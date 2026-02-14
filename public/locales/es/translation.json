@@ -653,6 +653,7 @@
       "actor": "Usuario",
       "action": "Acción",
       "entity": "Entidad",
+      "ip": "IP",
       "status": "Estado",
       "empty": "No se encontraron registros de auditoría."
     }

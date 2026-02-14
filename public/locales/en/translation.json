@@ -653,6 +653,7 @@
       "actor": "Actor",
       "action": "Action",
       "entity": "Entity",
+      "ip": "IP",
       "status": "Status",
       "empty": "No audit log entries found."
     }

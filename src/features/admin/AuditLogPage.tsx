@@ -35,22 +35,24 @@ export function AuditLogPage() {
 
       <Card>
         <CardContent className="p-0 overflow-x-auto">
-          {isLoading ? <div className="p-4"><SkeletonTable rows={10} cols={5} /></div> : entries && entries.length > 0 ? (
+          {isLoading ? <div className="p-4"><SkeletonTable rows={10} cols={6} /></div> : entries && entries.length > 0 ? (
             <table className="w-full text-sm">
               <thead><tr className="border-b border-gray-200 bg-gray-50">
                 <th className="text-left px-4 py-3 font-medium">{t('admin.auditLog.timestamp')}</th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.auditLog.actor')}</th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.auditLog.action')}</th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.auditLog.entity')}</th>
+                <th className="text-left px-4 py-3 font-medium">{t('admin.auditLog.ip')}</th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.auditLog.status')}</th>
               </tr></thead>
               <tbody>
                 {entries.map((entry) => (
                   <tr key={entry.id} className="border-b border-gray-50 hover:bg-gray-50">
                     <td className="px-4 py-3 text-text-secondary whitespace-nowrap">{formatDateTime(entry.createdAt)}</td>
-                    <td className="px-4 py-3">{entry.actorEmail}</td>
+                    <td className="px-4 py-3">{entry.actorEmail ?? '-'}</td>
                     <td className="px-4 py-3"><Badge>{entry.action}</Badge></td>
                     <td className="px-4 py-3">{entry.entityType}/{entry.entityId?.slice(0, 8)}</td>
+                    <td className="px-4 py-3 font-mono text-xs whitespace-nowrap">{entry.clientIp ?? '-'}</td>
                     <td className="px-4 py-3">
                       <Badge variant={entry.success ? 'success' : 'error'}>{entry.success ? 'OK' : `${entry.httpStatus}`}</Badge>
                     </td>

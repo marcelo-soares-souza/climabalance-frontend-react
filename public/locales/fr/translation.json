@@ -653,6 +653,7 @@
       "actor": "Utilisateur",
       "action": "Action",
       "entity": "Entité",
+      "ip": "IP",
       "status": "Statut",
       "empty": "Aucun enregistrement d'audit trouvé."
     }
