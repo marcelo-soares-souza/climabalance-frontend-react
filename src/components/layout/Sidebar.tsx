@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/hooks/use-auth';
 import {
@@ -15,6 +15,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   const { t } = useTranslation();
   const { isAuthenticated, isAdmin, hasRole, logout, userId } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const pathname = location.pathname;
   const calculatorPath = userId ? `/users/${userId}/impact/calculations/new` : '/footprint/calculator';
   const historyPath = userId ? `/users/${userId}/impact` : '/footprint/history';
   const profilePath = userId ? `/users/${userId}/profile` : '/profile';
@@ -33,6 +35,29 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       'flex items-center gap-3 px-4 py-2.5 rounded-[10px] text-base transition-colors',
       isActive ? 'bg-white/10 text-white font-medium' : 'text-white/70 hover:bg-sidebar-hover hover:text-white',
     );
+
+  const linkClassByValue = (isActive: boolean) =>
+    cn(
+      'flex items-center gap-3 px-4 py-2.5 rounded-[10px] text-base transition-colors',
+      isActive ? 'bg-white/10 text-white font-medium' : 'text-white/70 hover:bg-sidebar-hover hover:text-white',
+    );
+
+  const isCalculatorActive = userId
+    ? pathname === calculatorPath || new RegExp(`^/users/${userId}/impact/calculations/[^/]+/edit$`).test(pathname)
+    : pathname === '/footprint/calculator';
+  const isHistoryActive = userId
+    ? pathname === historyPath || new RegExp(`^/users/${userId}/impact/calculations/(?!new$)[^/]+$`).test(pathname)
+    : pathname === '/footprint/history' || /^\/footprint\/calculation\/[^/]+$/.test(pathname);
+  const isAreasAvailableActive = pathname === '/areas/available';
+  const isAreaDetailActive = /^\/areas\/[^/]+$/.test(pathname)
+    && pathname !== '/areas/available'
+    && pathname !== '/areas/create'
+    && !pathname.startsWith('/areas/edit/');
+  const isMyAreasActive =
+    pathname === '/areas'
+    || pathname === '/areas/create'
+    || /^\/areas\/edit\/[^/]+$/.test(pathname)
+    || isAreaDetailActive;
 
   const sectionLabel = (text: string) => (
     <div className="pt-4 pb-1 px-4 text-sm font-semibold text-white/40 uppercase tracking-wider">
@@ -83,20 +108,20 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           {isAuthenticated && (
             <>
               {sectionLabel(t('nav.impact'))}
-              <NavLink to={calculatorPath} className={linkClass} onClick={onClose}>
+              <NavLink to={calculatorPath} className={() => linkClassByValue(isCalculatorActive)} onClick={onClose}>
                 <Calculator className="h-4 w-4" /> {t('nav.calculator')}
               </NavLink>
-              <NavLink to={historyPath} className={linkClass} onClick={onClose}>
+              <NavLink to={historyPath} className={() => linkClassByValue(isHistoryActive)} onClick={onClose}>
                 <History className="h-4 w-4" /> {t('nav.history')}
               </NavLink>
 
               {(hasRole('producer') || isAdmin) && (
                 <>
                   {sectionLabel(t('nav.areas'))}
-                  <NavLink to="/areas/available" className={linkClass} onClick={onClose}>
+                  <NavLink to="/areas/available" className={() => linkClassByValue(isAreasAvailableActive)} onClick={onClose}>
                     <MapPin className="h-4 w-4" /> {t('nav.areas')}
                   </NavLink>
-                  <NavLink to="/areas" className={linkClass} onClick={onClose}>
+                  <NavLink to="/areas" className={() => linkClassByValue(isMyAreasActive)} onClick={onClose}>
                     <TreePine className="h-4 w-4" /> {t('nav.myAreas')}
                   </NavLink>
                 </>
