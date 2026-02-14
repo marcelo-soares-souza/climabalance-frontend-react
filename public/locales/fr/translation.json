@@ -416,6 +416,9 @@
     "error": {
       "loadFailed": "Impossible de charger la carte"
     },
+    "locate": {
+      "title": "Afficher ma position"
+    },
     "noAreas": "Aucune zone disponible pour le moment"
   },
   "area": {

@@ -16,8 +16,39 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ApiError } from '@/lib/api-client';
 import { useAuth } from '@/hooks/use-auth';
+import { LocateControl } from '@/components/leaflet/LocateControl';
 import type { AreaStatus } from '@/types/area';
 import { ArrowLeft } from 'lucide-react';
+
+const BRASILIA_COORDINATES: [number, number] = [-15.793889, -47.882778];
+
+type IpGeoResponse = {
+  latitude?: number | string;
+  longitude?: number | string;
+  lat?: number | string;
+  lon?: number | string;
+};
+
+function parseGeoCoordinate(value: unknown): number | null {
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+async function fetchIpBasedCoordinates(signal: AbortSignal): Promise<[number, number] | null> {
+  const response = await fetch('https://ipapi.co/json/', {
+    signal,
+    headers: { Accept: 'application/json' },
+  });
+  if (!response.ok) return null;
+
+  const payload = (await response.json()) as IpGeoResponse;
+  const latitude = parseGeoCoordinate(payload.latitude ?? payload.lat);
+  const longitude = parseGeoCoordinate(payload.longitude ?? payload.lon);
+  if (latitude == null || longitude == null) return null;
+  if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) return null;
+
+  return [latitude, longitude];
+}
 
 export function AreaFormPage() {
   const { areaId } = useParams<{ areaId: string }>();
@@ -41,6 +72,7 @@ export function AreaFormPage() {
     price_per_t_co2e: string;
   }>>({});
   const [error, setError] = useState<string | null>(null);
+  const [ipBasedCenter, setIpBasedCenter] = useState<[number, number] | null>(null);
 
   const { data: existing, isLoading } = useQuery({
     queryKey: ['areas', areaId],
@@ -121,26 +153,71 @@ export function AreaFormPage() {
     value: string
   ) => setForm((prev) => ({ ...prev, [field]: value }));
 
-  if (isEdit && isLoading) return <PageSkeleton />;
-
-  const parsedLat = Number(formValues.latitude);
-  const parsedLng = Number(formValues.longitude);
+  const hasLatitudeInput = formValues.latitude.trim().length > 0;
+  const hasLongitudeInput = formValues.longitude.trim().length > 0;
+  const parsedLat = hasLatitudeInput ? Number(formValues.latitude) : Number.NaN;
+  const parsedLng = hasLongitudeInput ? Number(formValues.longitude) : Number.NaN;
   const hasValidPosition =
-    Number.isFinite(parsedLat)
+    hasLatitudeInput
+    && hasLongitudeInput
+    && Number.isFinite(parsedLat)
     && Number.isFinite(parsedLng)
     && parsedLat >= -90
     && parsedLat <= 90
     && parsedLng >= -180
     && parsedLng <= 180;
 
-  const selectedPosition = hasValidPosition
-    ? ([parsedLat, parsedLng] as [number, number])
-    : null;
+  const selectedPosition = useMemo<[number, number] | null>(
+    () => (hasValidPosition ? [parsedLat, parsedLng] : null),
+    [hasValidPosition, parsedLat, parsedLng]
+  );
+  const hasSelectedPosition = selectedPosition !== null;
+  const hasManualCoordinates =
+    (form.latitude?.trim().length ?? 0) > 0 || (form.longitude?.trim().length ?? 0) > 0;
+
+  useEffect(() => {
+    if (isEdit || hasSelectedPosition || hasManualCoordinates) return;
+
+    let active = true;
+    const controller = new AbortController();
+    const applyCoordinates = (coordinates: [number, number]) => {
+      if (!active) return;
+
+      setIpBasedCenter(coordinates);
+      setForm((prev) => {
+        const hasLatitude = (prev.latitude?.trim().length ?? 0) > 0;
+        const hasLongitude = (prev.longitude?.trim().length ?? 0) > 0;
+        if (hasLatitude || hasLongitude) return prev;
+
+        return {
+          ...prev,
+          latitude: coordinates[0].toFixed(6),
+          longitude: coordinates[1].toFixed(6),
+        };
+      });
+    };
+
+    fetchIpBasedCoordinates(controller.signal)
+      .then((coordinates) => {
+        applyCoordinates(coordinates ?? BRASILIA_COORDINATES);
+      })
+      .catch(() => {
+        applyCoordinates(BRASILIA_COORDINATES);
+      });
+
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [isEdit, hasSelectedPosition, hasManualCoordinates, form.latitude, form.longitude]);
 
   const initialCenter = useMemo<[number, number]>(
-    () => selectedPosition ?? [-14.235, -51.9253],
-    [selectedPosition]
+    () => selectedPosition ?? ipBasedCenter ?? BRASILIA_COORDINATES,
+    [selectedPosition, ipBasedCenter]
   );
+  const initialZoom = selectedPosition ? 10 : ipBasedCenter ? 9 : 5;
+
+  if (isEdit && isLoading) return <PageSkeleton />;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -161,7 +238,9 @@ export function AreaFormPage() {
             <p className="text-sm font-medium">{t('area.form.pickOnMap')}</p>
             <p className="text-xs text-text-secondary">{t('area.form.mapHint')}</p>
             <div className="h-72 rounded-md overflow-hidden border border-gray-200">
-              <MapContainer center={initialCenter} zoom={selectedPosition ? 10 : 4} className="h-full w-full">
+              <MapContainer center={initialCenter} zoom={initialZoom} className="h-full w-full">
+                <MapCenterController center={initialCenter} zoom={initialZoom} />
+                <LocateControl title={t('map.locate.title')} />
                 <TileLayer
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -243,4 +322,20 @@ function LocationPicker({
   }, [map, position]);
 
   return position ? <Marker position={position} icon={locationPinIcon} /> : null;
+}
+
+function MapCenterController({
+  center,
+  zoom,
+}: {
+  center: [number, number];
+  zoom: number;
+}) {
+  const map = useMap();
+
+  useEffect(() => {
+    map.setView(center, zoom);
+  }, [map, center, zoom]);
+
+  return null;
 }

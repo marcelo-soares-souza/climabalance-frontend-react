@@ -9,6 +9,7 @@ import { areasService } from '@/services/areas';
 import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
+import { LocateControl } from '@/components/leaflet/LocateControl';
 import { formatTCO2e } from '@/lib/format';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { useCompensationStore } from '@/stores/compensation-store';
@@ -313,6 +314,7 @@ export function MapPage() {
           ) : (
             <MapContainer center={center} zoom={5} className="h-full w-full">
               <MapZoomListener onZoomChange={handleZoomChange} />
+              <LocateControl title={t('map.locate.title')} />
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

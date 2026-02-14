@@ -416,6 +416,9 @@
     "error": {
       "loadFailed": "Unable to load map"
     },
+    "locate": {
+      "title": "Show my location"
+    },
     "noAreas": "No areas available right now"
   },
   "area": {

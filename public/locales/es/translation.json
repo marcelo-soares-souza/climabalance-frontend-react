@@ -416,6 +416,9 @@
     "error": {
       "loadFailed": "Error al cargar el mapa"
     },
+    "locate": {
+      "title": "Mostrar mi ubicaci\u00f3n"
+    },
     "noAreas": "No hay áreas disponibles en este momento"
   },
   "area": {
