@@ -23,7 +23,6 @@ import { EmbedDemoPage } from '@/features/footprint/EmbedDemoPage';
 // Map & Areas
 import { MapPage } from '@/features/map/MapPage';
 import { AreaDetailPage } from '@/features/map/AreaDetailPage';
-import { AreaListPage } from '@/features/map/AreaListPage';
 import { AvailableAreasPage } from '@/features/map/AvailableAreasPage';
 import { AreaFormPage } from '@/features/map/AreaFormPage';
 import { PendingAreasPage } from '@/features/map/PendingAreasPage';
@@ -32,6 +31,7 @@ import { AreaAuditPage } from '@/features/map/AreaAuditPage';
 // Compensation
 import { CompensationReviewPage } from '@/features/compensation/ReviewPage';
 import { CompensationCheckoutPage } from '@/features/compensation/CheckoutPage';
+import { CompensationHistoryPage } from '@/features/compensation/HistoryPage';
 
 // Profile
 import { ProfilePage } from '@/features/profile/ProfilePage';
@@ -43,17 +43,13 @@ import { AdminUsersPage } from '@/features/admin/AdminUsersPage';
 import { UserEditPage } from '@/features/admin/UserEditPage';
 import { AuditLogPage } from '@/features/admin/AuditLogPage';
 
+// Certificates
+import { CertificateValidationPage } from '@/features/certificates/CertificateValidationPage';
+
 // Shared
 import { AccessDeniedPage } from '@/features/shared/AccessDeniedPage';
 
 export const router = createBrowserRouter([
-  // Auth routes (no shell)
-  { path: '/login', element: <LoginPage /> },
-  { path: '/register', element: <RegisterPage /> },
-  { path: '/confirm-email', element: <ConfirmEmailPage /> },
-  { path: '/password-reset', element: <PasswordResetRequestPage /> },
-  { path: '/password-reset/confirm', element: <PasswordResetConfirmPage /> },
-
   // Embed routes (no shell)
   { path: '/embed/calculator', element: <EmbedCalculatorPage /> },
   { path: '/demo/embed-calculator', element: <EmbedDemoPage /> },
@@ -63,8 +59,16 @@ export const router = createBrowserRouter([
     element: <AppShell />,
     children: [
       { path: '/', element: <HomePage /> },
+
+      // Auth routes (inside shell)
+      { path: '/login', element: <LoginPage /> },
+      { path: '/register', element: <RegisterPage /> },
+      { path: '/confirm-email', element: <ConfirmEmailPage /> },
+      { path: '/password-reset', element: <PasswordResetRequestPage /> },
+      { path: '/password-reset/confirm', element: <PasswordResetConfirmPage /> },
       { path: '/map', element: <MapPage /> },
       { path: '/areas/:areaId', element: <AreaDetailPage /> },
+      { path: '/certificates/validate', element: <CertificateValidationPage /> },
       { path: '/access-denied', element: <AccessDeniedPage /> },
 
       // Protected routes
@@ -103,6 +107,10 @@ export const router = createBrowserRouter([
       {
         path: '/compensation/checkout',
         element: <AuthGuard><CompensationCheckoutPage /></AuthGuard>,
+      },
+      {
+        path: '/profile/compensations',
+        element: <AuthGuard><CompensationHistoryPage /></AuthGuard>,
       },
       {
         path: '/profile',

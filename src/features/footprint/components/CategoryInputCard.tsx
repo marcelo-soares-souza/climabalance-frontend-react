@@ -6,14 +6,16 @@ import type { FootprintInput } from '@/types/footprint';
 interface CategoryField {
   key: string;
   unit: string;
+  displayUnit?: string;
   labelKey: string;
   placeholderKey?: string;
+  metadata?: Record<string, unknown>;
 }
 
 interface CategoryInputCardProps {
   category: string;
   fields: CategoryField[];
-  onSave: (inputs: FootprintInput[]) => void;
+  onSave: (inputs: FootprintInput[], category: FootprintInput['category']) => void;
   initialValues?: Record<string, number>;
 }
 
@@ -32,9 +34,9 @@ export function CategoryInputCard({ category, fields, onSave, initialValues = {}
         category: category as FootprintInput['category'],
         unit: f.unit,
         value: newValues[f.key] || 0,
-        metadata: { subcategory: f.key },
+        metadata: f.metadata ?? { subcategory: f.key },
       }));
-    onSave(inputs);
+    onSave(inputs, category as FootprintInput['category']);
   };
 
   return (
@@ -46,7 +48,8 @@ export function CategoryInputCard({ category, fields, onSave, initialValues = {}
           type="number"
           min="0"
           step="0.01"
-          label={`${t(field.labelKey)} (${field.unit})`}
+          label={t(field.labelKey)}
+          suffix={field.displayUnit ?? field.unit}
           value={values[field.key] || ''}
           onChange={(e) => handleChange(field.key, e.target.value)}
           placeholder={field.placeholderKey ? t(field.placeholderKey) : '0'}

@@ -65,7 +65,7 @@ export const useAuthStore = create<AuthState>()(
       logout: () => {
         const rt = tokenStorage.getRefreshToken();
         if (rt) {
-          api.post('/auth/revoke', { refreshToken: rt }).catch(() => {});
+          api.post('/auth/revoke', { refresh_token: rt }).catch(() => {});
         }
         tokenStorage.clear();
         queryClient.clear();

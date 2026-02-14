@@ -19,8 +19,8 @@ export const authService = {
     return api.post<void>('/auth/confirm-email/resend', { email });
   },
 
-  requestPasswordReset(email: string) {
-    return api.post<void>('/auth/password-reset/request', { email });
+  requestPasswordReset(email: string, locale = 'pt-BR') {
+    return api.post<void>('/auth/password-reset/request', { email, locale });
   },
 
   resetPassword(token: string, password: string, password_confirm: string) {
@@ -31,7 +31,7 @@ export const authService = {
     const res = await fetch(`${API_BASE}/auth/refresh`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ refreshToken }),
+      body: JSON.stringify({ refresh_token: refreshToken }),
     });
     if (!res.ok) throw new Error('Refresh failed');
     const json = await res.json();
@@ -39,6 +39,6 @@ export const authService = {
   },
 
   revokeToken(refreshToken: string) {
-    return api.post<void>('/auth/revoke', { refreshToken });
+    return api.post<void>('/auth/revoke', { refresh_token: refreshToken });
   },
 };

@@ -1,4 +1,4 @@
-export type AreaStatus = 'draft' | 'pending' | 'approved' | 'active' | 'suspended';
+export type AreaStatus = 'draft' | 'pending' | 'pending_audit' | 'approved' | 'active' | 'rejected' | 'suspended';
 export type BiomeType = 'amazonia' | 'cerrado' | 'mata_atlantica' | 'caatinga' | 'pampa' | 'pantanal';
 
 export interface Area {

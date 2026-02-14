@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from '@tanstack/react-query';
@@ -20,7 +20,7 @@ export function UserEditPage() {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [showDelete, setShowDelete] = useState(false);
-  const [form, setForm] = useState({ email: '', status: '', locale: '', password: '', password_confirm: '' });
+  const [form, setForm] = useState<Partial<{ email: string; status: string; locale: string; password: string; password_confirm: string }>>({});
 
   const { data: user, isLoading } = useQuery({
     queryKey: ['users', userId],
@@ -28,17 +28,21 @@ export function UserEditPage() {
     enabled: !!userId,
   });
 
-  useEffect(() => {
-    if (user) setForm({ email: user.email, status: user.status, locale: user.locale, password: '', password_confirm: '' });
-  }, [user]);
+  const formValues = {
+    email: form.email ?? user?.email ?? '',
+    status: form.status ?? user?.status ?? '',
+    locale: form.locale ?? user?.locale ?? '',
+    password: form.password ?? '',
+    password_confirm: form.password_confirm ?? '',
+  };
 
   const updateMutation = useMutation({
     mutationFn: () => {
       const data: Record<string, string> = {};
-      if (form.email !== user?.email) data.email = form.email;
-      if (form.status !== user?.status) data.status = form.status;
-      if (form.locale !== user?.locale) data.locale = form.locale;
-      if (form.password) { data.password = form.password; data.password_confirm = form.password_confirm; }
+      if (formValues.email !== user?.email) data.email = formValues.email;
+      if (formValues.status !== user?.status) data.status = formValues.status;
+      if (formValues.locale !== user?.locale) data.locale = formValues.locale;
+      if (formValues.password) { data.password = formValues.password; data.password_confirm = formValues.password_confirm; }
       return usersService.updateUser(userId!, data);
     },
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['users'] }); navigate('/admin/users'); },
@@ -50,7 +54,8 @@ export function UserEditPage() {
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['users'] }); navigate('/admin/users'); },
   });
 
-  const update = (field: string, value: string) => setForm(prev => ({ ...prev, [field]: value }));
+  const update = (field: 'email' | 'status' | 'locale' | 'password' | 'password_confirm', value: string) =>
+    setForm((prev) => ({ ...prev, [field]: value }));
 
   if (isLoading) return <PageSkeleton />;
   if (!user) return <div>{t('common.notFound')}</div>;
@@ -64,13 +69,13 @@ export function UserEditPage() {
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
       <form onSubmit={(e) => { e.preventDefault(); updateMutation.mutate(); }}>
         <Card><CardContent className="space-y-4 py-6">
-          <Input id="email" type="email" label={t('auth.email')} value={form.email} onChange={(e) => update('email', e.target.value)} />
-          <Select id="status" label={t('admin.users.status')} value={form.status} onChange={(e) => update('status', e.target.value)}
-            options={[{ value: 'active', label: 'Active' }, { value: 'pending', label: 'Pending' }, { value: 'inactive', label: 'Inactive' }]} />
-          <Select id="locale" label={t('admin.users.locale')} value={form.locale} onChange={(e) => update('locale', e.target.value)}
+          <Input id="email" type="email" label={t('auth.email')} value={formValues.email} onChange={(e) => update('email', e.target.value)} />
+          <Select id="status" label={t('admin.users.status')} value={formValues.status} onChange={(e) => update('status', e.target.value)}
+            options={[{ value: 'active', label: 'Active' }, { value: 'pending', label: 'Pending' }, { value: 'suspended', label: 'Suspended' }]} />
+          <Select id="locale" label={t('admin.users.locale')} value={formValues.locale} onChange={(e) => update('locale', e.target.value)}
             options={[{ value: 'pt-BR', label: 'Portugues (BR)' }, { value: 'en', label: 'English' }, { value: 'es', label: 'Espanol' }, { value: 'fr', label: 'Francais' }]} />
-          <Input id="password" type="password" label={t('admin.users.newPassword')} value={form.password} onChange={(e) => update('password', e.target.value)} placeholder={t('admin.users.passwordPlaceholder')} />
-          {form.password && <Input id="password_confirm" type="password" label={t('auth.confirmPassword')} value={form.password_confirm} onChange={(e) => update('password_confirm', e.target.value)} />}
+          <Input id="password" type="password" label={t('admin.users.newPassword')} value={formValues.password} onChange={(e) => update('password', e.target.value)} placeholder={t('admin.users.passwordPlaceholder')} />
+          {formValues.password && <Input id="password_confirm" type="password" label={t('auth.confirmPassword')} value={formValues.password_confirm} onChange={(e) => update('password_confirm', e.target.value)} />}
           <p className="text-xs text-text-secondary">{t('admin.users.roles')}: {user.roles?.join(', ')}</p>
         </CardContent></Card>
         <div className="flex justify-between mt-4">

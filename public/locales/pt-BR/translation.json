@@ -1,13 +1,13 @@
 {
   "common": {
     "back": "Voltar",
-    "backToHome": "Voltar ao inicio",
+    "backToHome": "Voltar ao in\u00edcio",
     "cancel": "Cancelar",
     "confirm": "Confirmar",
     "save": "Salvar",
     "delete": "Excluir",
-    "next": "Proximo",
-    "notFound": "Nao encontrado",
+    "next": "Pr\u00f3ximo",
+    "notFound": "N\u00e3o encontrado",
     "createdAt": "Criado em",
     "allStatuses": "Todos",
     "loading": "Carregando...",
@@ -18,7 +18,17 @@
       "pending": "Pendente",
       "active": "Ativo",
       "inactive": "Inativo",
-      "suspended": "Suspenso"
+      "suspended": "Suspenso",
+      "draft": "Rascunho",
+      "pending_audit": "Aguardando Auditoria",
+      "approved": "Aprovado",
+      "paid": "Pago",
+      "canceled": "Cancelado",
+      "failed": "Falhou",
+      "refunded": "Reembolsado",
+      "finalized": "Finalizado",
+      "issued": "Emitido",
+      "revoked": "Revogado"
     }
   },
   "auth": {
@@ -30,253 +40,307 @@
     "newPassword": "Nova senha",
     "login": {
       "title": "Bem-vindo de volta",
-      "subtitle": "Acesse sua conta para gerenciar acoes climaticas.",
+      "subtitle": "Acesse sua conta para gerenciar a\u00e7\u00f5es clim\u00e1ticas.",
       "submit": "Entrar",
       "forgotPassword": "Esqueci minha senha",
-      "noAccount": "Nao tem conta?",
+      "noAccount": "N\u00e3o tem conta?",
       "register": "Criar uma conta",
-      "error": "E-mail ou senha invalidos."
+      "error": "E-mail ou senha inv\u00e1lidos."
     },
     "register": {
       "title": "Criar conta",
       "subtitle": "Cadastre-se para acessar a plataforma",
       "submit": "Criar conta",
-      "hasAccount": "Ja tem conta?",
+      "hasAccount": "J\u00e1 tem conta?",
       "login": "Entrar",
       "role": "Tipo de conta",
-      "roleIndividual": "Pessoa Fisica",
-      "roleLegalEntity": "Pessoa Juridica",
-      "roleProducer": "Produtor"
+      "roleIndividual": "Pessoa F\u00edsica",
+      "roleLegalEntity": "Pessoa Jur\u00eddica",
+      "roleProducer": "Produtor",
+      "error": "Erro ao criar conta. Tente novamente."
     },
     "passwordReset": {
       "title": "Recuperar senha",
-      "description": "Informe seu e-mail para receber um link de redefinicao.",
+      "description": "Informe seu e-mail para receber um link de redefini\u00e7\u00e3o.",
       "submit": "Enviar link",
       "backToLogin": "Voltar ao login",
-      "haveToken": "Ja tenho um token",
+      "haveToken": "J\u00e1 tenho um token",
       "sentTitle": "Link enviado",
-      "sentMessage": "Se o e-mail existir, enviaremos instrucoes para redefinir a senha.",
+      "sentMessage": "Se o e-mail existir, enviaremos instru\u00e7\u00f5es para redefinir a senha.",
       "confirmTitle": "Definir nova senha",
       "confirmSubmit": "Atualizar senha",
       "successTitle": "Senha atualizada",
-      "successMessage": "Senha atualizada com sucesso. Faca login novamente."
+      "successMessage": "Senha atualizada com sucesso. Fa\u00e7a login novamente.",
+      "confirmError": "Erro ao redefinir senha. Verifique o token e tente novamente."
     },
     "confirmEmail": {
       "title": "Confirmar e-mail",
-      "description": "Cole o token que voce recebeu por e-mail",
-      "token": "Token de confirmacao",
+      "description": "Cole o token que voc\u00ea recebeu por e-mail",
+      "token": "Token de confirma\u00e7\u00e3o",
       "tokenPlaceholder": "Cole o token aqui",
-      "noToken": "Nao recebeu o token?",
+      "noToken": "N\u00e3o recebeu o token?",
       "submit": "Confirmar e-mail",
-      "resend": "Reenviar e-mail de confirmacao",
+      "resend": "Reenviar e-mail de confirma\u00e7\u00e3o",
+      "resent": "E-mail de confirma\u00e7\u00e3o reenviado com sucesso!",
       "successTitle": "E-mail confirmado!",
-      "successMessage": "E-mail confirmado com sucesso! Voce ja pode fazer login."
+      "successMessage": "E-mail confirmado com sucesso! Voc\u00ea j\u00e1 pode fazer login.",
+      "error": "Erro ao confirmar e-mail. Verifique o token.",
+      "resendError": "Erro ao reenviar e-mail. Tente novamente."
     }
   },
   "nav": {
-    "home": "Inicio",
-    "map": "Mapa de Areas",
+    "home": "In\u00edcio",
+    "map": "Mapa de \u00c1reas",
     "calculator": "Calculadora de Pegada",
-    "history": "Historico de Pegadas",
+    "history": "Hist\u00f3rico de Pegadas",
     "profile": "Meu perfil",
     "certificates": "Certificados",
-    "myAreas": "Minhas Areas",
-    "areas": "Areas Disponiveis",
+    "compensations": "Compensa\u00e7\u00f5es",
+    "validateCertificate": "Validar Certificado",
+    "myAreas": "Minhas \u00c1reas",
+    "areas": "\u00c1reas Dispon\u00edveis",
     "account": "Conta",
     "audit": "Auditoria",
-    "pendingAreas": "Areas Pendentes",
-    "admin": "Administracao",
-    "users": "Usuarios (Admin)",
+    "pendingAreas": "\u00c1reas Pendentes",
+    "admin": "Administra\u00e7\u00e3o",
+    "users": "Usu\u00e1rios (Admin)",
     "auditLog": "Auditoria (Admin)",
     "login": "Entrar",
     "logout": "Sair",
-    "impact": "Seu Impacto"
+    "impact": "Seu Impacto",
+    "collapse": "Recolher menu",
+    "expand": "Expandir menu"
   },
   "home": {
     "welcome": {
       "title": "Bem-vindo ao ClimaBalance",
-      "description": "Plataforma de certificacao climatica. Conectamos a compensacao de carbono ao apoio direto a propriedades rurais auditadas.",
-      "getStarted": "Comecar",
+      "description": "Plataforma de certifica\u00e7\u00e3o clim\u00e1tica. Conectamos a compensa\u00e7\u00e3o de carbono ao apoio direto a propriedades rurais auditadas.",
+      "getStarted": "Come\u00e7ar",
       "exploreMap": "Explorar Mapa",
       "step1Title": "Calcule sua Pegada",
-      "step1Description": "Responda perguntas simples sobre seu consumo para calcular suas emissoes de CO2.",
-      "step2Title": "Compense suas Emissoes",
-      "step2Description": "Apoie areas de reflorestamento verificadas em todo o Brasil.",
+      "step1Description": "Responda perguntas simples sobre seu consumo para calcular suas emiss\u00f5es de CO\u2082.",
+      "step2Title": "Compense suas Emiss\u00f5es",
+      "step2Description": "Apoie \u00e1reas de reflorestamento verificadas em todo o Brasil.",
       "step3Title": "Receba Certificados",
-      "step3Description": "Obtenha certificados oficiais de compensacao de carbono."
+      "step3Description": "Obtenha certificados oficiais de compensa\u00e7\u00e3o de carbono."
     },
     "dashboard": {
-      "title": "Seu Impacto Climatico",
+      "title": "Seu Impacto Clim\u00e1tico",
       "totalFootprint": "Pegada Total",
       "balance": "Saldo",
       "compensated": "Compensado",
-      "treesPlanted": "Arvores Plantadas",
+      "treesPlanted": "\u00c1rvores Plantadas",
       "recentActivity": "Atividade Recente",
-      "noActivityDescription": "Seus calculos e compensacoes recentes aparecerao aqui",
+      "noActivity": "Nenhuma atividade recente",
+      "noActivityDescription": "Seus c\u00e1lculos e compensa\u00e7\u00f5es recentes aparecer\u00e3o aqui",
       "calculateAction": "Calcular Pegada",
-      "calculateDescription": "Calcule suas emissoes de CO2",
+      "calculateDescription": "Calcule suas emiss\u00f5es de CO\u2082",
       "compensateAction": "Compensar Agora",
       "compensateDescription": "Apoie projetos de reflorestamento",
       "certificatesAction": "Certificados",
-      "certificatesDescription": "Veja seus certificados de compensacao"
+      "certificatesDescription": "Veja seus certificados de compensa\u00e7\u00e3o"
     }
   },
   "onboarding": {
     "skip": "Pular",
-    "next": "Proximo",
-    "finish": "Comecar",
+    "next": "Pr\u00f3ximo",
+    "finish": "Come\u00e7ar",
     "step1": {
       "title": "Bem-vindo ao ClimaBalance",
       "description": "Calcule sua pegada de carbono e contribua para o reflorestamento no Brasil"
     },
     "step2": {
-      "title": "Meca Seu Impacto",
-      "description": "Responda perguntas simples sobre seu consumo de energia, transporte e consumo para calcular suas emissoes de CO2"
+      "title": "Me\u00e7a Seu Impacto",
+      "description": "Responda perguntas simples sobre seu consumo de energia, transporte e consumo para calcular suas emiss\u00f5es de CO\u2082"
     },
     "step3": {
-      "title": "Compense Atraves de Arvores",
-      "description": "Apoie areas de reflorestamento verificadas em todo o Brasil e receba certificados oficiais"
+      "title": "Compense Atrav\u00e9s de \u00c1rvores",
+      "description": "Apoie \u00e1reas de reflorestamento verificadas em todo o Brasil e receba certificados oficiais"
     },
     "step4": {
       "title": "Acompanhe Seu Progresso",
-      "description": "Veja seu historico de compensacao e acompanhe seu impacto positivo crescer ao longo do tempo"
+      "description": "Veja seu hist\u00f3rico de compensa\u00e7\u00e3o e acompanhe seu impacto positivo crescer ao longo do tempo"
     }
   },
   "footprint": {
     "calculator": {
-      "title": "Calculadora de Pegada"
+      "title": "Calculadora de Pegada",
+      "calculate": "Calcular"
     },
     "calculating": "Calculando sua pegada...",
+    "steps": {
+      "profile": "Perfil",
+      "energy": "Energia",
+      "transport": "Transporte",
+      "fuel": "Combust\u00edveis",
+      "flights": "Voos",
+      "scope1": "Escopo 1",
+      "scope2": "Escopo 2",
+      "scope3": "Escopo 3",
+      "result": "Resultado"
+    },
+    "categories": {
+      "energy": "Energia",
+      "fuel": "Combust\u00edveis",
+      "transport": "Transporte",
+      "flights": "Voos",
+      "scope1": "Escopo 1",
+      "scope2": "Escopo 2",
+      "scope3": "Escopo 3"
+    },
     "dataQuality": {
-      "label": "Qualidade dos Dados"
+      "label": "Qualidade dos Dados",
+      "real": "Dados Reais",
+      "estimated": "Estimado",
+      "standard": "Padr\u00e3o"
     },
     "profile": {
       "typeLabel": "Tipo de Perfil",
-      "typeSubtitle": "Selecione o tipo de perfil para o calculo",
-      "individual": "Pessoa Fisica",
-      "individualSubtitle": "Calcula emissoes de consumo pessoal",
-      "legalEntity": "Pessoa Juridica",
-      "legalEntitySubtitle": "Calcula emissoes empresariais (Escopos 1, 2 e 3)"
+      "typeSubtitle": "Selecione o tipo de perfil para o c\u00e1lculo",
+      "individual": "Pessoa F\u00edsica",
+      "individualSubtitle": "Calcula emiss\u00f5es de consumo pessoal",
+      "legalEntity": "Pessoa Jur\u00eddica",
+      "legalEntitySubtitle": "Calcula emiss\u00f5es empresariais (Escopos 1, 2 e 3)",
+      "legal_entity": "Pessoa Jur\u00eddica"
     },
     "period": {
-      "label": "Periodo de Calculo",
-      "subtitle": "Escolha o periodo que deseja calcular",
+      "label": "Per\u00edodo de C\u00e1lculo",
+      "subtitle": "Escolha o per\u00edodo que deseja calcular",
       "monthly": "Mensal",
-      "monthlySubtitle": "Calculo para um mes especifico",
+      "monthlySubtitle": "C\u00e1lculo para um m\u00eas espec\u00edfico",
       "annual": "Anual",
-      "annualSubtitle": "Calculo para um ano completo",
-      "start": "Inicio",
+      "annualSubtitle": "C\u00e1lculo para um ano completo",
+      "start": "In\u00edcio",
       "end": "Fim"
     },
     "energy": {
       "title": "Consumo de Energia",
-      "description": "Informe seu consumo de energia eletrica no periodo",
-      "electricity": "Energia Eletrica Residencial",
+      "description": "Informe seu consumo de energia el\u00e9trica no per\u00edodo",
+      "electricity": "Energia El\u00e9trica Residencial",
       "kwhLabel": "Consumo (kWh)",
       "kwhHint": "Digite o consumo em kWh",
       "kwhHelper": "Encontre este valor na sua conta de luz",
-      "tip": "Dica: O consumo medio residencial no Brasil e cerca de 150-200 kWh por mes",
-      "naturalGas": "Gas Natural (m3)",
+      "tip": "Dica: O consumo m\u00e9dio residencial no Brasil \u00e9 cerca de 150\u2013200 kWh por m\u00eas",
+      "naturalGas": "G\u00e1s Natural (m\u00b3)",
       "lpg": "GLP"
     },
     "fuel": {
-      "title": "Consumo de Combustiveis",
-      "description": "Informe o consumo de combustiveis no periodo",
+      "title": "Consumo de Combust\u00edveis",
+      "description": "Informe o consumo de combust\u00edveis no per\u00edodo",
       "gasoline": "Gasolina",
       "ethanol": "Etanol",
       "diesel": "Diesel",
-      "naturalGas": "Gas Natural (m3)",
+      "naturalGas": "G\u00e1s Natural (m\u00b3)",
       "quantityLabel": "Quantidade (litros)",
-      "tip": "Voce pode deixar em branco os combustiveis que nao utilizou"
+      "tip": "Voc\u00ea pode deixar em branco os combust\u00edveis que n\u00e3o utilizou"
     },
     "transport": {
       "title": "Transporte Terrestre",
-      "description": "Informe a distancia percorrida por cada modal no periodo",
-      "car": "Automovel",
+      "description": "Informe a dist\u00e2ncia percorrida por cada modal no per\u00edodo",
+      "car": "Autom\u00f3vel",
       "carSmall": "Carro Pequeno",
       "carSmallSubtitle": "Ex: Gol, Onix, HB20",
-      "carMedium": "Carro Medio",
+      "carMedium": "Carro M\u00e9dio",
       "carMediumSubtitle": "Ex: Civic, Corolla, Cruze",
       "carLarge": "Carro Grande/SUV",
       "carLargeSubtitle": "Ex: Hilux, SW4, Compass",
       "motorcycle": "Motocicleta",
-      "bus": "Onibus",
-      "metro": "Metro",
+      "bus": "\u00d4nibus",
+      "metro": "Metr\u00f4",
       "train": "Trem",
       "otherModals": "Outros Modais",
-      "tip": "Informe apenas os modais que voce utilizou. Os demais podem ficar em branco.",
-      "distanceLabel": "Distancia (km)"
+      "tip": "Informe apenas os modais que voc\u00ea utilizou. Os demais podem ficar em branco.",
+      "distanceLabel": "Dist\u00e2ncia (km)"
     },
     "flights": {
-      "title": "Viagens Aereas",
-      "description": "Informe os voos realizados no periodo",
+      "title": "Viagens A\u00e9reas",
+      "description": "Informe os voos realizados no per\u00edodo",
       "emptyTitle": "Nenhum voo adicionado",
-      "emptySubtitle": "Adicione os voos que voce realizou no periodo",
+      "emptySubtitle": "Adicione os voos que voc\u00ea realizou no per\u00edodo",
       "addAction": "Adicionar Voo",
-      "distanceLabel": "Distancia (km)",
-      "distanceHint": "Digite a distancia do voo",
+      "distanceLabel": "Dist\u00e2ncia (km)",
+      "distanceHint": "Digite a dist\u00e2ncia do voo",
       "typeLabel": "Tipo de Voo",
-      "typeDomestic": "Domestico",
+      "typeDomestic": "Dom\u00e9stico",
       "typeInternational": "Internacional",
       "classLabel": "Classe",
-      "classEconomy": "Economica",
+      "classEconomy": "Econ\u00f4mica",
       "classBusiness": "Executiva",
       "classFirst": "Primeira",
-      "tip": "Se voce nao fez nenhum voo no periodo, pode pular esta etapa",
-      "cardTitle": "Voo {{index}}"
+      "tip": "Se voc\u00ea n\u00e3o fez nenhum voo no per\u00edodo, pode pular esta etapa",
+      "cardTitle": "Voo {{index}}",
+      "domesticShort": "Dom\u00e9stico Curta Dist\u00e2ncia",
+      "domesticLong": "Dom\u00e9stico Longa Dist\u00e2ncia",
+      "international": "Internacional",
+      "domesticEconomy": "Dom\u00e9stico - Econ\u00f4mica",
+      "domesticBusiness": "Dom\u00e9stico - Executiva",
+      "internationalEconomy": "Internacional - Econ\u00f4mica",
+      "internationalBusiness": "Internacional - Executiva"
     },
     "scope1": {
-      "title": "Escopo 1 - Emissoes Diretas",
-      "description": "Emissoes de fontes controladas diretamente pela empresa",
-      "whatIsTitle": "O que e Escopo 1?",
-      "whatIsDescription": "Combustao estacionaria (geradores, caldeiras), combustao movel (frota propria), emissoes fugitivas (ar condicionado, refrigeracao)",
-      "fuelFleet": "Combustiveis - Frota Propria",
-      "tip": "Deixe em branco os itens que nao se aplicam a sua empresa"
+      "title": "Escopo 1 \u2013 Emiss\u00f5es Diretas",
+      "description": "Emiss\u00f5es de fontes controladas diretamente pela empresa",
+      "whatIsTitle": "O que \u00e9 Escopo 1?",
+      "whatIsDescription": "Combust\u00e3o estacion\u00e1ria (geradores, caldeiras), combust\u00e3o m\u00f3vel (frota pr\u00f3pria), emiss\u00f5es fugitivas (ar-condicionado, refrigera\u00e7\u00e3o)",
+      "fuelFleet": "Combust\u00edveis \u2013 Frota Pr\u00f3pria",
+      "tip": "Deixe em branco os itens que n\u00e3o se aplicam \u00e0 sua empresa",
+      "stationaryCombustion": "Combust\u00e3o Estacion\u00e1ria",
+      "mobileCombustion": "Combust\u00e3o M\u00f3vel",
+      "fugitiveEmissions": "Emiss\u00f5es Fugitivas",
+      "processEmissions": "Emiss\u00f5es de Processos"
     },
     "scope2": {
-      "title": "Escopo 2 - Energia Comprada",
-      "description": "Emissoes indiretas do consumo de energia eletrica comprada",
-      "whatIsTitle": "O que e Escopo 2?",
-      "whatIsDescription": "Emissoes indiretas da geracao de energia eletrica comprada e consumida pela empresa. Inclui todas as unidades (escritorios, fabricas, lojas, etc.)",
-      "electricityLabel": "Energia Eletrica",
+      "title": "Escopo 2 \u2013 Energia Comprada",
+      "description": "Emiss\u00f5es indiretas do consumo de energia el\u00e9trica comprada",
+      "whatIsTitle": "O que \u00e9 Escopo 2?",
+      "whatIsDescription": "Emiss\u00f5es indiretas da gera\u00e7\u00e3o de energia el\u00e9trica comprada e consumida pela empresa. Inclui todas as unidades (escrit\u00f3rios, f\u00e1bricas, lojas, etc.)",
+      "electricityLabel": "Energia El\u00e9trica",
       "consumptionLabel": "Consumo Total (kWh)",
       "consumptionHint": "Digite o consumo total de energia",
-      "consumptionHelper": "Some todas as contas de energia do periodo"
+      "consumptionHelper": "Some todas as contas de energia do per\u00edodo",
+      "purchasedElectricity": "Eletricidade Comprada",
+      "purchasedHeat": "Calor Comprado",
+      "purchasedSteam": "Vapor Comprado"
     },
     "scope3": {
-      "title": "Escopo 3 - Cadeia de Valor",
-      "description": "Emissoes indiretas da cadeia de valor da empresa",
-      "whatIsTitle": "O que e Escopo 3?",
-      "whatIsDescription": "Emissoes indiretas de atividades nao controladas diretamente: logistica de produtos, deslocamento de funcionarios, viagens corporativas, fornecedores, entre outros",
+      "title": "Escopo 3 \u2013 Cadeia de Valor",
+      "description": "Emiss\u00f5es indiretas da cadeia de valor da empresa",
+      "whatIsTitle": "O que \u00e9 Escopo 3?",
+      "whatIsDescription": "Emiss\u00f5es indiretas de atividades n\u00e3o controladas diretamente: log\u00edstica de produtos, deslocamento de funcion\u00e1rios, viagens corporativas, fornecedores, entre outros",
       "mainCategories": "Principais Categorias",
-      "freightLabel": "Logistica e Transporte de Cargas",
-      "employeeCommuteLabel": "Deslocamento de Funcionarios",
+      "freightLabel": "Log\u00edstica e Transporte de Cargas",
+      "employeeCommuteLabel": "Deslocamento de Funcion\u00e1rios",
       "businessTravelLabel": "Viagens Corporativas",
-      "tip": "Escopo 3 pode ser estimado. Deixe em branco as categorias que voce nao tem dados"
+      "tip": "Escopo 3 pode ser estimado. Deixe em branco as categorias que voc\u00ea n\u00e3o tem dados",
+      "businessTravel": "Viagens Corporativas",
+      "employeeCommuting": "Deslocamento de Funcion\u00e1rios",
+      "purchasedGoods": "Bens e Servi\u00e7os Comprados",
+      "waste": "Res\u00edduos",
+      "upstreamTransport": "Transporte Upstream"
     },
     "result": {
-      "title": "Resultado do Calculo",
+      "title": "Resultado do C\u00e1lculo",
       "subtitle": "Sua pegada de carbono foi calculada",
-      "totalEmissions": "Total de Emissoes",
+      "totalEmissions": "Total de Emiss\u00f5es",
       "breakdown": "Detalhamento por Categoria",
-      "breakdownEmpty": "Nenhum dado de detalhamento disponivel",
+      "breakdownEmpty": "Nenhum dado de detalhamento dispon\u00edvel",
       "compensate": "Compensar Agora",
-      "compensateTitle": "Compense suas emissoes!",
-      "compensateDescription": "Apoie projetos de reflorestamento certificados e neutralize sua pegada de carbono plantando arvores nativas.",
-      "viewHistory": "Ver Historico",
-      "chartTitle": "Distribuicao de Emissoes",
+      "compensateTitle": "Compense suas emiss\u00f5es!",
+      "compensateDescription": "Apoie projetos de reflorestamento certificados e neutralize sua pegada de carbono plantando \u00e1rvores nativas.",
+      "viewHistory": "Ver Hist\u00f3rico",
+      "chartTitle": "Distribui\u00e7\u00e3o de Emiss\u00f5es",
       "saveDraft": "Salvar Rascunho",
-      "finalize": "Finalizar Calculo",
-      "comparison": "Como Voce se Compara?",
+      "finalize": "Finalizar C\u00e1lculo",
+      "comparison": "Como Voc\u00ea se Compara?",
       "you": "Seu Total",
-      "brazilAvg": "Media Nacional (Brasil)",
-      "globalAvg": "Media Global",
-      "belowAverage": "Abaixo da Media - Parabens!",
-      "aboveAverage": "Acima da Media"
+      "brazilAvg": "M\u00e9dia Nacional (Brasil)",
+      "globalAvg": "M\u00e9dia Global",
+      "belowAverage": "Abaixo da M\u00e9dia \u2013 Parab\u00e9ns!",
+      "aboveAverage": "Acima da M\u00e9dia"
     },
     "category": {
       "energy": "Energia",
-      "fuel": "Combustiveis",
+      "fuel": "Combust\u00edveis",
       "transport": "Transporte",
       "flights": "Voos",
       "scope1": "Escopo 1",
@@ -284,64 +348,65 @@
       "scope3": "Escopo 3"
     },
     "history": {
-      "title": "Historico de Calculos",
-      "empty": "Voce ainda nao fez nenhum calculo",
-      "emptyDescription": "Voce ainda nao realizou nenhum calculo de pegada",
+      "title": "Hist\u00f3rico de C\u00e1lculos",
+      "empty": "Voc\u00ea ainda n\u00e3o fez nenhum c\u00e1lculo",
+      "emptyDescription": "Voc\u00ea ainda n\u00e3o realizou nenhum c\u00e1lculo de pegada",
       "startCalculation": "Iniciar Nova Calculadora",
       "newCalculation": "Nova Calculadora",
       "filter": "Filtrar",
-      "filterTitle": "Filtrar Calculos",
+      "filterTitle": "Filtrar C\u00e1lculos",
       "filterApply": "Aplicar",
       "filterClear": "Limpar"
     },
     "detail": {
-      "title": "Detalhes do Calculo",
-      "period": "Detalhes de Periodo",
+      "title": "Detalhes do C\u00e1lculo",
+      "period": "Detalhes de Per\u00edodo",
       "inputs": "Entradas registradas",
       "breakdown": "Desdobramento",
       "noInputs": "Nenhum input salvo",
-      "noBreakdown": "Sem desdobramento disponivel",
-      "deleteTitle": "Confirmar Exclusao",
-      "deleteMessage": "Tem certeza que deseja excluir este rascunho? Esta acao nao pode ser desfeita.",
+      "noBreakdown": "Sem desdobramento dispon\u00edvel",
+      "deleteTitle": "Confirmar Exclus\u00e3o",
+      "deleteMessage": "Tem certeza que deseja excluir este rascunho? Esta a\u00e7\u00e3o n\u00e3o pode ser desfeita.",
       "deleteAction": "Excluir rascunho",
-      "continueEditing": "Continuar Edicao"
+      "continueEditing": "Continuar Edi\u00e7\u00e3o"
     },
     "status": {
       "draft": "Rascunho",
       "finalized": "Finalizado"
     },
     "error": {
-      "requiredField": "Campo obrigatorio",
-      "invalidNumber": "Digite um numero valido",
+      "requiredField": "Campo obrigat\u00f3rio",
+      "invalidNumber": "Digite um n\u00famero v\u00e1lido",
       "calculationFailed": "Erro ao calcular pegada",
       "saveFailed": "Erro ao salvar rascunho",
-      "loadFailed": "Erro ao carregar calculo"
+      "loadFailed": "Erro ao carregar c\u00e1lculo",
+      "createFailed": "Erro ao criar c\u00e1lculo"
     },
     "success": {
       "draftSaved": "Rascunho salvo com sucesso!",
       "calculated": "Pegada calculada com sucesso!",
-      "deleted": "Rascunho excluido com sucesso!"
+      "deleted": "Rascunho exclu\u00eddo com sucesso!"
     }
   },
   "map": {
-    "title": "Mapa de Areas",
+    "title": "Mapa de \u00c1reas",
     "allBiomes": "Todos os Biomas",
-    "areasCount": "{{count}} areas",
-    "available": "Disponivel",
+    "areasCount": "{{count}} \u00e1reas",
+    "available": "Dispon\u00edvel",
     "capacity": "Capacidade",
     "biome": "Bioma",
     "compensate": "Compensar agora",
     "viewDetails": "Ver Detalhes",
     "biomes": {
-      "amazonia": "Amazonia",
+      "amazonia": "Amaz\u00f4nia",
       "cerrado": "Cerrado",
-      "mataAtlantica": "Mata Atlantica",
+      "mataAtlantica": "Mata Atl\u00e2ntica",
       "caatinga": "Caatinga",
       "pampa": "Pampa",
       "pantanal": "Pantanal"
     },
     "filter": {
-      "title": "Filtrar Areas",
+      "title": "Filtrar \u00c1reas",
       "byBiome": "Filtrar por Bioma",
       "clear": "Limpar Filtros",
       "apply": "Aplicar",
@@ -350,19 +415,22 @@
     "error": {
       "loadFailed": "Erro ao carregar mapa"
     },
-    "noAreas": "Nenhuma area disponivel no momento"
+    "noAreas": "Nenhuma \u00e1rea dispon\u00edvel no momento"
   },
   "area": {
-    "available": "Disponivel",
-    "availableOf": "disponivel de",
+    "available": "Dispon\u00edvel",
+    "availableOf": "dispon\u00edvel de",
     "committed": "Comprometido",
-    "trees": "arvores",
-    "tCO2ePerTree": "tCO2e por Arvore/Ano",
+    "trees": "\u00e1rvores",
+    "tCO2ePerTree": "tCO\u2082e por \u00c1rvore/Ano",
     "totalCapacity": "Capacidade Total",
-    "contributions": "Contribuicoes por arvores",
-    "contributionsEmpty": "Ainda nao ha contribuicoes pagas para esta area.",
-    "media": "Midias da area",
-    "mediaEmpty": "Nenhuma foto ou video enviado ainda.",
+    "usage": "Utiliza\u00e7\u00e3o",
+    "contributions": "Contribui\u00e7\u00f5es por \u00e1rvores",
+    "contributionsEmpty": "Ainda n\u00e3o h\u00e1 contribui\u00e7\u00f5es pagas para esta \u00e1rea.",
+    "media": "M\u00eddias da \u00e1rea",
+    "mediaEmpty": "Nenhuma foto ou v\u00eddeo enviado ainda.",
+    "uploadMedia": "Enviar",
+    "uploadMediaError": "Falha ao enviar m\u00eddia. Tente novamente.",
     "compensateNow": "Compensar agora",
     "status": {
       "draft": "Rascunho",
@@ -373,23 +441,23 @@
       "suspended": "Suspenso"
     },
     "form": {
-      "createTitle": "Cadastrar Nova Area",
-      "editTitle": "Editar Area",
-      "create": "Criar Area",
-      "update": "Atualizar Area",
-      "name": "Nome da Area",
-      "description": "Descricao",
+      "createTitle": "Cadastrar Nova \u00c1rea",
+      "editTitle": "Editar \u00c1rea",
+      "create": "Criar \u00c1rea",
+      "update": "Atualizar \u00c1rea",
+      "name": "Nome da \u00c1rea",
+      "description": "Descri\u00e7\u00e3o",
       "latitude": "Latitude",
       "longitude": "Longitude",
       "state": "Estado",
       "city": "Cidade",
       "biome": "Bioma",
       "selectBiome": "Selecione um bioma",
-      "totalCapacity": "Capacidade Total (tCO2e)",
-      "tCO2ePerTree": "tCO2e por Arvore/Ano",
-      "pricePerTree": "Preco por Arvore",
-      "pricePerTCO2e": "Preco por tCO2e",
-      "error": "Erro ao salvar area. Tente novamente."
+      "totalCapacity": "Capacidade Total (tCO\u2082e)",
+      "tCO2ePerTree": "tCO\u2082e por \u00c1rvore/Ano",
+      "pricePerTree": "Pre\u00e7o por \u00c1rvore",
+      "pricePerTCO2e": "Pre\u00e7o por tCO\u2082e",
+      "error": "Erro ao salvar \u00e1rea. Tente novamente."
     },
     "actions": {
       "submitForAudit": "Enviar para Auditoria",
@@ -397,69 +465,92 @@
       "reject": "Rejeitar",
       "activate": "Ativar",
       "suspend": "Suspender",
-      "delete": "Excluir area"
+      "delete": "Excluir \u00e1rea"
     },
     "deleteConfirm": {
-      "title": "Excluir area",
-      "message": "Tem certeza de que deseja excluir esta area? Essa acao nao pode ser desfeita."
+      "title": "Excluir \u00e1rea",
+      "message": "Tem certeza de que deseja excluir esta \u00e1rea? Essa a\u00e7\u00e3o n\u00e3o pode ser desfeita."
+    },
+    "submitConfirm": {
+      "title": "Enviar para Auditoria",
+      "message": "Esta \u00e1rea ser\u00e1 enviada para revis\u00e3o por um analista. Voc\u00ea n\u00e3o poder\u00e1 edit\u00e1-la at\u00e9 que a auditoria seja conclu\u00edda.",
+      "notesLabel": "Observa\u00e7\u00f5es (opcional)",
+      "notesPlaceholder": "Adicione observa\u00e7\u00f5es para o auditor...",
+      "error": "Falha ao enviar \u00e1rea para auditoria. Tente novamente."
+    },
+    "suspendConfirm": {
+      "title": "Suspender \u00c1rea",
+      "message": "Suspender esta \u00e1rea impedir\u00e1 novas compensa\u00e7\u00f5es. Compensa\u00e7\u00f5es existentes n\u00e3o ser\u00e3o afetadas.",
+      "reasonLabel": "Motivo (opcional)",
+      "reasonPlaceholder": "Motivo da suspens\u00e3o...",
+      "error": "Falha ao suspender \u00e1rea. Tente novamente."
     }
   },
   "areas": {
     "list": {
-      "title": "Minhas Areas",
-      "create": "Criar Nova Area"
+      "title": "Minhas \u00c1reas",
+      "create": "Criar Nova \u00c1rea",
+      "empty": "Nenhuma \u00e1rea cadastrada ainda"
     },
     "my": {
-      "title": "Minhas Areas"
+      "title": "Minhas \u00c1reas",
+      "empty": "Voc\u00ea ainda n\u00e3o cadastrou nenhuma \u00e1rea",
+      "emptyDescription": "Cadastre uma \u00e1rea para come\u00e7ar a receber compensa\u00e7\u00f5es"
     },
     "available": {
-      "title": "Areas Disponiveis",
-      "empty": "Nenhuma area disponivel no momento",
-      "emptyHint": "Volte mais tarde para ver novas areas"
+      "title": "\u00c1reas Dispon\u00edveis",
+      "empty": "Nenhuma \u00e1rea dispon\u00edvel no momento",
+      "emptyHint": "Volte mais tarde para ver novas \u00e1reas"
     }
   },
   "compensation": {
     "review": {
-      "title": "Revisar Sua Compensacao",
+      "title": "Revisar Sua Compensa\u00e7\u00e3o",
       "subtitle": "Por favor, revise os detalhes antes de prosseguir",
-      "modeLabel": "Modalidade de Compensacao",
-      "treePurchase": "Compra de Arvores",
-      "treePurchaseDesc": "Escolha quantas arvores quer plantar (horizonte de 20 anos)",
-      "directTCO2e": "Compensacao por tCO2e",
-      "directTCO2eDesc": "Compense uma quantidade especifica de tCO2e",
-      "treesCount": "Quantidade de Arvores",
-      "pricePerTree": "Preco por arvore",
-      "estimatedCO2": "Carbono estimado (tCO2e)",
+      "modeLabel": "Modalidade de Compensa\u00e7\u00e3o",
+      "treePurchase": "Compra de \u00c1rvores",
+      "treePurchaseDesc": "Escolha quantas \u00e1rvores quer plantar (horizonte de 20 anos)",
+      "directTCO2e": "Compensa\u00e7\u00e3o por tCO\u2082e",
+      "directTCO2eDesc": "Compense uma quantidade espec\u00edfica de tCO\u2082e",
+      "treesCount": "Quantidade de \u00c1rvores",
+      "pricePerTree": "Pre\u00e7o por \u00e1rvore",
+      "estimatedCO2": "Carbono estimado (tCO\u2082e)",
       "total": "Custo total",
-      "tco2eAmount": "Total a compensar (tCO2e)",
+      "tco2eAmount": "Total a compensar (tCO\u2082e)",
       "proceed": "Prosseguir para Pagamento"
     },
     "mode": {
-      "tree_purchase": "Compra de arvores (20 anos)",
-      "tco2e": "Compensacao por tCO2e"
+      "tree_purchase": "Compra de \u00e1rvores (20 anos)",
+      "tco2e": "Compensa\u00e7\u00e3o por tCO\u2082e"
     }
   },
+  "compensations": {
+    "title": "Hist\u00f3rico de Compensa\u00e7\u00f5es",
+    "empty": "Nenhuma compensa\u00e7\u00e3o ainda.",
+    "emptyDescription": "Suas compensa\u00e7\u00f5es aparecer\u00e3o aqui ap\u00f3s compensar sua pegada de carbono.",
+    "page": "P\u00e1gina {{page}}"
+  },
   "checkout": {
-    "title": "Checkout da compensacao",
+    "title": "Checkout da compensa\u00e7\u00e3o",
     "summary": "Resumo do Pedido",
-    "area": "Area selecionada",
+    "area": "\u00c1rea selecionada",
     "mode": "Modalidade",
-    "trees": "Arvores",
-    "tco2e": "tCO2e",
+    "trees": "\u00c1rvores",
+    "tco2e": "tCO\u2082e",
     "total": "Total",
     "paymentDetails": "Dados do Pagamento",
-    "cardNumber": "Numero do cartao",
+    "cardNumber": "N\u00famero do cart\u00e3o",
     "cardholder": "Nome do titular",
-    "expiryMonth": "Mes de validade",
+    "expiryMonth": "M\u00eas de validade",
     "expiryYear": "Ano de validade",
     "cvv": "CVV",
     "installments": "Parcelas",
-    "testCardNote": "Cartoes de teste: 4111...1111 autorizado, 4000...0002 recusado, 4000...0101 em analise",
+    "testCardNote": "Cart\u00f5es de teste: 4111...1111 autorizado, 4000...0002 recusado, 4000...0101 em an\u00e1lise",
     "pay": "Pagar agora",
     "processing": "Processando pagamento...",
     "success": {
-      "title": "Compensacao registrada com sucesso!",
-      "message": "Seu pagamento foi aprovado e a compensacao foi finalizada.",
+      "title": "Compensa\u00e7\u00e3o registrada com sucesso!",
+      "message": "Seu pagamento foi aprovado e a compensa\u00e7\u00e3o foi finalizada.",
       "amount": "Valor compensado",
       "status": "Status do pagamento",
       "certificate": "Certificado emitido",
@@ -470,75 +561,97 @@
     "title": "Meu perfil",
     "edit": "Editar perfil",
     "editTitle": "Editar perfil",
-    "personalInfo": "Informacoes Pessoais",
+    "personalInfo": "Informa\u00e7\u00f5es Pessoais",
     "compensated": "Total Compensado",
-    "treesPlanted": "Arvores Plantadas",
-    "recentCompensations": "Compensacoes Recentes",
+    "treesPlanted": "\u00c1rvores Plantadas",
+    "recentCompensations": "Compensa\u00e7\u00f5es Recentes",
     "viewCertificates": "Ver Certificados",
     "documentType": "Tipo de documento",
-    "documentNumber": "Numero do documento",
+    "documentNumber": "N\u00famero do documento",
     "phone": "Telefone",
     "birthDate": "Data de nascimento",
-    "address": "Endereco",
+    "address": "Endere\u00e7o",
+    "saveError": "Erro ao salvar perfil. Tente novamente.",
     "form": {
       "displayName": "Nome exibido",
       "documentType": "Tipo de documento",
-      "documentNumber": "Numero do documento",
+      "documentNumber": "N\u00famero do documento",
       "birthDate": "Data de nascimento",
       "phone": "Telefone",
-      "addressLine1": "Endereco",
+      "addressLine1": "Endere\u00e7o",
       "addressLine2": "Complemento",
       "city": "Cidade",
       "state": "Estado",
       "postalCode": "CEP",
-      "country": "Pais",
+      "country": "Pa\u00eds",
       "passport": "Passaporte"
     }
   },
   "certificates": {
     "title": "Certificados",
     "empty": "Nenhum certificado emitido ainda.",
-    "emptyDescription": "Certificados sao emitidos apos compensacao bem-sucedida"
+    "emptyDescription": "Certificados s\u00e3o emitidos ap\u00f3s compensa\u00e7\u00e3o bem-sucedida",
+    "validate": {
+      "title": "Validar Certificado",
+      "description": "Insira o n\u00famero do certificado e o hash de verifica\u00e7\u00e3o para validar sua autenticidade.",
+      "certificateNumber": "N\u00famero do Certificado",
+      "certificateNumberPlaceholder": "Ex: CERT-2025-001",
+      "hash": "Hash de Verifica\u00e7\u00e3o",
+      "hashPlaceholder": "Ex: abc123def456...",
+      "submit": "Validar",
+      "valid": "Certificado V\u00e1lido",
+      "validDescription": "Este certificado \u00e9 aut\u00eantico e v\u00e1lido.",
+      "invalid": "Certificado Inv\u00e1lido",
+      "invalidDescription": "Este certificado n\u00e3o p\u00f4de ser verificado.",
+      "issuedAt": "Emitido em",
+      "error": "Certificado n\u00e3o encontrado ou dados inv\u00e1lidos. Verifique e tente novamente."
+    }
   },
   "audit": {
     "pending": {
-      "title": "Areas Pendentes de Auditoria",
-      "empty": "Nenhuma area pendente",
-      "emptyDescription": "Todas as areas foram auditadas"
+      "title": "\u00c1reas Pendentes de Auditoria",
+      "empty": "Nenhuma \u00e1rea pendente",
+      "emptyDescription": "Todas as \u00e1reas foram auditadas"
     },
     "review": {
-      "title": "Auditoria da Area",
-      "details": "Detalhes da Area",
-      "decision": "Decisao de Auditoria",
-      "criteria": "Criterios Socioambientais",
+      "title": "Auditoria da \u00c1rea",
+      "details": "Detalhes da \u00c1rea",
+      "decision": "Decis\u00e3o de Auditoria",
+      "criteria": "Crit\u00e9rios Socioambientais",
       "approve": "Aprovar",
       "reject": "Rejeitar",
-      "notesPlaceholder": "Registre observacoes relevantes sobre a auditoria.",
-      "rejectReasonPlaceholder": "Descreva o motivo da rejeicao"
+      "activate": "Ativar",
+      "notes": "Observa\u00e7\u00f5es",
+      "rejectReason": "Motivo da Rejei\u00e7\u00e3o",
+      "notesPlaceholder": "Registre observa\u00e7\u00f5es relevantes sobre a auditoria.",
+      "rejectReasonPlaceholder": "Descreva o motivo da rejei\u00e7\u00e3o",
+      "approveError": "Erro ao aprovar \u00e1rea. Tente novamente.",
+      "rejectError": "Erro ao rejeitar \u00e1rea. Tente novamente."
     }
   },
   "admin": {
     "users": {
-      "title": "Usuarios",
+      "title": "Usu\u00e1rios",
       "email": "E-mail",
       "status": "Status",
-      "roles": "Funcoes",
+      "roles": "Fun\u00e7\u00f5es",
       "createdAt": "Criado em",
       "locale": "Idioma",
       "searchPlaceholder": "Buscar por e-mail",
-      "empty": "Nenhum usuario encontrado.",
-      "editTitle": "Editar usuario",
+      "empty": "Nenhum usu\u00e1rio encontrado.",
+      "editTitle": "Editar usu\u00e1rio",
       "newPassword": "Nova senha (opcional)",
       "passwordPlaceholder": "Deixe em branco para manter a senha atual",
-      "deleteTitle": "Excluir usuario",
-      "deleteMessage": "Isso desativara a conta e removera o acesso."
+      "deleteTitle": "Excluir usu\u00e1rio",
+      "deleteMessage": "Isso desativar\u00e1 a conta e remover\u00e1 o acesso.",
+      "updateError": "Erro ao atualizar usu\u00e1rio. Tente novamente."
     },
     "auditLog": {
       "title": "Auditoria",
       "filterEntity": "Filtrar por entidade",
       "timestamp": "Data",
-      "actor": "Usuario",
-      "action": "Acao",
+      "actor": "Usu\u00e1rio",
+      "action": "A\u00e7\u00e3o",
       "entity": "Entidade",
       "status": "Status",
       "empty": "Nenhum registro de auditoria encontrado."
@@ -549,14 +662,26 @@
     "registerPrompt": "Crie uma conta gratuita para salvar seus resultados e compensar sua pegada de carbono",
     "demo": {
       "title": "Demo: Calculadora Embutida",
-      "description": "Veja como a calculadora aparecera quando embarcada em sites externos",
-      "codeTitle": "Codigo HTML para incorporar"
+      "description": "Veja como a calculadora aparecer\u00e1 quando embarcada em sites externos",
+      "codeTitle": "C\u00f3digo HTML para incorporar"
     }
   },
   "errors": {
     "accessDenied": "Acesso negado",
-    "accessDeniedDescription": "Voce nao tem permissao para acessar esta pagina.",
+    "accessDeniedDescription": "Voc\u00ea n\u00e3o tem permiss\u00e3o para acessar esta p\u00e1gina.",
     "generic": "Algo deu errado. Tente novamente.",
-    "network": "Erro de conexao. Verifique sua internet e tente novamente."
+    "network": "Erro de conex\u00e3o. Verifique sua internet e tente novamente.",
+    "auth.register.error": "Erro ao criar conta. Tente novamente.",
+    "auth.passwordReset.confirmError": "Erro ao redefinir senha. Verifique o token.",
+    "auth.confirmEmail.error": "Erro ao confirmar e-mail. Verifique o token.",
+    "auth.confirmEmail.resendError": "Erro ao reenviar e-mail. Tente novamente.",
+    "payment.error": "Erro ao processar pagamento. Tente novamente.",
+    "compensation.error": "Erro ao registrar compensa\u00e7\u00e3o. Tente novamente.",
+    "footprint.error.createFailed": "Erro ao criar c\u00e1lculo. Tente novamente.",
+    "area.form.error": "Erro ao salvar \u00e1rea. Tente novamente.",
+    "profile.saveError": "Erro ao salvar perfil. Tente novamente.",
+    "admin.users.updateError": "Erro ao atualizar usu\u00e1rio. Tente novamente.",
+    "audit.approveError": "Erro ao aprovar \u00e1rea. Tente novamente.",
+    "audit.rejectError": "Erro ao rejeitar \u00e1rea. Tente novamente."
   }
 }

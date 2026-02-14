@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/Input';
 import { Card, CardContent } from '@/components/ui/Card';
 import { cn } from '@/lib/cn';
+import { User, Building, BarChart3, ClipboardCheck, FileSpreadsheet } from 'lucide-react';
 import type { ProfileType, DataQuality } from '@/types/footprint';
 
 interface Props {
@@ -14,45 +15,64 @@ interface Props {
   onDataQualityChange: (quality: DataQuality) => void;
 }
 
+const QUALITY_ICONS: Record<DataQuality, React.ReactNode> = {
+  real: <ClipboardCheck className="h-4 w-4" />,
+  estimated: <BarChart3 className="h-4 w-4" />,
+  standard: <FileSpreadsheet className="h-4 w-4" />,
+};
+
 export function ProfilePeriodStep({ profileType, periodStart, periodEnd, dataQuality, onProfileTypeChange, onPeriodChange, onDataQualityChange }: Props) {
   const { t } = useTranslation();
 
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="font-medium mb-3">{t('footprint.profile.typeLabel')}</h3>
+        <h3 className="font-semibold text-lg mb-1">{t('footprint.profile.typeLabel')}</h3>
+        <p className="text-base text-text-secondary mb-3">{t('footprint.profile.typeSubtitle')}</p>
         <div className="grid grid-cols-2 gap-3">
-          {(['individual', 'legal_entity'] as ProfileType[]).map((type) => (
+          {([
+            { type: 'individual' as ProfileType, icon: <User className="h-6 w-6" />, subtitleKey: 'footprint.profile.individualSubtitle' },
+            { type: 'legal_entity' as ProfileType, icon: <Building className="h-6 w-6" />, subtitleKey: 'footprint.profile.legalEntitySubtitle' },
+          ]).map(({ type, icon, subtitleKey }) => (
             <Card
               key={type}
-              className={cn('cursor-pointer transition-all', profileType === type ? 'ring-2 ring-primary' : 'hover:shadow-md')}
+              className={cn('cursor-pointer transition-all hover:shadow-lg', profileType === type ? 'ring-2 ring-primary' : '')}
               onClick={() => onProfileTypeChange(type)}
             >
-              <CardContent className="py-4 text-center">
+              <CardContent className="py-5 text-center space-y-2">
+                <div className={cn('mx-auto w-12 h-12 rounded-full flex items-center justify-center', profileType === type ? 'bg-primary text-white' : 'bg-primary-50 text-primary')}>
+                  {icon}
+                </div>
                 <p className="font-medium">{t(`footprint.profile.${type}`)}</p>
+                <p className="text-sm text-text-secondary">{t(subtitleKey)}</p>
               </CardContent>
             </Card>
           ))}
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <Input id="periodStart" type="date" label={t('footprint.period.start')} value={periodStart} onChange={(e) => onPeriodChange(e.target.value, periodEnd)} />
-        <Input id="periodEnd" type="date" label={t('footprint.period.end')} value={periodEnd} onChange={(e) => onPeriodChange(periodStart, e.target.value)} />
+      <div>
+        <h3 className="font-semibold text-lg mb-1">{t('footprint.period.label')}</h3>
+        <p className="text-base text-text-secondary mb-3">{t('footprint.period.subtitle')}</p>
+        <div className="grid grid-cols-2 gap-4">
+          <Input id="periodStart" type="date" label={t('footprint.period.start')} value={periodStart} onChange={(e) => onPeriodChange(e.target.value, periodEnd)} />
+          <Input id="periodEnd" type="date" label={t('footprint.period.end')} value={periodEnd} onChange={(e) => onPeriodChange(periodStart, e.target.value)} />
+        </div>
       </div>
 
       <div>
-        <h3 className="font-medium mb-3">{t('footprint.dataQuality.label')}</h3>
+        <h3 className="font-semibold text-lg mb-1">{t('footprint.dataQuality.label')}</h3>
         <div className="flex gap-3">
           {(['real', 'estimated', 'standard'] as DataQuality[]).map((q) => (
             <button
               key={q}
               onClick={() => onDataQualityChange(q)}
               className={cn(
-                'px-4 py-2 rounded-lg text-sm border transition-colors',
-                dataQuality === q ? 'bg-primary text-white border-primary' : 'border-gray-300 hover:border-primary',
+                'flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-button)] text-base border transition-all',
+                dataQuality === q ? 'bg-primary text-white border-primary shadow-sm' : 'border-gray-200 hover:border-primary hover:bg-primary-50',
               )}
             >
+              {QUALITY_ICONS[q]}
               {t(`footprint.dataQuality.${q}`)}
             </button>
           ))}

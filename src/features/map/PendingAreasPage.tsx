@@ -14,8 +14,8 @@ export function PendingAreasPage() {
   const navigate = useNavigate();
 
   const { data: areas, isLoading } = useQuery({
-    queryKey: ['areas', { status: 'pending' }],
-    queryFn: () => areasService.listAreas({ status: 'pending' }),
+    queryKey: ['areas', { status: 'pending_audit' }],
+    queryFn: () => areasService.listAreas({ status: 'pending_audit' }),
   });
 
   return (

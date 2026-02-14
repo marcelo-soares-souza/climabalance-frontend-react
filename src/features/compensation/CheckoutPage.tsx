@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { areasService } from '@/services/areas';
 import { compensationsService } from '@/services/compensations';
 import { paymentsService } from '@/services/payments';
+import { footprintService } from '@/services/footprint';
 import { useCompensationStore } from '@/stores/compensation-store';
 import { queryClient } from '@/config/query-client';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
@@ -15,6 +17,10 @@ import { formatCurrency, formatTCO2e } from '@/lib/format';
 import { ApiError } from '@/lib/api-client';
 import { ArrowLeft, CreditCard, CheckCircle, Award } from 'lucide-react';
 import type { PaymentResult } from '@/types/payment';
+
+const PRICE_PER_TCO2E_BRL = 120;
+const DEFAULT_T_CO2E_PER_TREE_PER_YEAR = 0.00075;
+const DEFAULT_HORIZON_YEARS = 20;
 
 export function CompensationCheckoutPage() {
   const { t } = useTranslation();
@@ -28,6 +34,27 @@ export function CompensationCheckoutPage() {
   const [installments, setInstallments] = useState('1');
   const [error, setError] = useState<string | null>(null);
   const [paymentResult, setPaymentResult] = useState<PaymentResult | null>(null);
+  const { data: area } = useQuery({
+    queryKey: ['areas', store.areaId],
+    queryFn: () => areasService.getArea(store.areaId!),
+    enabled: !!store.areaId,
+  });
+  const { data: projection } = useQuery({
+    queryKey: ['footprint', 'projection', store.calculationId, store.areaId],
+    queryFn: () => footprintService.getCompensationProjection(store.calculationId!, { area_id: store.areaId! }),
+    enabled: store.compensationMode === 'tco2e' && !!store.calculationId && !!store.areaId,
+  });
+
+  const totalTCO2e = store.totalTCO2e ?? 0;
+  const tco2ePerTreePerYear = area?.tCO2ePerTreePerYear ?? DEFAULT_T_CO2E_PER_TREE_PER_YEAR;
+  const projectedTreesCount = projection?.treesNeeded && projection.treesNeeded > 0
+    ? projection.treesNeeded
+    : Math.max(
+        1,
+        Math.ceil(totalTCO2e / (Math.max(tco2ePerTreePerYear, Number.EPSILON) * DEFAULT_HORIZON_YEARS))
+      );
+  const tco2eTotalAmount = store.totalAmount ?? totalTCO2e * PRICE_PER_TCO2E_BRL;
+  const summaryTotalAmount = store.compensationMode === 'tco2e' ? tco2eTotalAmount : store.totalAmount;
 
   const createCompensationMutation = useMutation({
     mutationFn: () => compensationsService.createCompensation({
@@ -35,8 +62,9 @@ export function CompensationCheckoutPage() {
       calculation_id: store.calculationId || undefined,
       compensation_mode: store.compensationMode!,
       total_t_co2e: store.totalTCO2e || undefined,
-      trees_requested: store.treesRequested || undefined,
-      total_amount: store.totalAmount || undefined,
+      trees_count: store.compensationMode === 'tco2e' ? projectedTreesCount : undefined,
+      trees_requested: store.compensationMode === 'tree_purchase' ? store.treesRequested || undefined : undefined,
+      total_amount: store.compensationMode === 'tco2e' ? tco2eTotalAmount : store.totalAmount || undefined,
       currency: store.currency,
     }),
   });
@@ -116,7 +144,12 @@ export function CompensationCheckoutPage() {
           <div className="flex justify-between"><span>{t('checkout.mode')}</span><span className="font-medium">{t(`compensation.mode.${store.compensationMode}`)}</span></div>
           {store.treesRequested && <div className="flex justify-between"><span>{t('checkout.trees')}</span><span className="font-medium">{store.treesRequested}</span></div>}
           {store.totalTCO2e && <div className="flex justify-between"><span>{t('checkout.tco2e')}</span><span className="font-medium">{formatTCO2e(store.totalTCO2e)}</span></div>}
-          {store.totalAmount && <div className="flex justify-between text-lg font-bold border-t pt-2"><span>{t('checkout.total')}</span><span className="text-primary">{formatCurrency(store.totalAmount)}</span></div>}
+          {summaryTotalAmount && (
+            <div className="flex justify-between text-lg font-bold border-t pt-2">
+              <span>{t('checkout.total')}</span>
+              <span className="text-primary">{formatCurrency(summaryTotalAmount)}</span>
+            </div>
+          )}
         </CardContent>
       </Card>
 

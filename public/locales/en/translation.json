@@ -18,7 +18,17 @@
       "pending": "Pending",
       "active": "Active",
       "inactive": "Inactive",
-      "suspended": "Suspended"
+      "suspended": "Suspended",
+      "draft": "Draft",
+      "pending_audit": "Pending Audit",
+      "approved": "Approved",
+      "paid": "Paid",
+      "canceled": "Canceled",
+      "failed": "Failed",
+      "refunded": "Refunded",
+      "finalized": "Finalized",
+      "issued": "Issued",
+      "revoked": "Revoked"
     }
   },
   "auth": {
@@ -46,7 +56,8 @@
       "role": "Account type",
       "roleIndividual": "Individual",
       "roleLegalEntity": "Legal Entity",
-      "roleProducer": "Producer"
+      "roleProducer": "Producer",
+      "error": "Failed to create account. Please try again."
     },
     "passwordReset": {
       "title": "Reset your password",
@@ -59,7 +70,8 @@
       "confirmTitle": "Set a new password",
       "confirmSubmit": "Update password",
       "successTitle": "Password updated",
-      "successMessage": "Password updated successfully. Please sign in again."
+      "successMessage": "Password updated successfully. Please sign in again.",
+      "confirmError": "Failed to reset password. Check the token and try again."
     },
     "confirmEmail": {
       "title": "Confirm email",
@@ -69,8 +81,11 @@
       "noToken": "Didn't receive the token?",
       "submit": "Confirm email",
       "resend": "Resend confirmation email",
+      "resent": "Confirmation email resent successfully!",
       "successTitle": "Email confirmed!",
-      "successMessage": "Email confirmed successfully! You can now sign in."
+      "successMessage": "Email confirmed successfully! You can now sign in.",
+      "error": "Failed to confirm email. Check the token.",
+      "resendError": "Failed to resend email. Please try again."
     }
   },
   "nav": {
@@ -80,6 +95,8 @@
     "history": "Calculation History",
     "profile": "My profile",
     "certificates": "Certificates",
+    "compensations": "Compensations",
+    "validateCertificate": "Validate Certificate",
     "myAreas": "My Areas",
     "areas": "Available Areas",
     "account": "Account",
@@ -90,7 +107,9 @@
     "auditLog": "Audit Log (Admin)",
     "login": "Sign in",
     "logout": "Sign out",
-    "impact": "Your Impact"
+    "impact": "Your Impact",
+    "collapse": "Collapse sidebar",
+    "expand": "Expand sidebar"
   },
   "home": {
     "welcome": {
@@ -112,6 +131,7 @@
       "compensated": "Compensated",
       "treesPlanted": "Trees Planted",
       "recentActivity": "Recent Activity",
+      "noActivity": "No recent activity",
       "noActivityDescription": "Your recent calculations and compensations will appear here",
       "calculateAction": "Calculate Footprint",
       "calculateDescription": "Calculate your CO2 emissions",
@@ -144,11 +164,35 @@
   },
   "footprint": {
     "calculator": {
-      "title": "Footprint Calculator"
+      "title": "Footprint Calculator",
+      "calculate": "Calculate"
     },
     "calculating": "Calculating your footprint...",
+    "steps": {
+      "profile": "Profile",
+      "energy": "Energy",
+      "transport": "Transport",
+      "fuel": "Fuels",
+      "flights": "Flights",
+      "scope1": "Scope 1",
+      "scope2": "Scope 2",
+      "scope3": "Scope 3",
+      "result": "Result"
+    },
+    "categories": {
+      "energy": "Energy",
+      "fuel": "Fuels",
+      "transport": "Transport",
+      "flights": "Flights",
+      "scope1": "Scope 1",
+      "scope2": "Scope 2",
+      "scope3": "Scope 3"
+    },
     "dataQuality": {
-      "label": "Data Quality"
+      "label": "Data Quality",
+      "real": "Real Data",
+      "estimated": "Estimated",
+      "standard": "Standard"
     },
     "profile": {
       "typeLabel": "Profile Type",
@@ -156,7 +200,8 @@
       "individual": "Individual",
       "individualSubtitle": "Calculates personal consumption emissions",
       "legalEntity": "Legal Entity",
-      "legalEntitySubtitle": "Calculates corporate emissions (Scopes 1, 2, and 3)"
+      "legalEntitySubtitle": "Calculates corporate emissions (Scopes 1, 2, and 3)",
+      "legal_entity": "Legal Entity"
     },
     "period": {
       "label": "Calculation Period",
@@ -223,7 +268,14 @@
       "classBusiness": "Business",
       "classFirst": "First Class",
       "tip": "If you didn't take any flights during the period, you can skip this step",
-      "cardTitle": "Flight {{index}}"
+      "cardTitle": "Flight {{index}}",
+      "domesticShort": "Domestic Short-Haul",
+      "domesticLong": "Domestic Long-Haul",
+      "international": "International",
+      "domesticEconomy": "Domestic - Economy",
+      "domesticBusiness": "Domestic - Business",
+      "internationalEconomy": "International - Economy",
+      "internationalBusiness": "International - Business"
     },
     "scope1": {
       "title": "Scope 1 - Direct Emissions",
@@ -231,7 +283,11 @@
       "whatIsTitle": "What is Scope 1?",
       "whatIsDescription": "Stationary combustion (generators, boilers), mobile combustion (own fleet), fugitive emissions (air conditioning, refrigeration)",
       "fuelFleet": "Fuels - Own Fleet",
-      "tip": "Leave blank items that don't apply to your company"
+      "tip": "Leave blank items that don't apply to your company",
+      "stationaryCombustion": "Stationary Combustion",
+      "mobileCombustion": "Mobile Combustion",
+      "fugitiveEmissions": "Fugitive Emissions",
+      "processEmissions": "Process Emissions"
     },
     "scope2": {
       "title": "Scope 2 - Purchased Energy",
@@ -241,7 +297,10 @@
       "electricityLabel": "Electricity",
       "consumptionLabel": "Total Consumption (kWh)",
       "consumptionHint": "Enter total energy consumption",
-      "consumptionHelper": "Add all energy bills for the period"
+      "consumptionHelper": "Add all energy bills for the period",
+      "purchasedElectricity": "Purchased Electricity",
+      "purchasedHeat": "Purchased Heat",
+      "purchasedSteam": "Purchased Steam"
     },
     "scope3": {
       "title": "Scope 3 - Value Chain",
@@ -252,7 +311,12 @@
       "freightLabel": "Logistics and Freight Transport",
       "employeeCommuteLabel": "Employee Commuting",
       "businessTravelLabel": "Corporate Travel",
-      "tip": "Scope 3 can be estimated. Leave blank categories you don't have data for"
+      "tip": "Scope 3 can be estimated. Leave blank categories you don't have data for",
+      "businessTravel": "Business Travel",
+      "employeeCommuting": "Employee Commuting",
+      "purchasedGoods": "Purchased Goods & Services",
+      "waste": "Waste",
+      "upstreamTransport": "Upstream Transport"
     },
     "result": {
       "title": "Calculation Result",
@@ -315,7 +379,8 @@
       "invalidNumber": "Enter a valid number",
       "calculationFailed": "Failed to calculate footprint",
       "saveFailed": "Failed to save draft",
-      "loadFailed": "Failed to load calculation"
+      "loadFailed": "Failed to load calculation",
+      "createFailed": "Failed to create calculation"
     },
     "success": {
       "draftSaved": "Draft saved successfully!",
@@ -359,10 +424,13 @@
     "trees": "trees",
     "tCO2ePerTree": "tCO2e per Tree/Year",
     "totalCapacity": "Total Capacity",
+    "usage": "Usage",
     "contributions": "Tree contributions",
     "contributionsEmpty": "No paid tree contributions for this area yet.",
     "media": "Area media",
     "mediaEmpty": "No photos or videos uploaded yet.",
+    "uploadMedia": "Upload",
+    "uploadMediaError": "Failed to upload media. Please try again.",
     "compensateNow": "Compensate now",
     "status": {
       "draft": "Draft",
@@ -402,15 +470,32 @@
     "deleteConfirm": {
       "title": "Delete area",
       "message": "Are you sure you want to delete this area? This action cannot be undone."
+    },
+    "submitConfirm": {
+      "title": "Submit for Audit",
+      "message": "This area will be submitted for review by an analyst. You will not be able to edit it until the audit is complete.",
+      "notesLabel": "Notes (optional)",
+      "notesPlaceholder": "Add any notes for the auditor...",
+      "error": "Failed to submit area for audit. Please try again."
+    },
+    "suspendConfirm": {
+      "title": "Suspend Area",
+      "message": "Suspending this area will prevent new compensations. Existing compensations will not be affected.",
+      "reasonLabel": "Reason (optional)",
+      "reasonPlaceholder": "Reason for suspension...",
+      "error": "Failed to suspend area. Please try again."
     }
   },
   "areas": {
     "list": {
       "title": "My Areas",
-      "create": "Create New Area"
+      "create": "Create New Area",
+      "empty": "No areas registered yet"
     },
     "my": {
-      "title": "My Areas"
+      "title": "My Areas",
+      "empty": "You haven't registered any areas yet",
+      "emptyDescription": "Register an area to start receiving compensations"
     },
     "available": {
       "title": "Available Areas",
@@ -438,6 +523,12 @@
       "tree_purchase": "Tree purchase (20 years)",
       "tco2e": "tCO2e compensation"
     }
+  },
+  "compensations": {
+    "title": "Compensation History",
+    "empty": "No compensations yet.",
+    "emptyDescription": "Your compensations will appear here after you compensate your carbon footprint.",
+    "page": "Page {{page}}"
   },
   "checkout": {
     "title": "Compensation Checkout",
@@ -480,6 +571,7 @@
     "phone": "Phone",
     "birthDate": "Birth date",
     "address": "Address",
+    "saveError": "Failed to save profile. Please try again.",
     "form": {
       "displayName": "Display name",
       "documentType": "Document type",
@@ -498,7 +590,22 @@
   "certificates": {
     "title": "Certificates",
     "empty": "No certificates issued yet.",
-    "emptyDescription": "Certificates are issued after successful compensation"
+    "emptyDescription": "Certificates are issued after successful compensation",
+    "validate": {
+      "title": "Validate Certificate",
+      "description": "Enter the certificate number and verification hash to validate its authenticity.",
+      "certificateNumber": "Certificate Number",
+      "certificateNumberPlaceholder": "e.g. CERT-2025-001",
+      "hash": "Verification Hash",
+      "hashPlaceholder": "e.g. abc123def456...",
+      "submit": "Validate",
+      "valid": "Valid Certificate",
+      "validDescription": "This certificate is authentic and valid.",
+      "invalid": "Invalid Certificate",
+      "invalidDescription": "This certificate could not be verified.",
+      "issuedAt": "Issued at",
+      "error": "Certificate not found or invalid data. Please check and try again."
+    }
   },
   "audit": {
     "pending": {
@@ -513,8 +620,13 @@
       "criteria": "Socio-environmental Criteria",
       "approve": "Approve",
       "reject": "Reject",
+      "activate": "Activate",
+      "notes": "Notes",
+      "rejectReason": "Rejection Reason",
       "notesPlaceholder": "Add any relevant audit notes.",
-      "rejectReasonPlaceholder": "Describe the rejection reason"
+      "rejectReasonPlaceholder": "Describe the rejection reason",
+      "approveError": "Failed to approve area. Please try again.",
+      "rejectError": "Failed to reject area. Please try again."
     }
   },
   "admin": {
@@ -531,7 +643,8 @@
       "newPassword": "New password (optional)",
       "passwordPlaceholder": "Leave blank to keep current password",
       "deleteTitle": "Delete user",
-      "deleteMessage": "This will deactivate the account and remove access."
+      "deleteMessage": "This will deactivate the account and remove access.",
+      "updateError": "Failed to update user. Please try again."
     },
     "auditLog": {
       "title": "Audit Log",
@@ -557,6 +670,18 @@
     "accessDenied": "Access denied",
     "accessDeniedDescription": "You do not have permission to access this page.",
     "generic": "Something went wrong. Please try again.",
-    "network": "Connection error. Check your internet and try again."
+    "network": "Connection error. Check your internet and try again.",
+    "auth.register.error": "Failed to create account. Please try again.",
+    "auth.passwordReset.confirmError": "Failed to reset password. Check the token.",
+    "auth.confirmEmail.error": "Failed to confirm email. Check the token.",
+    "auth.confirmEmail.resendError": "Failed to resend email. Please try again.",
+    "payment.error": "Payment failed. Please try again.",
+    "compensation.error": "Failed to register compensation. Please try again.",
+    "footprint.error.createFailed": "Failed to create calculation. Please try again.",
+    "area.form.error": "Failed to save area. Please try again.",
+    "profile.saveError": "Failed to save profile. Please try again.",
+    "admin.users.updateError": "Failed to update user. Please try again.",
+    "audit.approveError": "Failed to approve area. Please try again.",
+    "audit.rejectError": "Failed to reject area. Please try again."
   }
 }

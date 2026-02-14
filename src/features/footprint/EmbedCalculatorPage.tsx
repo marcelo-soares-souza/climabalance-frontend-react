@@ -9,6 +9,9 @@ import { EnergyStep } from './components/steps/EnergyStep';
 import { TransportStep } from './components/steps/TransportStep';
 import { FuelStep } from './components/steps/FuelStep';
 import { FlightsStep } from './components/steps/FlightsStep';
+import { Scope1Step } from './components/steps/Scope1Step';
+import { Scope2Step } from './components/steps/Scope2Step';
+import { Scope3Step } from './components/steps/Scope3Step';
 import { footprintService } from '@/services/footprint';
 import { formatTCO2e } from '@/lib/format';
 import type { CalculationResult } from '@/types/footprint';
@@ -19,11 +22,19 @@ export function EmbedCalculatorPage() {
   const calculator = useCalculator();
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [loading, setLoading] = useState(false);
+  const isLastInputStep = calculator.currentStepIndex === calculator.totalSteps - 2;
+  const shouldCalculate = isLastInputStep || (calculator.currentStep === 'result' && !result);
 
   const handleCalculate = async () => {
     setLoading(true);
     try {
-      const res = await footprintService.calculateGuest(calculator.state.profileType, calculator.state.inputs);
+      const res = await footprintService.calculateGuest(
+        calculator.state.profileType,
+        calculator.state.periodStart,
+        calculator.state.periodEnd,
+        calculator.state.inputs,
+        calculator.state.dataQuality
+      );
       setResult(res);
       calculator.nextStep();
     } catch { /* ignore */ } finally { setLoading(false); }
@@ -42,10 +53,13 @@ export function EmbedCalculatorPage() {
     }
     switch (calculator.currentStep) {
       case 'profile': return <ProfilePeriodStep profileType={calculator.state.profileType} periodStart={calculator.state.periodStart} periodEnd={calculator.state.periodEnd} dataQuality={calculator.state.dataQuality} onProfileTypeChange={calculator.setProfileType} onPeriodChange={calculator.setPeriod} onDataQualityChange={calculator.setDataQuality} />;
-      case 'energy': return <EnergyStep onSave={calculator.addInputs} />;
-      case 'transport': return <TransportStep onSave={calculator.addInputs} />;
-      case 'fuel': return <FuelStep onSave={calculator.addInputs} />;
-      case 'flights': return <FlightsStep onSave={calculator.addInputs} />;
+      case 'energy': return <EnergyStep onSave={calculator.addInputs} initialValues={calculator.getInitialValues('energy')} />;
+      case 'transport': return <TransportStep onSave={calculator.addInputs} initialValues={calculator.getInitialValues('transport')} />;
+      case 'fuel': return <FuelStep onSave={calculator.addInputs} initialValues={calculator.getInitialValues('fuel')} />;
+      case 'flights': return <FlightsStep onSave={calculator.addInputs} initialValues={calculator.getInitialValues('flights')} />;
+      case 'scope1': return <Scope1Step onSave={calculator.addInputs} initialValues={calculator.getInitialValues('scope1')} />;
+      case 'scope2': return <Scope2Step onSave={calculator.addInputs} initialValues={calculator.getInitialValues('scope2')} />;
+      case 'scope3': return <Scope3Step onSave={calculator.addInputs} initialValues={calculator.getInitialValues('scope3')} />;
       default: return null;
     }
   };
@@ -64,8 +78,8 @@ export function EmbedCalculatorPage() {
         {!(result && calculator.currentStep === 'result') && (
           <div className="flex justify-between mt-4">
             <Button variant="ghost" onClick={calculator.prevStep} disabled={calculator.isFirstStep}>{t('common.back')}</Button>
-            <Button onClick={calculator.isLastStep ? handleCalculate : calculator.nextStep} loading={loading}>
-              {calculator.isLastStep ? t('footprint.calculator.calculate') : t('common.next')}
+            <Button onClick={shouldCalculate ? handleCalculate : calculator.nextStep} loading={loading}>
+              {shouldCalculate ? t('footprint.calculator.calculate') : t('common.next')}
             </Button>
           </div>
         )}

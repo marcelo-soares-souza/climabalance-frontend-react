@@ -7,11 +7,15 @@ export function formatNumber(value: number, locale = 'pt-BR', decimals = 2): str
 }
 
 export function formatDate(dateStr: string, locale = 'pt-BR'): string {
-  return new Date(dateStr).toLocaleDateString(locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return '-';
+  return date.toLocaleDateString(locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
 }
 
 export function formatDateTime(dateStr: string, locale = 'pt-BR'): string {
-  return new Date(dateStr).toLocaleString(locale, {
+  const date = new Date(dateStr);
+  if (Number.isNaN(date.getTime())) return '-';
+  return date.toLocaleString(locale, {
     year: 'numeric', month: '2-digit', day: '2-digit',
     hour: '2-digit', minute: '2-digit',
   });

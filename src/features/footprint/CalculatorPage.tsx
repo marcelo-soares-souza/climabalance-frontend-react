@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ErrorBanner } from '@/components/ErrorBanner';
@@ -20,25 +19,39 @@ import { footprintService } from '@/services/footprint';
 import { queryClient } from '@/config/query-client';
 import type { CalculationResult } from '@/types/footprint';
 import { ApiError } from '@/lib/api-client';
+import type { CreateCalculationRequest } from '@/types/footprint';
 
 export function CalculatorPage() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const calculator = useCalculator();
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const lastCalculatedSignatureRef = useRef<string | null>(null);
+
+  const calculationPayload = useMemo<CreateCalculationRequest>(() => ({
+    profile_type: calculator.state.profileType,
+    period_start: calculator.state.periodStart,
+    period_end: calculator.state.periodEnd,
+    data_quality: calculator.state.dataQuality,
+    inputs: calculator.state.inputs,
+  }), [
+    calculator.state.profileType,
+    calculator.state.periodStart,
+    calculator.state.periodEnd,
+    calculator.state.dataQuality,
+    calculator.state.inputs,
+  ]);
+
+  const calculationSignature = useMemo(
+    () => JSON.stringify(calculationPayload),
+    [calculationPayload]
+  );
 
   const createMutation = useMutation({
-    mutationFn: () =>
-      footprintService.createCalculation({
-        profile_type: calculator.state.profileType,
-        period_start: calculator.state.periodStart,
-        period_end: calculator.state.periodEnd,
-        data_quality: calculator.state.dataQuality,
-        inputs: calculator.state.inputs,
-      }),
-    onSuccess: (data) => {
+    mutationFn: (payload: CreateCalculationRequest) => footprintService.createCalculation(payload),
+    onSuccess: (data, payload) => {
       setResult(data);
+      lastCalculatedSignatureRef.current = JSON.stringify(payload);
       queryClient.invalidateQueries({ queryKey: ['calculations'] });
     },
     onError: (err) => {
@@ -48,35 +61,48 @@ export function CalculatorPage() {
 
   const finalizeMutation = useMutation({
     mutationFn: (id: string) => footprintService.finalizeCalculation(id),
-    onSuccess: (data) => {
-      setResult(data);
+    onSuccess: () => {
+      setResult((prev) => (prev ? { ...prev, status: 'finalized' } : prev));
       queryClient.invalidateQueries({ queryKey: ['calculations'] });
     },
   });
 
-  const handleNextFromResult = () => {
-    if (!result) {
-      createMutation.mutate();
+  // Auto-trigger calculation when entering result step
+  useEffect(() => {
+    if (calculator.currentStep !== 'result' || createMutation.isPending) {
+      return;
     }
-  };
+    if (result && lastCalculatedSignatureRef.current === calculationSignature) {
+      return;
+    }
+    createMutation.mutate(calculationPayload);
+  }, [calculator.currentStep, calculationPayload, calculationSignature, createMutation, result]);
 
   const handleNext = () => {
-    if (calculator.isLastStep && !result) {
-      createMutation.mutate();
-    } else {
-      calculator.nextStep();
-    }
+    calculator.nextStep();
   };
+  const isLastInputStep = calculator.currentStepIndex === calculator.totalSteps - 2;
 
   const renderStep = () => {
-    if (result && calculator.currentStep === 'result') {
-      return (
-        <ResultStep
-          result={result}
-          onFinalize={() => finalizeMutation.mutate(result.id)}
-          saving={finalizeMutation.isPending}
-        />
-      );
+    if (calculator.currentStep === 'result') {
+      if (createMutation.isPending) {
+        return (
+          <div className="text-center py-12">
+            <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-text-secondary">{t('footprint.calculating')}</p>
+          </div>
+        );
+      }
+      if (result) {
+        return (
+          <ResultStep
+            result={result}
+            onFinalize={() => finalizeMutation.mutate(result.id)}
+            saving={finalizeMutation.isPending}
+          />
+        );
+      }
+      return null;
     }
 
     switch (calculator.currentStep) {
@@ -92,53 +118,57 @@ export function CalculatorPage() {
             onDataQualityChange={calculator.setDataQuality}
           />
         );
-      case 'energy': return <EnergyStep onSave={calculator.addInputs} />;
-      case 'transport': return <TransportStep onSave={calculator.addInputs} />;
-      case 'fuel': return <FuelStep onSave={calculator.addInputs} />;
-      case 'flights': return <FlightsStep onSave={calculator.addInputs} />;
-      case 'scope1': return <Scope1Step onSave={calculator.addInputs} />;
-      case 'scope2': return <Scope2Step onSave={calculator.addInputs} />;
-      case 'scope3': return <Scope3Step onSave={calculator.addInputs} />;
-      case 'result': return <div className="text-center py-8"><p>{t('footprint.calculating')}</p></div>;
+      case 'energy': return <EnergyStep onSave={calculator.addInputs} initialValues={calculator.getInitialValues('energy')} />;
+      case 'transport': return <TransportStep onSave={calculator.addInputs} initialValues={calculator.getInitialValues('transport')} />;
+      case 'fuel': return <FuelStep onSave={calculator.addInputs} initialValues={calculator.getInitialValues('fuel')} />;
+      case 'flights': return <FlightsStep onSave={calculator.addInputs} initialValues={calculator.getInitialValues('flights')} />;
+      case 'scope1': return <Scope1Step onSave={calculator.addInputs} initialValues={calculator.getInitialValues('scope1')} />;
+      case 'scope2': return <Scope2Step onSave={calculator.addInputs} initialValues={calculator.getInitialValues('scope2')} />;
+      case 'scope3': return <Scope3Step onSave={calculator.addInputs} initialValues={calculator.getInitialValues('scope3')} />;
       default: return null;
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <h1 className="text-2xl font-bold">{t('footprint.calculator.title')}</h1>
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold font-display">{t('footprint.calculator.title')}</h1>
 
-      <StepIndicator
-        steps={calculator.steps}
-        currentIndex={calculator.currentStepIndex}
-        onStepClick={calculator.goToStep}
-      />
-
-      {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
-
-      <Card>
-        <CardContent className="py-6">
-          {renderStep()}
-        </CardContent>
-      </Card>
-
-      {!(result && calculator.currentStep === 'result') && (
-        <div className="flex justify-between">
-          <Button
-            variant="ghost"
-            onClick={calculator.prevStep}
-            disabled={calculator.isFirstStep}
-          >
-            {t('common.back')}
-          </Button>
-          <Button
-            onClick={handleNext}
-            loading={createMutation.isPending}
-          >
-            {calculator.isLastStep ? t('footprint.calculator.calculate') : t('common.next')}
-          </Button>
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Stepper column */}
+        <div className="lg:w-56 shrink-0">
+          <StepIndicator
+            steps={calculator.steps}
+            currentIndex={calculator.currentStepIndex}
+            onStepClick={calculator.goToStep}
+          />
         </div>
-      )}
+
+        {/* Content column */}
+        <div className="flex-1 min-w-0 space-y-6">
+          {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
+
+          <Card>
+            <CardContent className="py-6">
+              {renderStep()}
+            </CardContent>
+          </Card>
+
+          {calculator.currentStep !== 'result' && (
+            <div className="flex justify-between">
+              <Button
+                variant="ghost"
+                onClick={calculator.prevStep}
+                disabled={calculator.isFirstStep}
+              >
+                {t('common.back')}
+              </Button>
+              <Button onClick={handleNext}>
+                {isLastInputStep ? t('footprint.calculator.calculate') : t('common.next')}
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

@@ -34,7 +34,7 @@ export function AreaListPage() {
         {canCreate && <Button onClick={() => navigate('/areas/create')} size="sm"><Plus className="h-4 w-4 mr-1" /> {t('areas.list.create')}</Button>}
       </div>
       <div className="flex gap-3">
-        <Select options={[{ value: '', label: t('common.allStatuses') }, { value: 'draft', label: t('common.status.draft') }, { value: 'active', label: t('common.status.active') }, { value: 'pending', label: t('common.status.pending') }]} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />
+        <Select options={[{ value: '', label: t('common.allStatuses') }, { value: 'draft', label: t('common.status.draft') }, { value: 'active', label: t('common.status.active') }, { value: 'pending_audit', label: t('common.status.pending_audit') }]} value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} />
         <Select options={[{ value: '', label: t('map.allBiomes') }, { value: 'amazonia', label: t('map.biomes.amazonia') }, { value: 'cerrado', label: t('map.biomes.cerrado') }]} value={biomeFilter} onChange={(e) => setBiomeFilter(e.target.value)} />
       </div>
       {isLoading ? <SkeletonList /> : areas && areas.length > 0 ? (

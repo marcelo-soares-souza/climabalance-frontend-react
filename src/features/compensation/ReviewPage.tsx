@@ -5,19 +5,21 @@ import { useQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
 import { compensationsService } from '@/services/compensations';
 import { useCompensationStore } from '@/stores/compensation-store';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { ErrorBanner } from '@/components/ErrorBanner';
-import { formatTCO2e, formatCurrency, formatNumber } from '@/lib/format';
+import { formatTCO2e, formatCurrency } from '@/lib/format';
 import { cn } from '@/lib/cn';
 import { ArrowLeft, TreePine, Leaf, MapPin } from 'lucide-react';
 import type { CompensationMode } from '@/types/compensation';
 
+const PRICE_PER_TCO2E_BRL = 120;
+
 export function CompensationReviewPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { areaId, areaName, compensationMode, setSelection } = useCompensationStore();
+  const { areaId, compensationMode, setSelection } = useCompensationStore();
   const [mode, setMode] = useState<CompensationMode>(compensationMode || 'tree_purchase');
   const [treesRequested, setTreesRequested] = useState(100);
   const [tco2eAmount, setTco2eAmount] = useState(1);
@@ -52,7 +54,7 @@ export function CompensationReviewPage() {
         compensationMode: mode,
         totalTCO2e: tco2eAmount,
         treesRequested: null,
-        totalAmount: null,
+        totalAmount: tco2eAmount * PRICE_PER_TCO2E_BRL,
       });
     }
     navigate('/compensation/checkout');

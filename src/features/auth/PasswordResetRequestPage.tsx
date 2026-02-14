@@ -6,10 +6,12 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { authService } from '@/services/auth';
+import { useLocale } from '@/hooks/use-locale';
 import { Mail } from 'lucide-react';
 
 export function PasswordResetRequestPage() {
   const { t } = useTranslation();
+  const { locale } = useLocale();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -20,7 +22,7 @@ export function PasswordResetRequestPage() {
     setLoading(true);
     setError(null);
     try {
-      await authService.requestPasswordReset(email);
+      await authService.requestPasswordReset(email, locale);
       setSent(true);
     } catch {
       setError('auth.passwordReset.requestError');

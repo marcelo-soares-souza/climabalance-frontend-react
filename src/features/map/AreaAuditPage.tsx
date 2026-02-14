@@ -87,9 +87,9 @@ export function AreaAuditPage() {
               {media.map((m) => (
                 <div key={m.id} className="aspect-video bg-gray-100 rounded-lg overflow-hidden">
                   {m.mediaType === 'photo' ? (
-                    <img src={`/api/v1/areas/media/${m.id}/file`} alt={m.description || ''} className="w-full h-full object-cover" />
+                    <img src={m.url} alt={m.description || ''} className="w-full h-full object-cover" />
                   ) : (
-                    <video src={`/api/v1/areas/media/${m.id}/file`} controls className="w-full h-full object-cover" />
+                    <video src={m.url} controls className="w-full h-full object-cover" />
                   )}
                 </div>
               ))}
@@ -99,7 +99,7 @@ export function AreaAuditPage() {
       )}
 
       {/* Actions */}
-      {area.status === 'pending' && (
+      {area.status === 'pending_audit' && (
         <Card><CardContent className="space-y-4">
           <h3 className="font-medium">{t('audit.review.decision')}</h3>
           <Textarea id="notes" label={t('audit.review.notes')} value={notes} onChange={(e) => setNotes(e.target.value)} placeholder={t('audit.review.notesPlaceholder')} />
@@ -107,7 +107,13 @@ export function AreaAuditPage() {
             <Button onClick={() => approveMutation.mutate()} loading={approveMutation.isPending} className="flex-1">
               <CheckCircle className="h-4 w-4 mr-2" /> {t('audit.review.approve')}
             </Button>
-            <Button variant="danger" onClick={() => { if (rejectReason || notes) rejectMutation.mutate(); }} loading={rejectMutation.isPending} className="flex-1">
+            <Button
+              variant="danger"
+              onClick={() => { if (rejectReason.trim()) rejectMutation.mutate(); }}
+              loading={rejectMutation.isPending}
+              disabled={!rejectReason.trim()}
+              className="flex-1"
+            >
               <XCircle className="h-4 w-4 mr-2" /> {t('audit.review.reject')}
             </Button>
           </div>

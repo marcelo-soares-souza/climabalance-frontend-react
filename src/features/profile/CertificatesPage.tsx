@@ -40,9 +40,11 @@ export function CertificatesPage() {
                 <div className="flex items-start justify-between">
                   <div>
                     <p className="font-medium">{cert.certificateNumber}</p>
-                    <p className="text-sm text-text-secondary">{cert.areaName}</p>
-                    <p className="text-sm">{formatTCO2e(cert.totalTCO2e)} - {cert.treesCount} {t('area.trees')}</p>
-                    <p className="text-xs text-text-secondary mt-1">{formatDate(cert.issuedAt)}</p>
+                    <p className="text-sm text-text-secondary">{cert.compensationId}</p>
+                    {cert.totalTCO2e !== null && cert.treesCount !== null && (
+                      <p className="text-sm">{formatTCO2e(cert.totalTCO2e)} - {cert.treesCount} {t('area.trees')}</p>
+                    )}
+                    <p className="text-xs text-text-secondary mt-1">{cert.issuedAt ? formatDate(cert.issuedAt) : '-'}</p>
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <StatusBadge status={cert.status} />

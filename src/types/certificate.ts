@@ -4,9 +4,14 @@ export interface CertificateHistoryItem {
   compensationId: string;
   status: string;
   issuedAt: string;
-  areaName: string;
-  totalTCO2e: number;
-  treesCount: number;
+  fileName: string;
+  mimeType: string;
+  authenticityHash: string | null;
+  validationUrl: string | null;
+  qrCodeData: string | null;
+  areaName: string | null;
+  totalTCO2e: number | null;
+  treesCount: number | null;
 }
 
 export interface CertificateValidation {

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/Button';
 import { ResultBreakdownChart } from './ResultBreakdownChart';
 import { formatTCO2e, formatKgCO2e } from '@/lib/format';
 import type { CalculationResult } from '@/types/footprint';
-import { TreePine, BarChart3 } from 'lucide-react';
+import { TreePine, BarChart3, Leaf, TrendingDown, TrendingUp } from 'lucide-react';
 
 interface Props {
   result: CalculationResult;
@@ -20,25 +20,39 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
 
   const brazilAvg = 2.0;
   const globalAvg = 4.0;
+  const isBelowAvg = result.totalTCO2e <= brazilAvg;
 
   return (
     <div className="space-y-6">
       {/* Total Card */}
-      <Card className="bg-gradient-to-r from-primary to-primary-light text-white">
-        <CardContent className="py-8 text-center">
-          <p className="text-sm opacity-80 mb-2">{t('footprint.result.totalEmissions')}</p>
-          <p className="text-4xl font-bold mb-1">{formatTCO2e(result.totalTCO2e)}</p>
-          <p className="text-sm opacity-80">{formatKgCO2e(result.totalKgCO2e)}</p>
+      <Card className="bg-gradient-to-br from-primary via-primary-light to-accent text-white overflow-hidden">
+        <CardContent className="py-10 text-center relative">
+          <Leaf className="absolute top-4 right-4 h-16 w-16 text-white/10" />
+          <p className="text-base opacity-80 mb-2">{t('footprint.result.totalEmissions')}</p>
+          <p className="text-5xl font-bold mb-2">{formatTCO2e(result.totalTCO2e)}</p>
+          <p className="text-base opacity-70">{formatKgCO2e(result.totalKgCO2e)}</p>
+          {isBelowAvg && (
+            <div className="mt-4 inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-base">
+              <TrendingDown className="h-4 w-4" />
+              {t('footprint.result.belowAverage')}
+            </div>
+          )}
+          {!isBelowAvg && (
+            <div className="mt-4 inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-base">
+              <TrendingUp className="h-4 w-4" />
+              {t('footprint.result.aboveAverage')}
+            </div>
+          )}
         </CardContent>
       </Card>
 
       {/* Comparison */}
       <Card>
         <CardContent>
-          <h3 className="font-medium mb-4 flex items-center gap-2">
-            <BarChart3 className="h-4 w-4" /> {t('footprint.result.comparison')}
+          <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
+            <BarChart3 className="h-5 w-5 text-primary" /> {t('footprint.result.comparison')}
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-4">
             <ComparisonBar label={t('footprint.result.you')} value={result.totalTCO2e} max={Math.max(result.totalTCO2e, brazilAvg, globalAvg) * 1.2} color="bg-primary" />
             <ComparisonBar label={t('footprint.result.brazilAvg')} value={brazilAvg} max={Math.max(result.totalTCO2e, brazilAvg, globalAvg) * 1.2} color="bg-amber-500" />
             <ComparisonBar label={t('footprint.result.globalAvg')} value={globalAvg} max={Math.max(result.totalTCO2e, brazilAvg, globalAvg) * 1.2} color="bg-red-500" />
@@ -50,11 +64,26 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
       {result.breakdown && result.breakdown.length > 0 && (
         <Card>
           <CardContent>
-            <h3 className="font-medium mb-4">{t('footprint.result.breakdown')}</h3>
+            <h3 className="font-semibold text-lg mb-4">{t('footprint.result.breakdown')}</h3>
             <ResultBreakdownChart breakdown={result.breakdown} />
           </CardContent>
         </Card>
       )}
+
+      {/* Compensate CTA */}
+      <Card className="bg-accent/5 border border-accent/20">
+        <CardContent className="py-6">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-accent/15 rounded-xl">
+              <TreePine className="h-6 w-6 text-accent" />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-lg">{t('footprint.result.compensateTitle')}</h3>
+              <p className="text-base text-text-secondary mt-1">{t('footprint.result.compensateDescription')}</p>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Actions */}
       <div className="flex flex-col sm:flex-row gap-3">
@@ -81,12 +110,12 @@ function ComparisonBar({ label, value, max, color }: { label: string; value: num
   const pct = Math.min((value / max) * 100, 100);
   return (
     <div>
-      <div className="flex justify-between text-sm mb-1">
-        <span>{label}</span>
-        <span className="font-medium">{formatTCO2e(value)}</span>
+      <div className="flex justify-between text-base mb-1.5">
+        <span className="font-medium">{label}</span>
+        <span className="font-semibold">{formatTCO2e(value)}</span>
       </div>
-      <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
-        <div className={`h-full rounded-full ${color}`} style={{ width: `${pct}%` }} />
+      <div className="h-4 bg-gray-100 rounded-full overflow-hidden">
+        <div className={`h-full rounded-full ${color} transition-all duration-500`} style={{ width: `${pct}%` }} />
       </div>
     </div>
   );

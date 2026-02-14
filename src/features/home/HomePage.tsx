@@ -12,6 +12,8 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { formatTCO2e, formatNumber, formatDate } from '@/lib/format';
 import { Calculator, MapPin, TreePine, Award, ArrowRight, Leaf } from 'lucide-react';
 
+const LOGO_URL = '/logo.png';
+
 export function HomePage() {
   const { isAuthenticated, userId } = useAuth();
 
@@ -25,28 +27,38 @@ function UnauthenticatedHome() {
 
   return (
     <div className="max-w-4xl mx-auto text-center py-12">
-      <Leaf className="h-16 w-16 text-primary mx-auto mb-6" />
-      <h1 className="text-4xl font-bold mb-4">{t('home.welcome.title')}</h1>
-      <p className="text-lg text-text-secondary mb-8 max-w-2xl mx-auto">{t('home.welcome.description')}</p>
-      <div className="flex flex-col sm:flex-row gap-4 justify-center">
-        <Button size="lg" onClick={() => navigate('/register')}>{t('home.welcome.getStarted')}</Button>
-        <Button size="lg" variant="outline" onClick={() => navigate('/map')}>{t('home.welcome.exploreMap')}</Button>
+      <div className="bg-gradient-to-br from-primary via-primary-light to-accent rounded-3xl px-8 py-16 mb-16 text-white relative overflow-hidden">
+        <Leaf className="absolute -top-6 -right-6 h-40 w-40 text-white/5 rotate-12" />
+        <Leaf className="absolute -bottom-4 -left-4 h-24 w-24 text-white/5 -rotate-45" />
+        <img src={LOGO_URL} alt="ClimaBalance" className="h-28 w-28 mx-auto mb-6 drop-shadow-lg" />
+        <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">{t('home.welcome.title')}</h1>
+        <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">{t('home.welcome.description')}</p>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" onClick={() => navigate('/register')} className="bg-white text-primary hover:bg-white/90 shadow-lg">{t('home.welcome.getStarted')}</Button>
+          <Button size="lg" variant="outline" onClick={() => navigate('/map')} className="border-white/40 text-white hover:bg-white/10">{t('home.welcome.exploreMap')}</Button>
+        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-        <Card><CardContent className="text-center py-8">
-          <Calculator className="h-10 w-10 text-primary mx-auto mb-4" />
-          <h3 className="font-semibold mb-2">{t('home.welcome.step1Title')}</h3>
-          <p className="text-sm text-text-secondary">{t('home.welcome.step1Description')}</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <Card className="hover:shadow-lg transition-shadow"><CardContent className="text-center py-8">
+          <div className="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
+            <Calculator className="h-7 w-7 text-primary" />
+          </div>
+          <h3 className="font-semibold text-lg mb-2">{t('home.welcome.step1Title')}</h3>
+          <p className="text-base text-text-secondary">{t('home.welcome.step1Description')}</p>
         </CardContent></Card>
-        <Card><CardContent className="text-center py-8">
-          <TreePine className="h-10 w-10 text-primary mx-auto mb-4" />
-          <h3 className="font-semibold mb-2">{t('home.welcome.step2Title')}</h3>
-          <p className="text-sm text-text-secondary">{t('home.welcome.step2Description')}</p>
+        <Card className="hover:shadow-lg transition-shadow"><CardContent className="text-center py-8">
+          <div className="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center mx-auto mb-4">
+            <TreePine className="h-7 w-7 text-accent" />
+          </div>
+          <h3 className="font-semibold text-lg mb-2">{t('home.welcome.step2Title')}</h3>
+          <p className="text-base text-text-secondary">{t('home.welcome.step2Description')}</p>
         </CardContent></Card>
-        <Card><CardContent className="text-center py-8">
-          <Award className="h-10 w-10 text-primary mx-auto mb-4" />
-          <h3 className="font-semibold mb-2">{t('home.welcome.step3Title')}</h3>
-          <p className="text-sm text-text-secondary">{t('home.welcome.step3Description')}</p>
+        <Card className="hover:shadow-lg transition-shadow"><CardContent className="text-center py-8">
+          <div className="w-14 h-14 rounded-2xl bg-earth/20 flex items-center justify-center mx-auto mb-4">
+            <Award className="h-7 w-7 text-amber-700" />
+          </div>
+          <h3 className="font-semibold text-lg mb-2">{t('home.welcome.step3Title')}</h3>
+          <p className="text-base text-text-secondary">{t('home.welcome.step3Description')}</p>
         </CardContent></Card>
       </div>
     </div>
@@ -74,44 +86,44 @@ function AuthenticatedHome({ userId }: { userId: string }) {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">{t('home.dashboard.title')}</h1>
+      <h1 className="text-3xl font-bold font-display">{t('home.dashboard.title')}</h1>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard label={t('home.dashboard.totalFootprint')} value={loadingCalc ? null : formatTCO2e(totalFootprint)} icon={<Calculator className="h-5 w-5" />} color="text-amber-600" bg="bg-amber-50" />
-        <StatCard label={t('home.dashboard.compensated')} value={loadingComp ? null : formatTCO2e(totalCompensated)} icon={<TreePine className="h-5 w-5" />} color="text-success" bg="bg-green-50" />
-        <StatCard label={t('home.dashboard.balance')} value={loadingCalc || loadingComp ? null : formatTCO2e(balance)} icon={<Leaf className="h-5 w-5" />} color={balance > 0 ? 'text-error' : 'text-success'} bg={balance > 0 ? 'bg-red-50' : 'bg-green-50'} />
-        <StatCard label={t('home.dashboard.treesPlanted')} value={loadingComp ? null : formatNumber(totalTrees, 'pt-BR', 0)} icon={<TreePine className="h-5 w-5" />} color="text-primary" bg="bg-primary-50" />
+        <StatCard label={t('home.dashboard.totalFootprint')} value={loadingCalc ? null : formatTCO2e(totalFootprint)} icon={<Calculator className="h-5 w-5" />} color="text-amber-600" bg="bg-amber-50" borderColor="border-l-amber-400" />
+        <StatCard label={t('home.dashboard.compensated')} value={loadingComp ? null : formatTCO2e(totalCompensated)} icon={<TreePine className="h-5 w-5" />} color="text-success" bg="bg-green-50" borderColor="border-l-green-400" />
+        <StatCard label={t('home.dashboard.balance')} value={loadingCalc || loadingComp ? null : formatTCO2e(balance)} icon={<Leaf className="h-5 w-5" />} color={balance > 0 ? 'text-error' : 'text-success'} bg={balance > 0 ? 'bg-red-50' : 'bg-green-50'} borderColor={balance > 0 ? 'border-l-red-400' : 'border-l-green-400'} />
+        <StatCard label={t('home.dashboard.treesPlanted')} value={loadingComp ? null : formatNumber(totalTrees, 'pt-BR', 0)} icon={<TreePine className="h-5 w-5" />} color="text-primary" bg="bg-primary-50" borderColor="border-l-primary" />
       </div>
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/footprint/calculator')}>
+        <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate('/footprint/calculator')}>
           <CardContent className="flex items-center gap-4 py-4">
             <div className="p-3 bg-primary-50 rounded-xl"><Calculator className="h-6 w-6 text-primary" /></div>
             <div className="flex-1">
               <p className="font-medium">{t('home.dashboard.calculateAction')}</p>
-              <p className="text-sm text-text-secondary">{t('home.dashboard.calculateDescription')}</p>
+              <p className="text-base text-text-secondary">{t('home.dashboard.calculateDescription')}</p>
             </div>
             <ArrowRight className="h-5 w-5 text-text-secondary" />
           </CardContent>
         </Card>
-        <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/map')}>
+        <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate('/map')}>
           <CardContent className="flex items-center gap-4 py-4">
-            <div className="p-3 bg-primary-50 rounded-xl"><MapPin className="h-6 w-6 text-primary" /></div>
+            <div className="p-3 bg-accent/15 rounded-xl"><MapPin className="h-6 w-6 text-accent" /></div>
             <div className="flex-1">
               <p className="font-medium">{t('home.dashboard.compensateAction')}</p>
-              <p className="text-sm text-text-secondary">{t('home.dashboard.compensateDescription')}</p>
+              <p className="text-base text-text-secondary">{t('home.dashboard.compensateDescription')}</p>
             </div>
             <ArrowRight className="h-5 w-5 text-text-secondary" />
           </CardContent>
         </Card>
-        <Card className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate('/profile/certificates')}>
+        <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate('/profile/certificates')}>
           <CardContent className="flex items-center gap-4 py-4">
-            <div className="p-3 bg-primary-50 rounded-xl"><Award className="h-6 w-6 text-primary" /></div>
+            <div className="p-3 bg-earth/20 rounded-xl"><Award className="h-6 w-6 text-amber-700" /></div>
             <div className="flex-1">
               <p className="font-medium">{t('home.dashboard.certificatesAction')}</p>
-              <p className="text-sm text-text-secondary">{t('home.dashboard.certificatesDescription')}</p>
+              <p className="text-base text-text-secondary">{t('home.dashboard.certificatesDescription')}</p>
             </div>
             <ArrowRight className="h-5 w-5 text-text-secondary" />
           </CardContent>
@@ -121,7 +133,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
       {/* Recent Activity */}
       <Card>
         <CardContent>
-          <h2 className="font-semibold mb-4">{t('home.dashboard.recentActivity')}</h2>
+          <h2 className="font-semibold text-lg mb-4">{t('home.dashboard.recentActivity')}</h2>
           {loadingComp ? (
             <div className="space-y-3">{[1,2,3].map(i => <Skeleton key={i} className="h-12 w-full" />)}</div>
           ) : compensations && compensations.length > 0 ? (
@@ -129,11 +141,11 @@ function AuthenticatedHome({ userId }: { userId: string }) {
               {compensations.map((c) => (
                 <div key={c.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
                   <div>
-                    <p className="text-sm font-medium">{c.areaName}</p>
-                    <p className="text-xs text-text-secondary">{formatDate(c.createdAt)}</p>
+                    <p className="text-base font-medium">{c.areaName}</p>
+                    <p className="text-sm text-text-secondary">{formatDate(c.createdAt)}</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-medium">{formatTCO2e(c.totalTCO2e)}</p>
+                    <p className="text-base font-medium">{formatTCO2e(c.totalTCO2e)}</p>
                     <StatusBadge status={c.status} />
                   </div>
                 </div>
@@ -148,13 +160,13 @@ function AuthenticatedHome({ userId }: { userId: string }) {
   );
 }
 
-function StatCard({ label, value, icon, color, bg }: { label: string; value: string | null; icon: React.ReactNode; color: string; bg: string }) {
+function StatCard({ label, value, icon, color, bg, borderColor }: { label: string; value: string | null; icon: React.ReactNode; color: string; bg: string; borderColor: string }) {
   return (
-    <Card>
+    <Card className={`border-l-4 ${borderColor}`}>
       <CardContent className="py-4">
         <div className="flex items-center gap-3 mb-2">
           <div className={`p-2 rounded-lg ${bg} ${color}`}>{icon}</div>
-          <span className="text-sm text-text-secondary">{label}</span>
+          <span className="text-base text-text-secondary">{label}</span>
         </div>
         {value === null ? <Skeleton className="h-7 w-24" /> : <p className={`text-xl font-bold ${color}`}>{value}</p>}
       </CardContent>

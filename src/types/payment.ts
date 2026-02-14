@@ -30,12 +30,4 @@ export interface PaymentResult {
   } | null;
 }
 
-export interface PaymentStatusResponse {
-  id: string;
-  compensationId: string;
-  status: PaymentStatus;
-  provider: string;
-  amount: number;
-  currency: string;
-  processedAt: string | null;
-}
+export type PaymentStatusResponse = PaymentResult;

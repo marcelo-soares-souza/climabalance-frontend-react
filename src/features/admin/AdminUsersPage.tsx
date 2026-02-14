@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { usersService } from '@/services/users';
 import { Card, CardContent } from '@/components/ui/Card';
-import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 import { StatusBadge } from '@/components/StatusBadge';
 import { SkeletonTable } from '@/components/ui/Skeleton';
@@ -37,7 +36,7 @@ export function AdminUsersPage() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <Select options={[{ value: '', label: t('common.allStatuses') }, { value: 'active', label: 'Active' }, { value: 'pending', label: 'Pending' }, { value: 'inactive', label: 'Inactive' }]}
+        <Select options={[{ value: '', label: t('common.allStatuses') }, { value: 'active', label: 'Active' }, { value: 'pending', label: 'Pending' }, { value: 'suspended', label: 'Suspended' }]}
           value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-40" />
       </div>
 
@@ -57,8 +56,8 @@ export function AdminUsersPage() {
                   <tr key={user.id} className="border-b border-gray-50 hover:bg-gray-50">
                     <td className="px-4 py-3">{user.email}</td>
                     <td className="px-4 py-3"><StatusBadge status={user.status} /></td>
-                    <td className="px-4 py-3">{user.roles?.join(', ')}</td>
-                    <td className="px-4 py-3 text-text-secondary">{formatDate(user.createdAt)}</td>
+                    <td className="px-4 py-3">{user.roles?.length ? user.roles.join(', ') : '-'}</td>
+                    <td className="px-4 py-3 text-text-secondary">{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
                     <td className="px-4 py-3"><Button variant="ghost" size="sm" onClick={() => navigate(`/admin/users/edit/${user.id}`)}><Edit className="h-3 w-3" /></Button></td>
                   </tr>
                 ))}

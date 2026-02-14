@@ -7,8 +7,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/StatusBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
-import { EmptyState } from '@/components/EmptyState';
-import { formatTCO2e, formatCurrency, formatDate } from '@/lib/format';
+import { formatTCO2e, formatDate } from '@/lib/format';
 import { User, Edit, Award, TreePine } from 'lucide-react';
 
 export function ProfilePage() {

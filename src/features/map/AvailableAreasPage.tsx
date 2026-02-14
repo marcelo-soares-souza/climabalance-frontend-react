@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -19,7 +18,7 @@ export function AvailableAreasPage() {
 
   const { data: areas, isLoading } = useQuery({
     queryKey: ['areas', 'my'],
-    queryFn: () => areasService.listAreas({ owner_user_id: userId || undefined }),
+    queryFn: () => areasService.listAreas({ ownerUserId: userId || undefined }),
   });
 
   return (

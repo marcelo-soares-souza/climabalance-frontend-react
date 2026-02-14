@@ -1,22 +1,20 @@
 import type { ReactNode } from 'react';
+import { Card, CardContent } from '@/components/ui/Card';
 import { Leaf } from 'lucide-react';
-import { LanguageSelector } from '@/components/LanguageSelector';
 
 export function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-700 via-primary to-primary-light flex flex-col">
-      <div className="flex items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-2 text-white">
-          <Leaf className="h-6 w-6" />
-          <span className="font-semibold text-lg">ClimaBalance</span>
-        </div>
-        <LanguageSelector />
-      </div>
-      <div className="flex-1 flex items-center justify-center p-4">
-        <div className="bg-surface rounded-[var(--radius-card)] shadow-xl w-full max-w-md p-8">
+    <div className="flex items-center justify-center min-h-[calc(100vh-5rem)] py-8 relative">
+      <Leaf className="absolute top-8 -left-4 h-32 w-32 text-primary/5 rotate-45 pointer-events-none" />
+      <Leaf className="absolute bottom-8 -right-4 h-40 w-40 text-primary/5 -rotate-12 pointer-events-none" />
+      <Card className="w-full max-w-md relative z-10">
+        <CardContent className="p-8">
+          <div className="flex justify-center mb-6">
+            <img src="/logo.png" alt="ClimaBalance" className="h-14 w-14" />
+          </div>
           {children}
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

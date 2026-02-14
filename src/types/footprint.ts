@@ -7,12 +7,16 @@ export interface FootprintInput {
   category: InputCategory;
   unit: string;
   value: number;
-  metadata?: Record<string, unknown>;
+  metadata?: Record<string, unknown> | null;
 }
 
 export interface FootprintInputDetail extends FootprintInput {
   id: string;
   calculationId: string;
+  activityType: string;
+  quantity: number;
+  kgCO2e: number;
+  metadata: Record<string, unknown> | null;
 }
 
 export interface BreakdownItem {
@@ -24,7 +28,7 @@ export interface BreakdownItem {
 
 export interface CalculationResult {
   id: string;
-  userId: string;
+  userId?: string;
   profileType: ProfileType;
   periodStart: string;
   periodEnd: string;
@@ -33,7 +37,7 @@ export interface CalculationResult {
   status: CalculationStatus;
   dataQuality: DataQuality;
   factorsVersion: string;
-  region: string;
+  region?: string;
   breakdown: BreakdownItem[];
   createdAt: string;
   updatedAt: string;
@@ -53,6 +57,10 @@ export interface EmissionFactor {
 }
 
 export interface CompensationProjection {
+  projectionId: string;
+  calculationId: string;
+  areaId: string;
+  biome: string | null;
   totalTCO2e: number;
   treesNeeded: number;
   horizonYears: number;
