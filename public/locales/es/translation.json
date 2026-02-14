@@ -434,6 +434,11 @@
     "ownerEmail": "Responsable (correo)",
     "media": "Medios del área",
     "mediaEmpty": "Todav\u00eda no hay fotos o videos enviados.",
+    "mediaLightbox": {
+      "title": "Vista previa de imagen",
+      "open": "Abrir imagen en mayor tamaño",
+      "close": "Cerrar vista previa"
+    },
     "uploadMedia": "Subir",
     "uploadMediaError": "Error al subir el archivo. Int\u00e9ntelo de nuevo.",
     "compensateNow": "Compensar ahora",

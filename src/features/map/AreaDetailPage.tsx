@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -13,7 +13,7 @@ import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { useCompensationStore } from '@/stores/compensation-store';
 import { useAuth } from '@/hooks/use-auth';
 import { formatTCO2e, formatNumber } from '@/lib/format';
-import { ArrowLeft, MapPin, TreePine, Image, Send, ShieldOff, Upload, Trash2, Edit } from 'lucide-react';
+import { ArrowLeft, MapPin, TreePine, Image, Send, ShieldOff, Upload, Trash2, Edit, X } from 'lucide-react';
 
 export function AreaDetailPage() {
   const { areaId } = useParams<{ areaId: string }>();
@@ -28,6 +28,7 @@ export function AreaDetailPage() {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [submitNotes, setSubmitNotes] = useState('');
   const [suspendReason, setSuspendReason] = useState('');
+  const [lightboxImage, setLightboxImage] = useState<{ url: string; alt: string } | null>(null);
 
   const { data: area, isLoading } = useQuery({
     queryKey: ['areas', areaId],
@@ -121,6 +122,23 @@ export function AreaDetailPage() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
+  useEffect(() => {
+    if (!lightboxImage) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setLightboxImage(null);
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [lightboxImage]);
+
   if (isLoading) return <PageSkeleton />;
   if (!area) return <div>{t('common.notFound')}</div>;
 
@@ -212,7 +230,14 @@ export function AreaDetailPage() {
               {media.map((m) => (
                 <div key={m.id} className="relative group aspect-video bg-gray-100 rounded-lg overflow-hidden">
                   {m.mediaType === 'photo' ? (
-                    <img src={m.url} alt={m.description || ''} className="w-full h-full object-cover" />
+                    <button
+                      type="button"
+                      className="w-full h-full cursor-zoom-in"
+                      onClick={() => setLightboxImage({ url: m.url, alt: m.description || m.fileName })}
+                      aria-label={t('area.mediaLightbox.open')}
+                    >
+                      <img src={m.url} alt={m.description || m.fileName} className="w-full h-full object-cover" />
+                    </button>
                   ) : (
                     <video src={m.url} controls className="w-full h-full object-cover" />
                   )}
@@ -346,6 +371,34 @@ export function AreaDetailPage() {
           </Button>
         </DialogActions>
       </Dialog>
+
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setLightboxImage(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={t('area.mediaLightbox.title')}
+        >
+          <button
+            type="button"
+            className="absolute top-4 right-4 p-2 rounded-full bg-white/15 text-white hover:bg-white/25"
+            onClick={(event) => {
+              event.stopPropagation();
+              setLightboxImage(null);
+            }}
+            aria-label={t('area.mediaLightbox.close')}
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <img
+            src={lightboxImage.url}
+            alt={lightboxImage.alt}
+            className="max-h-[90vh] max-w-[95vw] object-contain rounded-md"
+            onClick={(event) => event.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 }

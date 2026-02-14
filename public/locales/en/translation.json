@@ -434,6 +434,11 @@
     "ownerEmail": "Responsible (email)",
     "media": "Area media",
     "mediaEmpty": "No photos or videos uploaded yet.",
+    "mediaLightbox": {
+      "title": "Image preview",
+      "open": "Open image in larger size",
+      "close": "Close preview"
+    },
     "uploadMedia": "Upload",
     "uploadMediaError": "Failed to upload media. Please try again.",
     "compensateNow": "Compensate now",

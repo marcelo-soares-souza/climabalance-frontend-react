@@ -434,6 +434,11 @@
     "ownerEmail": "Responsable (e-mail)",
     "media": "Médias de la zone",
     "mediaEmpty": "Aucune photo ou vid\u00e9o envoy\u00e9e pour le moment.",
+    "mediaLightbox": {
+      "title": "Aperçu de l'image",
+      "open": "Ouvrir l'image en grande taille",
+      "close": "Fermer l'aperçu"
+    },
     "uploadMedia": "T\u00e9l\u00e9charger",
     "uploadMediaError": "\u00c9chec du t\u00e9l\u00e9chargement du fichier. Veuillez r\u00e9essayer.",
     "compensateNow": "Compenser maintenant",

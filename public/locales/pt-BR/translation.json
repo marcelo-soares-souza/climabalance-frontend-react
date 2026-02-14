@@ -434,6 +434,11 @@
     "ownerEmail": "Respons\u00e1vel (e-mail)",
     "media": "M\u00eddias da \u00e1rea",
     "mediaEmpty": "Nenhuma foto ou v\u00eddeo enviado ainda.",
+    "mediaLightbox": {
+      "title": "Visualiza\u00e7\u00e3o da imagem",
+      "open": "Abrir imagem em tamanho maior",
+      "close": "Fechar visualiza\u00e7\u00e3o"
+    },
     "uploadMedia": "Enviar",
     "uploadMediaError": "Falha ao enviar m\u00eddia. Tente novamente.",
     "compensateNow": "Compensar agora",
