@@ -1,0 +1,562 @@
+{
+  "common": {
+    "back": "Back",
+    "backToHome": "Back to home",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "save": "Save",
+    "delete": "Delete",
+    "next": "Next",
+    "notFound": "Not found",
+    "createdAt": "Created at",
+    "allStatuses": "All",
+    "loading": "Loading...",
+    "retry": "Try again",
+    "ok": "OK",
+    "edit": "Edit",
+    "status": {
+      "pending": "Pending",
+      "active": "Active",
+      "inactive": "Inactive",
+      "suspended": "Suspended"
+    }
+  },
+  "auth": {
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "Your password",
+    "confirmPassword": "Confirm password",
+    "newPassword": "New password",
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Access your account to manage climate actions.",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "Don't have an account?",
+      "register": "Create an account",
+      "error": "Invalid email or password."
+    },
+    "register": {
+      "title": "Create account",
+      "subtitle": "Sign up to access the platform",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "login": "Sign in",
+      "role": "Account type",
+      "roleIndividual": "Individual",
+      "roleLegalEntity": "Legal Entity",
+      "roleProducer": "Producer"
+    },
+    "passwordReset": {
+      "title": "Reset your password",
+      "description": "Enter your email to receive a reset link.",
+      "submit": "Send link",
+      "backToLogin": "Back to sign in",
+      "haveToken": "I already have a token",
+      "sentTitle": "Link sent",
+      "sentMessage": "If the email exists, we'll send reset instructions.",
+      "confirmTitle": "Set a new password",
+      "confirmSubmit": "Update password",
+      "successTitle": "Password updated",
+      "successMessage": "Password updated successfully. Please sign in again."
+    },
+    "confirmEmail": {
+      "title": "Confirm email",
+      "description": "Paste the token you received by email",
+      "token": "Confirmation token",
+      "tokenPlaceholder": "Paste the token here",
+      "noToken": "Didn't receive the token?",
+      "submit": "Confirm email",
+      "resend": "Resend confirmation email",
+      "successTitle": "Email confirmed!",
+      "successMessage": "Email confirmed successfully! You can now sign in."
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "map": "Areas Map",
+    "calculator": "Footprint Calculator",
+    "history": "Calculation History",
+    "profile": "My profile",
+    "certificates": "Certificates",
+    "myAreas": "My Areas",
+    "areas": "Available Areas",
+    "account": "Account",
+    "audit": "Audit",
+    "pendingAreas": "Pending Areas",
+    "admin": "Administration",
+    "users": "Users (Admin)",
+    "auditLog": "Audit Log (Admin)",
+    "login": "Sign in",
+    "logout": "Sign out",
+    "impact": "Your Impact"
+  },
+  "home": {
+    "welcome": {
+      "title": "Welcome to ClimaBalance",
+      "description": "Climate certification platform. We connect carbon offsetting to direct support for audited rural properties.",
+      "getStarted": "Get Started",
+      "exploreMap": "Explore Map",
+      "step1Title": "Calculate Your Footprint",
+      "step1Description": "Answer simple questions about your consumption to calculate your CO2 emissions.",
+      "step2Title": "Offset Your Emissions",
+      "step2Description": "Support verified reforestation areas across Brazil.",
+      "step3Title": "Receive Certificates",
+      "step3Description": "Get official carbon offset certificates."
+    },
+    "dashboard": {
+      "title": "Your Climate Impact",
+      "totalFootprint": "Total Footprint",
+      "balance": "Balance",
+      "compensated": "Compensated",
+      "treesPlanted": "Trees Planted",
+      "recentActivity": "Recent Activity",
+      "noActivityDescription": "Your recent calculations and compensations will appear here",
+      "calculateAction": "Calculate Footprint",
+      "calculateDescription": "Calculate your CO2 emissions",
+      "compensateAction": "Compensate Now",
+      "compensateDescription": "Support reforestation projects",
+      "certificatesAction": "Certificates",
+      "certificatesDescription": "View your offset certificates"
+    }
+  },
+  "onboarding": {
+    "skip": "Skip",
+    "next": "Next",
+    "finish": "Get Started",
+    "step1": {
+      "title": "Welcome to ClimaBalance",
+      "description": "Calculate your carbon footprint and contribute to reforestation in Brazil"
+    },
+    "step2": {
+      "title": "Measure Your Impact",
+      "description": "Answer simple questions about your energy use, transport, and consumption to calculate your CO2 emissions"
+    },
+    "step3": {
+      "title": "Offset Through Trees",
+      "description": "Support verified reforestation areas across Brazil and receive official certificates"
+    },
+    "step4": {
+      "title": "Track Your Progress",
+      "description": "View your compensation history and see your positive impact grow over time"
+    }
+  },
+  "footprint": {
+    "calculator": {
+      "title": "Footprint Calculator"
+    },
+    "calculating": "Calculating your footprint...",
+    "dataQuality": {
+      "label": "Data Quality"
+    },
+    "profile": {
+      "typeLabel": "Profile Type",
+      "typeSubtitle": "Select the profile type for calculation",
+      "individual": "Individual",
+      "individualSubtitle": "Calculates personal consumption emissions",
+      "legalEntity": "Legal Entity",
+      "legalEntitySubtitle": "Calculates corporate emissions (Scopes 1, 2, and 3)"
+    },
+    "period": {
+      "label": "Calculation Period",
+      "subtitle": "Choose the period you want to calculate",
+      "monthly": "Monthly",
+      "monthlySubtitle": "Calculation for a specific month",
+      "annual": "Annual",
+      "annualSubtitle": "Calculation for a full year",
+      "start": "Start",
+      "end": "End"
+    },
+    "energy": {
+      "title": "Energy Consumption",
+      "description": "Enter your electricity consumption for the period",
+      "electricity": "Residential Electricity",
+      "kwhLabel": "Consumption (kWh)",
+      "kwhHint": "Enter consumption in kWh",
+      "kwhHelper": "Find this value on your electricity bill",
+      "tip": "Tip: Average residential consumption in Brazil is about 150-200 kWh per month",
+      "naturalGas": "Natural Gas (m3)",
+      "lpg": "LPG"
+    },
+    "fuel": {
+      "title": "Fuel Consumption",
+      "description": "Enter fuel consumption for the period",
+      "gasoline": "Gasoline",
+      "ethanol": "Ethanol",
+      "diesel": "Diesel",
+      "naturalGas": "Natural Gas (m3)",
+      "quantityLabel": "Quantity (liters)",
+      "tip": "You can leave blank the fuels you didn't use"
+    },
+    "transport": {
+      "title": "Ground Transportation",
+      "description": "Enter distance traveled by each mode for the period",
+      "car": "Automobile",
+      "carSmall": "Small Car",
+      "carSmallSubtitle": "E.g.: Compact cars",
+      "carMedium": "Medium Car",
+      "carMediumSubtitle": "E.g.: Sedan cars",
+      "carLarge": "Large Car/SUV",
+      "carLargeSubtitle": "E.g.: Trucks, SUVs",
+      "motorcycle": "Motorcycle",
+      "bus": "Bus",
+      "metro": "Metro",
+      "train": "Train",
+      "otherModals": "Other Modes",
+      "tip": "Enter only the modes you used. Others can be left blank.",
+      "distanceLabel": "Distance (km)"
+    },
+    "flights": {
+      "title": "Air Travel",
+      "description": "Enter flights taken during the period",
+      "emptyTitle": "No flights added",
+      "emptySubtitle": "Add flights you took during the period",
+      "addAction": "Add Flight",
+      "distanceLabel": "Distance (km)",
+      "distanceHint": "Enter flight distance",
+      "typeLabel": "Flight Type",
+      "typeDomestic": "Domestic",
+      "typeInternational": "International",
+      "classLabel": "Class",
+      "classEconomy": "Economy",
+      "classBusiness": "Business",
+      "classFirst": "First Class",
+      "tip": "If you didn't take any flights during the period, you can skip this step",
+      "cardTitle": "Flight {{index}}"
+    },
+    "scope1": {
+      "title": "Scope 1 - Direct Emissions",
+      "description": "Emissions from sources directly controlled by the company",
+      "whatIsTitle": "What is Scope 1?",
+      "whatIsDescription": "Stationary combustion (generators, boilers), mobile combustion (own fleet), fugitive emissions (air conditioning, refrigeration)",
+      "fuelFleet": "Fuels - Own Fleet",
+      "tip": "Leave blank items that don't apply to your company"
+    },
+    "scope2": {
+      "title": "Scope 2 - Purchased Energy",
+      "description": "Indirect emissions from purchased electricity consumption",
+      "whatIsTitle": "What is Scope 2?",
+      "whatIsDescription": "Indirect emissions from generation of purchased and consumed electricity. Includes all units (offices, factories, stores, etc.)",
+      "electricityLabel": "Electricity",
+      "consumptionLabel": "Total Consumption (kWh)",
+      "consumptionHint": "Enter total energy consumption",
+      "consumptionHelper": "Add all energy bills for the period"
+    },
+    "scope3": {
+      "title": "Scope 3 - Value Chain",
+      "description": "Indirect emissions from the company's value chain",
+      "whatIsTitle": "What is Scope 3?",
+      "whatIsDescription": "Indirect emissions from activities not directly controlled: product logistics, employee commuting, corporate travel, suppliers, among others",
+      "mainCategories": "Main Categories",
+      "freightLabel": "Logistics and Freight Transport",
+      "employeeCommuteLabel": "Employee Commuting",
+      "businessTravelLabel": "Corporate Travel",
+      "tip": "Scope 3 can be estimated. Leave blank categories you don't have data for"
+    },
+    "result": {
+      "title": "Calculation Result",
+      "subtitle": "Your carbon footprint has been calculated",
+      "totalEmissions": "Total Emissions",
+      "breakdown": "Breakdown by Category",
+      "breakdownEmpty": "No breakdown data available",
+      "compensate": "Offset Now",
+      "compensateTitle": "Offset your emissions!",
+      "compensateDescription": "Support certified reforestation projects and neutralize your carbon footprint by planting native trees.",
+      "viewHistory": "View History",
+      "chartTitle": "Emissions Distribution",
+      "saveDraft": "Save Draft",
+      "finalize": "Finalize Calculation",
+      "comparison": "How Do You Compare?",
+      "you": "Your Total",
+      "brazilAvg": "National Average (Brazil)",
+      "globalAvg": "Global Average",
+      "belowAverage": "Below Average - Great job!",
+      "aboveAverage": "Above Average"
+    },
+    "category": {
+      "energy": "Energy",
+      "fuel": "Fuels",
+      "transport": "Transport",
+      "flights": "Flights",
+      "scope1": "Scope 1",
+      "scope2": "Scope 2",
+      "scope3": "Scope 3"
+    },
+    "history": {
+      "title": "Calculation History",
+      "empty": "You haven't made any calculations yet",
+      "emptyDescription": "You haven't performed any footprint calculations yet",
+      "startCalculation": "Start New Calculator",
+      "newCalculation": "New Calculator",
+      "filter": "Filter",
+      "filterTitle": "Filter Calculations",
+      "filterApply": "Apply",
+      "filterClear": "Clear"
+    },
+    "detail": {
+      "title": "Calculation Details",
+      "period": "Period Details",
+      "inputs": "Registered Inputs",
+      "breakdown": "Breakdown",
+      "noInputs": "No saved inputs",
+      "noBreakdown": "No breakdown available",
+      "deleteTitle": "Confirm Deletion",
+      "deleteMessage": "Are you sure you want to delete this draft? This action cannot be undone.",
+      "deleteAction": "Delete draft",
+      "continueEditing": "Continue Editing"
+    },
+    "status": {
+      "draft": "Draft",
+      "finalized": "Finalized"
+    },
+    "error": {
+      "requiredField": "Required field",
+      "invalidNumber": "Enter a valid number",
+      "calculationFailed": "Failed to calculate footprint",
+      "saveFailed": "Failed to save draft",
+      "loadFailed": "Failed to load calculation"
+    },
+    "success": {
+      "draftSaved": "Draft saved successfully!",
+      "calculated": "Footprint calculated successfully!",
+      "deleted": "Draft deleted successfully!"
+    }
+  },
+  "map": {
+    "title": "Areas Map",
+    "allBiomes": "All Biomes",
+    "areasCount": "{{count}} areas",
+    "available": "Available",
+    "capacity": "Capacity",
+    "biome": "Biome",
+    "compensate": "Compensate now",
+    "viewDetails": "View Details",
+    "biomes": {
+      "amazonia": "Amazonia",
+      "cerrado": "Cerrado",
+      "mataAtlantica": "Atlantic Forest",
+      "caatinga": "Caatinga",
+      "pampa": "Pampa",
+      "pantanal": "Pantanal"
+    },
+    "filter": {
+      "title": "Filter Areas",
+      "byBiome": "Filter by Biome",
+      "clear": "Clear Filters",
+      "apply": "Apply",
+      "all": "All"
+    },
+    "error": {
+      "loadFailed": "Unable to load map"
+    },
+    "noAreas": "No areas available right now"
+  },
+  "area": {
+    "available": "Available",
+    "availableOf": "available of",
+    "committed": "Committed",
+    "trees": "trees",
+    "tCO2ePerTree": "tCO2e per Tree/Year",
+    "totalCapacity": "Total Capacity",
+    "contributions": "Tree contributions",
+    "contributionsEmpty": "No paid tree contributions for this area yet.",
+    "media": "Area media",
+    "mediaEmpty": "No photos or videos uploaded yet.",
+    "compensateNow": "Compensate now",
+    "status": {
+      "draft": "Draft",
+      "pending_audit": "Pending Audit",
+      "approved": "Approved",
+      "active": "Active",
+      "rejected": "Rejected",
+      "suspended": "Suspended"
+    },
+    "form": {
+      "createTitle": "Create New Area",
+      "editTitle": "Edit Area",
+      "create": "Create Area",
+      "update": "Update Area",
+      "name": "Area Name",
+      "description": "Description",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "state": "State",
+      "city": "City",
+      "biome": "Biome",
+      "selectBiome": "Select a biome",
+      "totalCapacity": "Total Capacity (tCO2e)",
+      "tCO2ePerTree": "tCO2e per Tree/Year",
+      "pricePerTree": "Price per Tree",
+      "pricePerTCO2e": "Price per tCO2e",
+      "error": "Error saving area. Please try again."
+    },
+    "actions": {
+      "submitForAudit": "Submit for Audit",
+      "approve": "Approve",
+      "reject": "Reject",
+      "activate": "Activate",
+      "suspend": "Suspend",
+      "delete": "Delete area"
+    },
+    "deleteConfirm": {
+      "title": "Delete area",
+      "message": "Are you sure you want to delete this area? This action cannot be undone."
+    }
+  },
+  "areas": {
+    "list": {
+      "title": "My Areas",
+      "create": "Create New Area"
+    },
+    "my": {
+      "title": "My Areas"
+    },
+    "available": {
+      "title": "Available Areas",
+      "empty": "No areas available at this time",
+      "emptyHint": "Check back later for new areas"
+    }
+  },
+  "compensation": {
+    "review": {
+      "title": "Review Your Compensation",
+      "subtitle": "Please review the details before proceeding",
+      "modeLabel": "Compensation Mode",
+      "treePurchase": "Tree Purchase",
+      "treePurchaseDesc": "Choose how many trees you want to plant (20-year horizon)",
+      "directTCO2e": "tCO2e Compensation",
+      "directTCO2eDesc": "Compensate a specific amount of tCO2e",
+      "treesCount": "Number of Trees",
+      "pricePerTree": "Price per tree",
+      "estimatedCO2": "Estimated carbon (tCO2e)",
+      "total": "Total cost",
+      "tco2eAmount": "Total to offset (tCO2e)",
+      "proceed": "Proceed to Payment"
+    },
+    "mode": {
+      "tree_purchase": "Tree purchase (20 years)",
+      "tco2e": "tCO2e compensation"
+    }
+  },
+  "checkout": {
+    "title": "Compensation Checkout",
+    "summary": "Order Summary",
+    "area": "Selected area",
+    "mode": "Mode",
+    "trees": "Trees",
+    "tco2e": "tCO2e",
+    "total": "Total",
+    "paymentDetails": "Payment Details",
+    "cardNumber": "Card number",
+    "cardholder": "Cardholder name",
+    "expiryMonth": "Expiration month",
+    "expiryYear": "Expiration year",
+    "cvv": "CVV",
+    "installments": "Installments",
+    "testCardNote": "Test cards: 4111...1111 authorized, 4000...0002 declined, 4000...0101 in review",
+    "pay": "Pay now",
+    "processing": "Processing payment...",
+    "success": {
+      "title": "Compensation created successfully!",
+      "message": "Your payment was approved and the compensation was finalized.",
+      "amount": "Compensated amount",
+      "status": "Payment status",
+      "certificate": "Certificate issued",
+      "viewCertificates": "View Certificates"
+    }
+  },
+  "profile": {
+    "title": "My profile",
+    "edit": "Edit profile",
+    "editTitle": "Edit profile",
+    "personalInfo": "Personal Information",
+    "compensated": "Total Compensated",
+    "treesPlanted": "Trees Planted",
+    "recentCompensations": "Recent Compensations",
+    "viewCertificates": "View Certificates",
+    "documentType": "Document type",
+    "documentNumber": "Document number",
+    "phone": "Phone",
+    "birthDate": "Birth date",
+    "address": "Address",
+    "form": {
+      "displayName": "Display name",
+      "documentType": "Document type",
+      "documentNumber": "Document number",
+      "birthDate": "Birth date",
+      "phone": "Phone",
+      "addressLine1": "Address line 1",
+      "addressLine2": "Address line 2",
+      "city": "City",
+      "state": "State",
+      "postalCode": "Postal code",
+      "country": "Country",
+      "passport": "Passport"
+    }
+  },
+  "certificates": {
+    "title": "Certificates",
+    "empty": "No certificates issued yet.",
+    "emptyDescription": "Certificates are issued after successful compensation"
+  },
+  "audit": {
+    "pending": {
+      "title": "Areas Pending Audit",
+      "empty": "No pending areas",
+      "emptyDescription": "All areas have been audited"
+    },
+    "review": {
+      "title": "Area Audit",
+      "details": "Area Details",
+      "decision": "Audit Decision",
+      "criteria": "Socio-environmental Criteria",
+      "approve": "Approve",
+      "reject": "Reject",
+      "notesPlaceholder": "Add any relevant audit notes.",
+      "rejectReasonPlaceholder": "Describe the rejection reason"
+    }
+  },
+  "admin": {
+    "users": {
+      "title": "Users",
+      "email": "Email",
+      "status": "Status",
+      "roles": "Roles",
+      "createdAt": "Created at",
+      "locale": "Locale",
+      "searchPlaceholder": "Search by email",
+      "empty": "No users found.",
+      "editTitle": "Edit user",
+      "newPassword": "New password (optional)",
+      "passwordPlaceholder": "Leave blank to keep current password",
+      "deleteTitle": "Delete user",
+      "deleteMessage": "This will deactivate the account and remove access."
+    },
+    "auditLog": {
+      "title": "Audit Log",
+      "filterEntity": "Filter by entity",
+      "timestamp": "Date",
+      "actor": "Actor",
+      "action": "Action",
+      "entity": "Entity",
+      "status": "Status",
+      "empty": "No audit log entries found."
+    }
+  },
+  "embed": {
+    "register": "Create Account & Save",
+    "registerPrompt": "Create a free account to save your results and offset your carbon footprint",
+    "demo": {
+      "title": "Demo: Embedded Calculator",
+      "description": "See how the calculator will appear when embedded on external websites",
+      "codeTitle": "HTML code to embed"
+    }
+  },
+  "errors": {
+    "accessDenied": "Access denied",
+    "accessDeniedDescription": "You do not have permission to access this page.",
+    "generic": "Something went wrong. Please try again.",
+    "network": "Connection error. Check your internet and try again."
+  }
+}

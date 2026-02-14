@@ -1,0 +1,26 @@
+export function formatCurrency(value: number, currency = 'BRL', locale = 'pt-BR'): string {
+  return new Intl.NumberFormat(locale, { style: 'currency', currency }).format(value);
+}
+
+export function formatNumber(value: number, locale = 'pt-BR', decimals = 2): string {
+  return new Intl.NumberFormat(locale, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }).format(value);
+}
+
+export function formatDate(dateStr: string, locale = 'pt-BR'): string {
+  return new Date(dateStr).toLocaleDateString(locale, { year: 'numeric', month: '2-digit', day: '2-digit' });
+}
+
+export function formatDateTime(dateStr: string, locale = 'pt-BR'): string {
+  return new Date(dateStr).toLocaleString(locale, {
+    year: 'numeric', month: '2-digit', day: '2-digit',
+    hour: '2-digit', minute: '2-digit',
+  });
+}
+
+export function formatTCO2e(value: number): string {
+  return `${formatNumber(value)} tCO2e`;
+}
+
+export function formatKgCO2e(value: number): string {
+  return `${formatNumber(value, 'pt-BR', 1)} kg CO2e`;
+}

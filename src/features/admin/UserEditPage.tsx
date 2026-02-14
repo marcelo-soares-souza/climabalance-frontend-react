@@ -1,0 +1,88 @@
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { usersService } from '@/services/users';
+import { queryClient } from '@/config/query-client';
+import { Card, CardContent } from '@/components/ui/Card';
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { Select } from '@/components/ui/Select';
+import { ErrorBanner } from '@/components/ErrorBanner';
+import { PageSkeleton } from '@/components/LoadingSkeleton';
+import { ConfirmDialog } from '@/components/ConfirmDialog';
+import { ApiError } from '@/lib/api-client';
+import { ArrowLeft, Trash2 } from 'lucide-react';
+
+export function UserEditPage() {
+  const { userId } = useParams<{ userId: string }>();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
+  const [showDelete, setShowDelete] = useState(false);
+  const [form, setForm] = useState({ email: '', status: '', locale: '', password: '', password_confirm: '' });
+
+  const { data: user, isLoading } = useQuery({
+    queryKey: ['users', userId],
+    queryFn: () => usersService.getUser(userId!),
+    enabled: !!userId,
+  });
+
+  useEffect(() => {
+    if (user) setForm({ email: user.email, status: user.status, locale: user.locale, password: '', password_confirm: '' });
+  }, [user]);
+
+  const updateMutation = useMutation({
+    mutationFn: () => {
+      const data: Record<string, string> = {};
+      if (form.email !== user?.email) data.email = form.email;
+      if (form.status !== user?.status) data.status = form.status;
+      if (form.locale !== user?.locale) data.locale = form.locale;
+      if (form.password) { data.password = form.password; data.password_confirm = form.password_confirm; }
+      return usersService.updateUser(userId!, data);
+    },
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['users'] }); navigate('/admin/users'); },
+    onError: (err) => setError(err instanceof ApiError ? err.messageKey : 'admin.users.updateError'),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: () => usersService.deleteUser(userId!),
+    onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['users'] }); navigate('/admin/users'); },
+  });
+
+  const update = (field: string, value: string) => setForm(prev => ({ ...prev, [field]: value }));
+
+  if (isLoading) return <PageSkeleton />;
+  if (!user) return <div>{t('common.notFound')}</div>;
+
+  return (
+    <div className="max-w-lg mx-auto space-y-6">
+      <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
+        <ArrowLeft className="h-4 w-4" /> {t('common.back')}
+      </button>
+      <h1 className="text-2xl font-bold">{t('admin.users.editTitle')}</h1>
+      {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
+      <form onSubmit={(e) => { e.preventDefault(); updateMutation.mutate(); }}>
+        <Card><CardContent className="space-y-4 py-6">
+          <Input id="email" type="email" label={t('auth.email')} value={form.email} onChange={(e) => update('email', e.target.value)} />
+          <Select id="status" label={t('admin.users.status')} value={form.status} onChange={(e) => update('status', e.target.value)}
+            options={[{ value: 'active', label: 'Active' }, { value: 'pending', label: 'Pending' }, { value: 'inactive', label: 'Inactive' }]} />
+          <Select id="locale" label={t('admin.users.locale')} value={form.locale} onChange={(e) => update('locale', e.target.value)}
+            options={[{ value: 'pt-BR', label: 'Portugues (BR)' }, { value: 'en', label: 'English' }, { value: 'es', label: 'Espanol' }, { value: 'fr', label: 'Francais' }]} />
+          <Input id="password" type="password" label={t('admin.users.newPassword')} value={form.password} onChange={(e) => update('password', e.target.value)} placeholder={t('admin.users.passwordPlaceholder')} />
+          {form.password && <Input id="password_confirm" type="password" label={t('auth.confirmPassword')} value={form.password_confirm} onChange={(e) => update('password_confirm', e.target.value)} />}
+          <p className="text-xs text-text-secondary">{t('admin.users.roles')}: {user.roles?.join(', ')}</p>
+        </CardContent></Card>
+        <div className="flex justify-between mt-4">
+          <Button variant="danger" type="button" onClick={() => setShowDelete(true)}><Trash2 className="h-4 w-4 mr-1" /> {t('common.delete')}</Button>
+          <div className="flex gap-3">
+            <Button variant="ghost" type="button" onClick={() => navigate(-1)}>{t('common.cancel')}</Button>
+            <Button type="submit" loading={updateMutation.isPending}>{t('common.save')}</Button>
+          </div>
+        </div>
+      </form>
+      <ConfirmDialog open={showDelete} onClose={() => setShowDelete(false)} onConfirm={() => deleteMutation.mutate()}
+        title={t('admin.users.deleteTitle')} message={t('admin.users.deleteMessage')} danger loading={deleteMutation.isPending} />
+    </div>
+  );
+}

@@ -1,0 +1,51 @@
+export interface UserSummary {
+  id: string;
+  email: string;
+  status: string;
+  locale: string;
+  emailConfirmedAt: string | null;
+  createdAt: string;
+  roles: string[];
+}
+
+export interface UserProfile {
+  id: string;
+  userId: string;
+  displayName: string | null;
+  documentType: string | null;
+  documentNumber: string | null;
+  birthDate: string | null;
+  phone: string | null;
+  countryCode: string | null;
+  addressLine1: string | null;
+  addressLine2: string | null;
+  addressCity: string | null;
+  addressState: string | null;
+  addressPostalCode: string | null;
+  addressCountry: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface UserProfileUpdate {
+  display_name?: string;
+  document_type?: string;
+  document_number?: string;
+  birth_date?: string;
+  phone?: string;
+  country_code?: string;
+  address_line1?: string;
+  address_line2?: string;
+  address_city?: string;
+  address_state?: string;
+  address_postal_code?: string;
+  address_country?: string;
+}
+
+export interface UserUpdate {
+  email?: string;
+  password?: string;
+  password_confirm?: string;
+  locale?: string;
+  status?: string;
+}

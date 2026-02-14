@@ -1,0 +1,562 @@
+{
+  "common": {
+    "back": "Retour",
+    "backToHome": "Retour a l'accueil",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "save": "Enregistrer",
+    "delete": "Supprimer",
+    "next": "Suivant",
+    "notFound": "Non trouve",
+    "createdAt": "Cree le",
+    "allStatuses": "Tous",
+    "loading": "Chargement...",
+    "retry": "Reessayer",
+    "ok": "OK",
+    "edit": "Modifier",
+    "status": {
+      "pending": "En attente",
+      "active": "Actif",
+      "inactive": "Inactif",
+      "suspended": "Suspendu"
+    }
+  },
+  "auth": {
+    "email": "E-mail",
+    "emailPlaceholder": "votre@email.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Votre mot de passe",
+    "confirmPassword": "Confirmer le mot de passe",
+    "newPassword": "Nouveau mot de passe",
+    "login": {
+      "title": "Ravi de vous revoir",
+      "subtitle": "Accedez a votre compte pour gerer les actions climatiques.",
+      "submit": "Se connecter",
+      "forgotPassword": "Mot de passe oublie ?",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "register": "Creer un compte",
+      "error": "E-mail ou mot de passe invalide."
+    },
+    "register": {
+      "title": "Creer un compte",
+      "subtitle": "Inscrivez-vous pour acceder a la plateforme",
+      "submit": "Creer un compte",
+      "hasAccount": "Vous avez deja un compte ?",
+      "login": "Se connecter",
+      "role": "Type de compte",
+      "roleIndividual": "Particulier",
+      "roleLegalEntity": "Personne morale",
+      "roleProducer": "Producteur"
+    },
+    "passwordReset": {
+      "title": "Reinitialiser le mot de passe",
+      "description": "Saisissez votre e-mail pour recevoir un lien de reinitialisation.",
+      "submit": "Envoyer le lien",
+      "backToLogin": "Retour a la connexion",
+      "haveToken": "J'ai deja un jeton",
+      "sentTitle": "Lien envoye",
+      "sentMessage": "Si l'e-mail existe, nous enverrons des instructions de reinitialisation.",
+      "confirmTitle": "Definir un nouveau mot de passe",
+      "confirmSubmit": "Mettre a jour le mot de passe",
+      "successTitle": "Mot de passe mis a jour",
+      "successMessage": "Mot de passe mis a jour. Veuillez vous reconnecter."
+    },
+    "confirmEmail": {
+      "title": "Confirmer l'e-mail",
+      "description": "Collez le jeton recu par e-mail",
+      "token": "Jeton de confirmation",
+      "tokenPlaceholder": "Collez le jeton ici",
+      "noToken": "Vous n'avez pas recu le jeton ?",
+      "submit": "Confirmer l'e-mail",
+      "resend": "Renvoyer l'e-mail de confirmation",
+      "successTitle": "E-mail confirme !",
+      "successMessage": "E-mail confirme avec succes ! Vous pouvez maintenant vous connecter."
+    }
+  },
+  "nav": {
+    "home": "Accueil",
+    "map": "Carte des Zones",
+    "calculator": "Calculateur d'Empreinte",
+    "history": "Historique des Calculs",
+    "profile": "Mon profil",
+    "certificates": "Certificats",
+    "myAreas": "Mes Zones",
+    "areas": "Zones Disponibles",
+    "account": "Compte",
+    "audit": "Audit",
+    "pendingAreas": "Zones en Attente",
+    "admin": "Administration",
+    "users": "Utilisateurs (Admin)",
+    "auditLog": "Audit (Admin)",
+    "login": "Se connecter",
+    "logout": "Se deconnecter",
+    "impact": "Votre Impact"
+  },
+  "home": {
+    "welcome": {
+      "title": "Bienvenue sur ClimaBalance",
+      "description": "Plateforme de certification climatique. Nous relions la compensation carbone au soutien direct de proprietes rurales auditees.",
+      "getStarted": "Commencer",
+      "exploreMap": "Explorer la Carte",
+      "step1Title": "Calculez Votre Empreinte",
+      "step1Description": "Repondez a des questions simples sur votre consommation pour calculer vos emissions de CO2.",
+      "step2Title": "Compensez Vos Emissions",
+      "step2Description": "Soutenez les zones de reboisement verifiees a travers le Bresil.",
+      "step3Title": "Recevez des Certificats",
+      "step3Description": "Obtenez des certificats officiels de compensation carbone."
+    },
+    "dashboard": {
+      "title": "Votre Impact Climatique",
+      "totalFootprint": "Empreinte Totale",
+      "balance": "Solde",
+      "compensated": "Compense",
+      "treesPlanted": "Arbres Plantes",
+      "recentActivity": "Activite Recente",
+      "noActivityDescription": "Vos calculs et compensations recents apparaitront ici",
+      "calculateAction": "Calculer l'Empreinte",
+      "calculateDescription": "Calculez vos emissions de CO2",
+      "compensateAction": "Compenser Maintenant",
+      "compensateDescription": "Soutenez des projets de reboisement",
+      "certificatesAction": "Certificats",
+      "certificatesDescription": "Consultez vos certificats de compensation"
+    }
+  },
+  "onboarding": {
+    "skip": "Passer",
+    "next": "Suivant",
+    "finish": "Commencer",
+    "step1": {
+      "title": "Bienvenue sur ClimaBalance",
+      "description": "Calculez votre empreinte carbone et contribuez au reboisement au Bresil"
+    },
+    "step2": {
+      "title": "Mesurez Votre Impact",
+      "description": "Repondez a des questions simples sur votre consommation d'energie, transport et consommation pour calculer vos emissions de CO2"
+    },
+    "step3": {
+      "title": "Compensez par les Arbres",
+      "description": "Soutenez les zones de reboisement verifiees a travers le Bresil et recevez des certificats officiels"
+    },
+    "step4": {
+      "title": "Suivez Votre Progression",
+      "description": "Consultez votre historique de compensation et voyez votre impact positif grandir au fil du temps"
+    }
+  },
+  "footprint": {
+    "calculator": {
+      "title": "Calculateur d'Empreinte"
+    },
+    "calculating": "Calcul de votre empreinte...",
+    "dataQuality": {
+      "label": "Qualite des Donnees"
+    },
+    "profile": {
+      "typeLabel": "Type de Profil",
+      "typeSubtitle": "Selectionnez le type de profil pour le calcul",
+      "individual": "Particulier",
+      "individualSubtitle": "Calcule les emissions de consommation personnelle",
+      "legalEntity": "Personne Morale",
+      "legalEntitySubtitle": "Calcule les emissions d'entreprise (Scopes 1, 2 et 3)"
+    },
+    "period": {
+      "label": "Periode de Calcul",
+      "subtitle": "Choisissez la periode que vous souhaitez calculer",
+      "monthly": "Mensuelle",
+      "monthlySubtitle": "Calcul pour un mois specifique",
+      "annual": "Annuelle",
+      "annualSubtitle": "Calcul pour une annee complete",
+      "start": "Debut",
+      "end": "Fin"
+    },
+    "energy": {
+      "title": "Consommation d'Energie",
+      "description": "Saisissez votre consommation d'electricite pour la periode",
+      "electricity": "Electricite Residentielle",
+      "kwhLabel": "Consommation (kWh)",
+      "kwhHint": "Saisissez la consommation en kWh",
+      "kwhHelper": "Trouvez cette valeur sur votre facture d'electricite",
+      "tip": "Conseil : La consommation residentielle moyenne au Bresil est d'environ 150-200 kWh par mois",
+      "naturalGas": "Gaz Naturel (m3)",
+      "lpg": "GPL"
+    },
+    "fuel": {
+      "title": "Consommation de Carburants",
+      "description": "Saisissez la consommation de carburants pour la periode",
+      "gasoline": "Essence",
+      "ethanol": "Ethanol",
+      "diesel": "Diesel",
+      "naturalGas": "Gaz Naturel (m3)",
+      "quantityLabel": "Quantite (litres)",
+      "tip": "Vous pouvez laisser vides les carburants que vous n'avez pas utilises"
+    },
+    "transport": {
+      "title": "Transport Terrestre",
+      "description": "Saisissez la distance parcourue par mode pour la periode",
+      "car": "Automobile",
+      "carSmall": "Petite Voiture",
+      "carSmallSubtitle": "Ex : Voitures compactes",
+      "carMedium": "Voiture Moyenne",
+      "carMediumSubtitle": "Ex : Berlines",
+      "carLarge": "Grande Voiture/SUV",
+      "carLargeSubtitle": "Ex : Pick-ups, SUV",
+      "motorcycle": "Moto",
+      "bus": "Bus",
+      "metro": "Metro",
+      "train": "Train",
+      "otherModals": "Autres Modes",
+      "tip": "Saisissez uniquement les modes que vous avez utilises. Les autres peuvent rester vides.",
+      "distanceLabel": "Distance (km)"
+    },
+    "flights": {
+      "title": "Voyages Aeriens",
+      "description": "Saisissez les vols effectues pendant la periode",
+      "emptyTitle": "Aucun vol ajoute",
+      "emptySubtitle": "Ajoutez les vols que vous avez effectues pendant la periode",
+      "addAction": "Ajouter un Vol",
+      "distanceLabel": "Distance (km)",
+      "distanceHint": "Saisissez la distance du vol",
+      "typeLabel": "Type de Vol",
+      "typeDomestic": "Domestique",
+      "typeInternational": "International",
+      "classLabel": "Classe",
+      "classEconomy": "Economique",
+      "classBusiness": "Affaires",
+      "classFirst": "Premiere Classe",
+      "tip": "Si vous n'avez pris aucun vol pendant la periode, vous pouvez passer cette etape",
+      "cardTitle": "Vol {{index}}"
+    },
+    "scope1": {
+      "title": "Scope 1 - Emissions Directes",
+      "description": "Emissions provenant de sources directement controlees par l'entreprise",
+      "whatIsTitle": "Qu'est-ce que le Scope 1 ?",
+      "whatIsDescription": "Combustion stationnaire (generateurs, chaudieres), combustion mobile (flotte propre), emissions fugitives (climatisation, refrigeration)",
+      "fuelFleet": "Carburants - Flotte Propre",
+      "tip": "Laissez vides les elements qui ne s'appliquent pas a votre entreprise"
+    },
+    "scope2": {
+      "title": "Scope 2 - Energie Achetee",
+      "description": "Emissions indirectes de la consommation d'electricite achetee",
+      "whatIsTitle": "Qu'est-ce que le Scope 2 ?",
+      "whatIsDescription": "Emissions indirectes de la production d'electricite achetee et consommee. Inclut toutes les unites (bureaux, usines, magasins, etc.)",
+      "electricityLabel": "Electricite",
+      "consumptionLabel": "Consommation Totale (kWh)",
+      "consumptionHint": "Saisissez la consommation totale d'energie",
+      "consumptionHelper": "Ajoutez toutes les factures d'energie de la periode"
+    },
+    "scope3": {
+      "title": "Scope 3 - Chaine de Valeur",
+      "description": "Emissions indirectes de la chaine de valeur de l'entreprise",
+      "whatIsTitle": "Qu'est-ce que le Scope 3 ?",
+      "whatIsDescription": "Emissions indirectes d'activites non directement controlees : logistique des produits, deplacements des employes, voyages d'affaires, fournisseurs, entre autres",
+      "mainCategories": "Categories Principales",
+      "freightLabel": "Logistique et Transport de Fret",
+      "employeeCommuteLabel": "Deplacements des Employes",
+      "businessTravelLabel": "Voyages d'Affaires",
+      "tip": "Le Scope 3 peut etre estime. Laissez vides les categories pour lesquelles vous n'avez pas de donnees"
+    },
+    "result": {
+      "title": "Resultat du Calcul",
+      "subtitle": "Votre empreinte carbone a ete calculee",
+      "totalEmissions": "Emissions Totales",
+      "breakdown": "Repartition par Categorie",
+      "breakdownEmpty": "Aucune donnee de repartition disponible",
+      "compensate": "Compenser Maintenant",
+      "compensateTitle": "Compensez vos emissions !",
+      "compensateDescription": "Soutenez des projets de reforestation certifies et neutralisez votre empreinte carbone en plantant des arbres natifs.",
+      "viewHistory": "Voir l'Historique",
+      "chartTitle": "Distribution des Emissions",
+      "saveDraft": "Enregistrer le Brouillon",
+      "finalize": "Finaliser le Calcul",
+      "comparison": "Comment Vous Comparez-Vous ?",
+      "you": "Votre Total",
+      "brazilAvg": "Moyenne Nationale (Bresil)",
+      "globalAvg": "Moyenne Mondiale",
+      "belowAverage": "En Dessous de la Moyenne - Bravo !",
+      "aboveAverage": "Au-Dessus de la Moyenne"
+    },
+    "category": {
+      "energy": "Energie",
+      "fuel": "Carburants",
+      "transport": "Transport",
+      "flights": "Vols",
+      "scope1": "Scope 1",
+      "scope2": "Scope 2",
+      "scope3": "Scope 3"
+    },
+    "history": {
+      "title": "Historique des Calculs",
+      "empty": "Vous n'avez encore fait aucun calcul",
+      "emptyDescription": "Vous n'avez encore effectue aucun calcul d'empreinte",
+      "startCalculation": "Demarrer un Nouveau Calculateur",
+      "newCalculation": "Nouveau Calculateur",
+      "filter": "Filtrer",
+      "filterTitle": "Filtrer les Calculs",
+      "filterApply": "Appliquer",
+      "filterClear": "Effacer"
+    },
+    "detail": {
+      "title": "Details du Calcul",
+      "period": "Details de la Periode",
+      "inputs": "Entrees Enregistrees",
+      "breakdown": "Repartition",
+      "noInputs": "Aucune entree enregistree",
+      "noBreakdown": "Aucune repartition disponible",
+      "deleteTitle": "Confirmer la Suppression",
+      "deleteMessage": "Etes-vous sur de vouloir supprimer ce brouillon ? Cette action ne peut pas etre annulee.",
+      "deleteAction": "Supprimer le brouillon",
+      "continueEditing": "Continuer l'Edition"
+    },
+    "status": {
+      "draft": "Brouillon",
+      "finalized": "Finalise"
+    },
+    "error": {
+      "requiredField": "Champ obligatoire",
+      "invalidNumber": "Saisissez un nombre valide",
+      "calculationFailed": "Echec du calcul de l'empreinte",
+      "saveFailed": "Echec de l'enregistrement du brouillon",
+      "loadFailed": "Echec du chargement du calcul"
+    },
+    "success": {
+      "draftSaved": "Brouillon enregistre avec succes !",
+      "calculated": "Empreinte calculee avec succes !",
+      "deleted": "Brouillon supprime avec succes !"
+    }
+  },
+  "map": {
+    "title": "Carte des Zones",
+    "allBiomes": "Tous les Biomes",
+    "areasCount": "{{count}} zones",
+    "available": "Disponible",
+    "capacity": "Capacite",
+    "biome": "Biome",
+    "compensate": "Compenser maintenant",
+    "viewDetails": "Voir les Details",
+    "biomes": {
+      "amazonia": "Amazonie",
+      "cerrado": "Cerrado",
+      "mataAtlantica": "Foret atlantique",
+      "caatinga": "Caatinga",
+      "pampa": "Pampa",
+      "pantanal": "Pantanal"
+    },
+    "filter": {
+      "title": "Filtrer les Zones",
+      "byBiome": "Filtrer par Biome",
+      "clear": "Effacer les Filtres",
+      "apply": "Appliquer",
+      "all": "Tous"
+    },
+    "error": {
+      "loadFailed": "Impossible de charger la carte"
+    },
+    "noAreas": "Aucune zone disponible pour le moment"
+  },
+  "area": {
+    "available": "Disponible",
+    "availableOf": "disponible sur",
+    "committed": "Engage",
+    "trees": "arbres",
+    "tCO2ePerTree": "tCO2e par Arbre/An",
+    "totalCapacity": "Capacite Totale",
+    "contributions": "Contributions par arbres",
+    "contributionsEmpty": "Aucune contribution payee pour cette zone pour le moment.",
+    "media": "Medias de la zone",
+    "mediaEmpty": "Aucune photo ou video envoyee pour le moment.",
+    "compensateNow": "Compenser maintenant",
+    "status": {
+      "draft": "Brouillon",
+      "pending_audit": "En attente d'audit",
+      "approved": "Approuve",
+      "active": "Actif",
+      "rejected": "Rejete",
+      "suspended": "Suspendu"
+    },
+    "form": {
+      "createTitle": "Creer une Nouvelle Zone",
+      "editTitle": "Modifier la Zone",
+      "create": "Creer la Zone",
+      "update": "Mettre a jour la Zone",
+      "name": "Nom de la Zone",
+      "description": "Description",
+      "latitude": "Latitude",
+      "longitude": "Longitude",
+      "state": "Region",
+      "city": "Ville",
+      "biome": "Biome",
+      "selectBiome": "Selectionnez un biome",
+      "totalCapacity": "Capacite Totale (tCO2e)",
+      "tCO2ePerTree": "tCO2e par Arbre/An",
+      "pricePerTree": "Prix par Arbre",
+      "pricePerTCO2e": "Prix par tCO2e",
+      "error": "Erreur lors de l'enregistrement de la zone. Veuillez reessayer."
+    },
+    "actions": {
+      "submitForAudit": "Soumettre a l'Audit",
+      "approve": "Approuver",
+      "reject": "Rejeter",
+      "activate": "Activer",
+      "suspend": "Suspendre",
+      "delete": "Supprimer la zone"
+    },
+    "deleteConfirm": {
+      "title": "Supprimer la zone",
+      "message": "Souhaitez-vous vraiment supprimer cette zone ? Cette action est irreversible."
+    }
+  },
+  "areas": {
+    "list": {
+      "title": "Mes Zones",
+      "create": "Creer une Nouvelle Zone"
+    },
+    "my": {
+      "title": "Mes Zones"
+    },
+    "available": {
+      "title": "Zones Disponibles",
+      "empty": "Aucune zone disponible pour le moment",
+      "emptyHint": "Revenez plus tard pour voir de nouvelles zones"
+    }
+  },
+  "compensation": {
+    "review": {
+      "title": "Revoir Votre Compensation",
+      "subtitle": "Veuillez examiner les details avant de continuer",
+      "modeLabel": "Mode de Compensation",
+      "treePurchase": "Achat d'Arbres",
+      "treePurchaseDesc": "Choisissez combien d'arbres vous voulez planter (horizon de 20 ans)",
+      "directTCO2e": "Compensation en tCO2e",
+      "directTCO2eDesc": "Compensez une quantite specifique de tCO2e",
+      "treesCount": "Nombre d'Arbres",
+      "pricePerTree": "Prix par arbre",
+      "estimatedCO2": "Carbone estime (tCO2e)",
+      "total": "Cout total",
+      "tco2eAmount": "Total a compenser (tCO2e)",
+      "proceed": "Continuer vers le Paiement"
+    },
+    "mode": {
+      "tree_purchase": "Achat d'arbres (20 ans)",
+      "tco2e": "Compensation en tCO2e"
+    }
+  },
+  "checkout": {
+    "title": "Checkout de compensation",
+    "summary": "Resume de la Commande",
+    "area": "Zone selectionnee",
+    "mode": "Modalite",
+    "trees": "Arbres",
+    "tco2e": "tCO2e",
+    "total": "Total",
+    "paymentDetails": "Details du Paiement",
+    "cardNumber": "Numero de carte",
+    "cardholder": "Nom du titulaire",
+    "expiryMonth": "Mois d'expiration",
+    "expiryYear": "Annee d'expiration",
+    "cvv": "CVV",
+    "installments": "Echeances",
+    "testCardNote": "Cartes de test : 4111...1111 autorisee, 4000...0002 refusee, 4000...0101 en revision",
+    "pay": "Payer maintenant",
+    "processing": "Traitement du paiement...",
+    "success": {
+      "title": "Compensation enregistree avec succes !",
+      "message": "Votre paiement a ete approuve et la compensation a ete finalisee.",
+      "amount": "Montant compense",
+      "status": "Statut du paiement",
+      "certificate": "Certificat emis",
+      "viewCertificates": "Voir les Certificats"
+    }
+  },
+  "profile": {
+    "title": "Mon profil",
+    "edit": "Modifier le profil",
+    "editTitle": "Modifier le profil",
+    "personalInfo": "Informations Personnelles",
+    "compensated": "Total Compense",
+    "treesPlanted": "Arbres Plantes",
+    "recentCompensations": "Compensations Recentes",
+    "viewCertificates": "Voir les Certificats",
+    "documentType": "Type de document",
+    "documentNumber": "Numero de document",
+    "phone": "Telephone",
+    "birthDate": "Date de naissance",
+    "address": "Adresse",
+    "form": {
+      "displayName": "Nom d'affichage",
+      "documentType": "Type de document",
+      "documentNumber": "Numero de document",
+      "birthDate": "Date de naissance",
+      "phone": "Telephone",
+      "addressLine1": "Adresse",
+      "addressLine2": "Complement",
+      "city": "Ville",
+      "state": "Region",
+      "postalCode": "Code postal",
+      "country": "Pays",
+      "passport": "Passeport"
+    }
+  },
+  "certificates": {
+    "title": "Certificats",
+    "empty": "Aucun certificat emis pour le moment.",
+    "emptyDescription": "Les certificats sont emis apres une compensation reussie"
+  },
+  "audit": {
+    "pending": {
+      "title": "Zones en Attente d'Audit",
+      "empty": "Aucune zone en attente",
+      "emptyDescription": "Toutes les zones ont ete auditees"
+    },
+    "review": {
+      "title": "Audit de la Zone",
+      "details": "Details de la Zone",
+      "decision": "Decision d'Audit",
+      "criteria": "Criteres Socio-environnementaux",
+      "approve": "Approuver",
+      "reject": "Rejeter",
+      "notesPlaceholder": "Ajoutez des notes pertinentes sur l'audit.",
+      "rejectReasonPlaceholder": "Decrivez le motif du rejet"
+    }
+  },
+  "admin": {
+    "users": {
+      "title": "Utilisateurs",
+      "email": "E-mail",
+      "status": "Statut",
+      "roles": "Roles",
+      "createdAt": "Cree le",
+      "locale": "Langue",
+      "searchPlaceholder": "Rechercher par e-mail",
+      "empty": "Aucun utilisateur trouve.",
+      "editTitle": "Modifier l'utilisateur",
+      "newPassword": "Nouveau mot de passe (optionnel)",
+      "passwordPlaceholder": "Laisser vide pour conserver le mot de passe actuel",
+      "deleteTitle": "Supprimer l'utilisateur",
+      "deleteMessage": "Cela desactivera le compte et supprimera l'acces."
+    },
+    "auditLog": {
+      "title": "Journal d'Audit",
+      "filterEntity": "Filtrer par entite",
+      "timestamp": "Date",
+      "actor": "Utilisateur",
+      "action": "Action",
+      "entity": "Entite",
+      "status": "Statut",
+      "empty": "Aucun enregistrement d'audit trouve."
+    }
+  },
+  "embed": {
+    "register": "Creer un Compte et Enregistrer",
+    "registerPrompt": "Creez un compte gratuit pour enregistrer vos resultats et compenser votre empreinte carbone",
+    "demo": {
+      "title": "Demo : Calculatrice Integree",
+      "description": "Voyez comment la calculatrice apparaitra une fois integree sur des sites externes",
+      "codeTitle": "Code HTML a integrer"
+    }
+  },
+  "errors": {
+    "accessDenied": "Acces refuse",
+    "accessDeniedDescription": "Vous n'avez pas l'autorisation d'acceder a cette page.",
+    "generic": "Un probleme est survenu. Veuillez reessayer.",
+    "network": "Erreur de connexion. Verifiez votre connexion et reessayez."
+  }
+}
