@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
@@ -18,6 +18,9 @@ export function ProfileEditPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { userId } = useAuth();
+  const { userId: routeUserId } = useParams<{ userId: string }>();
+  const targetUserId = routeUserId ?? userId ?? null;
+  const profilePath = targetUserId ? `/users/${targetUserId}/profile` : '/profile';
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState<Partial<{
     display_name: string;
@@ -35,9 +38,9 @@ export function ProfileEditPage() {
   }>>({});
 
   const { data: profile, isLoading } = useQuery({
-    queryKey: ['users', userId, 'profile'],
-    queryFn: () => usersService.getUserProfile(userId!),
-    enabled: !!userId,
+    queryKey: ['users', targetUserId, 'profile'],
+    queryFn: () => usersService.getUserProfile(targetUserId!),
+    enabled: !!targetUserId,
   });
 
   const formValues = {
@@ -56,10 +59,10 @@ export function ProfileEditPage() {
   };
 
   const mutation = useMutation({
-    mutationFn: () => usersService.upsertProfile(userId!, formValues),
+    mutationFn: () => usersService.upsertProfile(targetUserId!, formValues),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['users', userId, 'profile'] });
-      navigate('/profile');
+      queryClient.invalidateQueries({ queryKey: ['users', targetUserId, 'profile'] });
+      navigate(profilePath);
     },
     onError: (err) => setError(err instanceof ApiError ? err.messageKey : 'profile.saveError'),
   });

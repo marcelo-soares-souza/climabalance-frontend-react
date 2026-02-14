@@ -13,8 +13,12 @@ interface SidebarProps {
 
 export function Sidebar({ open, onClose }: SidebarProps) {
   const { t } = useTranslation();
-  const { isAuthenticated, isAdmin, hasRole, logout } = useAuth();
+  const { isAuthenticated, isAdmin, hasRole, logout, userId } = useAuth();
   const navigate = useNavigate();
+  const calculatorPath = userId ? `/users/${userId}/impact/calculations/new` : '/footprint/calculator';
+  const historyPath = userId ? `/users/${userId}/impact` : '/footprint/history';
+  const profilePath = userId ? `/users/${userId}/profile` : '/profile';
+  const certificatesPath = userId ? `/users/${userId}/certificates` : '/profile/certificates';
 
   const handleLogout = () => {
     logout();
@@ -79,10 +83,10 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           {isAuthenticated && (
             <>
               {sectionLabel(t('nav.impact'))}
-              <NavLink to="/footprint/calculator" className={linkClass} onClick={onClose}>
+              <NavLink to={calculatorPath} className={linkClass} onClick={onClose}>
                 <Calculator className="h-4 w-4" /> {t('nav.calculator')}
               </NavLink>
-              <NavLink to="/footprint/history" className={linkClass} onClick={onClose}>
+              <NavLink to={historyPath} className={linkClass} onClick={onClose}>
                 <History className="h-4 w-4" /> {t('nav.history')}
               </NavLink>
 
@@ -90,19 +94,22 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 <>
                   {sectionLabel(t('nav.areas'))}
                   <NavLink to="/areas/available" className={linkClass} onClick={onClose}>
+                    <MapPin className="h-4 w-4" /> {t('nav.areas')}
+                  </NavLink>
+                  <NavLink to="/areas" className={linkClass} onClick={onClose}>
                     <TreePine className="h-4 w-4" /> {t('nav.myAreas')}
                   </NavLink>
                 </>
               )}
 
               {sectionLabel(t('nav.account'))}
-              <NavLink to="/profile" className={linkClass} onClick={onClose}>
+              <NavLink to={profilePath} className={linkClass} onClick={onClose}>
                 <User className="h-4 w-4" /> {t('nav.profile')}
               </NavLink>
               <NavLink to="/profile/compensations" className={linkClass} onClick={onClose}>
                 <TreePine className="h-4 w-4" /> {t('nav.compensations')}
               </NavLink>
-              <NavLink to="/profile/certificates" className={linkClass} onClick={onClose}>
+              <NavLink to={certificatesPath} className={linkClass} onClick={onClose}>
                 <Award className="h-4 w-4" /> {t('nav.certificates')}
               </NavLink>
               <NavLink to="/certificates/validate" className={linkClass} onClick={onClose}>

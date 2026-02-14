@@ -1,6 +1,6 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
@@ -14,6 +14,7 @@ import { Skeleton } from '@/components/ui/Skeleton';
 import { useCompensationStore } from '@/stores/compensation-store';
 import { useAuth } from '@/hooks/use-auth';
 import { TreePine, MapPin } from 'lucide-react';
+import type { Area } from '@/types/area';
 
 const BIOME_COLORS: Record<string, string> = {
   amazonia: '#2D6A4F',
@@ -39,14 +40,33 @@ function createIcon(biome: string) {
 export function MapPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { isAuthenticated } = useAuth();
   const setSelection = useCompensationStore((s) => s.setSelection);
+  const storedCalculationId = useCompensationStore((s) => s.calculationId);
+  const storedTotalTCO2e = useCompensationStore((s) => s.totalTCO2e);
   const [biomeFilter, setBiomeFilter] = useState('');
+  const requestedCalculationId = searchParams.get('calculationId')?.trim() || null;
+  const requestedTCO2eRaw = searchParams.get('tCO2e');
+  const requestedTCO2eParsed = requestedTCO2eRaw == null ? NaN : Number(requestedTCO2eRaw);
+  const requestedTCO2e = Number.isFinite(requestedTCO2eParsed) && requestedTCO2eParsed > 0
+    ? requestedTCO2eParsed
+    : null;
+  const effectiveCalculationId = requestedCalculationId ?? storedCalculationId ?? null;
+  const effectiveMinCapacity = requestedTCO2e ?? storedTotalTCO2e ?? null;
 
   const { data: areas, isLoading } = useQuery({
     queryKey: ['map-areas', { biome: biomeFilter }],
     queryFn: () => areasService.getMapAreas(biomeFilter ? { biome: biomeFilter } : undefined),
   });
+
+  useEffect(() => {
+    if (!requestedCalculationId || !requestedTCO2e) return;
+    setSelection({
+      calculationId: requestedCalculationId,
+      totalTCO2e: requestedTCO2e,
+    });
+  }, [requestedCalculationId, requestedTCO2e, setSelection]);
 
   const biomeOptions = [
     { value: '', label: t('map.allBiomes') },
@@ -59,17 +79,46 @@ export function MapPage() {
   ];
 
   const center = useMemo(() => {
-    if (areas && areas.length > 0) {
-      const lat = areas.reduce((s, a) => s + a.latitude, 0) / areas.length;
-      const lng = areas.reduce((s, a) => s + a.longitude, 0) / areas.length;
+    const base = effectiveMinCapacity && areas
+      ? areas.filter((area) => (area.totalCapacityTCO2e - area.committedTCO2e) >= effectiveMinCapacity)
+      : areas;
+    if (base && base.length > 0) {
+      const lat = base.reduce((s, a) => s + a.latitude, 0) / base.length;
+      const lng = base.reduce((s, a) => s + a.longitude, 0) / base.length;
       return [lat, lng] as [number, number];
     }
     return [-14.235, -51.9253] as [number, number];
-  }, [areas]);
+  }, [areas, effectiveMinCapacity]);
 
-  const handleSelectArea = (area: typeof areas extends (infer T)[] | undefined ? T : never) => {
-    setSelection({ areaId: area.id, areaName: area.name });
-    navigate(`/areas/${area.id}`);
+  const visibleAreas = useMemo(() => {
+    if (!areas) return [];
+    if (!effectiveMinCapacity) return areas;
+    return areas.filter((area) => (area.totalCapacityTCO2e - area.committedTCO2e) >= effectiveMinCapacity);
+  }, [areas, effectiveMinCapacity]);
+
+  const handleSelectArea = (area: Area) => {
+    if (effectiveCalculationId && effectiveMinCapacity) {
+      setSelection({
+        areaId: area.id,
+        areaName: area.name,
+        calculationId: effectiveCalculationId,
+        compensationMode: 'tco2e',
+        totalTCO2e: effectiveMinCapacity,
+        treesRequested: null,
+        totalAmount: null,
+      });
+    } else {
+      setSelection({
+        areaId: area.id,
+        areaName: area.name,
+        calculationId: null,
+        compensationMode: 'tree_purchase',
+        totalTCO2e: null,
+        treesRequested: null,
+        totalAmount: null,
+      });
+    }
+    navigate('/compensation/checkout');
   };
 
   return (
@@ -91,7 +140,7 @@ export function MapPage() {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
-              {areas?.map((area) => (
+              {visibleAreas.map((area) => (
                 <Marker key={area.id} position={[area.latitude, area.longitude]} icon={createIcon(area.biome || '')}>
                   <Popup>
                     <div className="min-w-[200px]">
@@ -120,7 +169,7 @@ export function MapPage() {
       </Card>
 
       {areas && (
-        <p className="text-sm text-text-secondary">{t('map.areasCount', { count: areas.length })}</p>
+        <p className="text-sm text-text-secondary">{t('map.areasCount', { count: visibleAreas.length })}</p>
       )}
     </div>
   );

@@ -5,14 +5,26 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { formatTCO2e, formatDate } from '@/lib/format';
 import type { CalculationResult } from '@/types/footprint';
 
-export function CalculationCard({ calculation }: { calculation: CalculationResult }) {
+export function CalculationCard({
+  calculation,
+  detailsBasePath,
+}: {
+  calculation: CalculationResult;
+  detailsBasePath?: string;
+}) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
     <Card
       className="cursor-pointer hover:shadow-md transition-shadow"
-      onClick={() => navigate(`/footprint/calculation/${calculation.id}`)}
+      onClick={() =>
+        navigate(
+          detailsBasePath
+            ? `${detailsBasePath}/${calculation.id}`
+            : `/footprint/calculation/${calculation.id}`
+        )
+      }
     >
       <CardContent className="py-4">
         <div className="flex items-start justify-between mb-2">

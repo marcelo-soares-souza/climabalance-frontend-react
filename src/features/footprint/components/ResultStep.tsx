@@ -97,7 +97,14 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
             {t('footprint.result.finalize')}
           </Button>
         )}
-        <Button onClick={() => navigate('/map')} className="flex-1">
+        <Button
+          onClick={() =>
+            navigate(
+              `/map?calculationId=${encodeURIComponent(result.id)}&tCO2e=${encodeURIComponent(result.totalTCO2e)}`
+            )
+          }
+          className="flex-1"
+        >
           <TreePine className="h-4 w-4 mr-2" />
           {t('footprint.result.compensate')}
         </Button>

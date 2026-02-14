@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ErrorBanner } from '@/components/ErrorBanner';
@@ -23,10 +24,47 @@ import type { CreateCalculationRequest } from '@/types/footprint';
 
 export function CalculatorPage() {
   const { t } = useTranslation();
+  const location = useLocation();
+  const { id: routeCalculationId } = useParams<{ id: string }>();
+  const [searchParams] = useSearchParams();
   const calculator = useCalculator();
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const lastCalculatedSignatureRef = useRef<string | null>(null);
+  const hydratedDraftIdRef = useRef<string | null>(null);
+  const draftIdFromQuery = searchParams.get('draftId');
+  const draftId = useMemo(() => {
+    if (location.pathname.endsWith('/edit') && routeCalculationId) {
+      return routeCalculationId;
+    }
+    return draftIdFromQuery;
+  }, [draftIdFromQuery, location.pathname, routeCalculationId]);
+
+  const { data: draftCalculation, isLoading: draftLoading } = useQuery({
+    queryKey: ['calculations', draftId, 'edit'],
+    queryFn: () => footprintService.getCalculation(draftId!),
+    enabled: !!draftId,
+  });
+
+  useEffect(() => {
+    if (!draftId || !draftCalculation) return;
+    if (hydratedDraftIdRef.current === draftId) return;
+    calculator.hydrateFromDraft({
+      profileType: draftCalculation.profileType,
+      periodStart: draftCalculation.periodStart,
+      periodEnd: draftCalculation.periodEnd,
+      dataQuality: draftCalculation.dataQuality,
+      inputs: draftCalculation.inputs,
+    });
+    lastCalculatedSignatureRef.current = JSON.stringify({
+      profile_type: draftCalculation.profileType,
+      period_start: draftCalculation.periodStart,
+      period_end: draftCalculation.periodEnd,
+      data_quality: draftCalculation.dataQuality,
+      inputs: draftCalculation.inputs,
+    });
+    hydratedDraftIdRef.current = draftId;
+  }, [calculator, draftCalculation, draftId]);
 
   const calculationPayload = useMemo<CreateCalculationRequest>(() => ({
     profile_type: calculator.state.profileType,
@@ -59,24 +97,64 @@ export function CalculatorPage() {
     },
   });
 
-  const finalizeMutation = useMutation({
-    mutationFn: (id: string) => footprintService.finalizeCalculation(id),
-    onSuccess: () => {
-      setResult((prev) => (prev ? { ...prev, status: 'finalized' } : prev));
+  const updateMutation = useMutation({
+    mutationFn: async (payload: CreateCalculationRequest) => {
+      if (!draftId) throw new Error('footprint.error.createFailed');
+      await footprintService.updateCalculation(draftId, {
+        period_start: payload.period_start,
+        period_end: payload.period_end,
+        data_quality: payload.data_quality,
+        inputs: payload.inputs,
+      });
+      return footprintService.getCalculation(draftId);
+    },
+    onSuccess: (data, payload) => {
+      setResult(data);
+      lastCalculatedSignatureRef.current = JSON.stringify(payload);
       queryClient.invalidateQueries({ queryKey: ['calculations'] });
+      queryClient.invalidateQueries({ queryKey: ['calculations', draftId] });
+    },
+    onError: (err) => {
+      setError(err instanceof ApiError ? err.messageKey : 'footprint.error.createFailed');
     },
   });
 
+  const finalizeMutation = useMutation({
+    mutationFn: (id: string) => footprintService.finalizeCalculation(id),
+    onSuccess: () => {
+      if (draftCalculation) {
+        setResult({ ...draftCalculation, status: 'finalized' });
+      } else {
+        setResult((prev) => (prev ? { ...prev, status: 'finalized' } : prev));
+      }
+      queryClient.invalidateQueries({ queryKey: ['calculations'] });
+    },
+  });
+  const displayedResult = result ?? draftCalculation ?? null;
+
   // Auto-trigger calculation when entering result step
   useEffect(() => {
-    if (calculator.currentStep !== 'result' || createMutation.isPending) {
+    const isPendingMutation = draftId ? updateMutation.isPending : createMutation.isPending;
+    if (calculator.currentStep !== 'result' || isPendingMutation) {
       return;
     }
-    if (result && lastCalculatedSignatureRef.current === calculationSignature) {
+    if (displayedResult && lastCalculatedSignatureRef.current === calculationSignature) {
+      return;
+    }
+    if (draftId) {
+      updateMutation.mutate(calculationPayload);
       return;
     }
     createMutation.mutate(calculationPayload);
-  }, [calculator.currentStep, calculationPayload, calculationSignature, createMutation, result]);
+  }, [
+    calculator.currentStep,
+    calculationPayload,
+    calculationSignature,
+    createMutation,
+    draftId,
+    displayedResult,
+    updateMutation,
+  ]);
 
   const handleNext = () => {
     calculator.nextStep();
@@ -85,7 +163,7 @@ export function CalculatorPage() {
 
   const renderStep = () => {
     if (calculator.currentStep === 'result') {
-      if (createMutation.isPending) {
+      if (createMutation.isPending || updateMutation.isPending || draftLoading) {
         return (
           <div className="text-center py-12">
             <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin mx-auto mb-4" />
@@ -93,11 +171,11 @@ export function CalculatorPage() {
           </div>
         );
       }
-      if (result) {
+      if (displayedResult) {
         return (
           <ResultStep
-            result={result}
-            onFinalize={() => finalizeMutation.mutate(result.id)}
+            result={displayedResult}
+            onFinalize={() => finalizeMutation.mutate(displayedResult.id)}
             saving={finalizeMutation.isPending}
           />
         );

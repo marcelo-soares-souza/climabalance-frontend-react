@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
+import { useParams } from 'react-router-dom';
 import { usersService } from '@/services/users';
 import { certificatesService } from '@/services/certificates';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -15,11 +16,13 @@ import { saveAs } from 'file-saver';
 export function CertificatesPage() {
   const { t } = useTranslation();
   const { userId } = useAuth();
+  const { userId: routeUserId } = useParams<{ userId: string }>();
+  const targetUserId = routeUserId ?? userId ?? null;
 
   const { data: certificates, isLoading } = useQuery({
-    queryKey: ['users', userId, 'certificates'],
-    queryFn: () => usersService.getUserCertificates(userId!),
-    enabled: !!userId,
+    queryKey: ['users', targetUserId, 'certificates'],
+    queryFn: () => usersService.getUserCertificates(targetUserId!),
+    enabled: !!targetUserId,
   });
 
   const handleDownload = async (certId: string, certNumber: string) => {

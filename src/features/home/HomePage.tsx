@@ -68,6 +68,8 @@ function UnauthenticatedHome() {
 function AuthenticatedHome({ userId }: { userId: string }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const calculatorPath = `/users/${userId}/impact/calculations/new`;
+  const certificatesPath = `/users/${userId}/certificates`;
 
   const { data: compensations, isLoading: loadingComp } = useQuery({
     queryKey: ['users', userId, 'compensations'],
@@ -98,7 +100,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate('/footprint/calculator')}>
+        <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate(calculatorPath)}>
           <CardContent className="flex items-center gap-4 py-4">
             <div className="p-3 bg-primary-50 rounded-xl"><Calculator className="h-6 w-6 text-primary" /></div>
             <div className="flex-1">
@@ -118,7 +120,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
             <ArrowRight className="h-5 w-5 text-text-secondary" />
           </CardContent>
         </Card>
-        <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate('/profile/certificates')}>
+        <Card className="cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate(certificatesPath)}>
           <CardContent className="flex items-center gap-4 py-4">
             <div className="p-3 bg-earth/20 rounded-xl"><Award className="h-6 w-6 text-amber-700" /></div>
             <div className="flex-1">

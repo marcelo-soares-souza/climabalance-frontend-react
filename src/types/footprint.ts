@@ -81,4 +81,5 @@ export interface UpdateCalculationRequest {
   period_start?: string;
   period_end?: string;
   inputs?: FootprintInput[];
+  data_quality?: DataQuality;
 }

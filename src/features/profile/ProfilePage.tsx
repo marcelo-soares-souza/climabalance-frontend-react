@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
@@ -14,23 +14,27 @@ export function ProfilePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { userId } = useAuth();
+  const { userId: routeUserId } = useParams<{ userId: string }>();
+  const targetUserId = routeUserId ?? userId ?? null;
+  const editProfilePath = targetUserId ? `/users/${targetUserId}/profile/edit` : '/profile/edit';
+  const certificatesPath = targetUserId ? `/users/${targetUserId}/certificates` : '/profile/certificates';
 
   const { data: user, isLoading: loadingUser } = useQuery({
-    queryKey: ['users', userId],
-    queryFn: () => usersService.getUser(userId!),
-    enabled: !!userId,
+    queryKey: ['users', targetUserId],
+    queryFn: () => usersService.getUser(targetUserId!),
+    enabled: !!targetUserId,
   });
 
   const { data: profile, isLoading: loadingProfile } = useQuery({
-    queryKey: ['users', userId, 'profile'],
-    queryFn: () => usersService.getUserProfile(userId!),
-    enabled: !!userId,
+    queryKey: ['users', targetUserId, 'profile'],
+    queryFn: () => usersService.getUserProfile(targetUserId!),
+    enabled: !!targetUserId,
   });
 
   const { data: compensations } = useQuery({
-    queryKey: ['users', userId, 'compensations'],
-    queryFn: () => usersService.getUserCompensations(userId!, { limit: 5 }),
-    enabled: !!userId,
+    queryKey: ['users', targetUserId, 'compensations'],
+    queryFn: () => usersService.getUserCompensations(targetUserId!, { limit: 5 }),
+    enabled: !!targetUserId,
   });
 
   if (loadingUser || loadingProfile) return <PageSkeleton />;
@@ -42,7 +46,7 @@ export function ProfilePage() {
     <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t('profile.title')}</h1>
-        <Button variant="outline" size="sm" onClick={() => navigate('/profile/edit')}>
+        <Button variant="outline" size="sm" onClick={() => navigate(editProfilePath)}>
           <Edit className="h-4 w-4 mr-1" /> {t('profile.edit')}
         </Button>
       </div>
@@ -106,7 +110,7 @@ export function ProfilePage() {
         </Card>
       )}
 
-      <Button variant="outline" className="w-full" onClick={() => navigate('/profile/certificates')}>
+      <Button variant="outline" className="w-full" onClick={() => navigate(certificatesPath)}>
         <Award className="h-4 w-4 mr-2" /> {t('profile.viewCertificates')}
       </Button>
     </div>

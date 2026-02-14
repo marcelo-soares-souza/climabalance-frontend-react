@@ -50,8 +50,16 @@ export function AreaDetailPage() {
 
   const handleCompensate = () => {
     if (!area) return;
-    setSelection({ areaId: area.id, areaName: area.name });
-    navigate('/compensation/review');
+    setSelection({
+      areaId: area.id,
+      areaName: area.name,
+      calculationId: null,
+      compensationMode: 'tree_purchase',
+      totalTCO2e: null,
+      treesRequested: null,
+      totalAmount: null,
+    });
+    navigate('/compensation/checkout');
   };
 
   const submitMutation = useMutation({

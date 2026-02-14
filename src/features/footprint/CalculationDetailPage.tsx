@@ -9,14 +9,16 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ResultBreakdownChart } from './components/ResultBreakdownChart';
 import { formatTCO2e, formatDate, formatKgCO2e } from '@/lib/format';
-import { ArrowLeft, TreePine, CheckCircle, Trash2 } from 'lucide-react';
+import { ArrowLeft, TreePine, CheckCircle, Trash2, Edit } from 'lucide-react';
 import { useState } from 'react';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
+import { useAuth } from '@/hooks/use-auth';
 
 export function CalculationDetailPage() {
-  const { id } = useParams<{ id: string }>();
+  const { id, userId: routeUserId } = useParams<{ id: string; userId: string }>();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { userId: currentUserId, isAdmin } = useAuth();
   const [showDelete, setShowDelete] = useState(false);
 
   const { data: calculation, isLoading } = useQuery({
@@ -37,6 +39,13 @@ export function CalculationDetailPage() {
 
   if (isLoading) return <PageSkeleton />;
   if (!calculation) return <div>{t('common.notFound')}</div>;
+  const canEditDraft = calculation.status === 'draft'
+    && (isAdmin || (calculation.userId != null && calculation.userId === currentUserId));
+  const editPath = routeUserId
+    ? `/users/${routeUserId}/impact/calculations/${calculation.id}/edit`
+    : calculation.userId
+      ? `/users/${calculation.userId}/impact/calculations/${calculation.id}/edit`
+      : `/footprint/calculator?draftId=${encodeURIComponent(calculation.id)}`;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -91,8 +100,11 @@ export function CalculationDetailPage() {
       )}
 
       <div className="flex gap-3">
-        {calculation.status === 'draft' && (
+        {canEditDraft && (
           <>
+            <Button variant="outline" onClick={() => navigate(editPath)}>
+              <Edit className="h-4 w-4 mr-2" /> {t('common.edit')}
+            </Button>
             <Button variant="secondary" onClick={() => finalizeMutation.mutate()} loading={finalizeMutation.isPending}>
               <CheckCircle className="h-4 w-4 mr-2" /> {t('footprint.result.finalize')}
             </Button>
@@ -101,9 +113,17 @@ export function CalculationDetailPage() {
             </Button>
           </>
         )}
-        <Button onClick={() => navigate('/map')}>
-          <TreePine className="h-4 w-4 mr-2" /> {t('footprint.result.compensate')}
-        </Button>
+        {calculation.status !== 'draft' && (
+          <Button
+            onClick={() =>
+              navigate(
+                `/map?calculationId=${encodeURIComponent(calculation.id)}&tCO2e=${encodeURIComponent(calculation.totalTCO2e)}`
+              )
+            }
+          >
+            <TreePine className="h-4 w-4 mr-2" /> {t('footprint.result.compensate')}
+          </Button>
+        )}
       </div>
 
       <ConfirmDialog

@@ -188,7 +188,7 @@ export const footprintService = {
     return api.delete<void>(`/footprint/calculations/${id}`);
   },
 
-  listCalculations(params?: { status?: string; profile_type?: string; limit?: number; offset?: number }) {
+  listCalculations(params?: { status?: string; profile_type?: string; user_email?: string; limit?: number; offset?: number }) {
     return api
       .get<ApiCalculationBase[]>('/footprint/calculations', { params: params as Record<string, string | number> })
       .then((rows) => rows.map((row) => normalizeCalculation(row)));

@@ -15,6 +15,14 @@ export interface CalculatorState {
   currentStepIndex: number;
 }
 
+export interface DraftSnapshot {
+  profileType: ProfileType;
+  periodStart: string;
+  periodEnd: string;
+  dataQuality: DataQuality;
+  inputs: FootprintInput[];
+}
+
 function inputIdentity(input: FootprintInput): string {
   return `${input.category}|${input.unit}|${JSON.stringify(input.metadata ?? {})}`;
 }
@@ -108,6 +116,17 @@ export function useCalculator() {
     });
   }, []);
 
+  const hydrateFromDraft = useCallback((draft: DraftSnapshot) => {
+    setState({
+      profileType: draft.profileType,
+      periodStart: draft.periodStart,
+      periodEnd: draft.periodEnd,
+      dataQuality: draft.dataQuality,
+      inputs: draft.inputs,
+      currentStepIndex: 0,
+    });
+  }, []);
+
   const getInitialValues = useCallback((category: InputCategory): Record<string, number> => {
     const values: Record<string, number> = {};
     for (const input of state.inputs) {
@@ -135,6 +154,7 @@ export function useCalculator() {
     prevStep,
     goToStep,
     reset,
+    hydrateFromDraft,
     getInitialValues,
   };
 }

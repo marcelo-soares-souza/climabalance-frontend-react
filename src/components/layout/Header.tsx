@@ -11,16 +11,21 @@ interface HeaderProps {
 
 export function Header({ onMenuClick }: HeaderProps) {
   const { t } = useTranslation();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, userId } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const profilePath = userId ? `/users/${userId}/profile` : '/profile';
 
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
 
-  const isOnProfile = location.pathname === '/profile';
+  const isOnProfile =
+    location.pathname === '/profile'
+    || location.pathname === profilePath
+    || location.pathname.endsWith('/profile')
+    || location.pathname.endsWith('/profile/edit');
   const isOnLogin = location.pathname === '/login';
 
   return (
@@ -44,7 +49,7 @@ export function Header({ onMenuClick }: HeaderProps) {
         {isAuthenticated ? (
           <>
             <button
-              onClick={() => navigate('/profile')}
+              onClick={() => navigate(profilePath)}
               disabled={isOnProfile}
               className={cn(
                 'flex items-center gap-1.5 px-3 py-1.5 text-base rounded-[var(--radius-button)] transition-colors',

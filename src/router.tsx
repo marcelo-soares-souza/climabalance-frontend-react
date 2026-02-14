@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { AppShell } from '@/components/layout/AppShell';
 import { AuthGuard } from '@/components/AuthGuard';
+import { UserScopeGuard } from '@/components/UserScopeGuard';
 
 // Auth
 import { LoginPage } from '@/features/auth/LoginPage';
@@ -23,6 +24,7 @@ import { EmbedDemoPage } from '@/features/footprint/EmbedDemoPage';
 // Map & Areas
 import { MapPage } from '@/features/map/MapPage';
 import { AreaDetailPage } from '@/features/map/AreaDetailPage';
+import { AreaListPage } from '@/features/map/AreaListPage';
 import { AvailableAreasPage } from '@/features/map/AvailableAreasPage';
 import { AreaFormPage } from '@/features/map/AreaFormPage';
 import { PendingAreasPage } from '@/features/map/PendingAreasPage';
@@ -67,7 +69,7 @@ export const router = createBrowserRouter([
       { path: '/password-reset', element: <PasswordResetRequestPage /> },
       { path: '/password-reset/confirm', element: <PasswordResetConfirmPage /> },
       { path: '/map', element: <MapPage /> },
-      { path: '/areas/:areaId', element: <AreaDetailPage /> },
+      { path: '/areas', element: <AuthGuard><AreaListPage /></AuthGuard> },
       { path: '/certificates/validate', element: <CertificateValidationPage /> },
       { path: '/access-denied', element: <AccessDeniedPage /> },
 
@@ -87,6 +89,22 @@ export const router = createBrowserRouter([
       {
         path: '/footprint/calculation/:id',
         element: <AuthGuard><CalculationDetailPage /></AuthGuard>,
+      },
+      {
+        path: '/users/:userId/impact',
+        element: <AuthGuard><UserScopeGuard><HistoryPage /></UserScopeGuard></AuthGuard>,
+      },
+      {
+        path: '/users/:userId/impact/calculations/new',
+        element: <AuthGuard><UserScopeGuard><CalculatorPage /></UserScopeGuard></AuthGuard>,
+      },
+      {
+        path: '/users/:userId/impact/calculations/:id',
+        element: <AuthGuard><UserScopeGuard><CalculationDetailPage /></UserScopeGuard></AuthGuard>,
+      },
+      {
+        path: '/users/:userId/impact/calculations/:id/edit',
+        element: <AuthGuard><UserScopeGuard><CalculatorPage /></UserScopeGuard></AuthGuard>,
       },
       {
         path: '/areas/available',
@@ -117,13 +135,26 @@ export const router = createBrowserRouter([
         element: <AuthGuard><ProfilePage /></AuthGuard>,
       },
       {
+        path: '/users/:userId/profile',
+        element: <AuthGuard><UserScopeGuard><ProfilePage /></UserScopeGuard></AuthGuard>,
+      },
+      {
         path: '/profile/edit',
         element: <AuthGuard><ProfileEditPage /></AuthGuard>,
+      },
+      {
+        path: '/users/:userId/profile/edit',
+        element: <AuthGuard><UserScopeGuard><ProfileEditPage /></UserScopeGuard></AuthGuard>,
       },
       {
         path: '/profile/certificates',
         element: <AuthGuard><CertificatesPage /></AuthGuard>,
       },
+      {
+        path: '/users/:userId/certificates',
+        element: <AuthGuard><UserScopeGuard><CertificatesPage /></UserScopeGuard></AuthGuard>,
+      },
+      { path: '/areas/:areaId', element: <AreaDetailPage /> },
 
       // Analyst/Admin routes
       {
