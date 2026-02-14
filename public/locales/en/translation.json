@@ -105,6 +105,7 @@
     "admin": "Administration",
     "users": "Users (Admin)",
     "auditLog": "Audit Log (Admin)",
+    "publicAreas": "View Areas",
     "login": "Sign in",
     "logout": "Sign out",
     "impact": "Your Impact",
@@ -427,6 +428,7 @@
     "usage": "Usage",
     "contributions": "Tree contributions",
     "contributionsEmpty": "No paid tree contributions for this area yet.",
+    "ownerEmail": "Responsible (email)",
     "media": "Area media",
     "mediaEmpty": "No photos or videos uploaded yet.",
     "uploadMedia": "Upload",
@@ -449,6 +451,9 @@
       "description": "Description",
       "latitude": "Latitude",
       "longitude": "Longitude",
+      "status": "Status",
+      "pickOnMap": "Pick point on map",
+      "mapHint": "Click the map to automatically set latitude and longitude.",
       "state": "State",
       "city": "City",
       "biome": "Biome",
@@ -469,7 +474,8 @@
     },
     "deleteConfirm": {
       "title": "Delete area",
-      "message": "Are you sure you want to delete this area? This action cannot be undone."
+      "message": "Are you sure you want to delete this area? Associated media will also be removed.",
+      "error": "Failed to delete area. Please try again."
     },
     "submitConfirm": {
       "title": "Submit for Audit",
@@ -490,7 +496,12 @@
     "list": {
       "title": "My Areas",
       "create": "Create New Area",
-      "empty": "No areas registered yet"
+      "empty": "No areas registered yet",
+      "searchLabel": "Search",
+      "searchPlaceholder": "Name, city or state",
+      "cityPlaceholder": "Filter by city",
+      "statePlaceholder": "Filter by state",
+      "clearFilters": "Clear filters"
     },
     "my": {
       "title": "My Areas",
@@ -501,6 +512,14 @@
       "title": "Available Areas",
       "empty": "No areas available at this time",
       "emptyHint": "Check back later for new areas"
+    },
+    "public": {
+      "title": "Public areas",
+      "subtitle": "Browse areas as cards and open each project detail.",
+      "searchLabel": "Search",
+      "searchPlaceholder": "Area name, city, state or biome",
+      "empty": "No areas found",
+      "emptyDescription": "Adjust filters and try again."
     }
   },
   "compensation": {

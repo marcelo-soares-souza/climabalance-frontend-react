@@ -4,6 +4,7 @@ export type BiomeType = 'amazonia' | 'cerrado' | 'mata_atlantica' | 'caatinga' |
 export interface Area {
   id: string;
   ownerUserId: string;
+  ownerEmail: string | null;
   name: string;
   description: string | null;
   latitude: number;
@@ -79,6 +80,7 @@ export interface UpdateAreaRequest {
   description?: string;
   latitude?: number;
   longitude?: number;
+  status?: AreaStatus;
   biome?: string;
   state?: string;
   city?: string;

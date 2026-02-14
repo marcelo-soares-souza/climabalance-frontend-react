@@ -15,16 +15,17 @@ export function AvailableAreasPage() {
   const navigate = useNavigate();
   const { hasRole, isAdmin, userId } = useAuth();
   const canCreate = hasRole('producer') || isAdmin;
+  const isAdminView = isAdmin;
 
   const { data: areas, isLoading } = useQuery({
-    queryKey: ['areas', 'my'],
-    queryFn: () => areasService.listAreas({ ownerUserId: userId || undefined }),
+    queryKey: ['areas', 'available', { scope: isAdminView ? 'all' : userId ?? 'anonymous' }],
+    queryFn: () => areasService.listAreas(isAdminView ? undefined : { ownerUserId: userId || undefined }),
   });
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <h1 className="text-2xl font-bold">{t('areas.my.title')}</h1>
+        <h1 className="text-2xl font-bold">{isAdminView ? t('areas.available.title') : t('areas.my.title')}</h1>
         {canCreate && <Button onClick={() => navigate('/areas/create')} size="sm"><Plus className="h-4 w-4 mr-1" /> {t('areas.list.create')}</Button>}
       </div>
       {isLoading ? <SkeletonList /> : areas && areas.length > 0 ? (

@@ -105,6 +105,7 @@
     "admin": "Administra\u00e7\u00e3o",
     "users": "Usu\u00e1rios (Admin)",
     "auditLog": "Auditoria (Admin)",
+    "publicAreas": "Ver Áreas",
     "login": "Entrar",
     "logout": "Sair",
     "impact": "Seu Impacto",
@@ -427,6 +428,7 @@
     "usage": "Utiliza\u00e7\u00e3o",
     "contributions": "Contribui\u00e7\u00f5es por \u00e1rvores",
     "contributionsEmpty": "Ainda n\u00e3o h\u00e1 contribui\u00e7\u00f5es pagas para esta \u00e1rea.",
+    "ownerEmail": "Respons\u00e1vel (e-mail)",
     "media": "M\u00eddias da \u00e1rea",
     "mediaEmpty": "Nenhuma foto ou v\u00eddeo enviado ainda.",
     "uploadMedia": "Enviar",
@@ -449,6 +451,9 @@
       "description": "Descri\u00e7\u00e3o",
       "latitude": "Latitude",
       "longitude": "Longitude",
+      "status": "Status",
+      "pickOnMap": "Selecionar ponto no mapa",
+      "mapHint": "Clique no mapa para definir latitude e longitude automaticamente.",
       "state": "Estado",
       "city": "Cidade",
       "biome": "Bioma",
@@ -469,7 +474,8 @@
     },
     "deleteConfirm": {
       "title": "Excluir \u00e1rea",
-      "message": "Tem certeza de que deseja excluir esta \u00e1rea? Essa a\u00e7\u00e3o n\u00e3o pode ser desfeita."
+      "message": "Tem certeza de que deseja excluir esta \u00e1rea? As m\u00eddias associadas tamb\u00e9m ser\u00e3o removidas.",
+      "error": "Falha ao excluir \u00e1rea. Tente novamente."
     },
     "submitConfirm": {
       "title": "Enviar para Auditoria",
@@ -490,7 +496,12 @@
     "list": {
       "title": "Minhas \u00c1reas",
       "create": "Criar Nova \u00c1rea",
-      "empty": "Nenhuma \u00e1rea cadastrada ainda"
+      "empty": "Nenhuma \u00e1rea cadastrada ainda",
+      "searchLabel": "Busca",
+      "searchPlaceholder": "Nome, cidade ou estado",
+      "cityPlaceholder": "Filtrar por cidade",
+      "statePlaceholder": "Filtrar por estado",
+      "clearFilters": "Limpar filtros"
     },
     "my": {
       "title": "Minhas \u00c1reas",
@@ -501,6 +512,14 @@
       "title": "\u00c1reas Dispon\u00edveis",
       "empty": "Nenhuma \u00e1rea dispon\u00edvel no momento",
       "emptyHint": "Volte mais tarde para ver novas \u00e1reas"
+    },
+    "public": {
+      "title": "Áreas públicas",
+      "subtitle": "Explore áreas em formato de cards e abra o detalhe de cada projeto.",
+      "searchLabel": "Buscar",
+      "searchPlaceholder": "Nome da área, cidade, estado ou bioma",
+      "empty": "Nenhuma área encontrada",
+      "emptyDescription": "Ajuste os filtros e tente novamente."
     }
   },
   "compensation": {

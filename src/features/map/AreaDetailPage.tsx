@@ -13,7 +13,7 @@ import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { useCompensationStore } from '@/stores/compensation-store';
 import { useAuth } from '@/hooks/use-auth';
 import { formatTCO2e, formatNumber } from '@/lib/format';
-import { ArrowLeft, MapPin, TreePine, Image, Send, ShieldOff, Upload, Trash2 } from 'lucide-react';
+import { ArrowLeft, MapPin, TreePine, Image, Send, ShieldOff, Upload, Trash2, Edit } from 'lucide-react';
 
 export function AreaDetailPage() {
   const { areaId } = useParams<{ areaId: string }>();
@@ -25,6 +25,7 @@ export function AreaDetailPage() {
 
   const [submitDialogOpen, setSubmitDialogOpen] = useState(false);
   const [suspendDialogOpen, setSuspendDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [submitNotes, setSubmitNotes] = useState('');
   const [suspendReason, setSuspendReason] = useState('');
 
@@ -106,6 +107,14 @@ export function AreaDetailPage() {
     },
   });
 
+  const deleteAreaMutation = useMutation({
+    mutationFn: () => areasService.deleteArea(areaIdentifier),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['areas'] });
+      navigate('/areas/available');
+    },
+  });
+
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) uploadMutation.mutate(file);
@@ -119,8 +128,11 @@ export function AreaDetailPage() {
   const usagePct = area.totalCapacityTCO2e > 0 ? (area.committedTCO2e / area.totalCapacityTCO2e) * 100 : 0;
 
   const isOwner = userId === area.ownerUserId;
+  const canManageMedia = isOwner || isAdmin;
+  const canDelete = isOwner || isAdmin;
   const canSubmitForAudit = isOwner && area.status === 'draft';
   const canSuspend = isAdmin && area.status === 'active';
+  const canEdit = isAdmin || (isOwner && (area.status === 'draft' || area.status === 'active'));
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
@@ -135,6 +147,9 @@ export function AreaDetailPage() {
             <MapPin className="h-4 w-4" />
             <span>{[area.city, area.state].filter(Boolean).join(', ')}</span>
           </div>
+          <p className="text-sm text-text-secondary mt-1">
+            {t('area.ownerEmail')}: {area.ownerEmail || '-'}
+          </p>
         </div>
         <StatusBadge status={area.status} />
       </div>
@@ -180,7 +195,7 @@ export function AreaDetailPage() {
         <CardHeader>
           <div className="flex items-center justify-between">
             <h3 className="font-medium flex items-center gap-2"><Image className="h-4 w-4" /> {t('area.media')} ({media?.length ?? 0})</h3>
-            {isOwner && (
+            {canManageMedia && (
               <>
                 <input ref={fileInputRef} type="file" accept="image/*,video/*" className="hidden" onChange={handleFileSelect} />
                 <Button size="sm" variant="outline" onClick={() => fileInputRef.current?.click()} disabled={uploadMutation.isPending}>
@@ -201,7 +216,7 @@ export function AreaDetailPage() {
                   ) : (
                     <video src={m.url} controls className="w-full h-full object-cover" />
                   )}
-                  {isOwner && (
+                  {canManageMedia && (
                     <button
                       onClick={() => deleteMediMutation.mutate(m.id)}
                       className="absolute top-2 right-2 p-1.5 bg-black/60 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/80"
@@ -253,6 +268,16 @@ export function AreaDetailPage() {
             <ShieldOff className="h-5 w-5 mr-2" /> {t('area.actions.suspend')}
           </Button>
         )}
+        {canEdit && (
+          <Button size="lg" variant="outline" className="flex-1" onClick={() => navigate(`/areas/edit/${area.id}`)}>
+            <Edit className="h-5 w-5 mr-2" /> {t('common.edit')}
+          </Button>
+        )}
+        {canDelete && (
+          <Button size="lg" variant="outline" className="flex-1 border-error text-error hover:bg-red-50" onClick={() => setDeleteDialogOpen(true)}>
+            <Trash2 className="h-5 w-5 mr-2" /> {t('area.actions.delete')}
+          </Button>
+        )}
       </div>
 
       {/* Submit for Audit Dialog */}
@@ -297,6 +322,27 @@ export function AreaDetailPage() {
           </Button>
           <Button variant="outline" className="border-error text-error hover:bg-red-50" onClick={() => suspendMutation.mutate()} disabled={suspendMutation.isPending}>
             {suspendMutation.isPending ? t('common.loading') : t('area.actions.suspend')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
+        <DialogTitle>{t('area.deleteConfirm.title')}</DialogTitle>
+        <DialogContent>{t('area.deleteConfirm.message')}</DialogContent>
+        {deleteAreaMutation.isError && (
+          <p className="mt-2 text-sm text-error">{t('area.deleteConfirm.error')}</p>
+        )}
+        <DialogActions>
+          <Button variant="outline" onClick={() => setDeleteDialogOpen(false)} disabled={deleteAreaMutation.isPending}>
+            {t('common.cancel')}
+          </Button>
+          <Button
+            variant="outline"
+            className="border-error text-error hover:bg-red-50"
+            onClick={() => deleteAreaMutation.mutate()}
+            disabled={deleteAreaMutation.isPending}
+          >
+            {deleteAreaMutation.isPending ? t('common.loading') : t('area.actions.delete')}
           </Button>
         </DialogActions>
       </Dialog>

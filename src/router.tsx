@@ -29,6 +29,7 @@ import { AvailableAreasPage } from '@/features/map/AvailableAreasPage';
 import { AreaFormPage } from '@/features/map/AreaFormPage';
 import { PendingAreasPage } from '@/features/map/PendingAreasPage';
 import { AreaAuditPage } from '@/features/map/AreaAuditPage';
+import { PublicAreasPage } from '@/features/map/PublicAreasPage';
 
 // Compensation
 import { CompensationReviewPage } from '@/features/compensation/ReviewPage';
@@ -69,6 +70,7 @@ export const router = createBrowserRouter([
       { path: '/password-reset', element: <PasswordResetRequestPage /> },
       { path: '/password-reset/confirm', element: <PasswordResetConfirmPage /> },
       { path: '/map', element: <MapPage /> },
+      { path: '/areas/public', element: <PublicAreasPage /> },
       { path: '/areas', element: <AuthGuard><AreaListPage /></AuthGuard> },
       { path: '/certificates/validate', element: <CertificateValidationPage /> },
       { path: '/access-denied', element: <AccessDeniedPage /> },

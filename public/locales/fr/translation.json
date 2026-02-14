@@ -105,6 +105,7 @@
     "admin": "Administration",
     "users": "Utilisateurs (Admin)",
     "auditLog": "Audit (Admin)",
+    "publicAreas": "Voir les Zones",
     "login": "Se connecter",
     "logout": "Se déconnecter",
     "impact": "Votre Impact",
@@ -427,6 +428,7 @@
     "usage": "Utilisation",
     "contributions": "Contributions par arbres",
     "contributionsEmpty": "Aucune contribution payée pour cette zone pour le moment.",
+    "ownerEmail": "Responsable (e-mail)",
     "media": "Médias de la zone",
     "mediaEmpty": "Aucune photo ou vid\u00e9o envoy\u00e9e pour le moment.",
     "uploadMedia": "T\u00e9l\u00e9charger",
@@ -449,6 +451,9 @@
       "description": "Description",
       "latitude": "Latitude",
       "longitude": "Longitude",
+      "status": "Statut",
+      "pickOnMap": "Sélectionner un point sur la carte",
+      "mapHint": "Cliquez sur la carte pour définir automatiquement la latitude et la longitude.",
       "state": "Région",
       "city": "Ville",
       "biome": "Biome",
@@ -469,7 +474,8 @@
     },
     "deleteConfirm": {
       "title": "Supprimer la zone",
-      "message": "Souhaitez-vous vraiment supprimer cette zone ? Cette action est irr\u00e9versible."
+      "message": "Voulez-vous vraiment supprimer cette zone ? Les m\u00e9dias associ\u00e9s seront aussi supprim\u00e9s.",
+      "error": "\u00c9chec de la suppression de la zone. Veuillez r\u00e9essayer."
     },
     "submitConfirm": {
       "title": "Soumettre \u00e0 l'audit",
@@ -490,7 +496,12 @@
     "list": {
       "title": "Mes Zones",
       "create": "Créer une Nouvelle Zone",
-      "empty": "Aucune zone enregistrée"
+      "empty": "Aucune zone enregistrée",
+      "searchLabel": "Recherche",
+      "searchPlaceholder": "Nom, ville ou région",
+      "cityPlaceholder": "Filtrer par ville",
+      "statePlaceholder": "Filtrer par région",
+      "clearFilters": "Effacer les filtres"
     },
     "my": {
       "title": "Mes Zones",
@@ -501,6 +512,14 @@
       "title": "Zones Disponibles",
       "empty": "Aucune zone disponible pour le moment",
       "emptyHint": "Revenez plus tard pour voir de nouvelles zones"
+    },
+    "public": {
+      "title": "Zones publiques",
+      "subtitle": "Explorez les zones en cartes et ouvrez le détail de chaque projet.",
+      "searchLabel": "Rechercher",
+      "searchPlaceholder": "Nom de la zone, ville, région ou biome",
+      "empty": "Aucune zone trouvée",
+      "emptyDescription": "Ajustez les filtres et réessayez."
     }
   },
   "compensation": {

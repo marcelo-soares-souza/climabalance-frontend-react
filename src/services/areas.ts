@@ -6,6 +6,8 @@ type RawArea = {
   id?: string;
   owner_user_id?: string;
   ownerUserId?: string;
+  owner_email?: string | null;
+  ownerEmail?: string | null;
   name?: string;
   description?: string | null;
   latitude?: number | string;
@@ -122,6 +124,7 @@ function normalizeArea(raw: RawArea): Area {
   return {
     id: asString(raw.id),
     ownerUserId: asString(raw.ownerUserId ?? raw.owner_user_id),
+    ownerEmail: asNullableString(raw.ownerEmail ?? raw.owner_email),
     name: asString(raw.name),
     description: asNullableString(raw.description),
     latitude: asNumber(raw.latitude),
@@ -239,7 +242,9 @@ export const areasService = {
   },
 
   getMapAreas(params?: { biome?: string }) {
-    return api.get<RawArea[]>('/map/areas', { params: params as Record<string, string> }).then((rows) => rows.map(normalizeArea));
+    return api
+      .get<RawArea[]>('/map/areas', { params: params as Record<string, string> })
+      .then((rows) => rows.map((row) => normalizeArea({ status: 'active', ...row })));
   },
 
   getAreaCapacity(id: string) {

@@ -105,6 +105,7 @@
     "admin": "Administración",
     "users": "Usuarios (Admin)",
     "auditLog": "Auditoría (Admin)",
+    "publicAreas": "Ver Áreas",
     "login": "Iniciar sesión",
     "logout": "Cerrar sesión",
     "impact": "Tu Impacto",
@@ -427,6 +428,7 @@
     "usage": "Utilización",
     "contributions": "Contribuciones por árboles",
     "contributionsEmpty": "Aún no hay contribuciones pagadas para esta área.",
+    "ownerEmail": "Responsable (correo)",
     "media": "Medios del área",
     "mediaEmpty": "Todav\u00eda no hay fotos o videos enviados.",
     "uploadMedia": "Subir",
@@ -449,6 +451,9 @@
       "description": "Descripción",
       "latitude": "Latitud",
       "longitude": "Longitud",
+      "status": "Estado",
+      "pickOnMap": "Seleccionar punto en el mapa",
+      "mapHint": "Haz clic en el mapa para definir latitud y longitud automáticamente.",
       "state": "Estado",
       "city": "Ciudad",
       "biome": "Bioma",
@@ -469,7 +474,8 @@
     },
     "deleteConfirm": {
       "title": "Eliminar \u00e1rea",
-      "message": "\u00bfEst\u00e1 seguro de que desea eliminar esta \u00e1rea? Esta acci\u00f3n no se puede deshacer."
+      "message": "\u00bfEst\u00e1 seguro de que desea eliminar esta \u00e1rea? Los medios asociados tambi\u00e9n se eliminar\u00e1n.",
+      "error": "Error al eliminar el \u00e1rea. Int\u00e9ntelo de nuevo."
     },
     "submitConfirm": {
       "title": "Enviar a Auditor\u00eda",
@@ -490,7 +496,12 @@
     "list": {
       "title": "Mis Áreas",
       "create": "Crear Nueva Área",
-      "empty": "Aún no hay áreas registradas"
+      "empty": "Aún no hay áreas registradas",
+      "searchLabel": "Buscar",
+      "searchPlaceholder": "Nombre, ciudad o estado",
+      "cityPlaceholder": "Filtrar por ciudad",
+      "statePlaceholder": "Filtrar por estado",
+      "clearFilters": "Limpiar filtros"
     },
     "my": {
       "title": "Mis Áreas",
@@ -501,6 +512,14 @@
       "title": "Áreas Disponibles",
       "empty": "No hay áreas disponibles en este momento",
       "emptyHint": "Vuelve más tarde para ver nuevas áreas"
+    },
+    "public": {
+      "title": "Áreas públicas",
+      "subtitle": "Explora áreas en formato de tarjetas y abre el detalle de cada proyecto.",
+      "searchLabel": "Buscar",
+      "searchPlaceholder": "Nombre del área, ciudad, estado o bioma",
+      "empty": "No se encontraron áreas",
+      "emptyDescription": "Ajusta los filtros e inténtalo de nuevo."
     }
   },
   "compensation": {

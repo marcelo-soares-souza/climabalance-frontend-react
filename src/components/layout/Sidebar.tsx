@@ -48,9 +48,10 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   const isHistoryActive = userId
     ? pathname === historyPath || new RegExp(`^/users/${userId}/impact/calculations/(?!new$)[^/]+$`).test(pathname)
     : pathname === '/footprint/history' || /^\/footprint\/calculation\/[^/]+$/.test(pathname);
-  const isAreasAvailableActive = pathname === '/areas/available';
+  const isPublicAreasActive = pathname === '/areas/public';
   const isAreaDetailActive = /^\/areas\/[^/]+$/.test(pathname)
     && pathname !== '/areas/available'
+    && pathname !== '/areas/public'
     && pathname !== '/areas/create'
     && !pathname.startsWith('/areas/edit/');
   const isMyAreasActive =
@@ -104,6 +105,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           <NavLink to="/map" className={linkClass} onClick={onClose}>
             <MapPin className="h-4 w-4" /> {t('nav.map')}
           </NavLink>
+          <NavLink to="/areas/public" className={() => linkClassByValue(isPublicAreasActive)} onClick={onClose}>
+            <TreePine className="h-4 w-4" /> {t('nav.publicAreas')}
+          </NavLink>
 
           {isAuthenticated && (
             <>
@@ -115,17 +119,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 <History className="h-4 w-4" /> {t('nav.history')}
               </NavLink>
 
-              {(hasRole('producer') || isAdmin) && (
-                <>
-                  {sectionLabel(t('nav.areas'))}
-                  <NavLink to="/areas/available" className={() => linkClassByValue(isAreasAvailableActive)} onClick={onClose}>
-                    <MapPin className="h-4 w-4" /> {t('nav.areas')}
-                  </NavLink>
-                  <NavLink to="/areas" className={() => linkClassByValue(isMyAreasActive)} onClick={onClose}>
-                    <TreePine className="h-4 w-4" /> {t('nav.myAreas')}
-                  </NavLink>
-                </>
-              )}
+              <>
+                {sectionLabel(t('nav.areas'))}
+                <NavLink to="/areas" className={() => linkClassByValue(isMyAreasActive)} onClick={onClose}>
+                  <TreePine className="h-4 w-4" /> {t('nav.myAreas')}
+                </NavLink>
+              </>
 
               {sectionLabel(t('nav.account'))}
               <NavLink to={profilePath} className={linkClass} onClick={onClose}>
