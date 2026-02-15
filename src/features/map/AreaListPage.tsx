@@ -96,46 +96,36 @@ export function AreaListPage() {
           onChange={(e) => setStateFilter(e.target.value)}
           placeholder={t('areas.list.statePlaceholder')}
         />
-        <div className="w-full">
-          <label htmlFor="areas-status" className="block text-base font-medium text-text-secondary mb-1.5">
-            {t('area.form.status')}
-          </label>
-          <Select
-            id="areas-status"
-            className="px-4 py-3 border-gray-200"
-            options={[
-              { value: '', label: t('common.allStatuses') },
-              { value: 'draft', label: t('common.status.draft') },
-              { value: 'pending_audit', label: t('common.status.pending_audit') },
-              { value: 'approved', label: t('common.status.approved') },
-              { value: 'active', label: t('common.status.active') },
-              { value: 'rejected', label: t('area.status.rejected') },
-              { value: 'suspended', label: t('common.status.suspended') },
-            ]}
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-          />
-        </div>
-        <div className="w-full">
-          <label htmlFor="areas-biome" className="block text-base font-medium text-text-secondary mb-1.5">
-            {t('map.biome')}
-          </label>
-          <Select
-            id="areas-biome"
-            className="px-4 py-3 border-gray-200"
-            options={[
-              { value: '', label: t('map.allBiomes') },
-              { value: 'amazonia', label: t('map.biomes.amazonia') },
-              { value: 'cerrado', label: t('map.biomes.cerrado') },
-              { value: 'mata_atlantica', label: t('map.biomes.mataAtlantica') },
-              { value: 'caatinga', label: t('map.biomes.caatinga') },
-              { value: 'pampa', label: t('map.biomes.pampa') },
-              { value: 'pantanal', label: t('map.biomes.pantanal') },
-            ]}
-            value={biomeFilter}
-            onChange={(e) => setBiomeFilter(e.target.value)}
-          />
-        </div>
+        <Select
+          id="areas-status"
+          label={t('area.form.status')}
+          options={[
+            { value: '', label: t('common.allStatuses') },
+            { value: 'draft', label: t('common.status.draft') },
+            { value: 'pending_audit', label: t('common.status.pending_audit') },
+            { value: 'approved', label: t('common.status.approved') },
+            { value: 'active', label: t('common.status.active') },
+            { value: 'rejected', label: t('area.status.rejected') },
+            { value: 'suspended', label: t('common.status.suspended') },
+          ]}
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+        />
+        <Select
+          id="areas-biome"
+          label={t('map.biome')}
+          options={[
+            { value: '', label: t('map.allBiomes') },
+            { value: 'amazonia', label: t('map.biomes.amazonia') },
+            { value: 'cerrado', label: t('map.biomes.cerrado') },
+            { value: 'mata_atlantica', label: t('map.biomes.mataAtlantica') },
+            { value: 'caatinga', label: t('map.biomes.caatinga') },
+            { value: 'pampa', label: t('map.biomes.pampa') },
+            { value: 'pantanal', label: t('map.biomes.pantanal') },
+          ]}
+          value={biomeFilter}
+          onChange={(e) => setBiomeFilter(e.target.value)}
+        />
       </div>
       {hasFilters && (
         <div>

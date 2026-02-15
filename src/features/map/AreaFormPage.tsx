@@ -18,6 +18,11 @@ import { ApiError } from '@/lib/api-client';
 import { useAuth } from '@/hooks/use-auth';
 import { LocateControl } from '@/components/leaflet/LocateControl';
 import type { AreaStatus } from '@/types/area';
+import {
+  BRAZIL_STATES,
+  findBrazilStateCode,
+  getBrazilCitiesByState,
+} from '@/features/map/data/br-locations';
 import { ArrowLeft } from 'lucide-react';
 
 const BRASILIA_COORDINATES: [number, number] = [-15.793889, -47.882778];
@@ -73,6 +78,8 @@ export function AreaFormPage() {
   }>>({});
   const [error, setError] = useState<string | null>(null);
   const [ipBasedCenter, setIpBasedCenter] = useState<[number, number] | null>(null);
+  const [cityOptions, setCityOptions] = useState<string[]>([]);
+  const [isCitiesLoading, setIsCitiesLoading] = useState(false);
 
   const { data: existing, isLoading } = useQuery({
     queryKey: ['areas', areaId],
@@ -104,6 +111,41 @@ export function AreaFormPage() {
     { value: 'pampa', label: t('map.biomes.pampa') },
     { value: 'pantanal', label: t('map.biomes.pantanal') },
   ];
+  const stateOptions = useMemo(
+    () => [
+      { value: '', label: t('area.form.selectState') },
+      ...BRAZIL_STATES.map((state) => ({
+        value: state.code,
+        label: `${state.code} - ${state.name}`,
+      })),
+    ],
+    [t]
+  );
+  const normalizedStateCode = findBrazilStateCode(formValues.state);
+
+  const citySelectOptions = useMemo(() => {
+    if (!normalizedStateCode) {
+      return [{ value: '', label: t('area.form.selectStateFirst') }];
+    }
+
+    if (isCitiesLoading) {
+      return [{ value: '', label: t('area.form.loadingCities') }];
+    }
+
+    if (cityOptions.length === 0) {
+      return [{ value: '', label: t('area.form.noCitiesAvailable') }];
+    }
+
+    const options = [{ value: '', label: t('area.form.selectCity') }];
+    const mappedCities = cityOptions.map((city) => ({ value: city, label: city }));
+    const hasCurrentCity = mappedCities.some((city) => city.value === formValues.city);
+
+    if (formValues.city && !hasCurrentCity) {
+      mappedCities.unshift({ value: formValues.city, label: formValues.city });
+    }
+
+    return [...options, ...mappedCities];
+  }, [normalizedStateCode, isCitiesLoading, cityOptions, formValues.city, t]);
 
   const mutation = useMutation({
     mutationFn: () => {
@@ -174,6 +216,39 @@ export function AreaFormPage() {
   const hasSelectedPosition = selectedPosition !== null;
   const hasManualCoordinates =
     (form.latitude?.trim().length ?? 0) > 0 || (form.longitude?.trim().length ?? 0) > 0;
+
+  useEffect(() => {
+    if (!existing?.state || form.state !== undefined) return;
+    const existingStateCode = findBrazilStateCode(existing.state);
+    if (!existingStateCode) return;
+    setForm((prev) => ({ ...prev, state: existingStateCode }));
+  }, [existing?.state, form.state]);
+
+  useEffect(() => {
+    if (!normalizedStateCode) {
+      setCityOptions([]);
+      return;
+    }
+
+    let active = true;
+    const controller = new AbortController();
+    setIsCitiesLoading(true);
+
+    getBrazilCitiesByState(normalizedStateCode, controller.signal)
+      .then((cities) => {
+        if (!active) return;
+        setCityOptions(cities);
+      })
+      .finally(() => {
+        if (!active) return;
+        setIsCitiesLoading(false);
+      });
+
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [normalizedStateCode]);
 
   useEffect(() => {
     if (isEdit || hasSelectedPosition || hasManualCoordinates) return;
@@ -273,8 +348,28 @@ export function AreaFormPage() {
           )}
           <Select id="biome" label={t('area.form.biome')} options={biomeOptions} value={formValues.biome} onChange={(e) => update('biome', e.target.value)} />
           <div className="grid grid-cols-2 gap-4">
-            <Input id="state" label={t('area.form.state')} value={formValues.state} onChange={(e) => update('state', e.target.value)} />
-            <Input id="city" label={t('area.form.city')} value={formValues.city} onChange={(e) => update('city', e.target.value)} />
+            <Select
+              id="state"
+              label={t('area.form.state')}
+              value={normalizedStateCode ?? ''}
+              options={stateOptions}
+              onChange={(e) => {
+                const nextStateCode = e.target.value;
+                const previousStateCode = normalizedStateCode ?? '';
+                update('state', nextStateCode);
+                if (nextStateCode !== previousStateCode) {
+                  update('city', '');
+                }
+              }}
+            />
+            <Select
+              id="city"
+              label={t('area.form.city')}
+              value={formValues.city}
+              options={citySelectOptions}
+              disabled={!normalizedStateCode || isCitiesLoading || (cityOptions.length === 0 && !formValues.city)}
+              onChange={(e) => update('city', e.target.value)}
+            />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Input id="capacity" type="number" step="any" label={t('area.form.totalCapacity')} value={formValues.total_capacity_t_co2e} onChange={(e) => update('total_capacity_t_co2e', e.target.value)} />
