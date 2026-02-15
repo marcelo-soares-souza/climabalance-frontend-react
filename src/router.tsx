@@ -34,6 +34,7 @@ import { PublicAreasPage } from '@/features/map/PublicAreasPage';
 // Compensation
 import { CompensationReviewPage } from '@/features/compensation/ReviewPage';
 import { CompensationCheckoutPage } from '@/features/compensation/CheckoutPage';
+import { CompensationReportPage } from '@/features/compensation/ReportPage';
 import { CompensationHistoryPage } from '@/features/compensation/HistoryPage';
 
 // Profile
@@ -127,6 +128,10 @@ export const router = createBrowserRouter([
       {
         path: '/compensation/checkout',
         element: <AuthGuard><CompensationCheckoutPage /></AuthGuard>,
+      },
+      {
+        path: '/compensation/report',
+        element: <AuthGuard><CompensationReportPage /></AuthGuard>,
       },
       {
         path: '/profile/compensations',

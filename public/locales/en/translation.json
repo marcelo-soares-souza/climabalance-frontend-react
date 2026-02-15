@@ -549,8 +549,34 @@
     "mode": {
       "tree_purchase": "Tree purchase (20 years)",
       "tco2e": "tCO2e compensation"
+    },
+    "report": {
+      "title": "Compensation Report",
+      "subtitle": "See what was offset and download your certificate",
+      "summaryTitle": "Purchase summary",
+      "area": "Area",
+      "mode": "Mode",
+      "trees": "Trees",
+      "tco2e": "tCO₂e",
+      "amount": "Paid amount",
+      "installments": "Installments",
+      "paymentTitle": "Payment details",
+      "statusLabel": "Payment",
+      "simulationLabel": "Simulation",
+      "processedAt": "Processed at",
+      "certificateStatus": "Certificate status",
+      "certificateTitle": "Certificate",
+      "certificateSubtitle": "Download the official PDF",
+      "certificateNumber": "Certificate number",
+      "certificateIssued": "Issued on",
+      "download": "Download certificate",
+      "noCertificate": "Certificate not available yet.",
+      "viewAll": "View all certificates",
+      "missingTitle": "Report unavailable",
+      "missingDescription": "Complete a payment to see the report or check your compensation history."
     }
   },
+
   "compensations": {
     "title": "Compensation History",
     "empty": "No compensations yet.",

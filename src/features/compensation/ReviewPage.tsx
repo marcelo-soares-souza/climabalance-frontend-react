@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/Input';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { formatTCO2e, formatCurrency } from '@/lib/format';
 import { cn } from '@/lib/cn';
+import { ApiError } from '@/lib/api-client';
 import { ArrowLeft, TreePine, Leaf, MapPin } from 'lucide-react';
 import type { CompensationMode } from '@/types/compensation';
 
@@ -19,10 +20,20 @@ const PRICE_PER_TCO2E_BRL = 120;
 export function CompensationReviewPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { areaId, compensationMode, setSelection } = useCompensationStore();
+  const {
+    areaId,
+    compensationMode,
+    treesRequested: storedTreesRequested,
+    totalTCO2e: storedTotalTCO2e,
+    setSelection,
+  } = useCompensationStore();
   const [mode, setMode] = useState<CompensationMode>(compensationMode || 'tree_purchase');
-  const [treesRequested, setTreesRequested] = useState(100);
-  const [tco2eAmount, setTco2eAmount] = useState(1);
+  const [treesRequested, setTreesRequested] = useState(
+    storedTreesRequested && storedTreesRequested > 0 ? storedTreesRequested : 100
+  );
+  const [tco2eAmount, setTco2eAmount] = useState(
+    storedTotalTCO2e && storedTotalTCO2e > 0 ? storedTotalTCO2e : 1
+  );
   const [error, setError] = useState<string | null>(null);
 
   const { data: area } = useQuery({
@@ -31,7 +42,7 @@ export function CompensationReviewPage() {
     enabled: !!areaId,
   });
 
-  const { data: quote, isLoading: quoteLoading } = useQuery({
+  const { data: quote, isLoading: quoteLoading, error: quoteError } = useQuery({
     queryKey: ['quote', areaId, treesRequested],
     queryFn: () => compensationsService.getQuote({ area_id: areaId!, trees_requested: treesRequested, currency: 'BRL' }),
     enabled: !!areaId && mode === 'tree_purchase' && treesRequested > 0,
@@ -42,6 +53,16 @@ export function CompensationReviewPage() {
   }, [areaId, navigate]);
 
   const handleProceed = () => {
+    if (mode === 'tree_purchase' && (!quote || treesRequested < 1)) {
+      setError('compensation.error');
+      return;
+    }
+
+    if (mode === 'tco2e' && tco2eAmount <= 0) {
+      setError('compensation.error');
+      return;
+    }
+
     if (mode === 'tree_purchase') {
       setSelection({
         compensationMode: mode,
@@ -63,6 +84,9 @@ export function CompensationReviewPage() {
   if (!areaId) return null;
 
   const available = area ? area.totalCapacityTCO2e - area.committedTCO2e : 0;
+  const canProceed = mode === 'tree_purchase'
+    ? treesRequested > 0 && !!quote && !quoteLoading
+    : tco2eAmount > 0;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -72,6 +96,9 @@ export function CompensationReviewPage() {
       <h1 className="text-2xl font-bold">{t('compensation.review.title')}</h1>
 
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
+      {!error && quoteError && (
+        <ErrorBanner messageKey={quoteError instanceof ApiError ? quoteError.messageKey : 'compensation.error'} />
+      )}
 
       {/* Area Info */}
       {area && (
@@ -155,7 +182,7 @@ export function CompensationReviewPage() {
         </CardContent>
       </Card>
 
-      <Button size="lg" className="w-full" onClick={handleProceed} disabled={quoteLoading}>
+      <Button size="lg" className="w-full" onClick={handleProceed} disabled={!canProceed}>
         {t('compensation.review.proceed')}
       </Button>
     </div>

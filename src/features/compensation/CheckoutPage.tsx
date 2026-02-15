@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -15,8 +15,8 @@ import { Select } from '@/components/ui/Select';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { formatCurrency, formatTCO2e } from '@/lib/format';
 import { ApiError } from '@/lib/api-client';
-import { ArrowLeft, CreditCard, CheckCircle, Award } from 'lucide-react';
-import type { PaymentResult } from '@/types/payment';
+import { ArrowLeft, CreditCard } from 'lucide-react';
+import type { CompensationReportSummary } from '@/features/compensation/ReportPage';
 
 const PRICE_PER_TCO2E_BRL = 120;
 const DEFAULT_T_CO2E_PER_TREE_PER_YEAR = 0.00075;
@@ -33,7 +33,6 @@ export function CompensationCheckoutPage() {
   const [cvv, setCvv] = useState('123');
   const [installments, setInstallments] = useState('1');
   const [error, setError] = useState<string | null>(null);
-  const [paymentResult, setPaymentResult] = useState<PaymentResult | null>(null);
   const { data: area } = useQuery({
     queryKey: ['areas', store.areaId],
     queryFn: () => areasService.getArea(store.areaId!),
@@ -55,6 +54,31 @@ export function CompensationCheckoutPage() {
       );
   const tco2eTotalAmount = store.totalAmount ?? totalTCO2e * PRICE_PER_TCO2E_BRL;
   const summaryTotalAmount = store.compensationMode === 'tco2e' ? tco2eTotalAmount : store.totalAmount;
+
+  useEffect(() => {
+    if (!store.areaId) {
+      navigate('/map', { replace: true });
+      return;
+    }
+
+    if (!store.compensationMode) {
+      navigate('/compensation/review', { replace: true });
+      return;
+    }
+
+    if (store.compensationMode === 'tree_purchase') {
+      const hasTreesRequested = typeof store.treesRequested === 'number' && store.treesRequested > 0;
+      if (!hasTreesRequested) {
+        navigate('/compensation/review', { replace: true });
+      }
+      return;
+    }
+
+    const hasTotalTCO2e = typeof store.totalTCO2e === 'number' && store.totalTCO2e > 0;
+    if (!hasTotalTCO2e) {
+      navigate('/compensation/review', { replace: true });
+    }
+  }, [navigate, store.areaId, store.compensationMode, store.treesRequested, store.totalTCO2e]);
 
   const createCompensationMutation = useMutation({
     mutationFn: () => compensationsService.createCompensation({
@@ -79,11 +103,9 @@ export function CompensationCheckoutPage() {
       cvv,
       installments: parseInt(installments),
     }),
-    onSuccess: (result) => {
-      setPaymentResult(result);
+    onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['compensations'] });
       queryClient.invalidateQueries({ queryKey: ['areas'] });
-      store.clearSelection();
     },
     onError: (err) => {
       setError(err instanceof ApiError ? err.messageKey : 'payment.error');
@@ -94,38 +116,26 @@ export function CompensationCheckoutPage() {
     setError(null);
     try {
       const compensation = await createCompensationMutation.mutateAsync();
-      payMutation.mutate(compensation.compensationId);
+      const payment = await payMutation.mutateAsync(compensation.compensationId);
+      const reportSummary: CompensationReportSummary = {
+        areaName: store.areaName,
+        compensationMode: store.compensationMode,
+        treesRequested: store.treesRequested,
+        totalTCO2e: store.totalTCO2e,
+        totalAmount: summaryTotalAmount ?? payment.amount,
+        currency: store.currency,
+        installments: payment.installments,
+      };
+      navigate('/compensation/report', {
+        state: {
+          paymentResult: payment,
+          summary: reportSummary,
+        },
+      });
     } catch (err) {
       setError(err instanceof ApiError ? err.messageKey : 'compensation.error');
     }
   };
-
-  if (paymentResult) {
-    return (
-      <div className="max-w-lg mx-auto text-center py-12 space-y-6">
-        <CheckCircle className="h-20 w-20 text-success mx-auto" />
-        <h1 className="text-2xl font-bold">{t('checkout.success.title')}</h1>
-        <p className="text-text-secondary">{t('checkout.success.message')}</p>
-        <Card>
-          <CardContent className="space-y-2 text-sm">
-            <div className="flex justify-between"><span>{t('checkout.success.amount')}</span><span className="font-medium">{formatCurrency(paymentResult.amount)}</span></div>
-            <div className="flex justify-between"><span>{t('checkout.success.status')}</span><span className="font-medium text-success">{paymentResult.paymentStatus}</span></div>
-            {paymentResult.certificate && (
-              <div className="flex justify-between"><span>{t('checkout.success.certificate')}</span><span className="font-medium">{paymentResult.certificate.certificateNumber}</span></div>
-            )}
-          </CardContent>
-        </Card>
-        <div className="flex gap-3 justify-center">
-          {paymentResult.certificate && (
-            <Button variant="outline" onClick={() => navigate('/profile/certificates')}>
-              <Award className="h-4 w-4 mr-2" /> {t('checkout.success.viewCertificates')}
-            </Button>
-          )}
-          <Button onClick={() => navigate('/')}>{t('common.backToHome')}</Button>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-lg mx-auto space-y-6">
@@ -142,13 +152,22 @@ export function CompensationCheckoutPage() {
         <CardContent className="space-y-2 text-sm">
           <div className="flex justify-between"><span>{t('checkout.area')}</span><span className="font-medium">{store.areaName}</span></div>
           <div className="flex justify-between"><span>{t('checkout.mode')}</span><span className="font-medium">{t(`compensation.mode.${store.compensationMode}`)}</span></div>
-          {store.treesRequested && <div className="flex justify-between"><span>{t('checkout.trees')}</span><span className="font-medium">{store.treesRequested}</span></div>}
-          {store.totalTCO2e && <div className="flex justify-between"><span>{t('checkout.tco2e')}</span><span className="font-medium">{formatTCO2e(store.totalTCO2e)}</span></div>}
-          {summaryTotalAmount && (
+          {store.treesRequested != null && store.treesRequested > 0 && (
+            <div className="flex justify-between"><span>{t('checkout.trees')}</span><span className="font-medium">{store.treesRequested}</span></div>
+          )}
+          {store.totalTCO2e != null && store.totalTCO2e > 0 && (
+            <div className="flex justify-between"><span>{t('checkout.tco2e')}</span><span className="font-medium">{formatTCO2e(store.totalTCO2e)}</span></div>
+          )}
+          {summaryTotalAmount != null && summaryTotalAmount > 0 && (
             <div className="flex justify-between text-lg font-bold border-t pt-2">
               <span>{t('checkout.total')}</span>
               <span className="text-primary">{formatCurrency(summaryTotalAmount)}</span>
             </div>
+          )}
+          {store.compensationMode === 'tree_purchase' && (
+            <Button variant="ghost" size="sm" className="w-full" onClick={() => navigate('/compensation/review')}>
+              {t('common.edit')}
+            </Button>
           )}
         </CardContent>
       </Card>

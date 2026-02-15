@@ -549,6 +549,31 @@
     "mode": {
       "tree_purchase": "Compra de árboles (20 años)",
       "tco2e": "Compensación por tCO2e"
+    },
+    "report": {
+      "title": "Informe de compensación",
+      "subtitle": "Consulta cuánto compensaste y descarga tu certificado",
+      "summaryTitle": "Resumen de compra",
+      "area": "Área",
+      "mode": "Modalidad",
+      "trees": "Árboles",
+      "tco2e": "tCO₂e",
+      "amount": "Monto pagado",
+      "installments": "Cuotas",
+      "paymentTitle": "Detalles del pago",
+      "statusLabel": "Pago",
+      "simulationLabel": "Simulación",
+      "processedAt": "Procesado en",
+      "certificateStatus": "Estado del certificado",
+      "certificateTitle": "Certificado",
+      "certificateSubtitle": "Descarga el PDF oficial",
+      "certificateNumber": "Número del certificado",
+      "certificateIssued": "Emitido el",
+      "download": "Descargar certificado",
+      "noCertificate": "El certificado aún no está disponible.",
+      "viewAll": "Ver todos los certificados",
+      "missingTitle": "Informe no disponible",
+      "missingDescription": "Realiza un pago para ver el informe o revisa tu historial de compensaciones."
     }
   },
   "compensations": {

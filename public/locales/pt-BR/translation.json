@@ -549,6 +549,31 @@
     "mode": {
       "tree_purchase": "Compra de \u00e1rvores (20 anos)",
       "tco2e": "Compensa\u00e7\u00e3o por tCO\u2082e"
+    },
+    "report": {
+      "title": "Relatório da compensação",
+      "subtitle": "Avalie sua compra e baixe o certificado oficial",
+      "summaryTitle": "Resumo da compra",
+      "area": "Área",
+      "mode": "Modalidade",
+      "trees": "Árvores",
+      "tco2e": "tCO₂e compensado",
+      "amount": "Valor pago",
+      "installments": "Parcelas",
+      "paymentTitle": "Detalhes do pagamento",
+      "statusLabel": "Pagamento",
+      "simulationLabel": "Simulação",
+      "processedAt": "Processado em",
+      "certificateStatus": "Status do certificado",
+      "certificateTitle": "Certificado",
+      "certificateSubtitle": "Faça o download do PDF oficial",
+      "certificateNumber": "Número do certificado",
+      "certificateIssued": "Emitido em",
+      "download": "Baixar certificado",
+      "noCertificate": "O certificado ainda não está disponível.",
+      "viewAll": "Ver todos os certificados",
+      "missingTitle": "Relatório indisponível",
+      "missingDescription": "Finalize um pagamento para ver o relatório ou confira seu histórico de compensações."
     }
   },
   "compensations": {

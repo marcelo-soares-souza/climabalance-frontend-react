@@ -213,8 +213,6 @@ export function MapPage() {
   const [searchParams] = useSearchParams();
   const { isAuthenticated } = useAuth();
   const setSelection = useCompensationStore((s) => s.setSelection);
-  const storedCalculationId = useCompensationStore((s) => s.calculationId);
-  const storedTotalTCO2e = useCompensationStore((s) => s.totalTCO2e);
   const [biomeFilter, setBiomeFilter] = useState('');
   const [mapZoom, setMapZoom] = useState(5);
   const requestedCalculationId = searchParams.get('calculationId')?.trim() || null;
@@ -223,8 +221,9 @@ export function MapPage() {
   const requestedTCO2e = Number.isFinite(requestedTCO2eParsed) && requestedTCO2eParsed > 0
     ? requestedTCO2eParsed
     : null;
-  const effectiveCalculationId = requestedCalculationId ?? storedCalculationId ?? null;
-  const effectiveMinCapacity = requestedTCO2e ?? storedTotalTCO2e ?? null;
+  const hasProjectionContext = !!requestedCalculationId && !!requestedTCO2e;
+  const effectiveCalculationId = hasProjectionContext ? requestedCalculationId : null;
+  const selectedTotalTCO2e = hasProjectionContext ? requestedTCO2e : null;
 
   const { data: areas, isLoading } = useQuery({
     queryKey: ['map-areas', { biome: biomeFilter }],
@@ -250,33 +249,28 @@ export function MapPage() {
   ];
 
   const center = useMemo(() => {
-    const base = effectiveMinCapacity && areas
-      ? areas.filter((area) => (area.totalCapacityTCO2e - area.committedTCO2e) >= effectiveMinCapacity)
-      : areas;
-    if (base && base.length > 0) {
-      const lat = base.reduce((s, a) => s + a.latitude, 0) / base.length;
-      const lng = base.reduce((s, a) => s + a.longitude, 0) / base.length;
+    if (areas && areas.length > 0) {
+      const lat = areas.reduce((s, a) => s + a.latitude, 0) / areas.length;
+      const lng = areas.reduce((s, a) => s + a.longitude, 0) / areas.length;
       return [lat, lng] as [number, number];
     }
     return [-14.235, -51.9253] as [number, number];
-  }, [areas, effectiveMinCapacity]);
+  }, [areas]);
 
   const visibleAreas = useMemo(() => {
-    if (!areas) return [];
-    if (!effectiveMinCapacity) return areas;
-    return areas.filter((area) => (area.totalCapacityTCO2e - area.committedTCO2e) >= effectiveMinCapacity);
-  }, [areas, effectiveMinCapacity]);
+    return areas ?? [];
+  }, [areas]);
 
   const clusters = useMemo(() => buildClusters(visibleAreas, mapZoom), [visibleAreas, mapZoom]);
 
   const handleSelectArea = (area: Area) => {
-    if (effectiveCalculationId && effectiveMinCapacity) {
+    if (effectiveCalculationId && selectedTotalTCO2e) {
       setSelection({
         areaId: area.id,
         areaName: area.name,
         calculationId: effectiveCalculationId,
         compensationMode: 'tco2e',
-        totalTCO2e: effectiveMinCapacity,
+        totalTCO2e: selectedTotalTCO2e,
         treesRequested: null,
         totalAmount: null,
       });
@@ -291,7 +285,7 @@ export function MapPage() {
         totalAmount: null,
       });
     }
-    navigate('/compensation/checkout');
+    navigate('/compensation/review');
   };
 
   const handleZoomChange = useCallback((zoom: number) => {
