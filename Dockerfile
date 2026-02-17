@@ -2,12 +2,12 @@ ARG BUILD_VERSION=development
 ARG BUILD_TIMESTAMP
 
 # --- Stage 1: Build ---
-FROM node:22-alpine AS build
+FROM oven/bun:1.2.22-alpine AS build
 
 WORKDIR /app
 
-COPY package.json package-lock.json* ./
-RUN npm ci
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 
 COPY . .
 
@@ -18,7 +18,7 @@ ENV VITE_API_URL=
 ARG BUILD_VERSION
 ARG BUILD_TIMESTAMP
 
-RUN npm run build
+RUN bun run build
 
 # Generate version.json
 RUN if [ -z "$BUILD_TIMESTAMP" ]; then BUILD_TIMESTAMP=$(date +%s); fi && \
