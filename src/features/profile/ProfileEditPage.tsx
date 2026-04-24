@@ -90,12 +90,13 @@ export function ProfileEditPage() {
   const openBirthDatePicker = () => {
     const input = birthDatePickerRef.current;
     if (!input) return;
-    if ('showPicker' in input) {
-      input.showPicker();
+    const pickerInput = input as HTMLInputElement & { showPicker?: () => void };
+    if (typeof pickerInput.showPicker === 'function') {
+      pickerInput.showPicker();
       return;
     }
-    input.focus();
-    input.click();
+    pickerInput.focus();
+    pickerInput.click();
   };
 
   return (
