@@ -20,7 +20,7 @@ export function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
-  const [roleKey, setRoleKey] = useState('individual');
+  const [roleKey, setRoleKey] = useState('');
   const [humanAnswer, setHumanAnswer] = useState('');
   const [humanCheck, setHumanCheck] = useState<HumanCheckChallenge | null>(null);
   const [loading, setLoading] = useState(false);
@@ -56,6 +56,10 @@ export function RegisterPage() {
     e.preventDefault();
     setError(null);
     setFieldErrors({});
+    if (!roleKey) {
+      setFieldErrors({ role_key: t('errors.auth.register.roleRequired') });
+      return;
+    }
     if (password !== passwordConfirm) {
       setFieldErrors({ password_confirm: t('errors.auth.register.passwordMismatch') });
       return;
@@ -122,9 +126,11 @@ export function RegisterPage() {
               }
             />
           }
+          placeholder={t('auth.register.rolePlaceholder')}
           options={roleOptions}
           value={roleKey}
-          onChange={(e) => setRoleKey(e.target.value)}
+          error={fieldErrors.role_key}
+          onChange={(e) => { setRoleKey(e.target.value); setFieldErrors((current) => ({ ...current, role_key: '' })); }}
         />
         <Input
           id="humanAnswer"
