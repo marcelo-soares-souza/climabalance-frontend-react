@@ -8,8 +8,8 @@ import { Select } from '@/components/ui/Select';
 import { StatusBadge } from '@/components/StatusBadge';
 import { SkeletonTable } from '@/components/ui/Skeleton';
 import { EmptyState } from '@/components/EmptyState';
-import { formatDate } from '@/lib/format';
-import { Users, Edit, Search } from 'lucide-react';
+import { formatDate, formatDateTime } from '@/lib/format';
+import { Users, Edit, Eye, Search } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
 export function AdminUsersPage() {
@@ -49,6 +49,7 @@ export function AdminUsersPage() {
                 <th className="text-left px-4 py-3 font-medium">{t('admin.users.status')}</th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.users.roles')}</th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.users.createdAt')}</th>
+                <th className="text-left px-4 py-3 font-medium">{t('admin.users.lastLogin')}</th>
                 <th className="px-4 py-3"></th>
               </tr></thead>
               <tbody>
@@ -58,7 +59,11 @@ export function AdminUsersPage() {
                     <td className="px-4 py-3"><StatusBadge status={user.status} /></td>
                     <td className="px-4 py-3">{user.roles?.length ? user.roles.join(', ') : '-'}</td>
                     <td className="px-4 py-3 text-text-secondary">{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
-                    <td className="px-4 py-3"><Button variant="ghost" size="sm" onClick={() => navigate(`/admin/users/edit/${user.id}`)}><Edit className="h-3 w-3" /></Button></td>
+                    <td className="px-4 py-3 text-text-secondary">{user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-'}</td>
+                    <td className="px-4 py-3"><div className="flex items-center gap-1">
+                      <Button variant="ghost" size="sm" onClick={() => navigate(`/users/${user.id}/profile`)}><Eye className="h-3 w-3" /></Button>
+                      <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/users/edit/${user.id}`)}><Edit className="h-3 w-3" /></Button>
+                    </div></td>
                   </tr>
                 ))}
               </tbody>

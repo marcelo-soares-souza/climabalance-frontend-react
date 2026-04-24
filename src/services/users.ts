@@ -10,6 +10,8 @@ type RawUserSummary = {
   locale?: string;
   email_confirmed_at?: string | null;
   emailConfirmedAt?: string | null;
+  last_login_at?: string | null;
+  lastLoginAt?: string | null;
   created_at?: string;
   createdAt?: string;
   roles?: unknown;
@@ -121,6 +123,7 @@ function normalizeUserSummary(raw: RawUserSummary): UserSummary {
     status: asString(raw.status, 'pending'),
     locale: asString(raw.locale, 'pt-BR'),
     emailConfirmedAt: asNullableString(raw.email_confirmed_at ?? raw.emailConfirmedAt),
+    lastLoginAt: asNullableString(raw.last_login_at ?? raw.lastLoginAt),
     createdAt: asString(raw.created_at ?? raw.createdAt),
     roles,
   };

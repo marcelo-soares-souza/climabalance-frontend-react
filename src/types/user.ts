@@ -4,6 +4,7 @@ export interface UserSummary {
   status: string;
   locale: string;
   emailConfirmedAt: string | null;
+  lastLoginAt: string | null;
   createdAt: string;
   roles: string[];
 }

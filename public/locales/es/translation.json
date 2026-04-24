@@ -854,6 +854,8 @@
     "phone": "Teléfono",
     "birthDate": "Fecha de nacimiento",
     "address": "Dirección",
+    "memberSince": "Miembro desde",
+    "lastLogin": "\u00daltimo acceso:",
     "saveError": "Error al guardar perfil. Inténtalo de nuevo.",
     "form": {
       "displayName": "Nombre mostrado",
@@ -919,6 +921,7 @@
       "status": "Estado",
       "roles": "Funciones",
       "createdAt": "Creado el",
+      "lastLogin": "\u00daltimo acceso",
       "locale": "Idioma",
       "searchPlaceholder": "Buscar por correo",
       "empty": "No se encontraron usuarios.",

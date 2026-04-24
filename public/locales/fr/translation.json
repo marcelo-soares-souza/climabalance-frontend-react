@@ -854,6 +854,8 @@
     "phone": "Téléphone",
     "birthDate": "Date de naissance",
     "address": "Adresse",
+    "memberSince": "Membre depuis",
+    "lastLogin": "Derni\u00e8re connexion :",
     "saveError": "Échec de l'enregistrement du profil. Veuillez réessayer.",
     "form": {
       "displayName": "Nom d'affichage",
@@ -918,7 +920,8 @@
       "email": "E-mail",
       "status": "Statut",
       "roles": "Rôles",
-      "createdAt": "Créé le",
+      "createdAt": "Cr\u00e9\u00e9 le",
+      "lastLogin": "Derni\u00e8re connexion",
       "locale": "Langue",
       "searchPlaceholder": "Rechercher par e-mail",
       "empty": "Aucun utilisateur trouvé.",

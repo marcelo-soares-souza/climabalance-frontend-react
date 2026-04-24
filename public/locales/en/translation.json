@@ -855,6 +855,8 @@
     "phone": "Phone",
     "birthDate": "Birth date",
     "address": "Address",
+    "memberSince": "Member since",
+    "lastLogin": "Last login:",
     "saveError": "Failed to save profile. Please try again.",
     "form": {
       "displayName": "Display name",
@@ -920,6 +922,7 @@
       "status": "Status",
       "roles": "Roles",
       "createdAt": "Created at",
+      "lastLogin": "Last login",
       "locale": "Locale",
       "searchPlaceholder": "Search by email",
       "empty": "No users found.",

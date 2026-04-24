@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/Button';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
-import { formatTCO2e, formatDate } from '@/lib/format';
+import { formatTCO2e, formatDate, formatDateTime } from '@/lib/format';
 import { User, Edit, Award, TreePine } from 'lucide-react';
 
 export function ProfilePage() {
@@ -45,8 +45,7 @@ export function ProfilePage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{t('profile.title')}</h1>
+      <div className="flex justify-end">
         <Button variant="outline" size="sm" onClick={() => navigate(editProfilePath)}>
           <Edit className="h-4 w-4 mr-1" /> {t('profile.edit')}
         </Button>
@@ -64,6 +63,8 @@ export function ProfilePage() {
               <div className="flex gap-2 mt-1">
                 {user?.roles?.map(r => <StatusBadge key={r} status={r} />)}
               </div>
+              <p className="text-xs text-text-secondary mt-2">{t('profile.memberSince')} {user?.createdAt ? formatDate(user.createdAt) : '-'}</p>
+              {user?.lastLoginAt && <p className="text-xs text-text-secondary">{t('profile.lastLogin')} {formatDateTime(user.lastLoginAt)}</p>}
             </div>
           </div>
         </CardContent>

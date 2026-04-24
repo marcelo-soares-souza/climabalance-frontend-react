@@ -854,6 +854,8 @@
     "phone": "Telefone",
     "birthDate": "Data de nascimento",
     "address": "Endere\u00e7o",
+    "memberSince": "Membro desde",
+    "lastLogin": "\u00daltimo login:",
     "saveError": "Erro ao salvar perfil. Tente novamente.",
     "form": {
       "displayName": "Nome exibido",
@@ -919,6 +921,7 @@
       "status": "Status",
       "roles": "Fun\u00e7\u00f5es",
       "createdAt": "Criado em",
+      "lastLogin": "\u00daltimo login",
       "locale": "Idioma",
       "searchPlaceholder": "Buscar por e-mail",
       "empty": "Nenhum usu\u00e1rio encontrado.",
