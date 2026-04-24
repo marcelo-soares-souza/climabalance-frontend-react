@@ -57,6 +57,7 @@
       "roleIndividual": "Persona Física",
       "roleLegalEntity": "Persona Jurídica",
       "roleProducer": "Productor",
+      "humanCheckLabel": "Respuesta",
       "humanCheckPlaceholder": "Escribe tu respuesta",
       "humanCheckReload": "Cambiar pregunta",
       "humanCheckLoading": "Cargando pregunta...",
@@ -91,6 +92,23 @@
       "successMessage": "Correo confirmado exitosamente! Ya puedes iniciar sesión.",
       "error": "Error al confirmar correo. Verifica el token.",
       "resendError": "Error al reenviar correo. Inténtalo de nuevo."
+    },
+    "validation": {
+      "generic": {
+        "required": "{{field}} es obligatorio.",
+        "tooShort": "{{field}} es demasiado corto.",
+        "tooLong": "{{field}} es demasiado largo.",
+        "invalid": "{{field}} es inválido."
+      },
+      "email": {
+        "invalidEmail": "Ingresa un correo válido."
+      },
+      "password": {
+        "tooShort": "La contraseña debe tener al menos 8 caracteres."
+      },
+      "passwordConfirm": {
+        "mismatch": "Las contraseñas no coinciden."
+      }
     }
   },
   "nav": {
@@ -835,6 +853,10 @@
     "network": "Error de conexión. Verifica tu internet e inténtalo de nuevo.",
     "request.failed": "No fue posible completar la solicitud. Int\u00e9ntalo de nuevo.",
     "request.invalid_body": "Los datos enviados son inv\u00e1lidos. Revisa los campos e int\u00e9ntalo de nuevo.",
+    "request.validation_failed": "Algunos campos son inv\u00e1lidos. Revisa los datos enviados e int\u00e9ntalo de nuevo.",
+    "request.invalid_content_type": "Formato de env\u00edo inv\u00e1lido. Int\u00e9ntalo de nuevo.",
+    "request.payload_too_large": "El archivo o contenido enviado es demasiado grande.",
+    "request.rate_limited": "Demasiados intentos en poco tiempo. Espera un momento e int\u00e9ntalo de nuevo.",
     "auth.login.error": "No fue posible iniciar sesi\u00f3n. Int\u00e9ntalo de nuevo.",
     "auth.invalid_credentials": "Correo o contrase\u00f1a inv\u00e1lidos.",
     "auth.email_not_confirmed": "Tu correo a\u00fan no ha sido confirmado.",
@@ -855,6 +877,7 @@
     "auth.confirmEmail.error": "Error al confirmar correo. Verifica el token.",
     "auth.confirmEmail.resendError": "Error al reenviar correo. Inténtalo de nuevo.",
     "user.email_already_exists": "Ya existe una cuenta registrada con este correo.",
+    "database.error": "Ocurri\u00f3 un error interno al procesar tu solicitud.",
     "payment.error": "Error al procesar pago. Inténtalo de nuevo.",
     "compensation.error": "Error al registrar compensación. Inténtalo de nuevo.",
     "footprint.error.createFailed": "Error al crear cálculo. Inténtalo de nuevo.",

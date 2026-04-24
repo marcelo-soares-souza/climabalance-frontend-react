@@ -8,6 +8,7 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { authService } from '@/services/auth';
 import { CheckCircle } from 'lucide-react';
 import { ApiError } from '@/lib/api-client';
+import { getAuthFieldErrors } from './auth-form-errors';
 
 export function PasswordResetConfirmPage() {
   const { t } = useTranslation();
@@ -18,13 +19,15 @@ export function PasswordResetConfirmPage() {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
     if (password !== passwordConfirm) {
-      setError('auth.register.passwordMismatch');
+      setFieldErrors({ password_confirm: t('errors.auth.register.passwordMismatch') });
       return;
     }
     setLoading(true);
@@ -32,7 +35,12 @@ export function PasswordResetConfirmPage() {
       await authService.resetPassword(token, password, passwordConfirm);
       setSuccess(true);
     } catch (err) {
-      setError(err instanceof ApiError ? err.messageKey : 'auth.passwordReset.confirmError');
+      const nextFieldErrors = getAuthFieldErrors(err, t);
+      if (Object.keys(nextFieldErrors).length > 0) {
+        setFieldErrors(nextFieldErrors);
+      } else {
+        setError(err instanceof ApiError ? err.messageKey : 'auth.passwordReset.confirmError');
+      }
     } finally {
       setLoading(false);
     }
@@ -56,9 +64,9 @@ export function PasswordResetConfirmPage() {
       <h1 className="text-2xl font-bold text-center mb-6">{t('auth.passwordReset.confirmTitle')}</h1>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Input id="token" label={t('auth.confirmEmail.token')} value={token} onChange={(e) => setToken(e.target.value)} required />
-        <Input id="password" type="password" label={t('auth.newPassword')} value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <Input id="passwordConfirm" type="password" label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required />
+        <Input id="token" label={t('auth.confirmEmail.token')} value={token} onChange={(e) => { setToken(e.target.value); setFieldErrors((current) => ({ ...current, token: '' })); }} error={fieldErrors.token} required />
+        <Input id="password" type="password" label={t('auth.newPassword')} value={password} onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }} error={fieldErrors.password} required />
+        <Input id="passwordConfirm" type="password" label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => { setPasswordConfirm(e.target.value); setFieldErrors((current) => ({ ...current, password_confirm: '' })); }} error={fieldErrors.password_confirm} required />
         <Button type="submit" className="w-full" loading={loading}>{t('auth.passwordReset.confirmSubmit')}</Button>
       </form>
       <Link to="/login" className="block text-center mt-4 text-sm text-primary hover:underline">{t('auth.passwordReset.backToLogin')}</Link>

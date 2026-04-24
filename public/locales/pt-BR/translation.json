@@ -57,6 +57,7 @@
       "roleIndividual": "Pessoa F\u00edsica",
       "roleLegalEntity": "Pessoa Jur\u00eddica",
       "roleProducer": "Produtor",
+      "humanCheckLabel": "Resposta",
       "humanCheckPlaceholder": "Digite sua resposta",
       "humanCheckReload": "Trocar pergunta",
       "humanCheckLoading": "Carregando pergunta...",
@@ -91,6 +92,23 @@
       "successMessage": "E-mail confirmado com sucesso! Voc\u00ea j\u00e1 pode fazer login.",
       "error": "Erro ao confirmar e-mail. Verifique o token.",
       "resendError": "Erro ao reenviar e-mail. Tente novamente."
+    },
+    "validation": {
+      "generic": {
+        "required": "{{field}} \u00e9 obrigat\u00f3rio.",
+        "tooShort": "{{field}} est\u00e1 muito curto.",
+        "tooLong": "{{field}} est\u00e1 muito longo.",
+        "invalid": "{{field}} \u00e9 inv\u00e1lido."
+      },
+      "email": {
+        "invalidEmail": "Informe um e-mail v\u00e1lido."
+      },
+      "password": {
+        "tooShort": "A senha deve ter pelo menos 8 caracteres."
+      },
+      "passwordConfirm": {
+        "mismatch": "As senhas informadas n\u00e3o coincidem."
+      }
     }
   },
   "nav": {
@@ -835,6 +853,10 @@
     "network": "Erro de conex\u00e3o. Verifique sua internet e tente novamente.",
     "request.failed": "N\u00e3o foi poss\u00edvel concluir a solicita\u00e7\u00e3o. Tente novamente.",
     "request.invalid_body": "Os dados enviados s\u00e3o inv\u00e1lidos. Revise os campos e tente novamente.",
+    "request.validation_failed": "Alguns campos s\u00e3o inv\u00e1lidos. Revise os dados informados e tente novamente.",
+    "request.invalid_content_type": "Formato de envio inv\u00e1lido. Tente novamente.",
+    "request.payload_too_large": "O arquivo ou conte\u00fado enviado \u00e9 grande demais.",
+    "request.rate_limited": "Muitas tentativas em pouco tempo. Aguarde um instante e tente novamente.",
     "auth.login.error": "N\u00e3o foi poss\u00edvel entrar. Tente novamente.",
     "auth.invalid_credentials": "E-mail ou senha inv\u00e1lidos.",
     "auth.email_not_confirmed": "Seu e-mail ainda n\u00e3o foi confirmado.",
@@ -855,6 +877,7 @@
     "auth.confirmEmail.error": "Erro ao confirmar e-mail. Verifique o token.",
     "auth.confirmEmail.resendError": "Erro ao reenviar e-mail. Tente novamente.",
     "user.email_already_exists": "J\u00e1 existe uma conta cadastrada com este e-mail.",
+    "database.error": "Ocorreu um erro interno ao processar sua solicita\u00e7\u00e3o.",
     "payment.error": "Erro ao processar pagamento. Tente novamente.",
     "compensation.error": "Erro ao registrar compensa\u00e7\u00e3o. Tente novamente.",
     "footprint.error.createFailed": "Erro ao criar c\u00e1lculo. Tente novamente.",

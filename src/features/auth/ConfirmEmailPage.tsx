@@ -8,6 +8,7 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { authService } from '@/services/auth';
 import { CheckCircle } from 'lucide-react';
 import { ApiError } from '@/lib/api-client';
+import { getAuthFieldErrors } from './auth-form-errors';
 
 export function ConfirmEmailPage() {
   const { t } = useTranslation();
@@ -17,6 +18,7 @@ export function ConfirmEmailPage() {
   const [token, setToken] = useState(searchParams.get('token') || '');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
   const [success, setSuccess] = useState(false);
   const [resendEmail, setResendEmail] = useState(emailFromState);
   const [resent, setResent] = useState(false);
@@ -24,12 +26,18 @@ export function ConfirmEmailPage() {
   const handleConfirm = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
     setLoading(true);
     try {
       await authService.confirmEmail(token);
       setSuccess(true);
     } catch (err) {
-      setError(err instanceof ApiError ? err.messageKey : 'auth.confirmEmail.error');
+      const nextFieldErrors = getAuthFieldErrors(err, t);
+      if (Object.keys(nextFieldErrors).length > 0) {
+        setFieldErrors(nextFieldErrors);
+      } else {
+        setError(err instanceof ApiError ? err.messageKey : 'auth.confirmEmail.error');
+      }
     } finally {
       setLoading(false);
     }
@@ -41,7 +49,12 @@ export function ConfirmEmailPage() {
       await authService.resendConfirmationEmail(resendEmail);
       setResent(true);
     } catch (err) {
-      setError(err instanceof ApiError ? err.messageKey : 'auth.confirmEmail.resendError');
+      const nextFieldErrors = getAuthFieldErrors(err, t);
+      if (Object.keys(nextFieldErrors).length > 0) {
+        setFieldErrors(nextFieldErrors);
+      } else {
+        setError(err instanceof ApiError ? err.messageKey : 'auth.confirmEmail.resendError');
+      }
     }
   };
 
@@ -64,13 +77,13 @@ export function ConfirmEmailPage() {
       <p className="text-text-secondary text-center mb-6">{t('auth.confirmEmail.description')}</p>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
       <form onSubmit={handleConfirm} className="space-y-4">
-        <Input id="token" label={t('auth.confirmEmail.token')} value={token} onChange={(e) => setToken(e.target.value)} required autoFocus placeholder={t('auth.confirmEmail.tokenPlaceholder')} />
+        <Input id="token" label={t('auth.confirmEmail.token')} value={token} onChange={(e) => { setToken(e.target.value); setFieldErrors((current) => ({ ...current, token: '' })); }} error={fieldErrors.token} required autoFocus placeholder={t('auth.confirmEmail.tokenPlaceholder')} />
         <Button type="submit" className="w-full" loading={loading}>{t('auth.confirmEmail.submit')}</Button>
       </form>
       <div className="mt-6 border-t border-gray-100 pt-4">
         <p className="text-sm text-text-secondary mb-2">{t('auth.confirmEmail.noToken')}</p>
         <div className="flex gap-2">
-          <Input id="resendEmail" type="email" value={resendEmail} onChange={(e) => setResendEmail(e.target.value)} placeholder={t('auth.email')} className="text-sm" />
+          <Input id="resendEmail" type="email" value={resendEmail} onChange={(e) => { setResendEmail(e.target.value); setFieldErrors((current) => ({ ...current, email: '' })); }} error={fieldErrors.email} placeholder={t('auth.email')} className="text-sm" />
           <Button variant="outline" size="sm" onClick={handleResend} disabled={resent}>{resent ? t('auth.confirmEmail.resent') : t('auth.confirmEmail.resend')}</Button>
         </div>
       </div>

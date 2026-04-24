@@ -57,6 +57,7 @@
       "roleIndividual": "Particulier",
       "roleLegalEntity": "Personne morale",
       "roleProducer": "Producteur",
+      "humanCheckLabel": "Réponse",
       "humanCheckPlaceholder": "Saisissez votre réponse",
       "humanCheckReload": "Changer de question",
       "humanCheckLoading": "Chargement de la question...",
@@ -91,6 +92,23 @@
       "successMessage": "E-mail confirmé avec succès ! Vous pouvez maintenant vous connecter.",
       "error": "Échec de la confirmation de l'e-mail. Vérifiez le jeton.",
       "resendError": "Échec du renvoi de l'e-mail. Veuillez réessayer."
+    },
+    "validation": {
+      "generic": {
+        "required": "{{field}} est obligatoire.",
+        "tooShort": "{{field}} est trop court.",
+        "tooLong": "{{field}} est trop long.",
+        "invalid": "{{field}} est invalide."
+      },
+      "email": {
+        "invalidEmail": "Saisissez une adresse e-mail valide."
+      },
+      "password": {
+        "tooShort": "Le mot de passe doit contenir au moins 8 caractères."
+      },
+      "passwordConfirm": {
+        "mismatch": "Les mots de passe ne correspondent pas."
+      }
     }
   },
   "nav": {
@@ -835,6 +853,10 @@
     "network": "Erreur de connexion. Vérifiez votre connexion et réessayez.",
     "request.failed": "Impossible de finaliser la requête. Veuillez réessayer.",
     "request.invalid_body": "Les données envoyées sont invalides. Vérifiez les champs et réessayez.",
+    "request.validation_failed": "Certains champs sont invalides. Vérifiez les données envoyées et réessayez.",
+    "request.invalid_content_type": "Format d'envoi invalide. Veuillez réessayer.",
+    "request.payload_too_large": "Le fichier ou le contenu envoyé est trop volumineux.",
+    "request.rate_limited": "Trop de tentatives en peu de temps. Veuillez patienter et réessayer.",
     "auth.login.error": "Impossible de se connecter. Veuillez réessayer.",
     "auth.invalid_credentials": "E-mail ou mot de passe invalide.",
     "auth.email_not_confirmed": "Votre e-mail n'a pas encore été confirmé.",
@@ -855,6 +877,7 @@
     "auth.confirmEmail.error": "Échec de la confirmation de l'e-mail. Vérifiez le jeton.",
     "auth.confirmEmail.resendError": "Échec du renvoi de l'e-mail. Veuillez réessayer.",
     "user.email_already_exists": "Un compte existe déjà avec cet e-mail.",
+    "database.error": "Une erreur interne est survenue pendant le traitement de votre demande.",
     "payment.error": "Échec du paiement. Veuillez réessayer.",
     "compensation.error": "Échec de l'enregistrement de la compensation. Veuillez réessayer.",
     "footprint.error.createFailed": "Échec de la création du calcul. Veuillez réessayer.",

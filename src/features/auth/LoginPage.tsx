@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { ApiError } from '@/lib/api-client';
+import { getAuthFieldErrors } from './auth-form-errors';
 
 export function LoginPage() {
   const { t } = useTranslation();
@@ -16,17 +17,24 @@ export function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const from = (location.state as { from?: string })?.from || '/';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
     try {
       await login(email, password);
       navigate(from, { replace: true });
     } catch (err) {
       if (err instanceof ApiError) {
+        const nextFieldErrors = getAuthFieldErrors(err, t);
+        if (Object.keys(nextFieldErrors).length > 0) {
+          setFieldErrors(nextFieldErrors);
+          return;
+        }
         setError(err.messageKey);
       } else {
         setError('auth.login.error');
@@ -44,8 +52,9 @@ export function LoginPage() {
           type="email"
           label={t('auth.email')}
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => { setEmail(e.target.value); setFieldErrors((current) => ({ ...current, email: '' })); }}
           placeholder={t('auth.emailPlaceholder')}
+          error={fieldErrors.email}
           required
           autoFocus
         />
@@ -54,8 +63,9 @@ export function LoginPage() {
           type="password"
           label={t('auth.password')}
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }}
           placeholder={t('auth.passwordPlaceholder')}
+          error={fieldErrors.password}
           required
         />
         <Button type="submit" className="w-full" loading={isLoading}>

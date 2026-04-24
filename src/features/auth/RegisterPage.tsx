@@ -10,6 +10,7 @@ import { authService } from '@/services/auth';
 import { useLocale } from '@/hooks/use-locale';
 import { ApiError } from '@/lib/api-client';
 import type { HumanCheckChallenge } from '@/types/auth';
+import { getAuthFieldErrors } from './auth-form-errors';
 
 export function RegisterPage() {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ export function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [loadingHumanCheck, setLoadingHumanCheck] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const roleOptions = [
     { value: 'individual', label: t('auth.register.roleIndividual') },
@@ -37,6 +39,7 @@ export function RegisterPage() {
       const challenge = await authService.getHumanCheck(locale);
       setHumanCheck(challenge);
       setHumanAnswer('');
+      setFieldErrors((current) => ({ ...current, human_answer: '' }));
     } catch {
       setError('auth.register.humanCheckLoadError');
     } finally {
@@ -51,8 +54,9 @@ export function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setFieldErrors({});
     if (password !== passwordConfirm) {
-      setError('auth.register.passwordMismatch');
+      setFieldErrors({ password_confirm: t('errors.auth.register.passwordMismatch') });
       return;
     }
     if (!humanCheck?.challenge_id) {
@@ -72,8 +76,14 @@ export function RegisterPage() {
       });
       navigate('/confirm-email', { state: { email } });
     } catch (err) {
-      setError(err instanceof ApiError ? err.messageKey : 'auth.register.error');
+      const nextFieldErrors = getAuthFieldErrors(err, t);
+      if (Object.keys(nextFieldErrors).length > 0) {
+        setFieldErrors(nextFieldErrors);
+      } else {
+        setError(err instanceof ApiError ? err.messageKey : 'auth.register.error');
+      }
       if (err instanceof ApiError && err.messageKey === 'auth.register.humanCheckInvalid') {
+        setFieldErrors((current) => ({ ...current, human_answer: t('errors.auth.register.humanCheckInvalid') }));
         loadHumanCheck();
       }
     } finally {
@@ -86,18 +96,19 @@ export function RegisterPage() {
       <h1 className="text-2xl font-bold text-center mb-6">{t('auth.register.title')}</h1>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Input id="email" type="email" label={t('auth.email')} value={email} onChange={(e) => setEmail(e.target.value)} required autoFocus />
-        <Input id="password" type="password" label={t('auth.password')} value={password} onChange={(e) => setPassword(e.target.value)} required />
-        <Input id="passwordConfirm" type="password" label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required />
+        <Input id="email" type="email" label={t('auth.email')} value={email} onChange={(e) => { setEmail(e.target.value); setFieldErrors((current) => ({ ...current, email: '' })); }} error={fieldErrors.email} required autoFocus />
+        <Input id="password" type="password" label={t('auth.password')} value={password} onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }} error={fieldErrors.password} required />
+        <Input id="passwordConfirm" type="password" label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => { setPasswordConfirm(e.target.value); setFieldErrors((current) => ({ ...current, password_confirm: '' })); }} error={fieldErrors.password_confirm} required />
         <Select id="roleKey" label={t('auth.register.role')} options={roleOptions} value={roleKey} onChange={(e) => setRoleKey(e.target.value)} />
         <Input
           id="humanAnswer"
           label={humanCheck?.question ?? t('auth.register.humanCheckLoading')}
           value={humanAnswer}
-          onChange={(e) => setHumanAnswer(e.target.value)}
+          onChange={(e) => { setHumanAnswer(e.target.value); setFieldErrors((current) => ({ ...current, human_answer: '' })); }}
           required
           disabled={loadingHumanCheck || !humanCheck}
           placeholder={t('auth.register.humanCheckPlaceholder')}
+          error={fieldErrors.human_answer}
         />
         <Button type="button" variant="outline" className="w-full" onClick={loadHumanCheck} disabled={loadingHumanCheck}>
           {loadingHumanCheck ? t('auth.register.humanCheckLoading') : t('auth.register.humanCheckReload')}

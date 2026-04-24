@@ -57,6 +57,7 @@
       "roleIndividual": "Individual",
       "roleLegalEntity": "Legal Entity",
       "roleProducer": "Producer",
+      "humanCheckLabel": "Answer",
       "humanCheckPlaceholder": "Type your answer",
       "humanCheckReload": "Change question",
       "humanCheckLoading": "Loading question...",
@@ -91,6 +92,23 @@
       "successMessage": "Email confirmed successfully! You can now sign in.",
       "error": "Failed to confirm email. Check the token.",
       "resendError": "Failed to resend email. Please try again."
+    },
+    "validation": {
+      "generic": {
+        "required": "{{field}} is required.",
+        "tooShort": "{{field}} is too short.",
+        "tooLong": "{{field}} is too long.",
+        "invalid": "{{field}} is invalid."
+      },
+      "email": {
+        "invalidEmail": "Enter a valid email address."
+      },
+      "password": {
+        "tooShort": "Password must be at least 8 characters long."
+      },
+      "passwordConfirm": {
+        "mismatch": "The passwords do not match."
+      }
     }
   },
   "nav": {
@@ -836,6 +854,10 @@
     "network": "Connection error. Check your internet and try again.",
     "request.failed": "Unable to complete the request. Please try again.",
     "request.invalid_body": "The submitted data is invalid. Review the fields and try again.",
+    "request.validation_failed": "Some fields are invalid. Review the submitted data and try again.",
+    "request.invalid_content_type": "Invalid request format. Please try again.",
+    "request.payload_too_large": "The uploaded file or content is too large.",
+    "request.rate_limited": "Too many attempts in a short time. Please wait and try again.",
     "auth.login.error": "Unable to sign in. Please try again.",
     "auth.invalid_credentials": "Invalid email or password.",
     "auth.email_not_confirmed": "Your email has not been confirmed yet.",
@@ -856,6 +878,7 @@
     "auth.confirmEmail.error": "Failed to confirm email. Check the token.",
     "auth.confirmEmail.resendError": "Failed to resend email. Please try again.",
     "user.email_already_exists": "An account with this email already exists.",
+    "database.error": "An internal error occurred while processing your request.",
     "payment.error": "Payment failed. Please try again.",
     "compensation.error": "Failed to register compensation. Please try again.",
     "footprint.error.createFailed": "Failed to create calculation. Please try again.",
