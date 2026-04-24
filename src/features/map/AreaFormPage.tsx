@@ -79,8 +79,6 @@ export function AreaFormPage() {
   }>>({});
   const [error, setError] = useState<string | null>(null);
   const [ipBasedCenter, setIpBasedCenter] = useState<[number, number] | null>(null);
-  const [cityOptions, setCityOptions] = useState<string[]>([]);
-  const [isCitiesLoading, setIsCitiesLoading] = useState(false);
 
   const { data: existing, isLoading } = useQuery({
     queryKey: ['areas', areaId],
@@ -95,7 +93,7 @@ export function AreaFormPage() {
     longitude: form.longitude ?? (existing ? String(existing.longitude) : ''),
     status: form.status ?? existing?.status ?? 'draft',
     biome: form.biome ?? existing?.biome ?? '',
-    state: form.state ?? existing?.state ?? '',
+    state: form.state ?? (existing?.state ? (findBrazilStateCode(existing.state) || existing.state) : ''),
     city: form.city ?? existing?.city ?? '',
     total_capacity_t_co2e: form.total_capacity_t_co2e ?? (existing?.totalCapacityTCO2e ? String(existing.totalCapacityTCO2e) : ''),
     t_co2e_per_tree_per_year: form.t_co2e_per_tree_per_year ?? (existing?.tCO2ePerTreePerYear ? String(existing.tCO2ePerTreePerYear) : ''),
@@ -123,6 +121,13 @@ export function AreaFormPage() {
     [t]
   );
   const normalizedStateCode = findBrazilStateCode(formValues.state);
+
+  const { data: cityOptions, isLoading: isCitiesLoading } = useQuery({
+    queryKey: ['cities', normalizedStateCode],
+    queryFn: ({ signal }) => getBrazilCitiesByState(normalizedStateCode!, signal),
+    enabled: !!normalizedStateCode,
+    initialData: [],
+  });
 
   const citySelectOptions = useMemo(() => {
     if (!normalizedStateCode) {
@@ -217,39 +222,6 @@ export function AreaFormPage() {
   const hasSelectedPosition = selectedPosition !== null;
   const hasManualCoordinates =
     (form.latitude?.trim().length ?? 0) > 0 || (form.longitude?.trim().length ?? 0) > 0;
-
-  useEffect(() => {
-    if (!existing?.state || form.state !== undefined) return;
-    const existingStateCode = findBrazilStateCode(existing.state);
-    if (!existingStateCode) return;
-    setForm((prev) => ({ ...prev, state: existingStateCode }));
-  }, [existing?.state, form.state]);
-
-  useEffect(() => {
-    if (!normalizedStateCode) {
-      setCityOptions([]);
-      return;
-    }
-
-    let active = true;
-    const controller = new AbortController();
-    setIsCitiesLoading(true);
-
-    getBrazilCitiesByState(normalizedStateCode, controller.signal)
-      .then((cities) => {
-        if (!active) return;
-        setCityOptions(cities);
-      })
-      .finally(() => {
-        if (!active) return;
-        setIsCitiesLoading(false);
-      });
-
-    return () => {
-      active = false;
-      controller.abort();
-    };
-  }, [normalizedStateCode]);
 
   useEffect(() => {
     if (isEdit || hasSelectedPosition || hasManualCoordinates) return;

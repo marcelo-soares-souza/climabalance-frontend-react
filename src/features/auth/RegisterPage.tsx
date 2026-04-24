@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from '@tanstack/react-query';
 import { AuthLayout } from './components/AuthLayout';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -10,7 +11,6 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { authService } from '@/services/auth';
 import { useLocale } from '@/hooks/use-locale';
 import { ApiError } from '@/lib/api-client';
-import type { HumanCheckChallenge } from '@/types/auth';
 import { getAuthFieldErrors } from './auth-form-errors';
 
 export function RegisterPage() {
@@ -22,9 +22,7 @@ export function RegisterPage() {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [roleKey, setRoleKey] = useState('');
   const [humanAnswer, setHumanAnswer] = useState('');
-  const [humanCheck, setHumanCheck] = useState<HumanCheckChallenge | null>(null);
   const [loading, setLoading] = useState(false);
-  const [loadingHumanCheck, setLoadingHumanCheck] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
@@ -34,23 +32,17 @@ export function RegisterPage() {
     { value: 'producer', label: t('auth.register.roleProducer') },
   ];
 
-  const loadHumanCheck = async () => {
-    setLoadingHumanCheck(true);
-    try {
-      const challenge = await authService.getHumanCheck(locale);
-      setHumanCheck(challenge);
-      setHumanAnswer('');
-      setFieldErrors((current) => ({ ...current, human_answer: '' }));
-    } catch {
-      setError('auth.register.humanCheckLoadError');
-    } finally {
-      setLoadingHumanCheck(false);
-    }
-  };
+  const { data: humanCheck, isLoading: loadingHumanCheck, refetch: refetchHumanCheck } = useQuery({
+    queryKey: ['human-check', locale],
+    queryFn: () => authService.getHumanCheck(locale),
+    enabled: !!locale,
+  });
 
-  useEffect(() => {
-    loadHumanCheck();
-  }, [locale]);
+  const reloadHumanCheck = () => {
+    setHumanAnswer('');
+    setFieldErrors((current) => ({ ...current, human_answer: '' }));
+    refetchHumanCheck();
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -89,7 +81,7 @@ export function RegisterPage() {
       }
       if (err instanceof ApiError && err.messageKey === 'auth.register.humanCheckInvalid') {
         setFieldErrors((current) => ({ ...current, human_answer: t('errors.auth.register.humanCheckInvalid') }));
-        loadHumanCheck();
+        reloadHumanCheck();
       }
     } finally {
       setLoading(false);
@@ -142,7 +134,7 @@ export function RegisterPage() {
           placeholder={t('auth.register.humanCheckPlaceholder')}
           error={fieldErrors.human_answer}
         />
-        <Button type="button" variant="outline" className="w-full" onClick={loadHumanCheck} disabled={loadingHumanCheck}>
+        <Button type="button" variant="outline" className="w-full" onClick={reloadHumanCheck} disabled={loadingHumanCheck}>
           {loadingHumanCheck ? t('auth.register.humanCheckLoading') : t('auth.register.humanCheckReload')}
         </Button>
         <Button type="submit" className="w-full" loading={loading}>{t('auth.register.submit')}</Button>

@@ -17,6 +17,11 @@ type SortConfig = {
   order: 'asc' | 'desc';
 };
 
+function SortIcon({ sort, column }: { sort: SortConfig; column: string }) {
+  if (sort.column !== column) return <ArrowUpDown className="h-3 w-3 text-text-secondary" />;
+  return sort.order === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />;
+}
+
 export function AdminUsersPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -34,11 +39,6 @@ export function AdminUsersPage() {
       column,
       order: prev.column === column ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc',
     }));
-  };
-
-  const SortIcon = ({ column }: { column: string }) => {
-    if (sort.column !== column) return <ArrowUpDown className="h-3 w-3 text-text-secondary" />;
-    return sort.order === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />;
   };
 
   return (
@@ -64,17 +64,17 @@ export function AdminUsersPage() {
             <table className="w-full text-sm">
               <thead><tr className="border-b border-gray-200 bg-gray-50">
                 <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('email')}>
-                  <div className="flex items-center gap-1">{t('admin.users.email')} <SortIcon column="email" /></div>
+                  <div className="flex items-center gap-1">{t('admin.users.email')} <SortIcon sort={sort} column="email" /></div>
                 </th>
                 <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('status')}>
-                  <div className="flex items-center gap-1">{t('admin.users.status')} <SortIcon column="status" /></div>
+                  <div className="flex items-center gap-1">{t('admin.users.status')} <SortIcon sort={sort} column="status" /></div>
                 </th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.users.roles')}</th>
                 <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('created_at')}>
-                  <div className="flex items-center gap-1">{t('admin.users.createdAt')} <SortIcon column="created_at" /></div>
+                  <div className="flex items-center gap-1">{t('admin.users.createdAt')} <SortIcon sort={sort} column="created_at" /></div>
                 </th>
                 <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('last_login_at')}>
-                  <div className="flex items-center gap-1">{t('admin.users.lastLogin')} <SortIcon column="last_login_at" /></div>
+                  <div className="flex items-center gap-1">{t('admin.users.lastLogin')} <SortIcon sort={sort} column="last_login_at" /></div>
                 </th>
                 <th className="px-4 py-3"></th>
               </tr></thead>
