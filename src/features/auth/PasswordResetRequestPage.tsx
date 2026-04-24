@@ -8,6 +8,7 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { authService } from '@/services/auth';
 import { useLocale } from '@/hooks/use-locale';
 import { Mail } from 'lucide-react';
+import { ApiError } from '@/lib/api-client';
 
 export function PasswordResetRequestPage() {
   const { t } = useTranslation();
@@ -24,8 +25,8 @@ export function PasswordResetRequestPage() {
     try {
       await authService.requestPasswordReset(email, locale);
       setSent(true);
-    } catch {
-      setError('auth.passwordReset.requestError');
+    } catch (err) {
+      setError(err instanceof ApiError ? err.messageKey : 'auth.passwordReset.requestError');
     } finally {
       setLoading(false);
     }

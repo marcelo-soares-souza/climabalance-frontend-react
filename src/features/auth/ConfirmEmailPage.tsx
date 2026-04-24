@@ -40,8 +40,8 @@ export function ConfirmEmailPage() {
     try {
       await authService.resendConfirmationEmail(resendEmail);
       setResent(true);
-    } catch {
-      setError('auth.confirmEmail.resendError');
+    } catch (err) {
+      setError(err instanceof ApiError ? err.messageKey : 'auth.confirmEmail.resendError');
     }
   };
 

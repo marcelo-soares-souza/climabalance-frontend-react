@@ -16,7 +16,9 @@ export function ErrorBanner({ message, messageKey, onDismiss, className }: Error
 
   if (dismissed) return null;
 
-  const displayMessage = messageKey ? t(`errors.${messageKey}`, messageKey) : message;
+  const displayMessage = messageKey
+    ? t(`errors.${messageKey}`, { defaultValue: t(messageKey, { defaultValue: messageKey }) })
+    : message;
 
   return (
     <div className={cn('bg-red-50 border border-red-200 rounded-[var(--radius-card)] p-4 flex items-start gap-3', className)}>
