@@ -267,7 +267,7 @@ export function AreaDetailPage() {
             <div className="space-y-2">
               {contributions.map((c) => (
                 <div key={c.id} className="flex justify-between py-2 border-b border-gray-50 last:border-0 text-sm">
-                  <span>{c.userEmail}</span>
+                  <span>{c.userEmail || t('area.anonymousContributor')}</span>
                   <span className="font-medium">{formatTCO2e(c.totalTCO2e)} ({c.treesCount} {t('area.trees')})</span>
                 </div>
               ))}

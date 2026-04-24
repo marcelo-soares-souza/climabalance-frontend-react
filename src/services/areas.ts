@@ -151,7 +151,7 @@ function normalizeAreaContribution(raw: RawAreaContribution, areaId: string): Ar
     id: asString(raw.id ?? raw.compensation_id),
     areaId: asString(raw.areaId ?? raw.area_id, areaId),
     userId: asString(raw.user_id ?? raw.supporter_user_id),
-    userEmail: asString(raw.user_email ?? raw.supporter_display_name ?? raw.supporter_user_id),
+    userEmail: asString(raw.supporter_display_name ?? raw.user_email),
     treesCount: asNumber(raw.trees_count),
     totalTCO2e: asNumber(raw.total_t_co2e),
     totalAmount: asNumber(raw.total_amount),

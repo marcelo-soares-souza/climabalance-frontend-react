@@ -477,6 +477,7 @@
     "usage": "Usage",
     "contributions": "Tree contributions",
     "contributionsEmpty": "No paid tree contributions for this area yet.",
+    "anonymousContributor": "Supporter",
     "ownerEmail": "Responsible (email)",
     "media": "Area media",
     "mediaEmpty": "No photos or videos uploaded yet.",
