@@ -117,8 +117,10 @@
     "welcome": {
       "title": "Bem-vindo ao ClimaBalance",
       "description": "Plataforma de certifica\u00e7\u00e3o clim\u00e1tica. Conectamos a compensa\u00e7\u00e3o de carbono ao apoio direto a propriedades rurais auditadas.",
+      "inDevelopment": "Projeto em desenvolvimento",
       "getStarted": "Come\u00e7ar",
       "exploreMap": "Explorar Mapa",
+      "learnMore": "Sobre o projeto",
       "step1Title": "Calcule sua Pegada",
       "step1Description": "Responda perguntas simples sobre seu consumo para calcular suas emiss\u00f5es de CO\u2082.",
       "step2Title": "Compense suas Emiss\u00f5es",

@@ -117,8 +117,10 @@
     "welcome": {
       "title": "Bienvenue sur ClimaBalance",
       "description": "Plateforme de certification climatique. Nous relions la compensation carbone au soutien direct de propriétés rurales auditées.",
+      "inDevelopment": "Projet en développement",
       "getStarted": "Commencer",
       "exploreMap": "Explorer la Carte",
+      "learnMore": "À propos du projet",
       "step1Title": "Calculez Votre Empreinte",
       "step1Description": "Répondez à des questions simples sur votre consommation pour calculer vos émissions de CO2.",
       "step2Title": "Compensez Vos Émissions",

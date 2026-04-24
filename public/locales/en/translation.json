@@ -117,8 +117,10 @@
     "welcome": {
       "title": "Welcome to ClimaBalance",
       "description": "Climate certification platform. We connect carbon offsetting to direct support for audited rural properties.",
+      "inDevelopment": "Project in development",
       "getStarted": "Get Started",
       "exploreMap": "Explore Map",
+      "learnMore": "About the project",
       "step1Title": "Calculate Your Footprint",
       "step1Description": "Answer simple questions about your consumption to calculate your CO2 emissions.",
       "step2Title": "Offset Your Emissions",
