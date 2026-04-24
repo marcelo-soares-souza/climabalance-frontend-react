@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Building2, Leaf, Sprout, ArrowRight } from 'lucide-react';
@@ -10,7 +11,7 @@ type AccountTab = 'individual' | 'legalEntity' | 'producer';
 export function HowToUsePlatformPage() {
   const { t } = useTranslation();
 
-  const tabMeta: Array<{ key: AccountTab; icon: JSX.Element }> = [
+  const tabMeta: Array<{ key: AccountTab; icon: ReactNode }> = [
     { key: 'individual', icon: <Leaf className="h-5 w-5 text-primary" /> },
     { key: 'legalEntity', icon: <Building2 className="h-5 w-5 text-accent" /> },
     { key: 'producer', icon: <Sprout className="h-5 w-5 text-emerald-700" /> },
