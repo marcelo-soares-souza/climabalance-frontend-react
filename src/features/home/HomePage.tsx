@@ -47,6 +47,7 @@ function UnauthenticatedHome() {
           {t("home.welcome.inDevelopment")}
           <InfoTooltip
             className="ml-2"
+            buttonClassName="text-white/85 hover:bg-white/15 hover:text-white focus:ring-white/40"
             ariaLabel={t("tooltips.home.inDevelopmentAria")}
             panelClassName="left-auto right-0"
             content={<p>{t("tooltips.home.inDevelopment")}</p>}
@@ -73,6 +74,14 @@ function UnauthenticatedHome() {
             className="border-white/40 text-white hover:bg-white/10"
           >
             {t("home.welcome.exploreMap")}
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            onClick={() => navigate("/how-to-use")}
+            className="border-white/40 text-white hover:bg-white/10"
+          >
+            {t("home.welcome.howToUse")}
           </Button>
           <Button
             size="lg"

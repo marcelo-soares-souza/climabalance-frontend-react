@@ -6,16 +6,26 @@ interface InfoTooltipProps {
   content: ReactNode;
   ariaLabel: string;
   className?: string;
+  buttonClassName?: string;
   panelClassName?: string;
 }
 
-export function InfoTooltip({ content, ariaLabel, className, panelClassName }: InfoTooltipProps) {
+export function InfoTooltip({
+  content,
+  ariaLabel,
+  className,
+  buttonClassName,
+  panelClassName,
+}: InfoTooltipProps) {
   return (
     <div className={cn('group relative inline-flex', className)}>
       <button
         type="button"
         aria-label={ariaLabel}
-        className="inline-flex h-5 w-5 items-center justify-center rounded-full text-text-secondary transition-colors hover:bg-primary-50 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
+        className={cn(
+          'inline-flex h-5 w-5 items-center justify-center rounded-full text-text-secondary transition-colors hover:bg-primary-50 hover:text-primary focus:outline-none focus:ring-2 focus:ring-primary/40',
+          buttonClassName,
+        )}
       >
         <CircleHelp className="h-4 w-4" />
       </button>

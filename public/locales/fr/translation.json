@@ -52,6 +52,8 @@
       "subtitle": "Inscrivez-vous pour accéder à la plateforme",
       "submit": "Créer un compte",
       "hasAccount": "Vous avez déjà un compte ?",
+      "needHelpChoosingRole": "Vous hésitez encore sur le type de compte ?",
+      "howToUseLink": "Voir comment utiliser la plateforme",
       "login": "Se connecter",
       "role": "Type de compte",
       "roleHelpAria": "Aide sur les types de compte",
@@ -120,6 +122,7 @@
     "home": "Accueil",
     "map": "Carte des Zones",
     "about": "À Propos du Projet",
+    "howToUse": "Comment utiliser",
     "privacyPolicy": "Politique de Confidentialité",
     "calculator": "Calculateur d'Empreinte",
     "history": "Historique des Calculs",
@@ -149,6 +152,7 @@
       "inDevelopment": "Projet en développement",
       "getStarted": "Commencer",
       "exploreMap": "Explorer la Carte",
+      "howToUse": "Comment utiliser la plateforme",
       "learnMore": "À propos du projet",
       "step1Title": "Calculez Votre Empreinte",
       "step1Description": "Répondez à des questions simples sur votre consommation pour calculer vos émissions de CO2.",
@@ -215,6 +219,100 @@
       "card2Description": "Orienter les ressources vers des propriétés et des initiatives évaluées selon des critères socio-environnementaux, notamment l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique.",
       "card3Title": "Impact vérifiable",
       "card3Description": "Renforcer la confiance grâce à l'audit, aux certificats, aux preuves enregistrées et à la transparence sur la destination de la compensation."
+    }
+  },
+  "howToUse": {
+    "eyebrow": "Guide rapide",
+    "title": "How to use the platform",
+    "description": "Choisissez le type de compte et voyez, de manière directe, comment la plateforme fonctionne et ce que chaque profil peut faire.",
+    "primaryCta": "Créer un compte",
+    "secondaryCta": "À propos du projet",
+    "overviewLabel": "Vue d'ensemble",
+    "stepsLabel": "Étapes",
+    "featuresLabel": "Fonctionnalités",
+    "possibilitiesLabel": "Possibilités",
+    "tabs": {
+      "individual": "Particulier",
+      "legalEntity": "Personne morale",
+      "producer": "Producteur"
+    },
+    "individual": {
+      "title": "Particulier",
+      "summary": "Compte pour les personnes qui veulent calculer leur empreinte, soutenir des projets et suivre leur impact.",
+      "forWho": "Idéal pour les utilisateurs individuels et les soutiens.",
+      "steps": {
+        "title": "Comment cela fonctionne",
+        "step1": { "title": "Créer un compte", "description": "Inscrivez-vous comme particulier." },
+        "step2": { "title": "Calculer l'empreinte", "description": "Renseignez vos données d'émissions." },
+        "step3": { "title": "Explorer les zones", "description": "Voyez les zones et projets sur la carte." },
+        "step4": { "title": "Compenser", "description": "Choisissez votre soutien et finalisez la compensation." },
+        "step5": { "title": "Suivre", "description": "Consultez historique, certificats et impact." }
+      },
+      "features": {
+        "title": "Ce que vous pouvez faire",
+        "item1": "Calculer des émissions personnelles.",
+        "item2": "Compenser par arbres ou tCO2e.",
+        "item3": "Voir l'historique et les certificats."
+      },
+      "possibilities": {
+        "title": "Ce que cela permet",
+        "item1": "Mieux comprendre votre impact.",
+        "item2": "Soutenir des projets audités.",
+        "item3": "Conserver un registre des compensations."
+      },
+      "cta": "Créer un compte particulier"
+    },
+    "legalEntity": {
+      "title": "Personne morale",
+      "summary": "Compte pour les entreprises et organisations qui veulent calculer des émissions et structurer des compensations.",
+      "forWho": "Idéal pour les entreprises, coopératives et institutions.",
+      "steps": {
+        "title": "Comment cela fonctionne",
+        "step1": { "title": "Créer un compte", "description": "Inscrivez-vous comme personne morale." },
+        "step2": { "title": "Calculer les émissions", "description": "Utilisez le calculateur pour votre activité." },
+        "step3": { "title": "Définir le soutien", "description": "Choisissez des projets alignés avec vos objectifs." },
+        "step4": { "title": "Compenser", "description": "Réalisez des opérations de compensation." },
+        "step5": { "title": "Documenter", "description": "Suivez résultats et certificats." }
+      },
+      "features": {
+        "title": "Ce que vous pouvez faire",
+        "item1": "Calculer des émissions institutionnelles.",
+        "item2": "Soutenir des projets avec traçabilité.",
+        "item3": "Consulter certificats et résultats."
+      },
+      "possibilities": {
+        "title": "Ce que cela permet",
+        "item1": "Organiser une stratégie de compensation.",
+        "item2": "Donner de la transparence aux initiatives environnementales.",
+        "item3": "Maintenir des enregistrements vérifiables."
+      },
+      "cta": "Créer un compte institutionnel"
+    },
+    "producer": {
+      "title": "Producteur",
+      "summary": "Compte pour les personnes qui gèrent des zones ou projets écologiques et souhaitent les enregistrer sur la plateforme.",
+      "forWho": "Idéal pour les producteurs et responsables de zones.",
+      "steps": {
+        "title": "Comment cela fonctionne",
+        "step1": { "title": "Créer un compte", "description": "Inscrivez-vous comme producteur." },
+        "step2": { "title": "Enregistrer une zone", "description": "Renseignez données, localisation et capacité." },
+        "step3": { "title": "Ajouter des preuves", "description": "Ajoutez médias et informations de soutien." },
+        "step4": { "title": "Soumettre à l'audit", "description": "Envoyez la zone pour révision." },
+        "step5": { "title": "Recevoir du soutien", "description": "Une fois active, la zone peut recevoir des contributions." }
+      },
+      "features": {
+        "title": "Ce que vous pouvez faire",
+        "item1": "Créer et modifier des zones.",
+        "item2": "Téléverser médias et preuves.",
+        "item3": "Suivre statut et contributions."
+      },
+      "possibilities": {
+        "title": "Ce que cela permet",
+        "item1": "Donner de la visibilité au projet.",
+        "item2": "Recevoir du soutien avec plus de transparence.",
+        "item3": "Conserver un historique structuré de la zone."
+      },
+      "cta": "Créer un compte producteur"
     }
   },
   "privacy": {

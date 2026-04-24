@@ -33,12 +33,14 @@ export function TabsList({ children, className }: { children: ReactNode; classNa
 
 export function TabsTrigger({ value, children, className }: { value: string; children: ReactNode; className?: string }) {
   const { activeTab, setActiveTab } = useContext(TabsContext);
+  const isActive = activeTab === value;
   return (
     <button
       onClick={() => setActiveTab(value)}
+      data-active={isActive}
       className={cn(
         'px-4 py-2 text-sm font-medium border-b-2 transition-colors',
-        activeTab === value
+        isActive
           ? 'border-primary text-primary'
           : 'border-transparent text-text-secondary hover:text-text-primary',
         className,

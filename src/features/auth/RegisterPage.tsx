@@ -96,6 +96,12 @@ export function RegisterPage() {
     <AuthLayout>
       <h1 className="text-2xl font-bold text-center mb-6">{t('auth.register.title')}</h1>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
+      <p className="mb-4 text-center text-sm text-text-secondary">
+        {t('auth.register.needHelpChoosingRole')}{' '}
+        <Link to="/how-to-use" className="text-primary hover:underline">
+          {t('auth.register.howToUseLink')}
+        </Link>
+      </p>
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input id="email" type="email" label={t('auth.email')} value={email} onChange={(e) => { setEmail(e.target.value); setFieldErrors((current) => ({ ...current, email: '' })); }} error={fieldErrors.email} required autoFocus />
         <Input id="password" type="password" label={t('auth.password')} value={password} onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }} error={fieldErrors.password} required />

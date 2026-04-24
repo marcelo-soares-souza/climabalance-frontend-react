@@ -13,6 +13,7 @@ import { PasswordResetConfirmPage } from '@/features/auth/PasswordResetConfirmPa
 // Home
 import { HomePage } from '@/features/home/HomePage';
 import { AboutPage } from '@/features/about/AboutPage';
+import { HowToUsePlatformPage } from '@/features/how-to-use/HowToUsePlatformPage';
 import { PrivacyPolicyPage } from '@/features/privacy/PrivacyPolicyPage';
 import { OnboardingPage } from '@/features/onboarding/OnboardingPage';
 
@@ -66,6 +67,7 @@ export const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage /> },
       { path: '/about', element: <AboutPage /> },
+      { path: '/how-to-use', element: <HowToUsePlatformPage /> },
       { path: '/privacy-policy', element: <PrivacyPolicyPage /> },
 
       // Auth routes (inside shell)

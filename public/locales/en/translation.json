@@ -52,6 +52,8 @@
       "subtitle": "Sign up to access the platform",
       "submit": "Create account",
       "hasAccount": "Already have an account?",
+      "needHelpChoosingRole": "Not sure which account type fits you?",
+      "howToUseLink": "See how to use the platform",
       "login": "Sign in",
       "role": "Account type",
       "roleHelpAria": "Help about account types",
@@ -120,6 +122,7 @@
     "home": "Home",
     "map": "Areas Map",
     "about": "About",
+    "howToUse": "How to Use",
     "privacyPolicy": "Privacy Policy",
     "calculator": "Footprint Calculator",
     "history": "Calculation History",
@@ -149,6 +152,7 @@
       "inDevelopment": "Project in development",
       "getStarted": "Get Started",
       "exploreMap": "Explore Map",
+      "howToUse": "How to use the platform",
       "learnMore": "About the project",
       "step1Title": "Calculate Your Footprint",
       "step1Description": "Answer simple questions about your consumption to calculate your CO2 emissions.",
@@ -215,6 +219,100 @@
       "card2Description": "Direct resources to properties and initiatives evaluated with socio-environmental criteria, including Agroecology, Agroforestry, Permaculture, and Organic Agriculture.",
       "card3Title": "Verifiable impact",
       "card3Description": "Strengthen trust through audit trails, certificates, evidence records, and transparency about where compensation goes."
+    }
+  },
+  "howToUse": {
+    "eyebrow": "Quick guide",
+    "title": "How to use the platform",
+    "description": "Choose the account type and see, in a direct way, how the platform works and what each profile can do.",
+    "primaryCta": "Create account",
+    "secondaryCta": "About the project",
+    "overviewLabel": "Overview",
+    "stepsLabel": "Step by step",
+    "featuresLabel": "Features",
+    "possibilitiesLabel": "Possibilities",
+    "tabs": {
+      "individual": "Individual",
+      "legalEntity": "Legal Entity",
+      "producer": "Producer"
+    },
+    "individual": {
+      "title": "Individual",
+      "summary": "An account for people who want to calculate their footprint, support projects, and track impact.",
+      "forWho": "Best for individual users and supporters.",
+      "steps": {
+        "title": "How it works",
+        "step1": { "title": "Create account", "description": "Sign up as an individual." },
+        "step2": { "title": "Calculate footprint", "description": "Fill in your emissions data." },
+        "step3": { "title": "Explore areas", "description": "See areas and projects on the map." },
+        "step4": { "title": "Offset", "description": "Choose how to support and complete the compensation." },
+        "step5": { "title": "Track", "description": "Review history, certificates, and impact." }
+      },
+      "features": {
+        "title": "What you can do",
+        "item1": "Calculate personal emissions.",
+        "item2": "Offset by trees or tCO2e.",
+        "item3": "See history and certificates."
+      },
+      "possibilities": {
+        "title": "What this enables",
+        "item1": "Understand your impact better.",
+        "item2": "Support audited projects.",
+        "item3": "Keep records of completed offsets."
+      },
+      "cta": "Create individual account"
+    },
+    "legalEntity": {
+      "title": "Legal Entity",
+      "summary": "An account for companies and organizations that want to calculate emissions and structure compensation.",
+      "forWho": "Best for businesses, cooperatives, and institutions.",
+      "steps": {
+        "title": "How it works",
+        "step1": { "title": "Create account", "description": "Sign up as a legal entity." },
+        "step2": { "title": "Calculate emissions", "description": "Use the calculator for your operation." },
+        "step3": { "title": "Define support", "description": "Choose projects aligned with your goals." },
+        "step4": { "title": "Offset", "description": "Complete compensation operations." },
+        "step5": { "title": "Document", "description": "Track results and certificates." }
+      },
+      "features": {
+        "title": "What you can do",
+        "item1": "Calculate institutional emissions.",
+        "item2": "Support projects with traceability.",
+        "item3": "Review certificates and results."
+      },
+      "possibilities": {
+        "title": "What this enables",
+        "item1": "Organize compensation strategy.",
+        "item2": "Bring transparency to environmental initiatives.",
+        "item3": "Maintain verifiable records."
+      },
+      "cta": "Create institutional account"
+    },
+    "producer": {
+      "title": "Producer",
+      "summary": "An account for people managing ecological areas or projects who want to register them on the platform.",
+      "forWho": "Best for producers and area managers.",
+      "steps": {
+        "title": "How it works",
+        "step1": { "title": "Create account", "description": "Sign up as a producer." },
+        "step2": { "title": "Register area", "description": "Fill in data, location, and capacity." },
+        "step3": { "title": "Add evidence", "description": "Upload media and supporting information." },
+        "step4": { "title": "Submit for audit", "description": "Send the area for review." },
+        "step5": { "title": "Receive support", "description": "Once active, the area can receive contributions." }
+      },
+      "features": {
+        "title": "What you can do",
+        "item1": "Create and edit areas.",
+        "item2": "Upload media and evidence.",
+        "item3": "Track status and contributions."
+      },
+      "possibilities": {
+        "title": "What this enables",
+        "item1": "Give visibility to the project.",
+        "item2": "Receive support with more transparency.",
+        "item3": "Keep a structured area history."
+      },
+      "cta": "Create producer account"
     }
   },
   "privacy": {

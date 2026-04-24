@@ -52,6 +52,8 @@
       "subtitle": "Cadastre-se para acessar a plataforma",
       "submit": "Criar conta",
       "hasAccount": "J\u00e1 tem conta?",
+      "needHelpChoosingRole": "Ainda em d\u00favida sobre o tipo de conta?",
+      "howToUseLink": "Veja como usar a plataforma",
       "login": "Entrar",
       "role": "Tipo de conta",
       "roleHelpAria": "Ajuda sobre tipos de conta",
@@ -120,6 +122,7 @@
     "home": "In\u00edcio",
     "map": "Mapa de \u00c1reas",
     "about": "Sobre o Projeto",
+    "howToUse": "Como usar",
     "privacyPolicy": "Pol\u00edtica de Privacidade",
     "calculator": "Calculadora de Pegada",
     "history": "Hist\u00f3rico de Pegadas",
@@ -149,6 +152,7 @@
       "inDevelopment": "Projeto em desenvolvimento",
       "getStarted": "Come\u00e7ar",
       "exploreMap": "Explorar Mapa",
+      "howToUse": "Como usar a plataforma",
       "learnMore": "Sobre o projeto",
       "step1Title": "Calcule sua Pegada",
       "step1Description": "Responda perguntas simples sobre seu consumo para calcular suas emiss\u00f5es de CO\u2082.",
@@ -215,6 +219,100 @@
       "card2Description": "Direcionar recursos para propriedades e iniciativas avaliadas com critérios socioambientais, incluindo Agroecologia, Agrofloresta, Permacultura e Agricultura Orgânica.",
       "card3Title": "Impacto verificável",
       "card3Description": "Fortalecer a confiança com auditoria, certificados, registros de evidência e transparência sobre o destino da compensação."
+    }
+  },
+  "howToUse": {
+    "eyebrow": "Guia rápido",
+    "title": "How to use the platform",
+    "description": "Escolha o tipo de conta e veja, de forma direta, como a plataforma funciona e o que cada perfil pode fazer.",
+    "primaryCta": "Criar conta",
+    "secondaryCta": "Sobre o projeto",
+    "overviewLabel": "Visão geral",
+    "stepsLabel": "Passo a passo",
+    "featuresLabel": "Funcionalidades",
+    "possibilitiesLabel": "Possibilidades",
+    "tabs": {
+      "individual": "Pessoa Física",
+      "legalEntity": "Pessoa Jurídica",
+      "producer": "Produtor"
+    },
+    "individual": {
+      "title": "Pessoa Física",
+      "summary": "Conta para quem quer calcular a própria pegada, apoiar projetos e acompanhar impacto.",
+      "forWho": "Ideal para usuários individuais e apoiadores.",
+      "steps": {
+        "title": "Como funciona",
+        "step1": { "title": "Criar conta", "description": "Cadastre-se como pessoa física." },
+        "step2": { "title": "Calcular pegada", "description": "Preencha seus dados de emissões." },
+        "step3": { "title": "Explorar áreas", "description": "Veja áreas e projetos no mapa." },
+        "step4": { "title": "Compensar", "description": "Escolha como apoiar e concluir a compensação." },
+        "step5": { "title": "Acompanhar", "description": "Consulte histórico, certificados e impacto." }
+      },
+      "features": {
+        "title": "O que pode fazer",
+        "item1": "Calcular emissões pessoais.",
+        "item2": "Compensar por árvores ou tCO2e.",
+        "item3": "Ver histórico e certificados."
+      },
+      "possibilities": {
+        "title": "O que ganha com isso",
+        "item1": "Entender melhor seu impacto.",
+        "item2": "Apoiar projetos auditados.",
+        "item3": "Registrar compensações realizadas."
+      },
+      "cta": "Criar conta individual"
+    },
+    "legalEntity": {
+      "title": "Pessoa Jurídica",
+      "summary": "Conta para empresas e organizações que querem calcular emissões e estruturar compensações.",
+      "forWho": "Ideal para negócios, cooperativas e instituições.",
+      "steps": {
+        "title": "Como funciona",
+        "step1": { "title": "Criar conta", "description": "Cadastre-se como pessoa jurídica." },
+        "step2": { "title": "Calcular emissões", "description": "Use a calculadora para sua operação." },
+        "step3": { "title": "Definir apoio", "description": "Escolha projetos alinhados aos seus objetivos." },
+        "step4": { "title": "Compensar", "description": "Realize operações de compensação." },
+        "step5": { "title": "Documentar", "description": "Acompanhe resultados e certificados." }
+      },
+      "features": {
+        "title": "O que pode fazer",
+        "item1": "Calcular emissões institucionais.",
+        "item2": "Apoiar projetos com rastreabilidade.",
+        "item3": "Consultar certificados e resultados."
+      },
+      "possibilities": {
+        "title": "O que ganha com isso",
+        "item1": "Organizar estratégia de compensação.",
+        "item2": "Dar transparência a iniciativas ambientais.",
+        "item3": "Manter registros verificáveis."
+      },
+      "cta": "Criar conta institucional"
+    },
+    "producer": {
+      "title": "Produtor",
+      "summary": "Conta para quem gerencia áreas ou projetos ecológicos e quer cadastrá-los na plataforma.",
+      "forWho": "Ideal para produtores e responsáveis por áreas.",
+      "steps": {
+        "title": "Como funciona",
+        "step1": { "title": "Criar conta", "description": "Cadastre-se como produtor." },
+        "step2": { "title": "Cadastrar área", "description": "Preencha dados, localização e capacidade." },
+        "step3": { "title": "Adicionar evidências", "description": "Inclua mídias e informações de apoio." },
+        "step4": { "title": "Enviar para auditoria", "description": "Submeta a área para revisão." },
+        "step5": { "title": "Receber apoio", "description": "Com a área ativa, ela pode receber contribuições." }
+      },
+      "features": {
+        "title": "O que pode fazer",
+        "item1": "Cadastrar e editar áreas.",
+        "item2": "Enviar mídias e evidências.",
+        "item3": "Acompanhar status e contribuições."
+      },
+      "possibilities": {
+        "title": "O que ganha com isso",
+        "item1": "Dar visibilidade ao projeto.",
+        "item2": "Receber apoio com mais transparência.",
+        "item3": "Manter histórico estruturado da área."
+      },
+      "cta": "Criar conta de produtor"
     }
   },
   "privacy": {
