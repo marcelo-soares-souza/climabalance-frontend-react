@@ -116,17 +116,17 @@
   "home": {
     "welcome": {
       "title": "Bienvenue sur ClimaBalance",
-      "description": "Plateforme de certification climatique. Nous relions la compensation carbone au soutien direct de propriétés rurales auditées.",
+      "description": "Plateforme d'impact climatique dédiée au soutien de projets d'Agroécologie, d'Agroforesterie, de Permaculture, d'Agriculture Biologique et d'autres initiatives de production agricole écologique.",
       "inDevelopment": "Projet en développement",
       "getStarted": "Commencer",
       "exploreMap": "Explorer la Carte",
       "learnMore": "À propos du projet",
       "step1Title": "Calculez Votre Empreinte",
       "step1Description": "Répondez à des questions simples sur votre consommation pour calculer vos émissions de CO2.",
-      "step2Title": "Compensez Vos Émissions",
-      "step2Description": "Soutenez les zones de reboisement vérifiées à travers le Brésil.",
+      "step2Title": "Soutenez des projets écologiques",
+      "step2Description": "Orientez votre soutien vers des initiatives auditées de restauration, d'agroécologie et de production agricole durable.",
       "step3Title": "Recevez des Certificats",
-      "step3Description": "Obtenez des certificats officiels de compensation carbone."
+      "step3Description": "Recevez des certificats et suivez les contributions avec transparence et traçabilité."
     },
     "dashboard": {
       "title": "Votre Impact Climatique",
@@ -140,7 +140,7 @@
       "calculateAction": "Calculer l'Empreinte",
       "calculateDescription": "Calculez vos émissions de CO2",
       "compensateAction": "Compenser Maintenant",
-      "compensateDescription": "Soutenez des projets de reboisement",
+      "compensateDescription": "Soutenez des projets d'agroécologie, d'agroforesterie et de restauration",
       "certificatesAction": "Certificats",
       "certificatesDescription": "Consultez vos certificats de compensation"
     }
@@ -149,20 +149,20 @@
     "hero": {
       "eyebrow": "Projet en développement",
       "title": "Une technologie climatique qui relie carbone, territoire et impact réel",
-      "description": "ClimaBalance est une plateforme d'impact climatique qui relie personnes, entreprises et zones auditées de restauration grâce au calcul d'empreinte, au choix de projets et à une certification vérifiable.",
+      "description": "ClimaBalance est une plateforme d'impact climatique conçue pour relier personnes et entreprises à des initiatives auditées d'Agroécologie, d'Agroforesterie, de Permaculture, d'Agriculture Biologique et d'autres formes de production agricole écologique.",
       "primaryCta": "Explorer les zones",
       "secondaryCta": "Créer un compte"
     },
     "whatIs": {
       "label": "Qu'est-ce que c'est",
       "title": "Une plateforme qui transforme l'intention climatique en action traçable",
-      "paragraph1": "ClimaBalance a été créé pour rendre la compensation carbone plus claire, plus fiable et plus connectée au territoire où la restauration a lieu. La plateforme aide les utilisateurs à comprendre leurs émissions et à orienter leur soutien vers des zones auditées de reboisement et de régénération.",
-      "paragraph2": "Au lieu de traiter la compensation comme quelque chose d'abstrait, la plateforme structure le processus avec une carte interactive, des critères socio-environnementaux, une traçabilité des contributions et des certificats d'impact avec validation."
+      "paragraph1": "ClimaBalance a été créé pour rendre la compensation carbone plus claire, plus fiable et plus connectée au territoire. La plateforme aide les utilisateurs à comprendre leurs émissions et à orienter leur soutien vers des projets audités qui combinent restauration environnementale et production agricole écologique.",
+      "paragraph2": "Au lieu de traiter la compensation comme quelque chose d'abstrait, la plateforme structure le processus avec une carte interactive, des critères socio-environnementaux, une traçabilité des contributions et des certificats validés d'impact, en priorisant des initiatives comme l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique."
     },
     "partnerCall": {
       "label": "Partenariats",
       "title": "Nous recherchons des partenaires pour poursuivre le développement du projet",
-      "description": "La plateforme est en cours de développement et nous recherchons des partenaires stratégiques, techniques et institutionnels pour élargir son impact environnemental et social.",
+      "description": "La plateforme est en cours de développement et nous recherchons des partenaires stratégiques, techniques et institutionnels pour élargir le soutien à des projets de production agricole écologique, de restauration territoriale et de régénération socio-environnementale.",
       "link": "Participer à la construction"
     },
     "howItWorks": {
@@ -172,18 +172,18 @@
       "step1Title": "Calculer l'empreinte",
       "step1Description": "Les personnes et les entreprises renseignent leurs données de consommation et d'activité pour estimer leurs émissions et comprendre leur empreinte carbone.",
       "step2Title": "Choisir sur la carte",
-      "step2Description": "Les utilisateurs explorent des zones auditées, comparent les informations des projets et choisissent où orienter leur compensation.",
+      "step2Description": "Les utilisateurs explorent des zones et des projets audités, comparent les informations des initiatives et choisissent où orienter leur compensation.",
       "step3Title": "Compenser et valider",
       "step3Description": "Après la compensation, la plateforme enregistre l'opération, conserve la traçabilité et fournit un certificat avec des mécanismes de validation."
     },
     "objectives": {
       "label": "Objectifs",
       "title": "Ce que ClimaBalance cherche à rendre possible",
-      "description": "Le projet vise à combiner décarbonation, confiance opérationnelle et soutien direct aux initiatives qui restaurent les écosystèmes.",
+      "description": "Le projet vise à combiner décarbonation, confiance opérationnelle et soutien direct aux initiatives qui restaurent les écosystèmes et renforcent des modèles écologiques de production agricole.",
       "card1Title": "Décarbonation accessible",
       "card1Description": "Faciliter la compréhension de l'empreinte carbone et élargir l'accès à des actions concrètes de compensation.",
-      "card2Title": "Soutien aux zones auditées",
-      "card2Description": "Orienter les ressources vers des propriétés et des initiatives évaluées selon des critères socio-environnementaux et des preuves d'exécution.",
+      "card2Title": "Soutien aux projets écologiques audités",
+      "card2Description": "Orienter les ressources vers des propriétés et des initiatives évaluées selon des critères socio-environnementaux, notamment l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique.",
       "card3Title": "Impact vérifiable",
       "card3Description": "Renforcer la confiance grâce à l'audit, aux certificats, aux preuves enregistrées et à la transparence sur la destination de la compensation."
     }
@@ -194,15 +194,15 @@
     "finish": "Commencer",
     "step1": {
       "title": "Bienvenue sur ClimaBalance",
-      "description": "Calculez votre empreinte carbone et contribuez au reboisement au Brésil"
+      "description": "Calculez votre empreinte carbone et contribuez à des projets écologiques et régénératifs au Brésil"
     },
     "step2": {
       "title": "Mesurez Votre Impact",
       "description": "Répondez à des questions simples sur votre consommation d'énergie, transport et consommation pour calculer vos émissions de CO2"
     },
     "step3": {
-      "title": "Compensez par les Arbres",
-      "description": "Soutenez les zones de reboisement vérifiées à travers le Brésil et recevez des certificats officiels"
+      "title": "Compensez par des Projets Régénératifs",
+      "description": "Soutenez des projets vérifiés d'agroécologie, d'agroforesterie, d'agriculture biologique et de restauration écologique"
     },
     "step4": {
       "title": "Suivez Votre Progression",

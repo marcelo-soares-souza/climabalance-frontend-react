@@ -116,17 +116,17 @@
   "home": {
     "welcome": {
       "title": "Bienvenido a ClimaBalance",
-      "description": "Plataforma de certificación climática. Conectamos la compensación de carbono al apoyo directo a propiedades rurales auditadas.",
+      "description": "Plataforma de impacto climático enfocada en apoyar proyectos de Agroecología, Agroforestería, Permacultura, Agricultura Orgánica y otras iniciativas de producción agrícola ecológica.",
       "inDevelopment": "Proyecto en desarrollo",
       "getStarted": "Comenzar",
       "exploreMap": "Explorar Mapa",
       "learnMore": "Sobre el proyecto",
       "step1Title": "Calcula tu Huella",
       "step1Description": "Responde preguntas simples sobre tu consumo para calcular tus emisiones de CO2.",
-      "step2Title": "Compensa tus Emisiones",
-      "step2Description": "Apoya áreas de reforestación verificadas en todo Brasil.",
+      "step2Title": "Apoya proyectos ecológicos",
+      "step2Description": "Dirige apoyo a iniciativas auditadas de restauración, agroecología y producción agrícola sostenible.",
       "step3Title": "Recibe Certificados",
-      "step3Description": "Obtiene certificados oficiales de compensación de carbono."
+      "step3Description": "Recibe certificados y acompaña contribuciones con transparencia y trazabilidad."
     },
     "dashboard": {
       "title": "Tu Impacto Climático",
@@ -140,7 +140,7 @@
       "calculateAction": "Calcular Huella",
       "calculateDescription": "Calcula tus emisiones de CO2",
       "compensateAction": "Compensar Ahora",
-      "compensateDescription": "Apoya proyectos de reforestación",
+      "compensateDescription": "Apoya proyectos de agroecología, agroforestería y restauración",
       "certificatesAction": "Certificados",
       "certificatesDescription": "Ve tus certificados de compensación"
     }
@@ -149,20 +149,20 @@
     "hero": {
       "eyebrow": "Proyecto en desarrollo",
       "title": "Tecnología climática para conectar carbono, territorio e impacto real",
-      "description": "ClimaBalance es una plataforma de impacto climático que conecta personas, empresas y áreas auditadas de restauración mediante cálculo de huella, selección de proyectos y certificación verificable.",
+      "description": "ClimaBalance es una plataforma de impacto climático creada para conectar personas y empresas con iniciativas auditadas de Agroecología, Agroforestería, Permacultura, Agricultura Orgánica y otras formas de producción agrícola ecológica.",
       "primaryCta": "Explorar áreas",
       "secondaryCta": "Crear cuenta"
     },
     "whatIs": {
       "label": "Qué es",
       "title": "Una plataforma para convertir la intención climática en acción rastreable",
-      "paragraph1": "ClimaBalance fue creado para hacer que la compensación de carbono sea más clara, confiable y conectada al territorio donde ocurre la restauración. Ayuda a los usuarios a comprender sus emisiones y dirigir apoyo a áreas auditadas de reforestación y regeneración.",
-      "paragraph2": "En lugar de tratar la compensación como algo abstracto, la plataforma organiza el proceso con un mapa interactivo, criterios socioambientales, trazabilidad de la contribución y certificados de impacto con validación."
+      "paragraph1": "ClimaBalance fue creado para hacer que la compensación de carbono sea más clara, confiable y conectada al territorio. Ayuda a los usuarios a comprender sus emisiones y dirigir apoyo a proyectos auditados que combinan restauración ambiental con producción agrícola ecológica.",
+      "paragraph2": "En lugar de tratar la compensación como algo abstracto, la plataforma organiza el proceso con un mapa interactivo, criterios socioambientales, trazabilidad de la contribución y certificados validados de impacto, priorizando iniciativas como Agroecología, Agroforestería, Permacultura y Agricultura Orgánica."
     },
     "partnerCall": {
       "label": "Alianzas",
       "title": "Buscamos socios para continuar construyendo el proyecto",
-      "description": "La plataforma está en desarrollo y buscamos socios estratégicos, técnicos e institucionales para ampliar su impacto ambiental y social.",
+      "description": "La plataforma está en desarrollo y buscamos socios estratégicos, técnicos e institucionales para ampliar el apoyo a proyectos ecológicos de producción agrícola, restauración territorial y regeneración socioambiental.",
       "link": "Sumarse a la construcción"
     },
     "howItWorks": {
@@ -172,18 +172,18 @@
       "step1Title": "Calcular la huella",
       "step1Description": "Personas y empresas informan datos de consumo y actividad para estimar emisiones y comprender su huella de carbono.",
       "step2Title": "Elegir en el mapa",
-      "step2Description": "Los usuarios exploran áreas auditadas, comparan información de proyectos y eligen dónde dirigir su compensación.",
+      "step2Description": "Los usuarios exploran áreas y proyectos auditados, comparan información de las iniciativas y eligen dónde dirigir su compensación.",
       "step3Title": "Compensar y validar",
       "step3Description": "Después de la compensación, la plataforma registra la operación, mantiene la trazabilidad y entrega un certificado con mecanismos de validación."
     },
     "objectives": {
       "label": "Objetivos",
       "title": "Lo que ClimaBalance busca hacer posible",
-      "description": "El proyecto busca combinar descarbonización, confianza operativa y apoyo directo a iniciativas que restauran ecosistemas.",
+      "description": "El proyecto busca combinar descarbonización, confianza operativa y apoyo directo a iniciativas que restauran ecosistemas y fortalecen modelos ecológicos de producción agrícola.",
       "card1Title": "Descarbonización accesible",
       "card1Description": "Facilitar la comprensión de la huella de carbono y ampliar el acceso a acciones concretas de compensación.",
-      "card2Title": "Apoyo a áreas auditadas",
-      "card2Description": "Dirigir recursos a propiedades e iniciativas evaluadas con criterios socioambientales y evidencias de ejecución.",
+      "card2Title": "Apoyo a proyectos ecológicos auditados",
+      "card2Description": "Dirigir recursos a propiedades e iniciativas evaluadas con criterios socioambientales, incluyendo Agroecología, Agroforestería, Permacultura y Agricultura Orgánica.",
       "card3Title": "Impacto verificable",
       "card3Description": "Fortalecer la confianza mediante auditoría, certificados, registros de evidencia y transparencia sobre el destino de la compensación."
     }
@@ -194,15 +194,15 @@
     "finish": "Comenzar",
     "step1": {
       "title": "Bienvenido a ClimaBalance",
-      "description": "Calcula tu huella de carbono y contribuye a la reforestación en Brasil"
+      "description": "Calcula tu huella de carbono y contribuye a proyectos ecológicos y regenerativos en Brasil"
     },
     "step2": {
       "title": "Mide Tu Impacto",
       "description": "Responde preguntas simples sobre tu consumo de energía, transporte y consumo para calcular tus emisiones de CO2"
     },
     "step3": {
-      "title": "Compensa a Través de Árboles",
-      "description": "Apoya áreas de reforestación verificadas en todo Brasil y recibe certificados oficiales"
+      "title": "Compensa a Través de Proyectos Regenerativos",
+      "description": "Apoya proyectos verificados de agroecología, agroforestería, agricultura orgánica y restauración ecológica"
     },
     "step4": {
       "title": "Sigue Tu Progreso",

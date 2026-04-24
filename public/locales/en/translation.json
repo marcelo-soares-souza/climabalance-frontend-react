@@ -116,17 +116,17 @@
   "home": {
     "welcome": {
       "title": "Welcome to ClimaBalance",
-      "description": "Climate certification platform. We connect carbon offsetting to direct support for audited rural properties.",
+      "description": "A climate impact platform focused on supporting Agroecology, Agroforestry, Permaculture, Organic Agriculture, and other ecological farming projects.",
       "inDevelopment": "Project in development",
       "getStarted": "Get Started",
       "exploreMap": "Explore Map",
       "learnMore": "About the project",
       "step1Title": "Calculate Your Footprint",
       "step1Description": "Answer simple questions about your consumption to calculate your CO2 emissions.",
-      "step2Title": "Offset Your Emissions",
-      "step2Description": "Support verified reforestation areas across Brazil.",
+      "step2Title": "Support ecological projects",
+      "step2Description": "Direct support to audited initiatives in restoration, agroecology, and sustainable agricultural production.",
       "step3Title": "Receive Certificates",
-      "step3Description": "Get official carbon offset certificates."
+      "step3Description": "Receive certificates and track contributions with transparency and traceability."
     },
     "dashboard": {
       "title": "Your Climate Impact",
@@ -140,7 +140,7 @@
       "calculateAction": "Calculate Footprint",
       "calculateDescription": "Calculate your CO2 emissions",
       "compensateAction": "Compensate Now",
-      "compensateDescription": "Support reforestation projects",
+      "compensateDescription": "Support agroecology, agroforestry, and restoration projects",
       "certificatesAction": "Certificates",
       "certificatesDescription": "View your offset certificates"
     }
@@ -149,20 +149,20 @@
     "hero": {
       "eyebrow": "Project in development",
       "title": "Climate technology connecting carbon, land, and real impact",
-      "description": "ClimaBalance is a climate impact platform that brings people, companies, and audited restoration areas together through footprint calculation, project selection, and verifiable certification.",
+      "description": "ClimaBalance is a climate impact platform created to connect people and companies with audited Agroecology, Agroforestry, Permaculture, Organic Agriculture, and other ecological farming initiatives.",
       "primaryCta": "Explore areas",
       "secondaryCta": "Create account"
     },
     "whatIs": {
       "label": "What it is",
       "title": "A platform that turns climate intention into traceable action",
-      "paragraph1": "ClimaBalance was created to make carbon compensation clearer, more trustworthy, and more connected to the territory where restoration happens. It helps users understand emissions and direct support to audited reforestation and regeneration areas.",
-      "paragraph2": "Instead of treating compensation as something abstract, the platform structures the process with an interactive map, socio-environmental criteria, contribution traceability, and impact certificates with validation."
+      "paragraph1": "ClimaBalance was created to make carbon compensation clearer, more trustworthy, and more connected to the territory. It helps users understand emissions and direct support to audited projects that combine environmental restoration with ecological agricultural production.",
+      "paragraph2": "Instead of treating compensation as something abstract, the platform structures the process with an interactive map, socio-environmental criteria, contribution traceability, and validated impact certificates, prioritizing initiatives such as Agroecology, Agroforestry, Permaculture, and Organic Agriculture."
     },
     "partnerCall": {
       "label": "Partnerships",
       "title": "We are looking for partners to keep building the project",
-      "description": "The platform is under development, and we are looking for strategic, technical, and institutional partners to expand its environmental and social impact.",
+      "description": "The platform is under development, and we are looking for strategic, technical, and institutional partners to expand support for ecological farming, territorial restoration, and regenerative production projects.",
       "link": "Join the build"
     },
     "howItWorks": {
@@ -172,18 +172,18 @@
       "step1Title": "Calculate the footprint",
       "step1Description": "People and companies provide consumption and activity data to estimate emissions and understand their carbon footprint.",
       "step2Title": "Choose on the map",
-      "step2Description": "Users explore audited areas, compare project information, and choose where to direct their compensation.",
+      "step2Description": "Users explore audited areas and projects, compare initiative details, and choose where to direct their compensation.",
       "step3Title": "Compensate and validate",
       "step3Description": "After compensation, the platform records the operation, preserves traceability, and provides a certificate with validation mechanisms."
     },
     "objectives": {
       "label": "Objectives",
       "title": "What ClimaBalance is designed to enable",
-      "description": "The project aims to combine decarbonization, operational trust, and direct support for initiatives restoring ecosystems.",
+      "description": "The project aims to combine decarbonization, operational trust, and direct support for initiatives that restore ecosystems and strengthen ecological agricultural production models.",
       "card1Title": "Accessible decarbonization",
       "card1Description": "Make carbon footprint understanding easier and broaden access to concrete compensation actions.",
-      "card2Title": "Support for audited areas",
-      "card2Description": "Direct resources to properties and initiatives evaluated with socio-environmental criteria and execution evidence.",
+      "card2Title": "Support for audited ecological projects",
+      "card2Description": "Direct resources to properties and initiatives evaluated with socio-environmental criteria, including Agroecology, Agroforestry, Permaculture, and Organic Agriculture.",
       "card3Title": "Verifiable impact",
       "card3Description": "Strengthen trust through audit trails, certificates, evidence records, and transparency about where compensation goes."
     }
@@ -194,15 +194,15 @@
     "finish": "Get Started",
     "step1": {
       "title": "Welcome to ClimaBalance",
-      "description": "Calculate your carbon footprint and contribute to reforestation in Brazil"
+      "description": "Calculate your carbon footprint and contribute to ecological and regenerative projects in Brazil"
     },
     "step2": {
       "title": "Measure Your Impact",
       "description": "Answer simple questions about your energy use, transport, and consumption to calculate your CO2 emissions"
     },
     "step3": {
-      "title": "Offset Through Trees",
-      "description": "Support verified reforestation areas across Brazil and receive official certificates"
+      "title": "Offset Through Regenerative Projects",
+      "description": "Support verified agroecology, agroforestry, organic agriculture, and ecological restoration projects"
     },
     "step4": {
       "title": "Track Your Progress",
