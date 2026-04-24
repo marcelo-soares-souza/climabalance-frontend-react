@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from '@tanstack/react-query';
@@ -12,7 +12,7 @@ import { Select } from '@/components/ui/Select';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ApiError } from '@/lib/api-client';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Calendar } from 'lucide-react';
 
 export function ProfileEditPage() {
   const { t } = useTranslation();
@@ -22,6 +22,7 @@ export function ProfileEditPage() {
   const targetUserId = routeUserId ?? userId ?? null;
   const profilePath = targetUserId ? `/users/${targetUserId}/profile` : '/profile';
   const [error, setError] = useState<string | null>(null);
+  const birthDatePickerRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState<Partial<{
     display_name: string;
     document_type: string;
@@ -86,6 +87,17 @@ export function ProfileEditPage() {
 
   if (isLoading) return <PageSkeleton />;
 
+  const openBirthDatePicker = () => {
+    const input = birthDatePickerRef.current;
+    if (!input) return;
+    if ('showPicker' in input) {
+      input.showPicker();
+      return;
+    }
+    input.focus();
+    input.click();
+  };
+
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
@@ -102,7 +114,33 @@ export function ProfileEditPage() {
             <Input id="document_number" label={t('profile.form.documentNumber')} value={formValues.document_number} onChange={(e) => update('document_number', e.target.value)} />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Input id="birth_date" type="date" label={t('profile.form.birthDate')} value={formValues.birth_date} onChange={(e) => update('birth_date', e.target.value)} />
+            <div className="w-full">
+              <label htmlFor="birth_date" className="block text-base font-medium text-text-secondary mb-1.5">
+                {t('profile.form.birthDate')}
+              </label>
+              <div className="flex gap-2">
+                <Input
+                  id="birth_date"
+                  type="text"
+                  inputMode="numeric"
+                  placeholder="YYYY-MM-DD"
+                  value={formValues.birth_date}
+                  onChange={(e) => update('birth_date', e.target.value)}
+                />
+                <Button type="button" variant="outline" onClick={openBirthDatePicker} aria-label={t('profile.form.birthDate')}>
+                  <Calendar className="h-4 w-4" />
+                </Button>
+                <input
+                  ref={birthDatePickerRef}
+                  type="date"
+                  tabIndex={-1}
+                  aria-hidden="true"
+                  className="sr-only"
+                  value={formValues.birth_date}
+                  onChange={(e) => update('birth_date', e.target.value)}
+                />
+              </div>
+            </div>
             <Input id="phone" label={t('profile.form.phone')} value={formValues.phone} onChange={(e) => update('phone', e.target.value)} />
           </div>
           <Input id="address_line1" label={t('profile.form.addressLine1')} value={formValues.address_line1} onChange={(e) => update('address_line1', e.target.value)} />
