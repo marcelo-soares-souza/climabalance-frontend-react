@@ -200,7 +200,7 @@ export const usersService = {
     return api.put<RawUserProfile>(`/users/${userId}/profile`, data).then(normalizeUserProfile);
   },
 
-  listUsers(params?: { search?: string; status?: string; limit?: number; offset?: number }) {
+  listUsers(params?: { search?: string; status?: string; sort_by?: string; sort_order?: string; limit?: number; offset?: number }) {
     return api.get<RawUserSummary[]>('/users', { params: params as Record<string, string | number> }).then((rows) =>
       rows.map(normalizeUserSummary)
     );

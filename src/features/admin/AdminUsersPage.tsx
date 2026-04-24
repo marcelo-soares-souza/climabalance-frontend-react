@@ -9,19 +9,37 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { SkeletonTable } from '@/components/ui/Skeleton';
 import { EmptyState } from '@/components/EmptyState';
 import { formatDate, formatDateTime } from '@/lib/format';
-import { Users, Edit, Eye, Search } from 'lucide-react';
+import { Users, Edit, Eye, Search, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+
+type SortConfig = {
+  column: string;
+  order: 'asc' | 'desc';
+};
 
 export function AdminUsersPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
+  const [sort, setSort] = useState<SortConfig>({ column: 'created_at', order: 'desc' });
 
   const { data: users, isLoading } = useQuery({
-    queryKey: ['admin-users', { search, status: statusFilter }],
-    queryFn: () => usersService.listUsers({ search: search || undefined, status: statusFilter || undefined }),
+    queryKey: ['admin-users', { search, status: statusFilter, sort_by: sort.column, sort_order: sort.order }],
+    queryFn: () => usersService.listUsers({ search: search || undefined, status: statusFilter || undefined, sort_by: sort.column, sort_order: sort.order }),
   });
+
+  const handleSort = (column: string) => {
+    setSort((prev) => ({
+      column,
+      order: prev.column === column ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc',
+    }));
+  };
+
+  const SortIcon = ({ column }: { column: string }) => {
+    if (sort.column !== column) return <ArrowUpDown className="h-3 w-3 text-text-secondary" />;
+    return sort.order === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />;
+  };
 
   return (
     <div className="space-y-6">
@@ -45,11 +63,19 @@ export function AdminUsersPage() {
           {isLoading ? <div className="p-4"><SkeletonTable /></div> : users && users.length > 0 ? (
             <table className="w-full text-sm">
               <thead><tr className="border-b border-gray-200 bg-gray-50">
-                <th className="text-left px-4 py-3 font-medium">{t('admin.users.email')}</th>
-                <th className="text-left px-4 py-3 font-medium">{t('admin.users.status')}</th>
+                <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('email')}>
+                  <div className="flex items-center gap-1">{t('admin.users.email')} <SortIcon column="email" /></div>
+                </th>
+                <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('status')}>
+                  <div className="flex items-center gap-1">{t('admin.users.status')} <SortIcon column="status" /></div>
+                </th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.users.roles')}</th>
-                <th className="text-left px-4 py-3 font-medium">{t('admin.users.createdAt')}</th>
-                <th className="text-left px-4 py-3 font-medium">{t('admin.users.lastLogin')}</th>
+                <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('created_at')}>
+                  <div className="flex items-center gap-1">{t('admin.users.createdAt')} <SortIcon column="created_at" /></div>
+                </th>
+                <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('last_login_at')}>
+                  <div className="flex items-center gap-1">{t('admin.users.lastLogin')} <SortIcon column="last_login_at" /></div>
+                </th>
                 <th className="px-4 py-3"></th>
               </tr></thead>
               <tbody>
