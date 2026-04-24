@@ -54,9 +54,14 @@
       "hasAccount": "Already have an account?",
       "login": "Sign in",
       "role": "Account type",
+      "roleHelpAria": "Help about account types",
+      "roleHelpTitle": "Choose the type that best matches how you will use the platform.",
       "roleIndividual": "Individual",
+      "roleIndividualDescription": "For personal use, supporting projects, and tracking your individual impact.",
       "roleLegalEntity": "Legal Entity",
+      "roleLegalEntityDescription": "For companies and organizations that want to manage impact, support, and institutional certificates.",
       "roleProducer": "Producer",
+      "roleProducerDescription": "For people responsible for ecological areas and projects who want to register, update, and receive support.",
       "humanCheckLabel": "Answer",
       "humanCheckPlaceholder": "Type your answer",
       "humanCheckReload": "Change question",
@@ -887,5 +892,106 @@
     "admin.users.updateError": "Failed to update user. Please try again.",
     "audit.approveError": "Failed to approve area. Please try again.",
     "audit.rejectError": "Failed to reject area. Please try again."
+  },
+  "tooltips": {
+    "dashboard": {
+      "totalFootprint": "Sum of calculated emissions across the available records for this user.",
+      "compensated": "Volume of emissions already compensated in paid and confirmed records.",
+      "balance": "Difference between the estimated total emissions and what has already been compensated.",
+      "treesPlanted": "Total number of trees linked to confirmed compensations."
+    },
+    "home": {
+      "inDevelopmentAria": "Help about the project development status",
+      "inDevelopment": "This POC is still evolving. Some features may change, and the project is looking for partners to continue development."
+    },
+    "shared": {
+      "tco2eAria": "Help about tCO2e",
+      "tco2e": "tCO2e means tonnes of CO2 equivalent, a metric that combines different greenhouse gases into one comparable unit.",
+      "tco2ePerTreeAria": "Help about tCO2e per tree per year",
+      "tco2ePerTree": "This value estimates how much carbon a tree associated with the project may contribute per year. It is a projection reference, not an isolated guarantee per unit."
+    },
+    "footprint": {
+      "dataQualityAria": "Help about data quality",
+      "dataQuality": "Choose the level that best matches the quality of the information used in the calculation. Real data usually leads to more reliable estimates.",
+      "profileTypeAria": "Help about profile type",
+      "profileType": "Use Individual for personal calculations and Legal Entity for emissions related to a company or organization.",
+      "periodAria": "Help about calculation period",
+      "period": "The result only considers the selected time range. Ideally, use a period that is representative of the consumption being analyzed.",
+      "scope1Aria": "Help about Scope 1",
+      "scope1": "Scope 1 includes direct emissions under your control, such as combustion, process emissions, and fugitive leaks.",
+      "scope2Aria": "Help about Scope 2",
+      "scope2": "Scope 2 covers emissions linked to purchased energy, such as electricity, steam, or heat.",
+      "scope3Aria": "Help about Scope 3",
+      "scope3": "Scope 3 groups indirect emissions across the value chain, such as travel, commuting, purchased goods, and waste.",
+      "calculationStatusAria": "Help about calculation status",
+      "statusDraft": "Draft calculations can still be edited before finalization.",
+      "statusFinalized": "Finalized means the calculation is complete and ready to be used for reporting and compensation.",
+      "totalEmissionsAria": "Help about total emissions",
+      "totalEmissions": "This is the estimated total emissions for the selected period based on the data you entered.",
+      "compensateAria": "Help about compensation",
+      "compensate": "You can use this result to direct support to ecological projects and compensate the estimated emissions.",
+      "units": {
+        "kwhAria": "Help about kWh",
+        "kwh": "kWh is the unit used for electricity consumption.",
+        "kmAria": "Help about kilometers",
+        "km": "Enter the distance traveled in kilometers.",
+        "literAria": "Help about liters",
+        "liter": "Enter the consumed volume in liters."
+      }
+    },
+    "compensation": {
+      "modeAria": "Help about compensation modes",
+      "treePurchase": "Best for supporting ecological projects through tree-linked planting and long-term land stewardship.",
+      "directTco2e": "Best for entering the amount of emissions you want to offset directly in tCO2e.",
+      "paymentStatusAria": "Help about payment status",
+      "paymentStatus": "The payment status shows whether the financial operation was completed, is pending, or failed."
+    },
+    "checkout": {
+      "modeAria": "Help about selected mode",
+      "mode": "Shows how this compensation was structured: by tree purchase or by direct tCO2e volume.",
+      "treesAria": "Help about tree quantity",
+      "trees": "Number of trees or equivalent units linked to this compensation.",
+      "totalAria": "Help about total amount",
+      "total": "Estimated total financial amount for this operation.",
+      "installmentsAria": "Help about installments",
+      "installments": "Number of installments used in the payment simulation.",
+      "testCardAria": "Help about test card",
+      "testCard": "This flow uses a simulated payment for POC demonstration purposes."
+    },
+    "area": {
+      "statusAria": "Help about area status",
+      "statusSummary": "The status shows which stage the area is in, from initial registration to activation or suspension.",
+      "locationAria": "Help about area location",
+      "location": "The coordinates help identify the area on the map and connect evidence, audit, and territorial context.",
+      "biomeAria": "Help about biome",
+      "biome": "The biome helps contextualize the area environmentally and may influence evaluation criteria and project communication.",
+      "totalCapacityAria": "Help about total capacity",
+      "totalCapacity": "Estimated total compensation capacity that the area can support over the lifetime of the project.",
+      "committedAria": "Help about committed volume",
+      "committed": "Part of the total capacity that has already been reserved or linked to compensations.",
+      "availableAria": "Help about available volume",
+      "available": "Portion of the capacity still available for new support and compensation operations.",
+      "usageAria": "Help about capacity usage",
+      "usage": "Percentage of the area's total capacity that is already committed.",
+      "pricePerTreeAria": "Help about price per tree",
+      "pricePerTree": "Use this value when support is modeled by number of trees or equivalent project units.",
+      "pricePerTco2eAria": "Help about price per tCO2e",
+      "pricePerTco2e": "Use this value when compensation is offered directly by emissions volume in tCO2e.",
+      "media": "Media helps document the area, strengthen credibility, and support audit and transparency.",
+      "contributions": "List of recorded contributions for this area, including compensated volume and associated tree count when applicable.",
+      "statusDraft": "The area is still being edited and has not been submitted for audit yet.",
+      "statusPendingAudit": "The area was submitted and is waiting for review before it can be approved.",
+      "statusApproved": "The area passed review and is ready for operational activation.",
+      "statusActive": "The area is available for support and compensation on the platform.",
+      "statusSuspended": "The area was temporarily paused and should not receive new operations."
+    },
+    "certificates": {
+      "validationAria": "Help about certificate validation",
+      "validation": "Validation checks whether the certificate number and hash match a record issued by the platform.",
+      "certificateNumberAria": "Help about certificate number",
+      "certificateNumber": "Enter the certificate identifier exactly as it appears in the PDF or issuance record.",
+      "hashAria": "Help about certificate hash",
+      "hash": "The hash is an integrity identifier used to verify that the certificate matches the issued document."
+    }
   }
 }

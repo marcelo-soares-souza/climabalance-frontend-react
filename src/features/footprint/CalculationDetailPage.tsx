@@ -5,6 +5,7 @@ import { footprintService } from '@/services/footprint';
 import { queryClient } from '@/config/query-client';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ResultBreakdownChart } from './components/ResultBreakdownChart';
@@ -55,15 +56,30 @@ export function CalculationDetailPage() {
 
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-2xl font-bold">{t(`footprint.profile.${calculation.profileType}`)}</h1>
-          <p className="text-text-secondary">{formatDate(calculation.periodStart)} - {formatDate(calculation.periodEnd)}</p>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold">{t(`footprint.profile.${calculation.profileType}`)}</h1>
+            <InfoTooltip ariaLabel={t('tooltips.footprint.profileTypeAria')} content={<p>{t('tooltips.footprint.profileType')}</p>} />
+          </div>
+          <p className="flex items-center gap-2 text-text-secondary">{formatDate(calculation.periodStart)} - {formatDate(calculation.periodEnd)} <InfoTooltip ariaLabel={t('tooltips.footprint.periodAria')} content={<p>{t('tooltips.footprint.period')}</p>} /></p>
         </div>
-        <StatusBadge status={calculation.status} />
+        <div className="flex items-center gap-2">
+          <StatusBadge status={calculation.status} />
+          <InfoTooltip
+            ariaLabel={t('tooltips.footprint.calculationStatusAria')}
+            panelClassName="left-auto right-0"
+            content={
+              <>
+                <p><strong className="text-text-primary">{t('common.status.draft')}:</strong> {t('tooltips.footprint.statusDraft')}</p>
+                <p className="mt-2"><strong className="text-text-primary">{t('common.status.finalized')}:</strong> {t('tooltips.footprint.statusFinalized')}</p>
+              </>
+            }
+          />
+        </div>
       </div>
 
       <Card className="bg-gradient-to-r from-primary to-primary-light text-white">
         <CardContent className="py-8 text-center">
-          <p className="text-sm opacity-80">{t('footprint.result.totalEmissions')}</p>
+          <p className="inline-flex items-center gap-2 text-sm opacity-80">{t('footprint.result.totalEmissions')} <InfoTooltip ariaLabel={t('tooltips.footprint.totalEmissionsAria')} content={<p>{t('tooltips.footprint.totalEmissions')}</p>} /></p>
           <p className="text-4xl font-bold">{formatTCO2e(calculation.totalTCO2e)}</p>
         </CardContent>
       </Card>

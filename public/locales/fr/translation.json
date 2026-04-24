@@ -54,9 +54,14 @@
       "hasAccount": "Vous avez déjà un compte ?",
       "login": "Se connecter",
       "role": "Type de compte",
+      "roleHelpAria": "Aide sur les types de compte",
+      "roleHelpTitle": "Choisissez le type qui correspond le mieux à votre usage de la plateforme.",
       "roleIndividual": "Particulier",
+      "roleIndividualDescription": "Pour un usage personnel, le soutien de projets et le suivi de votre impact individuel.",
       "roleLegalEntity": "Personne morale",
+      "roleLegalEntityDescription": "Pour les entreprises et organisations qui souhaitent g\u00e9rer leur impact, leur soutien et leurs certificats institutionnels.",
       "roleProducer": "Producteur",
+      "roleProducerDescription": "Pour les responsables de zones et de projets \u00e9cologiques qui souhaitent enregistrer, mettre \u00e0 jour et recevoir du soutien.",
       "humanCheckLabel": "Réponse",
       "humanCheckPlaceholder": "Saisissez votre réponse",
       "humanCheckReload": "Changer de question",
@@ -886,5 +891,106 @@
     "admin.users.updateError": "Échec de la mise à jour de l'utilisateur. Veuillez réessayer.",
     "audit.approveError": "Échec de l'approbation de la zone. Veuillez réessayer.",
     "audit.rejectError": "Échec du rejet de la zone. Veuillez réessayer."
+  },
+  "tooltips": {
+    "dashboard": {
+      "totalFootprint": "Somme des émissions calculées dans les enregistrements disponibles pour cet utilisateur.",
+      "compensated": "Volume d'émissions déjà compensé dans les enregistrements payés et confirmés.",
+      "balance": "Différence entre le total estimé des émissions et ce qui a déjà été compensé.",
+      "treesPlanted": "Nombre total d'arbres liés aux compensations confirmées."
+    },
+    "home": {
+      "inDevelopmentAria": "Aide sur l'état de développement du projet",
+      "inDevelopment": "Cette POC est encore en évolution. Certaines fonctionnalités peuvent changer et le projet recherche des partenaires pour poursuivre son développement."
+    },
+    "shared": {
+      "tco2eAria": "Aide sur le tCO2e",
+      "tco2e": "tCO2e signifie tonnes de CO2 équivalent, une mesure qui regroupe différents gaz à effet de serre dans une unité comparable.",
+      "tco2ePerTreeAria": "Aide sur le tCO2e par arbre et par an",
+      "tco2ePerTree": "Cette valeur estime la contribution carbone annuelle d'un arbre associé au projet. C'est une référence de projection, et non une garantie isolée par unité."
+    },
+    "footprint": {
+      "dataQualityAria": "Aide sur la qualité des données",
+      "dataQuality": "Choisissez le niveau qui correspond le mieux à la qualité des informations utilisées dans le calcul. Les données réelles donnent en général des estimations plus fiables.",
+      "profileTypeAria": "Aide sur le type de profil",
+      "profileType": "Utilisez Particulier pour les calculs personnels et Personne morale pour les émissions liées à une entreprise ou une organisation.",
+      "periodAria": "Aide sur la période du calcul",
+      "period": "Le résultat ne prend en compte que l'intervalle sélectionné. L'idéal est d'utiliser une période représentative de la consommation analysée.",
+      "scope1Aria": "Aide sur le Scope 1",
+      "scope1": "Le Scope 1 inclut les émissions directes sous votre contrôle, comme la combustion, les procédés et les fuites fugitives.",
+      "scope2Aria": "Aide sur le Scope 2",
+      "scope2": "Le Scope 2 couvre les émissions liées à l'énergie achetée, comme l'électricité, la vapeur ou la chaleur.",
+      "scope3Aria": "Aide sur le Scope 3",
+      "scope3": "Le Scope 3 regroupe les émissions indirectes de la chaîne de valeur, comme les voyages, déplacements, achats et déchets.",
+      "calculationStatusAria": "Aide sur le statut du calcul",
+      "statusDraft": "Le brouillon peut encore être modifié avant finalisation.",
+      "statusFinalized": "Finalisé signifie que le calcul est terminé et prêt pour usage et compensation.",
+      "totalEmissionsAria": "Aide sur les émissions totales",
+      "totalEmissions": "Il s'agit du total estimé des émissions pour la période sélectionnée à partir des données saisies.",
+      "compensateAria": "Aide sur la compensation",
+      "compensate": "Vous pouvez utiliser ce résultat pour orienter un soutien vers des projets écologiques et compenser les émissions estimées.",
+      "units": {
+        "kwhAria": "Aide sur le kWh",
+        "kwh": "Le kWh est l'unité utilisée pour la consommation d'électricité.",
+        "kmAria": "Aide sur les kilomètres",
+        "km": "Saisissez la distance parcourue en kilomètres.",
+        "literAria": "Aide sur les litres",
+        "liter": "Saisissez le volume consommé en litres."
+      }
+    },
+    "compensation": {
+      "modeAria": "Aide sur les modes de compensation",
+      "treePurchase": "Idéal pour soutenir des projets écologiques via la plantation et la gestion liées aux arbres dans la durée.",
+      "directTco2e": "Idéal pour indiquer directement le volume d'émissions que vous souhaitez compenser en tCO2e.",
+      "paymentStatusAria": "Aide sur le statut du paiement",
+      "paymentStatus": "Le statut du paiement indique si l'opération financière a été finalisée, est en attente ou a échoué."
+    },
+    "checkout": {
+      "modeAria": "Aide sur le mode sélectionné",
+      "mode": "Indique comment cette compensation a été structurée : par achat d'arbres ou par volume direct en tCO2e.",
+      "treesAria": "Aide sur la quantité d'arbres",
+      "trees": "Nombre d'arbres ou d'unités équivalentes liés à cette compensation.",
+      "totalAria": "Aide sur le montant total",
+      "total": "Montant financier total estimé pour cette opération.",
+      "installmentsAria": "Aide sur les échéances",
+      "installments": "Nombre d'échéances utilisé dans la simulation de paiement.",
+      "testCardAria": "Aide sur la carte de test",
+      "testCard": "Ce flux utilise un paiement simulé à des fins de démonstration de la POC."
+    },
+    "area": {
+      "statusAria": "Aide sur le statut de la zone",
+      "statusSummary": "Le statut indique l'étape de la zone, depuis son enregistrement initial jusqu'à son activation ou sa suspension.",
+      "locationAria": "Aide sur la localisation de la zone",
+      "location": "Les coordonnées aident à identifier la zone sur la carte et à relier les preuves, l'audit et le contexte territorial.",
+      "biomeAria": "Aide sur le biome",
+      "biome": "Le biome aide à contextualiser la zone sur le plan environnemental et peut influencer les critères d'évaluation et la communication du projet.",
+      "totalCapacityAria": "Aide sur la capacité totale",
+      "totalCapacity": "Capacité totale estimée de compensation que la zone peut supporter pendant la durée de vie du projet.",
+      "committedAria": "Aide sur le volume engagé",
+      "committed": "Part de la capacité totale déjà réservée ou liée à des compensations.",
+      "availableAria": "Aide sur le volume disponible",
+      "available": "Part de la capacité encore disponible pour de nouvelles opérations de soutien et de compensation.",
+      "usageAria": "Aide sur l'utilisation de la capacité",
+      "usage": "Pourcentage de la capacité totale de la zone déjà engagée.",
+      "pricePerTreeAria": "Aide sur le prix par arbre",
+      "pricePerTree": "Utilisez cette valeur lorsque le soutien est modélisé par nombre d'arbres ou unités équivalentes du projet.",
+      "pricePerTco2eAria": "Aide sur le prix par tCO2e",
+      "pricePerTco2e": "Utilisez cette valeur lorsque la compensation est proposée directement par volume d'émissions en tCO2e.",
+      "media": "Les médias aident à documenter la zone, renforcer la crédibilité et soutenir l'audit et la transparence.",
+      "contributions": "Liste des contributions enregistrées pour cette zone, avec volume compensé et nombre d'arbres associé lorsque c'est applicable.",
+      "statusDraft": "La zone est encore en cours d'édition et n'a pas encore été soumise à l'audit.",
+      "statusPendingAudit": "La zone a été soumise et attend une révision avant de pouvoir être approuvée.",
+      "statusApproved": "La zone a passé la révision et est prête pour une activation opérationnelle.",
+      "statusActive": "La zone est disponible pour le soutien et la compensation sur la plateforme.",
+      "statusSuspended": "La zone a été temporairement suspendue et ne doit pas recevoir de nouvelles opérations."
+    },
+    "certificates": {
+      "validationAria": "Aide sur la validation du certificat",
+      "validation": "La validation vérifie si le numéro du certificat et le hash correspondent à un enregistrement émis par la plateforme.",
+      "certificateNumberAria": "Aide sur le numéro du certificat",
+      "certificateNumber": "Saisissez l'identifiant du certificat exactement comme il apparaît dans le PDF ou dans le registre d'émission.",
+      "hashAria": "Aide sur le hash du certificat",
+      "hash": "Le hash est un identifiant d'intégrité utilisé pour vérifier que le certificat correspond bien au document émis."
+    }
   }
 }

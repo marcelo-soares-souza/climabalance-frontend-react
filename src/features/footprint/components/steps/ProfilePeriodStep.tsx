@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/Input';
 import { Card, CardContent } from '@/components/ui/Card';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { cn } from '@/lib/cn';
 import { User, Building, BarChart3, ClipboardCheck, FileSpreadsheet } from 'lucide-react';
 import type { ProfileType, DataQuality } from '@/types/footprint';
@@ -27,7 +28,13 @@ export function ProfilePeriodStep({ profileType, periodStart, periodEnd, dataQua
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="font-semibold text-lg mb-1">{t('footprint.profile.typeLabel')}</h3>
+        <div className="mb-1 flex items-center gap-2">
+          <h3 className="font-semibold text-lg">{t('footprint.profile.typeLabel')}</h3>
+          <InfoTooltip
+            ariaLabel={t('tooltips.footprint.profileTypeAria')}
+            content={<p>{t('tooltips.footprint.profileType')}</p>}
+          />
+        </div>
         <p className="text-base text-text-secondary mb-3">{t('footprint.profile.typeSubtitle')}</p>
         <div className="grid grid-cols-2 gap-3">
           {([
@@ -52,7 +59,13 @@ export function ProfilePeriodStep({ profileType, periodStart, periodEnd, dataQua
       </div>
 
       <div>
-        <h3 className="font-semibold text-lg mb-1">{t('footprint.period.label')}</h3>
+        <div className="mb-1 flex items-center gap-2">
+          <h3 className="font-semibold text-lg">{t('footprint.period.label')}</h3>
+          <InfoTooltip
+            ariaLabel={t('tooltips.footprint.periodAria')}
+            content={<p>{t('tooltips.footprint.period')}</p>}
+          />
+        </div>
         <p className="text-base text-text-secondary mb-3">{t('footprint.period.subtitle')}</p>
         <div className="grid grid-cols-2 gap-4">
           <Input id="periodStart" type="date" label={t('footprint.period.start')} value={periodStart} onChange={(e) => onPeriodChange(e.target.value, periodEnd)} />
@@ -61,7 +74,13 @@ export function ProfilePeriodStep({ profileType, periodStart, periodEnd, dataQua
       </div>
 
       <div>
-        <h3 className="font-semibold text-lg mb-1">{t('footprint.dataQuality.label')}</h3>
+        <div className="mb-1 flex items-center gap-2">
+          <h3 className="font-semibold text-lg">{t('footprint.dataQuality.label')}</h3>
+          <InfoTooltip
+            ariaLabel={t('tooltips.footprint.dataQualityAria')}
+            content={<p>{t('tooltips.footprint.dataQuality')}</p>}
+          />
+        </div>
         <div className="flex gap-3">
           {(['real', 'estimated', 'standard'] as DataQuality[]).map((q) => (
             <button

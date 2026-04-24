@@ -5,6 +5,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { usersService } from '@/services/users';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { formatTCO2e, formatDate } from '@/lib/format';
@@ -85,12 +86,12 @@ export function ProfilePage() {
         <Card><CardContent className="text-center py-4">
           <TreePine className="h-6 w-6 text-primary mx-auto mb-2" />
           <p className="text-2xl font-bold text-primary">{formatTCO2e(totalCompensated)}</p>
-          <p className="text-sm text-text-secondary">{t('profile.compensated')}</p>
+          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('profile.compensated')}<InfoTooltip ariaLabel={t('profile.compensated')} content={<p>{t('tooltips.dashboard.compensated')}</p>} /></p>
         </CardContent></Card>
         <Card><CardContent className="text-center py-4">
           <TreePine className="h-6 w-6 text-success mx-auto mb-2" />
           <p className="text-2xl font-bold text-success">{totalTrees}</p>
-          <p className="text-sm text-text-secondary">{t('profile.treesPlanted')}</p>
+          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('profile.treesPlanted')}<InfoTooltip ariaLabel={t('profile.treesPlanted')} content={<p>{t('tooltips.dashboard.treesPlanted')}</p>} /></p>
         </CardContent></Card>
       </div>
 

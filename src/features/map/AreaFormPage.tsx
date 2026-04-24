@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Select } from '@/components/ui/Select';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ApiError } from '@/lib/api-client';
@@ -306,8 +307,8 @@ export function AreaFormPage() {
           <Input id="name" label={t('area.form.name')} value={formValues.name} onChange={(e) => update('name', e.target.value)} required />
           <Textarea id="description" label={t('area.form.description')} value={formValues.description} onChange={(e) => update('description', e.target.value)} />
           <div className="grid grid-cols-2 gap-4">
-            <Input id="latitude" type="number" step="any" label={t('area.form.latitude')} value={formValues.latitude} onChange={(e) => update('latitude', e.target.value)} required />
-            <Input id="longitude" type="number" step="any" label={t('area.form.longitude')} value={formValues.longitude} onChange={(e) => update('longitude', e.target.value)} required />
+            <Input id="latitude" type="number" step="any" label={t('area.form.latitude')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.locationAria')} content={<p>{t('tooltips.area.location')}</p>} />} value={formValues.latitude} onChange={(e) => update('latitude', e.target.value)} required />
+            <Input id="longitude" type="number" step="any" label={t('area.form.longitude')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.locationAria')} content={<p>{t('tooltips.area.location')}</p>} />} value={formValues.longitude} onChange={(e) => update('longitude', e.target.value)} required />
           </div>
           <div className="space-y-2">
             <p className="text-sm font-medium">{t('area.form.pickOnMap')}</p>
@@ -334,6 +335,12 @@ export function AreaFormPage() {
             <Select
               id="status"
               label={t('area.form.status')}
+              labelAdornment={
+                <InfoTooltip
+                  ariaLabel={t('tooltips.area.statusAria')}
+                  content={<p>{t('tooltips.area.statusSummary')}</p>}
+                />
+              }
               options={[
                 { value: 'draft', label: t('area.status.draft') },
                 { value: 'pending_audit', label: t('area.status.pending_audit') },
@@ -346,7 +353,7 @@ export function AreaFormPage() {
               onChange={(e) => update('status', e.target.value)}
             />
           )}
-          <Select id="biome" label={t('area.form.biome')} options={biomeOptions} value={formValues.biome} onChange={(e) => update('biome', e.target.value)} />
+          <Select id="biome" label={t('area.form.biome')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.biomeAria')} content={<p>{t('tooltips.area.biome')}</p>} />} options={biomeOptions} value={formValues.biome} onChange={(e) => update('biome', e.target.value)} />
           <div className="grid grid-cols-2 gap-4">
             <Select
               id="state"
@@ -372,12 +379,25 @@ export function AreaFormPage() {
             />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Input id="capacity" type="number" step="any" label={t('area.form.totalCapacity')} value={formValues.total_capacity_t_co2e} onChange={(e) => update('total_capacity_t_co2e', e.target.value)} />
-            <Input id="tco2e_tree" type="number" step="any" label={t('area.form.tCO2ePerTree')} value={formValues.t_co2e_per_tree_per_year} onChange={(e) => update('t_co2e_per_tree_per_year', e.target.value)} />
+            <Input id="capacity" type="number" step="any" label={t('area.form.totalCapacity')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.totalCapacityAria')} content={<p>{t('tooltips.area.totalCapacity')}</p>} />} value={formValues.total_capacity_t_co2e} onChange={(e) => update('total_capacity_t_co2e', e.target.value)} />
+            <Input
+              id="tco2e_tree"
+              type="number"
+              step="any"
+              label={t('area.form.tCO2ePerTree')}
+              labelAdornment={
+                <InfoTooltip
+                  ariaLabel={t('tooltips.shared.tco2ePerTreeAria')}
+                  content={<p>{t('tooltips.shared.tco2ePerTree')}</p>}
+                />
+              }
+              value={formValues.t_co2e_per_tree_per_year}
+              onChange={(e) => update('t_co2e_per_tree_per_year', e.target.value)}
+            />
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <Input id="price_tree" type="number" step="any" label={t('area.form.pricePerTree')} value={formValues.price_per_tree} onChange={(e) => update('price_per_tree', e.target.value)} />
-            <Input id="price_tco2e" type="number" step="any" label={t('area.form.pricePerTCO2e')} value={formValues.price_per_t_co2e} onChange={(e) => update('price_per_t_co2e', e.target.value)} />
+            <Input id="price_tree" type="number" step="any" label={t('area.form.pricePerTree')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.pricePerTreeAria')} content={<p>{t('tooltips.area.pricePerTree')}</p>} />} value={formValues.price_per_tree} onChange={(e) => update('price_per_tree', e.target.value)} />
+            <Input id="price_tco2e" type="number" step="any" label={t('area.form.pricePerTCO2e')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.pricePerTco2eAria')} content={<p>{t('tooltips.area.pricePerTco2e')}</p>} />} value={formValues.price_per_t_co2e} onChange={(e) => update('price_per_t_co2e', e.target.value)} />
           </div>
         </CardContent></Card>
         <div className="flex gap-3 mt-4">

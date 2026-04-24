@@ -8,6 +8,7 @@ import { useCompensationStore } from '@/stores/compensation-store';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { formatTCO2e, formatCurrency } from '@/lib/format';
 import { cn } from '@/lib/cn';
@@ -113,7 +114,18 @@ export function CompensationReviewPage() {
 
       {/* Mode Selection */}
       <div>
-        <h3 className="font-medium mb-3">{t('compensation.review.modeLabel')}</h3>
+        <div className="mb-3 flex items-center gap-2">
+          <h3 className="font-medium">{t('compensation.review.modeLabel')}</h3>
+          <InfoTooltip
+            ariaLabel={t('tooltips.compensation.modeAria')}
+            content={
+              <>
+                <p><strong className="text-text-primary">{t('compensation.review.treePurchase')}:</strong> {t('tooltips.compensation.treePurchase')}</p>
+                <p className="mt-2"><strong className="text-text-primary">{t('compensation.review.directTCO2e')}:</strong> {t('tooltips.compensation.directTco2e')}</p>
+              </>
+            }
+          />
+        </div>
         <div className="grid grid-cols-2 gap-3">
           <Card
             className={cn('cursor-pointer transition-all', mode === 'tree_purchase' ? 'ring-2 ring-primary' : 'hover:shadow-md')}
@@ -175,6 +187,12 @@ export function CompensationReviewPage() {
               min="0.01"
               step="0.01"
               label={t('compensation.review.tco2eAmount')}
+              labelAdornment={
+                <InfoTooltip
+                  ariaLabel={t('tooltips.shared.tco2eAria')}
+                  content={<p>{t('tooltips.shared.tco2e')}</p>}
+                />
+              }
               value={tco2eAmount}
               onChange={(e) => setTco2eAmount(parseFloat(e.target.value) || 0)}
             />

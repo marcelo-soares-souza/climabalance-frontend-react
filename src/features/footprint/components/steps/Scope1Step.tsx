@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { Factory, Info } from 'lucide-react';
 import { CategoryInputCard } from '../CategoryInputCard';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import type { FootprintInput } from '@/types/footprint';
 
 export function Scope1Step({ onSave, initialValues }: { onSave: (inputs: FootprintInput[], category: FootprintInput['category']) => void; initialValues?: Record<string, number> }) {
@@ -12,7 +13,10 @@ export function Scope1Step({ onSave, initialValues }: { onSave: (inputs: Footpri
           <Factory className="h-5 w-5 text-primary" />
         </div>
         <div>
-          <h3 className="font-semibold text-lg">{t('footprint.scope1.title')}</h3>
+          <div className="flex items-center gap-2">
+            <h3 className="font-semibold text-lg">{t('footprint.scope1.title')}</h3>
+            <InfoTooltip ariaLabel={t('tooltips.footprint.scope1Aria')} content={<p>{t('tooltips.footprint.scope1')}</p>} />
+          </div>
           <p className="text-base text-text-secondary">{t('footprint.scope1.description')}</p>
         </div>
       </div>

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { EmptyState } from '@/components/EmptyState';
 import { formatCurrency, formatDate, formatTCO2e } from '@/lib/format';
@@ -110,15 +111,15 @@ export function CompensationReportPage() {
             <span className="font-medium">{safeSummary.areaName ?? '-'}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span>{t('compensation.report.mode')}</span>
+            <span className="inline-flex items-center gap-2">{t('compensation.report.mode')}<InfoTooltip ariaLabel={t('tooltips.compensation.modeAria')} content={<p>{t('tooltips.checkout.mode')}</p>} /></span>
             <span className="font-medium">{compensationLabel}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span>{t('compensation.report.trees')}</span>
+            <span className="inline-flex items-center gap-2">{t('compensation.report.trees')}<InfoTooltip ariaLabel={t('tooltips.checkout.treesAria')} content={<p>{t('tooltips.checkout.trees')}</p>} /></span>
             <span className="font-medium">{formattedTrees}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span>{t('compensation.report.tco2e')}</span>
+            <span className="inline-flex items-center gap-2">{t('compensation.report.tco2e')}<InfoTooltip ariaLabel={t('tooltips.shared.tco2eAria')} content={<p>{t('tooltips.shared.tco2e')}</p>} /></span>
             <span className="font-medium">{formattedTCO2e}</span>
           </div>
           <div className="flex justify-between text-xl font-bold border-t pt-2">
@@ -126,7 +127,7 @@ export function CompensationReportPage() {
             <span className="text-primary">{formattedAmount}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span>{t('compensation.report.installments')}</span>
+            <span className="inline-flex items-center gap-2">{t('compensation.report.installments')}<InfoTooltip ariaLabel={t('tooltips.checkout.installmentsAria')} content={<p>{t('tooltips.checkout.installments')}</p>} /></span>
             <span className="font-medium">{safeSummary.installments}x</span>
           </div>
         </CardContent>
@@ -136,7 +137,7 @@ export function CompensationReportPage() {
         <CardHeader><h3 className="font-medium">{t('compensation.report.paymentTitle')}</h3></CardHeader>
         <CardContent className="space-y-3 text-sm">
           <div className="flex justify-between">
-            <span>{t('compensation.report.statusLabel')}</span>
+            <span className="inline-flex items-center gap-2">{t('compensation.report.statusLabel')}<InfoTooltip ariaLabel={t('tooltips.compensation.paymentStatusAria')} content={<p>{t('tooltips.compensation.paymentStatus')}</p>} /></span>
             <StatusBadge status={safePaymentResult.paymentStatus} />
           </div>
           <div className="flex justify-between">
@@ -163,7 +164,7 @@ export function CompensationReportPage() {
           {certificate ? (
             <>
               <div className="flex justify-between">
-                <span>{t('compensation.report.certificateNumber')}</span>
+                <span className="inline-flex items-center gap-2">{t('compensation.report.certificateNumber')}<InfoTooltip ariaLabel={t('tooltips.certificates.certificateNumberAria')} content={<p>{t('tooltips.certificates.certificateNumber')}</p>} /></span>
                 <span className="font-medium">{certificate.certificateNumber}</span>
               </div>
               <div className="flex justify-between">

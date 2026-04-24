@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from '@/components/ui/Input';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import type { FootprintInput } from '@/types/footprint';
 
 interface CategoryField {
@@ -22,6 +23,33 @@ interface CategoryInputCardProps {
 export function CategoryInputCard({ category, fields, onSave, initialValues = {} }: CategoryInputCardProps) {
   const { t } = useTranslation();
   const [values, setValues] = useState<Record<string, number>>(initialValues);
+
+  const getUnitTooltip = (unit: string) => {
+    switch (unit) {
+      case 'tco2e':
+        return {
+          aria: t('tooltips.shared.tco2eAria'),
+          content: t('tooltips.shared.tco2e'),
+        };
+      case 'kwh':
+        return {
+          aria: t('tooltips.footprint.units.kwhAria'),
+          content: t('tooltips.footprint.units.kwh'),
+        };
+      case 'km':
+        return {
+          aria: t('tooltips.footprint.units.kmAria'),
+          content: t('tooltips.footprint.units.km'),
+        };
+      case 'liter':
+        return {
+          aria: t('tooltips.footprint.units.literAria'),
+          content: t('tooltips.footprint.units.liter'),
+        };
+      default:
+        return null;
+    }
+  };
 
   const handleChange = (key: string, value: string) => {
     const num = parseFloat(value) || 0;
@@ -49,6 +77,14 @@ export function CategoryInputCard({ category, fields, onSave, initialValues = {}
           min="0"
           step="0.01"
           label={t(field.labelKey)}
+          labelAdornment={
+            getUnitTooltip(field.unit) ? (
+              <InfoTooltip
+                ariaLabel={getUnitTooltip(field.unit)!.aria}
+                content={<p>{getUnitTooltip(field.unit)!.content}</p>}
+              />
+            ) : undefined
+          }
           suffix={field.displayUnit ?? field.unit}
           value={values[field.key] || ''}
           onChange={(e) => handleChange(field.key, e.target.value)}

@@ -54,9 +54,14 @@
       "hasAccount": "Ya tienes cuenta?",
       "login": "Iniciar sesión",
       "role": "Tipo de cuenta",
+      "roleHelpAria": "Ayuda sobre tipos de cuenta",
+      "roleHelpTitle": "Elige el tipo que mejor represente cómo usarás la plataforma.",
       "roleIndividual": "Persona Física",
+      "roleIndividualDescription": "Para uso personal, apoyo a proyectos y seguimiento de tu impacto individual.",
       "roleLegalEntity": "Persona Jurídica",
+      "roleLegalEntityDescription": "Para empresas y organizaciones que desean gestionar impacto, apoyo y certificados institucionales.",
       "roleProducer": "Productor",
+      "roleProducerDescription": "Para responsables de áreas y proyectos ecológicos que desean registrar, actualizar y recibir apoyo.",
       "humanCheckLabel": "Respuesta",
       "humanCheckPlaceholder": "Escribe tu respuesta",
       "humanCheckReload": "Cambiar pregunta",
@@ -886,5 +891,106 @@
     "admin.users.updateError": "Error al actualizar usuario. Inténtalo de nuevo.",
     "audit.approveError": "Error al aprobar área. Inténtalo de nuevo.",
     "audit.rejectError": "Error al rechazar área. Inténtalo de nuevo."
+  },
+  "tooltips": {
+    "dashboard": {
+      "totalFootprint": "Suma de las emisiones calculadas en los registros disponibles para este usuario.",
+      "compensated": "Volumen de emisiones ya compensado en registros pagados y confirmados.",
+      "balance": "Diferencia entre el total estimado de emisiones y lo que ya fue compensado.",
+      "treesPlanted": "Cantidad total de árboles vinculados a compensaciones confirmadas."
+    },
+    "home": {
+      "inDevelopmentAria": "Ayuda sobre el estado de desarrollo del proyecto",
+      "inDevelopment": "Esta POC sigue en evolución. Algunas funciones pueden cambiar y el proyecto busca socios para continuar el desarrollo."
+    },
+    "shared": {
+      "tco2eAria": "Ayuda sobre tCO2e",
+      "tco2e": "tCO2e significa toneladas de CO2 equivalente, una medida que reúne distintos gases de efecto invernadero en una sola unidad comparable.",
+      "tco2ePerTreeAria": "Ayuda sobre tCO2e por árbol por año",
+      "tco2ePerTree": "Este valor estima cuánto carbono puede aportar por año un árbol asociado al proyecto. Es una referencia de proyección, no una garantía aislada por unidad."
+    },
+    "footprint": {
+      "dataQualityAria": "Ayuda sobre calidad de los datos",
+      "dataQuality": "Elige el nivel que mejor represente la calidad de la información usada en el cálculo. Los datos reales suelen generar estimaciones más confiables.",
+      "profileTypeAria": "Ayuda sobre tipo de perfil",
+      "profileType": "Usa Persona Física para cálculos personales y Persona Jurídica para emisiones vinculadas a una empresa u organización.",
+      "periodAria": "Ayuda sobre el período del cálculo",
+      "period": "El resultado considera solo el intervalo seleccionado. Lo ideal es usar un período representativo del consumo analizado.",
+      "scope1Aria": "Ayuda sobre Alcance 1",
+      "scope1": "El Alcance 1 incluye emisiones directas bajo tu control, como combustión, procesos y fugas fugitivas.",
+      "scope2Aria": "Ayuda sobre Alcance 2",
+      "scope2": "El Alcance 2 cubre emisiones asociadas a la energía comprada, como electricidad, vapor o calor.",
+      "scope3Aria": "Ayuda sobre Alcance 3",
+      "scope3": "El Alcance 3 agrupa emisiones indirectas de la cadena de valor, como viajes, desplazamientos, compras y residuos.",
+      "calculationStatusAria": "Ayuda sobre el estado del cálculo",
+      "statusDraft": "El borrador todavía puede editarse antes de finalizar.",
+      "statusFinalized": "Finalizado indica que el cálculo está completo y listo para uso y compensación.",
+      "totalEmissionsAria": "Ayuda sobre emisiones totales",
+      "totalEmissions": "Este es el total estimado de emisiones para el período seleccionado según los datos informados.",
+      "compensateAria": "Ayuda sobre compensación",
+      "compensate": "Puedes usar este resultado para dirigir apoyo a proyectos ecológicos y compensar las emisiones estimadas.",
+      "units": {
+        "kwhAria": "Ayuda sobre kWh",
+        "kwh": "kWh es la unidad usada para consumo de energía eléctrica.",
+        "kmAria": "Ayuda sobre kilómetros",
+        "km": "Ingresa la distancia recorrida en kilómetros.",
+        "literAria": "Ayuda sobre litros",
+        "liter": "Ingresa el volumen consumido en litros."
+      }
+    },
+    "compensation": {
+      "modeAria": "Ayuda sobre modos de compensación",
+      "treePurchase": "Ideal para apoyar proyectos ecológicos mediante plantación y manejo vinculados a árboles a lo largo del tiempo.",
+      "directTco2e": "Ideal para informar directamente el volumen de emisiones que deseas compensar en tCO2e.",
+      "paymentStatusAria": "Ayuda sobre estado del pago",
+      "paymentStatus": "El estado del pago indica si la operación financiera fue completada, está pendiente o falló."
+    },
+    "checkout": {
+      "modeAria": "Ayuda sobre el modo seleccionado",
+      "mode": "Muestra cómo fue estructurada esta compensación: por compra de árboles o por volumen directo en tCO2e.",
+      "treesAria": "Ayuda sobre cantidad de árboles",
+      "trees": "Cantidad de árboles o unidades equivalentes vinculadas a esta compensación.",
+      "totalAria": "Ayuda sobre valor total",
+      "total": "Valor financiero total estimado para esta operación.",
+      "installmentsAria": "Ayuda sobre cuotas",
+      "installments": "Número de cuotas usado en la simulación de pago.",
+      "testCardAria": "Ayuda sobre tarjeta de prueba",
+      "testCard": "Este flujo usa un pago simulado para demostración de la POC."
+    },
+    "area": {
+      "statusAria": "Ayuda sobre el estado del área",
+      "statusSummary": "El estado muestra en qué etapa se encuentra el área, desde el registro inicial hasta la activación o suspensión.",
+      "locationAria": "Ayuda sobre la ubicación del área",
+      "location": "Las coordenadas ayudan a identificar el área en el mapa y a vincular evidencias, auditoría y contexto territorial.",
+      "biomeAria": "Ayuda sobre bioma",
+      "biome": "El bioma ayuda a contextualizar ambientalmente el área y puede influir en criterios de evaluación y comunicación del proyecto.",
+      "totalCapacityAria": "Ayuda sobre capacidad total",
+      "totalCapacity": "Capacidad total estimada de compensación que el área puede soportar durante la vida del proyecto.",
+      "committedAria": "Ayuda sobre volumen comprometido",
+      "committed": "Parte de la capacidad total que ya fue reservada o vinculada a compensaciones.",
+      "availableAria": "Ayuda sobre volumen disponible",
+      "available": "Parte de la capacidad que aún está disponible para nuevas operaciones de apoyo y compensación.",
+      "usageAria": "Ayuda sobre uso de la capacidad",
+      "usage": "Porcentaje de la capacidad total del área que ya está comprometido.",
+      "pricePerTreeAria": "Ayuda sobre precio por árbol",
+      "pricePerTree": "Usa este valor cuando el apoyo se modele por número de árboles o unidades equivalentes del proyecto.",
+      "pricePerTco2eAria": "Ayuda sobre precio por tCO2e",
+      "pricePerTco2e": "Usa este valor cuando la compensación se ofrezca directamente por volumen de emisiones en tCO2e.",
+      "media": "Los medios ayudan a documentar el área, fortalecer la credibilidad y apoyar auditoría y transparencia.",
+      "contributions": "Lista de contribuciones registradas para esta área, con volumen compensado y cantidad de árboles asociada cuando corresponda.",
+      "statusDraft": "El área aún está en edición y todavía no fue enviada a auditoría.",
+      "statusPendingAudit": "El área fue enviada y espera revisión antes de poder aprobarse.",
+      "statusApproved": "El área pasó la revisión y está lista para activación operativa.",
+      "statusActive": "El área está disponible para apoyo y compensación dentro de la plataforma.",
+      "statusSuspended": "El área fue pausada temporalmente y no debería recibir nuevas operaciones."
+    },
+    "certificates": {
+      "validationAria": "Ayuda sobre validación de certificado",
+      "validation": "La validación comprueba si el número del certificado y el hash corresponden a un registro emitido por la plataforma.",
+      "certificateNumberAria": "Ayuda sobre número del certificado",
+      "certificateNumber": "Ingresa el identificador del certificado exactamente como aparece en el PDF o en el registro de emisión.",
+      "hashAria": "Ayuda sobre hash del certificado",
+      "hash": "El hash es un identificador de integridad usado para verificar que el certificado coincide con el documento emitido."
+    }
   }
 }

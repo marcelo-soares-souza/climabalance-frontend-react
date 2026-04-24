@@ -6,6 +6,7 @@ import { usersService } from '@/services/users';
 import { certificatesService } from '@/services/certificates';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
@@ -50,7 +51,10 @@ export function CertificatesPage() {
                     <p className="text-xs text-text-secondary mt-1">{cert.issuedAt ? formatDate(cert.issuedAt) : '-'}</p>
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    <StatusBadge status={cert.status} />
+                    <div className="flex items-center gap-2">
+                      <StatusBadge status={cert.status} />
+                      <InfoTooltip ariaLabel={t('tooltips.certificates.validationAria')} panelClassName="left-auto right-0" content={<p>{t('tooltips.certificates.status')}</p>} />
+                    </div>
                     <Button variant="outline" size="sm" onClick={() => handleDownload(cert.id, cert.certificateNumber)}>
                       <Download className="h-3 w-3 mr-1" /> PDF
                     </Button>

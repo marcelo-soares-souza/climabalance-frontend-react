@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Card, CardContent } from '@/components/ui/Card';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { formatTCO2e, formatDate } from '@/lib/format';
 import type { CalculationResult } from '@/types/footprint';
@@ -34,7 +35,19 @@ export function CalculationCard({
               {formatDate(calculation.periodStart)} - {formatDate(calculation.periodEnd)}
             </p>
           </div>
-          <StatusBadge status={calculation.status} />
+          <div className="flex items-center gap-2">
+            <StatusBadge status={calculation.status} />
+            <InfoTooltip
+              ariaLabel={t('tooltips.footprint.calculationStatusAria')}
+              panelClassName="left-auto right-0"
+              content={
+                <>
+                  <p><strong className="text-text-primary">{t('common.status.draft')}:</strong> {t('tooltips.footprint.statusDraft')}</p>
+                  <p className="mt-2"><strong className="text-text-primary">{t('common.status.finalized')}:</strong> {t('tooltips.footprint.statusFinalized')}</p>
+                </>
+              }
+            />
+          </div>
         </div>
         <p className="text-xl font-bold text-primary">{formatTCO2e(calculation.totalTCO2e)}</p>
         <p className="text-xs text-text-secondary mt-1">{formatDate(calculation.createdAt)}</p>

@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { Textarea } from '@/components/ui/Textarea';
 import { StatusBadge } from '@/components/StatusBadge';
 import { ErrorBanner } from '@/components/ErrorBanner';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { formatTCO2e, formatDate } from '@/lib/format';
 import { ArrowLeft, CheckCircle, XCircle, Play, MapPin } from 'lucide-react';
@@ -64,7 +65,14 @@ export function AreaAuditPage() {
           <h1 className="text-2xl font-bold">{t('audit.review.title')}: {area.name}</h1>
           <div className="flex items-center gap-2 mt-1 text-text-secondary"><MapPin className="h-4 w-4" /> {[area.city, area.state].filter(Boolean).join(', ')}</div>
         </div>
-        <StatusBadge status={area.status} />
+        <div className="flex items-center gap-2">
+          <StatusBadge status={area.status} />
+          <InfoTooltip
+            ariaLabel={t('tooltips.area.statusAria')}
+            panelClassName="left-auto right-0"
+            content={<p>{t('tooltips.area.statusSummary')}</p>}
+          />
+        </div>
       </div>
 
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
@@ -73,7 +81,7 @@ export function AreaAuditPage() {
         <h3 className="font-medium mb-3">{t('audit.review.details')}</h3>
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div><span className="text-text-secondary">{t('area.totalCapacity')}:</span> <span className="font-medium">{formatTCO2e(area.totalCapacityTCO2e)}</span></div>
-          <div><span className="text-text-secondary">{t('area.tCO2ePerTree')}:</span> <span className="font-medium">{area.tCO2ePerTreePerYear}</span></div>
+          <div><span className="inline-flex items-center gap-2 text-text-secondary">{t('area.tCO2ePerTree')}: <InfoTooltip ariaLabel={t('tooltips.shared.tco2ePerTreeAria')} content={<p>{t('tooltips.shared.tco2ePerTree')}</p>} /></span> <span className="font-medium">{area.tCO2ePerTreePerYear}</span></div>
           <div><span className="text-text-secondary">{t('area.form.biome')}:</span> <span className="font-medium">{area.biome ? t(`map.biomes.${area.biome}`, area.biome) : '-'}</span></div>
           <div><span className="text-text-secondary">{t('common.createdAt')}:</span> <span className="font-medium">{formatDate(area.createdAt)}</span></div>
         </div>

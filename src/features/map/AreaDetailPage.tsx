@@ -9,6 +9,7 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { Badge } from '@/components/ui/Badge';
 import { Dialog, DialogTitle, DialogContent, DialogActions } from '@/components/ui/Dialog';
 import { Input } from '@/components/ui/Input';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { useCompensationStore } from '@/stores/compensation-store';
 import { useAuth } from '@/hooks/use-auth';
@@ -169,7 +170,22 @@ export function AreaDetailPage() {
             {t('area.ownerEmail')}: {area.ownerEmail || '-'}
           </p>
         </div>
-        <StatusBadge status={area.status} />
+        <div className="flex items-center gap-2">
+          <StatusBadge status={area.status} />
+          <InfoTooltip
+            ariaLabel={t('tooltips.area.statusAria')}
+            panelClassName="left-auto right-0"
+            content={
+              <>
+                <p><strong className="text-text-primary">{t('common.status.draft')}:</strong> {t('tooltips.area.statusDraft')}</p>
+                <p className="mt-2"><strong className="text-text-primary">{t('common.status.pending_audit')}:</strong> {t('tooltips.area.statusPendingAudit')}</p>
+                <p className="mt-2"><strong className="text-text-primary">{t('common.status.approved')}:</strong> {t('tooltips.area.statusApproved')}</p>
+                <p className="mt-2"><strong className="text-text-primary">{t('common.status.active')}:</strong> {t('tooltips.area.statusActive')}</p>
+                <p className="mt-2"><strong className="text-text-primary">{t('common.status.suspended')}:</strong> {t('tooltips.area.statusSuspended')}</p>
+              </>
+            }
+          />
+        </div>
       </div>
 
       {area.description && (
@@ -178,22 +194,22 @@ export function AreaDetailPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card><CardContent className="text-center py-4">
-          <p className="text-sm text-text-secondary">{t('area.totalCapacity')}</p>
+          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('area.totalCapacity')}<InfoTooltip ariaLabel={t('tooltips.area.totalCapacityAria')} content={<p>{t('tooltips.area.totalCapacity')}</p>} /></p>
           <p className="text-xl font-bold text-primary">{formatTCO2e(area.totalCapacityTCO2e)}</p>
         </CardContent></Card>
         <Card><CardContent className="text-center py-4">
-          <p className="text-sm text-text-secondary">{t('area.committed')}</p>
+          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('area.committed')}<InfoTooltip ariaLabel={t('tooltips.area.committedAria')} content={<p>{t('tooltips.area.committed')}</p>} /></p>
           <p className="text-xl font-bold text-amber-600">{formatTCO2e(area.committedTCO2e)}</p>
         </CardContent></Card>
         <Card><CardContent className="text-center py-4">
-          <p className="text-sm text-text-secondary">{t('area.available')}</p>
+          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('area.available')}<InfoTooltip ariaLabel={t('tooltips.area.availableAria')} content={<p>{t('tooltips.area.available')}</p>} /></p>
           <p className="text-xl font-bold text-success">{formatTCO2e(available)}</p>
         </CardContent></Card>
       </div>
 
       <Card><CardContent>
         <div className="flex justify-between text-sm mb-2">
-          <span>{t('area.usage')}</span>
+          <span className="inline-flex items-center gap-2">{t('area.usage')}<InfoTooltip ariaLabel={t('tooltips.area.usageAria')} content={<p>{t('tooltips.area.usage')}</p>} /></span>
           <span>{usagePct.toFixed(1)}%</span>
         </div>
         <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
@@ -204,7 +220,13 @@ export function AreaDetailPage() {
       {area.biome && (
         <Card><CardContent className="flex items-center gap-4">
           <Badge variant="success">{t(`map.biomes.${area.biome}`, area.biome)}</Badge>
-          <span className="text-sm text-text-secondary">{t('area.tCO2ePerTree')}: {formatNumber(area.tCO2ePerTreePerYear, 'pt-BR', 4)} tCO2e/tree/year</span>
+          <span className="flex items-center gap-2 text-sm text-text-secondary">
+            {t('area.tCO2ePerTree')}: {formatNumber(area.tCO2ePerTreePerYear, 'pt-BR', 4)} tCO2e/tree/year
+            <InfoTooltip
+              ariaLabel={t('tooltips.shared.tco2ePerTreeAria')}
+              content={<p>{t('tooltips.shared.tco2ePerTree')}</p>}
+            />
+          </span>
         </CardContent></Card>
       )}
 
@@ -212,7 +234,7 @@ export function AreaDetailPage() {
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <h3 className="font-medium flex items-center gap-2"><Image className="h-4 w-4" /> {t('area.media')} ({media?.length ?? 0})</h3>
+            <h3 className="font-medium flex items-center gap-2"><Image className="h-4 w-4" /> {t('area.media')} ({media?.length ?? 0}) <InfoTooltip ariaLabel={t('area.media')} content={<p>{t('tooltips.area.media')}</p>} /></h3>
             {canManageMedia && (
               <>
                 <input ref={fileInputRef} type="file" accept="image/*,video/*" className="hidden" onChange={handleFileSelect} />
@@ -262,7 +284,7 @@ export function AreaDetailPage() {
       {/* Contributions */}
       {contributions && contributions.length > 0 && (
         <Card>
-          <CardHeader><h3 className="font-medium">{t('area.contributions')} ({contributions.length})</h3></CardHeader>
+          <CardHeader><h3 className="font-medium">{t('area.contributions')} ({contributions.length}) <InfoTooltip ariaLabel={t('area.contributions')} content={<p>{t('tooltips.area.contributions')}</p>} /></h3></CardHeader>
           <CardContent>
             <div className="space-y-2">
               {contributions.map((c) => (

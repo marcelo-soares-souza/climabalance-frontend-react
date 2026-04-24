@@ -1,22 +1,26 @@
-import { forwardRef, type SelectHTMLAttributes } from 'react';
+import { forwardRef, type ReactNode, type SelectHTMLAttributes } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
 interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
+  labelAdornment?: ReactNode;
   error?: string;
   options: Array<{ value: string; label: string }>;
   placeholder?: string;
 }
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, label, error, options, placeholder, id, ...props }, ref) => {
+  ({ className, label, labelAdornment, error, options, placeholder, id, ...props }, ref) => {
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={id} className="block text-base font-medium text-text-secondary mb-1.5">
-            {label}
-          </label>
+          <div className="mb-1.5 flex items-center gap-2">
+            <label htmlFor={id} className="block text-base font-medium text-text-secondary">
+              {label}
+            </label>
+            {labelAdornment}
+          </div>
         )}
         <div className="relative">
           <select

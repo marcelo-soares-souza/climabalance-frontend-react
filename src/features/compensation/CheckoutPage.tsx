@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { formatCurrency, formatTCO2e } from '@/lib/format';
 import { ApiError } from '@/lib/api-client';
@@ -151,16 +152,16 @@ export function CompensationCheckoutPage() {
         <CardHeader><h3 className="font-medium">{t('checkout.summary')}</h3></CardHeader>
         <CardContent className="space-y-2 text-sm">
           <div className="flex justify-between"><span>{t('checkout.area')}</span><span className="font-medium">{store.areaName}</span></div>
-          <div className="flex justify-between"><span>{t('checkout.mode')}</span><span className="font-medium">{t(`compensation.mode.${store.compensationMode}`)}</span></div>
+          <div className="flex justify-between"><span className="inline-flex items-center gap-2">{t('checkout.mode')}<InfoTooltip ariaLabel={t('tooltips.compensation.modeAria')} content={<p>{t('tooltips.checkout.mode')}</p>} /></span><span className="font-medium">{t(`compensation.mode.${store.compensationMode}`)}</span></div>
           {store.treesRequested != null && store.treesRequested > 0 && (
-            <div className="flex justify-between"><span>{t('checkout.trees')}</span><span className="font-medium">{store.treesRequested}</span></div>
+            <div className="flex justify-between"><span className="inline-flex items-center gap-2">{t('checkout.trees')}<InfoTooltip ariaLabel={t('tooltips.checkout.treesAria')} content={<p>{t('tooltips.checkout.trees')}</p>} /></span><span className="font-medium">{store.treesRequested}</span></div>
           )}
           {store.totalTCO2e != null && store.totalTCO2e > 0 && (
-            <div className="flex justify-between"><span>{t('checkout.tco2e')}</span><span className="font-medium">{formatTCO2e(store.totalTCO2e)}</span></div>
+            <div className="flex justify-between"><span className="inline-flex items-center gap-2">{t('checkout.tco2e')}<InfoTooltip ariaLabel={t('tooltips.shared.tco2eAria')} content={<p>{t('tooltips.shared.tco2e')}</p>} /></span><span className="font-medium">{formatTCO2e(store.totalTCO2e)}</span></div>
           )}
           {summaryTotalAmount != null && summaryTotalAmount > 0 && (
             <div className="flex justify-between text-lg font-bold border-t pt-2">
-              <span>{t('checkout.total')}</span>
+              <span className="inline-flex items-center gap-2">{t('checkout.total')}<InfoTooltip ariaLabel={t('tooltips.checkout.totalAria')} content={<p>{t('tooltips.checkout.total')}</p>} /></span>
               <span className="text-primary">{formatCurrency(summaryTotalAmount)}</span>
             </div>
           )}
@@ -187,7 +188,7 @@ export function CompensationCheckoutPage() {
           </div>
           <Select id="installments" label={t('checkout.installments')} value={installments} onChange={(e) => setInstallments(e.target.value)}
             options={Array.from({ length: 12 }, (_, i) => ({ value: String(i + 1), label: `${i + 1}x` }))} />
-          <p className="text-xs text-text-secondary">{t('checkout.testCardNote')}</p>
+          <p className="inline-flex items-center gap-2 text-xs text-text-secondary">{t('checkout.testCardNote')}<InfoTooltip ariaLabel={t('tooltips.checkout.testCardAria')} content={<p>{t('tooltips.checkout.testCard')}</p>} /></p>
         </CardContent>
       </Card>
 

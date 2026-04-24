@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ResultBreakdownChart } from './ResultBreakdownChart';
 import { formatTCO2e, formatKgCO2e } from '@/lib/format';
 import type { CalculationResult } from '@/types/footprint';
@@ -28,7 +29,7 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
       <Card className="bg-gradient-to-br from-primary via-primary-light to-accent text-white overflow-hidden">
         <CardContent className="py-10 text-center relative">
           <Leaf className="absolute top-4 right-4 h-16 w-16 text-white/10" />
-          <p className="text-base opacity-80 mb-2">{t('footprint.result.totalEmissions')}</p>
+          <p className="inline-flex items-center gap-2 text-base opacity-80 mb-2">{t('footprint.result.totalEmissions')} <InfoTooltip ariaLabel={t('tooltips.footprint.totalEmissionsAria')} content={<p>{t('tooltips.footprint.totalEmissions')}</p>} /></p>
           <p className="text-5xl font-bold mb-2">{formatTCO2e(result.totalTCO2e)}</p>
           <p className="text-base opacity-70">{formatKgCO2e(result.totalKgCO2e)}</p>
           {isBelowAvg && (
@@ -78,7 +79,10 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
               <TreePine className="h-6 w-6 text-accent" />
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-lg">{t('footprint.result.compensateTitle')}</h3>
+              <div className="flex items-center gap-2">
+                <h3 className="font-semibold text-lg">{t('footprint.result.compensateTitle')}</h3>
+                <InfoTooltip ariaLabel={t('tooltips.footprint.compensateAria')} content={<p>{t('tooltips.footprint.compensate')}</p>} />
+              </div>
               <p className="text-base text-text-secondary mt-1">{t('footprint.result.compensateDescription')}</p>
             </div>
           </div>

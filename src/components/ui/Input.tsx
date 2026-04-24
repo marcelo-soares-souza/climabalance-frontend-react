@@ -1,20 +1,24 @@
-import { forwardRef, type InputHTMLAttributes } from 'react';
+import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cn } from '@/lib/cn';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  labelAdornment?: ReactNode;
   error?: string;
   suffix?: string;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, error, suffix, id, ...props }, ref) => {
+  ({ className, label, labelAdornment, error, suffix, id, ...props }, ref) => {
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={id} className="block text-base font-medium text-text-secondary mb-1.5">
-            {label}
-          </label>
+          <div className="mb-1.5 flex items-center gap-2">
+            <label htmlFor={id} className="block text-base font-medium text-text-secondary">
+              {label}
+            </label>
+            {labelAdornment}
+          </div>
         )}
         <div className="relative">
           <input

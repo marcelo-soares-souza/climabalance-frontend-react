@@ -6,6 +6,7 @@ import { usersService } from "@/services/users";
 import { footprintService } from "@/services/footprint";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { EmptyState } from "@/components/EmptyState";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -44,6 +45,12 @@ function UnauthenticatedHome() {
         />
         <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium mb-4">
           {t("home.welcome.inDevelopment")}
+          <InfoTooltip
+            className="ml-2"
+            ariaLabel={t("tooltips.home.inDevelopmentAria")}
+            panelClassName="left-auto right-0"
+            content={<p>{t("tooltips.home.inDevelopment")}</p>}
+          />
         </div>
         <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
           {t("home.welcome.title")}
@@ -160,6 +167,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard
           label={t("home.dashboard.totalFootprint")}
+          tooltip={t("tooltips.dashboard.totalFootprint")}
           value={loadingCalc ? null : formatTCO2e(totalFootprint)}
           icon={<Calculator className="h-5 w-5" />}
           color="text-amber-600"
@@ -168,6 +176,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
         />
         <StatCard
           label={t("home.dashboard.compensated")}
+          tooltip={t("tooltips.dashboard.compensated")}
           value={loadingComp ? null : formatTCO2e(totalCompensated)}
           icon={<TreePine className="h-5 w-5" />}
           color="text-success"
@@ -176,6 +185,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
         />
         <StatCard
           label={t("home.dashboard.balance")}
+          tooltip={t("tooltips.dashboard.balance")}
           value={loadingCalc || loadingComp ? null : formatTCO2e(balance)}
           icon={<Leaf className="h-5 w-5" />}
           color={balance > 0 ? "text-error" : "text-success"}
@@ -184,6 +194,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
         />
         <StatCard
           label={t("home.dashboard.treesPlanted")}
+          tooltip={t("tooltips.dashboard.treesPlanted")}
           value={loadingComp ? null : formatNumber(totalTrees, "pt-BR", 0)}
           icon={<TreePine className="h-5 w-5" />}
           color="text-primary"
@@ -301,6 +312,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
 
 function StatCard({
   label,
+  tooltip,
   value,
   icon,
   color,
@@ -308,6 +320,7 @@ function StatCard({
   borderColor,
 }: {
   label: string;
+  tooltip?: string;
   value: string | null;
   icon: React.ReactNode;
   color: string;
@@ -319,7 +332,7 @@ function StatCard({
       <CardContent className="py-4">
         <div className="flex items-center gap-3 mb-2">
           <div className={`p-2 rounded-lg ${bg} ${color}`}>{icon}</div>
-          <span className="text-base text-text-secondary">{label}</span>
+          <span className="inline-flex items-center gap-2 text-base text-text-secondary">{label}{tooltip ? <InfoTooltip ariaLabel={label} content={<p>{tooltip}</p>} /> : null}</span>
         </div>
         {value === null ? (
           <Skeleton className="h-7 w-24" />

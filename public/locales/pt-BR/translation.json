@@ -54,9 +54,14 @@
       "hasAccount": "J\u00e1 tem conta?",
       "login": "Entrar",
       "role": "Tipo de conta",
+      "roleHelpAria": "Ajuda sobre tipos de conta",
+      "roleHelpTitle": "Escolha o tipo que melhor representa seu uso da plataforma.",
       "roleIndividual": "Pessoa F\u00edsica",
+      "roleIndividualDescription": "Para uso pessoal, apoio a projetos e acompanhamento do seu impacto individual.",
       "roleLegalEntity": "Pessoa Jur\u00eddica",
+      "roleLegalEntityDescription": "Para empresas e organiza\u00e7\u00f5es que desejam gerenciar impacto, apoio e certificados institucionais.",
       "roleProducer": "Produtor",
+      "roleProducerDescription": "Para respons\u00e1veis por \u00e1reas e projetos ecol\u00f3gicos que desejam cadastrar, atualizar e receber apoio.",
       "humanCheckLabel": "Resposta",
       "humanCheckPlaceholder": "Digite sua resposta",
       "humanCheckReload": "Trocar pergunta",
@@ -886,5 +891,106 @@
     "admin.users.updateError": "Erro ao atualizar usu\u00e1rio. Tente novamente.",
     "audit.approveError": "Erro ao aprovar \u00e1rea. Tente novamente.",
     "audit.rejectError": "Erro ao rejeitar \u00e1rea. Tente novamente."
+  },
+  "tooltips": {
+    "dashboard": {
+      "totalFootprint": "Soma das emiss\u00f5es calculadas nos registros dispon\u00edveis para este usu\u00e1rio.",
+      "compensated": "Volume de emiss\u00f5es j\u00e1 compensado em registros pagos e confirmados.",
+      "balance": "Diferen\u00e7a entre o total estimado de emiss\u00f5es e o total j\u00e1 compensado.",
+      "treesPlanted": "Quantidade total de \u00e1rvores vinculadas \u00e0s compensa\u00e7\u00f5es confirmadas."
+    },
+    "home": {
+      "inDevelopmentAria": "Ajuda sobre o status de desenvolvimento do projeto",
+      "inDevelopment": "Esta POC est\u00e1 em evolu\u00e7\u00e3o. Algumas funcionalidades podem mudar, e o projeto busca parceiros para continuar o desenvolvimento."
+    },
+    "shared": {
+      "tco2eAria": "Ajuda sobre tCO2e",
+      "tco2e": "tCO2e significa toneladas de CO2 equivalente, uma medida que soma diferentes gases de efeito estufa em uma unidade compar\u00e1vel.",
+      "tco2ePerTreeAria": "Ajuda sobre tCO2e por \u00e1rvore por ano",
+      "tco2ePerTree": "Este valor estima quanto carbono uma \u00e1rvore associada ao projeto pode contribuir por ano. \u00c9 uma refer\u00eancia de proje\u00e7\u00e3o, n\u00e3o uma garantia isolada por unidade."
+    },
+    "footprint": {
+      "dataQualityAria": "Ajuda sobre qualidade dos dados",
+      "dataQuality": "Escolha o n\u00edvel que melhor representa a qualidade das informa\u00e7\u00f5es usadas no c\u00e1lculo. Dados reais tendem a gerar estimativas mais confi\u00e1veis.",
+      "profileTypeAria": "Ajuda sobre tipo de perfil",
+      "profileType": "Use Pessoa F\u00edsica para c\u00e1lculos pessoais e Pessoa Jur\u00eddica para emiss\u00f5es ligadas a empresa ou organiza\u00e7\u00e3o.",
+      "periodAria": "Ajuda sobre per\u00edodo do c\u00e1lculo",
+      "period": "O resultado considera apenas o intervalo informado. O ideal \u00e9 usar um per\u00edodo representativo do consumo analisado.",
+      "scope1Aria": "Ajuda sobre Escopo 1",
+      "scope1": "Escopo 1 inclui emiss\u00f5es diretas sob seu controle, como combust\u00e3o, processos e perdas fugitivas.",
+      "scope2Aria": "Ajuda sobre Escopo 2",
+      "scope2": "Escopo 2 cobre emiss\u00f5es associadas \u00e0 energia adquirida, como eletricidade, calor ou vapor.",
+      "scope3Aria": "Ajuda sobre Escopo 3",
+      "scope3": "Escopo 3 re\u00fane emiss\u00f5es indiretas da cadeia de valor, como viagens, deslocamento, compras e res\u00edduos.",
+      "calculationStatusAria": "Ajuda sobre status do c\u00e1lculo",
+      "statusDraft": "Rascunho pode ser editado antes da finaliza\u00e7\u00e3o.",
+      "statusFinalized": "Finalizado indica que o c\u00e1lculo foi conclu\u00eddo e est\u00e1 pronto para uso e compensa\u00e7\u00e3o.",
+      "totalEmissionsAria": "Ajuda sobre emiss\u00f5es totais",
+      "totalEmissions": "Este \u00e9 o total estimado de emiss\u00f5es do per\u00edodo selecionado com base nos dados informados.",
+      "compensateAria": "Ajuda sobre compensa\u00e7\u00e3o",
+      "compensate": "Voc\u00ea pode usar este resultado para direcionar apoio a projetos ecol\u00f3gicos e compensar as emiss\u00f5es estimadas.",
+      "units": {
+        "kwhAria": "Ajuda sobre kWh",
+        "kwh": "kWh \u00e9 a unidade usada para consumo de energia el\u00e9trica.",
+        "kmAria": "Ajuda sobre quil\u00f4metros",
+        "km": "Informe a dist\u00e2ncia percorrida em quil\u00f4metros.",
+        "literAria": "Ajuda sobre litros",
+        "liter": "Informe o volume consumido em litros."
+      }
+    },
+    "compensation": {
+      "modeAria": "Ajuda sobre modos de compensa\u00e7\u00e3o",
+      "treePurchase": "Ideal para apoiar projetos ecol\u00f3gicos por meio do plantio e manejo vinculado a \u00e1rvores ao longo do tempo.",
+      "directTco2e": "Ideal para informar diretamente o volume de emiss\u00f5es que voc\u00ea deseja compensar em tCO2e.",
+      "paymentStatusAria": "Ajuda sobre status do pagamento",
+      "paymentStatus": "O status do pagamento indica se a opera\u00e7\u00e3o financeira foi conclu\u00edda, est\u00e1 pendente ou falhou."
+    },
+    "checkout": {
+      "modeAria": "Ajuda sobre modo selecionado",
+      "mode": "Mostra como esta compensa\u00e7\u00e3o foi estruturada: por compra de \u00e1rvores ou por volume direto em tCO2e.",
+      "treesAria": "Ajuda sobre quantidade de \u00e1rvores",
+      "trees": "Quantidade de \u00e1rvores ou unidades equivalentes vinculadas \u00e0 compensa\u00e7\u00e3o.",
+      "totalAria": "Ajuda sobre valor total",
+      "total": "Valor financeiro total estimado para esta opera\u00e7\u00e3o.",
+      "installmentsAria": "Ajuda sobre parcelas",
+      "installments": "N\u00famero de parcelas usado na simula\u00e7\u00e3o de pagamento.",
+      "testCardAria": "Ajuda sobre cart\u00e3o de teste",
+      "testCard": "Este fluxo usa um pagamento simulado para demonstra\u00e7\u00e3o da POC."
+    },
+    "area": {
+      "statusAria": "Ajuda sobre status da \u00e1rea",
+      "statusSummary": "O status mostra em que etapa a \u00e1rea est\u00e1, desde o cadastro inicial at\u00e9 a ativa\u00e7\u00e3o ou suspens\u00e3o.",
+      "locationAria": "Ajuda sobre localiza\u00e7\u00e3o da \u00e1rea",
+      "location": "As coordenadas ajudam a identificar a \u00e1rea no mapa e a vincular evid\u00eancias, auditoria e contexto territorial.",
+      "biomeAria": "Ajuda sobre bioma",
+      "biome": "O bioma ajuda a contextualizar a \u00e1rea ambientalmente e pode influenciar crit\u00e9rios de avalia\u00e7\u00e3o e comunica\u00e7\u00e3o do projeto.",
+      "totalCapacityAria": "Ajuda sobre capacidade total",
+      "totalCapacity": "Capacidade total estimada de compensa\u00e7\u00e3o que a \u00e1rea pode suportar ao longo do projeto.",
+      "committedAria": "Ajuda sobre volume comprometido",
+      "committed": "Parte da capacidade total que j\u00e1 foi reservada ou vinculada a compensa\u00e7\u00f5es.",
+      "availableAria": "Ajuda sobre volume dispon\u00edvel",
+      "available": "Parcela da capacidade ainda dispon\u00edvel para novas opera\u00e7\u00f5es de apoio e compensa\u00e7\u00e3o.",
+      "usageAria": "Ajuda sobre uso da capacidade",
+      "usage": "Percentual da capacidade total da \u00e1rea que j\u00e1 est\u00e1 comprometido.",
+      "pricePerTreeAria": "Ajuda sobre pre\u00e7o por \u00e1rvore",
+      "pricePerTree": "Use este valor quando o apoio for modelado por n\u00famero de \u00e1rvores ou unidades equivalentes do projeto.",
+      "pricePerTco2eAria": "Ajuda sobre pre\u00e7o por tCO2e",
+      "pricePerTco2e": "Use este valor quando a compensa\u00e7\u00e3o for ofertada diretamente por volume de emiss\u00f5es em tCO2e.",
+      "media": "As m\u00eddias ajudam a documentar a \u00e1rea, fortalecer a credibilidade e apoiar auditoria e transpar\u00eancia.",
+      "contributions": "Lista de contribui\u00e7\u00f5es registradas para esta \u00e1rea, com volume compensado e quantidade de \u00e1rvores associadas quando aplic\u00e1vel.",
+      "statusDraft": "A \u00e1rea ainda est\u00e1 em edi\u00e7\u00e3o e n\u00e3o foi enviada para auditoria.",
+      "statusPendingAudit": "A \u00e1rea foi enviada e aguarda revis\u00e3o antes de poder ser aprovada.",
+      "statusApproved": "A \u00e1rea passou pela revis\u00e3o e est\u00e1 pronta para ativa\u00e7\u00e3o operacional.",
+      "statusActive": "A \u00e1rea est\u00e1 dispon\u00edvel para apoio e compensa\u00e7\u00e3o na plataforma.",
+      "statusSuspended": "A \u00e1rea foi temporariamente interrompida e n\u00e3o deve receber novas opera\u00e7\u00f5es."
+    },
+    "certificates": {
+      "validationAria": "Ajuda sobre valida\u00e7\u00e3o de certificado",
+      "validation": "A valida\u00e7\u00e3o confere se o n\u00famero do certificado e o hash informado correspondem a um registro emitido pela plataforma.",
+      "certificateNumberAria": "Ajuda sobre n\u00famero do certificado",
+      "certificateNumber": "Informe o identificador do certificado exatamente como ele aparece no PDF ou no registro de emiss\u00e3o.",
+      "hashAria": "Ajuda sobre hash do certificado",
+      "hash": "O hash \u00e9 um identificador de integridade usado para verificar se o certificado corresponde ao documento emitido."
+    }
   }
 }

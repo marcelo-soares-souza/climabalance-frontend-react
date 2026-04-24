@@ -6,6 +6,7 @@ import type { CertificateValidation } from '@/types/certificate';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { formatDate } from '@/lib/format';
 import { ShieldCheck, ShieldX, Search } from 'lucide-react';
@@ -30,7 +31,13 @@ export function CertificateValidationPage() {
   return (
     <div className="max-w-xl mx-auto space-y-6">
       <div className="text-center">
-        <h1 className="text-2xl font-bold">{t('certificates.validate.title')}</h1>
+        <div className="flex items-center justify-center gap-2">
+          <h1 className="text-2xl font-bold">{t('certificates.validate.title')}</h1>
+          <InfoTooltip
+            ariaLabel={t('tooltips.certificates.validationAria')}
+            content={<p>{t('tooltips.certificates.validation')}</p>}
+          />
+        </div>
         <p className="text-text-secondary mt-2">{t('certificates.validate.description')}</p>
       </div>
 
@@ -39,6 +46,12 @@ export function CertificateValidationPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
               label={t('certificates.validate.certificateNumber')}
+              labelAdornment={
+                <InfoTooltip
+                  ariaLabel={t('tooltips.certificates.certificateNumberAria')}
+                  content={<p>{t('tooltips.certificates.certificateNumber')}</p>}
+                />
+              }
               value={certificateNumber}
               onChange={(e) => setCertificateNumber(e.target.value)}
               placeholder={t('certificates.validate.certificateNumberPlaceholder')}
@@ -46,6 +59,12 @@ export function CertificateValidationPage() {
             />
             <Input
               label={t('certificates.validate.hash')}
+              labelAdornment={
+                <InfoTooltip
+                  ariaLabel={t('tooltips.certificates.hashAria')}
+                  content={<p>{t('tooltips.certificates.hash')}</p>}
+                />
+              }
               value={hash}
               onChange={(e) => setHash(e.target.value)}
               placeholder={t('certificates.validate.hashPlaceholder')}

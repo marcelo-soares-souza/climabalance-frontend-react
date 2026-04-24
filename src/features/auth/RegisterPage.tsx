@@ -5,6 +5,7 @@ import { AuthLayout } from './components/AuthLayout';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
+import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { authService } from '@/services/auth';
 import { useLocale } from '@/hooks/use-locale';
@@ -99,7 +100,26 @@ export function RegisterPage() {
         <Input id="email" type="email" label={t('auth.email')} value={email} onChange={(e) => { setEmail(e.target.value); setFieldErrors((current) => ({ ...current, email: '' })); }} error={fieldErrors.email} required autoFocus />
         <Input id="password" type="password" label={t('auth.password')} value={password} onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }} error={fieldErrors.password} required />
         <Input id="passwordConfirm" type="password" label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => { setPasswordConfirm(e.target.value); setFieldErrors((current) => ({ ...current, password_confirm: '' })); }} error={fieldErrors.password_confirm} required />
-        <Select id="roleKey" label={t('auth.register.role')} options={roleOptions} value={roleKey} onChange={(e) => setRoleKey(e.target.value)} />
+        <Select
+          id="roleKey"
+          label={t('auth.register.role')}
+          labelAdornment={
+            <InfoTooltip
+              ariaLabel={t('auth.register.roleHelpAria')}
+              content={
+                <>
+                  <p className="font-semibold text-text-primary">{t('auth.register.roleHelpTitle')}</p>
+                  <p className="mt-2"><strong className="text-text-primary">{t('auth.register.roleIndividual')}:</strong> {t('auth.register.roleIndividualDescription')}</p>
+                  <p className="mt-2"><strong className="text-text-primary">{t('auth.register.roleLegalEntity')}:</strong> {t('auth.register.roleLegalEntityDescription')}</p>
+                  <p className="mt-2"><strong className="text-text-primary">{t('auth.register.roleProducer')}:</strong> {t('auth.register.roleProducerDescription')}</p>
+                </>
+              }
+            />
+          }
+          options={roleOptions}
+          value={roleKey}
+          onChange={(e) => setRoleKey(e.target.value)}
+        />
         <Input
           id="humanAnswer"
           label={humanCheck?.question ?? t('auth.register.humanCheckLoading')}
