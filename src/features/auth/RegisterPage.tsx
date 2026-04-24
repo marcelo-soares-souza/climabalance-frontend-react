@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { AuthLayout } from './components/AuthLayout';
@@ -9,6 +9,7 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { authService } from '@/services/auth';
 import { useLocale } from '@/hooks/use-locale';
 import { ApiError } from '@/lib/api-client';
+import type { HumanCheckChallenge } from '@/types/auth';
 
 export function RegisterPage() {
   const { t } = useTranslation();
@@ -18,7 +19,10 @@ export function RegisterPage() {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [roleKey, setRoleKey] = useState('individual');
+  const [humanAnswer, setHumanAnswer] = useState('');
+  const [humanCheck, setHumanCheck] = useState<HumanCheckChallenge | null>(null);
   const [loading, setLoading] = useState(false);
+  const [loadingHumanCheck, setLoadingHumanCheck] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const roleOptions = [
@@ -27,6 +31,23 @@ export function RegisterPage() {
     { value: 'producer', label: t('auth.register.roleProducer') },
   ];
 
+  const loadHumanCheck = async () => {
+    setLoadingHumanCheck(true);
+    try {
+      const challenge = await authService.getHumanCheck(locale);
+      setHumanCheck(challenge);
+      setHumanAnswer('');
+    } catch {
+      setError('auth.register.humanCheckLoadError');
+    } finally {
+      setLoadingHumanCheck(false);
+    }
+  };
+
+  useEffect(() => {
+    loadHumanCheck();
+  }, [locale]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -34,12 +55,27 @@ export function RegisterPage() {
       setError('auth.register.passwordMismatch');
       return;
     }
+    if (!humanCheck?.challenge_id) {
+      setError('auth.register.humanCheckLoadError');
+      return;
+    }
     setLoading(true);
     try {
-      await authService.register({ email, password, password_confirm: passwordConfirm, locale, role_key: roleKey });
+      await authService.register({
+        email,
+        password,
+        password_confirm: passwordConfirm,
+        human_challenge_id: humanCheck.challenge_id,
+        human_answer: humanAnswer,
+        locale,
+        role_key: roleKey,
+      });
       navigate('/confirm-email', { state: { email } });
     } catch (err) {
       setError(err instanceof ApiError ? err.messageKey : 'auth.register.error');
+      if (err instanceof ApiError && err.messageKey === 'auth.register.humanCheckInvalid') {
+        loadHumanCheck();
+      }
     } finally {
       setLoading(false);
     }
@@ -54,6 +90,18 @@ export function RegisterPage() {
         <Input id="password" type="password" label={t('auth.password')} value={password} onChange={(e) => setPassword(e.target.value)} required />
         <Input id="passwordConfirm" type="password" label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => setPasswordConfirm(e.target.value)} required />
         <Select id="roleKey" label={t('auth.register.role')} options={roleOptions} value={roleKey} onChange={(e) => setRoleKey(e.target.value)} />
+        <Input
+          id="humanAnswer"
+          label={humanCheck?.question ?? t('auth.register.humanCheckLoading')}
+          value={humanAnswer}
+          onChange={(e) => setHumanAnswer(e.target.value)}
+          required
+          disabled={loadingHumanCheck || !humanCheck}
+          placeholder={t('auth.register.humanCheckPlaceholder')}
+        />
+        <Button type="button" variant="outline" className="w-full" onClick={loadHumanCheck} disabled={loadingHumanCheck}>
+          {loadingHumanCheck ? t('auth.register.humanCheckLoading') : t('auth.register.humanCheckReload')}
+        </Button>
         <Button type="submit" className="w-full" loading={loading}>{t('auth.register.submit')}</Button>
       </form>
       <p className="mt-6 text-center text-sm text-text-secondary">

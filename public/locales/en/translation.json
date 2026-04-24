@@ -57,6 +57,11 @@
       "roleIndividual": "Individual",
       "roleLegalEntity": "Legal Entity",
       "roleProducer": "Producer",
+      "humanCheckPlaceholder": "Type your answer",
+      "humanCheckReload": "Change question",
+      "humanCheckLoading": "Loading question...",
+      "humanCheckInvalid": "Incorrect answer. Please try again.",
+      "humanCheckLoadError": "Unable to load the human check. Please try again.",
       "error": "Failed to create account. Please try again."
     },
     "passwordReset": {
@@ -778,6 +783,8 @@
     "generic": "Something went wrong. Please try again.",
     "network": "Connection error. Check your internet and try again.",
     "auth.register.error": "Failed to create account. Please try again.",
+    "auth.register.humanCheckInvalid": "Incorrect answer. Please try again.",
+    "auth.register.humanCheckLoadError": "Unable to load the human check. Please try again.",
     "auth.passwordReset.confirmError": "Failed to reset password. Check the token.",
     "auth.confirmEmail.error": "Failed to confirm email. Check the token.",
     "auth.confirmEmail.resendError": "Failed to resend email. Please try again.",

@@ -1,6 +1,6 @@
 import { api } from '@/lib/api-client';
 import { API_BASE } from '@/config/api';
-import type { LoginResponse, RegisterRequest, RegisterResponse } from '@/types/auth';
+import type { HumanCheckChallenge, LoginResponse, RegisterRequest, RegisterResponse } from '@/types/auth';
 
 export const authService = {
   login(email: string, password: string) {
@@ -9,6 +9,10 @@ export const authService = {
 
   register(data: RegisterRequest) {
     return api.post<RegisterResponse>('/auth/register', data);
+  },
+
+  getHumanCheck(locale = 'pt-BR') {
+    return api.get<HumanCheckChallenge>('/auth/human-check', { params: { locale } });
   },
 
   confirmEmail(token: string) {

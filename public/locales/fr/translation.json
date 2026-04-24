@@ -57,6 +57,11 @@
       "roleIndividual": "Particulier",
       "roleLegalEntity": "Personne morale",
       "roleProducer": "Producteur",
+      "humanCheckPlaceholder": "Saisissez votre réponse",
+      "humanCheckReload": "Changer de question",
+      "humanCheckLoading": "Chargement de la question...",
+      "humanCheckInvalid": "Réponse incorrecte. Veuillez réessayer.",
+      "humanCheckLoadError": "Impossible de charger la vérification humaine. Veuillez réessayer.",
       "error": "Échec de la création du compte. Veuillez réessayer."
     },
     "passwordReset": {
@@ -777,6 +782,8 @@
     "generic": "Un problème est survenu. Veuillez réessayer.",
     "network": "Erreur de connexion. Vérifiez votre connexion et réessayez.",
     "auth.register.error": "Échec de la création du compte. Veuillez réessayer.",
+    "auth.register.humanCheckInvalid": "Réponse incorrecte. Veuillez réessayer.",
+    "auth.register.humanCheckLoadError": "Impossible de charger la vérification humaine. Veuillez réessayer.",
     "auth.passwordReset.confirmError": "Échec de la réinitialisation. Vérifiez le jeton.",
     "auth.confirmEmail.error": "Échec de la confirmation de l'e-mail. Vérifiez le jeton.",
     "auth.confirmEmail.resendError": "Échec du renvoi de l'e-mail. Veuillez réessayer.",

@@ -14,6 +14,8 @@ export interface RegisterRequest {
   email: string;
   password: string;
   password_confirm: string;
+  human_challenge_id: string;
+  human_answer: string;
   locale?: string;
   role_key?: string;
 }
@@ -22,6 +24,12 @@ export interface RegisterResponse {
   id: string;
   email: string;
   status: string;
+}
+
+export interface HumanCheckChallenge {
+  challenge_id: string;
+  question: string;
+  locale: string;
 }
 
 export interface RefreshRequest {

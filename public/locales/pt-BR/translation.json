@@ -57,6 +57,11 @@
       "roleIndividual": "Pessoa F\u00edsica",
       "roleLegalEntity": "Pessoa Jur\u00eddica",
       "roleProducer": "Produtor",
+      "humanCheckPlaceholder": "Digite sua resposta",
+      "humanCheckReload": "Trocar pergunta",
+      "humanCheckLoading": "Carregando pergunta...",
+      "humanCheckInvalid": "Resposta incorreta. Tente novamente.",
+      "humanCheckLoadError": "N\u00e3o foi poss\u00edvel carregar a verifica\u00e7\u00e3o humana. Tente novamente.",
       "error": "Erro ao criar conta. Tente novamente."
     },
     "passwordReset": {
@@ -777,6 +782,8 @@
     "generic": "Algo deu errado. Tente novamente.",
     "network": "Erro de conex\u00e3o. Verifique sua internet e tente novamente.",
     "auth.register.error": "Erro ao criar conta. Tente novamente.",
+    "auth.register.humanCheckInvalid": "Resposta incorreta. Tente novamente.",
+    "auth.register.humanCheckLoadError": "N\u00e3o foi poss\u00edvel carregar a verifica\u00e7\u00e3o humana. Tente novamente.",
     "auth.passwordReset.confirmError": "Erro ao redefinir senha. Verifique o token.",
     "auth.confirmEmail.error": "Erro ao confirmar e-mail. Verifique o token.",
     "auth.confirmEmail.resendError": "Erro ao reenviar e-mail. Tente novamente.",
