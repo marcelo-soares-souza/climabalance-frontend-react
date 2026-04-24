@@ -91,6 +91,7 @@
   "nav": {
     "home": "Accueil",
     "map": "Carte des Zones",
+    "about": "À Propos du Projet",
     "calculator": "Calculateur d'Empreinte",
     "history": "Historique des Calculs",
     "profile": "Mon profil",
@@ -140,6 +141,49 @@
       "compensateDescription": "Soutenez des projets de reboisement",
       "certificatesAction": "Certificats",
       "certificatesDescription": "Consultez vos certificats de compensation"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Projet en développement",
+      "title": "Une technologie climatique qui relie carbone, territoire et impact réel",
+      "description": "ClimaBalance est une plateforme d'impact climatique qui relie personnes, entreprises et zones auditées de restauration grâce au calcul d'empreinte, au choix de projets et à une certification vérifiable.",
+      "primaryCta": "Explorer les zones",
+      "secondaryCta": "Créer un compte"
+    },
+    "whatIs": {
+      "label": "Qu'est-ce que c'est",
+      "title": "Une plateforme qui transforme l'intention climatique en action traçable",
+      "paragraph1": "ClimaBalance a été créé pour rendre la compensation carbone plus claire, plus fiable et plus connectée au territoire où la restauration a lieu. La plateforme aide les utilisateurs à comprendre leurs émissions et à orienter leur soutien vers des zones auditées de reboisement et de régénération.",
+      "paragraph2": "Au lieu de traiter la compensation comme quelque chose d'abstrait, la plateforme structure le processus avec une carte interactive, des critères socio-environnementaux, une traçabilité des contributions et des certificats d'impact avec validation."
+    },
+    "partnerCall": {
+      "label": "Partenariats",
+      "title": "Nous recherchons des partenaires pour poursuivre le développement du projet",
+      "description": "La plateforme est en cours de développement et nous recherchons des partenaires stratégiques, techniques et institutionnels pour élargir son impact environnemental et social.",
+      "link": "Participer à la construction"
+    },
+    "howItWorks": {
+      "label": "Fonctionnement",
+      "title": "Un parcours simple avec une transparence de bout en bout",
+      "description": "L'expérience a été conçue pour relier calcul, décision et validation pour celles et ceux qui souhaitent compenser leurs émissions avec davantage de confiance.",
+      "step1Title": "Calculer l'empreinte",
+      "step1Description": "Les personnes et les entreprises renseignent leurs données de consommation et d'activité pour estimer leurs émissions et comprendre leur empreinte carbone.",
+      "step2Title": "Choisir sur la carte",
+      "step2Description": "Les utilisateurs explorent des zones auditées, comparent les informations des projets et choisissent où orienter leur compensation.",
+      "step3Title": "Compenser et valider",
+      "step3Description": "Après la compensation, la plateforme enregistre l'opération, conserve la traçabilité et fournit un certificat avec des mécanismes de validation."
+    },
+    "objectives": {
+      "label": "Objectifs",
+      "title": "Ce que ClimaBalance cherche à rendre possible",
+      "description": "Le projet vise à combiner décarbonation, confiance opérationnelle et soutien direct aux initiatives qui restaurent les écosystèmes.",
+      "card1Title": "Décarbonation accessible",
+      "card1Description": "Faciliter la compréhension de l'empreinte carbone et élargir l'accès à des actions concrètes de compensation.",
+      "card2Title": "Soutien aux zones auditées",
+      "card2Description": "Orienter les ressources vers des propriétés et des initiatives évaluées selon des critères socio-environnementaux et des preuves d'exécution.",
+      "card3Title": "Impact vérifiable",
+      "card3Description": "Renforcer la confiance grâce à l'audit, aux certificats, aux preuves enregistrées et à la transparence sur la destination de la compensation."
     }
   },
   "onboarding": {

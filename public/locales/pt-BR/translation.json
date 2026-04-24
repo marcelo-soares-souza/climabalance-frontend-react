@@ -91,6 +91,7 @@
   "nav": {
     "home": "In\u00edcio",
     "map": "Mapa de \u00c1reas",
+    "about": "Sobre o Projeto",
     "calculator": "Calculadora de Pegada",
     "history": "Hist\u00f3rico de Pegadas",
     "profile": "Meu perfil",
@@ -140,6 +141,49 @@
       "compensateDescription": "Apoie projetos de reflorestamento",
       "certificatesAction": "Certificados",
       "certificatesDescription": "Veja seus certificados de compensa\u00e7\u00e3o"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Projeto em desenvolvimento",
+      "title": "Tecnologia climática para conectar carbono, território e impacto real",
+      "description": "O ClimaBalance é uma plataforma de impacto climático que aproxima pessoas, empresas e áreas auditadas de restauração por meio de cálculo de pegada, seleção de projetos e certificação verificável.",
+      "primaryCta": "Explorar áreas",
+      "secondaryCta": "Criar conta"
+    },
+    "whatIs": {
+      "label": "O que é",
+      "title": "Uma plataforma para transformar intenção climática em ação rastreável",
+      "paragraph1": "O ClimaBalance foi criado para tornar a compensação de carbono mais clara, confiável e conectada ao território. A proposta é ajudar usuários a entender suas emissões e direcionar apoio para áreas auditadas de reflorestamento e regeneração.",
+      "paragraph2": "Em vez de tratar a compensação como algo abstrato, a plataforma organiza o processo com mapa interativo, critérios socioambientais, rastreabilidade da contribuição e certificados de impacto com validação."
+    },
+    "partnerCall": {
+      "label": "Parcerias",
+      "title": "Buscamos parceiros para continuar a evolução do projeto",
+      "description": "Estamos desenvolvendo a plataforma e buscamos parceiros estratégicos, técnicos e institucionais para ampliar sua capacidade de gerar impacto ambiental e social real.",
+      "link": "Participar da construção"
+    },
+    "howItWorks": {
+      "label": "Como funciona",
+      "title": "Um fluxo simples, com transparência de ponta a ponta",
+      "description": "A jornada foi desenhada para unir cálculo, decisão e validação em uma experiência clara para quem quer compensar emissões com mais confiança.",
+      "step1Title": "Calcular a pegada",
+      "step1Description": "Pessoas e empresas informam dados de consumo e atividade para estimar emissões e visualizar sua pegada de carbono.",
+      "step2Title": "Escolher no mapa",
+      "step2Description": "O usuário explora áreas auditadas, compara informações do projeto e seleciona onde deseja direcionar sua compensação.",
+      "step3Title": "Compensar e validar",
+      "step3Description": "Após a compensação, a plataforma registra a operação, mantém rastreabilidade e disponibiliza certificado com mecanismos de validação."
+    },
+    "objectives": {
+      "label": "Objetivos",
+      "title": "O que queremos viabilizar com o ClimaBalance",
+      "description": "O projeto busca combinar descarbonização, confiança operacional e apoio direto a iniciativas que restauram ecossistemas.",
+      "card1Title": "Descarbonização acessível",
+      "card1Description": "Facilitar o entendimento da pegada de carbono e ampliar o acesso a ações concretas de compensação.",
+      "card2Title": "Apoio a áreas auditadas",
+      "card2Description": "Direcionar recursos para propriedades e iniciativas avaliadas com critérios socioambientais e evidências de execução.",
+      "card3Title": "Impacto verificável",
+      "card3Description": "Fortalecer a confiança com auditoria, certificados, registros de evidência e transparência sobre o destino da compensação."
     }
   },
   "onboarding": {

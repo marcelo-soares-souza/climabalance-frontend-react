@@ -12,6 +12,7 @@ import { PasswordResetConfirmPage } from '@/features/auth/PasswordResetConfirmPa
 
 // Home
 import { HomePage } from '@/features/home/HomePage';
+import { AboutPage } from '@/features/about/AboutPage';
 import { OnboardingPage } from '@/features/onboarding/OnboardingPage';
 
 // Footprint
@@ -63,6 +64,7 @@ export const router = createBrowserRouter([
     element: <AppShell />,
     children: [
       { path: '/', element: <HomePage /> },
+      { path: '/about', element: <AboutPage /> },
 
       // Auth routes (inside shell)
       { path: '/login', element: <LoginPage /> },

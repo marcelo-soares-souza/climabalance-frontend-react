@@ -91,6 +91,7 @@
   "nav": {
     "home": "Home",
     "map": "Areas Map",
+    "about": "About",
     "calculator": "Footprint Calculator",
     "history": "Calculation History",
     "profile": "My profile",
@@ -140,6 +141,49 @@
       "compensateDescription": "Support reforestation projects",
       "certificatesAction": "Certificates",
       "certificatesDescription": "View your offset certificates"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Project in development",
+      "title": "Climate technology connecting carbon, land, and real impact",
+      "description": "ClimaBalance is a climate impact platform that brings people, companies, and audited restoration areas together through footprint calculation, project selection, and verifiable certification.",
+      "primaryCta": "Explore areas",
+      "secondaryCta": "Create account"
+    },
+    "whatIs": {
+      "label": "What it is",
+      "title": "A platform that turns climate intention into traceable action",
+      "paragraph1": "ClimaBalance was created to make carbon compensation clearer, more trustworthy, and more connected to the territory where restoration happens. It helps users understand emissions and direct support to audited reforestation and regeneration areas.",
+      "paragraph2": "Instead of treating compensation as something abstract, the platform structures the process with an interactive map, socio-environmental criteria, contribution traceability, and impact certificates with validation."
+    },
+    "partnerCall": {
+      "label": "Partnerships",
+      "title": "We are looking for partners to keep building the project",
+      "description": "The platform is under development, and we are looking for strategic, technical, and institutional partners to expand its environmental and social impact.",
+      "link": "Join the build"
+    },
+    "howItWorks": {
+      "label": "How it works",
+      "title": "A simple flow with end-to-end transparency",
+      "description": "The experience is designed to connect calculation, decision, and validation for people and organizations that want to offset emissions with more confidence.",
+      "step1Title": "Calculate the footprint",
+      "step1Description": "People and companies provide consumption and activity data to estimate emissions and understand their carbon footprint.",
+      "step2Title": "Choose on the map",
+      "step2Description": "Users explore audited areas, compare project information, and choose where to direct their compensation.",
+      "step3Title": "Compensate and validate",
+      "step3Description": "After compensation, the platform records the operation, preserves traceability, and provides a certificate with validation mechanisms."
+    },
+    "objectives": {
+      "label": "Objectives",
+      "title": "What ClimaBalance is designed to enable",
+      "description": "The project aims to combine decarbonization, operational trust, and direct support for initiatives restoring ecosystems.",
+      "card1Title": "Accessible decarbonization",
+      "card1Description": "Make carbon footprint understanding easier and broaden access to concrete compensation actions.",
+      "card2Title": "Support for audited areas",
+      "card2Description": "Direct resources to properties and initiatives evaluated with socio-environmental criteria and execution evidence.",
+      "card3Title": "Verifiable impact",
+      "card3Description": "Strengthen trust through audit trails, certificates, evidence records, and transparency about where compensation goes."
     }
   },
   "onboarding": {
