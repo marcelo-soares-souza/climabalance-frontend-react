@@ -97,6 +97,7 @@
     "home": "Inicio",
     "map": "Mapa de Áreas",
     "about": "Acerca del Proyecto",
+    "privacyPolicy": "Política de Privacidad",
     "calculator": "Calculadora de Huella",
     "history": "Historial de Cálculos",
     "profile": "Mi perfil",
@@ -191,6 +192,57 @@
       "card2Description": "Dirigir recursos a propiedades e iniciativas evaluadas con criterios socioambientales, incluyendo Agroecología, Agroforestería, Permacultura y Agricultura Orgánica.",
       "card3Title": "Impacto verificable",
       "card3Description": "Fortalecer la confianza mediante auditoría, certificados, registros de evidencia y transparencia sobre el destino de la compensación."
+    }
+  },
+  "privacy": {
+    "hero": {
+      "eyebrow": "Privacidad y datos",
+      "title": "Política de Privacidad",
+      "description": "Esta política explica qué información ClimaBalance puede almacenar, cómo se usa, durante cuánto tiempo puede conservarse y qué derechos puedes ejercer sobre tus datos.",
+      "versionDateLabel": "Versión de esta política",
+      "versionDate": "24 de abril de 2026",
+      "effectiveDate": "Esta política puede actualizarse a medida que el proyecto evolucione."
+    },
+    "summary": {
+      "label": "Resumen",
+      "title": "Tratamos datos personales únicamente para operar la plataforma con transparencia, seguridad y trazabilidad.",
+      "paragraph1": "ClimaBalance puede almacenar datos de cuenta, perfil, cálculos de huella, compensaciones, certificados, archivos enviados y registros técnicos necesarios para autenticación, seguridad, auditoría y prevención de fraude.",
+      "paragraph2": "Nuestro compromiso es recopilar solo lo necesario para el funcionamiento del servicio, proteger esa información y respetar solicitudes de eliminación, anonimización y revocación siempre que ello sea técnica y legalmente posible."
+    },
+    "sections": {
+      "dataCollected": {
+        "title": "Qué información puede almacenarse",
+        "paragraph1": "Podemos almacenar datos de registro como correo electrónico, contraseña protegida, idioma, perfil de usuario, información opcional de identificación y datos de contacto. También podemos almacenar la información que proporciones en tu perfil, incluyendo nombre público, documento, teléfono, fecha de nacimiento y dirección.",
+        "paragraph2": "También pueden almacenarse datos operativos como cálculos de huella, emisiones informadas, áreas o proyectos seleccionados, compensaciones realizadas, certificados emitidos, archivos enviados, registros de acceso, tokens de sesión, logs de auditoría y direcciones IP usadas para seguridad."
+      },
+      "howUsed": {
+        "title": "Cómo se utiliza esta información",
+        "paragraph1": "Usamos esta información para crear y mantener tu cuenta, autenticar el acceso, habilitar funcionalidades de la plataforma, calcular la huella de carbono, registrar compensaciones, emitir certificados, mostrar historial de actividad y apoyar la operación general del servicio.",
+        "paragraph2": "Los datos también pueden utilizarse para seguridad, prevención de abuso, respuesta a incidentes, trazabilidad operativa, auditoría de flujos y mejora técnica del producto."
+      },
+      "sharing": {
+        "title": "Compartición y exposición de datos",
+        "paragraph1": "ClimaBalance no tiene como objetivo vender datos personales. Parte de la información puede mostrarse dentro de la plataforma cuando forme parte del flujo del producto, como nombre público, proyectos vinculados, certificados y registros necesarios para comprobar contribuciones.",
+        "paragraph2": "También podemos compartir datos con proveedores técnicos estrictamente necesarios para alojamiento, almacenamiento, correo electrónico, seguridad u operaciones de pago, siempre dentro de lo necesario para prestar el servicio."
+      },
+      "security": {
+        "title": "Seguridad y protección",
+        "paragraph1": "Adoptamos medidas técnicas y organizativas razonables para proteger los datos almacenados. Esto incluye autenticación, control de acceso, registros de auditoría, protección de contraseñas y mecanismos de seguridad para reducir abuso automatizado y accesos no autorizados.",
+        "paragraph2": "Incluso con medidas de protección, ningún sistema conectado a internet puede garantizar riesgo cero. Por eso monitoreamos eventos relevantes y podemos ajustar controles de seguridad cuando sea necesario."
+      },
+      "deletion": {
+        "title": "Eliminación de cuenta, derecho al olvido y retención",
+        "paragraph1": "Puedes solicitar la eliminación de tu cuenta y de los datos personales vinculados a ella. Cuando corresponda, esos datos serán eliminados, anonimizados o vueltos inaccesibles, según la naturaleza de la información y las limitaciones técnicas y legales del servicio.",
+        "paragraph2": "Algunos registros pueden necesitar conservarse por más tiempo para cumplir obligaciones legales, seguridad, prevención de fraude, integridad de certificados, comprobación de transacciones o consistencia de auditoría. En esos casos, retenemos solo lo estrictamente necesario."
+      },
+      "rights": {
+        "title": "Tus derechos",
+        "paragraph1": "Puedes solicitar acceso, corrección, actualización o eliminación de la información personal proporcionada a ClimaBalance, así como revocar consentimientos cuando el tratamiento dependa de ellos.",
+        "paragraph2": "Las solicitudes relacionadas con privacidad y datos pueden tratarse a través de los canales de soporte y contacto puestos a disposición por el proyecto. En algunos casos, podremos requerir verificación adicional de identidad antes de completar la solicitud."
+      }
+    },
+    "footer": {
+      "lastUpdatedLabel": "\u00daltima actualizaci\u00f3n"
     }
   },
   "onboarding": {

@@ -97,6 +97,7 @@
     "home": "In\u00edcio",
     "map": "Mapa de \u00c1reas",
     "about": "Sobre o Projeto",
+    "privacyPolicy": "Pol\u00edtica de Privacidade",
     "calculator": "Calculadora de Pegada",
     "history": "Hist\u00f3rico de Pegadas",
     "profile": "Meu perfil",
@@ -191,6 +192,57 @@
       "card2Description": "Direcionar recursos para propriedades e iniciativas avaliadas com critérios socioambientais, incluindo Agroecologia, Agrofloresta, Permacultura e Agricultura Orgânica.",
       "card3Title": "Impacto verificável",
       "card3Description": "Fortalecer a confiança com auditoria, certificados, registros de evidência e transparência sobre o destino da compensação."
+    }
+  },
+  "privacy": {
+    "hero": {
+      "eyebrow": "Privacidade e dados",
+      "title": "Pol\u00edtica de Privacidade",
+      "description": "Esta pol\u00edtica descreve quais informa\u00e7\u00f5es o ClimaBalance pode armazenar, como elas s\u00e3o utilizadas, por quanto tempo podem ser mantidas e quais direitos voc\u00ea pode exercer sobre seus dados.",
+      "versionDateLabel": "Vers\u00e3o desta pol\u00edtica",
+      "versionDate": "24 de abril de 2026",
+      "effectiveDate": "Esta pol\u00edtica pode ser atualizada conforme o projeto evolui."
+    },
+    "summary": {
+      "label": "Resumo",
+      "title": "Tratamos dados pessoais apenas para operar a plataforma com transpar\u00eancia, seguran\u00e7a e rastreabilidade.",
+      "paragraph1": "O ClimaBalance pode armazenar informa\u00e7\u00f5es de conta, perfil, c\u00e1lculos de pegada, compensa\u00e7\u00f5es, certificados, m\u00eddias enviadas e registros t\u00e9cnicos necess\u00e1rios para autentica\u00e7\u00e3o, seguran\u00e7a, auditoria e preven\u00e7\u00e3o de fraude.",
+      "paragraph2": "Nosso compromisso \u00e9 coletar o m\u00ednimo necess\u00e1rio para o funcionamento do servi\u00e7o, proteger essas informa\u00e7\u00f5es e respeitar pedidos de exclus\u00e3o, anonimiza\u00e7\u00e3o e revoga\u00e7\u00e3o sempre que isso for tecnicamente e legalmente poss\u00edvel."
+    },
+    "sections": {
+      "dataCollected": {
+        "title": "Quais informa\u00e7\u00f5es podem ser salvas",
+        "paragraph1": "Podemos salvar dados de cadastro como e-mail, senha protegida, idioma, perfil do usu\u00e1rio, informa\u00e7\u00f5es opcionais de identifica\u00e7\u00e3o e dados de contato. Tamb\u00e9m podemos armazenar informa\u00e7\u00f5es fornecidas por voc\u00ea no perfil, incluindo nome de exibi\u00e7\u00e3o, documento, telefone, data de nascimento e endere\u00e7o.",
+        "paragraph2": "Tamb\u00e9m podem ser salvos dados operacionais, como c\u00e1lculos de pegada, emiss\u00f5es informadas, sele\u00e7\u00e3o de \u00e1reas ou projetos, compensa\u00e7\u00f5es realizadas, certificados emitidos, m\u00eddias enviadas, registros de login, tokens de sess\u00e3o, logs de auditoria e endere\u00e7os IP usados para seguran\u00e7a."
+      },
+      "howUsed": {
+        "title": "Como essas informa\u00e7\u00f5es s\u00e3o usadas",
+        "paragraph1": "Usamos essas informa\u00e7\u00f5es para criar e manter sua conta, autenticar acesso, permitir o uso das funcionalidades da plataforma, calcular pegada de carbono, registrar compensa\u00e7\u00f5es, emitir certificados, exibir hist\u00f3rico de atividades e dar suporte ao funcionamento geral do servi\u00e7o.",
+        "paragraph2": "Os dados tamb\u00e9m podem ser utilizados para seguran\u00e7a, preven\u00e7\u00e3o de abuso, resposta a incidentes, rastreabilidade operacional, auditoria de fluxos e melhoria t\u00e9cnica do produto."
+      },
+      "sharing": {
+        "title": "Compartilhamento e exposi\u00e7\u00e3o de dados",
+        "paragraph1": "O ClimaBalance n\u00e3o tem como objetivo vender dados pessoais. Algumas informa\u00e7\u00f5es podem ser exibidas dentro da plataforma quando isso fizer parte do fluxo do produto, como nome p\u00fablico, projetos associados, certificados e registros necess\u00e1rios para comprova\u00e7\u00e3o de contribui\u00e7\u00f5es.",
+        "paragraph2": "Tamb\u00e9m podemos compartilhar dados com provedores t\u00e9cnicos estritamente necess\u00e1rios para hospedagem, armazenamento, e-mail, seguran\u00e7a ou opera\u00e7\u00f5es de pagamento, sempre dentro do necess\u00e1rio para prestar o servi\u00e7o."
+      },
+      "security": {
+        "title": "Seguran\u00e7a e prote\u00e7\u00e3o",
+        "paragraph1": "Adotamos medidas t\u00e9cnicas e organizacionais razo\u00e1veis para proteger os dados armazenados. Isso inclui autentica\u00e7\u00e3o, controle de acesso, registros de auditoria, prote\u00e7\u00e3o de senha e mecanismos de seguran\u00e7a para reduzir abuso automatizado e acesso indevido.",
+        "paragraph2": "Mesmo com esfor\u00e7os de prote\u00e7\u00e3o, nenhum sistema conectado \u00e0 internet pode garantir risco zero. Por isso, monitoramos eventos relevantes e podemos ajustar controles de seguran\u00e7a sempre que necess\u00e1rio."
+      },
+      "deletion": {
+        "title": "Exclus\u00e3o de conta, direito ao esquecimento e reten\u00e7\u00e3o",
+        "paragraph1": "Voc\u00ea pode solicitar exclus\u00e3o da conta e dos dados pessoais vinculados a ela. Quando aplic\u00e1vel, esses dados ser\u00e3o removidos, anonimizados ou deixados inacess\u00edveis, de acordo com a natureza da informa\u00e7\u00e3o e com as limita\u00e7\u00f5es t\u00e9cnicas e legais do servi\u00e7o.",
+        "paragraph2": "Alguns registros podem precisar ser mantidos por mais tempo para cumprir obriga\u00e7\u00f5es legais, seguran\u00e7a, preven\u00e7\u00e3o de fraude, integridade de certificados, comprova\u00e7\u00e3o de transa\u00e7\u00f5es ou consist\u00eancia de auditoria. Nesses casos, retemos apenas o que for estritamente necess\u00e1rio."
+      },
+      "rights": {
+        "title": "Seus direitos",
+        "paragraph1": "Voc\u00ea pode solicitar acesso, corre\u00e7\u00e3o, atualiza\u00e7\u00e3o ou exclus\u00e3o de informa\u00e7\u00f5es pessoais fornecidas ao ClimaBalance, bem como revogar consentimentos quando esse tratamento depender deles.",
+        "paragraph2": "Pedidos relacionados a privacidade e dados podem ser tratados pelos canais de suporte e contato disponibilizados pelo projeto. Em alguns casos, poderemos solicitar verifica\u00e7\u00e3o adicional de identidade antes de executar a solicita\u00e7\u00e3o."
+      }
+    },
+    "footer": {
+      "lastUpdatedLabel": "\u00daltima atualiza\u00e7\u00e3o"
     }
   },
   "onboarding": {

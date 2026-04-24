@@ -15,6 +15,7 @@ import {
   TreePine,
   Award,
   ShieldCheck,
+  FileText,
   Info,
   X,
 } from "lucide-react";
@@ -145,6 +146,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           </NavLink>
           <NavLink to="/about" className={linkClass} onClick={onClose}>
             <Info className="h-4 w-4" /> {t("nav.about")}
+          </NavLink>
+          <NavLink to="/privacy-policy" className={linkClass} onClick={onClose}>
+            <FileText className="h-4 w-4" /> {t("nav.privacyPolicy")}
           </NavLink>
           <NavLink to="/map" className={linkClass} onClick={onClose}>
             <MapPin className="h-4 w-4" /> {t("nav.map")}

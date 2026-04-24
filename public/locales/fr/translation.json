@@ -97,6 +97,7 @@
     "home": "Accueil",
     "map": "Carte des Zones",
     "about": "À Propos du Projet",
+    "privacyPolicy": "Politique de Confidentialité",
     "calculator": "Calculateur d'Empreinte",
     "history": "Historique des Calculs",
     "profile": "Mon profil",
@@ -191,6 +192,57 @@
       "card2Description": "Orienter les ressources vers des propriétés et des initiatives évaluées selon des critères socio-environnementaux, notamment l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique.",
       "card3Title": "Impact vérifiable",
       "card3Description": "Renforcer la confiance grâce à l'audit, aux certificats, aux preuves enregistrées et à la transparence sur la destination de la compensation."
+    }
+  },
+  "privacy": {
+    "hero": {
+      "eyebrow": "Vie privée et données",
+      "title": "Politique de Confidentialité",
+      "description": "Cette politique explique quelles informations ClimaBalance peut stocker, comment elles sont utilisées, combien de temps elles peuvent être conservées et quels droits vous pouvez exercer sur vos données.",
+      "versionDateLabel": "Version de cette politique",
+      "versionDate": "24 avril 2026",
+      "effectiveDate": "Cette politique peut être mise à jour à mesure que le projet évolue."
+    },
+    "summary": {
+      "label": "Résumé",
+      "title": "Nous traitons les données personnelles uniquement pour faire fonctionner la plateforme avec transparence, sécurité et traçabilité.",
+      "paragraph1": "ClimaBalance peut stocker des données de compte, de profil, des calculs d’empreinte, des compensations, des certificats, des médias envoyés et des enregistrements techniques nécessaires à l’authentification, à la sécurité, à l’audit et à la prévention de la fraude.",
+      "paragraph2": "Notre engagement est de ne collecter que ce qui est nécessaire au fonctionnement du service, de protéger ces informations et de respecter les demandes de suppression, d’anonymisation et de révocation chaque fois que cela est techniquement et légalement possible."
+    },
+    "sections": {
+      "dataCollected": {
+        "title": "Quelles informations peuvent être conservées",
+        "paragraph1": "Nous pouvons conserver des données d’inscription telles que l’e-mail, le mot de passe protégé, la langue, le profil utilisateur, des informations facultatives d’identification et des données de contact. Nous pouvons également conserver les informations fournies dans votre profil, notamment le nom public, le document, le téléphone, la date de naissance et l’adresse.",
+        "paragraph2": "Nous pouvons aussi conserver des données opérationnelles telles que les calculs d’empreinte, les émissions déclarées, les zones ou projets sélectionnés, les compensations réalisées, les certificats émis, les médias envoyés, les journaux de connexion, les jetons de session, les journaux d’audit et les adresses IP utilisées à des fins de sécurité."
+      },
+      "howUsed": {
+        "title": "Comment ces informations sont utilisées",
+        "paragraph1": "Nous utilisons ces informations pour créer et maintenir votre compte, authentifier l’accès, permettre l’utilisation des fonctionnalités de la plateforme, calculer l’empreinte carbone, enregistrer les compensations, émettre des certificats, afficher l’historique d’activité et soutenir le fonctionnement général du service.",
+        "paragraph2": "Les données peuvent également être utilisées pour la sécurité, la prévention des abus, la réponse aux incidents, la traçabilité opérationnelle, l’audit des flux et l’amélioration technique du produit."
+      },
+      "sharing": {
+        "title": "Partage et exposition des données",
+        "paragraph1": "ClimaBalance n’a pas vocation à vendre des données personnelles. Certaines informations peuvent être affichées au sein de la plateforme lorsqu’elles font partie du fonctionnement du produit, comme le nom public, les projets liés, les certificats et les enregistrements nécessaires à la preuve des contributions.",
+        "paragraph2": "Nous pouvons également partager des données avec des prestataires techniques strictement nécessaires à l’hébergement, au stockage, à l’e-mail, à la sécurité ou aux opérations de paiement, toujours dans la limite de ce qui est nécessaire pour fournir le service."
+      },
+      "security": {
+        "title": "Sécurité et protection",
+        "paragraph1": "Nous mettons en place des mesures techniques et organisationnelles raisonnables pour protéger les données stockées. Cela inclut l’authentification, le contrôle d’accès, les journaux d’audit, la protection des mots de passe et des mécanismes de sécurité pour réduire les abus automatisés et les accès non autorisés.",
+        "paragraph2": "Même avec des efforts de protection, aucun système connecté à internet ne peut garantir un risque nul. C’est pourquoi nous surveillons les événements pertinents et pouvons ajuster les contrôles de sécurité lorsque nécessaire."
+      },
+      "deletion": {
+        "title": "Suppression du compte, droit à l’oubli et conservation",
+        "paragraph1": "Vous pouvez demander la suppression de votre compte et des données personnelles qui y sont liées. Lorsque cela est applicable, ces données seront supprimées, anonymisées ou rendues inaccessibles, selon la nature des informations et les limites techniques et légales du service.",
+        "paragraph2": "Certains enregistrements peuvent devoir être conservés plus longtemps afin de respecter des obligations légales, la sécurité, la prévention de la fraude, l’intégrité des certificats, la preuve des transactions ou la cohérence de l’audit. Dans ces cas, nous ne conservons que ce qui est strictement nécessaire."
+      },
+      "rights": {
+        "title": "Vos droits",
+        "paragraph1": "Vous pouvez demander l’accès, la correction, la mise à jour ou la suppression des informations personnelles fournies à ClimaBalance, ainsi que révoquer vos consentements lorsque le traitement en dépend.",
+        "paragraph2": "Les demandes liées à la confidentialité et aux données peuvent être traitées par les canaux de support et de contact mis à disposition par le projet. Dans certains cas, nous pourrons demander une vérification d’identité supplémentaire avant d’exécuter la demande."
+      }
+    },
+    "footer": {
+      "lastUpdatedLabel": "Derni\u00e8re mise \u00e0 jour"
     }
   },
   "onboarding": {

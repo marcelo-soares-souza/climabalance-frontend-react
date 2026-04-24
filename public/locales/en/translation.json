@@ -97,6 +97,7 @@
     "home": "Home",
     "map": "Areas Map",
     "about": "About",
+    "privacyPolicy": "Privacy Policy",
     "calculator": "Footprint Calculator",
     "history": "Calculation History",
     "profile": "My profile",
@@ -191,6 +192,57 @@
       "card2Description": "Direct resources to properties and initiatives evaluated with socio-environmental criteria, including Agroecology, Agroforestry, Permaculture, and Organic Agriculture.",
       "card3Title": "Verifiable impact",
       "card3Description": "Strengthen trust through audit trails, certificates, evidence records, and transparency about where compensation goes."
+    }
+  },
+  "privacy": {
+    "hero": {
+      "eyebrow": "Privacy and data",
+      "title": "Privacy Policy",
+      "description": "This policy explains what information ClimaBalance may store, how it is used, how long it may be retained, and what rights you can exercise over your data.",
+      "versionDateLabel": "Policy version date",
+      "versionDate": "April 24, 2026",
+      "effectiveDate": "This policy may be updated as the project evolves."
+    },
+    "summary": {
+      "label": "Summary",
+      "title": "We process personal data only to operate the platform with transparency, security, and traceability.",
+      "paragraph1": "ClimaBalance may store account, profile, footprint calculations, compensations, certificates, uploaded media, and technical records needed for authentication, security, audit, and fraud prevention.",
+      "paragraph2": "Our commitment is to collect only what is necessary for the service to work, protect that information, and respect requests for deletion, anonymization, and revocation whenever this is technically and legally possible."
+    },
+    "sections": {
+      "dataCollected": {
+        "title": "What information may be stored",
+        "paragraph1": "We may store registration data such as email, protected password, language, user profile, optional identification information, and contact data. We may also store information you provide in your profile, including display name, document number, phone number, birth date, and address.",
+        "paragraph2": "We may also store operational data such as footprint calculations, reported emissions, selected areas or projects, compensations, issued certificates, uploaded media, login records, session tokens, audit logs, and IP addresses used for security."
+      },
+      "howUsed": {
+        "title": "How this information is used",
+        "paragraph1": "We use this information to create and maintain your account, authenticate access, enable platform features, calculate carbon footprint, record compensations, issue certificates, display activity history, and support the general operation of the service.",
+        "paragraph2": "Data may also be used for security, abuse prevention, incident response, operational traceability, flow auditing, and technical product improvement."
+      },
+      "sharing": {
+        "title": "Data sharing and exposure",
+        "paragraph1": "ClimaBalance is not intended to sell personal data. Some information may be displayed inside the platform when it is part of the product flow, such as public name, linked projects, certificates, and records needed to prove contributions.",
+        "paragraph2": "We may also share data with technical providers strictly required for hosting, storage, email, security, or payment operations, always within what is necessary to provide the service."
+      },
+      "security": {
+        "title": "Security and protection",
+        "paragraph1": "We adopt reasonable technical and organizational measures to protect stored data. This includes authentication, access control, audit records, password protection, and security mechanisms to reduce automated abuse and unauthorized access.",
+        "paragraph2": "Even with protective efforts, no internet-connected system can guarantee zero risk. Because of that, we monitor relevant events and may adjust security controls whenever necessary."
+      },
+      "deletion": {
+        "title": "Account deletion, right to be forgotten, and retention",
+        "paragraph1": "You may request deletion of your account and the personal data linked to it. When applicable, that data will be removed, anonymized, or made inaccessible, depending on the nature of the information and the technical and legal limitations of the service.",
+        "paragraph2": "Some records may need to be retained for longer in order to comply with legal obligations, security, fraud prevention, certificate integrity, transaction proof, or audit consistency. In those cases, we retain only what is strictly necessary."
+      },
+      "rights": {
+        "title": "Your rights",
+        "paragraph1": "You may request access, correction, update, or deletion of personal information provided to ClimaBalance, as well as revoke consent whenever processing depends on it.",
+        "paragraph2": "Privacy and data-related requests may be handled through the support and contact channels made available by the project. In some cases, we may require additional identity verification before completing the request."
+      }
+    },
+    "footer": {
+      "lastUpdatedLabel": "Last updated"
     }
   },
   "onboarding": {
