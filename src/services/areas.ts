@@ -38,6 +38,10 @@ type RawArea = {
   auditedByUserId?: string | null;
   audited_at?: string | null;
   auditedAt?: string | null;
+  committed_trees_count?: number | string;
+  committedTreesCount?: number | string;
+  thumbnail_url?: string;
+  thumbnailUrl?: string;
   created_at?: string;
   createdAt?: string;
   updated_at?: string;
@@ -151,6 +155,10 @@ function normalizeArea(raw: RawArea): Area {
     auditNotes: asNullableString(raw.auditNotes ?? raw.audit_notes),
     auditedBy: asNullableString(raw.auditedByUserId ?? raw.audited_by_user_id),
     auditedAt: asNullableString(raw.auditedAt ?? raw.audited_at),
+    committedTreesCount: asNullableNumber(
+      raw.committedTreesCount ?? raw.committed_trees_count
+    ) ?? undefined,
+    thumbnailUrl: asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url) ?? undefined,
     createdAt: asString(raw.createdAt ?? raw.created_at),
     updatedAt: asString(raw.updatedAt ?? raw.updated_at),
   };

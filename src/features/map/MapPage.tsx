@@ -1,30 +1,37 @@
-import { useState, useMemo, useEffect, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
-import { areasService } from '@/services/areas';
-import { Select } from '@/components/ui/Select';
-import { Button } from '@/components/ui/Button';
-import { Card } from '@/components/ui/Card';
-import { LocateControl } from '@/components/leaflet/LocateControl';
-import { formatCurrency, formatKgCO2e } from '@/lib/format';
-import { Skeleton } from '@/components/ui/Skeleton';
-import { useCompensationStore } from '@/stores/compensation-store';
-import { useAuth } from '@/hooks/use-auth';
-import { TreePine, MapPin } from 'lucide-react';
-import type { Area } from '@/types/area';
-import type { LeafletEvent } from 'leaflet';
+import { useState, useMemo, useEffect, useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMap,
+  useMapEvents,
+} from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+import { areasService } from "@/services/areas";
+import { Select } from "@/components/ui/Select";
+import { Button } from "@/components/ui/Button";
+import { Card } from "@/components/ui/Card";
+import { LocateControl } from "@/components/leaflet/LocateControl";
+import { formatCurrency, formatKgCO2e } from "@/lib/format";
+import { Skeleton } from "@/components/ui/Skeleton";
+import { useCompensationStore } from "@/stores/compensation-store";
+import { useAuth } from "@/hooks/use-auth";
+import { TreePine, MapPin } from "lucide-react";
+import type { Area } from "@/types/area";
+import type { LeafletEvent } from "leaflet";
 
 const BIOME_COLORS: Record<string, string> = {
-  amazonia: '#2D6A4F',
-  cerrado: '#D4A373',
-  mata_atlantica: '#40916C',
-  caatinga: '#C9ADA7',
-  pampa: '#95D5B2',
-  pantanal: '#74C69D',
+  amazonia: "#2D6A4F",
+  cerrado: "#D4A373",
+  mata_atlantica: "#40916C",
+  caatinga: "#C9ADA7",
+  pampa: "#95D5B2",
+  pantanal: "#74C69D",
 };
 
 const BIOME_SYMBOLS: Record<string, string> = {
@@ -65,10 +72,10 @@ const BIOME_SYMBOLS: Record<string, string> = {
 };
 
 function createIcon(biome: string) {
-  const color = BIOME_COLORS[biome] || '#0B5F4B';
+  const color = BIOME_COLORS[biome] || "#0B5F4B";
   const symbol = BIOME_SYMBOLS[biome] || BIOME_SYMBOLS.amazonia;
   return L.divIcon({
-    className: '',
+    className: "",
     html: `<div style="background:${color};width:28px;height:28px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">
       ${symbol}
     </div>`,
@@ -80,14 +87,19 @@ function createIcon(biome: string) {
 function createClusterIcon(count: number) {
   const size = count >= 20 ? 46 : count >= 10 ? 42 : 38;
   return L.divIcon({
-    className: '',
+    className: "",
     html: `<div style="background:#0B5F4B;width:${size}px;height:${size}px;border-radius:50%;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:13px;">${count}</div>`,
     iconSize: [size, size],
     iconAnchor: [size / 2, size / 2],
   });
 }
 
-function haversineMeters(aLat: number, aLng: number, bLat: number, bLng: number): number {
+function haversineMeters(
+  aLat: number,
+  aLng: number,
+  bLat: number,
+  bLng: number,
+): number {
   const toRad = (value: number) => (value * Math.PI) / 180;
   const r = 6371000;
   const dLat = toRad(bLat - aLat);
@@ -96,12 +108,13 @@ function haversineMeters(aLat: number, aLng: number, bLat: number, bLng: number)
   const lat2 = toRad(bLat);
   const sinDLat = Math.sin(dLat / 2);
   const sinDLng = Math.sin(dLng / 2);
-  const h = sinDLat * sinDLat + Math.cos(lat1) * Math.cos(lat2) * sinDLng * sinDLng;
+  const h =
+    sinDLat * sinDLat + Math.cos(lat1) * Math.cos(lat2) * sinDLng * sinDLng;
   return 2 * r * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
 function clusterRadiusMeters(zoom: number): number {
-  return Math.max(80, Math.min(10000, 220000 / (2 ** zoom)));
+  return Math.max(80, Math.min(10000, 220000 / 2 ** zoom));
 }
 
 type AreaCluster = {
@@ -117,7 +130,13 @@ function buildClusters(areas: Area[], zoom: number): AreaCluster[] {
 
   for (const area of areas) {
     const target = clusters.find(
-      (cluster) => haversineMeters(area.latitude, area.longitude, cluster.latitude, cluster.longitude) <= radius
+      (cluster) =>
+        haversineMeters(
+          area.latitude,
+          area.longitude,
+          cluster.latitude,
+          cluster.longitude,
+        ) <= radius,
     );
 
     if (!target) {
@@ -132,14 +151,19 @@ function buildClusters(areas: Area[], zoom: number): AreaCluster[] {
 
     target.areas.push(area);
     const total = target.areas.length;
-    target.latitude = ((target.latitude * (total - 1)) + area.latitude) / total;
-    target.longitude = ((target.longitude * (total - 1)) + area.longitude) / total;
+    target.latitude = (target.latitude * (total - 1) + area.latitude) / total;
+    target.longitude =
+      (target.longitude * (total - 1) + area.longitude) / total;
   }
 
   return clusters;
 }
 
-function MapZoomListener({ onZoomChange }: { onZoomChange: (zoom: number) => void }) {
+function MapZoomListener({
+  onZoomChange,
+}: {
+  onZoomChange: (zoom: number) => void;
+}) {
   const map = useMapEvents({
     zoomend: (event: LeafletEvent) => {
       const target = event.target as L.Map;
@@ -174,21 +198,77 @@ function ClusterMarker({
     if (!area) return null;
 
     return (
-      <Marker position={[area.latitude, area.longitude]} icon={createIcon(area.biome || '')}>
+      <Marker
+        position={[area.latitude, area.longitude]}
+        icon={createIcon(area.biome || "")}
+      >
         <Popup>
-          <div className="min-w-[200px]">
-            <h3 className="font-semibold text-base mb-1">{area.name}</h3>
-            <div className="space-y-1 text-sm">
-              {area.biome && <p><span className="text-text-secondary">{t('map.biome')}:</span> {t(`map.biomes.${area.biome}`, { defaultValue: area.biome })}</p>}
-              {area.city && area.state && <p><MapPin className="h-3 w-3 inline" /> {area.city}, {area.state}</p>}
-              <p><span className="text-text-secondary">{t('area.form.pricePerTree')}:</span> {area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</p>
-              <p><span className="text-text-secondary">{t('compensation.review.estimatedCO2')}:</span> {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</p>
+          <div className="min-w-[220px]">
+            {area.thumbnailUrl && (
+              <img
+                src={area.thumbnailUrl}
+                alt=""
+                className="w-full h-28 object-cover rounded-t-md -mt-1 -mx-1 mb-2"
+                style={{ width: "calc(100% + 8px)" }}
+              />
+            )}
+            <h3 className="font-semibold text-lg mb-1.5 leading-tight">
+              {area.name}
+            </h3>
+            <div className="space-y-1.5">
+              {area.biome && (
+                <span
+                  className="inline-flex items-center gap-1.5 text-sm font-medium px-2.5 py-0.5 rounded-full text-white"
+                  style={{ backgroundColor: BIOME_COLORS[area.biome] || "#0B5F4B" }}
+                >
+                  <span dangerouslySetInnerHTML={{ __html: BIOME_SYMBOLS[area.biome] || "" }} />
+                  {t(`map.biomes.${area.biome}`, { defaultValue: area.biome })}
+                </span>
+              )}
+              {area.city && area.state && (
+                <p className="text-text-secondary text-sm">
+                  <MapPin className="h-3.5 w-3.5 inline" /> {area.city},{" "}
+                  {area.state}
+                </p>
+              )}
+              {area.description && (
+                <p className="text-sm text-text-secondary line-clamp-4">
+                  {area.description}
+                </p>
+              )}
+              <div className="flex gap-4 pt-1.5">
+                {area.pricePerTree != null && (
+                  <p className="text-sm">
+                    <span className="text-text-secondary">{t("area.form.pricePerTree")}:</span>{" "}
+                    <span className="font-medium">{formatCurrency(area.pricePerTree)}</span>
+                  </p>
+                )}
+                <p className="text-sm">
+                  <span className="text-text-secondary">
+                    {t("compensation.review.estimatedCO2")}:
+                  </span>{" "}
+                  <span className="font-medium">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span>
+                </p>
+              </div>
+              {area.committedTreesCount != null && (
+                <p className="text-sm">
+                  <TreePine className="h-3.5 w-3.5 inline mr-0.5" />
+                  <span className="font-medium">{area.committedTreesCount.toLocaleString()}</span>{" "}
+                  <span className="text-text-secondary">{t("map.treesPlanted")}</span>
+                </p>
+              )}
             </div>
             <div className="mt-3 flex gap-2">
-              <Button size="sm" variant="outline" onClick={() => navigate(`/areas/${area.id}`)}>{t('map.viewDetails')}</Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => navigate(`/areas/${area.id}`)}
+              >
+                {t("map.viewDetails")}
+              </Button>
               {isAuthenticated && (
                 <Button size="sm" onClick={() => onSelectArea(area)}>
-                  <TreePine className="h-3 w-3 mr-1" /> {t('map.compensate')}
+                  <TreePine className="h-3 w-3 mr-1" /> {t("map.compensate")}
                 </Button>
               )}
             </div>
@@ -207,34 +287,60 @@ function ClusterMarker({
       icon={createClusterIcon(cluster.areas.length)}
       eventHandlers={{
         click: () => {
-          map.setView([cluster.latitude, cluster.longitude], Math.min(map.getZoom() + 2, 18));
+          map.setView(
+            [cluster.latitude, cluster.longitude],
+            Math.min(map.getZoom() + 2, 18),
+          );
         },
       }}
     >
       <Popup>
-        <div className="min-w-[240px]">
+        <div className="min-w-[260px]">
           <p className="font-semibold mb-2">
-            {t('map.areasCount', { count: cluster.areas.length })}
+            {t("map.areasCount", { count: cluster.areas.length })}
           </p>
-          <div className="space-y-2 max-h-56 overflow-auto pr-1">
+          <div className="space-y-2 max-h-60 overflow-auto pr-1">
             {preview.map((area) => (
-              <div key={area.id} className="border border-gray-100 rounded-md p-2">
-                <p className="font-medium text-sm">{area.name}</p>
-                <p className="text-xs text-text-secondary">
-                  {t('area.form.pricePerTree')}: {area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}
-                </p>
-                <p className="text-xs text-text-secondary">
-                  {t('compensation.review.estimatedCO2')}: {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
-                </p>
-                <div className="mt-2 flex gap-2">
-                  <Button size="sm" variant="outline" onClick={() => navigate(`/areas/${area.id}`)}>
-                    {t('map.viewDetails')}
-                  </Button>
-                  {isAuthenticated && (
-                    <Button size="sm" onClick={() => onSelectArea(area)}>
-                      <TreePine className="h-3 w-3 mr-1" /> {t('map.compensate')}
-                    </Button>
+              <div
+                key={area.id}
+                className="border border-gray-100 rounded-md p-2 flex gap-2"
+              >
+                {area.thumbnailUrl && (
+                  <img
+                    src={area.thumbnailUrl}
+                    alt=""
+                    className="w-12 h-12 rounded object-cover shrink-0 mt-0.5"
+                  />
+                )}
+                <div className="min-w-0 flex-1">
+                  <p className="font-medium text-sm truncate">{area.name}</p>
+                  {area.description && (
+                    <p className="text-xs text-text-secondary truncate">{area.description}</p>
                   )}
+                  <div className="flex gap-2 text-xs text-text-secondary">
+                    {area.pricePerTree != null && (
+                      <span>{formatCurrency(area.pricePerTree)}</span>
+                    )}
+                    <span>{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span>
+                    {area.committedTreesCount != null && (
+                      <span>{area.committedTreesCount.toLocaleString()} {t("area.trees")}</span>
+                    )}
+                  </div>
+                  <div className="mt-1 flex gap-1.5">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => navigate(`/areas/${area.id}`)}
+                    >
+                      {t("map.viewDetails")}
+                    </Button>
+                    {isAuthenticated && (
+                      <Button size="sm" onClick={() => onSelectArea(area)}>
+                        <TreePine className="h-3 w-3 mr-1" />{" "}
+                        {t("map.compensate")}
+                      </Button>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
@@ -254,21 +360,29 @@ export function MapPage() {
   const [searchParams] = useSearchParams();
   const { isAuthenticated } = useAuth();
   const setSelection = useCompensationStore((s) => s.setSelection);
-  const [biomeFilter, setBiomeFilter] = useState('');
-  const [mapZoom, setMapZoom] = useState(5);
-  const requestedCalculationId = searchParams.get('calculationId')?.trim() || null;
-  const requestedTCO2eRaw = searchParams.get('tCO2e');
-  const requestedTCO2eParsed = requestedTCO2eRaw == null ? NaN : Number(requestedTCO2eRaw);
-  const requestedTCO2e = Number.isFinite(requestedTCO2eParsed) && requestedTCO2eParsed > 0
-    ? requestedTCO2eParsed
-    : null;
+  const [biomeFilter, setBiomeFilter] = useState("");
+  const [mapZoom, setMapZoom] = useState(3);
+  const requestedCalculationId =
+    searchParams.get("calculationId")?.trim() || null;
+  const requestedTCO2eRaw = searchParams.get("tCO2e");
+  const requestedTCO2eParsed =
+    requestedTCO2eRaw == null ? NaN : Number(requestedTCO2eRaw);
+  const requestedTCO2e =
+    Number.isFinite(requestedTCO2eParsed) && requestedTCO2eParsed > 0
+      ? requestedTCO2eParsed
+      : null;
   const hasProjectionContext = !!requestedCalculationId && !!requestedTCO2e;
-  const effectiveCalculationId = hasProjectionContext ? requestedCalculationId : null;
+  const effectiveCalculationId = hasProjectionContext
+    ? requestedCalculationId
+    : null;
   const selectedTotalTCO2e = hasProjectionContext ? requestedTCO2e : null;
 
   const { data: areas, isLoading } = useQuery({
-    queryKey: ['map-areas', { biome: biomeFilter }],
-    queryFn: () => areasService.getMapAreas(biomeFilter ? { biome: biomeFilter } : undefined),
+    queryKey: ["map-areas", { biome: biomeFilter }],
+    queryFn: () =>
+      areasService.getMapAreas(
+        biomeFilter ? { biome: biomeFilter } : undefined,
+      ),
   });
 
   useEffect(() => {
@@ -280,13 +394,13 @@ export function MapPage() {
   }, [requestedCalculationId, requestedTCO2e, setSelection]);
 
   const biomeOptions = [
-    { value: '', label: t('map.allBiomes') },
-    { value: 'amazonia', label: t('map.biomes.amazonia') },
-    { value: 'cerrado', label: t('map.biomes.cerrado') },
-    { value: 'mata_atlantica', label: t('map.biomes.mataAtlantica') },
-    { value: 'caatinga', label: t('map.biomes.caatinga') },
-    { value: 'pampa', label: t('map.biomes.pampa') },
-    { value: 'pantanal', label: t('map.biomes.pantanal') },
+    { value: "", label: t("map.allBiomes") },
+    { value: "amazonia", label: t("map.biomes.amazonia") },
+    { value: "cerrado", label: t("map.biomes.cerrado") },
+    { value: "mata_atlantica", label: t("map.biomes.mataAtlantica") },
+    { value: "caatinga", label: t("map.biomes.caatinga") },
+    { value: "pampa", label: t("map.biomes.pampa") },
+    { value: "pantanal", label: t("map.biomes.pantanal") },
   ];
 
   const center = useMemo(() => {
@@ -302,19 +416,22 @@ export function MapPage() {
     return areas ?? [];
   }, [areas]);
 
-  const clusters = useMemo(() => buildClusters(visibleAreas, mapZoom), [visibleAreas, mapZoom]);
+  const clusters = useMemo(
+    () => buildClusters(visibleAreas, mapZoom),
+    [visibleAreas, mapZoom],
+  );
 
   const handleSelectArea = (area: Area) => {
     setSelection({
       areaId: area.id,
       areaName: area.name,
       calculationId: effectiveCalculationId,
-      compensationMode: 'tree_purchase',
+      compensationMode: "tree_purchase",
       totalTCO2e: selectedTotalTCO2e,
       treesRequested: null,
       totalAmount: null,
     });
-    navigate('/compensation/review');
+    navigate("/compensation/review");
   };
 
   const handleZoomChange = useCallback((zoom: number) => {
@@ -324,9 +441,13 @@ export function MapPage() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <h1 className="text-2xl font-bold">{t('map.title')}</h1>
+        <h1 className="text-2xl font-bold">{t("map.title")}</h1>
         <div className="w-48">
-          <Select options={biomeOptions} value={biomeFilter} onChange={(e) => setBiomeFilter(e.target.value)} />
+          <Select
+            options={biomeOptions}
+            value={biomeFilter}
+            onChange={(e) => setBiomeFilter(e.target.value)}
+          />
         </div>
       </div>
 
@@ -335,9 +456,9 @@ export function MapPage() {
           {isLoading ? (
             <Skeleton className="w-full h-full" />
           ) : (
-            <MapContainer center={center} zoom={5} className="h-full w-full">
+            <MapContainer center={center} zoom={3} className="h-full w-full">
               <MapZoomListener onZoomChange={handleZoomChange} />
-              <LocateControl title={t('map.locate.title')} />
+              <LocateControl title={t("map.locate.title")} />
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -358,7 +479,9 @@ export function MapPage() {
       </Card>
 
       {areas && (
-        <p className="text-sm text-text-secondary">{t('map.areasCount', { count: visibleAreas.length })}</p>
+        <p className="text-sm text-text-secondary">
+          {t("map.areasCount", { count: visibleAreas.length })}
+        </p>
       )}
     </div>
   );

@@ -20,6 +20,8 @@ export interface Area {
   pricePerTree: number | null;
   defaultHorizonYears: number | null;
   pricePerTCO2e: number | null;
+  thumbnailUrl?: string;
+  committedTreesCount?: number;
   auditNotes: string | null;
   auditedBy: string | null;
   auditedAt: string | null;
