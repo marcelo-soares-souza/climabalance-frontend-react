@@ -144,6 +144,10 @@ export const router = createBrowserRouter([
         element: <AuthGuard><CompensationHistoryPage /></AuthGuard>,
       },
       {
+        path: '/profile/contributions',
+        element: <AuthGuard><CompensationHistoryPage /></AuthGuard>,
+      },
+      {
         path: '/profile',
         element: <AuthGuard><ProfilePage /></AuthGuard>,
       },

@@ -22,6 +22,7 @@ import type { AreaStatus } from '@/types/area';
 import {
   BRAZIL_STATES,
   findBrazilStateCode,
+  getBrazilStateCenter,
   getBrazilCitiesByState,
 } from '@/features/map/data/br-locations';
 import { ArrowLeft } from 'lucide-react';
@@ -72,10 +73,9 @@ export function AreaFormPage() {
     biome: string;
     state: string;
     city: string;
-    total_capacity_t_co2e: string;
     t_co2e_per_tree_per_year: string;
     price_per_tree: string;
-    price_per_t_co2e: string;
+    default_horizon_years: string;
   }>>({});
   const [error, setError] = useState<string | null>(null);
   const [ipBasedCenter, setIpBasedCenter] = useState<[number, number] | null>(null);
@@ -95,10 +95,9 @@ export function AreaFormPage() {
     biome: form.biome ?? existing?.biome ?? '',
     state: form.state ?? (existing?.state ? (findBrazilStateCode(existing.state) || existing.state) : ''),
     city: form.city ?? existing?.city ?? '',
-    total_capacity_t_co2e: form.total_capacity_t_co2e ?? (existing?.totalCapacityTCO2e ? String(existing.totalCapacityTCO2e) : ''),
     t_co2e_per_tree_per_year: form.t_co2e_per_tree_per_year ?? (existing?.tCO2ePerTreePerYear ? String(existing.tCO2ePerTreePerYear) : ''),
     price_per_tree: form.price_per_tree ?? (existing?.pricePerTree ? String(existing.pricePerTree) : ''),
-    price_per_t_co2e: form.price_per_t_co2e ?? (existing?.pricePerTCO2e ? String(existing.pricePerTCO2e) : ''),
+    default_horizon_years: form.default_horizon_years ?? (existing?.defaultHorizonYears ? String(existing.defaultHorizonYears) : ''),
   };
 
   const biomeOptions = [
@@ -126,24 +125,28 @@ export function AreaFormPage() {
     queryKey: ['cities', normalizedStateCode],
     queryFn: ({ signal }) => getBrazilCitiesByState(normalizedStateCode!, signal),
     enabled: !!normalizedStateCode,
-    initialData: [],
   });
+
+  const fallbackCityOptions = useMemo(() => {
+    if (!normalizedStateCode) return [];
+
+    const state = BRAZIL_STATES.find((item) => item.code === normalizedStateCode);
+    return state ? [state.capital] : [];
+  }, [normalizedStateCode]);
 
   const citySelectOptions = useMemo(() => {
     if (!normalizedStateCode) {
       return [{ value: '', label: t('area.form.selectStateFirst') }];
     }
 
-    if (isCitiesLoading) {
-      return [{ value: '', label: t('area.form.loadingCities') }];
-    }
-
-    if (cityOptions.length === 0) {
-      return [{ value: '', label: t('area.form.noCitiesAvailable') }];
-    }
-
-    const options = [{ value: '', label: t('area.form.selectCity') }];
-    const mappedCities = cityOptions.map((city) => ({ value: city, label: city }));
+    const resolvedCities = cityOptions && cityOptions.length > 0 ? cityOptions : fallbackCityOptions;
+    const placeholderLabel = isCitiesLoading && resolvedCities.length === 0
+      ? t('area.form.loadingCities')
+      : resolvedCities.length === 0
+        ? t('area.form.noCitiesAvailable')
+        : t('area.form.selectCity');
+    const options = [{ value: '', label: placeholderLabel }];
+    const mappedCities = resolvedCities.map((city) => ({ value: city, label: city }));
     const hasCurrentCity = mappedCities.some((city) => city.value === formValues.city);
 
     if (formValues.city && !hasCurrentCity) {
@@ -151,7 +154,7 @@ export function AreaFormPage() {
     }
 
     return [...options, ...mappedCities];
-  }, [normalizedStateCode, isCitiesLoading, cityOptions, formValues.city, t]);
+  }, [normalizedStateCode, isCitiesLoading, cityOptions, fallbackCityOptions, formValues.city, t]);
 
   const mutation = useMutation({
     mutationFn: () => {
@@ -164,10 +167,9 @@ export function AreaFormPage() {
         biome: formValues.biome || undefined,
         state: formValues.state || undefined,
         city: formValues.city || undefined,
-        total_capacity_t_co2e: parseFloat(formValues.total_capacity_t_co2e) || undefined,
         t_co2e_per_tree_per_year: parseFloat(formValues.t_co2e_per_tree_per_year) || undefined,
         price_per_tree: parseFloat(formValues.price_per_tree) || undefined,
-        price_per_t_co2e: parseFloat(formValues.price_per_t_co2e) || undefined,
+        default_horizon_years: parseInt(formValues.default_horizon_years, 10) || undefined,
       };
       return isEdit ? areasService.updateArea(areaId!, data) : areasService.createArea(data);
     },
@@ -194,10 +196,9 @@ export function AreaFormPage() {
       | 'biome'
       | 'state'
       | 'city'
-      | 'total_capacity_t_co2e'
       | 't_co2e_per_tree_per_year'
       | 'price_per_tree'
-      | 'price_per_t_co2e',
+      | 'default_horizon_years',
     value: string
   ) => setForm((prev) => ({ ...prev, [field]: value }));
 
@@ -279,8 +280,33 @@ export function AreaFormPage() {
           <Input id="name" label={t('area.form.name')} value={formValues.name} onChange={(e) => update('name', e.target.value)} required />
           <Textarea id="description" label={t('area.form.description')} value={formValues.description} onChange={(e) => update('description', e.target.value)} />
           <div className="grid grid-cols-2 gap-4">
-            <Input id="latitude" type="number" step="any" label={t('area.form.latitude')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.locationAria')} content={<p>{t('tooltips.area.location')}</p>} />} value={formValues.latitude} onChange={(e) => update('latitude', e.target.value)} required />
-            <Input id="longitude" type="number" step="any" label={t('area.form.longitude')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.locationAria')} content={<p>{t('tooltips.area.location')}</p>} />} value={formValues.longitude} onChange={(e) => update('longitude', e.target.value)} required />
+            <Select
+              id="state"
+              label={t('area.form.state')}
+              value={normalizedStateCode ?? ''}
+              options={stateOptions}
+              onChange={(e) => {
+                const nextStateCode = e.target.value;
+                const previousStateCode = normalizedStateCode ?? '';
+                update('state', nextStateCode);
+                if (nextStateCode !== previousStateCode) {
+                  update('city', '');
+                  const stateCenter = getBrazilStateCenter(nextStateCode);
+                  if (stateCenter) {
+                    update('latitude', stateCenter[0].toFixed(6));
+                    update('longitude', stateCenter[1].toFixed(6));
+                  }
+                }
+              }}
+            />
+            <Select
+              id="city"
+              label={t('area.form.city')}
+              value={formValues.city}
+              options={citySelectOptions}
+              disabled={!normalizedStateCode}
+              onChange={(e) => update('city', e.target.value)}
+            />
           </div>
           <div className="space-y-2">
             <p className="text-sm font-medium">{t('area.form.pickOnMap')}</p>
@@ -302,6 +328,10 @@ export function AreaFormPage() {
                 />
               </MapContainer>
             </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Input id="latitude" type="number" step="any" label={t('area.form.latitude')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.locationAria')} content={<p>{t('tooltips.area.location')}</p>} />} value={formValues.latitude} onChange={(e) => update('latitude', e.target.value)} required />
+            <Input id="longitude" type="number" step="any" label={t('area.form.longitude')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.locationAria')} content={<p>{t('tooltips.area.location')}</p>} />} value={formValues.longitude} onChange={(e) => update('longitude', e.target.value)} required />
           </div>
           {isEdit && isAdmin && (
             <Select
@@ -327,31 +357,6 @@ export function AreaFormPage() {
           )}
           <Select id="biome" label={t('area.form.biome')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.biomeAria')} content={<p>{t('tooltips.area.biome')}</p>} />} options={biomeOptions} value={formValues.biome} onChange={(e) => update('biome', e.target.value)} />
           <div className="grid grid-cols-2 gap-4">
-            <Select
-              id="state"
-              label={t('area.form.state')}
-              value={normalizedStateCode ?? ''}
-              options={stateOptions}
-              onChange={(e) => {
-                const nextStateCode = e.target.value;
-                const previousStateCode = normalizedStateCode ?? '';
-                update('state', nextStateCode);
-                if (nextStateCode !== previousStateCode) {
-                  update('city', '');
-                }
-              }}
-            />
-            <Select
-              id="city"
-              label={t('area.form.city')}
-              value={formValues.city}
-              options={citySelectOptions}
-              disabled={!normalizedStateCode || isCitiesLoading || (cityOptions.length === 0 && !formValues.city)}
-              onChange={(e) => update('city', e.target.value)}
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <Input id="capacity" type="number" step="any" label={t('area.form.totalCapacity')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.totalCapacityAria')} content={<p>{t('tooltips.area.totalCapacity')}</p>} />} value={formValues.total_capacity_t_co2e} onChange={(e) => update('total_capacity_t_co2e', e.target.value)} />
             <Input
               id="tco2e_tree"
               type="number"
@@ -366,10 +371,23 @@ export function AreaFormPage() {
               value={formValues.t_co2e_per_tree_per_year}
               onChange={(e) => update('t_co2e_per_tree_per_year', e.target.value)}
             />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
             <Input id="price_tree" type="number" step="any" label={t('area.form.pricePerTree')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.pricePerTreeAria')} content={<p>{t('tooltips.area.pricePerTree')}</p>} />} value={formValues.price_per_tree} onChange={(e) => update('price_per_tree', e.target.value)} />
-            <Input id="price_tco2e" type="number" step="any" label={t('area.form.pricePerTCO2e')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.pricePerTco2eAria')} content={<p>{t('tooltips.area.pricePerTco2e')}</p>} />} value={formValues.price_per_t_co2e} onChange={(e) => update('price_per_t_co2e', e.target.value)} />
+          </div>
+          <div className="grid grid-cols-1 gap-4">
+            <Input
+              id="default_horizon_years"
+              type="number"
+              step="1"
+              label={t('area.form.defaultHorizonYears')}
+              labelAdornment={
+                <InfoTooltip
+                  ariaLabel={t('tooltips.area.defaultHorizonYearsAria')}
+                  content={<p>{t('tooltips.area.defaultHorizonYears')}</p>}
+                />
+              }
+              value={formValues.default_horizon_years}
+              onChange={(e) => update('default_horizon_years', e.target.value)}
+            />
           </div>
         </CardContent></Card>
         <div className="flex gap-3 mt-4">

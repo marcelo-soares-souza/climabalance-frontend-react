@@ -74,18 +74,23 @@ function buildUrl(path: string, params?: Record<string, string | number | boolea
   return url.toString();
 }
 
+function isAuthRoute(path: string): boolean {
+  return path.startsWith('/auth/');
+}
+
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { params, ...fetchOptions } = options;
   const url = buildUrl(path, params);
+  const shouldHandleSession = !isAuthRoute(path);
 
   const token = tokenStorage.getAccessToken();
   const headers: Record<string, string> = {
     ...(fetchOptions.headers as Record<string, string>),
   };
 
-  if (token && !isTokenExpired(token)) {
+  if (shouldHandleSession && token && !isTokenExpired(token)) {
     headers['Authorization'] = `Bearer ${token}`;
-  } else if (token) {
+  } else if (shouldHandleSession && token) {
     const newToken = await handleUnauthorized();
     if (newToken) {
       headers['Authorization'] = `Bearer ${newToken}`;
@@ -98,7 +103,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 
   const res = await fetch(url, { ...fetchOptions, headers });
 
-  if (res.status === 401) {
+  if (res.status === 401 && shouldHandleSession) {
     const newToken = await handleUnauthorized();
     if (newToken) {
       headers['Authorization'] = `Bearer ${newToken}`;

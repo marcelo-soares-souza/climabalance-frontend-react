@@ -24,8 +24,12 @@ type RawArea = {
   availableTCO2e?: number | string;
   t_co2e_per_tree_per_year?: number | string;
   tCO2ePerTreePerYear?: number | string;
+  estimated_kg_co2_per_tree_per_year?: number | string;
+  estimatedKgCO2PerTreePerYear?: number | string;
   price_per_tree?: number | string | null;
   pricePerTree?: number | string | null;
+  default_horizon_years?: number | string | null;
+  defaultHorizonYears?: number | string | null;
   price_per_t_co2e?: number | string | null;
   pricePerTCO2e?: number | string | null;
   audit_notes?: string | null;
@@ -136,7 +140,13 @@ function normalizeArea(raw: RawArea): Area {
     totalCapacityTCO2e: total,
     committedTCO2e: committed,
     tCO2ePerTreePerYear: asNumber(raw.tCO2ePerTreePerYear ?? raw.t_co2e_per_tree_per_year),
+    estimatedKgCO2PerTreePerYear: asNumber(
+      raw.estimatedKgCO2PerTreePerYear ?? raw.estimated_kg_co2_per_tree_per_year
+    ),
     pricePerTree: asNullableNumber(raw.pricePerTree ?? raw.price_per_tree),
+    defaultHorizonYears: asNullableNumber(
+      raw.defaultHorizonYears ?? raw.default_horizon_years
+    ),
     pricePerTCO2e: asNullableNumber(raw.pricePerTCO2e ?? raw.price_per_t_co2e),
     auditNotes: asNullableString(raw.auditNotes ?? raw.audit_notes),
     auditedBy: asNullableString(raw.auditedByUserId ?? raw.audited_by_user_id),

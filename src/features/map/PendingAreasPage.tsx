@@ -6,7 +6,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
 import { StatusBadge } from '@/components/StatusBadge';
-import { formatTCO2e, formatDate } from '@/lib/format';
+import { formatCurrency, formatDate } from '@/lib/format';
 import { FileCheck, MapPin } from 'lucide-react';
 
 export function PendingAreasPage() {
@@ -32,7 +32,7 @@ export function PendingAreasPage() {
                 </div>
                 <div className="flex items-center gap-1 text-sm text-text-secondary mb-1"><MapPin className="h-3 w-3" /> {[area.city, area.state].filter(Boolean).join(', ')}</div>
                 <div className="flex justify-between text-sm">
-                  <span>{t('area.totalCapacity')}: {formatTCO2e(area.totalCapacityTCO2e)}</span>
+                  <span>{t('area.form.pricePerTree')}: {area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</span>
                   <span className="text-text-secondary">{formatDate(area.createdAt)}</span>
                 </div>
               </CardContent>

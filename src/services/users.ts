@@ -1,6 +1,7 @@
 import { api } from '@/lib/api-client';
 import type { UserSummary, UserProfile, UserProfileUpdate, UserUpdate } from '@/types/user';
 import type { CompensationHistoryItem } from '@/types/compensation';
+import type { ContributionHistoryItem } from '@/types/contribution';
 import type { CertificateHistoryItem } from '@/types/certificate';
 
 type RawUserSummary = {
@@ -95,6 +96,14 @@ type RawCertificate = {
   qrCodeData?: string | null;
 };
 
+type RawClimateBalance = {
+  gross_emissions_t_co2e?: number | string;
+  estimated_offset_t_co2e?: number | string;
+  net_balance_t_co2e?: number | string;
+  total_trees_purchased?: number | string;
+  total_contribution_amount?: number | string;
+};
+
 function asString(value: unknown, fallback = ''): string {
   return typeof value === 'string' ? value : fallback;
 }
@@ -167,6 +176,33 @@ function normalizeCompensation(raw: RawCompensation): CompensationHistoryItem {
   };
 }
 
+function normalizeContribution(raw: RawCompensation): ContributionHistoryItem {
+  return {
+    id: asString(raw.id),
+    areaId: asString(raw.area_id ?? raw.areaId),
+    areaName: asString(raw.area_name ?? raw.areaName),
+    calculationId: asNullableString(raw.calculation_id ?? raw.calculationId),
+    compensationMode: asString(raw.compensation_mode ?? raw.compensationMode, 'tco2e') as ContributionHistoryItem['compensationMode'],
+    totalTCO2e: asNumber(raw.total_t_co2e ?? raw.totalTCO2e),
+    treesCount: asNumber(raw.trees_count ?? raw.treesCount),
+    totalAmount: asNumber(raw.total_amount ?? raw.totalAmount),
+    currency: asString(raw.currency, 'BRL'),
+    status: asString(raw.status, 'pending') as ContributionHistoryItem['status'],
+    createdAt: asString(raw.created_at ?? raw.createdAt),
+    paidAt: asNullableString(raw.paid_at ?? raw.paidAt),
+  };
+}
+
+function normalizeClimateBalance(raw: RawClimateBalance) {
+  return {
+    grossEmissionsTCO2e: asNumber(raw.gross_emissions_t_co2e),
+    estimatedOffsetTCO2e: asNumber(raw.estimated_offset_t_co2e),
+    netBalanceTCO2e: asNumber(raw.net_balance_t_co2e),
+    totalTreesPurchased: asNumber(raw.total_trees_purchased),
+    totalContributionAmount: asNumber(raw.total_contribution_amount),
+  };
+}
+
 function normalizeCertificate(raw: RawCertificate): CertificateHistoryItem {
   return {
     id: asString(raw.id),
@@ -218,6 +254,20 @@ export const usersService = {
     return api
       .get<RawCompensation[]>(`/users/${userId}/compensations`, { params: params as Record<string, number> })
       .then((rows) => rows.map(normalizeCompensation));
+  },
+
+  getUserContributions(userId: string, params?: { limit?: number; offset?: number; status?: string }) {
+    return api
+      .get<RawCompensation[]>(`/users/${userId}/contributions`, {
+        params: params as Record<string, string | number>,
+      })
+      .then((rows) => rows.map(normalizeContribution));
+  },
+
+  getClimateBalance(userId: string) {
+    return api
+      .get<RawClimateBalance>(`/users/${userId}/climate-balance`)
+      .then(normalizeClimateBalance);
   },
 
   getUserCertificates(userId: string, params?: { limit?: number; offset?: number }) {

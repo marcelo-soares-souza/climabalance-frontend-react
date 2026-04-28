@@ -199,7 +199,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 <User className="h-4 w-4" /> {t("nav.profile")}
               </NavLink>
               <NavLink
-                to="/profile/compensations"
+                to="/profile/contributions"
                 className={linkClass}
                 onClick={onClose}
               >

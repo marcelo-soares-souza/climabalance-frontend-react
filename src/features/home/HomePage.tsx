@@ -59,6 +59,9 @@ function UnauthenticatedHome() {
         <p className="text-lg text-white/80 mb-8 max-w-2xl mx-auto">
           {t("home.welcome.description")}
         </p>
+        {/* <p className="mx-auto mb-8 max-w-2xl rounded-2xl border border-white/15 bg-white/10 px-4 py-3 text-sm text-white/90">
+          {t("home.welcome.transferNotice")}
+        </p> */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             size="lg"
@@ -145,8 +148,13 @@ function AuthenticatedHome({ userId }: { userId: string }) {
   const certificatesPath = `/users/${userId}/certificates`;
 
   const { data: compensations, isLoading: loadingComp } = useQuery({
-    queryKey: ["users", userId, "compensations"],
-    queryFn: () => usersService.getUserCompensations(userId, { limit: 5 }),
+    queryKey: ["users", userId, "contributions"],
+    queryFn: () => usersService.getUserContributions(userId, { limit: 5 }),
+  });
+
+  const { data: climateBalance, isLoading: loadingBalance } = useQuery({
+    queryKey: ["users", userId, "climate-balance"],
+    queryFn: () => usersService.getClimateBalance(userId),
   });
 
   const { data: calculations, isLoading: loadingCalc } = useQuery({
@@ -155,16 +163,22 @@ function AuthenticatedHome({ userId }: { userId: string }) {
   });
 
   const totalFootprint =
-    calculations?.reduce((sum, c) => sum + c.totalTCO2e, 0) || 0;
+    climateBalance?.grossEmissionsTCO2e ??
+    (calculations?.reduce((sum, c) => sum + c.totalTCO2e, 0) || 0);
   const totalCompensated =
-    compensations
+    climateBalance?.estimatedOffsetTCO2e ??
+    (compensations
       ?.filter((c) => c.status === "paid")
-      .reduce((sum, c) => sum + c.totalTCO2e, 0) || 0;
+      .reduce((sum, c) => sum + c.totalTCO2e, 0) ||
+      0);
   const totalTrees =
-    compensations
+    climateBalance?.totalTreesPurchased ??
+    (compensations
       ?.filter((c) => c.status === "paid")
-      .reduce((sum, c) => sum + c.treesCount, 0) || 0;
-  const balance = totalFootprint - totalCompensated;
+      .reduce((sum, c) => sum + c.treesCount, 0) ||
+      0);
+  const balance =
+    climateBalance?.netBalanceTCO2e ?? totalFootprint - totalCompensated;
 
   return (
     <div className="space-y-6">
@@ -186,7 +200,9 @@ function AuthenticatedHome({ userId }: { userId: string }) {
         <StatCard
           label={t("home.dashboard.compensated")}
           tooltip={t("tooltips.dashboard.compensated")}
-          value={loadingComp ? null : formatTCO2e(totalCompensated)}
+          value={
+            loadingComp || loadingBalance ? null : formatTCO2e(totalCompensated)
+          }
           icon={<TreePine className="h-5 w-5" />}
           color="text-success"
           bg="bg-green-50"
@@ -195,7 +211,11 @@ function AuthenticatedHome({ userId }: { userId: string }) {
         <StatCard
           label={t("home.dashboard.balance")}
           tooltip={t("tooltips.dashboard.balance")}
-          value={loadingCalc || loadingComp ? null : formatTCO2e(balance)}
+          value={
+            loadingCalc || loadingComp || loadingBalance
+              ? null
+              : formatTCO2e(balance)
+          }
           icon={<Leaf className="h-5 w-5" />}
           color={balance > 0 ? "text-error" : "text-success"}
           bg={balance > 0 ? "bg-red-50" : "bg-green-50"}
@@ -204,7 +224,11 @@ function AuthenticatedHome({ userId }: { userId: string }) {
         <StatCard
           label={t("home.dashboard.treesPlanted")}
           tooltip={t("tooltips.dashboard.treesPlanted")}
-          value={loadingComp ? null : formatNumber(totalTrees, "pt-BR", 0)}
+          value={
+            loadingComp || loadingBalance
+              ? null
+              : formatNumber(totalTrees, "pt-BR", 0)
+          }
           icon={<TreePine className="h-5 w-5" />}
           color="text-primary"
           bg="bg-primary-50"
@@ -341,7 +365,12 @@ function StatCard({
       <CardContent className="py-4">
         <div className="flex items-center gap-3 mb-2">
           <div className={`p-2 rounded-lg ${bg} ${color}`}>{icon}</div>
-          <span className="inline-flex items-center gap-2 text-base text-text-secondary">{label}{tooltip ? <InfoTooltip ariaLabel={label} content={<p>{tooltip}</p>} /> : null}</span>
+          <span className="inline-flex items-center gap-2 text-base text-text-secondary">
+            {label}
+            {tooltip ? (
+              <InfoTooltip ariaLabel={label} content={<p>{tooltip}</p>} />
+            ) : null}
+          </span>
         </div>
         {value === null ? (
           <Skeleton className="h-7 w-24" />

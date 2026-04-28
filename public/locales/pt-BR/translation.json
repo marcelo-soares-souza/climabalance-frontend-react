@@ -9,11 +9,14 @@
     "next": "Pr\u00f3ximo",
     "notFound": "N\u00e3o encontrado",
     "createdAt": "Criado em",
+    "years": "anos",
     "allStatuses": "Todos",
     "loading": "Carregando...",
     "retry": "Tentar novamente",
     "ok": "OK",
     "edit": "Editar",
+    "showMore": "Mostrar mais",
+    "showLess": "Mostrar menos",
     "status": {
       "pending": "Pendente",
       "active": "Ativo",
@@ -29,6 +32,13 @@
       "finalized": "Finalizado",
       "issued": "Emitido",
       "revoked": "Revogado"
+    },
+    "roles": {
+      "individual": "Pessoa Física",
+      "legal_entity": "Pessoa Jurídica",
+      "producer": "Produtor",
+      "administrator": "Administrador",
+      "analyst": "Analista"
     }
   },
   "auth": {
@@ -129,7 +139,7 @@
     "history": "Hist\u00f3rico de Pegadas",
     "profile": "Meu perfil",
     "certificates": "Certificados",
-    "compensations": "Compensa\u00e7\u00f5es",
+    "compensations": "Contribui\u00e7\u00f5es",
     "validateCertificate": "Validar Certificado",
     "myAreas": "Minhas \u00c1reas",
     "areas": "\u00c1reas Dispon\u00edveis",
@@ -150,6 +160,7 @@
     "welcome": {
       "title": "Bem-vindo ao ClimaBalance",
       "description": "Plataforma de impacto clim\u00e1tico voltada ao apoio de projetos de Agroecologia, Agrofloresta, Permacultura, Agricultura Org\u00e2nica e outras iniciativas de produ\u00e7\u00e3o agr\u00edcola ecol\u00f3gica.",
+      "transferNotice": "O valor das contribui\u00e7\u00f5es \u00e9 transferido ao produtor respons\u00e1vel pela \u00e1rea, com cobran\u00e7a de uma taxa para manuten\u00e7\u00e3o e evolu\u00e7\u00e3o da plataforma.",
       "inDevelopment": "Projeto em desenvolvimento",
       "getStarted": "Come\u00e7ar",
       "exploreMap": "Explorar Mapa",
@@ -191,7 +202,8 @@
       "label": "O que é",
       "title": "Uma plataforma para transformar intenção climática em ação rastreável",
       "paragraph1": "O ClimaBalance foi criado para tornar a compensação de carbono mais clara, confiável e conectada ao território. A proposta é ajudar usuários a entender suas emissões e direcionar apoio para projetos auditados que combinam restauração ambiental com produção agrícola ecológica.",
-      "paragraph2": "Em vez de tratar a compensação como algo abstrato, a plataforma organiza o processo com mapa interativo, critérios socioambientais, rastreabilidade da contribuição e certificados de impacto com validação, priorizando iniciativas como Agroecologia, Agrofloresta, Permacultura e Agricultura Orgânica."
+      "paragraph2": "Em vez de tratar a compensação como algo abstrato, a plataforma organiza o processo com mapa interativo, critérios socioambientais, rastreabilidade da contribuição e certificados de impacto com validação, priorizando iniciativas como Agroecologia, Agrofloresta, Permacultura e Agricultura Orgânica.",
+      "paragraph3": "Quando uma contribuição é realizada, o valor é transferido ao produtor responsável pela área apoiada, enquanto a plataforma cobra uma taxa para viabilizar sua manutenção contínua e sua evolução."
     },
     "partnerCall": {
       "label": "Parcerias",
@@ -208,7 +220,7 @@
       "step2Title": "Escolher no mapa",
       "step2Description": "O usuário explora áreas e projetos auditados, compara informações das iniciativas e seleciona onde deseja direcionar sua compensação.",
       "step3Title": "Compensar e validar",
-      "step3Description": "Após a compensação, a plataforma registra a operação, mantém rastreabilidade e disponibiliza certificado com mecanismos de validação."
+      "step3Description": "Após a compensação, a plataforma registra a operação, transfere o valor ao produtor responsável pela área, cobra uma taxa de manutenção e evolução e disponibiliza certificado com mecanismos de validação."
     },
     "objectives": {
       "label": "Objetivos",
@@ -299,7 +311,7 @@
         "step2": { "title": "Cadastrar área", "description": "Preencha dados, localização e capacidade." },
         "step3": { "title": "Adicionar evidências", "description": "Inclua mídias e informações de apoio." },
         "step4": { "title": "Enviar para auditoria", "description": "Submeta a área para revisão." },
-        "step5": { "title": "Receber apoio", "description": "Com a área ativa, ela pode receber contribuições." }
+        "step5": { "title": "Receber apoio", "description": "Com a área ativa, o produtor recebe transferências das contribuições, descontada a taxa da plataforma." }
       },
       "features": {
         "title": "O que pode fazer",
@@ -310,7 +322,7 @@
       "possibilities": {
         "title": "O que ganha com isso",
         "item1": "Dar visibilidade ao projeto.",
-        "item2": "Receber apoio com mais transparência.",
+        "item2": "Receber transferências com regras claras sobre taxas da plataforma.",
         "item3": "Manter histórico estruturado da área."
       },
       "cta": "Criar conta de produtor"
@@ -621,7 +633,7 @@
     "available": "Dispon\u00edvel",
     "capacity": "Capacidade",
     "biome": "Bioma",
-    "compensate": "Compensar agora",
+    "compensate": "Apoiar projeto",
     "viewDetails": "Ver Detalhes",
     "biomes": {
       "amazonia": "Amaz\u00f4nia",
@@ -651,7 +663,7 @@
     "availableOf": "dispon\u00edvel de",
     "committed": "Comprometido",
     "trees": "\u00e1rvores",
-    "tCO2ePerTree": "tCO\u2082e por \u00c1rvore/Ano",
+    "tCO2ePerTree": "CO\u2082 estimado por \u00e1rvore/ano",
     "totalCapacity": "Capacidade Total",
     "usage": "Utiliza\u00e7\u00e3o",
     "contributions": "Contribui\u00e7\u00f5es por \u00e1rvores",
@@ -667,7 +679,7 @@
     },
     "uploadMedia": "Enviar",
     "uploadMediaError": "Falha ao enviar m\u00eddia. Tente novamente.",
-    "compensateNow": "Compensar agora",
+    "compensateNow": "Apoiar este projeto",
     "status": {
       "draft": "Rascunho",
       "pending_audit": "Aguardando Auditoria",
@@ -698,9 +710,10 @@
       "loadingCities": "Carregando cidades...",
       "noCitiesAvailable": "Nenhuma cidade disponível",
       "totalCapacity": "Capacidade Total (tCO\u2082e)",
-      "tCO2ePerTree": "tCO\u2082e por \u00c1rvore/Ano",
+      "tCO2ePerTree": "CO\u2082 estimado por \u00e1rvore/ano",
       "pricePerTree": "Pre\u00e7o por \u00c1rvore",
       "pricePerTCO2e": "Pre\u00e7o por tCO\u2082e",
+      "defaultHorizonYears": "Horizonte padr\u00e3o (anos)",
       "error": "Erro ao salvar \u00e1rea. Tente novamente."
     },
     "actions": {
@@ -774,6 +787,7 @@
       "pricePerTree": "Pre\u00e7o por \u00e1rvore",
       "estimatedCO2": "Carbono estimado (tCO\u2082e)",
       "total": "Custo total",
+      "transferNotice": "O valor pago será transferido ao produtor responsável por esta área. A plataforma cobra uma taxa para manutenção e evolução do serviço.",
       "tco2eAmount": "Total a compensar (tCO\u2082e)",
       "proceed": "Prosseguir para Pagamento"
     },
@@ -821,6 +835,7 @@
     "trees": "\u00c1rvores",
     "tco2e": "tCO\u2082e",
     "total": "Total",
+    "transferNotice": "Ao concluir o pagamento, o valor será transferido ao produtor responsável pela área, com cobrança de uma taxa para manutenção e evolução da plataforma.",
     "paymentDetails": "Dados do Pagamento",
     "cardNumber": "N\u00famero do cart\u00e3o",
     "cardholder": "Nome do titular",
@@ -845,9 +860,10 @@
     "edit": "Editar perfil",
     "editTitle": "Editar perfil",
     "personalInfo": "Informa\u00e7\u00f5es Pessoais",
-    "compensated": "Total Compensado",
+    "accountType": "Tipo de conta",
+    "compensated": "Offset estimado apoiado",
     "treesPlanted": "\u00c1rvores Plantadas",
-    "recentCompensations": "Compensa\u00e7\u00f5es Recentes",
+    "recentCompensations": "Contribui\u00e7\u00f5es Recentes",
     "viewCertificates": "Ver Certificados",
     "documentType": "Tipo de documento",
     "documentNumber": "N\u00famero do documento",
@@ -1077,6 +1093,8 @@
       "usage": "Percentual da capacidade total da \u00e1rea que j\u00e1 est\u00e1 comprometido.",
       "pricePerTreeAria": "Ajuda sobre pre\u00e7o por \u00e1rvore",
       "pricePerTree": "Use este valor quando o apoio for modelado por n\u00famero de \u00e1rvores ou unidades equivalentes do projeto.",
+      "defaultHorizonYearsAria": "Ajuda sobre horizonte padr\u00e3o do projeto",
+      "defaultHorizonYears": "Define o horizonte de anos usado como refer\u00eancia padr\u00e3o para estimativas e opera\u00e7\u00f5es vinculadas a esta \u00e1rea.",
       "pricePerTco2eAria": "Ajuda sobre pre\u00e7o por tCO2e",
       "pricePerTco2e": "Use este valor quando a compensa\u00e7\u00e3o for ofertada diretamente por volume de emiss\u00f5es em tCO2e.",
       "media": "As m\u00eddias ajudam a documentar a \u00e1rea, fortalecer a credibilidade e apoiar auditoria e transpar\u00eancia.",

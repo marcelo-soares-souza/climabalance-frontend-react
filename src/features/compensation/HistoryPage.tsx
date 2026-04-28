@@ -18,13 +18,13 @@ export function CompensationHistoryPage() {
   const { userId } = useAuth();
   const [offset, setOffset] = useState(0);
 
-  const { data: compensations, isLoading } = useQuery({
-    queryKey: ['users', userId, 'compensations', offset],
-    queryFn: () => usersService.getUserCompensations(userId!, { limit: PAGE_SIZE, offset }),
+  const { data: contributions, isLoading } = useQuery({
+    queryKey: ['users', userId, 'contributions', offset],
+    queryFn: () => usersService.getUserContributions(userId!, { limit: PAGE_SIZE, offset }),
     enabled: !!userId,
   });
 
-  const hasMore = compensations?.length === PAGE_SIZE;
+  const hasMore = contributions?.length === PAGE_SIZE;
   const page = Math.floor(offset / PAGE_SIZE) + 1;
 
   return (
@@ -33,10 +33,10 @@ export function CompensationHistoryPage() {
 
       {isLoading ? (
         <SkeletonList />
-      ) : compensations && compensations.length > 0 ? (
+      ) : contributions && contributions.length > 0 ? (
         <>
           <div className="space-y-4">
-            {compensations.map((c) => (
+            {contributions.map((c) => (
               <Card key={c.id}>
                 <CardContent className="py-4">
                   <div className="flex items-start justify-between">

@@ -11,7 +11,7 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
-import { formatTCO2e, formatDate } from '@/lib/format';
+import { formatCurrency, formatDate, formatKgCO2e } from '@/lib/format';
 import { ArrowLeft, CheckCircle, XCircle, Play, MapPin } from 'lucide-react';
 
 export function AreaAuditPage() {
@@ -80,8 +80,8 @@ export function AreaAuditPage() {
       <Card><CardContent>
         <h3 className="font-medium mb-3">{t('audit.review.details')}</h3>
         <div className="grid grid-cols-2 gap-4 text-sm">
-          <div><span className="text-text-secondary">{t('area.totalCapacity')}:</span> <span className="font-medium">{formatTCO2e(area.totalCapacityTCO2e)}</span></div>
-          <div><span className="inline-flex items-center gap-2 text-text-secondary">{t('area.tCO2ePerTree')}: <InfoTooltip ariaLabel={t('tooltips.shared.tco2ePerTreeAria')} content={<p>{t('tooltips.shared.tco2ePerTree')}</p>} /></span> <span className="font-medium">{area.tCO2ePerTreePerYear}</span></div>
+          <div><span className="text-text-secondary">{t('area.form.pricePerTree')}:</span> <span className="font-medium">{area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</span></div>
+          <div><span className="inline-flex items-center gap-2 text-text-secondary">{t('area.tCO2ePerTree')}: <InfoTooltip ariaLabel={t('tooltips.shared.tco2ePerTreeAria')} content={<p>{t('tooltips.shared.tco2ePerTree')}</p>} /></span> <span className="font-medium">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span></div>
           <div><span className="text-text-secondary">{t('area.form.biome')}:</span> <span className="font-medium">{area.biome ? t(`map.biomes.${area.biome}`, area.biome) : '-'}</span></div>
           <div><span className="text-text-secondary">{t('common.createdAt')}:</span> <span className="font-medium">{formatDate(area.createdAt)}</span></div>
         </div>

@@ -9,11 +9,14 @@
     "next": "Suivant",
     "notFound": "Non trouvé",
     "createdAt": "Créé le",
+    "years": "ans",
     "allStatuses": "Tous",
     "loading": "Chargement...",
     "retry": "Réessayer",
     "ok": "OK",
     "edit": "Modifier",
+    "showMore": "Afficher plus",
+    "showLess": "Afficher moins",
     "status": {
       "pending": "En attente",
       "active": "Actif",
@@ -29,6 +32,13 @@
       "finalized": "Finalisé",
       "issued": "Émis",
       "revoked": "Révoqué"
+    },
+    "roles": {
+      "individual": "Particulier",
+      "legal_entity": "Personne morale",
+      "producer": "Producteur",
+      "administrator": "Administrateur",
+      "analyst": "Analyste"
     }
   },
   "auth": {
@@ -129,7 +139,7 @@
     "history": "Historique des Calculs",
     "profile": "Mon profil",
     "certificates": "Certificats",
-    "compensations": "Compensations",
+    "compensations": "Contributions",
     "validateCertificate": "Valider le Certificat",
     "myAreas": "Mes Zones",
     "areas": "Zones Disponibles",
@@ -150,6 +160,7 @@
     "welcome": {
       "title": "Bienvenue sur ClimaBalance",
       "description": "Plateforme d'impact climatique dédiée au soutien de projets d'Agroécologie, d'Agroforesterie, de Permaculture, d'Agriculture Biologique et d'autres initiatives de production agricole écologique.",
+      "transferNotice": "Le montant des contributions est transféré au producteur responsable de la zone, avec des frais prélevés pour la maintenance et l'évolution de la plateforme.",
       "inDevelopment": "Projet en développement",
       "getStarted": "Commencer",
       "exploreMap": "Explorer la Carte",
@@ -191,7 +202,8 @@
       "label": "Qu'est-ce que c'est",
       "title": "Une plateforme qui transforme l'intention climatique en action traçable",
       "paragraph1": "ClimaBalance a été créé pour rendre la compensation carbone plus claire, plus fiable et plus connectée au territoire. La plateforme aide les utilisateurs à comprendre leurs émissions et à orienter leur soutien vers des projets audités qui combinent restauration environnementale et production agricole écologique.",
-      "paragraph2": "Au lieu de traiter la compensation comme quelque chose d'abstrait, la plateforme structure le processus avec une carte interactive, des critères socio-environnementaux, une traçabilité des contributions et des certificats validés d'impact, en priorisant des initiatives comme l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique."
+      "paragraph2": "Au lieu de traiter la compensation comme quelque chose d'abstrait, la plateforme structure le processus avec une carte interactive, des critères socio-environnementaux, une traçabilité des contributions et des certificats validés d'impact, en priorisant des initiatives comme l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique.",
+      "paragraph3": "Lorsqu'une contribution est réalisée, le montant est transféré au producteur responsable de la zone soutenue, tandis que la plateforme prélève des frais pour assurer sa maintenance continue et son évolution."
     },
     "partnerCall": {
       "label": "Partenariats",
@@ -208,7 +220,7 @@
       "step2Title": "Choisir sur la carte",
       "step2Description": "Les utilisateurs explorent des zones et des projets audités, comparent les informations des initiatives et choisissent où orienter leur compensation.",
       "step3Title": "Compenser et valider",
-      "step3Description": "Après la compensation, la plateforme enregistre l'opération, conserve la traçabilité et fournit un certificat avec des mécanismes de validation."
+      "step3Description": "Après la compensation, la plateforme enregistre l'opération, transfère le montant au producteur responsable de la zone, prélève des frais de maintenance et d'évolution et fournit un certificat avec des mécanismes de validation."
     },
     "objectives": {
       "label": "Objectifs",
@@ -299,7 +311,7 @@
         "step2": { "title": "Enregistrer une zone", "description": "Renseignez données, localisation et capacité." },
         "step3": { "title": "Ajouter des preuves", "description": "Ajoutez médias et informations de soutien." },
         "step4": { "title": "Soumettre à l'audit", "description": "Envoyez la zone pour révision." },
-        "step5": { "title": "Recevoir du soutien", "description": "Une fois active, la zone peut recevoir des contributions." }
+        "step5": { "title": "Recevoir du soutien", "description": "Une fois la zone active, le producteur reçoit les transferts des contributions, déduction faite des frais de la plateforme." }
       },
       "features": {
         "title": "Ce que vous pouvez faire",
@@ -310,7 +322,7 @@
       "possibilities": {
         "title": "Ce que cela permet",
         "item1": "Donner de la visibilité au projet.",
-        "item2": "Recevoir du soutien avec plus de transparence.",
+        "item2": "Recevoir des transferts avec des règles claires sur les frais de la plateforme.",
         "item3": "Conserver un historique structuré de la zone."
       },
       "cta": "Créer un compte producteur"
@@ -698,9 +710,10 @@
       "loadingCities": "Chargement des villes...",
       "noCitiesAvailable": "Aucune ville disponible",
       "totalCapacity": "Capacité Totale (tCO2e)",
-      "tCO2ePerTree": "tCO2e par Arbre/An",
+      "tCO2ePerTree": "CO2 estimé par Arbre/An",
       "pricePerTree": "Prix par Arbre",
       "pricePerTCO2e": "Prix par tCO2e",
+      "defaultHorizonYears": "Horizon par défaut (ans)",
       "error": "Erreur lors de l'enregistrement de la zone. Veuillez réessayer."
     },
     "actions": {
@@ -774,6 +787,7 @@
       "pricePerTree": "Prix par arbre",
       "estimatedCO2": "Carbone estimé (tCO2e)",
       "total": "Coût total",
+      "transferNotice": "Le montant payé sera transféré au producteur responsable de cette zone. La plateforme prélève des frais pour la maintenance et l'évolution du service.",
       "tco2eAmount": "Total à compenser (tCO2e)",
       "proceed": "Continuer vers le Paiement"
     },
@@ -821,6 +835,7 @@
     "trees": "Arbres",
     "tco2e": "tCO2e",
     "total": "Total",
+    "transferNotice": "Une fois le paiement terminé, le montant sera transféré au producteur responsable de la zone, avec des frais prélevés pour la maintenance et l'évolution de la plateforme.",
     "paymentDetails": "Détails du Paiement",
     "cardNumber": "Numéro de carte",
     "cardholder": "Nom du titulaire",
@@ -845,9 +860,10 @@
     "edit": "Modifier le profil",
     "editTitle": "Modifier le profil",
     "personalInfo": "Informations Personnelles",
-    "compensated": "Total Compensé",
+    "accountType": "Type de compte",
+    "compensated": "Offset estimé soutenu",
     "treesPlanted": "Arbres Plantés",
-    "recentCompensations": "Compensations Récentes",
+    "recentCompensations": "Contributions Récentes",
     "viewCertificates": "Voir les Certificats",
     "documentType": "Type de document",
     "documentNumber": "Numéro de document",
@@ -1077,6 +1093,8 @@
       "usage": "Pourcentage de la capacité totale de la zone déjà engagée.",
       "pricePerTreeAria": "Aide sur le prix par arbre",
       "pricePerTree": "Utilisez cette valeur lorsque le soutien est modélisé par nombre d'arbres ou unités équivalentes du projet.",
+      "defaultHorizonYearsAria": "Aide sur l'horizon par défaut du projet",
+      "defaultHorizonYears": "Définit l'horizon en années utilisé comme référence par défaut pour les estimations et opérations liées à cette zone.",
       "pricePerTco2eAria": "Aide sur le prix par tCO2e",
       "pricePerTco2e": "Utilisez cette valeur lorsque la compensation est proposée directement par volume d'émissions en tCO2e.",
       "media": "Les médias aident à documenter la zone, renforcer la crédibilité et soutenir l'audit et la transparence.",

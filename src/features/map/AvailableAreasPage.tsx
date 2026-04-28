@@ -7,7 +7,7 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
-import { formatTCO2e } from '@/lib/format';
+import { formatCurrency, formatKgCO2e } from '@/lib/format';
 import { MapPin, TreePine, Plus } from 'lucide-react';
 
 export function AvailableAreasPage() {
@@ -35,7 +35,8 @@ export function AvailableAreasPage() {
               <CardContent className="py-4">
                 <h3 className="font-medium mb-1">{area.name}</h3>
                 <div className="flex items-center gap-1 text-sm text-text-secondary mb-2"><MapPin className="h-3 w-3" /> {[area.city, area.state].filter(Boolean).join(', ') || '-'}</div>
-                <p className="text-sm">{formatTCO2e(area.totalCapacityTCO2e - area.committedTCO2e)} {t('area.availableOf')} {formatTCO2e(area.totalCapacityTCO2e)}</p>
+                <p className="text-sm">{t('area.form.pricePerTree')}: {area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</p>
+                <p className="text-sm text-text-secondary">{t('area.tCO2ePerTree')}: {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</p>
               </CardContent>
             </Card>
           ))}

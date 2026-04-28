@@ -28,3 +28,8 @@ export function formatTCO2e(value: number): string {
 export function formatKgCO2e(value: number): string {
   return `${formatNumber(value, 'pt-BR', 1)} kg CO2e`;
 }
+
+export function maskDocumentNumber(value: string): string {
+  const visible = value.trim().slice(-4);
+  return visible ? `***${visible}` : '***';
+}

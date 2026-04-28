@@ -16,7 +16,9 @@ export interface Area {
   totalCapacityTCO2e: number;
   committedTCO2e: number;
   tCO2ePerTreePerYear: number;
+  estimatedKgCO2PerTreePerYear: number;
   pricePerTree: number | null;
+  defaultHorizonYears: number | null;
   pricePerTCO2e: number | null;
   auditNotes: string | null;
   auditedBy: string | null;
@@ -72,6 +74,7 @@ export interface CreateAreaRequest {
   total_capacity_t_co2e?: number;
   t_co2e_per_tree_per_year?: number;
   price_per_tree?: number;
+  default_horizon_years?: number;
   price_per_t_co2e?: number;
 }
 
@@ -87,6 +90,7 @@ export interface UpdateAreaRequest {
   total_capacity_t_co2e?: number;
   t_co2e_per_tree_per_year?: number;
   price_per_tree?: number;
+  default_horizon_years?: number;
   price_per_t_co2e?: number;
 }
 

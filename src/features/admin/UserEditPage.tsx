@@ -12,6 +12,7 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { ApiError } from '@/lib/api-client';
+import { getPrimaryAccountType, getRoleLabels } from '@/lib/user-display';
 import { ArrowLeft, Trash2 } from 'lucide-react';
 
 export function UserEditPage() {
@@ -76,7 +77,8 @@ export function UserEditPage() {
             options={[{ value: 'pt-BR', label: 'Portugues (BR)' }, { value: 'en', label: 'English' }, { value: 'es', label: 'Espanol' }, { value: 'fr', label: 'Francais' }]} />
           <Input id="password" type="password" label={t('admin.users.newPassword')} value={formValues.password} onChange={(e) => update('password', e.target.value)} placeholder={t('admin.users.passwordPlaceholder')} />
           {formValues.password && <Input id="password_confirm" type="password" label={t('auth.confirmPassword')} value={formValues.password_confirm} onChange={(e) => update('password_confirm', e.target.value)} />}
-          <p className="text-xs text-text-secondary">{t('admin.users.roles')}: {user.roles?.join(', ')}</p>
+          <p className="text-xs text-text-secondary">{t('profile.accountType')}: {getPrimaryAccountType(user.roles, t)}</p>
+          <p className="text-xs text-text-secondary">{t('admin.users.roles')}: {getRoleLabels(user.roles, t).join(', ') || '-'}</p>
         </CardContent></Card>
         <div className="flex justify-between mt-4">
           <Button variant="danger" type="button" onClick={() => setShowDelete(true)}><Trash2 className="h-4 w-4 mr-1" /> {t('common.delete')}</Button>

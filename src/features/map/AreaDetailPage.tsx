@@ -1,22 +1,44 @@
-import { useEffect, useRef, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { areasService } from '@/services/areas';
-import { Card, CardContent, CardHeader } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
-import { StatusBadge } from '@/components/StatusBadge';
-import { Badge } from '@/components/ui/Badge';
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@/components/ui/Dialog';
-import { Input } from '@/components/ui/Input';
-import { InfoTooltip } from '@/components/ui/InfoTooltip';
-import { PageSkeleton } from '@/components/LoadingSkeleton';
-import { useCompensationStore } from '@/stores/compensation-store';
-import { useAuth } from '@/hooks/use-auth';
-import { formatTCO2e, formatNumber } from '@/lib/format';
-import { ArrowLeft, MapPin, TreePine, Image, Send, ShieldOff, Upload, Trash2, Edit, X } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { areasService } from "@/services/areas";
+import { Card, CardContent, CardHeader } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
+import { StatusBadge } from "@/components/StatusBadge";
+import { Badge } from "@/components/ui/Badge";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@/components/ui/Dialog";
+import { Input } from "@/components/ui/Input";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
+import { PageSkeleton } from "@/components/LoadingSkeleton";
+import { useCompensationStore } from "@/stores/compensation-store";
+import { useAuth } from "@/hooks/use-auth";
+import {
+  formatCurrency,
+  formatKgCO2e,
+  formatNumber,
+  formatTCO2e,
+} from "@/lib/format";
+import {
+  ArrowLeft,
+  MapPin,
+  TreePine,
+  Image,
+  Send,
+  ShieldOff,
+  Upload,
+  Trash2,
+  Edit,
+  X,
+} from "lucide-react";
 
 export function AreaDetailPage() {
+  const DESCRIPTION_PREVIEW_LENGTH = 260;
   const { areaId } = useParams<{ areaId: string }>();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -27,29 +49,33 @@ export function AreaDetailPage() {
   const [submitDialogOpen, setSubmitDialogOpen] = useState(false);
   const [suspendDialogOpen, setSuspendDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [submitNotes, setSubmitNotes] = useState('');
-  const [suspendReason, setSuspendReason] = useState('');
-  const [lightboxImage, setLightboxImage] = useState<{ url: string; alt: string } | null>(null);
+  const [submitNotes, setSubmitNotes] = useState("");
+  const [suspendReason, setSuspendReason] = useState("");
+  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
+  const [lightboxImage, setLightboxImage] = useState<{
+    url: string;
+    alt: string;
+  } | null>(null);
 
   const { data: area, isLoading } = useQuery({
-    queryKey: ['areas', areaId],
+    queryKey: ["areas", areaId],
     queryFn: () => areasService.getArea(areaId!),
     enabled: !!areaId,
   });
 
   const { data: contributions } = useQuery({
-    queryKey: ['areas', areaId, 'contributions'],
+    queryKey: ["areas", areaId, "contributions"],
     queryFn: () => areasService.listAreaContributions(areaId!),
     enabled: !!areaId,
   });
 
   const { data: media } = useQuery({
-    queryKey: ['areas', areaId, 'media'],
+    queryKey: ["areas", areaId, "media"],
     queryFn: () => areasService.listAreaMedia(areaId!),
     enabled: !!areaId,
   });
 
-  const areaIdentifier = area?.id ?? areaId ?? '';
+  const areaIdentifier = area?.id ?? areaId ?? "";
 
   const handleCompensate = () => {
     if (!area) return;
@@ -57,29 +83,31 @@ export function AreaDetailPage() {
       areaId: area.id,
       areaName: area.name,
       calculationId: null,
-      compensationMode: 'tree_purchase',
+      compensationMode: "tree_purchase",
       totalTCO2e: null,
       treesRequested: null,
       totalAmount: null,
     });
-    navigate('/compensation/review');
+    navigate("/compensation/review");
   };
 
   const submitMutation = useMutation({
-    mutationFn: () => areasService.submitForAudit(areaIdentifier, submitNotes || undefined),
+    mutationFn: () =>
+      areasService.submitForAudit(areaIdentifier, submitNotes || undefined),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['areas', areaId] });
+      queryClient.invalidateQueries({ queryKey: ["areas", areaId] });
       setSubmitDialogOpen(false);
-      setSubmitNotes('');
+      setSubmitNotes("");
     },
   });
 
   const suspendMutation = useMutation({
-    mutationFn: () => areasService.suspendArea(areaIdentifier, suspendReason || undefined),
+    mutationFn: () =>
+      areasService.suspendArea(areaIdentifier, suspendReason || undefined),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['areas', areaId] });
+      queryClient.invalidateQueries({ queryKey: ["areas", areaId] });
       setSuspendDialogOpen(false);
-      setSuspendReason('');
+      setSuspendReason("");
     },
   });
 
@@ -87,9 +115,9 @@ export function AreaDetailPage() {
 
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
-      if (!areaIdentifier) throw new Error('area.not_found');
+      if (!areaIdentifier) throw new Error("area.not_found");
       const base64 = await fileToBase64(file);
-      const mediaType = file.type.startsWith('video/') ? 'video' : 'photo';
+      const mediaType = file.type.startsWith("video/") ? "video" : "photo";
       return areasService.uploadAreaMedia(areaIdentifier, {
         media_type: mediaType,
         mime_type: file.type,
@@ -98,90 +126,132 @@ export function AreaDetailPage() {
       });
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['areas', areaId, 'media'] });
+      queryClient.invalidateQueries({ queryKey: ["areas", areaId, "media"] });
     },
   });
 
   const deleteMediMutation = useMutation({
     mutationFn: (mediaId: string) => areasService.deleteAreaMedia(mediaId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['areas', areaId, 'media'] });
+      queryClient.invalidateQueries({ queryKey: ["areas", areaId, "media"] });
     },
   });
 
   const deleteAreaMutation = useMutation({
     mutationFn: () => areasService.deleteArea(areaIdentifier),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['areas'] });
-      navigate('/areas/available');
+      queryClient.invalidateQueries({ queryKey: ["areas"] });
+      navigate("/areas/available");
     },
   });
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) uploadMutation.mutate(file);
-    if (fileInputRef.current) fileInputRef.current.value = '';
+    if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
   useEffect(() => {
     if (!lightboxImage) return;
 
     const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setLightboxImage(null);
+      if (event.key === "Escape") setLightboxImage(null);
     };
 
-    window.addEventListener('keydown', onKeyDown);
+    window.addEventListener("keydown", onKeyDown);
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
+      window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = previousOverflow;
     };
   }, [lightboxImage]);
 
   if (isLoading) return <PageSkeleton />;
-  if (!area) return <div>{t('common.notFound')}</div>;
+  if (!area) return <div>{t("common.notFound")}</div>;
 
-  const available = area.totalCapacityTCO2e - area.committedTCO2e;
-  const usagePct = area.totalCapacityTCO2e > 0 ? (area.committedTCO2e / area.totalCapacityTCO2e) * 100 : 0;
+  const totalTreesFunded =
+    contributions?.reduce((sum, item) => sum + item.treesCount, 0) ?? 0;
+  const totalEstimatedTCO2e =
+    contributions?.reduce((sum, item) => sum + item.totalTCO2e, 0) ?? 0;
+  const supporterCount = contributions?.length ?? 0;
+  const defaultHorizonYears = area.defaultHorizonYears ?? 20;
+  const description = area.description?.trim() ?? "";
+  const hasLongDescription = description.length > DESCRIPTION_PREVIEW_LENGTH;
+  const visibleDescription =
+    hasLongDescription && !isDescriptionExpanded
+      ? `${description.slice(0, DESCRIPTION_PREVIEW_LENGTH).trimEnd()}...`
+      : description;
 
   const isOwner = userId === area.ownerUserId;
   const canManageMedia = isOwner || isAdmin;
   const canDelete = isOwner || isAdmin;
-  const canSubmitForAudit = isOwner && area.status === 'draft';
-  const canSuspend = isAdmin && area.status === 'active';
-  const canEdit = isAdmin || (isOwner && (area.status === 'draft' || area.status === 'active'));
+  const canSubmitForAudit = isOwner && area.status === "draft";
+  const canSuspend = isAdmin && area.status === "active";
+  const canEdit =
+    isAdmin ||
+    (isOwner && (area.status === "draft" || area.status === "active"));
 
   return (
     <div className="max-w-3xl mx-auto space-y-6">
-      <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
-        <ArrowLeft className="h-4 w-4" /> {t('common.back')}
+      <button
+        onClick={() => navigate(-1)}
+        className="flex items-center gap-2 text-sm text-primary hover:underline"
+      >
+        <ArrowLeft className="h-4 w-4" /> {t("common.back")}
       </button>
 
       <div className="flex items-start justify-between flex-wrap gap-3">
         <div>
           <h1 className="text-2xl font-bold">{area.name}</h1>
           <div className="flex items-center gap-2 mt-1 text-text-secondary">
-            <MapPin className="h-4 w-4" />
-            <span>{[area.city, area.state].filter(Boolean).join(', ')}</span>
+            {/* <MapPin className="h-4 w-4" /> */}
+            <span>{[area.city, area.state].filter(Boolean).join(", ")}</span>
           </div>
-          <p className="text-sm text-text-secondary mt-1">
-            {t('area.ownerEmail')}: {area.ownerEmail || '-'}
-          </p>
+          {isAuthenticated && (
+            <p className="text-sm text-text-secondary mt-1">
+              {t("area.ownerEmail")}: {area.ownerEmail || "-"}
+            </p>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <StatusBadge status={area.status} />
           <InfoTooltip
-            ariaLabel={t('tooltips.area.statusAria')}
+            ariaLabel={t("tooltips.area.statusAria")}
             panelClassName="left-auto right-0"
             content={
               <>
-                <p><strong className="text-text-primary">{t('common.status.draft')}:</strong> {t('tooltips.area.statusDraft')}</p>
-                <p className="mt-2"><strong className="text-text-primary">{t('common.status.pending_audit')}:</strong> {t('tooltips.area.statusPendingAudit')}</p>
-                <p className="mt-2"><strong className="text-text-primary">{t('common.status.approved')}:</strong> {t('tooltips.area.statusApproved')}</p>
-                <p className="mt-2"><strong className="text-text-primary">{t('common.status.active')}:</strong> {t('tooltips.area.statusActive')}</p>
-                <p className="mt-2"><strong className="text-text-primary">{t('common.status.suspended')}:</strong> {t('tooltips.area.statusSuspended')}</p>
+                <p>
+                  <strong className="text-text-primary">
+                    {t("common.status.draft")}:
+                  </strong>{" "}
+                  {t("tooltips.area.statusDraft")}
+                </p>
+                <p className="mt-2">
+                  <strong className="text-text-primary">
+                    {t("common.status.pending_audit")}:
+                  </strong>{" "}
+                  {t("tooltips.area.statusPendingAudit")}
+                </p>
+                <p className="mt-2">
+                  <strong className="text-text-primary">
+                    {t("common.status.approved")}:
+                  </strong>{" "}
+                  {t("tooltips.area.statusApproved")}
+                </p>
+                <p className="mt-2">
+                  <strong className="text-text-primary">
+                    {t("common.status.active")}:
+                  </strong>{" "}
+                  {t("tooltips.area.statusActive")}
+                </p>
+                <p className="mt-2">
+                  <strong className="text-text-primary">
+                    {t("common.status.suspended")}:
+                  </strong>{" "}
+                  {t("tooltips.area.statusSuspended")}
+                </p>
               </>
             }
           />
@@ -189,85 +259,179 @@ export function AreaDetailPage() {
       </div>
 
       {area.description && (
-        <Card><CardContent><p className="text-text-secondary">{area.description}</p></CardContent></Card>
+        <Card>
+          <CardContent className="py-6">
+            <p className="whitespace-pre-line text-text-secondary">
+              {visibleDescription}
+            </p>
+            {hasLongDescription && (
+              <button
+                type="button"
+                onClick={() => setIsDescriptionExpanded((current) => !current)}
+                className="mt-3 text-sm font-medium text-primary hover:underline"
+              >
+                {isDescriptionExpanded
+                  ? t("common.showLess")
+                  : t("common.showMore")}
+              </button>
+            )}
+          </CardContent>
+        </Card>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card><CardContent className="text-center py-4">
-          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('area.totalCapacity')}<InfoTooltip ariaLabel={t('tooltips.area.totalCapacityAria')} content={<p>{t('tooltips.area.totalCapacity')}</p>} /></p>
-          <p className="text-xl font-bold text-primary">{formatTCO2e(area.totalCapacityTCO2e)}</p>
-        </CardContent></Card>
-        <Card><CardContent className="text-center py-4">
-          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('area.committed')}<InfoTooltip ariaLabel={t('tooltips.area.committedAria')} content={<p>{t('tooltips.area.committed')}</p>} /></p>
-          <p className="text-xl font-bold text-amber-600">{formatTCO2e(area.committedTCO2e)}</p>
-        </CardContent></Card>
-        <Card><CardContent className="text-center py-4">
-          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('area.available')}<InfoTooltip ariaLabel={t('tooltips.area.availableAria')} content={<p>{t('tooltips.area.available')}</p>} /></p>
-          <p className="text-xl font-bold text-success">{formatTCO2e(available)}</p>
-        </CardContent></Card>
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+        <Card>
+          <CardContent className="text-center py-4">
+            <p className="inline-flex items-center gap-2 text-sm text-text-secondary">
+              {t("area.form.pricePerTree")}
+              <InfoTooltip
+                ariaLabel={t("tooltips.area.pricePerTreeAria")}
+                content={<p>{t("tooltips.area.pricePerTree")}</p>}
+              />
+            </p>
+            <p className="text-xl font-bold text-primary">
+              {area.pricePerTree != null
+                ? formatCurrency(area.pricePerTree)
+                : "-"}
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="text-center py-4">
+            <p className="inline-flex items-center gap-2 text-sm text-text-secondary">
+              {t("area.tCO2ePerTree")}
+              <InfoTooltip
+                ariaLabel={t("tooltips.shared.tco2ePerTreeAria")}
+                content={<p>{t("tooltips.shared.tco2ePerTree")}</p>}
+              />
+            </p>
+            <p className="text-xl font-bold text-amber-600">
+              {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="text-center py-4">
+            <p className="text-sm text-text-secondary">
+              {t("profile.treesPlanted")}
+            </p>
+            <p className="text-xl font-bold text-success">
+              {formatNumber(totalTreesFunded, "pt-BR", 0)}
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="text-center py-4">
+            <p className="text-sm text-text-secondary">
+              {t("profile.compensated")}
+            </p>
+            <p className="text-xl font-bold text-text-primary">
+              {formatTCO2e(totalEstimatedTCO2e)}
+            </p>
+          </CardContent>
+        </Card>
       </div>
 
-      <Card><CardContent>
-        <div className="flex justify-between text-sm mb-2">
-          <span className="inline-flex items-center gap-2">{t('area.usage')}<InfoTooltip ariaLabel={t('tooltips.area.usageAria')} content={<p>{t('tooltips.area.usage')}</p>} /></span>
-          <span>{usagePct.toFixed(1)}%</span>
-        </div>
-        <div className="h-3 bg-gray-100 rounded-full overflow-hidden">
-          <div className="h-full bg-primary rounded-full" style={{ width: `${usagePct}%` }} />
-        </div>
-      </CardContent></Card>
-
       {area.biome && (
-        <Card><CardContent className="flex items-center gap-4">
-          <Badge variant="success">{t(`map.biomes.${area.biome}`, area.biome)}</Badge>
-          <span className="flex items-center gap-2 text-sm text-text-secondary">
-            {t('area.tCO2ePerTree')}: {formatNumber(area.tCO2ePerTreePerYear, 'pt-BR', 4)} tCO2e/tree/year
-            <InfoTooltip
-              ariaLabel={t('tooltips.shared.tco2ePerTreeAria')}
-              content={<p>{t('tooltips.shared.tco2ePerTree')}</p>}
-            />
-          </span>
-        </CardContent></Card>
+        <Card>
+          <CardContent className="flex items-center gap-4">
+            <Badge variant="success">
+              {t(`map.biomes.${area.biome}`, area.biome)}
+            </Badge>
+            <span className="flex items-center gap-2 text-sm text-text-secondary">
+              {t("area.tCO2ePerTree")}:{" "}
+              {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
+              <InfoTooltip
+                ariaLabel={t("tooltips.shared.tco2ePerTreeAria")}
+                content={<p>{t("tooltips.shared.tco2ePerTree")}</p>}
+              />
+            </span>
+            <span className="text-sm text-text-secondary">
+              {defaultHorizonYears} {t("common.years")}
+            </span>
+          </CardContent>
+        </Card>
       )}
 
       {/* Media Gallery */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
-            <h3 className="font-medium flex items-center gap-2"><Image className="h-4 w-4" /> {t('area.media')} ({media?.length ?? 0}) <InfoTooltip ariaLabel={t('area.media')} content={<p>{t('tooltips.area.media')}</p>} /></h3>
+            <h3 className="font-medium flex items-center gap-2">
+              <Image className="h-4 w-4" /> {t("area.media")} (
+              {media?.length ?? 0}){" "}
+              <InfoTooltip
+                ariaLabel={t("area.media")}
+                content={<p>{t("tooltips.area.media")}</p>}
+              />
+            </h3>
             {canManageMedia && (
               <>
-                <input ref={fileInputRef} type="file" accept="image/*,video/*" className="hidden" onChange={handleFileSelect} />
-                <Button size="sm" variant="outline" onClick={() => fileInputRef.current?.click()} disabled={uploadMutation.isPending}>
-                  <Upload className="h-4 w-4 mr-1" /> {uploadMutation.isPending ? t('common.loading') : t('area.uploadMedia')}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*,video/*"
+                  className="hidden"
+                  onChange={handleFileSelect}
+                />
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={uploadMutation.isPending}
+                >
+                  <Upload className="h-4 w-4 mr-1" />{" "}
+                  {uploadMutation.isPending
+                    ? t("common.loading")
+                    : t("area.uploadMedia")}
                 </Button>
               </>
             )}
           </div>
-          {uploadMutation.isError && <p className="mt-2 text-sm text-error">{t('area.uploadMediaError')}</p>}
+          {uploadMutation.isError && (
+            <p className="mt-2 text-sm text-error">
+              {t("area.uploadMediaError")}
+            </p>
+          )}
         </CardHeader>
         <CardContent>
           {media && media.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
               {media.map((m) => (
-                <div key={m.id} className="relative group aspect-video bg-gray-100 rounded-lg overflow-hidden">
-                  {m.mediaType === 'photo' ? (
+                <div
+                  key={m.id}
+                  className="relative group aspect-video bg-gray-100 rounded-lg overflow-hidden"
+                >
+                  {m.mediaType === "photo" ? (
                     <button
                       type="button"
                       className="w-full h-full cursor-zoom-in"
-                      onClick={() => setLightboxImage({ url: m.url, alt: m.description || m.fileName })}
-                      aria-label={t('area.mediaLightbox.open')}
+                      onClick={() =>
+                        setLightboxImage({
+                          url: m.url,
+                          alt: m.description || m.fileName,
+                        })
+                      }
+                      aria-label={t("area.mediaLightbox.open")}
                     >
-                      <img src={m.url} alt={m.description || m.fileName} className="w-full h-full object-cover" />
+                      <img
+                        src={m.url}
+                        alt={m.description || m.fileName}
+                        className="w-full h-full object-cover"
+                      />
                     </button>
                   ) : (
-                    <video src={m.url} controls className="w-full h-full object-cover" />
+                    <video
+                      src={m.url}
+                      controls
+                      className="w-full h-full object-cover"
+                    />
                   )}
                   {canManageMedia && (
                     <button
                       onClick={() => deleteMediMutation.mutate(m.id)}
                       className="absolute top-2 right-2 p-1.5 bg-black/60 rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/80"
-                      title={t('common.delete')}
+                      title={t("common.delete")}
                     >
                       <Trash2 className="h-3.5 w-3.5" />
                     </button>
@@ -276,7 +440,9 @@ export function AreaDetailPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-text-secondary">{t('area.mediaEmpty')}</p>
+            <p className="text-sm text-text-secondary">
+              {t("area.mediaEmpty")}
+            </p>
           )}
         </CardContent>
       </Card>
@@ -284,13 +450,53 @@ export function AreaDetailPage() {
       {/* Contributions */}
       {contributions && contributions.length > 0 && (
         <Card>
-          <CardHeader><h3 className="font-medium">{t('area.contributions')} ({contributions.length}) <InfoTooltip ariaLabel={t('area.contributions')} content={<p>{t('tooltips.area.contributions')}</p>} /></h3></CardHeader>
+          <CardHeader>
+            <h3 className="font-medium">
+              {t("area.contributions")} ({contributions.length}){" "}
+              <InfoTooltip
+                ariaLabel={t("area.contributions")}
+                content={<p>{t("tooltips.area.contributions")}</p>}
+              />
+            </h3>
+          </CardHeader>
           <CardContent>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              <div className="rounded-md bg-primary-50 p-3 text-center">
+                <p className="text-xs text-text-secondary">
+                  {t("profile.treesPlanted")}
+                </p>
+                <p className="text-lg font-semibold text-primary">
+                  {formatNumber(totalTreesFunded, "pt-BR", 0)}
+                </p>
+              </div>
+              <div className="rounded-md bg-success/10 p-3 text-center">
+                <p className="text-xs text-text-secondary">
+                  {t("profile.compensated")}
+                </p>
+                <p className="text-lg font-semibold text-success">
+                  {formatTCO2e(totalEstimatedTCO2e)}
+                </p>
+              </div>
+              <div className="rounded-md bg-gray-100 p-3 text-center">
+                <p className="text-xs text-text-secondary">
+                  {t("area.contributions")}
+                </p>
+                <p className="text-lg font-semibold text-text-primary">
+                  {formatNumber(supporterCount, "pt-BR", 0)}
+                </p>
+              </div>
+            </div>
             <div className="space-y-2">
               {contributions.map((c) => (
-                <div key={c.id} className="flex justify-between py-2 border-b border-gray-50 last:border-0 text-sm">
-                  <span>{c.userEmail || t('area.anonymousContributor')}</span>
-                  <span className="font-medium">{formatTCO2e(c.totalTCO2e)} ({c.treesCount} {t('area.trees')})</span>
+                <div
+                  key={c.id}
+                  className="flex justify-between py-2 border-b border-gray-50 last:border-0 text-sm"
+                >
+                  <span>{c.userEmail || t("area.anonymousContributor")}</span>
+                  <span className="font-medium">
+                    {formatTCO2e(c.totalTCO2e)} ({c.treesCount}{" "}
+                    {t("area.trees")})
+                  </span>
                 </div>
               ))}
             </div>
@@ -300,88 +506,167 @@ export function AreaDetailPage() {
 
       {/* Action buttons */}
       <div className="flex flex-col sm:flex-row gap-3">
-        {area.status === 'active' && isAuthenticated && (
+        {area.status === "active" && isAuthenticated && (
           <Button size="lg" className="flex-1" onClick={handleCompensate}>
-            <TreePine className="h-5 w-5 mr-2" /> {t('area.compensateNow')}
+            <TreePine className="h-5 w-5 mr-2" /> {t("area.compensateNow")}
+          </Button>
+        )}
+        {isAdmin && area.status === "pending_audit" && (
+          <Button
+            size="lg"
+            variant="secondary"
+            className="flex-1"
+            onClick={() => navigate(`/audit/area/${area.id}`)}
+          >
+            {t("audit.review.approve")}
+          </Button>
+        )}
+        {isAdmin && area.status === "approved" && (
+          <Button
+            size="lg"
+            variant="secondary"
+            className="flex-1"
+            onClick={() => navigate(`/audit/area/${area.id}`)}
+          >
+            {t("audit.review.activate")}
           </Button>
         )}
         {canSubmitForAudit && (
-          <Button size="lg" variant="secondary" className="flex-1" onClick={() => setSubmitDialogOpen(true)}>
-            <Send className="h-5 w-5 mr-2" /> {t('area.actions.submitForAudit')}
+          <Button
+            size="lg"
+            variant="secondary"
+            className="flex-1"
+            onClick={() => setSubmitDialogOpen(true)}
+          >
+            <Send className="h-5 w-5 mr-2" /> {t("area.actions.submitForAudit")}
           </Button>
         )}
         {canSuspend && (
-          <Button size="lg" variant="outline" className="flex-1 border-error text-error hover:bg-red-50" onClick={() => setSuspendDialogOpen(true)}>
-            <ShieldOff className="h-5 w-5 mr-2" /> {t('area.actions.suspend')}
+          <Button
+            size="lg"
+            variant="outline"
+            className="flex-1 border-error text-error hover:bg-red-50"
+            onClick={() => setSuspendDialogOpen(true)}
+          >
+            <ShieldOff className="h-5 w-5 mr-2" /> {t("area.actions.suspend")}
           </Button>
         )}
         {canEdit && (
-          <Button size="lg" variant="outline" className="flex-1" onClick={() => navigate(`/areas/edit/${area.id}`)}>
-            <Edit className="h-5 w-5 mr-2" /> {t('common.edit')}
+          <Button
+            size="lg"
+            variant="outline"
+            className="flex-1"
+            onClick={() => navigate(`/areas/edit/${area.id}`)}
+          >
+            <Edit className="h-5 w-5 mr-2" /> {t("common.edit")}
           </Button>
         )}
         {canDelete && (
-          <Button size="lg" variant="outline" className="flex-1 border-error text-error hover:bg-red-50" onClick={() => setDeleteDialogOpen(true)}>
-            <Trash2 className="h-5 w-5 mr-2" /> {t('area.actions.delete')}
+          <Button
+            size="lg"
+            variant="outline"
+            className="flex-1 border-error text-error hover:bg-red-50"
+            onClick={() => setDeleteDialogOpen(true)}
+          >
+            <Trash2 className="h-5 w-5 mr-2" /> {t("area.actions.delete")}
           </Button>
         )}
       </div>
 
       {/* Submit for Audit Dialog */}
-      <Dialog open={submitDialogOpen} onClose={() => setSubmitDialogOpen(false)}>
-        <DialogTitle>{t('area.submitConfirm.title')}</DialogTitle>
-        <DialogContent>{t('area.submitConfirm.message')}</DialogContent>
+      <Dialog
+        open={submitDialogOpen}
+        onClose={() => setSubmitDialogOpen(false)}
+      >
+        <DialogTitle>{t("area.submitConfirm.title")}</DialogTitle>
+        <DialogContent>{t("area.submitConfirm.message")}</DialogContent>
         <Input
-          label={t('area.submitConfirm.notesLabel')}
+          label={t("area.submitConfirm.notesLabel")}
           value={submitNotes}
           onChange={(e) => setSubmitNotes(e.target.value)}
-          placeholder={t('area.submitConfirm.notesPlaceholder')}
+          placeholder={t("area.submitConfirm.notesPlaceholder")}
         />
         {submitMutation.isError && (
-          <p className="mt-2 text-sm text-error">{t('area.submitConfirm.error')}</p>
+          <p className="mt-2 text-sm text-error">
+            {t("area.submitConfirm.error")}
+          </p>
         )}
         <DialogActions>
-          <Button variant="outline" onClick={() => setSubmitDialogOpen(false)} disabled={submitMutation.isPending}>
-            {t('common.cancel')}
+          <Button
+            variant="outline"
+            onClick={() => setSubmitDialogOpen(false)}
+            disabled={submitMutation.isPending}
+          >
+            {t("common.cancel")}
           </Button>
-          <Button onClick={() => submitMutation.mutate()} disabled={submitMutation.isPending}>
-            {submitMutation.isPending ? t('common.loading') : t('area.actions.submitForAudit')}
+          <Button
+            onClick={() => submitMutation.mutate()}
+            disabled={submitMutation.isPending}
+          >
+            {submitMutation.isPending
+              ? t("common.loading")
+              : t("area.actions.submitForAudit")}
           </Button>
         </DialogActions>
       </Dialog>
 
       {/* Suspend Area Dialog */}
-      <Dialog open={suspendDialogOpen} onClose={() => setSuspendDialogOpen(false)}>
-        <DialogTitle>{t('area.suspendConfirm.title')}</DialogTitle>
-        <DialogContent>{t('area.suspendConfirm.message')}</DialogContent>
+      <Dialog
+        open={suspendDialogOpen}
+        onClose={() => setSuspendDialogOpen(false)}
+      >
+        <DialogTitle>{t("area.suspendConfirm.title")}</DialogTitle>
+        <DialogContent>{t("area.suspendConfirm.message")}</DialogContent>
         <Input
-          label={t('area.suspendConfirm.reasonLabel')}
+          label={t("area.suspendConfirm.reasonLabel")}
           value={suspendReason}
           onChange={(e) => setSuspendReason(e.target.value)}
-          placeholder={t('area.suspendConfirm.reasonPlaceholder')}
+          placeholder={t("area.suspendConfirm.reasonPlaceholder")}
         />
         {suspendMutation.isError && (
-          <p className="mt-2 text-sm text-error">{t('area.suspendConfirm.error')}</p>
+          <p className="mt-2 text-sm text-error">
+            {t("area.suspendConfirm.error")}
+          </p>
         )}
         <DialogActions>
-          <Button variant="outline" onClick={() => setSuspendDialogOpen(false)} disabled={suspendMutation.isPending}>
-            {t('common.cancel')}
+          <Button
+            variant="outline"
+            onClick={() => setSuspendDialogOpen(false)}
+            disabled={suspendMutation.isPending}
+          >
+            {t("common.cancel")}
           </Button>
-          <Button variant="outline" className="border-error text-error hover:bg-red-50" onClick={() => suspendMutation.mutate()} disabled={suspendMutation.isPending}>
-            {suspendMutation.isPending ? t('common.loading') : t('area.actions.suspend')}
+          <Button
+            variant="outline"
+            className="border-error text-error hover:bg-red-50"
+            onClick={() => suspendMutation.mutate()}
+            disabled={suspendMutation.isPending}
+          >
+            {suspendMutation.isPending
+              ? t("common.loading")
+              : t("area.actions.suspend")}
           </Button>
         </DialogActions>
       </Dialog>
 
-      <Dialog open={deleteDialogOpen} onClose={() => setDeleteDialogOpen(false)}>
-        <DialogTitle>{t('area.deleteConfirm.title')}</DialogTitle>
-        <DialogContent>{t('area.deleteConfirm.message')}</DialogContent>
+      <Dialog
+        open={deleteDialogOpen}
+        onClose={() => setDeleteDialogOpen(false)}
+      >
+        <DialogTitle>{t("area.deleteConfirm.title")}</DialogTitle>
+        <DialogContent>{t("area.deleteConfirm.message")}</DialogContent>
         {deleteAreaMutation.isError && (
-          <p className="mt-2 text-sm text-error">{t('area.deleteConfirm.error')}</p>
+          <p className="mt-2 text-sm text-error">
+            {t("area.deleteConfirm.error")}
+          </p>
         )}
         <DialogActions>
-          <Button variant="outline" onClick={() => setDeleteDialogOpen(false)} disabled={deleteAreaMutation.isPending}>
-            {t('common.cancel')}
+          <Button
+            variant="outline"
+            onClick={() => setDeleteDialogOpen(false)}
+            disabled={deleteAreaMutation.isPending}
+          >
+            {t("common.cancel")}
           </Button>
           <Button
             variant="outline"
@@ -389,7 +674,9 @@ export function AreaDetailPage() {
             onClick={() => deleteAreaMutation.mutate()}
             disabled={deleteAreaMutation.isPending}
           >
-            {deleteAreaMutation.isPending ? t('common.loading') : t('area.actions.delete')}
+            {deleteAreaMutation.isPending
+              ? t("common.loading")
+              : t("area.actions.delete")}
           </Button>
         </DialogActions>
       </Dialog>
@@ -400,7 +687,7 @@ export function AreaDetailPage() {
           onClick={() => setLightboxImage(null)}
           role="dialog"
           aria-modal="true"
-          aria-label={t('area.mediaLightbox.title')}
+          aria-label={t("area.mediaLightbox.title")}
         >
           <button
             type="button"
@@ -409,7 +696,7 @@ export function AreaDetailPage() {
               event.stopPropagation();
               setLightboxImage(null);
             }}
-            aria-label={t('area.mediaLightbox.close')}
+            aria-label={t("area.mediaLightbox.close")}
           >
             <X className="h-5 w-5" />
           </button>
@@ -431,7 +718,7 @@ function fileToBase64(file: File): Promise<string> {
     reader.onload = () => {
       const result = reader.result as string;
       // Remove "data:mime/type;base64," prefix
-      resolve(result.split(',')[1]);
+      resolve(result.split(",")[1]);
     };
     reader.onerror = reject;
     reader.readAsDataURL(file);

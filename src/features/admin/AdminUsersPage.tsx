@@ -9,6 +9,7 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { SkeletonTable } from '@/components/ui/Skeleton';
 import { EmptyState } from '@/components/EmptyState';
 import { formatDate, formatDateTime } from '@/lib/format';
+import { getPrimaryAccountType, getRoleLabels } from '@/lib/user-display';
 import { Users, Edit, Eye, Search, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
@@ -83,7 +84,11 @@ export function AdminUsersPage() {
                   <tr key={user.id} className="border-b border-gray-50 hover:bg-gray-50">
                     <td className="px-4 py-3">{user.email}</td>
                     <td className="px-4 py-3"><StatusBadge status={user.status} /></td>
-                    <td className="px-4 py-3">{user.roles?.length ? user.roles.join(', ') : '-'}</td>
+                    <td className="px-4 py-3">
+                      {user.roles?.length
+                        ? `${getPrimaryAccountType(user.roles, t)}${getRoleLabels(user.roles, t).length > 1 ? ` (${getRoleLabels(user.roles, t).join(', ')})` : ''}`
+                        : '-'}
+                    </td>
                     <td className="px-4 py-3 text-text-secondary">{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
                     <td className="px-4 py-3 text-text-secondary">{user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-'}</td>
                     <td className="px-4 py-3"><div className="flex items-center gap-1">

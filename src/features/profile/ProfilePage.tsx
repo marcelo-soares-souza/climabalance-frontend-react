@@ -8,8 +8,9 @@ import { Button } from '@/components/ui/Button';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
-import { formatTCO2e, formatDate, formatDateTime } from '@/lib/format';
-import { User, Edit, Award, TreePine } from 'lucide-react';
+import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber } from '@/lib/format';
+import { getPrimaryAccountType, getRoleLabels } from '@/lib/user-display';
+import { User, Edit, Award, TreePine, Calculator, Leaf, Scale } from 'lucide-react';
 
 export function ProfilePage() {
   const { t } = useTranslation();
@@ -33,15 +34,25 @@ export function ProfilePage() {
   });
 
   const { data: compensations } = useQuery({
-    queryKey: ['users', targetUserId, 'compensations'],
-    queryFn: () => usersService.getUserCompensations(targetUserId!, { limit: 5 }),
+    queryKey: ['users', targetUserId, 'contributions'],
+    queryFn: () => usersService.getUserContributions(targetUserId!, { limit: 5 }),
+    enabled: !!targetUserId,
+  });
+
+  const { data: climateBalance } = useQuery({
+    queryKey: ['users', targetUserId, 'climate-balance'],
+    queryFn: () => usersService.getClimateBalance(targetUserId!),
     enabled: !!targetUserId,
   });
 
   if (loadingUser || loadingProfile) return <PageSkeleton />;
 
-  const totalCompensated = compensations?.filter(c => c.status === 'paid').reduce((s, c) => s + c.totalTCO2e, 0) || 0;
-  const totalTrees = compensations?.filter(c => c.status === 'paid').reduce((s, c) => s + c.treesCount, 0) || 0;
+  const grossEmissions = climateBalance?.grossEmissionsTCO2e ?? 0;
+  const totalCompensated = climateBalance?.estimatedOffsetTCO2e ?? 0;
+  const netBalance = climateBalance?.netBalanceTCO2e ?? grossEmissions - totalCompensated;
+  const totalTrees = climateBalance?.totalTreesPurchased ?? 0;
+  const primaryAccountType = getPrimaryAccountType(user?.roles, t);
+  const roleLabels = getRoleLabels(user?.roles, t);
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -60,8 +71,11 @@ export function ProfilePage() {
             <div>
               <h2 className="text-xl font-semibold">{profile?.displayName || user?.email}</h2>
               <p className="text-text-secondary">{user?.email}</p>
+              <p className="text-sm text-text-secondary mt-1">
+                <span className="font-medium text-text-primary">{t('profile.accountType')}:</span> {primaryAccountType}
+              </p>
               <div className="flex gap-2 mt-1">
-                {user?.roles?.map(r => <StatusBadge key={r} status={r} />)}
+                {roleLabels.map((roleLabel) => <StatusBadge key={roleLabel} status={roleLabel} />)}
               </div>
               <p className="text-xs text-text-secondary mt-2">{t('profile.memberSince')} {user?.createdAt ? formatDate(user.createdAt) : '-'}</p>
               {user?.lastLoginAt && <p className="text-xs text-text-secondary">{t('profile.lastLogin')} {formatDateTime(user.lastLoginAt)}</p>}
@@ -75,7 +89,7 @@ export function ProfilePage() {
           <CardHeader><h3 className="font-medium">{t('profile.personalInfo')}</h3></CardHeader>
           <CardContent className="grid grid-cols-2 gap-4 text-sm">
             {profile.documentType && <div><span className="text-text-secondary">{t('profile.documentType')}:</span> {profile.documentType}</div>}
-            {profile.documentNumber && <div><span className="text-text-secondary">{t('profile.documentNumber')}:</span> {profile.documentNumber}</div>}
+            {profile.documentNumber && <div><span className="text-text-secondary">{t('profile.documentNumber')}:</span> {maskDocumentNumber(profile.documentNumber)}</div>}
             {profile.phone && <div><span className="text-text-secondary">{t('profile.phone')}:</span> {profile.phone}</div>}
             {profile.birthDate && <div><span className="text-text-secondary">{t('profile.birthDate')}:</span> {formatDate(profile.birthDate)}</div>}
             {profile.addressCity && <div className="col-span-2"><span className="text-text-secondary">{t('profile.address')}:</span> {[profile.addressLine1, profile.addressCity, profile.addressState, profile.addressPostalCode].filter(Boolean).join(', ')}</div>}
@@ -83,16 +97,38 @@ export function ProfilePage() {
         </Card>
       )}
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card><CardContent className="text-center py-4">
-          <TreePine className="h-6 w-6 text-primary mx-auto mb-2" />
+          <Calculator className="h-6 w-6 text-text-primary mx-auto mb-2" />
+          <p className="text-2xl font-bold text-text-primary">{formatTCO2e(grossEmissions)}</p>
+          <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
+            <span className="text-center leading-5">{t('home.dashboard.totalFootprint')}</span>
+            <InfoTooltip ariaLabel={t('home.dashboard.totalFootprint')} content={<p>{t('tooltips.dashboard.totalFootprint')}</p>} />
+          </div>
+        </CardContent></Card>
+        <Card><CardContent className="text-center py-4">
+          <Leaf className="h-6 w-6 text-primary mx-auto mb-2" />
           <p className="text-2xl font-bold text-primary">{formatTCO2e(totalCompensated)}</p>
-          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('profile.compensated')}<InfoTooltip ariaLabel={t('profile.compensated')} content={<p>{t('tooltips.dashboard.compensated')}</p>} /></p>
+          <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
+            <span className="text-center leading-5">{t('profile.compensated')}</span>
+            <InfoTooltip ariaLabel={t('profile.compensated')} content={<p>{t('tooltips.dashboard.compensated')}</p>} />
+          </div>
+        </CardContent></Card>
+        <Card><CardContent className="text-center py-4">
+          <Scale className="h-6 w-6 text-amber-600 mx-auto mb-2" />
+          <p className="text-2xl font-bold text-amber-700">{formatTCO2e(netBalance)}</p>
+          <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
+            <span className="text-center leading-5">{t('home.dashboard.balance')}</span>
+            <InfoTooltip ariaLabel={t('home.dashboard.balance')} content={<p>{t('tooltips.dashboard.balance')}</p>} />
+          </div>
         </CardContent></Card>
         <Card><CardContent className="text-center py-4">
           <TreePine className="h-6 w-6 text-success mx-auto mb-2" />
           <p className="text-2xl font-bold text-success">{totalTrees}</p>
-          <p className="inline-flex items-center gap-2 text-sm text-text-secondary">{t('profile.treesPlanted')}<InfoTooltip ariaLabel={t('profile.treesPlanted')} content={<p>{t('tooltips.dashboard.treesPlanted')}</p>} /></p>
+          <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
+            <span className="text-center leading-5">{t('profile.treesPlanted')}</span>
+            <InfoTooltip ariaLabel={t('profile.treesPlanted')} content={<p>{t('tooltips.dashboard.treesPlanted')}</p>} />
+          </div>
         </CardContent></Card>
       </div>
 

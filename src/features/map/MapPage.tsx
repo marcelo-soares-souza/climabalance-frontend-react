@@ -10,7 +10,7 @@ import { Select } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { LocateControl } from '@/components/leaflet/LocateControl';
-import { formatTCO2e } from '@/lib/format';
+import { formatCurrency, formatKgCO2e } from '@/lib/format';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { useCompensationStore } from '@/stores/compensation-store';
 import { useAuth } from '@/hooks/use-auth';
@@ -27,12 +27,50 @@ const BIOME_COLORS: Record<string, string> = {
   pantanal: '#74C69D',
 };
 
+const BIOME_SYMBOLS: Record<string, string> = {
+  amazonia: `
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3 7 10h3l-2 4h3v5h2v-5h3l-2-4h3L12 3Z" fill="white"/>
+    </svg>
+  `,
+  cerrado: `
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="12" cy="9" r="4" fill="white"/>
+      <path d="M6 19c1.8-2.3 4-3.5 6-3.5s4.2 1.2 6 3.5" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  `,
+  mata_atlantica: `
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M18 6c-5.5.4-9.3 4-10.8 10.4 4.5-.7 8.3-4.2 10.8-10.4Z" fill="white"/>
+      <path d="M8 17c2-1 4.4-3.4 6-6" stroke="${BIOME_COLORS.mata_atlantica}" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  `,
+  caatinga: `
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 5v14M9 9v3M15 8v4M9 12c0-1.2-.8-2-2-2M15 11c0-1.2.8-2 2-2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  `,
+  pampa: `
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5 15c2.2-2.4 4.7-3.6 7-3.6S16.8 12.6 19 15" stroke="white" stroke-width="2" stroke-linecap="round"/>
+      <path d="M7 18c1.7-1.5 3.4-2.2 5-2.2s3.3.7 5 2.2" stroke="white" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  `,
+  pantanal: `
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 4c-2.7 3.2-4 5.4-4 7.4a4 4 0 1 0 8 0c0-2-1.3-4.2-4-7.4Z" fill="white"/>
+      <path d="M6 18c1.8-1.2 3.8-1.8 6-1.8s4.2.6 6 1.8" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+    </svg>
+  `,
+};
+
 function createIcon(biome: string) {
   const color = BIOME_COLORS[biome] || '#0B5F4B';
+  const symbol = BIOME_SYMBOLS[biome] || BIOME_SYMBOLS.amazonia;
   return L.divIcon({
     className: '',
     html: `<div style="background:${color};width:28px;height:28px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M12 2L8 8h3v4H8l4 6 4-6h-3V8h3L12 2z"/></svg>
+      ${symbol}
     </div>`,
     iconSize: [28, 28],
     iconAnchor: [14, 14],
@@ -143,8 +181,8 @@ function ClusterMarker({
             <div className="space-y-1 text-sm">
               {area.biome && <p><span className="text-text-secondary">{t('map.biome')}:</span> {t(`map.biomes.${area.biome}`, { defaultValue: area.biome })}</p>}
               {area.city && area.state && <p><MapPin className="h-3 w-3 inline" /> {area.city}, {area.state}</p>}
-              <p><span className="text-text-secondary">{t('map.capacity')}:</span> {formatTCO2e(area.totalCapacityTCO2e)}</p>
-              <p><span className="text-text-secondary">{t('map.available')}:</span> {formatTCO2e(area.totalCapacityTCO2e - area.committedTCO2e)}</p>
+              <p><span className="text-text-secondary">{t('area.form.pricePerTree')}:</span> {area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</p>
+              <p><span className="text-text-secondary">{t('compensation.review.estimatedCO2')}:</span> {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</p>
             </div>
             <div className="mt-3 flex gap-2">
               <Button size="sm" variant="outline" onClick={() => navigate(`/areas/${area.id}`)}>{t('map.viewDetails')}</Button>
@@ -183,7 +221,10 @@ function ClusterMarker({
               <div key={area.id} className="border border-gray-100 rounded-md p-2">
                 <p className="font-medium text-sm">{area.name}</p>
                 <p className="text-xs text-text-secondary">
-                  {t('map.available')}: {formatTCO2e(area.totalCapacityTCO2e - area.committedTCO2e)}
+                  {t('area.form.pricePerTree')}: {area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}
+                </p>
+                <p className="text-xs text-text-secondary">
+                  {t('compensation.review.estimatedCO2')}: {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
                 </p>
                 <div className="mt-2 flex gap-2">
                   <Button size="sm" variant="outline" onClick={() => navigate(`/areas/${area.id}`)}>
@@ -264,27 +305,15 @@ export function MapPage() {
   const clusters = useMemo(() => buildClusters(visibleAreas, mapZoom), [visibleAreas, mapZoom]);
 
   const handleSelectArea = (area: Area) => {
-    if (effectiveCalculationId && selectedTotalTCO2e) {
-      setSelection({
-        areaId: area.id,
-        areaName: area.name,
-        calculationId: effectiveCalculationId,
-        compensationMode: 'tco2e',
-        totalTCO2e: selectedTotalTCO2e,
-        treesRequested: null,
-        totalAmount: null,
-      });
-    } else {
-      setSelection({
-        areaId: area.id,
-        areaName: area.name,
-        calculationId: null,
-        compensationMode: 'tree_purchase',
-        totalTCO2e: null,
-        treesRequested: null,
-        totalAmount: null,
-      });
-    }
+    setSelection({
+      areaId: area.id,
+      areaName: area.name,
+      calculationId: effectiveCalculationId,
+      compensationMode: 'tree_purchase',
+      totalTCO2e: selectedTotalTCO2e,
+      treesRequested: null,
+      totalAmount: null,
+    });
     navigate('/compensation/review');
   };
 

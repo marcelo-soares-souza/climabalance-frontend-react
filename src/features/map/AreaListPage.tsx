@@ -10,7 +10,7 @@ import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/StatusBadge';
 import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
-import { formatDate, formatTCO2e } from '@/lib/format';
+import { formatCurrency, formatDate, formatKgCO2e } from '@/lib/format';
 import { MapPin, Plus, FilterX } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 
@@ -156,16 +156,16 @@ export function AreaListPage() {
                 )}
                 <div className="grid grid-cols-3 gap-2 text-center">
                   <div className="rounded-md bg-primary-50 p-2">
-                    <p className="text-xs text-text-secondary">{t('area.available')}</p>
-                    <p className="text-xs font-semibold text-primary">{formatTCO2e(area.totalCapacityTCO2e - area.committedTCO2e)}</p>
+                    <p className="text-xs text-text-secondary">{t('area.form.pricePerTree')}</p>
+                    <p className="text-xs font-semibold text-primary">{area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</p>
                   </div>
                   <div className="rounded-md bg-amber-50 p-2">
-                    <p className="text-xs text-text-secondary">{t('area.committed')}</p>
-                    <p className="text-xs font-semibold text-amber-700">{formatTCO2e(area.committedTCO2e)}</p>
+                    <p className="text-xs text-text-secondary">{t('area.tCO2ePerTree')}</p>
+                    <p className="text-xs font-semibold text-amber-700">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</p>
                   </div>
                   <div className="rounded-md bg-gray-100 p-2">
-                    <p className="text-xs text-text-secondary">{t('area.totalCapacity')}</p>
-                    <p className="text-xs font-semibold text-text-primary">{formatTCO2e(area.totalCapacityTCO2e)}</p>
+                    <p className="text-xs text-text-secondary">{t('area.form.defaultHorizonYears')}</p>
+                    <p className="text-xs font-semibold text-text-primary">{area.defaultHorizonYears ?? 20} {t('common.years')}</p>
                   </div>
                 </div>
                 <p className="text-xs text-text-secondary">

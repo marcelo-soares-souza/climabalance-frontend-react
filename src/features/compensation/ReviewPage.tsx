@@ -3,37 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
-import { compensationsService } from '@/services/compensations';
+import { contributionsService } from '@/services/contributions';
 import { useCompensationStore } from '@/stores/compensation-store';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { formatTCO2e, formatCurrency } from '@/lib/format';
-import { cn } from '@/lib/cn';
 import { ApiError } from '@/lib/api-client';
-import { ArrowLeft, TreePine, Leaf, MapPin } from 'lucide-react';
-import type { CompensationMode } from '@/types/compensation';
-
-const PRICE_PER_TCO2E_BRL = 120;
+import { ArrowLeft, TreePine, MapPin } from 'lucide-react';
 
 export function CompensationReviewPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     areaId,
-    compensationMode,
     treesRequested: storedTreesRequested,
-    totalTCO2e: storedTotalTCO2e,
     setSelection,
   } = useCompensationStore();
-  const [mode, setMode] = useState<CompensationMode>(compensationMode || 'tree_purchase');
   const [treesRequested, setTreesRequested] = useState(
     storedTreesRequested && storedTreesRequested > 0 ? storedTreesRequested : 100
-  );
-  const [tco2eAmount, setTco2eAmount] = useState(
-    storedTotalTCO2e && storedTotalTCO2e > 0 ? storedTotalTCO2e : 1
   );
   const [error, setError] = useState<string | null>(null);
 
@@ -45,8 +34,8 @@ export function CompensationReviewPage() {
 
   const { data: quote, isLoading: quoteLoading, error: quoteError } = useQuery({
     queryKey: ['quote', areaId, treesRequested],
-    queryFn: () => compensationsService.getQuote({ area_id: areaId!, trees_requested: treesRequested, currency: 'BRL' }),
-    enabled: !!areaId && mode === 'tree_purchase' && treesRequested > 0,
+    queryFn: () => contributionsService.getQuote({ area_id: areaId!, trees_requested: treesRequested, currency: 'BRL' }),
+    enabled: !!areaId && treesRequested > 0,
   });
 
   useEffect(() => {
@@ -54,40 +43,23 @@ export function CompensationReviewPage() {
   }, [areaId, navigate]);
 
   const handleProceed = () => {
-    if (mode === 'tree_purchase' && (!quote || treesRequested < 1)) {
+    if (!quote || treesRequested < 1) {
       setError('compensation.error');
       return;
     }
 
-    if (mode === 'tco2e' && tco2eAmount <= 0) {
-      setError('compensation.error');
-      return;
-    }
-
-    if (mode === 'tree_purchase') {
-      setSelection({
-        compensationMode: mode,
-        treesRequested,
-        totalTCO2e: quote?.estimatedTotalTCO2e || 0,
-        totalAmount: quote?.totalAmount || 0,
-      });
-    } else {
-      setSelection({
-        compensationMode: mode,
-        totalTCO2e: tco2eAmount,
-        treesRequested: null,
-        totalAmount: tco2eAmount * PRICE_PER_TCO2E_BRL,
-      });
-    }
+    setSelection({
+      compensationMode: 'tree_purchase',
+      treesRequested,
+      totalTCO2e: quote.estimatedTotalTCO2e,
+      totalAmount: quote.totalAmount,
+    });
     navigate('/compensation/checkout');
   };
 
   if (!areaId) return null;
 
-  const available = area ? area.totalCapacityTCO2e - area.committedTCO2e : 0;
-  const canProceed = mode === 'tree_purchase'
-    ? treesRequested > 0 && !!quote && !quoteLoading
-    : tco2eAmount > 0;
+  const canProceed = treesRequested > 0 && !!quote && !quoteLoading;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -107,95 +79,47 @@ export function CompensationReviewPage() {
           <CardContent className="py-4">
             <h3 className="font-medium flex items-center gap-2"><MapPin className="h-4 w-4 text-primary" /> {area.name}</h3>
             <p className="text-sm text-text-secondary mt-1">{[area.city, area.state].filter(Boolean).join(', ')}</p>
-            <p className="text-sm mt-2">{t('area.available')}: <span className="font-medium text-success">{formatTCO2e(available)}</span></p>
+            {area.pricePerTree != null && (
+              <p className="text-sm mt-2">
+                {t('area.form.pricePerTree')}: <span className="font-medium text-success">{formatCurrency(area.pricePerTree)}</span>
+              </p>
+            )}
           </CardContent>
         </Card>
       )}
 
-      {/* Mode Selection */}
-      <div>
-        <div className="mb-3 flex items-center gap-2">
-          <h3 className="font-medium">{t('compensation.review.modeLabel')}</h3>
-          <InfoTooltip
-            ariaLabel={t('tooltips.compensation.modeAria')}
-            content={
-              <>
-                <p><strong className="text-text-primary">{t('compensation.review.treePurchase')}:</strong> {t('tooltips.compensation.treePurchase')}</p>
-                <p className="mt-2"><strong className="text-text-primary">{t('compensation.review.directTCO2e')}:</strong> {t('tooltips.compensation.directTco2e')}</p>
-              </>
-            }
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-3">
-          <Card
-            className={cn('cursor-pointer transition-all', mode === 'tree_purchase' ? 'ring-2 ring-primary' : 'hover:shadow-md')}
-            onClick={() => setMode('tree_purchase')}
-          >
-            <CardContent className="py-4 text-center">
-              <TreePine className="h-8 w-8 text-primary mx-auto mb-2" />
-              <p className="font-medium">{t('compensation.review.treePurchase')}</p>
-              <p className="text-xs text-text-secondary">{t('compensation.review.treePurchaseDesc')}</p>
-            </CardContent>
-          </Card>
-          <Card
-            className={cn('cursor-pointer transition-all', mode === 'tco2e' ? 'ring-2 ring-primary' : 'hover:shadow-md')}
-            onClick={() => setMode('tco2e')}
-          >
-            <CardContent className="py-4 text-center">
-              <Leaf className="h-8 w-8 text-primary mx-auto mb-2" />
-              <p className="font-medium">{t('compensation.review.directTCO2e')}</p>
-              <p className="text-xs text-text-secondary">{t('compensation.review.directTCO2eDesc')}</p>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      {/* Amount Input */}
       <Card>
         <CardContent className="space-y-4">
-          {mode === 'tree_purchase' ? (
-            <>
-              <Input
-                id="trees"
-                type="number"
-                min="1"
-                label={t('compensation.review.treesCount')}
-                value={treesRequested}
-                onChange={(e) => setTreesRequested(parseInt(e.target.value) || 0)}
-              />
-              {quote && (
-                <div className="bg-primary-50 rounded-lg p-4 space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span>{t('compensation.review.pricePerTree')}</span>
-                    <span className="font-medium">{formatCurrency(quote.pricePerTree)}</span>
-                  </div>
-                  <div className="flex justify-between text-sm">
-                    <span>{t('compensation.review.estimatedCO2')}</span>
-                    <span className="font-medium">{formatTCO2e(quote.estimatedTotalTCO2e)}</span>
-                  </div>
-                  <div className="flex justify-between text-base font-bold border-t border-primary-200 pt-2">
-                    <span>{t('compensation.review.total')}</span>
-                    <span className="text-primary">{formatCurrency(quote.totalAmount)}</span>
-                  </div>
-                </div>
-              )}
-            </>
-          ) : (
-            <Input
-              id="tco2e"
-              type="number"
-              min="0.01"
-              step="0.01"
-              label={t('compensation.review.tco2eAmount')}
-              labelAdornment={
-                <InfoTooltip
-                  ariaLabel={t('tooltips.shared.tco2eAria')}
-                  content={<p>{t('tooltips.shared.tco2e')}</p>}
-                />
-              }
-              value={tco2eAmount}
-              onChange={(e) => setTco2eAmount(parseFloat(e.target.value) || 0)}
-            />
+          <div className="flex items-center gap-2 text-primary">
+            <TreePine className="h-5 w-5" />
+            <p className="font-medium">{t('compensation.review.treePurchase')}</p>
+          </div>
+          <Input
+            id="trees"
+            type="number"
+            min="1"
+            label={t('compensation.review.treesCount')}
+            value={treesRequested}
+            onChange={(e) => setTreesRequested(parseInt(e.target.value) || 0)}
+          />
+          {quote && (
+            <div className="bg-primary-50 rounded-lg p-4 space-y-2">
+              <div className="flex justify-between text-sm">
+                <span>{t('compensation.review.pricePerTree')}</span>
+                <span className="font-medium">{formatCurrency(quote.pricePerTree)}</span>
+              </div>
+              <div className="flex justify-between text-sm">
+                <span>{t('compensation.review.estimatedCO2')}</span>
+                <span className="font-medium">{formatTCO2e(quote.estimatedTotalTCO2e)}</span>
+              </div>
+              <div className="flex justify-between text-base font-bold border-t border-primary-200 pt-2">
+                <span>{t('compensation.review.total')}</span>
+                <span className="text-primary">{formatCurrency(quote.totalAmount)}</span>
+              </div>
+              <p className="border-t border-primary-200 pt-3 text-xs leading-5 text-text-secondary">
+                {t('compensation.review.transferNotice')}
+              </p>
+            </div>
           )}
         </CardContent>
       </Card>

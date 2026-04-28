@@ -9,11 +9,14 @@
     "next": "Next",
     "notFound": "Not found",
     "createdAt": "Created at",
+    "years": "years",
     "allStatuses": "All",
     "loading": "Loading...",
     "retry": "Try again",
     "ok": "OK",
     "edit": "Edit",
+    "showMore": "Show more",
+    "showLess": "Show less",
     "status": {
       "pending": "Pending",
       "active": "Active",
@@ -29,6 +32,13 @@
       "finalized": "Finalized",
       "issued": "Issued",
       "revoked": "Revoked"
+    },
+    "roles": {
+      "individual": "Individual",
+      "legal_entity": "Legal Entity",
+      "producer": "Producer",
+      "administrator": "Administrator",
+      "analyst": "Analyst"
     }
   },
   "auth": {
@@ -129,7 +139,7 @@
     "history": "Calculation History",
     "profile": "My profile",
     "certificates": "Certificates",
-    "compensations": "Compensations",
+    "compensations": "Contributions",
     "validateCertificate": "Validate Certificate",
     "myAreas": "My Areas",
     "areas": "Available Areas",
@@ -150,6 +160,7 @@
     "welcome": {
       "title": "Welcome to ClimaBalance",
       "description": "A climate impact platform focused on supporting Agroecology, Agroforestry, Permaculture, Organic Agriculture, and other ecological farming projects.",
+      "transferNotice": "Contribution amounts are transferred to the producer responsible for the area, with a fee charged for platform maintenance and evolution.",
       "inDevelopment": "Project in development",
       "getStarted": "Get Started",
       "exploreMap": "Explore Map",
@@ -191,7 +202,8 @@
       "label": "What it is",
       "title": "A platform that turns climate intention into traceable action",
       "paragraph1": "ClimaBalance was created to make carbon compensation clearer, more trustworthy, and more connected to the territory. It helps users understand emissions and direct support to audited projects that combine environmental restoration with ecological agricultural production.",
-      "paragraph2": "Instead of treating compensation as something abstract, the platform structures the process with an interactive map, socio-environmental criteria, contribution traceability, and validated impact certificates, prioritizing initiatives such as Agroecology, Agroforestry, Permaculture, and Organic Agriculture."
+      "paragraph2": "Instead of treating compensation as something abstract, the platform structures the process with an interactive map, socio-environmental criteria, contribution traceability, and validated impact certificates, prioritizing initiatives such as Agroecology, Agroforestry, Permaculture, and Organic Agriculture.",
+      "paragraph3": "When a contribution is made, the amount is transferred to the producer responsible for the supported area, while the platform charges a fee to sustain ongoing maintenance and evolution."
     },
     "partnerCall": {
       "label": "Partnerships",
@@ -208,7 +220,7 @@
       "step2Title": "Choose on the map",
       "step2Description": "Users explore audited areas and projects, compare initiative details, and choose where to direct their compensation.",
       "step3Title": "Compensate and validate",
-      "step3Description": "After compensation, the platform records the operation, preserves traceability, and provides a certificate with validation mechanisms."
+      "step3Description": "After compensation, the platform records the operation, transfers the amount to the producer responsible for the area, charges a maintenance and evolution fee, and provides a certificate with validation mechanisms."
     },
     "objectives": {
       "label": "Objectives",
@@ -299,7 +311,7 @@
         "step2": { "title": "Register area", "description": "Fill in data, location, and capacity." },
         "step3": { "title": "Add evidence", "description": "Upload media and supporting information." },
         "step4": { "title": "Submit for audit", "description": "Send the area for review." },
-        "step5": { "title": "Receive support", "description": "Once active, the area can receive contributions." }
+        "step5": { "title": "Receive support", "description": "Once active, the producer receives contribution transfers minus the platform fee." }
       },
       "features": {
         "title": "What you can do",
@@ -310,7 +322,7 @@
       "possibilities": {
         "title": "What this enables",
         "item1": "Give visibility to the project.",
-        "item2": "Receive support with more transparency.",
+        "item2": "Receive transfers with clear platform fee rules.",
         "item3": "Keep a structured area history."
       },
       "cta": "Create producer account"
@@ -621,7 +633,7 @@
     "available": "Available",
     "capacity": "Capacity",
     "biome": "Biome",
-    "compensate": "Compensate now",
+    "compensate": "Support project",
     "viewDetails": "View Details",
     "biomes": {
       "amazonia": "Amazonia",
@@ -651,7 +663,7 @@
     "availableOf": "available of",
     "committed": "Committed",
     "trees": "trees",
-    "tCO2ePerTree": "tCO2e per Tree/Year",
+    "tCO2ePerTree": "Estimated CO2 per tree/year",
     "totalCapacity": "Total Capacity",
     "usage": "Usage",
     "contributions": "Tree contributions",
@@ -667,7 +679,7 @@
     },
     "uploadMedia": "Upload",
     "uploadMediaError": "Failed to upload media. Please try again.",
-    "compensateNow": "Compensate now",
+    "compensateNow": "Support this project",
     "status": {
       "draft": "Draft",
       "pending_audit": "Pending Audit",
@@ -698,9 +710,10 @@
       "loadingCities": "Loading cities...",
       "noCitiesAvailable": "No cities available",
       "totalCapacity": "Total Capacity (tCO2e)",
-      "tCO2ePerTree": "tCO2e per Tree/Year",
+      "tCO2ePerTree": "Estimated CO2 per tree/year",
       "pricePerTree": "Price per Tree",
       "pricePerTCO2e": "Price per tCO2e",
+      "defaultHorizonYears": "Default horizon (years)",
       "error": "Error saving area. Please try again."
     },
     "actions": {
@@ -774,6 +787,7 @@
       "pricePerTree": "Price per tree",
       "estimatedCO2": "Estimated carbon (tCO2e)",
       "total": "Total cost",
+      "transferNotice": "The paid amount will be transferred to the producer responsible for this area. The platform charges a fee for maintenance and evolution of the service.",
       "tco2eAmount": "Total to offset (tCO2e)",
       "proceed": "Proceed to Payment"
     },
@@ -822,6 +836,7 @@
     "trees": "Trees",
     "tco2e": "tCO2e",
     "total": "Total",
+    "transferNotice": "When payment is completed, the amount will be transferred to the producer responsible for the area, with a fee charged for platform maintenance and evolution.",
     "paymentDetails": "Payment Details",
     "cardNumber": "Card number",
     "cardholder": "Cardholder name",
@@ -846,9 +861,10 @@
     "edit": "Edit profile",
     "editTitle": "Edit profile",
     "personalInfo": "Personal Information",
-    "compensated": "Total Compensated",
+    "accountType": "Account type",
+    "compensated": "Estimated offset supported",
     "treesPlanted": "Trees Planted",
-    "recentCompensations": "Recent Compensations",
+    "recentCompensations": "Recent Contributions",
     "viewCertificates": "View Certificates",
     "documentType": "Document type",
     "documentNumber": "Document number",
@@ -1078,6 +1094,8 @@
       "usage": "Percentage of the area's total capacity that is already committed.",
       "pricePerTreeAria": "Help about price per tree",
       "pricePerTree": "Use this value when support is modeled by number of trees or equivalent project units.",
+      "defaultHorizonYearsAria": "Help about the project's default horizon",
+      "defaultHorizonYears": "Defines the default year horizon used as the reference for estimates and operations linked to this area.",
       "pricePerTco2eAria": "Help about price per tCO2e",
       "pricePerTco2e": "Use this value when compensation is offered directly by emissions volume in tCO2e.",
       "media": "Media helps document the area, strengthen credibility, and support audit and transparency.",

@@ -41,7 +41,7 @@ export function CompensationReportPage() {
 
   useEffect(() => {
     if (!paymentResult) {
-      navigate('/profile/compensations', { replace: true });
+      navigate('/profile/contributions', { replace: true });
     }
   }, [navigate, paymentResult]);
 
