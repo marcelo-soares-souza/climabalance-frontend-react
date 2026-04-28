@@ -11,78 +11,39 @@ import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
 import { StatusBadge } from '@/components/StatusBadge';
 import { formatCurrency, formatKgCO2e } from '@/lib/format';
-import { useAuth } from '@/hooks/use-auth';
+import { filterAreas, getBiomeOptions } from '@/features/map/lib/area-filters';
 import { MapPin, TreePine, FilterX } from 'lucide-react';
 
 export function PublicAreasPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
-  const [statusFilter, setStatusFilter] = useState('');
   const [biomeFilter, setBiomeFilter] = useState('');
   const [searchFilter, setSearchFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
   const [stateFilter, setStateFilter] = useState('');
+  const biomeOptions = getBiomeOptions(t, { includeAll: true });
 
   const { data: areas, isLoading } = useQuery({
-    queryKey: ['areas', 'public', { isAuthenticated, status: statusFilter || 'all', biome: biomeFilter || 'all' }],
-    queryFn: () => {
-      if (isAuthenticated) {
-        return areasService.listAreas({
-          status: statusFilter || undefined,
-          biome: biomeFilter || undefined,
-        });
-      }
-
-      return areasService.getMapAreas(biomeFilter ? { biome: biomeFilter } : undefined);
-    },
+    queryKey: ['areas', 'public', { biome: biomeFilter || 'all' }],
+    queryFn: () => areasService.getMapAreas(biomeFilter ? { biome: biomeFilter } : undefined),
   });
 
   const filteredAreas = useMemo(() => {
-    if (!areas) return [];
-    const normalizedSearch = searchFilter.trim().toLowerCase();
-    const normalizedCity = cityFilter.trim().toLowerCase();
-    const normalizedState = stateFilter.trim().toLowerCase();
-
-    return areas.filter((area) => {
-      const name = area.name.toLowerCase();
-      const city = (area.city ?? '').toLowerCase();
-      const state = (area.state ?? '').toLowerCase();
-      const biome = (area.biome ?? '').toLowerCase();
-      const status = area.status;
-      const effectiveStatusFilter = isAuthenticated ? '' : 'active';
-
-      const matchesSearch = !normalizedSearch
-        || name.includes(normalizedSearch)
-        || city.includes(normalizedSearch)
-        || state.includes(normalizedSearch)
-        || biome.includes(normalizedSearch);
-      const matchesCity = !normalizedCity || city.includes(normalizedCity);
-      const matchesState = !normalizedState || state.includes(normalizedState);
-      const matchesStatus = !effectiveStatusFilter || status === effectiveStatusFilter;
-      const matchesBiome = !biomeFilter || biome === biomeFilter;
-
-      return matchesSearch && matchesCity && matchesState && matchesStatus && matchesBiome;
+    return filterAreas(areas, {
+      search: searchFilter,
+      city: cityFilter,
+      state: stateFilter,
+      status: 'active',
+      biome: biomeFilter,
     });
-  }, [areas, searchFilter, cityFilter, stateFilter, biomeFilter, statusFilter, isAuthenticated]);
+  }, [areas, searchFilter, cityFilter, stateFilter, biomeFilter]);
 
-  const biomeOptions = [
-    { value: '', label: t('map.allBiomes') },
-    { value: 'amazonia', label: t('map.biomes.amazonia') },
-    { value: 'cerrado', label: t('map.biomes.cerrado') },
-    { value: 'mata_atlantica', label: t('map.biomes.mataAtlantica') },
-    { value: 'caatinga', label: t('map.biomes.caatinga') },
-    { value: 'pampa', label: t('map.biomes.pampa') },
-    { value: 'pantanal', label: t('map.biomes.pantanal') },
-  ];
-
-  const hasFilters = Boolean(searchFilter || cityFilter || stateFilter || statusFilter || biomeFilter);
+  const hasFilters = Boolean(searchFilter || cityFilter || stateFilter || biomeFilter);
 
   const clearFilters = () => {
     setSearchFilter('');
     setCityFilter('');
     setStateFilter('');
-    setStatusFilter('');
     setBiomeFilter('');
   };
 
@@ -115,25 +76,7 @@ export function PublicAreasPage() {
           onChange={(e) => setStateFilter(e.target.value)}
           placeholder={t('areas.list.statePlaceholder')}
         />
-        {isAuthenticated ? (
-          <Select
-            id="areas-public-status"
-            label={t('area.form.status')}
-            options={[
-              { value: '', label: t('common.allStatuses') },
-              { value: 'draft', label: t('common.status.draft') },
-              { value: 'pending_audit', label: t('common.status.pending_audit') },
-              { value: 'approved', label: t('common.status.approved') },
-              { value: 'active', label: t('common.status.active') },
-              { value: 'rejected', label: t('area.status.rejected') },
-              { value: 'suspended', label: t('common.status.suspended') },
-            ]}
-            value={statusFilter}
-            onChange={(e) => setStatusFilter(e.target.value)}
-          />
-        ) : (
-          <Input id="areas-public-status" label={t('area.form.status')} value={t('common.status.active')} disabled />
-        )}
+        <Input id="areas-public-status" label={t('area.form.status')} value={t('common.status.active')} disabled />
         <Select
           id="areas-public-biome"
           label={t('map.biome')}

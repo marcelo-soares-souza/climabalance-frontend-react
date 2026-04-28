@@ -31,18 +31,19 @@ export const authService = {
     return api.post<void>('/auth/password-reset/confirm', { token, password, password_confirm });
   },
 
-  async refreshToken(refreshToken: string): Promise<LoginResponse> {
+  async refreshToken(): Promise<LoginResponse> {
     const res = await fetch(`${API_BASE}/auth/refresh`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ refresh_token: refreshToken }),
+      credentials: 'include',
+      body: JSON.stringify({}),
     });
     if (!res.ok) throw new Error('Refresh failed');
     const json = await res.json();
     return json.data || json;
   },
 
-  revokeToken(refreshToken: string) {
-    return api.post<void>('/auth/revoke', { refresh_token: refreshToken });
+  revokeToken() {
+    return api.post<void>('/auth/revoke', {});
   },
 };

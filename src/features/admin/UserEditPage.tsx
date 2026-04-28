@@ -14,6 +14,7 @@ import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { ApiError } from '@/lib/api-client';
 import { getPrimaryAccountType, getRoleLabels } from '@/lib/user-display';
 import { ArrowLeft, Trash2 } from 'lucide-react';
+import { getLocaleOptions, getUserStatusOptions } from '@/lib/options';
 
 export function UserEditPage() {
   const { userId } = useParams<{ userId: string }>();
@@ -22,6 +23,8 @@ export function UserEditPage() {
   const [error, setError] = useState<string | null>(null);
   const [showDelete, setShowDelete] = useState(false);
   const [form, setForm] = useState<Partial<{ email: string; status: string; locale: string; password: string; password_confirm: string }>>({});
+  const localeOptions = getLocaleOptions(t);
+  const statusOptions = getUserStatusOptions(t);
 
   const { data: user, isLoading } = useQuery({
     queryKey: ['users', userId],
@@ -72,9 +75,9 @@ export function UserEditPage() {
         <Card><CardContent className="space-y-4 py-6">
           <Input id="email" type="email" label={t('auth.email')} value={formValues.email} onChange={(e) => update('email', e.target.value)} />
           <Select id="status" label={t('admin.users.status')} value={formValues.status} onChange={(e) => update('status', e.target.value)}
-            options={[{ value: 'active', label: 'Active' }, { value: 'pending', label: 'Pending' }, { value: 'suspended', label: 'Suspended' }]} />
+            options={statusOptions} />
           <Select id="locale" label={t('admin.users.locale')} value={formValues.locale} onChange={(e) => update('locale', e.target.value)}
-            options={[{ value: 'pt-BR', label: 'Portugues (BR)' }, { value: 'en', label: 'English' }, { value: 'es', label: 'Espanol' }, { value: 'fr', label: 'Francais' }]} />
+            options={localeOptions} />
           <Input id="password" type="password" label={t('admin.users.newPassword')} value={formValues.password} onChange={(e) => update('password', e.target.value)} placeholder={t('admin.users.passwordPlaceholder')} />
           {formValues.password && <Input id="password_confirm" type="password" label={t('auth.confirmPassword')} value={formValues.password_confirm} onChange={(e) => update('password_confirm', e.target.value)} />}
           <p className="text-xs text-text-secondary">{t('profile.accountType')}: {getPrimaryAccountType(user.roles, t)}</p>

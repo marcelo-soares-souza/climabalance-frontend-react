@@ -7,7 +7,7 @@ export interface LoginResponse {
   accessToken: string;
   tokenType: string;
   expiresIn: number;
-  refreshToken: string;
+  refreshExpiresIn: number;
 }
 
 export interface RegisterRequest {
@@ -32,15 +32,13 @@ export interface HumanCheckChallenge {
   locale: string;
 }
 
-export interface RefreshRequest {
-  refreshToken: string;
-}
+export interface RefreshRequest {}
 
 export interface RefreshResponse {
   accessToken: string;
   tokenType: string;
   expiresIn: number;
-  refreshToken: string;
+  refreshExpiresIn: number;
 }
 
 export interface JwtPayload {
@@ -57,6 +55,5 @@ export interface AuthSession {
   email: string;
   roles: string[];
   accessToken: string;
-  refreshToken: string;
   expiresAt: number;
 }

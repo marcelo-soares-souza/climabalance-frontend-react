@@ -7,9 +7,10 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
+import { RoleBadge } from '@/components/RoleBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber } from '@/lib/format';
-import { getPrimaryAccountType, getRoleLabels } from '@/lib/user-display';
+import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
 import { User, Edit, Award, TreePine, Calculator, Leaf, Scale } from 'lucide-react';
 
 export function ProfilePage() {
@@ -52,7 +53,7 @@ export function ProfilePage() {
   const netBalance = climateBalance?.netBalanceTCO2e ?? grossEmissions - totalCompensated;
   const totalTrees = climateBalance?.totalTreesPurchased ?? 0;
   const primaryAccountType = getPrimaryAccountType(user?.roles, t);
-  const roleLabels = getRoleLabels(user?.roles, t);
+  const roles = getNormalizedRoles(user?.roles);
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -75,7 +76,7 @@ export function ProfilePage() {
                 <span className="font-medium text-text-primary">{t('profile.accountType')}:</span> {primaryAccountType}
               </p>
               <div className="flex gap-2 mt-1">
-                {roleLabels.map((roleLabel) => <StatusBadge key={roleLabel} status={roleLabel} />)}
+                {roles.map((role) => <RoleBadge key={role} role={role} />)}
               </div>
               <p className="text-xs text-text-secondary mt-2">{t('profile.memberSince')} {user?.createdAt ? formatDate(user.createdAt) : '-'}</p>
               {user?.lastLoginAt && <p className="text-xs text-text-secondary">{t('profile.lastLogin')} {formatDateTime(user.lastLoginAt)}</p>}

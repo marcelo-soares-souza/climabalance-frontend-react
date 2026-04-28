@@ -11,6 +11,7 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
 import { formatCurrency, formatDate, formatKgCO2e } from '@/lib/format';
+import { filterAreas, getAreaStatusOptions, getBiomeOptions } from '@/features/map/lib/area-filters';
 import { MapPin, Plus, FilterX } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 
@@ -23,6 +24,8 @@ export function AreaListPage() {
   const [searchFilter, setSearchFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
   const [stateFilter, setStateFilter] = useState('');
+  const areaStatusOptions = getAreaStatusOptions(t, { includeAll: true, includeRejected: true });
+  const biomeOptions = getBiomeOptions(t, { includeAll: true });
 
   const { data: areas, isLoading } = useQuery({
     queryKey: ['areas', { status: statusFilter, biome: biomeFilter }],
@@ -30,30 +33,12 @@ export function AreaListPage() {
   });
 
   const filteredAreas = useMemo(() => {
-    if (!areas) return [];
-
-    const normalizedSearch = searchFilter.trim().toLowerCase();
-    const normalizedCity = cityFilter.trim().toLowerCase();
-    const normalizedState = stateFilter.trim().toLowerCase();
-
-    return areas.filter((area) => {
-      const name = area.name.toLowerCase();
-      const city = (area.city ?? '').toLowerCase();
-      const state = (area.state ?? '').toLowerCase();
-      const biome = (area.biome ?? '').toLowerCase();
-      const status = area.status;
-
-      const matchesSearch = !normalizedSearch
-        || name.includes(normalizedSearch)
-        || city.includes(normalizedSearch)
-        || state.includes(normalizedSearch)
-        || biome.includes(normalizedSearch);
-      const matchesCity = !normalizedCity || city.includes(normalizedCity);
-      const matchesState = !normalizedState || state.includes(normalizedState);
-      const matchesStatus = !statusFilter || status === statusFilter;
-      const matchesBiome = !biomeFilter || biome === biomeFilter;
-
-      return matchesSearch && matchesCity && matchesState && matchesStatus && matchesBiome;
+    return filterAreas(areas, {
+      search: searchFilter,
+      city: cityFilter,
+      state: stateFilter,
+      status: statusFilter,
+      biome: biomeFilter,
     });
   }, [areas, searchFilter, cityFilter, stateFilter, statusFilter, biomeFilter]);
 
@@ -99,30 +84,14 @@ export function AreaListPage() {
         <Select
           id="areas-status"
           label={t('area.form.status')}
-          options={[
-            { value: '', label: t('common.allStatuses') },
-            { value: 'draft', label: t('common.status.draft') },
-            { value: 'pending_audit', label: t('common.status.pending_audit') },
-            { value: 'approved', label: t('common.status.approved') },
-            { value: 'active', label: t('common.status.active') },
-            { value: 'rejected', label: t('area.status.rejected') },
-            { value: 'suspended', label: t('common.status.suspended') },
-          ]}
+          options={areaStatusOptions}
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
         />
         <Select
           id="areas-biome"
           label={t('map.biome')}
-          options={[
-            { value: '', label: t('map.allBiomes') },
-            { value: 'amazonia', label: t('map.biomes.amazonia') },
-            { value: 'cerrado', label: t('map.biomes.cerrado') },
-            { value: 'mata_atlantica', label: t('map.biomes.mataAtlantica') },
-            { value: 'caatinga', label: t('map.biomes.caatinga') },
-            { value: 'pampa', label: t('map.biomes.pampa') },
-            { value: 'pantanal', label: t('map.biomes.pantanal') },
-          ]}
+          options={biomeOptions}
           value={biomeFilter}
           onChange={(e) => setBiomeFilter(e.target.value)}
         />

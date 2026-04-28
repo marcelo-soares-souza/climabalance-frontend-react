@@ -9,9 +9,10 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { SkeletonTable } from '@/components/ui/Skeleton';
 import { EmptyState } from '@/components/EmptyState';
 import { formatDate, formatDateTime } from '@/lib/format';
-import { getPrimaryAccountType, getRoleLabels } from '@/lib/user-display';
+import { getPrimaryAccountType, getAdditionalRoleLabels } from '@/lib/user-display';
 import { Users, Edit, Eye, Search, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { getUserStatusOptions } from '@/lib/options';
 
 type SortConfig = {
   column: string;
@@ -29,6 +30,7 @@ export function AdminUsersPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [sort, setSort] = useState<SortConfig>({ column: 'created_at', order: 'desc' });
+  const statusOptions = getUserStatusOptions(t, { includeAll: true });
 
   const { data: users, isLoading } = useQuery({
     queryKey: ['admin-users', { search, status: statusFilter, sort_by: sort.column, sort_order: sort.order }],
@@ -55,7 +57,7 @@ export function AdminUsersPage() {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <Select options={[{ value: '', label: t('common.allStatuses') }, { value: 'active', label: 'Active' }, { value: 'pending', label: 'Pending' }, { value: 'suspended', label: 'Suspended' }]}
+        <Select options={statusOptions}
           value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-40" />
       </div>
 
@@ -85,9 +87,12 @@ export function AdminUsersPage() {
                     <td className="px-4 py-3">{user.email}</td>
                     <td className="px-4 py-3"><StatusBadge status={user.status} /></td>
                     <td className="px-4 py-3">
-                      {user.roles?.length
-                        ? `${getPrimaryAccountType(user.roles, t)}${getRoleLabels(user.roles, t).length > 1 ? ` (${getRoleLabels(user.roles, t).join(', ')})` : ''}`
-                        : '-'}
+                      {(() => {
+                        const primaryRole = getPrimaryAccountType(user.roles, t);
+                        const additionalRoles = getAdditionalRoleLabels(user.roles, t);
+                        if (!user.roles?.length) return '-';
+                        return `${primaryRole}${additionalRoles.length > 0 ? ` (${additionalRoles.join(', ')})` : ''}`;
+                      })()}
                     </td>
                     <td className="px-4 py-3 text-text-secondary">{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
                     <td className="px-4 py-3 text-text-secondary">{user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-'}</td>

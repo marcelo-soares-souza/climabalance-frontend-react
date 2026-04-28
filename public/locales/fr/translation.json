@@ -17,6 +17,12 @@
     "edit": "Modifier",
     "showMore": "Afficher plus",
     "showLess": "Afficher moins",
+    "locales": {
+      "ptBR": "Portugais (BR)",
+      "en": "Anglais",
+      "es": "Espagnol",
+      "fr": "Français"
+    },
     "status": {
       "pending": "En attente",
       "active": "Actif",
@@ -25,6 +31,7 @@
       "draft": "Brouillon",
       "pending_audit": "En attente d'audit",
       "approved": "Approuvé",
+      "rejected": "Rejeté",
       "paid": "Payé",
       "canceled": "Annulé",
       "failed": "Échoué",
@@ -667,6 +674,7 @@
     "totalCapacity": "Capacité Totale",
     "usage": "Utilisation",
     "contributions": "Contributions par arbres",
+    "supporters": "Supporters",
     "contributionsEmpty": "Aucune contribution payée pour cette zone pour le moment.",
     "anonymousContributor": "Contributeur",
     "ownerEmail": "Responsable (e-mail)",

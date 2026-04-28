@@ -13,19 +13,18 @@ import { MapPin, TreePine, Plus } from 'lucide-react';
 export function AvailableAreasPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { hasRole, isAdmin, userId } = useAuth();
+  const { hasRole, isAdmin } = useAuth();
   const canCreate = hasRole('producer') || isAdmin;
-  const isAdminView = isAdmin;
 
   const { data: areas, isLoading } = useQuery({
-    queryKey: ['areas', 'available', { scope: isAdminView ? 'all' : userId ?? 'anonymous' }],
-    queryFn: () => areasService.listAreas(isAdminView ? undefined : { ownerUserId: userId || undefined }),
+    queryKey: ['areas', 'available', { status: 'active' }],
+    queryFn: () => areasService.listAreas({ status: 'active' }),
   });
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <h1 className="text-2xl font-bold">{isAdminView ? t('areas.available.title') : t('areas.my.title')}</h1>
+        <h1 className="text-2xl font-bold">{t('areas.available.title')}</h1>
         {canCreate && <Button onClick={() => navigate('/areas/create')} size="sm"><Plus className="h-4 w-4 mr-1" /> {t('areas.list.create')}</Button>}
       </div>
       {isLoading ? <SkeletonList /> : areas && areas.length > 0 ? (
@@ -41,7 +40,7 @@ export function AvailableAreasPage() {
             </Card>
           ))}
         </div>
-      ) : <EmptyState icon={<TreePine className="h-12 w-12" />} title={t('areas.my.empty')} description={t('areas.my.emptyDescription')} action={canCreate ? <Button onClick={() => navigate('/areas/create')}>{t('areas.list.create')}</Button> : undefined} />}
+      ) : <EmptyState icon={<TreePine className="h-12 w-12" />} title={t('areas.available.empty')} description={t('areas.available.emptyHint')} action={canCreate ? <Button onClick={() => navigate('/areas/create')}>{t('areas.list.create')}</Button> : undefined} />}
     </div>
   );
 }

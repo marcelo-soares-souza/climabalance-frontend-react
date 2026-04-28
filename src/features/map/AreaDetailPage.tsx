@@ -26,7 +26,6 @@ import {
 } from "@/lib/format";
 import {
   ArrowLeft,
-  MapPin,
   TreePine,
   Image,
   Send,
@@ -479,7 +478,7 @@ export function AreaDetailPage() {
               </div>
               <div className="rounded-md bg-gray-100 p-3 text-center">
                 <p className="text-xs text-text-secondary">
-                  {t("area.contributions")}
+                  {t("area.supporters")}
                 </p>
                 <p className="text-lg font-semibold text-text-primary">
                   {formatNumber(supporterCount, "pt-BR", 0)}

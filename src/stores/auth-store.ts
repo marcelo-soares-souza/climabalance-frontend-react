@@ -1,10 +1,9 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import type { AuthSession } from '@/types/auth';
 import { tokenStorage } from '@/lib/token-storage';
 import { decodeToken, isTokenExpired } from '@/lib/jwt';
-import { api } from '@/lib/api-client';
 import { queryClient } from '@/config/query-client';
+import { authService } from '@/services/auth';
 
 interface AuthState {
   session: AuthSession | null;
@@ -13,111 +12,105 @@ interface AuthState {
   isAdmin: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-  restoreSession: () => void;
+  restoreSession: () => Promise<void>;
   hasRole: (role: string) => boolean;
 }
 
+function buildSession(accessToken: string, email = ''): AuthSession | null {
+  const payload = decodeToken(accessToken);
+  if (!payload) return null;
+
+  return {
+    userId: payload.sub,
+    email,
+    roles: payload.roles,
+    accessToken,
+    expiresAt: payload.exp * 1000,
+  };
+}
+
+function clearAuthState() {
+  tokenStorage.clear();
+  queryClient.clear();
+  return { session: null, isAuthenticated: false, isAdmin: false, isLoading: false };
+}
+
 export const useAuthStore = create<AuthState>()(
-  persist(
-    (set, get) => ({
-      session: null,
-      isLoading: false,
-      isAuthenticated: false,
-      isAdmin: false,
+  (set, get) => ({
+    session: null,
+    isLoading: false,
+    isAuthenticated: false,
+    isAdmin: false,
 
-      login: async (email: string, password: string) => {
-        set({ isLoading: true });
-        try {
-          const data = await api.post<{
-            accessToken: string;
-            tokenType: string;
-            expiresIn: number;
-            refreshToken: string;
-          }>('/auth/login', { email, password });
+    login: async (email: string, password: string) => {
+      set({ isLoading: true });
+      try {
+        const data = await authService.login(email, password);
 
-          tokenStorage.setAccessToken(data.accessToken);
-          tokenStorage.setRefreshToken(data.refreshToken);
+        tokenStorage.setAccessToken(data.accessToken);
 
-          const payload = decodeToken(data.accessToken);
-          if (!payload) throw new Error('Invalid token');
+        const session = buildSession(data.accessToken, email);
+        if (!session) throw new Error('Invalid token');
 
-          const session: AuthSession = {
-            userId: payload.sub,
-            email,
-            roles: payload.roles,
-            accessToken: data.accessToken,
-            refreshToken: data.refreshToken,
-            expiresAt: payload.exp * 1000,
-          };
+        const isAdmin = session.roles.includes('administrator');
 
+        set({
+          session,
+          isAuthenticated: true,
+          isAdmin,
+          isLoading: false,
+        });
+      } catch (err) {
+        set({ isLoading: false });
+        throw err;
+      }
+    },
+
+    logout: () => {
+      authService.revokeToken().catch(() => {});
+      set(clearAuthState());
+    },
+
+    restoreSession: async () => {
+      set({ isLoading: true });
+      const accessToken = tokenStorage.getAccessToken();
+
+      if (accessToken && !isTokenExpired(accessToken)) {
+        const session = buildSession(accessToken);
+        if (session) {
           set({
             session,
             isAuthenticated: true,
-            isAdmin: payload.roles.includes('administrator'),
+            isAdmin: session.roles.includes('administrator'),
             isLoading: false,
           });
-        } catch (err) {
-          set({ isLoading: false });
-          throw err;
-        }
-      },
-
-      logout: () => {
-        const rt = tokenStorage.getRefreshToken();
-        if (rt) {
-          api.post('/auth/revoke', { refresh_token: rt }).catch(() => {});
-        }
-        tokenStorage.clear();
-        queryClient.clear();
-        set({ session: null, isAuthenticated: false, isAdmin: false });
-      },
-
-      restoreSession: () => {
-        const accessToken = tokenStorage.getAccessToken();
-        const refreshToken = tokenStorage.getRefreshToken();
-        if (!accessToken || !refreshToken) return;
-
-        if (isTokenExpired(accessToken)) {
-          // will be handled by api-client interceptor on next request
           return;
         }
+      }
 
-        const payload = decodeToken(accessToken);
-        if (!payload) {
-          tokenStorage.clear();
+      try {
+        const data = await authService.refreshToken();
+        tokenStorage.setAccessToken(data.accessToken);
+        const session = buildSession(data.accessToken);
+        if (!session) {
+          set(clearAuthState());
           return;
         }
 
         set({
-          session: {
-            userId: payload.sub,
-            email: '',
-            roles: payload.roles,
-            accessToken,
-            refreshToken,
-            expiresAt: payload.exp * 1000,
-          },
+          session,
           isAuthenticated: true,
-          isAdmin: payload.roles.includes('administrator'),
+          isAdmin: session.roles.includes('administrator'),
+          isLoading: false,
         });
-      },
-
-      hasRole: (role: string) => {
-        const { session } = get();
-        return session?.roles.includes(role) ?? false;
-      },
-    }),
-    {
-      name: 'cb_auth',
-      partialize: (state) => ({ session: state.session }),
-      onRehydrateStorage: () => {
-        return (state: AuthState | undefined) => {
-          if (state?.session) {
-            state.isAuthenticated = true;
-            state.isAdmin = state.session.roles.includes('administrator');
-          }
-        };
-      },
+      } catch {
+        set(clearAuthState());
+      }
     },
-  ),
+
+    hasRole: (role: string) => {
+      const { session } = get();
+      return session?.roles.includes(role) ?? false;
+    },
+  }),
 );

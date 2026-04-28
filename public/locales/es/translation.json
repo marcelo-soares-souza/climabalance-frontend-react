@@ -17,6 +17,12 @@
     "edit": "Editar",
     "showMore": "Mostrar más",
     "showLess": "Mostrar menos",
+    "locales": {
+      "ptBR": "Portugués (BR)",
+      "en": "Inglés",
+      "es": "Español",
+      "fr": "Francés"
+    },
     "status": {
       "pending": "Pendiente",
       "active": "Activo",
@@ -25,6 +31,7 @@
       "draft": "Borrador",
       "pending_audit": "Pendiente de Auditoría",
       "approved": "Aprobado",
+      "rejected": "Rechazado",
       "paid": "Pagado",
       "canceled": "Cancelado",
       "failed": "Fallido",
@@ -667,6 +674,7 @@
     "totalCapacity": "Capacidad Total",
     "usage": "Utilización",
     "contributions": "Contribuciones por árboles",
+    "supporters": "Supporters",
     "contributionsEmpty": "Aún no hay contribuciones pagadas para esta área.",
     "anonymousContributor": "Colaborador",
     "ownerEmail": "Responsable (correo)",

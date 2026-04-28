@@ -17,6 +17,12 @@
     "edit": "Edit",
     "showMore": "Show more",
     "showLess": "Show less",
+    "locales": {
+      "ptBR": "Portuguese (BR)",
+      "en": "English",
+      "es": "Spanish",
+      "fr": "French"
+    },
     "status": {
       "pending": "Pending",
       "active": "Active",
@@ -25,6 +31,7 @@
       "draft": "Draft",
       "pending_audit": "Pending Audit",
       "approved": "Approved",
+      "rejected": "Rejected",
       "paid": "Paid",
       "canceled": "Canceled",
       "failed": "Failed",
@@ -667,6 +674,7 @@
     "totalCapacity": "Total Capacity",
     "usage": "Usage",
     "contributions": "Tree contributions",
+    "supporters": "Supporters",
     "contributionsEmpty": "No paid tree contributions for this area yet.",
     "anonymousContributor": "Supporter",
     "ownerEmail": "Responsible (email)",

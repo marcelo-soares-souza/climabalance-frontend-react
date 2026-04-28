@@ -19,14 +19,12 @@ function addRefreshSubscriber(cb: (token: string) => void): void {
 }
 
 async function refreshTokenRequest(): Promise<string | null> {
-  const refreshToken = tokenStorage.getRefreshToken();
-  if (!refreshToken) return null;
-
   try {
     const res = await fetch(`${API_BASE}/auth/refresh`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ refresh_token: refreshToken }),
+      credentials: 'include',
+      body: JSON.stringify({}),
     });
 
     if (!res.ok) return null;
@@ -34,7 +32,6 @@ async function refreshTokenRequest(): Promise<string | null> {
     const json = await res.json();
     const data = json.data || json;
     tokenStorage.setAccessToken(data.accessToken);
-    tokenStorage.setRefreshToken(data.refreshToken);
     return data.accessToken;
   } catch {
     return null;
@@ -101,13 +98,13 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
     headers['Content-Type'] = 'application/json';
   }
 
-  const res = await fetch(url, { ...fetchOptions, headers });
+  const res = await fetch(url, { ...fetchOptions, headers, credentials: 'include' });
 
   if (res.status === 401 && shouldHandleSession) {
     const newToken = await handleUnauthorized();
     if (newToken) {
       headers['Authorization'] = `Bearer ${newToken}`;
-      const retryRes = await fetch(url, { ...fetchOptions, headers });
+      const retryRes = await fetch(url, { ...fetchOptions, headers, credentials: 'include' });
       if (!retryRes.ok) {
         const err = await retryRes.json().catch(() => ({}));
         throw new ApiError(retryRes.status, err.error?.message_key || err.error || 'request.failed', err.error?.details);
@@ -183,7 +180,7 @@ export const api = {
     const headers: Record<string, string> = {};
     if (token) headers['Authorization'] = `Bearer ${token}`;
 
-    const res = await fetch(url, { ...fetchOptions, method: 'GET', headers });
+    const res = await fetch(url, { ...fetchOptions, method: 'GET', headers, credentials: 'include' });
     if (!res.ok) throw new ApiError(res.status, 'download.failed');
     return res.blob();
   },

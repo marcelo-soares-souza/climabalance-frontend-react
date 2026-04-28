@@ -12,6 +12,8 @@ const statusVariants: Record<string, 'default' | 'success' | 'warning' | 'error'
   pending_audit: 'warning',
   approved: 'info',
   active: 'success',
+  inactive: 'default',
+  rejected: 'error',
   suspended: 'error',
   paid: 'success',
   canceled: 'error',
