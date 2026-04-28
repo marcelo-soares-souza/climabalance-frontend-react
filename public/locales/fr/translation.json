@@ -194,7 +194,10 @@
       "compensateAction": "Compenser Maintenant",
       "compensateDescription": "Soutenez des projets d'agroécologie, d'agroforesterie et de restauration",
       "certificatesAction": "Certificats",
-      "certificatesDescription": "Consultez vos certificats de compensation"
+      "certificatesDescription": "Voir vos certificats de compensation",
+      "myAreas": "Mes Zones",
+      "noAreas": "Aucune zone enregistr\u00e9e",
+      "noAreasDescription": "Enregistrez des projets de restauration et recevez du soutien pour planter des arbres"
     }
   },
   "about": {

@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "@/services/users";
+import { areasService } from "@/services/areas";
 import { footprintService } from "@/services/footprint";
-import { Card, CardContent } from "@/components/ui/Card";
+import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { Skeleton } from "@/components/ui/Skeleton";
@@ -18,6 +19,7 @@ import {
   Award,
   ArrowRight,
   Leaf,
+  Plus,
 } from "lucide-react";
 
 const LOGO_URL = "/logo.png";
@@ -144,6 +146,8 @@ function UnauthenticatedHome() {
 function AuthenticatedHome({ userId }: { userId: string }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { roles } = useAuth();
+  const isProducer = roles.includes("producer");
   const calculatorPath = `/users/${userId}/impact/calculations/new`;
   const certificatesPath = `/users/${userId}/certificates`;
 
@@ -160,6 +164,12 @@ function AuthenticatedHome({ userId }: { userId: string }) {
   const { data: calculations, isLoading: loadingCalc } = useQuery({
     queryKey: ["calculations"],
     queryFn: () => footprintService.listCalculations({ limit: 5 }),
+  });
+
+  const { data: myAreas, isLoading: loadingAreas } = useQuery({
+    queryKey: ["areas", "my", userId],
+    queryFn: () => areasService.listAreas({ ownerUserId: userId }),
+    enabled: isProducer,
   });
 
   const totalFootprint =
@@ -297,6 +307,67 @@ function AuthenticatedHome({ userId }: { userId: string }) {
         </Card>
       </div>
 
+      {/* My Areas (producer only) */}
+      {isProducer && (
+        <Card>
+          <CardHeader>
+            <div className="flex items-center justify-between">
+              <h2 className="font-semibold text-lg">
+                {t("home.dashboard.myAreas")}
+              </h2>
+              <Button
+                size="sm"
+                onClick={() => navigate("/areas/create")}
+              >
+                <Plus className="h-4 w-4 mr-1" /> {t("area.form.create")}
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent>
+            {loadingAreas ? (
+              <div className="space-y-3">
+                {[1, 2].map((i) => (
+                  <Skeleton key={i} className="h-14 w-full" />
+                ))}
+              </div>
+            ) : myAreas && myAreas.length > 0 ? (
+              <div className="space-y-2">
+                {myAreas.map((area) => (
+                  <div
+                    key={area.id}
+                    className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-100"
+                    onClick={() => navigate(`/areas/${area.id}`)}
+                  >
+                    <div className="min-w-0 flex-1">
+                      <p className="text-sm font-medium truncate">
+                        {area.name}
+                      </p>
+                      <p className="text-xs text-text-secondary">
+                        {[area.city, area.state].filter(Boolean).join(", ")}
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0 ml-3">
+                      <StatusBadge status={area.status} />
+                      <ArrowRight className="h-4 w-4 text-text-secondary" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <EmptyState
+                title={t("home.dashboard.noAreas")}
+                description={t("home.dashboard.noAreasDescription")}
+                action={
+                  <Button size="sm" onClick={() => navigate("/areas/create")}>
+                    <Plus className="h-4 w-4 mr-1" /> {t("area.form.create")}
+                  </Button>
+                }
+              />
+            )}
+          </CardContent>
+        </Card>
+      )}
+
       {/* Recent Activity */}
       <Card>
         <CardContent>
@@ -314,7 +385,8 @@ function AuthenticatedHome({ userId }: { userId: string }) {
               {compensations.map((c) => (
                 <div
                   key={c.id}
-                  className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0"
+                  className="flex items-center justify-between py-2 px-1 rounded-lg hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0"
+                  onClick={() => navigate(`/areas/${c.areaId}`)}
                 >
                   <div>
                     <p className="text-base font-medium">{c.areaName}</p>
@@ -322,11 +394,12 @@ function AuthenticatedHome({ userId }: { userId: string }) {
                       {formatDate(c.createdAt)}
                     </p>
                   </div>
-                  <div className="text-right">
+                  <div className="text-right flex items-center gap-2">
                     <p className="text-base font-medium">
                       {formatTCO2e(c.totalTCO2e)}
                     </p>
                     <StatusBadge status={c.status} />
+                    <ArrowRight className="h-4 w-4 text-text-secondary shrink-0" />
                   </div>
                 </div>
               ))}

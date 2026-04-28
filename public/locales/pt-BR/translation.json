@@ -194,7 +194,10 @@
       "compensateAction": "Compensar Agora",
       "compensateDescription": "Apoie projetos de agroecologia, agrofloresta e restaura\u00e7\u00e3o",
       "certificatesAction": "Certificados",
-      "certificatesDescription": "Veja seus certificados de compensa\u00e7\u00e3o"
+      "certificatesDescription": "Veja seus certificados de compensa\u00e7\u00e3o",
+      "myAreas": "Minhas \u00c1reas",
+      "noAreas": "Nenhuma \u00e1rea cadastrada",
+      "noAreasDescription": "Cadastre projetos de restaura\u00e7\u00e3o e receba apoio para plantar \u00e1rvores"
     }
   },
   "about": {

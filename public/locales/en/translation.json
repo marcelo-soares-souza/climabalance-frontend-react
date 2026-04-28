@@ -194,7 +194,10 @@
       "compensateAction": "Compensate Now",
       "compensateDescription": "Support agroecology, agroforestry, and restoration projects",
       "certificatesAction": "Certificates",
-      "certificatesDescription": "View your offset certificates"
+      "certificatesDescription": "View your offset certificates",
+      "myAreas": "My Areas",
+      "noAreas": "No areas registered",
+      "noAreasDescription": "Register restoration projects and receive support to plant trees"
     }
   },
   "about": {
