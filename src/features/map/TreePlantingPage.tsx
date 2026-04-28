@@ -17,6 +17,8 @@ import {
 } from "@/components/ui/Dialog";
 import { PageSkeleton } from "@/components/LoadingSkeleton";
 import { ErrorBanner } from "@/components/ErrorBanner";
+import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
+import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
 import { ArrowLeft, TreePine, Check, Trash2, MapPin } from "lucide-react";
 
 const treeIcon = L.divIcon({
@@ -62,6 +64,7 @@ export function TreePlantingPage() {
   const [points, setPoints] = useState<{ latitude: number; longitude: number }[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
+  const [satellite, setSatellite] = useState(false);
 
   const { data: area, isLoading: areaLoading } = useQuery({
     queryKey: ["areas", areaId],
@@ -193,8 +196,12 @@ export function TreePlantingPage() {
             className="h-full w-full"
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
+              url={satellite ? SATELLITE_URL : OSM_URL}
+            />
+            <MapLayerControl
+              satellite={satellite}
+              onToggle={() => setSatellite((s) => !s)}
             />
             <MapClickHandler onMapClick={handleMapClick} />
             <Marker

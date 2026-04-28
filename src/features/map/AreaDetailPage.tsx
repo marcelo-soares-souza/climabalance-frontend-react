@@ -42,6 +42,8 @@ import {
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
+import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
 
 const treeDotIcon = L.divIcon({
   className: "",
@@ -63,6 +65,7 @@ export function AreaDetailPage() {
   const setSelection = useCompensationStore((s) => s.setSelection);
   const queryClient = useQueryClient();
 
+  const [satellite, setSatellite] = useState(false);
   const [submitDialogOpen, setSubmitDialogOpen] = useState(false);
   const [suspendDialogOpen, setSuspendDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -436,13 +439,15 @@ export function AreaDetailPage() {
                 center={[area.latitude, area.longitude]}
                 zoom={15}
                 className="h-full w-full"
-                scrollWheelZoom={false}
-                dragging={false}
-                zoomControl={false}
+                zoomControl={true}
               >
                 <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
+                  url={satellite ? SATELLITE_URL : OSM_URL}
+                />
+                <MapLayerControl
+                  satellite={satellite}
+                  onToggle={() => setSatellite((s) => !s)}
                 />
                 <Marker
                   position={[area.latitude, area.longitude]}

@@ -5,6 +5,8 @@ import { useQuery, useMutation } from '@tanstack/react-query';
 import { MapContainer, Marker, TileLayer, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
+import { MapLayerControl } from '@/components/leaflet/MapLayerControl';
+import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from '@/components/leaflet/map-layers';
 import { areasService } from '@/services/areas';
 import { queryClient } from '@/config/query-client';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -64,6 +66,7 @@ export function AreaFormPage() {
   const { isAdmin } = useAuth();
   const isEdit = !!areaId;
 
+  const [satellite, setSatellite] = useState(false);
   const [form, setForm] = useState<Partial<{
     name: string;
     description: string;
@@ -316,8 +319,12 @@ export function AreaFormPage() {
                 <MapCenterController center={initialCenter} zoom={initialZoom} />
                 <LocateControl title={t('map.locate.title')} />
                 <TileLayer
-                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                  attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
+                  url={satellite ? SATELLITE_URL : OSM_URL}
+                />
+                <MapLayerControl
+                  satellite={satellite}
+                  onToggle={() => setSatellite((s) => !s)}
                 />
                 <LocationPicker
                   position={selectedPosition}

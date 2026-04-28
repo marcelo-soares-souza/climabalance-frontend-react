@@ -17,6 +17,8 @@ import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { LocateControl } from "@/components/leaflet/LocateControl";
+import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
+import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
 import { formatCurrency, formatKgCO2e } from "@/lib/format";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useCompensationStore } from "@/stores/compensation-store";
@@ -363,6 +365,7 @@ export function MapPage() {
   const setSelection = useCompensationStore((s) => s.setSelection);
   const [biomeFilter, setBiomeFilter] = useState("");
   const [mapZoom, setMapZoom] = useState(3);
+  const [satellite, setSatellite] = useState(false);
   const requestedCalculationId =
     searchParams.get("calculationId")?.trim() || null;
   const requestedTCO2eRaw = searchParams.get("tCO2e");
@@ -464,9 +467,13 @@ export function MapPage() {
             <MapContainer center={center} zoom={3} className="h-full w-full">
               <MapZoomListener onZoomChange={handleZoomChange} />
               <LocateControl title={t("map.locate.title")} />
+              <MapLayerControl
+                satellite={satellite}
+                onToggle={() => setSatellite((s) => !s)}
+              />
               <TileLayer
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
+                url={satellite ? SATELLITE_URL : OSM_URL}
               />
               {clusters.map((cluster) => (
                 <ClusterMarker
