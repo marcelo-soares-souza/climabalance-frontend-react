@@ -266,11 +266,9 @@ function ClusterMarker({
               >
                 {t("map.viewDetails")}
               </Button>
-              {isAuthenticated && (
-                <Button size="sm" onClick={() => onSelectArea(area)}>
-                  <TreePine className="h-3 w-3 mr-1" /> {t("map.compensate")}
-                </Button>
-              )}
+              <Button size="sm" onClick={() => onSelectArea(area)}>
+                <TreePine className="h-3 w-3 mr-1" /> {t("map.compensate")}
+              </Button>
             </div>
           </div>
         </Popup>
@@ -334,12 +332,10 @@ function ClusterMarker({
                     >
                       {t("map.viewDetails")}
                     </Button>
-                    {isAuthenticated && (
-                      <Button size="sm" onClick={() => onSelectArea(area)}>
-                        <TreePine className="h-3 w-3 mr-1" />{" "}
-                        {t("map.compensate")}
-                      </Button>
-                    )}
+                    <Button size="sm" onClick={() => onSelectArea(area)}>
+                      <TreePine className="h-3 w-3 mr-1" />{" "}
+                      {t("map.compensate")}
+                    </Button>
                   </div>
                 </div>
               </div>
@@ -431,6 +427,10 @@ export function MapPage() {
       treesRequested: null,
       totalAmount: null,
     });
+    if (!isAuthenticated) {
+      navigate("/login", { state: { from: "/compensation/review" } });
+      return;
+    }
     navigate("/compensation/review");
   };
 

@@ -34,10 +34,10 @@ export function Header({ onMenuClick }: HeaderProps) {
       <button onClick={onMenuClick} className="text-text-primary hover:text-primary p-1 -ml-1">
         <Menu className="h-6 w-6" />
       </button>
-      <div className="flex items-center gap-2">
+      <button onClick={() => navigate('/')} className="flex items-center gap-2">
         <img src="/logo.png" alt="ClimaBalance" className="h-7 w-7" />
         <span className="font-semibold text-primary hidden sm:inline">ClimaBalance</span>
-      </div>
+      </button>
 
       {/* Spacer */}
       <div className="flex-1" />

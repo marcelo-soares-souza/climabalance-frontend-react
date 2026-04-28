@@ -90,6 +90,10 @@ export function AreaDetailPage() {
       treesRequested: null,
       totalAmount: null,
     });
+    if (!isAuthenticated) {
+      navigate("/login", { state: { from: "/compensation/review" } });
+      return;
+    }
     navigate("/compensation/review");
   };
 
@@ -538,7 +542,7 @@ export function AreaDetailPage() {
 
       {/* Action buttons */}
       <div className="flex flex-col sm:flex-row gap-3">
-        {area.status === "active" && isAuthenticated && (
+        {area.status === "active" && (
           <Button size="lg" className="flex-1" onClick={handleCompensate}>
             <TreePine className="h-5 w-5 mr-2" /> {t("area.compensateNow")}
           </Button>
