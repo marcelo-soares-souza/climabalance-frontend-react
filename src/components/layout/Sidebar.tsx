@@ -151,9 +151,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           <NavLink to="/how-to-use" className={linkClass} onClick={onClose}>
             <Waypoints className="h-4 w-4" /> {t("nav.howToUse")}
           </NavLink>
-          <NavLink to="/privacy-policy" className={linkClass} onClick={onClose}>
-            <FileText className="h-4 w-4" /> {t("nav.privacyPolicy")}
-          </NavLink>
           <NavLink to="/map" className={linkClass} onClick={onClose}>
             <MapPin className="h-4 w-4" /> {t("nav.map")}
           </NavLink>
@@ -255,6 +252,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
               )}
             </>
           )}
+          <NavLink to="/privacy-policy" className={linkClass} onClick={onClose}>
+            <FileText className="h-4 w-4" /> {t("nav.privacyPolicy")}
+          </NavLink>
         </nav>
 
         {/* Bottom: logout in drawer */}

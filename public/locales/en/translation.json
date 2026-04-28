@@ -89,6 +89,7 @@
       "humanCheckLoading": "Loading question...",
       "humanCheckInvalid": "Incorrect answer. Please try again.",
       "humanCheckLoadError": "Unable to load the human check. Please try again.",
+      "privacyAgreement": "By creating an account, you agree to our",
       "error": "Failed to create account. Please try again."
     },
     "passwordReset": {

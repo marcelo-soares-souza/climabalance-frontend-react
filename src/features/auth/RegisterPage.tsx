@@ -139,6 +139,10 @@ export function RegisterPage() {
         </Button>
         <Button type="submit" className="w-full" loading={loading}>{t('auth.register.submit')}</Button>
       </form>
+      <p className="mt-4 text-center text-xs text-text-secondary">
+        {t('auth.register.privacyAgreement')}{' '}
+        <Link to="/privacy-policy" className="text-primary hover:underline">{t('nav.privacyPolicy')}</Link>
+      </p>
       <p className="mt-6 text-center text-sm text-text-secondary">
         {t('auth.register.hasAccount')}{' '}
         <Link to="/login" className="text-primary hover:underline">{t('auth.register.login')}</Link>

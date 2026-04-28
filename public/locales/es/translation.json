@@ -89,6 +89,7 @@
       "humanCheckLoading": "Cargando pregunta...",
       "humanCheckInvalid": "Respuesta incorrecta. Inténtalo de nuevo.",
       "humanCheckLoadError": "No fue posible cargar la verificación humana. Inténtalo de nuevo.",
+      "privacyAgreement": "Al crear una cuenta, aceptas nuestra",
       "error": "Error al crear cuenta. Inténtalo de nuevo."
     },
     "passwordReset": {
