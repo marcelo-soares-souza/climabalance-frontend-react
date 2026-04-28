@@ -32,13 +32,13 @@ const treeIcon = L.divIcon({
 
 const existingTreeIcon = L.divIcon({
   className: "",
-  html: `<div style="background:#95D5B2;width:22px;height:22px;border-radius:50%;border:3px solid white;box-shadow:0 2px 5px rgba(0,0,0,0.25);display:flex;align-items:center;justify-content:center;">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+  html: `<div style="background:#40916C;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <path d="M12 3 7 10h3l-2 4h3v5h2v-5h3l-2-4h3L12 3Z" fill="white"/>
     </svg>
   </div>`,
-  iconSize: [22, 22],
-  iconAnchor: [11, 11],
+  iconSize: [24, 24],
+  iconAnchor: [12, 12],
 });
 
 function MapClickHandler({

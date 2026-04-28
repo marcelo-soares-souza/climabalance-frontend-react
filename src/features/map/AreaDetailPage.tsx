@@ -45,9 +45,13 @@ import "leaflet/dist/leaflet.css";
 
 const treeDotIcon = L.divIcon({
   className: "",
-  html: `<div style="background:#2D6A4F;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>`,
-  iconSize: [12, 12],
-  iconAnchor: [6, 6],
+  html: `<div style="background:#40916C;width:24px;height:24px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M12 3 7 10h3l-2 4h3v5h2v-5h3l-2-4h3L12 3Z" fill="white"/>
+    </svg>
+  </div>`,
+  iconSize: [24, 24],
+  iconAnchor: [12, 12],
 });
 
 export function AreaDetailPage() {
