@@ -22,6 +22,7 @@ export interface Area {
   pricePerTCO2e: number | null;
   thumbnailUrl?: string;
   committedTreesCount?: number;
+  plantedTreesCount?: number;
   auditNotes: string | null;
   auditedBy: string | null;
   auditedAt: string | null;
