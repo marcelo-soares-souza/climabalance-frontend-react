@@ -472,7 +472,7 @@ export function AreaDetailPage() {
       )}
 
       {/* Plant Trees Button */}
-      {isAuthenticated && area.ownerUserId === userId && (pendingCount?.pending ?? 0) > 0 && (
+      {isAuthenticated && (area.ownerUserId === userId || isAdmin) && (pendingCount?.pending ?? 0) > 0 && (
         <div className="flex">
           <Button onClick={() => navigate(`/areas/${areaId}/plant-trees`)}>
             <TreePine className="h-4 w-4 mr-1.5" /> {t("map.plantTrees")}
