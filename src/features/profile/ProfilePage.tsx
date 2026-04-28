@@ -114,42 +114,42 @@ export function ProfilePage() {
       )}
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <Card><CardContent className="text-center py-4">
-          <Calculator className="h-6 w-6 text-text-primary mx-auto mb-2" />
+        <Card className="border-slate-200 bg-gradient-to-b from-slate-50 to-white shadow-sm"><CardContent className="text-center py-4">
+          <Calculator className="h-6 w-6 text-slate-700 mx-auto mb-2" />
           <div className="space-y-1">
-            <p className="break-words text-[clamp(1.75rem,3vw,2.25rem)] font-bold leading-none text-text-primary">{grossDisplay.amount}</p>
-            <p className="text-lg font-semibold leading-none text-text-primary">{grossDisplay.unit}</p>
+            <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-slate-800">{grossDisplay.amount}</p>
+            <p className="text-sm font-semibold leading-none text-slate-700">{grossDisplay.unit}</p>
           </div>
           <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
             <span className="text-center leading-5">{t('home.dashboard.totalFootprint')}</span>
             <InfoTooltip ariaLabel={t('home.dashboard.totalFootprint')} content={<p>{t('tooltips.dashboard.totalFootprint')}</p>} />
           </div>
         </CardContent></Card>
-        <Card><CardContent className="text-center py-4">
-          <Leaf className="h-6 w-6 text-primary mx-auto mb-2" />
+        <Card className="border-emerald-200 bg-gradient-to-b from-emerald-50 to-white shadow-sm"><CardContent className="text-center py-4">
+          <Leaf className="h-6 w-6 text-emerald-700 mx-auto mb-2" />
           <div className="space-y-1">
-            <p className="break-words text-[clamp(1.75rem,3vw,2.25rem)] font-bold leading-none text-primary">{compensatedDisplay.amount}</p>
-            <p className="text-lg font-semibold leading-none text-primary">{compensatedDisplay.unit}</p>
+            <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-emerald-700">{compensatedDisplay.amount}</p>
+            <p className="text-sm font-semibold leading-none text-emerald-600">{compensatedDisplay.unit}</p>
           </div>
           <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
             <span className="text-center leading-5">{t('profile.compensated')}</span>
             <InfoTooltip ariaLabel={t('profile.compensated')} content={<p>{t('tooltips.dashboard.compensated')}</p>} />
           </div>
         </CardContent></Card>
-        <Card><CardContent className="text-center py-4">
-          <Scale className="h-6 w-6 text-amber-600 mx-auto mb-2" />
+        <Card className="border-amber-200 bg-gradient-to-b from-amber-50 to-white shadow-sm"><CardContent className="text-center py-4">
+          <Scale className="h-6 w-6 text-amber-700 mx-auto mb-2" />
           <div className="space-y-1">
-            <p className="break-words text-[clamp(1.75rem,3vw,2.25rem)] font-bold leading-none text-amber-700">{balanceDisplay.amount}</p>
-            <p className="text-lg font-semibold leading-none text-amber-700">{balanceDisplay.unit}</p>
+            <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-amber-700">{balanceDisplay.amount}</p>
+            <p className="text-sm font-semibold leading-none text-amber-600">{balanceDisplay.unit}</p>
           </div>
           <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
             <span className="text-center leading-5">{t('home.dashboard.balance')}</span>
             <InfoTooltip ariaLabel={t('home.dashboard.balance')} content={<p>{t('tooltips.dashboard.balance')}</p>} />
           </div>
         </CardContent></Card>
-        <Card><CardContent className="text-center py-4">
-          <TreePine className="h-6 w-6 text-success mx-auto mb-2" />
-          <p className="text-2xl font-bold text-success">{totalTrees}</p>
+        <Card className="border-teal-200 bg-gradient-to-b from-teal-50 to-white shadow-sm"><CardContent className="text-center py-4">
+          <TreePine className="h-6 w-6 text-teal-700 mx-auto mb-2" />
+          <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-teal-700">{totalTrees}</p>
           <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
             <span className="text-center leading-5">{t('profile.treesPlanted')}</span>
             <InfoTooltip ariaLabel={t('profile.treesPlanted')} content={<p>{t('tooltips.dashboard.treesPlanted')}</p>} />

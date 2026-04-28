@@ -34,6 +34,9 @@ import {
   Trash2,
   Edit,
   X,
+  Coins,
+  Sprout,
+  Leaf,
 } from "lucide-react";
 
 export function AreaDetailPage() {
@@ -182,6 +185,22 @@ export function AreaDetailPage() {
     hasLongDescription && !isDescriptionExpanded
       ? `${description.slice(0, DESCRIPTION_PREVIEW_LENGTH).trimEnd()}...`
       : description;
+  const formatMetric = (value: number, unit: string) => {
+    const abs = Math.abs(value);
+    const decimals = abs >= 1000 ? 0 : abs >= 100 ? 1 : 2;
+    return {
+      amount: new Intl.NumberFormat("pt-BR", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals,
+      }).format(value),
+      unit,
+    };
+  };
+  const perTreeDisplay = formatMetric(
+    (area.estimatedKgCO2PerTreePerYear ?? 0) / 1000,
+    "tCO2e",
+  );
+  const compensatedDisplay = formatMetric(totalEstimatedTCO2e, "tCO2e");
 
   const isOwner = userId === area.ownerUserId;
   const canManageMedia = isOwner || isAdmin;
@@ -279,8 +298,9 @@ export function AreaDetailPage() {
       )}
 
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-        <Card>
+        <Card className="border-emerald-200 bg-gradient-to-b from-emerald-50 to-white shadow-sm">
           <CardContent className="text-center py-4">
+            <Coins className="mx-auto mb-2 h-6 w-6 text-emerald-700" />
             <div className="inline-flex items-center gap-2 text-sm text-text-secondary">
               {t("area.form.pricePerTree")}
               <InfoTooltip
@@ -288,15 +308,16 @@ export function AreaDetailPage() {
                 content={<p>{t("tooltips.area.pricePerTree")}</p>}
               />
             </div>
-            <p className="text-xl font-bold text-primary">
+            <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-emerald-700">
               {area.pricePerTree != null
                 ? formatCurrency(area.pricePerTree)
                 : "-"}
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="border-amber-200 bg-gradient-to-b from-amber-50 to-white shadow-sm">
           <CardContent className="text-center py-4">
+            <Sprout className="mx-auto mb-2 h-6 w-6 text-amber-700" />
             <div className="inline-flex items-center gap-2 text-sm text-text-secondary">
               {t("area.tCO2ePerTree")}
               <InfoTooltip
@@ -304,29 +325,41 @@ export function AreaDetailPage() {
                 content={<p>{t("tooltips.shared.tco2ePerTree")}</p>}
               />
             </div>
-            <p className="text-xl font-bold text-amber-600">
-              {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
-            </p>
+            <div className="space-y-1">
+              <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-amber-700">
+                {perTreeDisplay.amount}
+              </p>
+              <p className="text-sm font-semibold leading-none text-amber-600">
+                {perTreeDisplay.unit}
+              </p>
+            </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="border-teal-200 bg-gradient-to-b from-teal-50 to-white shadow-sm">
           <CardContent className="text-center py-4">
+            <TreePine className="mx-auto mb-2 h-6 w-6 text-teal-700" />
             <p className="text-sm text-text-secondary">
               {t("profile.treesPlanted")}
             </p>
-            <p className="text-xl font-bold text-success">
+            <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-teal-700">
               {formatNumber(totalTreesFunded, "pt-BR", 0)}
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="border-sky-200 bg-gradient-to-b from-sky-50 to-white shadow-sm">
           <CardContent className="text-center py-4">
+            <Leaf className="mx-auto mb-2 h-6 w-6 text-sky-700" />
             <p className="text-sm text-text-secondary">
               {t("profile.compensated")}
             </p>
-            <p className="text-xl font-bold text-text-primary">
-              {formatTCO2e(totalEstimatedTCO2e)}
-            </p>
+            <div className="space-y-1">
+              <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-sky-700">
+                {compensatedDisplay.amount}
+              </p>
+              <p className="text-sm font-semibold leading-none text-sky-600">
+                {compensatedDisplay.unit}
+              </p>
+            </div>
           </CardContent>
         </Card>
       </div>
