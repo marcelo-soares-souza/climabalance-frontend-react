@@ -18,6 +18,7 @@ interface Props {
 export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const canFinalize = result.status === 'draft' && !!onFinalize;
 
   const brazilAvg = 2.0;
   const globalAvg = 4.0;
@@ -29,7 +30,7 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
       <Card className="bg-gradient-to-br from-primary via-primary-light to-accent text-white overflow-hidden">
         <CardContent className="py-10 text-center relative">
           <Leaf className="absolute top-4 right-4 h-16 w-16 text-white/10" />
-          <p className="inline-flex items-center gap-2 text-base opacity-80 mb-2">{t('footprint.result.totalEmissions')} <InfoTooltip ariaLabel={t('tooltips.footprint.totalEmissionsAria')} content={<p>{t('tooltips.footprint.totalEmissions')}</p>} /></p>
+          <div className="inline-flex items-center gap-2 text-base opacity-80 mb-2">{t('footprint.result.totalEmissions')} <InfoTooltip ariaLabel={t('tooltips.footprint.totalEmissionsAria')} content={<p>{t('tooltips.footprint.totalEmissions')}</p>} /></div>
           <p className="text-5xl font-bold mb-2">{formatTCO2e(result.totalTCO2e)}</p>
           <p className="text-base opacity-70">{formatKgCO2e(result.totalKgCO2e)}</p>
           {isBelowAvg && (
@@ -96,7 +97,7 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
             {t('footprint.result.saveDraft')}
           </Button>
         )}
-        {onFinalize && (
+        {canFinalize && (
           <Button variant="secondary" onClick={onFinalize} loading={saving} className="flex-1">
             {t('footprint.result.finalize')}
           </Button>

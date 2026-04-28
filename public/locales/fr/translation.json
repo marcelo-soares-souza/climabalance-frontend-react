@@ -1013,6 +1013,8 @@
     "payment.error": "Échec du paiement. Veuillez réessayer.",
     "compensation.error": "Échec de l'enregistrement de la compensation. Veuillez réessayer.",
     "footprint.error.createFailed": "Échec de la création du calcul. Veuillez réessayer.",
+    "footprint.error.finalizeFailed": "Échec de la finalisation du calcul. Veuillez réessayer.",
+    "footprint.error.inputsRequired": "Ajoutez au moins une donnée avant de calculer.",
     "area.form.error": "Échec de l'enregistrement de la zone. Veuillez réessayer.",
     "profile.saveError": "Échec de l'enregistrement du profil. Veuillez réessayer.",
     "admin.users.updateError": "Échec de la mise à jour de l'utilisateur. Veuillez réessayer.",

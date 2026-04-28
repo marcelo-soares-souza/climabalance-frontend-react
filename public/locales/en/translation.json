@@ -1014,6 +1014,8 @@
     "payment.error": "Payment failed. Please try again.",
     "compensation.error": "Failed to register compensation. Please try again.",
     "footprint.error.createFailed": "Failed to create calculation. Please try again.",
+    "footprint.error.finalizeFailed": "Failed to finalize calculation. Please try again.",
+    "footprint.error.inputsRequired": "Add at least one input before calculating.",
     "area.form.error": "Failed to save area. Please try again.",
     "profile.saveError": "Failed to save profile. Please try again.",
     "admin.users.updateError": "Failed to update user. Please try again.",

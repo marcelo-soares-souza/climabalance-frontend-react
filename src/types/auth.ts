@@ -32,7 +32,7 @@ export interface HumanCheckChallenge {
   locale: string;
 }
 
-export interface RefreshRequest {}
+export type RefreshRequest = Record<string, never>;
 
 export interface RefreshResponse {
   accessToken: string;

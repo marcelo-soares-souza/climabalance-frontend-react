@@ -1013,6 +1013,8 @@
     "payment.error": "Erro ao processar pagamento. Tente novamente.",
     "compensation.error": "Erro ao registrar compensa\u00e7\u00e3o. Tente novamente.",
     "footprint.error.createFailed": "Erro ao criar c\u00e1lculo. Tente novamente.",
+    "footprint.error.finalizeFailed": "Erro ao finalizar c\u00e1lculo. Tente novamente.",
+    "footprint.error.inputsRequired": "Adicione pelo menos um dado antes de calcular.",
     "area.form.error": "Erro ao salvar \u00e1rea. Tente novamente.",
     "profile.saveError": "Erro ao salvar perfil. Tente novamente.",
     "admin.users.updateError": "Erro ao atualizar usu\u00e1rio. Tente novamente.",

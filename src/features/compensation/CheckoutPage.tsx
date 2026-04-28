@@ -151,7 +151,7 @@ export function CompensationCheckoutPage() {
           </div>
           <Select id="installments" label={t('checkout.installments')} value={installments} onChange={(e) => setInstallments(e.target.value)}
             options={Array.from({ length: 12 }, (_, i) => ({ value: String(i + 1), label: `${i + 1}x` }))} />
-          <p className="inline-flex items-center gap-2 text-xs text-text-secondary">{t('checkout.testCardNote')}<InfoTooltip ariaLabel={t('tooltips.checkout.testCardAria')} content={<p>{t('tooltips.checkout.testCard')}</p>} /></p>
+          <div className="inline-flex items-center gap-2 text-xs text-text-secondary">{t('checkout.testCardNote')}<InfoTooltip ariaLabel={t('tooltips.checkout.testCardAria')} content={<p>{t('tooltips.checkout.testCard')}</p>} /></div>
         </CardContent>
       </Card>
 

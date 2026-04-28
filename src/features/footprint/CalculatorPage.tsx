@@ -31,6 +31,7 @@ export function CalculatorPage() {
   const [result, setResult] = useState<CalculationResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const lastCalculatedSignatureRef = useRef<string | null>(null);
+  const lastSubmittedSignatureRef = useRef<string | null>(null);
   const hydratedDraftIdRef = useRef<string | null>(null);
   const draftIdFromQuery = searchParams.get('draftId');
   const draftId = useMemo(() => {
@@ -88,8 +89,10 @@ export function CalculatorPage() {
   const createMutation = useMutation({
     mutationFn: (payload: CreateCalculationRequest) => footprintService.createCalculation(payload),
     onSuccess: (data, payload) => {
+      setError(null);
       setResult(data);
       lastCalculatedSignatureRef.current = JSON.stringify(payload);
+      lastSubmittedSignatureRef.current = JSON.stringify(payload);
       queryClient.invalidateQueries({ queryKey: ['calculations'] });
     },
     onError: (err) => {
@@ -109,8 +112,10 @@ export function CalculatorPage() {
       return footprintService.getCalculation(draftId);
     },
     onSuccess: (data, payload) => {
+      setError(null);
       setResult(data);
       lastCalculatedSignatureRef.current = JSON.stringify(payload);
+      lastSubmittedSignatureRef.current = JSON.stringify(payload);
       queryClient.invalidateQueries({ queryKey: ['calculations'] });
       queryClient.invalidateQueries({ queryKey: ['calculations', draftId] });
     },
@@ -122,12 +127,16 @@ export function CalculatorPage() {
   const finalizeMutation = useMutation({
     mutationFn: (id: string) => footprintService.finalizeCalculation(id),
     onSuccess: () => {
+      setError(null);
       if (draftCalculation) {
         setResult({ ...draftCalculation, status: 'finalized' });
       } else {
         setResult((prev) => (prev ? { ...prev, status: 'finalized' } : prev));
       }
       queryClient.invalidateQueries({ queryKey: ['calculations'] });
+    },
+    onError: (err) => {
+      setError(err instanceof ApiError ? err.messageKey : 'footprint.error.finalizeFailed');
     },
   });
   const displayedResult = result ?? draftCalculation ?? null;
@@ -141,6 +150,10 @@ export function CalculatorPage() {
     if (displayedResult && lastCalculatedSignatureRef.current === calculationSignature) {
       return;
     }
+    if (lastSubmittedSignatureRef.current === calculationSignature) {
+      return;
+    }
+    lastSubmittedSignatureRef.current = calculationSignature;
     if (draftId) {
       updateMutation.mutate(calculationPayload);
       return;
@@ -157,6 +170,11 @@ export function CalculatorPage() {
   ]);
 
   const handleNext = () => {
+    if (isLastInputStep && calculator.state.inputs.length === 0) {
+      setError('footprint.error.inputsRequired');
+      return;
+    }
+    setError(null);
     calculator.nextStep();
   };
   const isLastInputStep = calculator.currentStepIndex === calculator.totalSteps - 2;

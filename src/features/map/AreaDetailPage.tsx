@@ -281,13 +281,13 @@ export function AreaDetailPage() {
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         <Card>
           <CardContent className="text-center py-4">
-            <p className="inline-flex items-center gap-2 text-sm text-text-secondary">
+            <div className="inline-flex items-center gap-2 text-sm text-text-secondary">
               {t("area.form.pricePerTree")}
               <InfoTooltip
                 ariaLabel={t("tooltips.area.pricePerTreeAria")}
                 content={<p>{t("tooltips.area.pricePerTree")}</p>}
               />
-            </p>
+            </div>
             <p className="text-xl font-bold text-primary">
               {area.pricePerTree != null
                 ? formatCurrency(area.pricePerTree)
@@ -297,13 +297,13 @@ export function AreaDetailPage() {
         </Card>
         <Card>
           <CardContent className="text-center py-4">
-            <p className="inline-flex items-center gap-2 text-sm text-text-secondary">
+            <div className="inline-flex items-center gap-2 text-sm text-text-secondary">
               {t("area.tCO2ePerTree")}
               <InfoTooltip
                 ariaLabel={t("tooltips.shared.tco2ePerTreeAria")}
                 content={<p>{t("tooltips.shared.tco2ePerTree")}</p>}
               />
-            </p>
+            </div>
             <p className="text-xl font-bold text-amber-600">
               {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
             </p>

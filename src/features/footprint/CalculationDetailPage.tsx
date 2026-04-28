@@ -60,7 +60,7 @@ export function CalculationDetailPage() {
             <h1 className="text-2xl font-bold">{t(`footprint.profile.${calculation.profileType}`)}</h1>
             <InfoTooltip ariaLabel={t('tooltips.footprint.profileTypeAria')} content={<p>{t('tooltips.footprint.profileType')}</p>} />
           </div>
-          <p className="flex items-center gap-2 text-text-secondary">{formatDate(calculation.periodStart)} - {formatDate(calculation.periodEnd)} <InfoTooltip ariaLabel={t('tooltips.footprint.periodAria')} content={<p>{t('tooltips.footprint.period')}</p>} /></p>
+          <div className="flex items-center gap-2 text-text-secondary">{formatDate(calculation.periodStart)} - {formatDate(calculation.periodEnd)} <InfoTooltip ariaLabel={t('tooltips.footprint.periodAria')} content={<p>{t('tooltips.footprint.period')}</p>} /></div>
         </div>
         <div className="flex items-center gap-2">
           <StatusBadge status={calculation.status} />
@@ -79,7 +79,7 @@ export function CalculationDetailPage() {
 
       <Card className="bg-gradient-to-r from-primary to-primary-light text-white">
         <CardContent className="py-8 text-center">
-          <p className="inline-flex items-center gap-2 text-sm opacity-80">{t('footprint.result.totalEmissions')} <InfoTooltip ariaLabel={t('tooltips.footprint.totalEmissionsAria')} content={<p>{t('tooltips.footprint.totalEmissions')}</p>} /></p>
+          <div className="inline-flex items-center gap-2 text-sm opacity-80">{t('footprint.result.totalEmissions')} <InfoTooltip ariaLabel={t('tooltips.footprint.totalEmissionsAria')} content={<p>{t('tooltips.footprint.totalEmissions')}</p>} /></div>
           <p className="text-4xl font-bold">{formatTCO2e(calculation.totalTCO2e)}</p>
         </CardContent>
       </Card>
