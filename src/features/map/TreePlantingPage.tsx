@@ -177,8 +177,15 @@ export function TreePlantingPage() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <MapClickHandler onMapClick={handleMapClick} />
-            <Marker position={[area.latitude, area.longitude]}>
-            </Marker>
+            <Marker
+              position={[area.latitude, area.longitude]}
+              icon={L.divIcon({
+                className: "",
+                html: `<div style="background:#0B5F4B;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
+                iconSize: [16, 16],
+                iconAnchor: [8, 8],
+              })}
+            />
             {existingTrees?.map((tree) => (
               <Marker
                 key={tree.id}
