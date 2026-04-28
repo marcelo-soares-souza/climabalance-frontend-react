@@ -101,7 +101,7 @@ export function AreaDetailPage() {
   const { data: pendingCount } = useQuery({
     queryKey: ["pending-tree-count", areaId],
     queryFn: () => plantedTreesService.getPendingTreeCount(areaId!),
-    enabled: !!areaId && isAuthenticated,
+    enabled: !!areaId,
   });
 
   const areaIdentifier = area?.id ?? areaId ?? "";
