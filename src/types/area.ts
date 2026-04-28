@@ -23,6 +23,7 @@ export interface Area {
   thumbnailUrl?: string;
   committedTreesCount?: number;
   plantedTreesCount?: number;
+  totalCompensatedTreesCount?: number;
   auditNotes: string | null;
   auditedBy: string | null;
   auditedAt: string | null;

@@ -42,6 +42,8 @@ type RawArea = {
   committedTreesCount?: number | string;
   planted_trees_count?: number | string;
   plantedTreesCount?: number | string;
+  total_compensated_trees_count?: number | string;
+  totalCompensatedTreesCount?: number | string;
   thumbnail_url?: string;
   thumbnailUrl?: string;
   created_at?: string;
@@ -162,6 +164,9 @@ function normalizeArea(raw: RawArea): Area {
     ) ?? undefined,
     plantedTreesCount: asNullableNumber(
       raw.plantedTreesCount ?? raw.planted_trees_count
+    ) ?? undefined,
+    totalCompensatedTreesCount: asNullableNumber(
+      raw.totalCompensatedTreesCount ?? raw.total_compensated_trees_count
     ) ?? undefined,
     thumbnailUrl: asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url) ?? undefined,
     createdAt: asString(raw.createdAt ?? raw.created_at),

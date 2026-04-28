@@ -248,14 +248,14 @@ function ClusterMarker({
                   <span className="font-medium">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span>
                 </p>
               </div>
-              {(area.plantedTreesCount ?? 0) > 0 || (area.committedTreesCount ?? 0) > 0 ? (
+              {(area.plantedTreesCount ?? 0) > 0 || (area.totalCompensatedTreesCount ?? 0) > 0 ? (
                 <p className="text-sm">
                   <TreePine className="h-3.5 w-3.5 inline mr-0.5" />
                   <span className="font-medium">
                     {area.plantedTreesCount?.toLocaleString() ?? 0}
-                    {area.committedTreesCount != null && (
+                    {(area.totalCompensatedTreesCount ?? 0) > 0 && (
                       <span className="text-text-secondary font-normal">
-                        /{area.committedTreesCount.toLocaleString()}
+                        /{area.totalCompensatedTreesCount!.toLocaleString()}
                       </span>
                     )}
                   </span>{" "}
