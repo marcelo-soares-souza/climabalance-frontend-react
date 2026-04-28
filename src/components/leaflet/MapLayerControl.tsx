@@ -31,8 +31,10 @@ export function MapLayerControl({ position = 'topright', satellite, onToggle }: 
       onToggleRef.current();
     });
 
-    const control = L.control({ position });
-    control.onAdd = () => container;
+    const CustomControl = L.Control.extend({
+      onAdd: () => container,
+    });
+    const control = new CustomControl({ position });
     control.addTo(map);
 
     return () => {
