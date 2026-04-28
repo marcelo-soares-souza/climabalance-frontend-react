@@ -13,6 +13,18 @@ import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber } from '@/l
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
 import { User, Edit, Award, TreePine, Calculator, Leaf, Scale } from 'lucide-react';
 
+function formatProfileTCO2e(value: number): { amount: string; unit: string } {
+  const abs = Math.abs(value);
+  const decimals = abs >= 1000 ? 0 : abs >= 100 ? 1 : 2;
+  return {
+    amount: new Intl.NumberFormat('pt-BR', {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    }).format(value),
+    unit: 'tCO2e',
+  };
+}
+
 export function ProfilePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -54,6 +66,9 @@ export function ProfilePage() {
   const totalTrees = climateBalance?.totalTreesPurchased ?? 0;
   const primaryAccountType = getPrimaryAccountType(user?.roles, t);
   const roles = getNormalizedRoles(user?.roles);
+  const grossDisplay = formatProfileTCO2e(grossEmissions);
+  const compensatedDisplay = formatProfileTCO2e(totalCompensated);
+  const balanceDisplay = formatProfileTCO2e(netBalance);
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -101,7 +116,10 @@ export function ProfilePage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card><CardContent className="text-center py-4">
           <Calculator className="h-6 w-6 text-text-primary mx-auto mb-2" />
-          <p className="text-2xl font-bold text-text-primary">{formatTCO2e(grossEmissions)}</p>
+          <div className="space-y-1">
+            <p className="break-words text-[clamp(1.75rem,3vw,2.25rem)] font-bold leading-none text-text-primary">{grossDisplay.amount}</p>
+            <p className="text-lg font-semibold leading-none text-text-primary">{grossDisplay.unit}</p>
+          </div>
           <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
             <span className="text-center leading-5">{t('home.dashboard.totalFootprint')}</span>
             <InfoTooltip ariaLabel={t('home.dashboard.totalFootprint')} content={<p>{t('tooltips.dashboard.totalFootprint')}</p>} />
@@ -109,7 +127,10 @@ export function ProfilePage() {
         </CardContent></Card>
         <Card><CardContent className="text-center py-4">
           <Leaf className="h-6 w-6 text-primary mx-auto mb-2" />
-          <p className="text-2xl font-bold text-primary">{formatTCO2e(totalCompensated)}</p>
+          <div className="space-y-1">
+            <p className="break-words text-[clamp(1.75rem,3vw,2.25rem)] font-bold leading-none text-primary">{compensatedDisplay.amount}</p>
+            <p className="text-lg font-semibold leading-none text-primary">{compensatedDisplay.unit}</p>
+          </div>
           <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
             <span className="text-center leading-5">{t('profile.compensated')}</span>
             <InfoTooltip ariaLabel={t('profile.compensated')} content={<p>{t('tooltips.dashboard.compensated')}</p>} />
@@ -117,7 +138,10 @@ export function ProfilePage() {
         </CardContent></Card>
         <Card><CardContent className="text-center py-4">
           <Scale className="h-6 w-6 text-amber-600 mx-auto mb-2" />
-          <p className="text-2xl font-bold text-amber-700">{formatTCO2e(netBalance)}</p>
+          <div className="space-y-1">
+            <p className="break-words text-[clamp(1.75rem,3vw,2.25rem)] font-bold leading-none text-amber-700">{balanceDisplay.amount}</p>
+            <p className="text-lg font-semibold leading-none text-amber-700">{balanceDisplay.unit}</p>
+          </div>
           <div className="mt-2 flex min-h-12 items-start justify-center gap-2 text-sm text-text-secondary">
             <span className="text-center leading-5">{t('home.dashboard.balance')}</span>
             <InfoTooltip ariaLabel={t('home.dashboard.balance')} content={<p>{t('tooltips.dashboard.balance')}</p>} />
