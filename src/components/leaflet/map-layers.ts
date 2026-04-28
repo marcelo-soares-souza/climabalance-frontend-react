@@ -1,4 +1,4 @@
-const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
+export const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN || '';
 
 export const OSM_URL = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
 export const OSM_ATTR = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
