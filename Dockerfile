@@ -1,6 +1,5 @@
 ARG BUILD_VERSION=development
 ARG BUILD_TIMESTAMP
-ARG VITE_MAPBOX_TOKEN
 
 # --- Stage 1: Build ---
 FROM oven/bun:1.2.22-alpine AS build
@@ -18,10 +17,9 @@ ENV VITE_API_URL=
 
 ARG BUILD_VERSION
 ARG BUILD_TIMESTAMP
-ARG VITE_MAPBOX_TOKEN
-ENV VITE_MAPBOX_TOKEN=$VITE_MAPBOX_TOKEN
 
-RUN bun run build
+# Source VITE_ env vars from .env (except VITE_API_URL which must be empty for production)
+RUN if [ -f .env ]; then export $(grep '^VITE_' .env | grep -v '^VITE_API_URL' | xargs); fi && bun run build
 
 # Generate version.json
 RUN if [ -z "$BUILD_TIMESTAMP" ]; then BUILD_TIMESTAMP=$(date +%s); fi && \
