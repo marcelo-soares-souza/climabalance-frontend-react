@@ -373,7 +373,12 @@ export function AreaDetailPage() {
               {t("profile.treesPlanted")}
             </p>
             <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-teal-700">
-              {formatNumber(totalTreesFunded, "pt-BR", 0)}
+              {formatNumber(plantedTrees?.length ?? 0, "pt-BR", 0)}
+              {pendingCount && (
+                <span className="text-base font-normal text-text-secondary">
+                  /{formatNumber(pendingCount.totalCompensated, "pt-BR", 0)}
+                </span>
+              )}
             </p>
           </CardContent>
         </Card>
