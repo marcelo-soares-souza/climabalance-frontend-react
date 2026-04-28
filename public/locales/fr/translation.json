@@ -664,6 +664,8 @@
       "title": "Afficher ma position"
     },
     "treesPlanted": "arbres plant\u00e9s",
+    "plantTrees": "Planter des Arbres",
+    "plantTreesHint": "Cliquez sur la carte pour ajouter un point pour chaque arbre plant\u00e9. Cliquez sur un point pour le supprimer.",
     "noAreas": "Aucune zone disponible pour le moment"
   },
   "area": {

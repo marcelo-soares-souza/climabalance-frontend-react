@@ -27,6 +27,7 @@ import { EmbedDemoPage } from '@/features/footprint/EmbedDemoPage';
 // Map & Areas
 import { MapPage } from '@/features/map/MapPage';
 import { AreaDetailPage } from '@/features/map/AreaDetailPage';
+import { TreePlantingPage } from '@/features/map/TreePlantingPage';
 import { AreaListPage } from '@/features/map/AreaListPage';
 import { AvailableAreasPage } from '@/features/map/AvailableAreasPage';
 import { AreaFormPage } from '@/features/map/AreaFormPage';
@@ -171,6 +172,7 @@ export const router = createBrowserRouter([
         path: '/users/:userId/certificates',
         element: <AuthGuard><UserScopeGuard><CertificatesPage /></UserScopeGuard></AuthGuard>,
       },
+      { path: '/areas/:areaId/plant-trees', element: <AuthGuard roles={['producer', 'administrator']}><TreePlantingPage /></AuthGuard> },
       { path: '/areas/:areaId', element: <AreaDetailPage /> },
 
       // Analyst/Admin routes

@@ -664,6 +664,8 @@
       "title": "Mostrar mi ubicaci\u00f3n"
     },
     "treesPlanted": "árboles plantados",
+    "plantTrees": "Plantar Árboles",
+    "plantTreesHint": "Haga clic en el mapa para añadir un punto por cada árbol plantado. Haga clic en un punto para eliminarlo.",
     "noAreas": "No hay áreas disponibles en este momento"
   },
   "area": {

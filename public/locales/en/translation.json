@@ -664,6 +664,8 @@
       "title": "Show my location"
     },
     "treesPlanted": "trees planted",
+    "plantTrees": "Plant Trees",
+    "plantTreesHint": "Click on the map to add a point for each planted tree. Click a point to remove it.",
     "noAreas": "No areas available right now"
   },
   "area": {

@@ -180,13 +180,11 @@ function MapZoomListener({
 
 function ClusterMarker({
   cluster,
-  isAuthenticated,
   t,
   navigate,
   onSelectArea,
 }: {
   cluster: AreaCluster;
-  isAuthenticated: boolean;
   t: (key: string, options?: Record<string, unknown>) => string;
   navigate: (path: string) => void;
   onSelectArea: (area: Area) => void;
@@ -467,7 +465,6 @@ export function MapPage() {
                 <ClusterMarker
                   key={cluster.id}
                   cluster={cluster}
-                  isAuthenticated={isAuthenticated}
                   t={t}
                   navigate={navigate}
                   onSelectArea={handleSelectArea}

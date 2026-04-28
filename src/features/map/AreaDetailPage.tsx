@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
+import { plantedTreesService } from "@/services/planted-trees";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -38,6 +39,16 @@ import {
   Sprout,
   Leaf,
 } from "lucide-react";
+import { MapContainer, Marker, TileLayer } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
+
+const treeDotIcon = L.divIcon({
+  className: "",
+  html: `<div style="background:#2D6A4F;width:12px;height:12px;border-radius:50%;border:2px solid white;box-shadow:0 1px 3px rgba(0,0,0,0.3);"></div>`,
+  iconSize: [12, 12],
+  iconAnchor: [6, 6],
+});
 
 export function AreaDetailPage() {
   const DESCRIPTION_PREVIEW_LENGTH = 260;
@@ -74,6 +85,12 @@ export function AreaDetailPage() {
   const { data: media } = useQuery({
     queryKey: ["areas", areaId, "media"],
     queryFn: () => areasService.listAreaMedia(areaId!),
+    enabled: !!areaId,
+  });
+
+  const { data: plantedTrees } = useQuery({
+    queryKey: ["planted-trees", areaId],
+    queryFn: () => plantedTreesService.getPlantedTrees(areaId!),
     enabled: !!areaId,
   });
 
@@ -387,6 +404,52 @@ export function AreaDetailPage() {
             </span>
           </CardContent>
         </Card>
+      )}
+
+      {/* Planted Trees Map */}
+      {plantedTrees && plantedTrees.length > 0 && (
+        <Card>
+          <CardHeader>
+            <h3 className="font-medium flex items-center gap-2">
+              <TreePine className="h-4 w-4 text-primary" />{" "}
+              {t("map.treesPlanted")} ({plantedTrees.length})
+            </h3>
+          </CardHeader>
+          <CardContent className="p-0">
+            <div className="h-48 rounded-b-lg overflow-hidden">
+              <MapContainer
+                center={[area.latitude, area.longitude]}
+                zoom={15}
+                className="h-full w-full"
+                scrollWheelZoom={false}
+                dragging={false}
+                zoomControl={false}
+              >
+                <TileLayer
+                  attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+                <Marker position={[area.latitude, area.longitude]} />
+                {plantedTrees.map((tree) => (
+                  <Marker
+                    key={tree.id}
+                    position={[tree.latitude, tree.longitude]}
+                    icon={treeDotIcon}
+                  />
+                ))}
+              </MapContainer>
+            </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {/* Plant Trees Button */}
+      {isAuthenticated && area.ownerUserId === userId && (
+        <div className="flex">
+          <Button onClick={() => navigate(`/areas/${areaId}/plant-trees`)}>
+            <TreePine className="h-4 w-4 mr-1.5" /> {t("map.plantTrees")}
+          </Button>
+        </div>
       )}
 
       {/* Media Gallery */}
