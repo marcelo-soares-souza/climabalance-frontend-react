@@ -94,6 +94,12 @@ export function AreaDetailPage() {
     enabled: !!areaId,
   });
 
+  const { data: pendingCount } = useQuery({
+    queryKey: ["pending-tree-count", areaId],
+    queryFn: () => plantedTreesService.getPendingTreeCount(areaId!),
+    enabled: !!areaId && isAuthenticated,
+  });
+
   const areaIdentifier = area?.id ?? areaId ?? "";
 
   const handleCompensate = () => {
@@ -416,7 +422,7 @@ export function AreaDetailPage() {
             </h3>
           </CardHeader>
           <CardContent className="p-0">
-            <div className="h-48 rounded-b-lg overflow-hidden">
+            <div className="h-72 rounded-b-lg overflow-hidden">
               <MapContainer
                 center={[area.latitude, area.longitude]}
                 zoom={15}
@@ -429,7 +435,15 @@ export function AreaDetailPage() {
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Marker position={[area.latitude, area.longitude]} />
+                <Marker
+                  position={[area.latitude, area.longitude]}
+                  icon={L.divIcon({
+                    className: "",
+                    html: `<div style="background:#0B5F4B;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
+                    iconSize: [14, 14],
+                    iconAnchor: [7, 7],
+                  })}
+                />
                 {plantedTrees.map((tree) => (
                   <Marker
                     key={tree.id}
@@ -444,7 +458,7 @@ export function AreaDetailPage() {
       )}
 
       {/* Plant Trees Button */}
-      {isAuthenticated && area.ownerUserId === userId && (
+      {isAuthenticated && area.ownerUserId === userId && (pendingCount?.pending ?? 0) > 0 && (
         <div className="flex">
           <Button onClick={() => navigate(`/areas/${areaId}/plant-trees`)}>
             <TreePine className="h-4 w-4 mr-1.5" /> {t("map.plantTrees")}

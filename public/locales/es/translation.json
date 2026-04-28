@@ -14,6 +14,7 @@
     "loading": "Cargando...",
     "retry": "Intentar de nuevo",
     "ok": "OK",
+    "clearAll": "Limpiar todo",
     "edit": "Editar",
     "showMore": "Mostrar más",
     "showLess": "Mostrar menos",
@@ -669,6 +670,8 @@
     "treesPlanted": "árboles plantados",
     "plantTrees": "Plantar Árboles",
     "plantTreesHint": "Haga clic en el mapa para añadir un punto por cada árbol plantado. Haga clic en un punto para eliminarlo.",
+    "clearTreesTitle": "¿Limpiar árboles plantados?",
+    "clearTreesConfirm": "Todos los árboles plantados en esta área serán eliminados. Esta acción no se puede deshacer.",
     "noAreas": "No hay áreas disponibles en este momento"
   },
   "area": {

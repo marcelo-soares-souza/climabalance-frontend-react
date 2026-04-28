@@ -9,9 +9,15 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from "@/components/ui/Dialog";
 import { PageSkeleton } from "@/components/LoadingSkeleton";
 import { ErrorBanner } from "@/components/ErrorBanner";
-import { ArrowLeft, TreePine, Check, MapPin } from "lucide-react";
+import { ArrowLeft, TreePine, Check, Trash2, MapPin } from "lucide-react";
 
 const treeIcon = L.divIcon({
   className: "",
@@ -55,6 +61,7 @@ export function TreePlantingPage() {
   const queryClient = useQueryClient();
   const [points, setPoints] = useState<{ latitude: number; longitude: number }[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [showClearConfirm, setShowClearConfirm] = useState(false);
 
   const { data: area, isLoading: areaLoading } = useQuery({
     queryKey: ["areas", areaId],
@@ -84,6 +91,19 @@ export function TreePlantingPage() {
     },
     onError: () => {
       setError("Erro ao salvar plantio. Tente novamente.");
+    },
+  });
+
+  const clearMutation = useMutation({
+    mutationFn: () => plantedTreesService.clearPlantedTrees(areaId!),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["planted-trees", areaId] });
+      queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaId] });
+      setShowClearConfirm(false);
+      setPoints([]);
+    },
+    onError: () => {
+      setError("Erro ao limpar \u00e1rvores. Tente novamente.");
     },
   });
 
@@ -166,7 +186,7 @@ export function TreePlantingPage() {
             : t("map.plantTreesHint")}
         </p>
 
-        <div className="h-[500px] rounded-lg overflow-hidden border border-gray-200">
+        <div className="h-[550px] rounded-lg overflow-hidden border border-gray-200">
           <MapContainer
             center={[area.latitude, area.longitude]}
             zoom={16}
@@ -214,6 +234,16 @@ export function TreePlantingPage() {
         >
           {t("common.cancel")}
         </Button>
+        <div className="flex-1" />
+        {existingCount > 0 && (
+          <Button
+            variant="outline"
+            className="text-error border-error/40 hover:bg-red-50"
+            onClick={() => setShowClearConfirm(true)}
+          >
+            <Trash2 className="h-4 w-4 mr-1.5" /> {t("common.clearAll")}
+          </Button>
+        )}
         <Button
           onClick={handleSave}
           disabled={points.length === 0 || saveMutation.isPending}
@@ -222,6 +252,30 @@ export function TreePlantingPage() {
           <Check className="h-4 w-4 mr-1.5" /> {t("common.save")}
         </Button>
       </div>
+
+      <Dialog open={showClearConfirm} onClose={() => setShowClearConfirm(false)}>
+        <DialogTitle>{t("map.clearTreesTitle")}</DialogTitle>
+        <DialogContent>
+          <p className="text-sm text-text-secondary">
+            {t("map.clearTreesConfirm")}
+          </p>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            variant="outline"
+            onClick={() => setShowClearConfirm(false)}
+          >
+            {t("common.cancel")}
+          </Button>
+          <Button
+            className="bg-error hover:bg-error/90"
+            onClick={() => clearMutation.mutate()}
+            loading={clearMutation.isPending}
+          >
+            <Trash2 className="h-4 w-4 mr-1.5" /> {t("common.clearAll")}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

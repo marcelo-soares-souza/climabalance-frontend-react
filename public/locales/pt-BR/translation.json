@@ -14,6 +14,7 @@
     "loading": "Carregando...",
     "retry": "Tentar novamente",
     "ok": "OK",
+    "clearAll": "Limpar tudo",
     "edit": "Editar",
     "showMore": "Mostrar mais",
     "showLess": "Mostrar menos",
@@ -669,6 +670,8 @@
     "treesPlanted": "\u00e1rvores plantadas",
     "plantTrees": "Plantar \u00c1rvores",
     "plantTreesHint": "Clique no mapa para adicionar um ponto para cada \u00e1rvore plantada. Clique em um ponto para remov\u00ea-lo.",
+    "clearTreesTitle": "Limpar \u00e1rvores plantadas?",
+    "clearTreesConfirm": "Todas as \u00e1rvores plantadas nesta \u00e1rea ser\u00e3o removidas. Esta a\u00e7\u00e3o n\u00e3o pode ser desfeita.",
     "noAreas": "Nenhuma \u00e1rea dispon\u00edvel no momento"
   },
   "area": {

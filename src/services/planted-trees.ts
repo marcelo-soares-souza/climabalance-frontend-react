@@ -13,4 +13,8 @@ export const plantedTreesService = {
   savePlantedTrees(areaId: string, points: { latitude: number; longitude: number }[]) {
     return api.post<void>(`/areas/${areaId}/planted-trees`, { points });
   },
+
+  clearPlantedTrees(areaId: string) {
+    return api.delete<void>(`/areas/${areaId}/planted-trees`);
+  },
 };

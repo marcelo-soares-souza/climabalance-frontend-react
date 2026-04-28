@@ -14,6 +14,7 @@
     "loading": "Loading...",
     "retry": "Try again",
     "ok": "OK",
+    "clearAll": "Clear all",
     "edit": "Edit",
     "showMore": "Show more",
     "showLess": "Show less",
@@ -666,9 +667,11 @@
     "locate": {
       "title": "Show my location"
     },
-    "treesPlanted": "trees planted",
+    "treesPlanted": "Trees Planted",
     "plantTrees": "Plant Trees",
     "plantTreesHint": "Click on the map to add a point for each planted tree. Click a point to remove it.",
+    "clearTreesTitle": "Clear planted trees?",
+    "clearTreesConfirm": "All planted trees in this area will be removed. This action cannot be undone.",
     "noAreas": "No areas available right now"
   },
   "area": {
