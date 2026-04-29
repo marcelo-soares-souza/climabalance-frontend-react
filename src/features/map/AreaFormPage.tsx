@@ -71,9 +71,9 @@ export function AreaFormPage() {
     biome: form.biome ?? existing?.biome ?? '',
     state: form.state ?? existing?.state ?? '',
     city: form.city ?? existing?.city ?? '',
-    t_co2e_per_tree_per_year: form.t_co2e_per_tree_per_year ?? (existing?.tCO2ePerTreePerYear ? String(existing.tCO2ePerTreePerYear) : ''),
-    price_per_tree: form.price_per_tree ?? (existing?.pricePerTree ? String(existing.pricePerTree) : ''),
-    default_horizon_years: form.default_horizon_years ?? (existing?.defaultHorizonYears ? String(existing.defaultHorizonYears) : ''),
+    t_co2e_per_tree_per_year: form.t_co2e_per_tree_per_year ?? (existing?.tCO2ePerTreePerYear != null ? String(existing.tCO2ePerTreePerYear) : '10'),
+    price_per_tree: form.price_per_tree ?? (existing?.pricePerTree != null ? String(existing.pricePerTree) : '15'),
+    default_horizon_years: form.default_horizon_years ?? (existing?.defaultHorizonYears != null ? String(existing.defaultHorizonYears) : '20'),
   };
 
   const { data: states = [], isLoading: loadingStates } = useQuery({
