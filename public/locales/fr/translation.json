@@ -10,6 +10,7 @@
     "notFound": "Non trouvé",
     "createdAt": "Créé le",
     "years": "ans",
+    "details": "Détails",
     "allStatuses": "Tous",
     "loading": "Chargement...",
     "retry": "Réessayer",
@@ -18,6 +19,7 @@
     "edit": "Modifier",
     "showMore": "Afficher plus",
     "showLess": "Afficher moins",
+    "statusLabel": "Statut",
     "locales": {
       "ptBR": "Portugais (BR)",
       "en": "Anglais",
@@ -1145,7 +1147,8 @@
       "certificateNumberAria": "Aide sur le numéro du certificat",
       "certificateNumber": "Saisissez l'identifiant du certificat exactement comme il apparaît dans le PDF ou dans le registre d'émission.",
       "hashAria": "Aide sur le hash du certificat",
-      "hash": "Le hash est un identifiant d'intégrité utilisé pour vérifier que le certificat correspond bien au document émis."
+      "hash": "Le hash est un identifiant d'intégrité utilisé pour vérifier que le certificat correspond bien au document émis.",
+      "status": "Le statut indique l'état actuel du certificat sur la plateforme."
     }
   }
 }

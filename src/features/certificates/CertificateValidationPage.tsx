@@ -111,7 +111,7 @@ export function CertificateValidationPage() {
                 <p className="font-medium">{result.certificateNumber}</p>
               </div>
               <div>
-                <p className="text-sm text-text-secondary">{t('common.status')}</p>
+                <p className="text-sm text-text-secondary">{t('common.statusLabel')}</p>
                 <StatusBadge status={result.status} />
               </div>
               <div>

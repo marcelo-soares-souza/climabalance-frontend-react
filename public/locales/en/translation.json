@@ -10,6 +10,7 @@
     "notFound": "Not found",
     "createdAt": "Created at",
     "years": "years",
+    "details": "Details",
     "allStatuses": "All",
     "loading": "Loading...",
     "retry": "Try again",
@@ -18,6 +19,7 @@
     "edit": "Edit",
     "showMore": "Show more",
     "showLess": "Show less",
+    "statusLabel": "Status",
     "locales": {
       "ptBR": "Portuguese (BR)",
       "en": "English",
@@ -1146,7 +1148,8 @@
       "certificateNumberAria": "Help about certificate number",
       "certificateNumber": "Enter the certificate identifier exactly as it appears in the PDF or issuance record.",
       "hashAria": "Help about certificate hash",
-      "hash": "The hash is an integrity identifier used to verify that the certificate matches the issued document."
+      "hash": "The hash is an integrity identifier used to verify that the certificate matches the issued document.",
+      "status": "The status indicates the current state of the certificate on the platform."
     }
   }
 }
