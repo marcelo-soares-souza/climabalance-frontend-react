@@ -7,6 +7,7 @@ import {
   TileLayer,
   Marker,
   Popup,
+  useMap,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -204,31 +205,36 @@ function ClusterMarker({
     );
   }
 
+  return <ClusterZoomMarker cluster={cluster} t={t} navigate={navigate} onSelectArea={onSelectArea} />;
+}
+
+function ClusterZoomMarker({
+  cluster,
+  t,
+  navigate,
+  onSelectArea,
+}: {
+  cluster: AreaCluster;
+  t: (key: string, options?: Record<string, unknown>) => string;
+  navigate: (path: string) => void;
+  onSelectArea: (area: Area) => void;
+}) {
+  const map = useMap();
+
+  const handleClusterClick = useCallback(() => {
+    const bounds = cluster.areas.reduce(
+      (b, area) => b.extend([area.latitude, area.longitude]),
+      L.latLngBounds(cluster.areas[0].latitude, cluster.areas[0].longitude, cluster.areas[0].latitude, cluster.areas[0].longitude),
+    );
+    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
+  }, [cluster, map]);
+
   return (
     <Marker
       position={[cluster.latitude, cluster.longitude]}
       icon={CLUSTER_ICON(cluster.areas.length)}
-    >
-      <Popup>
-        <div className="space-y-2">
-          <p className="font-semibold text-sm">
-            {t("map.areasCount", { count: cluster.areas.length })}
-          </p>
-          <div className="space-y-1.5">
-            {cluster.areas.map((area) => (
-              <button
-                key={area.id}
-                type="button"
-                className="block w-full text-left text-sm text-primary hover:underline"
-                onClick={() => navigate(`/areas/${area.id}`)}
-              >
-                {area.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </Popup>
-    </Marker>
+      eventHandlers={{ click: handleClusterClick }}
+    />
   );
 }
 
