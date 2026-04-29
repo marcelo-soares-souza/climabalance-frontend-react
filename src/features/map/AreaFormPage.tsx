@@ -8,12 +8,14 @@ import L from 'leaflet';
 import { MapLayerControl } from '@/components/leaflet/MapLayerControl';
 import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from '@/components/leaflet/map-layers';
 import { areasService } from '@/services/areas';
+import { locationsService } from '@/services/locations';
 import { queryClient } from '@/config/query-client';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Textarea } from '@/components/ui/Textarea';
 import { Select } from '@/components/ui/Select';
+import { Combobox } from '@/components/ui/Combobox';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
@@ -21,43 +23,13 @@ import { ApiError } from '@/lib/api-client';
 import { useAuth } from '@/hooks/use-auth';
 import { LocateControl } from '@/components/leaflet/LocateControl';
 import type { AreaStatus } from '@/types/area';
-import {
-  BRAZIL_STATES,
-  findBrazilStateCode,
-  getBrazilStateCenter,
-  getBrazilCitiesByState,
-} from '@/features/map/data/br-locations';
+import { countries } from '@/lib/countries';
+import { getCountryCenter } from '@/lib/country-coords';
 import { ArrowLeft } from 'lucide-react';
 
-const BRASILIA_COORDINATES: [number, number] = [-15.793889, -47.882778];
+const DEFAULT_CENTER: [number, number] = [-15.793889, -47.882778];
 
-type IpGeoResponse = {
-  latitude?: number | string;
-  longitude?: number | string;
-  lat?: number | string;
-  lon?: number | string;
-};
-
-function parseGeoCoordinate(value: unknown): number | null {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) ? parsed : null;
-}
-
-async function fetchIpBasedCoordinates(signal: AbortSignal): Promise<[number, number] | null> {
-  const response = await fetch('https://ipapi.co/json/', {
-    signal,
-    headers: { Accept: 'application/json' },
-  });
-  if (!response.ok) return null;
-
-  const payload = (await response.json()) as IpGeoResponse;
-  const latitude = parseGeoCoordinate(payload.latitude ?? payload.lat);
-  const longitude = parseGeoCoordinate(payload.longitude ?? payload.lon);
-  if (latitude == null || longitude == null) return null;
-  if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) return null;
-
-  return [latitude, longitude];
-}
+const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
 export function AreaFormPage() {
   const { areaId } = useParams<{ areaId: string }>();
@@ -73,6 +45,7 @@ export function AreaFormPage() {
     latitude: string;
     longitude: string;
     status: AreaStatus;
+    countryCode: string;
     biome: string;
     state: string;
     city: string;
@@ -81,7 +54,6 @@ export function AreaFormPage() {
     default_horizon_years: string;
   }>>({});
   const [error, setError] = useState<string | null>(null);
-  const [ipBasedCenter, setIpBasedCenter] = useState<[number, number] | null>(null);
 
   const { data: existing, isLoading } = useQuery({
     queryKey: ['areas', areaId],
@@ -95,69 +67,24 @@ export function AreaFormPage() {
     latitude: form.latitude ?? (existing ? String(existing.latitude) : ''),
     longitude: form.longitude ?? (existing ? String(existing.longitude) : ''),
     status: form.status ?? existing?.status ?? 'draft',
+    countryCode: form.countryCode ?? existing?.countryCode ?? '',
     biome: form.biome ?? existing?.biome ?? '',
-    state: form.state ?? (existing?.state ? (findBrazilStateCode(existing.state) || existing.state) : ''),
+    state: form.state ?? existing?.state ?? '',
     city: form.city ?? existing?.city ?? '',
     t_co2e_per_tree_per_year: form.t_co2e_per_tree_per_year ?? (existing?.tCO2ePerTreePerYear ? String(existing.tCO2ePerTreePerYear) : ''),
     price_per_tree: form.price_per_tree ?? (existing?.pricePerTree ? String(existing.pricePerTree) : ''),
     default_horizon_years: form.default_horizon_years ?? (existing?.defaultHorizonYears ? String(existing.defaultHorizonYears) : ''),
   };
 
-  const biomeOptions = [
-    { value: '', label: t('area.form.selectBiome') },
-    { value: 'amazonia', label: t('map.biomes.amazonia') },
-    { value: 'cerrado', label: t('map.biomes.cerrado') },
-    { value: 'mata_atlantica', label: t('map.biomes.mataAtlantica') },
-    { value: 'caatinga', label: t('map.biomes.caatinga') },
-    { value: 'pampa', label: t('map.biomes.pampa') },
-    { value: 'pantanal', label: t('map.biomes.pantanal') },
-  ];
-  const stateOptions = useMemo(
-    () => [
-      { value: '', label: t('area.form.selectState') },
-      ...BRAZIL_STATES.map((state) => ({
-        value: state.code,
-        label: `${state.code} - ${state.name}`,
-      })),
-    ],
-    [t]
-  );
-  const normalizedStateCode = findBrazilStateCode(formValues.state);
-
-  const { data: cityOptions, isLoading: isCitiesLoading } = useQuery({
-    queryKey: ['cities', normalizedStateCode],
-    queryFn: ({ signal }) => getBrazilCitiesByState(normalizedStateCode!, signal),
-    enabled: !!normalizedStateCode,
+  const { data: states = [], isLoading: loadingStates } = useQuery({
+    queryKey: ['states', formValues.countryCode],
+    queryFn: () => locationsService.listStates(formValues.countryCode),
+    enabled: formValues.countryCode.length === 2,
   });
 
-  const fallbackCityOptions = useMemo(() => {
-    if (!normalizedStateCode) return [];
-
-    const state = BRAZIL_STATES.find((item) => item.code === normalizedStateCode);
-    return state ? [state.capital] : [];
-  }, [normalizedStateCode]);
-
-  const citySelectOptions = useMemo(() => {
-    if (!normalizedStateCode) {
-      return [{ value: '', label: t('area.form.selectStateFirst') }];
-    }
-
-    const resolvedCities = cityOptions && cityOptions.length > 0 ? cityOptions : fallbackCityOptions;
-    const placeholderLabel = isCitiesLoading && resolvedCities.length === 0
-      ? t('area.form.loadingCities')
-      : resolvedCities.length === 0
-        ? t('area.form.noCitiesAvailable')
-        : t('area.form.selectCity');
-    const options = [{ value: '', label: placeholderLabel }];
-    const mappedCities = resolvedCities.map((city) => ({ value: city, label: city }));
-    const hasCurrentCity = mappedCities.some((city) => city.value === formValues.city);
-
-    if (formValues.city && !hasCurrentCity) {
-      mappedCities.unshift({ value: formValues.city, label: formValues.city });
-    }
-
-    return [...options, ...mappedCities];
-  }, [normalizedStateCode, isCitiesLoading, cityOptions, fallbackCityOptions, formValues.city, t]);
+  const stateOptions = useMemo(() => {
+    return [{ value: '', label: formValues.countryCode ? t('area.form.selectState') : t('area.form.selectCountryFirst') }, ...states.map((s: string) => ({ value: s, label: s }))];
+  }, [states, formValues.countryCode, t]);
 
   const mutation = useMutation({
     mutationFn: () => {
@@ -167,6 +94,7 @@ export function AreaFormPage() {
         latitude: parseFloat(formValues.latitude),
         longitude: parseFloat(formValues.longitude),
         status: isEdit && isAdmin ? (formValues.status as AreaStatus) : undefined,
+        countryCode: formValues.countryCode || undefined,
         biome: formValues.biome || undefined,
         state: formValues.state || undefined,
         city: formValues.city || undefined,
@@ -196,6 +124,7 @@ export function AreaFormPage() {
       | 'latitude'
       | 'longitude'
       | 'status'
+      | 'countryCode'
       | 'biome'
       | 'state'
       | 'city'
@@ -223,51 +152,16 @@ export function AreaFormPage() {
     () => (hasValidPosition ? [parsedLat, parsedLng] : null),
     [hasValidPosition, parsedLat, parsedLng]
   );
-  const hasSelectedPosition = selectedPosition !== null;
-  const hasManualCoordinates =
-    (form.latitude?.trim().length ?? 0) > 0 || (form.longitude?.trim().length ?? 0) > 0;
-
-  useEffect(() => {
-    if (isEdit || hasSelectedPosition || hasManualCoordinates) return;
-
-    let active = true;
-    const controller = new AbortController();
-    const applyCoordinates = (coordinates: [number, number]) => {
-      if (!active) return;
-
-      setIpBasedCenter(coordinates);
-      setForm((prev) => {
-        const hasLatitude = (prev.latitude?.trim().length ?? 0) > 0;
-        const hasLongitude = (prev.longitude?.trim().length ?? 0) > 0;
-        if (hasLatitude || hasLongitude) return prev;
-
-        return {
-          ...prev,
-          latitude: coordinates[0].toFixed(6),
-          longitude: coordinates[1].toFixed(6),
-        };
-      });
-    };
-
-    fetchIpBasedCoordinates(controller.signal)
-      .then((coordinates) => {
-        applyCoordinates(coordinates ?? BRASILIA_COORDINATES);
-      })
-      .catch(() => {
-        applyCoordinates(BRASILIA_COORDINATES);
-      });
-
-    return () => {
-      active = false;
-      controller.abort();
-    };
-  }, [isEdit, hasSelectedPosition, hasManualCoordinates, form.latitude, form.longitude]);
+  const countryCenter = useMemo(() => {
+    if (formValues.countryCode) return getCountryCenter(formValues.countryCode);
+    return null;
+  }, [formValues.countryCode]);
 
   const initialCenter = useMemo<[number, number]>(
-    () => selectedPosition ?? ipBasedCenter ?? BRASILIA_COORDINATES,
-    [selectedPosition, ipBasedCenter]
+    () => selectedPosition ?? countryCenter ?? DEFAULT_CENTER,
+    [selectedPosition, countryCenter]
   );
-  const initialZoom = selectedPosition ? 10 : ipBasedCenter ? 9 : 5;
+  const initialZoom = selectedPosition ? 10 : countryCenter ? 6 : 3;
 
   if (isEdit && isLoading) return <PageSkeleton />;
 
@@ -283,40 +177,48 @@ export function AreaFormPage() {
           <Input id="name" label={t('area.form.name')} value={formValues.name} onChange={(e) => update('name', e.target.value)} required />
           <Textarea id="description" label={t('area.form.description')} value={formValues.description} onChange={(e) => update('description', e.target.value)} />
           <div className="grid grid-cols-2 gap-4">
-            <Select
-              id="state"
-              label={t('area.form.state')}
-              value={normalizedStateCode ?? ''}
-              options={stateOptions}
-              onChange={(e) => {
-                const nextStateCode = e.target.value;
-                const previousStateCode = normalizedStateCode ?? '';
-                update('state', nextStateCode);
-                if (nextStateCode !== previousStateCode) {
-                  update('city', '');
-                  const stateCenter = getBrazilStateCenter(nextStateCode);
-                  if (stateCenter) {
-                    update('latitude', stateCenter[0].toFixed(6));
-                    update('longitude', stateCenter[1].toFixed(6));
-                  }
+            <Combobox
+              id="countryCode"
+              label={t('area.form.country')}
+              value={formValues.countryCode}
+              options={countryOptions}
+              emptyLabel="—"
+              placeholder={t('area.form.selectCountry')}
+              onChange={(val) => {
+                update('countryCode', val);
+                update('state', '');
+                update('city', '');
+                const center = getCountryCenter(val);
+                if (center) {
+                  update('latitude', center[0].toFixed(6));
+                  update('longitude', center[1].toFixed(6));
                 }
               }}
             />
             <Select
-              id="city"
-              label={t('area.form.city')}
-              value={formValues.city}
-              options={citySelectOptions}
-              disabled={!normalizedStateCode}
-              onChange={(e) => update('city', e.target.value)}
+              id="state"
+              label={t('area.form.state')}
+              value={formValues.state}
+              options={stateOptions}
+              disabled={!formValues.countryCode || loadingStates}
+              onChange={(e) => {
+                update('state', e.target.value);
+                update('city', '');
+              }}
             />
           </div>
+          <Input
+            id="city"
+            label={t('area.form.city')}
+            value={formValues.city}
+            onChange={(e) => update('city', e.target.value)}
+          />
           <div className="space-y-2">
             <p className="text-sm font-medium">{t('area.form.pickOnMap')}</p>
             <p className="text-xs text-text-secondary">{t('area.form.mapHint')}</p>
             <div className="h-72 rounded-md overflow-hidden border border-gray-200">
               <MapContainer center={initialCenter} zoom={initialZoom} className="h-full w-full">
-                <MapCenterController center={initialCenter} zoom={initialZoom} />
+                <MapCenterController center={countryCenter ?? initialCenter} zoom={countryCenter ? 6 : initialZoom} />
                 <LocateControl title={t('map.locate.title')} />
                 <TileLayer
                   attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
@@ -344,12 +246,7 @@ export function AreaFormPage() {
             <Select
               id="status"
               label={t('area.form.status')}
-              labelAdornment={
-                <InfoTooltip
-                  ariaLabel={t('tooltips.area.statusAria')}
-                  content={<p>{t('tooltips.area.statusSummary')}</p>}
-                />
-              }
+              labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.statusAria')} content={<p>{t('tooltips.area.statusSummary')}</p>} />}
               options={[
                 { value: 'draft', label: t('area.status.draft') },
                 { value: 'pending_audit', label: t('area.status.pending_audit') },
@@ -362,39 +259,19 @@ export function AreaFormPage() {
               onChange={(e) => update('status', e.target.value)}
             />
           )}
-          <Select id="biome" label={t('area.form.biome')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.biomeAria')} content={<p>{t('tooltips.area.biome')}</p>} />} options={biomeOptions} value={formValues.biome} onChange={(e) => update('biome', e.target.value)} />
+          <Input id="biome" label={t('area.form.biome')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.biomeAria')} content={<p>{t('tooltips.area.biome')}</p>} />} value={formValues.biome} onChange={(e) => update('biome', e.target.value)} />
           <div className="grid grid-cols-2 gap-4">
-            <Input
-              id="tco2e_tree"
-              type="number"
-              step="any"
-              label={t('area.form.tCO2ePerTree')}
-              labelAdornment={
-                <InfoTooltip
-                  ariaLabel={t('tooltips.shared.tco2ePerTreeAria')}
-                  content={<p>{t('tooltips.shared.tco2ePerTree')}</p>}
-                />
-              }
-              value={formValues.t_co2e_per_tree_per_year}
-              onChange={(e) => update('t_co2e_per_tree_per_year', e.target.value)}
-            />
-            <Input id="price_tree" type="number" step="any" label={t('area.form.pricePerTree')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.pricePerTreeAria')} content={<p>{t('tooltips.area.pricePerTree')}</p>} />} value={formValues.price_per_tree} onChange={(e) => update('price_per_tree', e.target.value)} />
+            <Input id="tco2e_tree" type="number" step="any" label={t('area.form.tCO2ePerTree')}
+              labelAdornment={<InfoTooltip ariaLabel={t('tooltips.shared.tco2ePerTreeAria')} content={<p>{t('tooltips.shared.tco2ePerTree')}</p>} />}
+              value={formValues.t_co2e_per_tree_per_year} onChange={(e) => update('t_co2e_per_tree_per_year', e.target.value)} />
+            <Input id="price_tree" type="number" step="any" label={t('area.form.pricePerTree')}
+              labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.pricePerTreeAria')} content={<p>{t('tooltips.area.pricePerTree')}</p>} />}
+              value={formValues.price_per_tree} onChange={(e) => update('price_per_tree', e.target.value)} />
           </div>
           <div className="grid grid-cols-1 gap-4">
-            <Input
-              id="default_horizon_years"
-              type="number"
-              step="1"
-              label={t('area.form.defaultHorizonYears')}
-              labelAdornment={
-                <InfoTooltip
-                  ariaLabel={t('tooltips.area.defaultHorizonYearsAria')}
-                  content={<p>{t('tooltips.area.defaultHorizonYears')}</p>}
-                />
-              }
-              value={formValues.default_horizon_years}
-              onChange={(e) => update('default_horizon_years', e.target.value)}
-            />
+            <Input id="default_horizon_years" type="number" step="1" label={t('area.form.defaultHorizonYears')}
+              labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.defaultHorizonYearsAria')} content={<p>{t('tooltips.area.defaultHorizonYears')}</p>} />}
+              value={formValues.default_horizon_years} onChange={(e) => update('default_horizon_years', e.target.value)} />
           </div>
         </CardContent></Card>
         <div className="flex gap-3 mt-4">
@@ -444,10 +321,6 @@ function MapCenterController({
   zoom: number;
 }) {
   const map = useMap();
-
-  useEffect(() => {
-    map.setView(center, zoom);
-  }, [map, center, zoom]);
-
+  useEffect(() => { map.setView(center, zoom); }, [map, center, zoom]);
   return null;
 }

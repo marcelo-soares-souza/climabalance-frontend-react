@@ -645,6 +645,7 @@
   },
   "map": {
     "title": "Mapa de Áreas",
+    "allCountries": "Todos los países",
     "allBiomes": "Todos los Biomas",
     "areasCount": "{{count}} áreas",
     "available": "Disponible",
@@ -723,6 +724,9 @@
       "status": "Estado",
       "pickOnMap": "Seleccionar punto en el mapa",
       "mapHint": "Haz clic en el mapa para definir latitud y longitud automáticamente.",
+      "country": "Pa\u00eds",
+      "selectCountry": "Selecciona un pa\u00eds",
+      "selectCountryFirst": "Selecciona un pa\u00eds primero",
       "state": "Estado",
       "city": "Ciudad",
       "biome": "Bioma",
@@ -792,7 +796,7 @@
       "title": "Áreas públicas",
       "subtitle": "Explora áreas en formato de tarjetas y abre el detalle de cada proyecto.",
       "searchLabel": "Buscar",
-      "searchPlaceholder": "Nombre del área, ciudad, estado o bioma",
+      "searchPlaceholder": "Nombre del área, país o bioma",
       "empty": "No se encontraron áreas",
       "emptyDescription": "Ajusta los filtros e inténtalo de nuevo."
     }

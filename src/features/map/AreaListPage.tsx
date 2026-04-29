@@ -11,7 +11,7 @@ import { StatusBadge } from '@/components/StatusBadge';
 import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
 import { formatCurrency, formatDate, formatKgCO2e } from '@/lib/format';
-import { filterAreas, getAreaStatusOptions, getBiomeOptions } from '@/features/map/lib/area-filters';
+import { filterAreas, getAreaStatusOptions } from '@/features/map/lib/area-filters';
 import { MapPin, Plus, FilterX } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 
@@ -20,16 +20,15 @@ export function AreaListPage() {
   const navigate = useNavigate();
   const { hasRole, isAdmin } = useAuth();
   const [statusFilter, setStatusFilter] = useState('');
-  const [biomeFilter, setBiomeFilter] = useState('');
   const [searchFilter, setSearchFilter] = useState('');
   const [cityFilter, setCityFilter] = useState('');
   const [stateFilter, setStateFilter] = useState('');
+  const canCreate = hasRole('producer') || isAdmin;
   const areaStatusOptions = getAreaStatusOptions(t, { includeAll: true, includeRejected: true });
-  const biomeOptions = getBiomeOptions(t, { includeAll: true });
 
   const { data: areas, isLoading } = useQuery({
-    queryKey: ['areas', { status: statusFilter, biome: biomeFilter }],
-    queryFn: () => areasService.listAreas({ status: statusFilter || undefined, biome: biomeFilter || undefined }),
+    queryKey: ['areas', { status: statusFilter || 'all' }],
+    queryFn: () => areasService.listAreas({ status: statusFilter || undefined }),
   });
 
   const filteredAreas = useMemo(() => {
@@ -38,19 +37,16 @@ export function AreaListPage() {
       city: cityFilter,
       state: stateFilter,
       status: statusFilter,
-      biome: biomeFilter,
     });
-  }, [areas, searchFilter, cityFilter, stateFilter, statusFilter, biomeFilter]);
+  }, [areas, searchFilter, cityFilter, stateFilter, statusFilter]);
 
-  const canCreate = hasRole('producer') || isAdmin;
-  const hasFilters = Boolean(searchFilter || cityFilter || stateFilter || statusFilter || biomeFilter);
+  const hasFilters = Boolean(searchFilter || cityFilter || stateFilter || statusFilter);
 
   const clearFilters = () => {
     setSearchFilter('');
     setCityFilter('');
     setStateFilter('');
     setStatusFilter('');
-    setBiomeFilter('');
   };
 
   return (
@@ -87,13 +83,6 @@ export function AreaListPage() {
           options={areaStatusOptions}
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-        />
-        <Select
-          id="areas-biome"
-          label={t('map.biome')}
-          options={biomeOptions}
-          value={biomeFilter}
-          onChange={(e) => setBiomeFilter(e.target.value)}
         />
       </div>
       {hasFilters && (

@@ -645,6 +645,7 @@
   },
   "map": {
     "title": "Areas Map",
+    "allCountries": "All countries",
     "allBiomes": "All Biomes",
     "areasCount": "{{count}} areas",
     "available": "Available",
@@ -723,6 +724,9 @@
       "status": "Status",
       "pickOnMap": "Pick point on map",
       "mapHint": "Click the map to automatically set latitude and longitude.",
+      "country": "Country",
+      "selectCountry": "Select a country",
+      "selectCountryFirst": "Select a country first",
       "state": "State",
       "city": "City",
       "biome": "Biome",
@@ -792,7 +796,7 @@
       "title": "Public areas",
       "subtitle": "Browse areas as cards and open each project detail.",
       "searchLabel": "Search",
-      "searchPlaceholder": "Area name, city, state or biome",
+      "searchPlaceholder": "Area name, country or biome",
       "empty": "No areas found",
       "emptyDescription": "Adjust filters and try again."
     }

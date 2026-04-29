@@ -159,7 +159,7 @@ export function ProfileEditPage() {
               label={t('profile.form.country')}
               value={formValues.address_country}
               options={countries.map((c) => ({ value: c.code, label: c.name }))}
-              emptyLabel=""
+              emptyLabel="—"
               placeholder={t('profile.form.countryPlaceholder') || 'Type to search...'}
               onChange={(val) => update('address_country', val)}
             />

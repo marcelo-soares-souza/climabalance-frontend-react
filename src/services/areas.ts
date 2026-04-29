@@ -13,6 +13,8 @@ type RawArea = {
   latitude?: number | string;
   longitude?: number | string;
   biome?: string | null;
+  country_code?: string | null;
+  countryCode?: string | null;
   state?: string | null;
   city?: string | null;
   status?: string;
@@ -142,6 +144,7 @@ function normalizeArea(raw: RawArea): Area {
     latitude: asNumber(raw.latitude),
     longitude: asNumber(raw.longitude),
     biome: asNullableString(raw.biome),
+    countryCode: asNullableString(raw.countryCode ?? raw.country_code),
     state: asNullableString(raw.state),
     city: asNullableString(raw.city),
     status: normalizeAreaStatus(raw.status) as Area['status'],
@@ -269,10 +272,10 @@ export const areasService = {
     return api.get<RawArea[]>('/areas', { params: apiParams }).then((rows) => rows.map(normalizeArea));
   },
 
-  getMapAreas(params?: { biome?: string }) {
+  getMapAreas(params?: { biome?: string; status?: string }) {
     return api
       .get<RawArea[]>('/map/areas', { params: params as Record<string, string> })
-      .then((rows) => rows.map((row) => normalizeArea({ status: 'active', ...row })));
+      .then((rows) => rows.map((row) => normalizeArea(row)));
   },
 
   getAreaCapacity(id: string) {

@@ -5,46 +5,47 @@ import { useQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Select } from '@/components/ui/Select';
+import { Combobox } from '@/components/ui/Combobox';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
 import { StatusBadge } from '@/components/StatusBadge';
 import { formatCurrency, formatKgCO2e } from '@/lib/format';
-import { filterAreas, getBiomeOptions } from '@/features/map/lib/area-filters';
+import { filterAreas } from '@/features/map/lib/area-filters';
+import { getAreaStatusOptions } from '@/features/map/lib/area-filters';
+import { countries, getCountryName } from '@/lib/countries';
 import { MapPin, TreePine, FilterX } from 'lucide-react';
+
+const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
 export function PublicAreasPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [biomeFilter, setBiomeFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
   const [searchFilter, setSearchFilter] = useState('');
-  const [cityFilter, setCityFilter] = useState('');
-  const [stateFilter, setStateFilter] = useState('');
-  const biomeOptions = getBiomeOptions(t, { includeAll: true });
+  const [countryFilter, setCountryFilter] = useState('');
+  const statusOptions = getAreaStatusOptions(t, { includeAll: true });
 
   const { data: areas, isLoading } = useQuery({
-    queryKey: ['areas', 'public', { biome: biomeFilter || 'all' }],
-    queryFn: () => areasService.getMapAreas(biomeFilter ? { biome: biomeFilter } : undefined),
+    queryKey: ['areas', 'public', { status: statusFilter || 'all' }],
+    queryFn: () => areasService.getMapAreas(statusFilter ? { status: statusFilter } : undefined),
   });
 
   const filteredAreas = useMemo(() => {
     return filterAreas(areas, {
       search: searchFilter,
-      city: cityFilter,
-      state: stateFilter,
-      status: 'active',
-      biome: biomeFilter,
+      country: countryFilter,
+      status: statusFilter,
     });
-  }, [areas, searchFilter, cityFilter, stateFilter, biomeFilter]);
+  }, [areas, searchFilter, countryFilter, statusFilter]);
 
-  const hasFilters = Boolean(searchFilter || cityFilter || stateFilter || biomeFilter);
+  const hasFilters = Boolean(searchFilter || countryFilter || statusFilter);
 
   const clearFilters = () => {
     setSearchFilter('');
-    setCityFilter('');
-    setStateFilter('');
-    setBiomeFilter('');
+    setCountryFilter('');
+    setStatusFilter('');
   };
 
   return (
@@ -54,7 +55,7 @@ export function PublicAreasPage() {
         <p className="text-text-secondary mt-1">{t('areas.public.subtitle')}</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         <Input
           id="areas-public-search"
           label={t('areas.public.searchLabel')}
@@ -62,27 +63,21 @@ export function PublicAreasPage() {
           onChange={(e) => setSearchFilter(e.target.value)}
           placeholder={t('areas.public.searchPlaceholder')}
         />
-        <Input
-          id="areas-public-city"
-          label={t('area.form.city')}
-          value={cityFilter}
-          onChange={(e) => setCityFilter(e.target.value)}
-          placeholder={t('areas.list.cityPlaceholder')}
+        <Combobox
+          id="areas-public-country"
+          label={t('area.form.country')}
+          value={countryFilter}
+          options={countryOptions}
+          emptyLabel={t('map.allCountries')}
+          placeholder={t('area.form.selectCountry')}
+          onChange={(val) => setCountryFilter(val)}
         />
-        <Input
-          id="areas-public-state"
-          label={t('area.form.state')}
-          value={stateFilter}
-          onChange={(e) => setStateFilter(e.target.value)}
-          placeholder={t('areas.list.statePlaceholder')}
-        />
-        <Input id="areas-public-status" label={t('area.form.status')} value={t('common.status.active')} disabled />
         <Select
-          id="areas-public-biome"
-          label={t('map.biome')}
-          options={biomeOptions}
-          value={biomeFilter}
-          onChange={(e) => setBiomeFilter(e.target.value)}
+          id="areas-public-status"
+          label={t('area.form.status')}
+          options={statusOptions}
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
         />
       </div>
       {hasFilters && (
@@ -109,14 +104,9 @@ export function PublicAreasPage() {
                   <StatusBadge status={area.status} />
                 </div>
                 <div className="flex items-center gap-1 text-sm text-text-secondary">
-                  <MapPin className="h-3 w-3" />
-                  <span>{[area.city, area.state].filter(Boolean).join(', ') || '-'}</span>
+                  <MapPin className="h-3 w-3 shrink-0" />
+                  <span>{[area.city, area.state, getCountryName(area.countryCode ?? '')].filter(Boolean).join(', ') || '-'}</span>
                 </div>
-                {area.biome && (
-                  <p className="text-xs text-text-secondary">
-                    {t('map.biome')}: {t(`map.biomes.${area.biome}`, area.biome)}
-                  </p>
-                )}
                 <div className="grid grid-cols-3 gap-2 text-center">
                   <div className="rounded-md bg-primary-50 p-2">
                     <p className="text-xs text-text-secondary">{t('area.form.pricePerTree')}</p>

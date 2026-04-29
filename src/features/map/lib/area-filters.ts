@@ -1,11 +1,8 @@
-import type { TFunction } from 'i18next';
 import type { Area } from '@/types/area';
 
 export interface AreaFilterValues {
   search?: string;
-  city?: string;
-  state?: string;
-  status?: string;
+  country?: string;
   biome?: string;
 }
 
@@ -17,47 +14,23 @@ export function filterAreas(areas: Area[] | undefined, filters: AreaFilterValues
   if (!areas) return [];
 
   const normalizedSearch = normalizeFilterValue(filters.search);
-  const normalizedCity = normalizeFilterValue(filters.city);
-  const normalizedState = normalizeFilterValue(filters.state);
-  const normalizedStatus = normalizeFilterValue(filters.status);
+  const normalizedCountry = normalizeFilterValue(filters.country);
   const normalizedBiome = normalizeFilterValue(filters.biome);
 
   return areas.filter((area) => {
     const name = area.name.toLowerCase();
-    const city = normalizeFilterValue(area.city ?? '');
-    const state = normalizeFilterValue(area.state ?? '');
+    const country = normalizeFilterValue(area.countryCode ?? '');
     const biome = normalizeFilterValue(area.biome ?? '');
-    const status = normalizeFilterValue(area.status);
 
     const matchesSearch = !normalizedSearch
       || name.includes(normalizedSearch)
-      || city.includes(normalizedSearch)
-      || state.includes(normalizedSearch)
+      || country.includes(normalizedSearch)
       || biome.includes(normalizedSearch);
-    const matchesCity = !normalizedCity || city.includes(normalizedCity);
-    const matchesState = !normalizedState || state.includes(normalizedState);
-    const matchesStatus = !normalizedStatus || status === normalizedStatus;
+    const matchesCountry = !normalizedCountry || country === normalizedCountry;
     const matchesBiome = !normalizedBiome || biome === normalizedBiome;
 
-    return matchesSearch && matchesCity && matchesState && matchesStatus && matchesBiome;
+    return matchesSearch && matchesCountry && matchesBiome;
   });
-}
-
-export function getBiomeOptions(t: TFunction, options?: { includeAll?: boolean }) {
-  const entries = [
-    { value: 'amazonia', label: t('map.biomes.amazonia') },
-    { value: 'cerrado', label: t('map.biomes.cerrado') },
-    { value: 'mata_atlantica', label: t('map.biomes.mataAtlantica') },
-    { value: 'caatinga', label: t('map.biomes.caatinga') },
-    { value: 'pampa', label: t('map.biomes.pampa') },
-    { value: 'pantanal', label: t('map.biomes.pantanal') },
-  ];
-
-  if (options?.includeAll) {
-    return [{ value: '', label: t('map.allBiomes') }, ...entries];
-  }
-
-  return entries;
 }
 
 export function getAreaStatusOptions(

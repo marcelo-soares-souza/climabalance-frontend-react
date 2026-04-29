@@ -7,7 +7,6 @@ import { plantedTreesService } from "@/services/planted-trees";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/StatusBadge";
-import { Badge } from "@/components/ui/Badge";
 import {
   Dialog,
   DialogTitle,
@@ -38,6 +37,7 @@ import {
   Coins,
   Sprout,
   Leaf,
+  MapPin,
 } from "lucide-react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
@@ -403,12 +403,8 @@ export function AreaDetailPage() {
         </Card>
       </div>
 
-      {area.biome && (
-        <Card>
-          <CardContent className="flex items-center gap-4">
-            <Badge variant="success">
-              {t(`map.biomes.${area.biome}`, area.biome)}
-            </Badge>
+      <Card>
+        <CardContent className="flex items-center gap-4">
             <span className="flex items-center gap-2 text-sm text-text-secondary">
               {t("area.tCO2ePerTree")}:{" "}
               {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
@@ -422,54 +418,51 @@ export function AreaDetailPage() {
             </span>
           </CardContent>
         </Card>
-      )}
 
-      {/* Planted Trees Map */}
-      {plantedTrees && plantedTrees.length > 0 && (
-        <Card>
-          <CardHeader>
-            <h3 className="font-medium flex items-center gap-2">
-              <TreePine className="h-4 w-4 text-primary" />{" "}
-              {t("map.treesPlanted")} ({plantedTrees.length})
-            </h3>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="h-72 rounded-b-lg overflow-hidden">
-              <MapContainer
-                center={[area.latitude, area.longitude]}
-                zoom={15}
-                className="h-full w-full"
-                zoomControl={true}
-              >
-                <TileLayer
-                  attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
-                  url={satellite ? SATELLITE_URL : OSM_URL}
-                />
-                <MapLayerControl
-                  satellite={satellite}
-                  onToggle={() => setSatellite((s) => !s)}
-                />
+      {/* Area Map */}
+      <Card>
+        <CardHeader>
+          <h3 className="font-medium flex items-center gap-2">
+            <MapPin className="h-4 w-4 text-primary" />{" "}
+            {t("map.title")}
+          </h3>
+        </CardHeader>
+        <CardContent className="p-0">
+          <div className="h-72 rounded-b-lg overflow-hidden">
+            <MapContainer
+              center={[area.latitude, area.longitude]}
+              zoom={15}
+              className="h-full w-full"
+              zoomControl={true}
+            >
+              <TileLayer
+                attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
+                url={satellite ? SATELLITE_URL : OSM_URL}
+              />
+              <MapLayerControl
+                satellite={satellite}
+                onToggle={() => setSatellite((s) => !s)}
+              />
+              <Marker
+                position={[area.latitude, area.longitude]}
+                icon={L.divIcon({
+                  className: "",
+                  html: `<div style="background:#0B5F4B;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
+                  iconSize: [14, 14],
+                  iconAnchor: [7, 7],
+                })}
+              />
+              {plantedTrees?.map((tree) => (
                 <Marker
-                  position={[area.latitude, area.longitude]}
-                  icon={L.divIcon({
-                    className: "",
-                    html: `<div style="background:#0B5F4B;width:14px;height:14px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
-                    iconSize: [14, 14],
-                    iconAnchor: [7, 7],
-                  })}
+                  key={tree.id}
+                  position={[tree.latitude, tree.longitude]}
+                  icon={treeDotIcon}
                 />
-                {plantedTrees.map((tree) => (
-                  <Marker
-                    key={tree.id}
-                    position={[tree.latitude, tree.longitude]}
-                    icon={treeDotIcon}
-                  />
-                ))}
-              </MapContainer>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+              ))}
+            </MapContainer>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Plant Trees Button */}
       {isAuthenticated && (area.ownerUserId === userId || isAdmin) && (pendingCount?.pending ?? 0) > 0 && (

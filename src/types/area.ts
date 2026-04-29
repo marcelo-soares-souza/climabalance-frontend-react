@@ -10,6 +10,7 @@ export interface Area {
   latitude: number;
   longitude: number;
   biome: string | null;
+  countryCode: string | null;
   state: string | null;
   city: string | null;
   status: AreaStatus;
@@ -73,6 +74,7 @@ export interface CreateAreaRequest {
   latitude: number;
   longitude: number;
   biome?: string;
+  countryCode?: string;
   state?: string;
   city?: string;
   total_capacity_t_co2e?: number;
@@ -89,6 +91,7 @@ export interface UpdateAreaRequest {
   longitude?: number;
   status?: AreaStatus;
   biome?: string;
+  countryCode?: string;
   state?: string;
   city?: string;
   total_capacity_t_co2e?: number;

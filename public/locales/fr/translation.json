@@ -645,6 +645,7 @@
   },
   "map": {
     "title": "Carte des Zones",
+    "allCountries": "Tous les pays",
     "allBiomes": "Tous les Biomes",
     "areasCount": "{{count}} zones",
     "available": "Disponible",
@@ -723,6 +724,9 @@
       "status": "Statut",
       "pickOnMap": "Sélectionner un point sur la carte",
       "mapHint": "Cliquez sur la carte pour définir automatiquement la latitude et la longitude.",
+      "country": "Pays",
+      "selectCountry": "Sélectionnez un pays",
+      "selectCountryFirst": "Sélectionnez d'abord un pays",
       "state": "Région",
       "city": "Ville",
       "biome": "Biome",
@@ -792,7 +796,7 @@
       "title": "Zones publiques",
       "subtitle": "Explorez les zones en cartes et ouvrez le détail de chaque projet.",
       "searchLabel": "Rechercher",
-      "searchPlaceholder": "Nom de la zone, ville, région ou biome",
+      "searchPlaceholder": "Nom de la zone, pays ou biome",
       "empty": "Aucune zone trouvée",
       "emptyDescription": "Ajustez les filtres et réessayez."
     }
