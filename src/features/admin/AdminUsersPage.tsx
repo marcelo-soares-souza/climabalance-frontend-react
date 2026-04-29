@@ -29,7 +29,7 @@ export function AdminUsersPage() {
   const navigate = useNavigate();
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
-  const [sort, setSort] = useState<SortConfig>({ column: 'created_at', order: 'desc' });
+  const [sort, setSort] = useState<SortConfig>({ column: 'last_login_at', order: 'desc' });
   const statusOptions = getUserStatusOptions(t, { includeAll: true });
 
   const { data: users, isLoading } = useQuery({
