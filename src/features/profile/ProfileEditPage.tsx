@@ -110,7 +110,7 @@ export function ProfileEditPage() {
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
       <form onSubmit={(e) => { e.preventDefault(); mutation.mutate(); }}>
         <Card><CardContent className="space-y-4 py-6">
-          <Input id="display_name" label={t('profile.form.displayName')} value={formValues.display_name} onChange={(e) => update('display_name', e.target.value)} />
+          <Input id="display_name" label={t('profile.form.displayName')} value={formValues.display_name} onChange={(e) => update('display_name', e.target.value)} required />
           <div className="grid grid-cols-2 gap-4">
             <Select id="document_type" label={t('profile.form.documentType')} value={formValues.document_type} onChange={(e) => update('document_type', e.target.value)}
               options={[{ value: '', label: '-' }, { value: 'CPF', label: 'CPF' }, { value: 'CNPJ', label: 'CNPJ' }, { value: 'passport', label: t('profile.form.passport') }]} />

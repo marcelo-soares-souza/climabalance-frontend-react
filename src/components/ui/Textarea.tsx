@@ -8,11 +8,13 @@ interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   ({ className, label, error, id, ...props }, ref) => {
+    const isRequired = props.required;
     return (
       <div className="w-full">
         {label && (
           <label htmlFor={id} className="block text-base font-medium text-text-secondary mb-1.5">
             {label}
+            {isRequired && <span className="text-error ml-0.5">*</span>}
           </label>
         )}
         <textarea

@@ -140,16 +140,16 @@ export function CompensationCheckoutPage() {
       <Card>
         <CardHeader><h3 className="font-medium flex items-center gap-2"><CreditCard className="h-4 w-4" /> {t('checkout.paymentDetails')}</h3></CardHeader>
         <CardContent className="space-y-4">
-          <Input id="cardNumber" label={t('checkout.cardNumber')} value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="4111 1111 1111 1111" />
-          <Input id="cardholder" label={t('checkout.cardholder')} value={cardholderName} onChange={(e) => setCardholderName(e.target.value)} />
+          <Input id="cardNumber" label={t('checkout.cardNumber')} value={cardNumber} onChange={(e) => setCardNumber(e.target.value)} placeholder="4111 1111 1111 1111" required />
+          <Input id="cardholder" label={t('checkout.cardholder')} value={cardholderName} onChange={(e) => setCardholderName(e.target.value)} required />
           <div className="grid grid-cols-3 gap-3">
-            <Select id="expiryMonth" label={t('checkout.expiryMonth')} value={expiryMonth} onChange={(e) => setExpiryMonth(e.target.value)}
+            <Select id="expiryMonth" label={t('checkout.expiryMonth')} value={expiryMonth} onChange={(e) => setExpiryMonth(e.target.value)} required
               options={Array.from({ length: 12 }, (_, i) => ({ value: String(i + 1), label: String(i + 1).padStart(2, '0') }))} />
-            <Select id="expiryYear" label={t('checkout.expiryYear')} value={expiryYear} onChange={(e) => setExpiryYear(e.target.value)}
+            <Select id="expiryYear" label={t('checkout.expiryYear')} value={expiryYear} onChange={(e) => setExpiryYear(e.target.value)} required
               options={Array.from({ length: 10 }, (_, i) => ({ value: String(2025 + i), label: String(2025 + i) }))} />
-            <Input id="cvv" label={t('checkout.cvv')} value={cvv} onChange={(e) => setCvv(e.target.value)} placeholder="123" maxLength={4} />
+            <Input id="cvv" label={t('checkout.cvv')} value={cvv} onChange={(e) => setCvv(e.target.value)} placeholder="123" maxLength={4} required />
           </div>
-          <Select id="installments" label={t('checkout.installments')} value={installments} onChange={(e) => setInstallments(e.target.value)}
+          <Select id="installments" label={t('checkout.installments')} value={installments} onChange={(e) => setInstallments(e.target.value)} required
             options={Array.from({ length: 12 }, (_, i) => ({ value: String(i + 1), label: `${i + 1}x` }))} />
           <div className="inline-flex items-center gap-2 text-xs text-text-secondary">{t('checkout.testCardNote')}<InfoTooltip ariaLabel={t('tooltips.checkout.testCardAria')} content={<p>{t('tooltips.checkout.testCard')}</p>} /></div>
         </CardContent>

@@ -12,12 +12,14 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
 
 export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   ({ className, label, labelAdornment, error, options, placeholder, id, ...props }, ref) => {
+    const isRequired = props.required;
     return (
       <div className="w-full">
         {label && (
           <div className="mb-1.5 flex items-center gap-2">
             <label htmlFor={id} className="block text-base font-medium text-text-secondary">
               {label}
+              {isRequired && <span className="text-error ml-0.5">*</span>}
             </label>
             {labelAdornment}
           </div>

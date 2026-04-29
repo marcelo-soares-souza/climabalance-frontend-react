@@ -125,7 +125,7 @@ export function AreaAuditPage() {
               <XCircle className="h-4 w-4 mr-2" /> {t('audit.review.reject')}
             </Button>
           </div>
-          <Textarea id="rejectReason" label={t('audit.review.rejectReason')} value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} placeholder={t('audit.review.rejectReasonPlaceholder')} />
+          <Textarea id="rejectReason" label={t('audit.review.rejectReason')} value={rejectReason} onChange={(e) => setRejectReason(e.target.value)} placeholder={t('audit.review.rejectReasonPlaceholder')} required />
         </CardContent></Card>
       )}
 

@@ -68,8 +68,8 @@ export function ProfilePeriodStep({ profileType, periodStart, periodEnd, dataQua
         </div>
         <p className="text-base text-text-secondary mb-3">{t('footprint.period.subtitle')}</p>
         <div className="grid grid-cols-2 gap-4">
-          <Input id="periodStart" type="date" label={t('footprint.period.start')} value={periodStart} onChange={(e) => onPeriodChange(e.target.value, periodEnd)} />
-          <Input id="periodEnd" type="date" label={t('footprint.period.end')} value={periodEnd} onChange={(e) => onPeriodChange(periodStart, e.target.value)} />
+          <Input id="periodStart" type="date" label={t('footprint.period.start')} value={periodStart} onChange={(e) => onPeriodChange(e.target.value, periodEnd)} required />
+          <Input id="periodEnd" type="date" label={t('footprint.period.end')} value={periodEnd} onChange={(e) => onPeriodChange(periodStart, e.target.value)} required />
         </div>
       </div>
 

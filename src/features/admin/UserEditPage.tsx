@@ -73,8 +73,8 @@ export function UserEditPage() {
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
       <form onSubmit={(e) => { e.preventDefault(); updateMutation.mutate(); }}>
         <Card><CardContent className="space-y-4 py-6">
-          <Input id="email" type="email" label={t('auth.email')} value={formValues.email} onChange={(e) => update('email', e.target.value)} />
-          <Select id="status" label={t('admin.users.status')} value={formValues.status} onChange={(e) => update('status', e.target.value)}
+          <Input id="email" type="email" label={t('auth.email')} value={formValues.email} onChange={(e) => update('email', e.target.value)} required />
+          <Select id="status" label={t('admin.users.status')} value={formValues.status} onChange={(e) => update('status', e.target.value)} required
             options={statusOptions} />
           <Select id="locale" label={t('admin.users.locale')} value={formValues.locale} onChange={(e) => update('locale', e.target.value)}
             options={localeOptions} />

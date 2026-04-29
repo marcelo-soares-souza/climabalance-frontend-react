@@ -18,6 +18,7 @@ interface ComboboxProps {
   onChange: (value: string) => void;
   error?: string;
   className?: string;
+  required?: boolean;
 }
 
 export function Combobox({
@@ -31,6 +32,7 @@ export function Combobox({
   onChange,
   error,
   className,
+  required,
 }: ComboboxProps) {
   const [open, setOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
@@ -104,6 +106,7 @@ export function Combobox({
         <div className="mb-1.5 flex items-center gap-2">
           <label htmlFor={id} className="block text-base font-medium text-text-secondary">
             {label}
+            {required && <span className="text-error ml-0.5">*</span>}
           </label>
           {labelAdornment}
         </div>

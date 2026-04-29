@@ -181,6 +181,7 @@ export function AreaFormPage() {
               id="countryCode"
               label={t('area.form.country')}
               value={formValues.countryCode}
+              required
               options={countryOptions}
               emptyLabel="—"
               placeholder={t('area.form.selectCountry')}

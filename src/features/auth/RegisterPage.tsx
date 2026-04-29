@@ -105,6 +105,7 @@ export function RegisterPage() {
         <Select
           id="roleKey"
           label={t('auth.register.role')}
+          required
           labelAdornment={
             <InfoTooltip
               ariaLabel={t('auth.register.roleHelpAria')}

@@ -99,6 +99,7 @@ export function CompensationReviewPage() {
             type="number"
             min="1"
             label={t('compensation.review.treesCount')}
+            required
             value={treesRequested}
             onChange={(e) => setTreesRequested(parseInt(e.target.value) || 0)}
           />
