@@ -246,6 +246,11 @@
       "card3Description": "Strengthen trust through audit trails, certificates, evidence records, and transparency about where compensation goes."
     }
   },
+  "support": {
+    "title": "Support the Project",
+    "description": "Help keep ClimaBalance free and open. Your contribution makes a difference!",
+    "action": "Make a donation"
+  },
   "howToUse": {
     "eyebrow": "Quick guide",
     "title": "How to use the platform",
