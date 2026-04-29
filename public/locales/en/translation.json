@@ -909,6 +909,7 @@
       "state": "State",
       "postalCode": "Postal code",
       "country": "Country",
+      "countryPlaceholder": "Type to search...",
       "passport": "Passport"
     }
   },

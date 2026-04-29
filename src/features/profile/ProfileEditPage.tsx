@@ -13,6 +13,8 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ApiError } from '@/lib/api-client';
 import { ArrowLeft, Calendar } from 'lucide-react';
+import { Combobox } from '@/components/ui/Combobox';
+import { countries } from '@/lib/countries';
 
 export function ProfileEditPage() {
   const { t } = useTranslation();
@@ -152,7 +154,15 @@ export function ProfileEditPage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             <Input id="address_postal_code" label={t('profile.form.postalCode')} value={formValues.address_postal_code} onChange={(e) => update('address_postal_code', e.target.value)} />
-            <Input id="address_country" label={t('profile.form.country')} value={formValues.address_country} onChange={(e) => update('address_country', e.target.value)} />
+            <Combobox
+              id="address_country"
+              label={t('profile.form.country')}
+              value={formValues.address_country}
+              options={countries.map((c) => ({ value: c.code, label: c.name }))}
+              emptyLabel=""
+              placeholder={t('profile.form.countryPlaceholder') || 'Type to search...'}
+              onChange={(val) => update('address_country', val)}
+            />
           </div>
         </CardContent></Card>
         <div className="flex gap-3 mt-4">

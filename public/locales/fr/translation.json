@@ -908,6 +908,7 @@
       "state": "Région",
       "postalCode": "Code postal",
       "country": "Pays",
+      "countryPlaceholder": "Tapez pour rechercher...",
       "passport": "Passeport"
     }
   },

@@ -908,6 +908,7 @@
       "state": "Estado",
       "postalCode": "Código postal",
       "country": "País",
+      "countryPlaceholder": "Escribe para buscar...",
       "passport": "Pasaporte"
     }
   },
