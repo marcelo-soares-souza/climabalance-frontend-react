@@ -82,7 +82,7 @@ export function AreaAuditPage() {
         <div className="grid grid-cols-2 gap-4 text-sm">
           <div><span className="text-text-secondary">{t('area.form.pricePerTree')}:</span> <span className="font-medium">{area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</span></div>
           <div><span className="inline-flex items-center gap-2 text-text-secondary">{t('area.tCO2ePerTree')}: <InfoTooltip ariaLabel={t('tooltips.shared.tco2ePerTreeAria')} content={<p>{t('tooltips.shared.tco2ePerTree')}</p>} /></span> <span className="font-medium">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span></div>
-          <div><span className="text-text-secondary">{t('area.form.biome')}:</span> <span className="font-medium">{area.biome ? t(`map.biomes.${area.biome}`, area.biome) : '-'}</span></div>
+          <div><span className="text-text-secondary">{t('area.form.biome')}:</span> <span className="font-medium">{area.biome || '-'}</span></div>
           <div><span className="text-text-secondary">{t('common.createdAt')}:</span> <span className="font-medium">{formatDate(area.createdAt)}</span></div>
         </div>
         {area.description && <p className="mt-3 text-sm text-text-secondary">{area.description}</p>}

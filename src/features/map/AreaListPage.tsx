@@ -106,7 +106,7 @@ export function AreaListPage() {
                 </div>
                 {area.biome && (
                   <p className="text-xs text-text-secondary">
-                    {t('map.biome')}: {t(`map.biomes.${area.biome}`, area.biome)}
+                    {t('map.biome')}: {area.biome}
                   </p>
                 )}
                 {area.description && (
