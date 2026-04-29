@@ -896,6 +896,10 @@
     "address": "Address",
     "memberSince": "Member since",
     "lastLogin": "Last login:",
+    "changePassword": "Change password",
+    "oldPassword": "Current password",
+    "newPassword": "New password",
+    "passwordChanged": "Password changed successfully!",
     "saveError": "Failed to save profile. Please try again.",
     "form": {
       "displayName": "Display name",

@@ -1,17 +1,22 @@
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
+import { authService } from '@/services/auth';
 import { usersService } from '@/services/users';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { RoleBadge } from '@/components/RoleBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
+import { ErrorBanner } from '@/components/ErrorBanner';
+import { ApiError } from '@/lib/api-client';
 import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber } from '@/lib/format';
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
-import { User, Edit, Award, TreePine, Calculator, Leaf, Scale } from 'lucide-react';
+import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp } from 'lucide-react';
 
 function formatProfileTCO2e(value: number): { amount: string; unit: string } {
   const abs = Math.abs(value);
@@ -31,8 +36,27 @@ export function ProfilePage() {
   const { userId } = useAuth();
   const { userId: routeUserId } = useParams<{ userId: string }>();
   const targetUserId = routeUserId ?? userId ?? null;
+  const isOwnProfile = !routeUserId || routeUserId === userId;
   const editProfilePath = targetUserId ? `/users/${targetUserId}/profile/edit` : '/profile/edit';
   const certificatesPath = targetUserId ? `/users/${targetUserId}/certificates` : '/profile/certificates';
+
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+  const [passwordError, setPasswordError] = useState<string | null>(null);
+
+  const passwordMutation = useMutation({
+    mutationFn: () => authService.changePassword(oldPassword, newPassword, newPasswordConfirm),
+    onSuccess: () => {
+      setOldPassword('');
+      setNewPassword('');
+      setNewPasswordConfirm('');
+      setShowPasswordForm(false);
+      setPasswordError(null);
+    },
+    onError: (err) => setPasswordError(err instanceof ApiError ? err.messageKey : 'server.error'),
+  });
 
   const { data: user, isLoading: loadingUser } = useQuery({
     queryKey: ['users', targetUserId],
@@ -99,6 +123,47 @@ export function ProfilePage() {
           </div>
         </CardContent>
       </Card>
+
+      {isOwnProfile && (
+        <Card>
+          <CardContent className="py-4">
+            <button
+              type="button"
+              onClick={() => setShowPasswordForm(!showPasswordForm)}
+              className="flex w-full items-center justify-between text-left"
+            >
+              <div className="flex items-center gap-2">
+                <Lock className="h-4 w-4 text-text-secondary" />
+                <span className="font-medium">{t('profile.changePassword')}</span>
+              </div>
+              {showPasswordForm ? <ChevronUp className="h-4 w-4 text-text-secondary" /> : <ChevronDown className="h-4 w-4 text-text-secondary" />}
+            </button>
+            {showPasswordForm && (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (newPassword !== newPasswordConfirm) {
+                    setPasswordError('errors.auth.register.passwordMismatch');
+                    return;
+                  }
+                  passwordMutation.mutate();
+                }}
+                className="mt-4 space-y-3 border-t border-gray-100 pt-4"
+              >
+                {passwordError && <ErrorBanner messageKey={passwordError} onDismiss={() => setPasswordError(null)} />}
+                <Input id="old_password" type="password" label={t('profile.oldPassword')} value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
+                <Input id="new_password" type="password" label={t('profile.newPassword')} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={8} />
+                <Input id="new_password_confirm" type="password" label={t('auth.confirmPassword')} value={newPasswordConfirm} onChange={(e) => setNewPasswordConfirm(e.target.value)} required />
+                <div className="flex justify-end gap-2">
+                  <Button variant="ghost" type="button" size="sm" onClick={() => { setShowPasswordForm(false); setPasswordError(null); setOldPassword(''); setNewPassword(''); setNewPasswordConfirm(''); }}>{t('common.cancel')}</Button>
+                  <Button type="submit" size="sm" loading={passwordMutation.isPending}>{t('common.save')}</Button>
+                </div>
+                {passwordMutation.isSuccess && <p className="text-sm text-success">{t('profile.passwordChanged')}</p>}
+              </form>
+            )}
+          </CardContent>
+        </Card>
+      )}
 
       {profile && (profile.documentNumber || profile.phone || profile.addressCity) && (
         <Card>

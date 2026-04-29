@@ -43,6 +43,14 @@ export const authService = {
     return json.data || json;
   },
 
+  changePassword(oldPassword: string, newPassword: string, newPasswordConfirm: string) {
+    return api.post<void>('/users/change-password', {
+      old_password: oldPassword,
+      new_password: newPassword,
+      new_password_confirm: newPasswordConfirm,
+    });
+  },
+
   revokeToken() {
     return api.post<void>('/auth/revoke', {});
   },
