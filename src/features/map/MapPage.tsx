@@ -7,7 +7,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  useMap,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -131,7 +130,7 @@ function ClusterMarker({
         icon={DEFAULT_ICON}
       >
         <Popup>
-          <div className="min-w-[220px]">
+          <div className="min-w-[220px] cursor-pointer" onClick={() => navigate(`/areas/${area.id}`)}>
             {area.thumbnailUrl && (
               <img
                 src={area.thumbnailUrl}
@@ -188,13 +187,13 @@ function ClusterMarker({
               <Button
                 size="sm"
                 variant="outline"
-                onClick={() => navigate(`/areas/${area.id}`)}
+                onClick={(e) => { e.stopPropagation(); navigate(`/areas/${area.id}`); }}
               >
                 {t("common.details")}
               </Button>
               <Button
                 size="sm"
-                onClick={() => onSelectArea(area)}
+                onClick={(e) => { e.stopPropagation(); onSelectArea(area); }}
               >
                 {t("map.compensate")}
               </Button>
@@ -219,22 +218,40 @@ function ClusterZoomMarker({
   navigate: (path: string) => void;
   onSelectArea: (area: Area) => void;
 }) {
-  const map = useMap();
-
-  const handleClusterClick = useCallback(() => {
-    const bounds = cluster.areas.reduce(
-      (b, area) => b.extend([area.latitude, area.longitude]),
-      L.latLngBounds(cluster.areas[0].latitude, cluster.areas[0].longitude, cluster.areas[0].latitude, cluster.areas[0].longitude),
-    );
-    map.fitBounds(bounds, { padding: [50, 50], maxZoom: 14 });
-  }, [cluster, map]);
-
   return (
     <Marker
       position={[cluster.latitude, cluster.longitude]}
       icon={CLUSTER_ICON(cluster.areas.length)}
-      eventHandlers={{ click: handleClusterClick }}
-    />
+    >
+      <Popup>
+        <div className="min-w-[260px] max-h-[320px] overflow-y-auto space-y-3">
+          <p className="font-semibold text-sm text-text-secondary sticky top-0 bg-white pb-1">
+            {t("map.areasCount", { count: cluster.areas.length })}
+          </p>
+          {cluster.areas.map((area) => (
+            <div key={area.id} className="border border-gray-100 rounded-lg p-3 space-y-2 hover:bg-gray-50 cursor-pointer" onClick={() => navigate(`/areas/${area.id}`)}>
+              {area.thumbnailUrl && (
+                <img src={area.thumbnailUrl} alt="" className="w-full h-20 object-cover rounded-md" />
+              )}
+              <p className="font-semibold text-sm leading-snug">{area.name}</p>
+              <p className="text-xs text-text-secondary">
+                <MapPin className="h-3 w-3 inline" />{" "}
+                {[area.city, area.state, getCountryName(area.countryCode ?? "")].filter(Boolean).join(", ") || "-"}
+              </p>
+              <div className="flex gap-2 text-xs">
+                {area.pricePerTree != null && (
+                  <span className="rounded bg-primary-50 px-2 py-1 font-medium text-primary">{formatCurrency(area.pricePerTree)}</span>
+                )}
+                <span className="rounded bg-amber-50 px-2 py-1 font-medium text-amber-700">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span>
+              </div>
+              <Button size="sm" className="w-full" onClick={(e) => { e.stopPropagation(); onSelectArea(area); }}>
+                {t("map.compensate")}
+              </Button>
+            </div>
+          ))}
+        </div>
+      </Popup>
+    </Marker>
   );
 }
 
