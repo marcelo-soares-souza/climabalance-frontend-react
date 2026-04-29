@@ -43,7 +43,12 @@ import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
-import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
+import {
+  OSM_URL,
+  OSM_ATTR,
+  SATELLITE_URL,
+  SATELLITE_ATTR,
+} from "@/components/leaflet/map-layers";
 
 const treeDotIcon = L.divIcon({
   className: "",
@@ -213,6 +218,8 @@ export function AreaDetailPage() {
     contributions?.reduce((sum, item) => sum + item.totalTCO2e, 0) ?? 0;
   const supporterCount = contributions?.length ?? 0;
   const defaultHorizonYears = area.defaultHorizonYears ?? 20;
+  const plantedCount = plantedTrees?.length ?? 0;
+  const availableCount = pendingCount?.totalCompensated ?? totalTreesFunded;
   const description = area.description?.trim() ?? "";
   const hasLongDescription = description.length > DESCRIPTION_PREVIEW_LENGTH;
   const visibleDescription =
@@ -376,10 +383,10 @@ export function AreaDetailPage() {
               {t("profile.treesPlanted")}
             </p>
             <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-teal-700">
-              {formatNumber(plantedTrees?.length ?? 0, "pt-BR", 0)}
-              {pendingCount && (
+              {formatNumber(plantedCount, "pt-BR", 0)}
+              {availableCount > 0 && (
                 <span className="text-base font-normal text-text-secondary">
-                  /{formatNumber(pendingCount.totalCompensated, "pt-BR", 0)}
+                  /{formatNumber(availableCount, "pt-BR", 0)}
                 </span>
               )}
             </p>
@@ -405,26 +412,30 @@ export function AreaDetailPage() {
 
       <Card>
         <CardContent className="flex items-center gap-4">
-            <span className="flex items-center gap-2 text-sm text-text-secondary">
-              {t("area.tCO2ePerTree")}:{" "}
-              {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
-              <InfoTooltip
-                ariaLabel={t("tooltips.shared.tco2ePerTreeAria")}
-                content={<p>{t("tooltips.shared.tco2ePerTree")}</p>}
-              />
-            </span>
-            <span className="text-sm text-text-secondary">
-              {defaultHorizonYears} {t("common.years")}
-            </span>
-          </CardContent>
-        </Card>
+          <span className="flex items-center gap-2 text-sm text-text-secondary">
+            {t("area.tCO2ePerTree")}:{" "}
+            {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
+            <InfoTooltip
+              ariaLabel={t("tooltips.shared.tco2ePerTreeAria")}
+              content={<p>{t("tooltips.shared.tco2ePerTree")}</p>}
+            />
+          </span>
+          <span className="text-sm text-text-secondary">
+            {defaultHorizonYears} {t("common.years")}
+          </span>
+        </CardContent>
+      </Card>
 
       {/* Area Map */}
       <Card>
         <CardHeader>
           <h3 className="font-medium flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-primary" />{" "}
-            {t("map.title")}
+            <MapPin className="h-4 w-4 text-primary" /> {t("map.title")}
+            {availableCount > 0 && (
+              <span className="text-sm font-normal text-text-secondary">
+                ({t("profile.treesPlanted")}: {plantedCount}/{availableCount})
+              </span>
+            )}
           </h3>
         </CardHeader>
         <CardContent className="p-0">
@@ -465,13 +476,15 @@ export function AreaDetailPage() {
       </Card>
 
       {/* Plant Trees Button */}
-      {isAuthenticated && (area.ownerUserId === userId || isAdmin) && (pendingCount?.pending ?? 0) > 0 && (
-        <div className="flex">
-          <Button onClick={() => navigate(`/areas/${areaId}/plant-trees`)}>
-            <TreePine className="h-4 w-4 mr-1.5" /> {t("map.plantTrees")}
-          </Button>
-        </div>
-      )}
+      {isAuthenticated &&
+        (area.ownerUserId === userId || isAdmin) &&
+        (pendingCount?.pending ?? 0) > 0 && (
+          <div className="flex">
+            <Button onClick={() => navigate(`/areas/${areaId}/plant-trees`)}>
+              <TreePine className="h-4 w-4 mr-1.5" /> {t("map.plantTrees")}
+            </Button>
+          </div>
+        )}
 
       {/* Media Gallery */}
       <Card>
