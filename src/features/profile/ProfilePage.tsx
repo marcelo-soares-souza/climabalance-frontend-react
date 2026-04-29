@@ -16,7 +16,7 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { ApiError } from '@/lib/api-client';
 import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber } from '@/lib/format';
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
-import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp } from 'lucide-react';
+import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone } from 'lucide-react';
 
 function formatProfileTCO2e(value: number): { amount: string; unit: string } {
   const abs = Math.abs(value);
@@ -39,6 +39,7 @@ export function ProfilePage() {
   const isOwnProfile = !routeUserId || routeUserId === userId;
   const editProfilePath = targetUserId ? `/users/${targetUserId}/profile/edit` : '/profile/edit';
   const certificatesPath = targetUserId ? `/users/${targetUserId}/certificates` : '/profile/certificates';
+  const sessionsPath = targetUserId ? `/users/${targetUserId}/sessions` : '/profile/sessions';
 
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
@@ -241,6 +242,11 @@ export function ProfilePage() {
       <Button variant="outline" className="w-full" onClick={() => navigate(certificatesPath)}>
         <Award className="h-4 w-4 mr-2" /> {t('profile.viewCertificates')}
       </Button>
+      {isOwnProfile && (
+        <Button variant="outline" className="w-full" onClick={() => navigate(sessionsPath)}>
+          <Smartphone className="h-4 w-4 mr-2" /> {t('profile.sessions')}
+        </Button>
+      )}
     </div>
   );
 }

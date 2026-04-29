@@ -54,4 +54,16 @@ export const authService = {
   revokeToken() {
     return api.post<void>('/auth/revoke', {});
   },
+
+  listSessions() {
+    return api.get<{ id: string; createdAt: string; expiresAt: string; userAgent: string | null; hasFingerprint: boolean }[]>('/auth/sessions');
+  },
+
+  revokeSession(id: string) {
+    return api.delete<void>(`/auth/sessions/${id}`);
+  },
+
+  revokeAllSessions() {
+    return api.delete<void>('/auth/sessions');
+  },
 };

@@ -966,7 +966,15 @@
       "country": "País",
       "countryPlaceholder": "Digite para buscar...",
       "passport": "Passaporte"
-    }
+    },
+    "sessions": "Sessões Ativas",
+    "revokeAll": "Sair de todos",
+    "revokeAllTitle": "Sair de todos os dispositivos?",
+    "revokeAllConfirm": "Todas as sessões ativas serão revogadas. Você precisará fazer login novamente em todos os dispositivos.",
+    "sessionCreated": "Criada em",
+    "sessionExpires": "Expira em",
+    "unknownDevice": "Dispositivo desconhecido",
+    "noSessions": "Nenhuma sessão ativa"
   },
   "certificates": {
     "title": "Certificados",

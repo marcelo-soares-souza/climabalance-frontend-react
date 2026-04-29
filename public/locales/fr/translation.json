@@ -966,7 +966,15 @@
       "country": "Pays",
       "countryPlaceholder": "Tapez pour rechercher...",
       "passport": "Passeport"
-    }
+    },
+    "sessions": "Sessions Actives",
+    "revokeAll": "Se déconnecter partout",
+    "revokeAllTitle": "Se déconnecter de tous les appareils ?",
+    "revokeAllConfirm": "Toutes les sessions actives seront révoquées. Vous devrez vous reconnecter sur chaque appareil.",
+    "sessionCreated": "Créée",
+    "sessionExpires": "Expire",
+    "unknownDevice": "Appareil inconnu",
+    "noSessions": "Aucune session active"
   },
   "certificates": {
     "title": "Certificats",

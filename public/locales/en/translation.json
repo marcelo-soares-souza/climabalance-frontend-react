@@ -966,7 +966,15 @@
       "country": "Country",
       "countryPlaceholder": "Type to search...",
       "passport": "Passport"
-    }
+    },
+    "sessions": "Active Sessions",
+    "revokeAll": "Log out everywhere",
+    "revokeAllTitle": "Log out of all devices?",
+    "revokeAllConfirm": "All active sessions will be revoked. You will need to log in again on every device.",
+    "sessionCreated": "Created",
+    "sessionExpires": "Expires",
+    "unknownDevice": "Unknown device",
+    "noSessions": "No active sessions"
   },
   "certificates": {
     "title": "Certificates",

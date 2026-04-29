@@ -45,6 +45,7 @@ import { CompensationHistoryPage } from '@/features/compensation/HistoryPage';
 import { ProfilePage } from '@/features/profile/ProfilePage';
 import { ProfileEditPage } from '@/features/profile/ProfileEditPage';
 import { CertificatesPage } from '@/features/profile/CertificatesPage';
+import { SessionsPage } from '@/features/profile/SessionsPage';
 
 // Admin
 import { AdminUsersPage } from '@/features/admin/AdminUsersPage';
@@ -171,6 +172,14 @@ export const router = createBrowserRouter([
       {
         path: '/users/:userId/certificates',
         element: <AuthGuard><UserScopeGuard><CertificatesPage /></UserScopeGuard></AuthGuard>,
+      },
+      {
+        path: '/profile/sessions',
+        element: <AuthGuard><SessionsPage /></AuthGuard>,
+      },
+      {
+        path: '/users/:userId/sessions',
+        element: <AuthGuard><UserScopeGuard><SessionsPage /></UserScopeGuard></AuthGuard>,
       },
       { path: '/areas/:areaId/plant-trees', element: <AuthGuard roles={['producer', 'administrator']}><TreePlantingPage /></AuthGuard> },
       { path: '/areas/:areaId', element: <AreaDetailPage /> },
