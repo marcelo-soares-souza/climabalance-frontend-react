@@ -81,9 +81,9 @@
       "roleIndividual": "Particulier",
       "roleIndividualDescription": "Pour un usage personnel, le soutien de projets et le suivi de votre impact individuel.",
       "roleLegalEntity": "Personne morale",
-      "roleLegalEntityDescription": "Pour les entreprises et organisations qui souhaitent g\u00e9rer leur impact, leur soutien et leurs certificats institutionnels.",
+      "roleLegalEntityDescription": "Pour les entreprises et organisations qui souhaitent gérer leur impact, leur soutien et leurs certificats institutionnels.",
       "roleProducer": "Producteur",
-      "roleProducerDescription": "Pour les responsables de zones et de projets \u00e9cologiques qui souhaitent enregistrer, mettre \u00e0 jour et recevoir du soutien.",
+      "roleProducerDescription": "Pour les responsables de zones et de projets écologiques qui souhaitent enregistrer, mettre à jour et recevoir du soutien.",
       "rolePlaceholder": "Sélectionnez un type de compte",
       "humanCheckLabel": "Réponse",
       "humanCheckPlaceholder": "Saisissez votre réponse",
@@ -200,7 +200,7 @@
       "certificatesAction": "Certificats",
       "certificatesDescription": "Voir vos certificats de compensation",
       "myAreas": "Mes Zones",
-      "noAreas": "Aucune zone enregistr\u00e9e",
+      "noAreas": "Aucune zone enregistrée",
       "noAreasDescription": "Enregistrez des projets de restauration et recevez du soutien pour planter des arbres"
     }
   },
@@ -274,11 +274,26 @@
       "forWho": "Idéal pour les utilisateurs individuels et les soutiens.",
       "steps": {
         "title": "Comment cela fonctionne",
-        "step1": { "title": "Créer un compte", "description": "Inscrivez-vous comme particulier." },
-        "step2": { "title": "Calculer l'empreinte", "description": "Renseignez vos données d'émissions." },
-        "step3": { "title": "Explorer les zones", "description": "Voyez les zones et projets sur la carte." },
-        "step4": { "title": "Compenser", "description": "Choisissez votre soutien et finalisez la compensation." },
-        "step5": { "title": "Suivre", "description": "Consultez historique, certificats et impact." }
+        "step1": {
+          "title": "Créer un compte",
+          "description": "Inscrivez-vous comme particulier."
+        },
+        "step2": {
+          "title": "Calculer l'empreinte",
+          "description": "Renseignez vos données d'émissions."
+        },
+        "step3": {
+          "title": "Explorer les zones",
+          "description": "Voyez les zones et projets sur la carte."
+        },
+        "step4": {
+          "title": "Compenser",
+          "description": "Choisissez votre soutien et finalisez la compensation."
+        },
+        "step5": {
+          "title": "Suivre",
+          "description": "Consultez historique, certificats et impact."
+        }
       },
       "features": {
         "title": "Ce que vous pouvez faire",
@@ -300,11 +315,26 @@
       "forWho": "Idéal pour les entreprises, coopératives et institutions.",
       "steps": {
         "title": "Comment cela fonctionne",
-        "step1": { "title": "Créer un compte", "description": "Inscrivez-vous comme personne morale." },
-        "step2": { "title": "Calculer les émissions", "description": "Utilisez le calculateur pour votre activité." },
-        "step3": { "title": "Définir le soutien", "description": "Choisissez des projets alignés avec vos objectifs." },
-        "step4": { "title": "Compenser", "description": "Réalisez des opérations de compensation." },
-        "step5": { "title": "Documenter", "description": "Suivez résultats et certificats." }
+        "step1": {
+          "title": "Créer un compte",
+          "description": "Inscrivez-vous comme personne morale."
+        },
+        "step2": {
+          "title": "Calculer les émissions",
+          "description": "Utilisez le calculateur pour votre activité."
+        },
+        "step3": {
+          "title": "Définir le soutien",
+          "description": "Choisissez des projets alignés avec vos objectifs."
+        },
+        "step4": {
+          "title": "Compenser",
+          "description": "Réalisez des opérations de compensation."
+        },
+        "step5": {
+          "title": "Documenter",
+          "description": "Suivez résultats et certificats."
+        }
       },
       "features": {
         "title": "Ce que vous pouvez faire",
@@ -326,11 +356,26 @@
       "forWho": "Idéal pour les producteurs et responsables de zones.",
       "steps": {
         "title": "Comment cela fonctionne",
-        "step1": { "title": "Créer un compte", "description": "Inscrivez-vous comme producteur." },
-        "step2": { "title": "Enregistrer une zone", "description": "Renseignez données, localisation et capacité." },
-        "step3": { "title": "Ajouter des preuves", "description": "Ajoutez médias et informations de soutien." },
-        "step4": { "title": "Soumettre à l'audit", "description": "Envoyez la zone pour révision." },
-        "step5": { "title": "Recevoir du soutien", "description": "Une fois la zone active, le producteur reçoit les transferts des contributions, déduction faite des frais de la plateforme." }
+        "step1": {
+          "title": "Créer un compte",
+          "description": "Inscrivez-vous comme producteur."
+        },
+        "step2": {
+          "title": "Enregistrer une zone",
+          "description": "Renseignez données, localisation et capacité."
+        },
+        "step3": {
+          "title": "Ajouter des preuves",
+          "description": "Ajoutez médias et informations de soutien."
+        },
+        "step4": {
+          "title": "Soumettre à l'audit",
+          "description": "Envoyez la zone pour révision."
+        },
+        "step5": {
+          "title": "Recevoir du soutien",
+          "description": "Une fois la zone active, le producteur reçoit les transferts des contributions, déduction faite des frais de la plateforme."
+        }
       },
       "features": {
         "title": "Ce que vous pouvez faire",
@@ -395,7 +440,7 @@
       }
     },
     "footer": {
-      "lastUpdatedLabel": "Derni\u00e8re mise \u00e0 jour"
+      "lastUpdatedLabel": "Dernière mise à jour"
     }
   },
   "onboarding": {
@@ -529,9 +574,9 @@
       "domesticShort": "Domestique Court-Courrier",
       "domesticLong": "Domestique Long-Courrier",
       "international": "International",
-      "domesticEconomy": "Domestique - \u00c9conomique",
+      "domesticEconomy": "Domestique - Économique",
       "domesticBusiness": "Domestique - Affaires",
-      "internationalEconomy": "International - \u00c9conomique",
+      "internationalEconomy": "International - Économique",
       "internationalBusiness": "International - Affaires"
     },
     "scope1": {
@@ -676,12 +721,13 @@
     "locate": {
       "title": "Afficher ma position"
     },
-    "treesPlanted": "arbres plant\u00e9s",
+    "treesPlanted": "arbres plantés",
     "plantTrees": "Planter des Arbres",
-    "plantTreesHint": "Cliquez sur la carte pour ajouter un point pour chaque arbre plant\u00e9. Cliquez sur un point pour le supprimer.",
-    "clearTreesTitle": "Effacer les arbres plant\u00e9s ?",
-    "clearTreesConfirm": "Tous les arbres plant\u00e9s dans cette zone seront supprim\u00e9s. Cette action est irr\u00e9versible.",
-    "noAreas": "Aucune zone disponible pour le moment"
+    "plantTreesHint": "Cliquez sur la carte pour ajouter un point pour chaque arbre planté. Cliquez sur un point pour le supprimer.",
+    "clearTreesTitle": "Effacer les arbres plantés ?",
+    "clearTreesConfirm": "Tous les arbres plantés dans cette zone seront supprimés. Cette action est irréversible.",
+    "noAreas": "Aucune zone disponible pour le moment",
+    "treesCompensated": "arbres compensés"
   },
   "area": {
     "available": "Disponible",
@@ -697,14 +743,14 @@
     "anonymousContributor": "Contributeur",
     "ownerEmail": "Responsable (e-mail)",
     "media": "Médias de la zone",
-    "mediaEmpty": "Aucune photo ou vid\u00e9o envoy\u00e9e pour le moment.",
+    "mediaEmpty": "Aucune photo ou vidéo envoyée pour le moment.",
     "mediaLightbox": {
       "title": "Aperçu de l'image",
       "open": "Ouvrir l'image en grande taille",
       "close": "Fermer l'aperçu"
     },
-    "uploadMedia": "T\u00e9l\u00e9charger",
-    "uploadMediaError": "\u00c9chec du t\u00e9l\u00e9chargement du fichier. Veuillez r\u00e9essayer.",
+    "uploadMedia": "Télécharger",
+    "uploadMediaError": "Échec du téléchargement du fichier. Veuillez réessayer.",
     "compensateNow": "Compenser maintenant",
     "status": {
       "draft": "Brouillon",
@@ -755,22 +801,22 @@
     },
     "deleteConfirm": {
       "title": "Supprimer la zone",
-      "message": "Voulez-vous vraiment supprimer cette zone ? Les m\u00e9dias associ\u00e9s seront aussi supprim\u00e9s.",
-      "error": "\u00c9chec de la suppression de la zone. Veuillez r\u00e9essayer."
+      "message": "Voulez-vous vraiment supprimer cette zone ? Les médias associés seront aussi supprimés.",
+      "error": "Échec de la suppression de la zone. Veuillez réessayer."
     },
     "submitConfirm": {
-      "title": "Soumettre \u00e0 l'audit",
-      "message": "Cette zone sera soumise \u00e0 l'examen d'un analyste. Vous ne pourrez pas la modifier tant que l'audit ne sera pas termin\u00e9.",
+      "title": "Soumettre à l'audit",
+      "message": "Cette zone sera soumise à l'examen d'un analyste. Vous ne pourrez pas la modifier tant que l'audit ne sera pas terminé.",
       "notesLabel": "Notes (facultatif)",
       "notesPlaceholder": "Ajoutez des notes pour l'auditeur...",
-      "error": "\u00c9chec de la soumission de la zone \u00e0 l'audit. Veuillez r\u00e9essayer."
+      "error": "Échec de la soumission de la zone à l'audit. Veuillez réessayer."
     },
     "suspendConfirm": {
       "title": "Suspendre la zone",
-      "message": "Suspendre cette zone emp\u00eachera les nouvelles compensations. Les compensations existantes ne seront pas affect\u00e9es.",
+      "message": "Suspendre cette zone empêchera les nouvelles compensations. Les compensations existantes ne seront pas affectées.",
       "reasonLabel": "Motif (facultatif)",
       "reasonPlaceholder": "Motif de la suspension...",
-      "error": "\u00c9chec de la suspension de la zone. Veuillez r\u00e9essayer."
+      "error": "Échec de la suspension de la zone. Veuillez réessayer."
     }
   },
   "areas": {
@@ -853,7 +899,7 @@
   "compensations": {
     "title": "Historique des Compensations",
     "empty": "Aucune compensation pour le moment.",
-    "emptyDescription": "Vos compensations appara\u00eetront ici apr\u00e8s avoir compens\u00e9 votre empreinte carbone.",
+    "emptyDescription": "Vos compensations apparaîtront ici après avoir compensé votre empreinte carbone.",
     "page": "Page {{page}}"
   },
   "checkout": {
@@ -900,7 +946,7 @@
     "birthDate": "Date de naissance",
     "address": "Adresse",
     "memberSince": "Membre depuis",
-    "lastLogin": "Derni\u00e8re connexion :",
+    "lastLogin": "Dernière connexion :",
     "changePassword": "Changer le mot de passe",
     "oldPassword": "Mot de passe actuel",
     "newPassword": "Nouveau mot de passe",
@@ -924,22 +970,22 @@
   },
   "certificates": {
     "title": "Certificats",
-    "empty": "Aucun certificat \u00e9mis pour le moment.",
-    "emptyDescription": "Les certificats sont \u00e9mis apr\u00e8s une compensation r\u00e9ussie",
+    "empty": "Aucun certificat émis pour le moment.",
+    "emptyDescription": "Les certificats sont émis après une compensation réussie",
     "validate": {
       "title": "Valider le Certificat",
-      "description": "Entrez le num\u00e9ro du certificat et le hash de v\u00e9rification pour valider son authenticit\u00e9.",
-      "certificateNumber": "Num\u00e9ro du Certificat",
+      "description": "Entrez le numéro du certificat et le hash de vérification pour valider son authenticité.",
+      "certificateNumber": "Numéro du Certificat",
       "certificateNumberPlaceholder": "Ex : CERT-2025-001",
-      "hash": "Hash de V\u00e9rification",
+      "hash": "Hash de Vérification",
       "hashPlaceholder": "Ex : abc123def456...",
       "submit": "Valider",
       "valid": "Certificat Valide",
       "validDescription": "Ce certificat est authentique et valide.",
       "invalid": "Certificat Invalide",
-      "invalidDescription": "Ce certificat n'a pas pu \u00eatre v\u00e9rifi\u00e9.",
-      "issuedAt": "\u00c9mis le",
-      "error": "Certificat introuvable ou donn\u00e9es invalides. V\u00e9rifiez et r\u00e9essayez."
+      "invalidDescription": "Ce certificat n'a pas pu être vérifié.",
+      "issuedAt": "Émis le",
+      "error": "Certificat introuvable ou données invalides. Vérifiez et réessayez."
     }
   },
   "audit": {
@@ -970,8 +1016,8 @@
       "email": "E-mail",
       "status": "Statut",
       "roles": "Rôles",
-      "createdAt": "Cr\u00e9\u00e9 le",
-      "lastLogin": "Derni\u00e8re connexion",
+      "createdAt": "Créé le",
+      "lastLogin": "Dernière connexion",
       "locale": "Langue",
       "searchPlaceholder": "Rechercher par e-mail",
       "empty": "Aucun utilisateur trouvé.",

@@ -72,8 +72,8 @@
       "subtitle": "Regístrate para acceder a la plataforma",
       "submit": "Crear cuenta",
       "hasAccount": "Ya tienes cuenta?",
-      "needHelpChoosingRole": "¿A\u00fan tienes dudas sobre el tipo de cuenta?",
-      "howToUseLink": "Mira c\u00f3mo usar la plataforma",
+      "needHelpChoosingRole": "¿Aún tienes dudas sobre el tipo de cuenta?",
+      "howToUseLink": "Mira cómo usar la plataforma",
       "login": "Iniciar sesión",
       "role": "Tipo de cuenta",
       "roleHelpAria": "Ayuda sobre tipos de cuenta",
@@ -152,7 +152,7 @@
     "certificates": "Certificados",
     "compensations": "Contribuciones",
     "validateCertificate": "Validar Certificado",
-    "myAreas": "Mis \u00c1reas",
+    "myAreas": "Mis Áreas",
     "areas": "Áreas Disponibles",
     "account": "Cuenta",
     "audit": "Auditoría",
@@ -175,7 +175,7 @@
       "inDevelopment": "Proyecto en desarrollo",
       "getStarted": "Comenzar",
       "exploreMap": "Explorar Mapa",
-      "howToUse": "C\u00f3mo usar la plataforma",
+      "howToUse": "Cómo usar la plataforma",
       "learnMore": "Sobre el proyecto",
       "step1Title": "Calcula tu Huella",
       "step1Description": "Responde preguntas simples sobre tu consumo para calcular tus emisiones de CO2.",
@@ -274,11 +274,26 @@
       "forWho": "Ideal para usuarios individuales y apoyadores.",
       "steps": {
         "title": "Cómo funciona",
-        "step1": { "title": "Crear cuenta", "description": "Regístrate como persona física." },
-        "step2": { "title": "Calcular huella", "description": "Completa tus datos de emisiones." },
-        "step3": { "title": "Explorar áreas", "description": "Ve áreas y proyectos en el mapa." },
-        "step4": { "title": "Compensar", "description": "Elige cómo apoyar y completa la compensación." },
-        "step5": { "title": "Seguir", "description": "Consulta historial, certificados e impacto." }
+        "step1": {
+          "title": "Crear cuenta",
+          "description": "Regístrate como persona física."
+        },
+        "step2": {
+          "title": "Calcular huella",
+          "description": "Completa tus datos de emisiones."
+        },
+        "step3": {
+          "title": "Explorar áreas",
+          "description": "Ve áreas y proyectos en el mapa."
+        },
+        "step4": {
+          "title": "Compensar",
+          "description": "Elige cómo apoyar y completa la compensación."
+        },
+        "step5": {
+          "title": "Seguir",
+          "description": "Consulta historial, certificados e impacto."
+        }
       },
       "features": {
         "title": "Qué puedes hacer",
@@ -300,11 +315,26 @@
       "forWho": "Ideal para negocios, cooperativas e instituciones.",
       "steps": {
         "title": "Cómo funciona",
-        "step1": { "title": "Crear cuenta", "description": "Regístrate como persona jurídica." },
-        "step2": { "title": "Calcular emisiones", "description": "Usa la calculadora para tu operación." },
-        "step3": { "title": "Definir apoyo", "description": "Elige proyectos alineados con tus objetivos." },
-        "step4": { "title": "Compensar", "description": "Realiza operaciones de compensación." },
-        "step5": { "title": "Documentar", "description": "Sigue resultados y certificados." }
+        "step1": {
+          "title": "Crear cuenta",
+          "description": "Regístrate como persona jurídica."
+        },
+        "step2": {
+          "title": "Calcular emisiones",
+          "description": "Usa la calculadora para tu operación."
+        },
+        "step3": {
+          "title": "Definir apoyo",
+          "description": "Elige proyectos alineados con tus objetivos."
+        },
+        "step4": {
+          "title": "Compensar",
+          "description": "Realiza operaciones de compensación."
+        },
+        "step5": {
+          "title": "Documentar",
+          "description": "Sigue resultados y certificados."
+        }
       },
       "features": {
         "title": "Qué puedes hacer",
@@ -326,11 +356,26 @@
       "forWho": "Ideal para productores y responsables de áreas.",
       "steps": {
         "title": "Cómo funciona",
-        "step1": { "title": "Crear cuenta", "description": "Regístrate como productor." },
-        "step2": { "title": "Registrar área", "description": "Completa datos, ubicación y capacidad." },
-        "step3": { "title": "Agregar evidencias", "description": "Sube medios e información de apoyo." },
-        "step4": { "title": "Enviar a auditoría", "description": "Envía el área para revisión." },
-        "step5": { "title": "Recibir apoyo", "description": "Con el área activa, el productor recibe transferencias de las contribuciones, descontada la tasa de la plataforma." }
+        "step1": {
+          "title": "Crear cuenta",
+          "description": "Regístrate como productor."
+        },
+        "step2": {
+          "title": "Registrar área",
+          "description": "Completa datos, ubicación y capacidad."
+        },
+        "step3": {
+          "title": "Agregar evidencias",
+          "description": "Sube medios e información de apoyo."
+        },
+        "step4": {
+          "title": "Enviar a auditoría",
+          "description": "Envía el área para revisión."
+        },
+        "step5": {
+          "title": "Recibir apoyo",
+          "description": "Con el área activa, el productor recibe transferencias de las contribuciones, descontada la tasa de la plataforma."
+        }
       },
       "features": {
         "title": "Qué puedes hacer",
@@ -395,7 +440,7 @@
       }
     },
     "footer": {
-      "lastUpdatedLabel": "\u00daltima actualizaci\u00f3n"
+      "lastUpdatedLabel": "Última actualización"
     }
   },
   "onboarding": {
@@ -526,12 +571,12 @@
       "classFirst": "Primera Clase",
       "tip": "Si no realizaste ningún vuelo durante el período, puedes omitir este paso",
       "cardTitle": "Vuelo {{index}}",
-      "domesticShort": "Dom\u00e9stico Corta Distancia",
-      "domesticLong": "Dom\u00e9stico Larga Distancia",
+      "domesticShort": "Doméstico Corta Distancia",
+      "domesticLong": "Doméstico Larga Distancia",
       "international": "Internacional",
-      "domesticEconomy": "Dom\u00e9stico - Econ\u00f3mica",
-      "domesticBusiness": "Dom\u00e9stico - Ejecutiva",
-      "internationalEconomy": "Internacional - Econ\u00f3mica",
+      "domesticEconomy": "Doméstico - Económica",
+      "domesticBusiness": "Doméstico - Ejecutiva",
+      "internationalEconomy": "Internacional - Económica",
       "internationalBusiness": "Internacional - Ejecutiva"
     },
     "scope1": {
@@ -674,14 +719,15 @@
       "loadFailed": "Error al cargar el mapa"
     },
     "locate": {
-      "title": "Mostrar mi ubicaci\u00f3n"
+      "title": "Mostrar mi ubicación"
     },
     "treesPlanted": "árboles plantados",
     "plantTrees": "Plantar Árboles",
     "plantTreesHint": "Haga clic en el mapa para añadir un punto por cada árbol plantado. Haga clic en un punto para eliminarlo.",
     "clearTreesTitle": "¿Limpiar árboles plantados?",
     "clearTreesConfirm": "Todos los árboles plantados en esta área serán eliminados. Esta acción no se puede deshacer.",
-    "noAreas": "No hay áreas disponibles en este momento"
+    "noAreas": "No hay áreas disponibles en este momento",
+    "treesCompensated": "árboles compensadas"
   },
   "area": {
     "available": "Disponible",
@@ -697,14 +743,14 @@
     "anonymousContributor": "Colaborador",
     "ownerEmail": "Responsable (correo)",
     "media": "Medios del área",
-    "mediaEmpty": "Todav\u00eda no hay fotos o videos enviados.",
+    "mediaEmpty": "Todavía no hay fotos o videos enviados.",
     "mediaLightbox": {
       "title": "Vista previa de imagen",
       "open": "Abrir imagen en mayor tamaño",
       "close": "Cerrar vista previa"
     },
     "uploadMedia": "Subir",
-    "uploadMediaError": "Error al subir el archivo. Int\u00e9ntelo de nuevo.",
+    "uploadMediaError": "Error al subir el archivo. Inténtelo de nuevo.",
     "compensateNow": "Compensar ahora",
     "status": {
       "draft": "Borrador",
@@ -726,9 +772,9 @@
       "status": "Estado",
       "pickOnMap": "Seleccionar punto en el mapa",
       "mapHint": "Haz clic en el mapa para definir latitud y longitud automáticamente.",
-      "country": "Pa\u00eds",
-      "selectCountry": "Selecciona un pa\u00eds",
-      "selectCountryFirst": "Selecciona un pa\u00eds primero",
+      "country": "País",
+      "selectCountry": "Selecciona un país",
+      "selectCountryFirst": "Selecciona un país primero",
       "state": "Estado",
       "city": "Ciudad",
       "biome": "Bioma",
@@ -754,23 +800,23 @@
       "delete": "Eliminar área"
     },
     "deleteConfirm": {
-      "title": "Eliminar \u00e1rea",
-      "message": "\u00bfEst\u00e1 seguro de que desea eliminar esta \u00e1rea? Los medios asociados tambi\u00e9n se eliminar\u00e1n.",
-      "error": "Error al eliminar el \u00e1rea. Int\u00e9ntelo de nuevo."
+      "title": "Eliminar área",
+      "message": "¿Está seguro de que desea eliminar esta área? Los medios asociados también se eliminarán.",
+      "error": "Error al eliminar el área. Inténtelo de nuevo."
     },
     "submitConfirm": {
-      "title": "Enviar a Auditor\u00eda",
-      "message": "Esta \u00e1rea ser\u00e1 enviada para revisi\u00f3n por un analista. No podr\u00e1 editarla hasta que la auditor\u00eda se complete.",
+      "title": "Enviar a Auditoría",
+      "message": "Esta área será enviada para revisión por un analista. No podrá editarla hasta que la auditoría se complete.",
       "notesLabel": "Notas (opcional)",
       "notesPlaceholder": "Agregue notas para el auditor...",
-      "error": "Error al enviar el \u00e1rea para auditor\u00eda. Int\u00e9ntelo de nuevo."
+      "error": "Error al enviar el área para auditoría. Inténtelo de nuevo."
     },
     "suspendConfirm": {
-      "title": "Suspender \u00c1rea",
-      "message": "Suspender esta \u00e1rea impedir\u00e1 nuevas compensaciones. Las compensaciones existentes no se ver\u00e1n afectadas.",
+      "title": "Suspender Área",
+      "message": "Suspender esta área impedirá nuevas compensaciones. Las compensaciones existentes no se verán afectadas.",
       "reasonLabel": "Motivo (opcional)",
-      "reasonPlaceholder": "Motivo de la suspensi\u00f3n...",
-      "error": "Error al suspender el \u00e1rea. Int\u00e9ntelo de nuevo."
+      "reasonPlaceholder": "Motivo de la suspensión...",
+      "error": "Error al suspender el área. Inténtelo de nuevo."
     }
   },
   "areas": {
@@ -852,12 +898,12 @@
   },
   "compensations": {
     "title": "Historial de Compensaciones",
-    "empty": "A\u00fan no hay compensaciones.",
-    "emptyDescription": "Sus compensaciones aparecer\u00e1n aqu\u00ed despu\u00e9s de compensar su huella de carbono.",
-    "page": "P\u00e1gina {{page}}"
+    "empty": "Aún no hay compensaciones.",
+    "emptyDescription": "Sus compensaciones aparecerán aquí después de compensar su huella de carbono.",
+    "page": "Página {{page}}"
   },
   "checkout": {
-    "title": "Checkout de compensaci\u00f3n",
+    "title": "Checkout de compensación",
     "summary": "Resumen del Pedido",
     "area": "Área seleccionada",
     "mode": "Modalidad",
@@ -900,7 +946,7 @@
     "birthDate": "Fecha de nacimiento",
     "address": "Dirección",
     "memberSince": "Miembro desde",
-    "lastLogin": "\u00daltimo acceso:",
+    "lastLogin": "Último acceso:",
     "changePassword": "Cambiar contraseña",
     "oldPassword": "Contraseña actual",
     "newPassword": "Nueva contraseña",
@@ -924,22 +970,22 @@
   },
   "certificates": {
     "title": "Certificados",
-    "empty": "A\u00fan no hay certificados emitidos.",
-    "emptyDescription": "Los certificados se emiten despu\u00e9s de una compensaci\u00f3n exitosa",
+    "empty": "Aún no hay certificados emitidos.",
+    "emptyDescription": "Los certificados se emiten después de una compensación exitosa",
     "validate": {
       "title": "Validar Certificado",
-      "description": "Ingrese el n\u00famero del certificado y el hash de verificaci\u00f3n para validar su autenticidad.",
-      "certificateNumber": "N\u00famero del Certificado",
+      "description": "Ingrese el número del certificado y el hash de verificación para validar su autenticidad.",
+      "certificateNumber": "Número del Certificado",
       "certificateNumberPlaceholder": "Ej: CERT-2025-001",
-      "hash": "Hash de Verificaci\u00f3n",
+      "hash": "Hash de Verificación",
       "hashPlaceholder": "Ej: abc123def456...",
       "submit": "Validar",
-      "valid": "Certificado V\u00e1lido",
-      "validDescription": "Este certificado es aut\u00e9ntico y v\u00e1lido.",
-      "invalid": "Certificado Inv\u00e1lido",
+      "valid": "Certificado Válido",
+      "validDescription": "Este certificado es auténtico y válido.",
+      "invalid": "Certificado Inválido",
       "invalidDescription": "Este certificado no pudo ser verificado.",
       "issuedAt": "Emitido el",
-      "error": "Certificado no encontrado o datos inv\u00e1lidos. Verifique e int\u00e9ntelo de nuevo."
+      "error": "Certificado no encontrado o datos inválidos. Verifique e inténtelo de nuevo."
     }
   },
   "audit": {
@@ -971,7 +1017,7 @@
       "status": "Estado",
       "roles": "Funciones",
       "createdAt": "Creado el",
-      "lastLogin": "\u00daltimo acceso",
+      "lastLogin": "Último acceso",
       "locale": "Idioma",
       "searchPlaceholder": "Buscar por correo",
       "empty": "No se encontraron usuarios.",
@@ -1008,23 +1054,23 @@
     "accessDeniedDescription": "No tienes permiso para acceder a esta página.",
     "generic": "Algo salió mal. Inténtalo de nuevo.",
     "network": "Error de conexión. Verifica tu internet e inténtalo de nuevo.",
-    "request.failed": "No fue posible completar la solicitud. Int\u00e9ntalo de nuevo.",
-    "request.invalid_body": "Los datos enviados son inv\u00e1lidos. Revisa los campos e int\u00e9ntalo de nuevo.",
-    "request.validation_failed": "Algunos campos son inv\u00e1lidos. Revisa los datos enviados e int\u00e9ntalo de nuevo.",
-    "request.invalid_content_type": "Formato de env\u00edo inv\u00e1lido. Int\u00e9ntalo de nuevo.",
+    "request.failed": "No fue posible completar la solicitud. Inténtalo de nuevo.",
+    "request.invalid_body": "Los datos enviados son inválidos. Revisa los campos e inténtalo de nuevo.",
+    "request.validation_failed": "Algunos campos son inválidos. Revisa los datos enviados e inténtalo de nuevo.",
+    "request.invalid_content_type": "Formato de envío inválido. Inténtalo de nuevo.",
     "request.payload_too_large": "El archivo o contenido enviado es demasiado grande.",
-    "request.rate_limited": "Demasiados intentos en poco tiempo. Espera un momento e int\u00e9ntalo de nuevo.",
-    "auth.login.error": "No fue posible iniciar sesi\u00f3n. Int\u00e9ntalo de nuevo.",
-    "auth.invalid_credentials": "Correo o contrase\u00f1a inv\u00e1lidos.",
-    "auth.email_not_confirmed": "Tu correo a\u00fan no ha sido confirmado.",
-    "auth.user_not_active": "Tu cuenta no est\u00e1 activa en este momento.",
-    "auth.invalid_token": "El token informado es inv\u00e1lido.",
+    "request.rate_limited": "Demasiados intentos en poco tiempo. Espera un momento e inténtalo de nuevo.",
+    "auth.login.error": "No fue posible iniciar sesión. Inténtalo de nuevo.",
+    "auth.invalid_credentials": "Correo o contraseña inválidos.",
+    "auth.email_not_confirmed": "Tu correo aún no ha sido confirmado.",
+    "auth.user_not_active": "Tu cuenta no está activa en este momento.",
+    "auth.invalid_token": "El token informado es inválido.",
     "auth.token_expired": "El token informado ha expirado.",
     "auth.token_already_used": "Este token ya fue utilizado.",
-    "auth.required": "Debes iniciar sesi\u00f3n para continuar.",
-    "auth.invalid": "Tu sesi\u00f3n es inv\u00e1lida. Inicia sesi\u00f3n nuevamente.",
-    "auth.unauthorized": "Tu sesi\u00f3n expir\u00f3. Inicia sesi\u00f3n nuevamente.",
-    "auth.forbidden": "No tienes permiso para realizar esta acci\u00f3n.",
+    "auth.required": "Debes iniciar sesión para continuar.",
+    "auth.invalid": "Tu sesión es inválida. Inicia sesión nuevamente.",
+    "auth.unauthorized": "Tu sesión expiró. Inicia sesión nuevamente.",
+    "auth.forbidden": "No tienes permiso para realizar esta acción.",
     "auth.register.error": "Error al crear cuenta. Inténtalo de nuevo.",
     "auth.register.passwordMismatch": "Las contraseñas no coinciden.",
     "auth.register.humanCheckInvalid": "Respuesta incorrecta. Inténtalo de nuevo.",
@@ -1035,7 +1081,7 @@
     "auth.confirmEmail.error": "Error al confirmar correo. Verifica el token.",
     "auth.confirmEmail.resendError": "Error al reenviar correo. Inténtalo de nuevo.",
     "user.email_already_exists": "Ya existe una cuenta registrada con este correo.",
-    "database.error": "Ocurri\u00f3 un error interno al procesar tu solicitud.",
+    "database.error": "Ocurrió un error interno al procesar tu solicitud.",
     "payment.error": "Error al procesar pago. Inténtalo de nuevo.",
     "compensation.error": "Error al registrar compensación. Inténtalo de nuevo.",
     "footprint.error.createFailed": "Error al crear cálculo. Inténtalo de nuevo.",

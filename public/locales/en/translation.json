@@ -274,11 +274,26 @@
       "forWho": "Best for individual users and supporters.",
       "steps": {
         "title": "How it works",
-        "step1": { "title": "Create account", "description": "Sign up as an individual." },
-        "step2": { "title": "Calculate footprint", "description": "Fill in your emissions data." },
-        "step3": { "title": "Explore areas", "description": "See areas and projects on the map." },
-        "step4": { "title": "Offset", "description": "Choose how to support and complete the compensation." },
-        "step5": { "title": "Track", "description": "Review history, certificates, and impact." }
+        "step1": {
+          "title": "Create account",
+          "description": "Sign up as an individual."
+        },
+        "step2": {
+          "title": "Calculate footprint",
+          "description": "Fill in your emissions data."
+        },
+        "step3": {
+          "title": "Explore areas",
+          "description": "See areas and projects on the map."
+        },
+        "step4": {
+          "title": "Offset",
+          "description": "Choose how to support and complete the compensation."
+        },
+        "step5": {
+          "title": "Track",
+          "description": "Review history, certificates, and impact."
+        }
       },
       "features": {
         "title": "What you can do",
@@ -300,11 +315,26 @@
       "forWho": "Best for businesses, cooperatives, and institutions.",
       "steps": {
         "title": "How it works",
-        "step1": { "title": "Create account", "description": "Sign up as a legal entity." },
-        "step2": { "title": "Calculate emissions", "description": "Use the calculator for your operation." },
-        "step3": { "title": "Define support", "description": "Choose projects aligned with your goals." },
-        "step4": { "title": "Offset", "description": "Complete compensation operations." },
-        "step5": { "title": "Document", "description": "Track results and certificates." }
+        "step1": {
+          "title": "Create account",
+          "description": "Sign up as a legal entity."
+        },
+        "step2": {
+          "title": "Calculate emissions",
+          "description": "Use the calculator for your operation."
+        },
+        "step3": {
+          "title": "Define support",
+          "description": "Choose projects aligned with your goals."
+        },
+        "step4": {
+          "title": "Offset",
+          "description": "Complete compensation operations."
+        },
+        "step5": {
+          "title": "Document",
+          "description": "Track results and certificates."
+        }
       },
       "features": {
         "title": "What you can do",
@@ -326,11 +356,26 @@
       "forWho": "Best for producers and area managers.",
       "steps": {
         "title": "How it works",
-        "step1": { "title": "Create account", "description": "Sign up as a producer." },
-        "step2": { "title": "Register area", "description": "Fill in data, location, and capacity." },
-        "step3": { "title": "Add evidence", "description": "Upload media and supporting information." },
-        "step4": { "title": "Submit for audit", "description": "Send the area for review." },
-        "step5": { "title": "Receive support", "description": "Once active, the producer receives contribution transfers minus the platform fee." }
+        "step1": {
+          "title": "Create account",
+          "description": "Sign up as a producer."
+        },
+        "step2": {
+          "title": "Register area",
+          "description": "Fill in data, location, and capacity."
+        },
+        "step3": {
+          "title": "Add evidence",
+          "description": "Upload media and supporting information."
+        },
+        "step4": {
+          "title": "Submit for audit",
+          "description": "Send the area for review."
+        },
+        "step5": {
+          "title": "Receive support",
+          "description": "Once active, the producer receives contribution transfers minus the platform fee."
+        }
       },
       "features": {
         "title": "What you can do",
@@ -681,7 +726,8 @@
     "plantTreesHint": "Click on the map to add a point for each planted tree. Click a point to remove it.",
     "clearTreesTitle": "Clear planted trees?",
     "clearTreesConfirm": "All planted trees in this area will be removed. This action cannot be undone.",
-    "noAreas": "No areas available right now"
+    "noAreas": "No areas available right now",
+    "treesCompensated": "trees compensated"
   },
   "area": {
     "available": "Available",
@@ -850,7 +896,6 @@
       "missingDescription": "Complete a payment to see the report or check your compensation history."
     }
   },
-
   "compensations": {
     "title": "Compensation History",
     "empty": "No compensations yet.",

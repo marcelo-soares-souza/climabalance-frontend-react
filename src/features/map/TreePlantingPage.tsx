@@ -19,6 +19,7 @@ import { PageSkeleton } from "@/components/LoadingSkeleton";
 import { ErrorBanner } from "@/components/ErrorBanner";
 import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
 import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
+import { getCountryName } from "@/lib/countries";
 import { ArrowLeft, TreePine, Check, Trash2, MapPin } from "lucide-react";
 
 const treeIcon = L.divIcon({
@@ -88,6 +89,7 @@ export function TreePlantingPage() {
     mutationFn: (pts: { latitude: number; longitude: number }[]) =>
       plantedTreesService.savePlantedTrees(areaId!, pts),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["areas"] });
       queryClient.invalidateQueries({ queryKey: ["planted-trees", areaId] });
       queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaId] });
       navigate(`/areas/${areaId}`);
@@ -100,6 +102,7 @@ export function TreePlantingPage() {
   const clearMutation = useMutation({
     mutationFn: () => plantedTreesService.clearPlantedTrees(areaId!),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["areas"] });
       queryClient.invalidateQueries({ queryKey: ["planted-trees", areaId] });
       queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaId] });
       setShowClearConfirm(false);
@@ -157,7 +160,7 @@ export function TreePlantingPage() {
           <h1 className="text-2xl font-bold">{t("map.plantTrees")}</h1>
           <p className="text-text-secondary text-sm mt-1">
             <MapPin className="h-3.5 w-3.5 inline" /> {area.name}
-            {area.city && area.state && <> &mdash; {area.city}, {area.state}</>}
+            {area.city && area.state && <> &mdash; {[area.city, area.state, getCountryName(area.countryCode ?? '')].filter(Boolean).join(', ')}</>}
           </p>
         </div>
       </div>

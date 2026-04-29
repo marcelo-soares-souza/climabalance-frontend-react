@@ -18,12 +18,12 @@ import { Card } from "@/components/ui/Card";
 import { LocateControl } from "@/components/leaflet/LocateControl";
 import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
 import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
-import { formatCurrency, formatKgCO2e } from "@/lib/format";
+import { formatCurrency, formatKgCO2e, formatNumber } from "@/lib/format";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useCompensationStore } from "@/stores/compensation-store";
 import { useAuth } from "@/hooks/use-auth";
-import { countries } from "@/lib/countries";
-import { MapPin } from "lucide-react";
+import { countries, getCountryName } from "@/lib/countries";
+import { MapPin, TreePine, Sprout } from "lucide-react";
 import type { Area } from "@/types/area";
 import type { LeafletEvent } from "leaflet";
 
@@ -147,7 +147,7 @@ function ClusterMarker({
             <div className="space-y-1.5">
               <p className="text-text-secondary text-sm">
                 <MapPin className="h-3.5 w-3.5 inline" />{" "}
-                {[area.city, area.state].filter(Boolean).join(", ") || "-"}
+                {[area.city, area.state, getCountryName(area.countryCode ?? "")].filter(Boolean).join(", ") || "-"}
               </p>
               {area.description && (
                 <p className="text-sm text-text-secondary line-clamp-4">
@@ -168,6 +168,22 @@ function ClusterMarker({
                   <span className="font-medium">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span>
                 </p>
               </div>
+              {(area.plantedTreesCount != null || area.totalCompensatedTreesCount != null) && (
+                <div className="flex gap-3 pt-1 text-xs text-text-secondary">
+                  {area.plantedTreesCount != null && (
+                    <span className="flex items-center gap-1">
+                      <TreePine className="h-3 w-3" />
+                      {t("map.treesPlanted")}: {formatNumber(area.plantedTreesCount, "pt-BR", 0)}
+                    </span>
+                  )}
+                  {area.totalCompensatedTreesCount != null && (
+                    <span className="flex items-center gap-1">
+                      <Sprout className="h-3 w-3" />
+                      {t("map.treesCompensated")}: {formatNumber(area.totalCompensatedTreesCount, "pt-BR", 0)}
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
             <div className="flex gap-2 mt-3">
               <Button
@@ -242,7 +258,7 @@ export function MapPage() {
   const selectedTotalTCO2e = hasProjectionContext ? requestedTCO2e : null;
 
   const { data: areas, isLoading } = useQuery({
-    queryKey: ["map-areas", { country: countryFilter }],
+    queryKey: ["areas", "map", { country: countryFilter }],
     queryFn: () => areasService.getMapAreas(),
   });
 

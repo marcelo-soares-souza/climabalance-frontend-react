@@ -42,6 +42,7 @@ import {
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { getCountryName } from "@/lib/countries";
 import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
 import {
   OSM_URL,
@@ -167,6 +168,7 @@ export function AreaDetailPage() {
       });
     },
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["areas"] });
       queryClient.invalidateQueries({ queryKey: ["areas", areaId, "media"] });
     },
   });
@@ -174,6 +176,7 @@ export function AreaDetailPage() {
   const deleteMediMutation = useMutation({
     mutationFn: (mediaId: string) => areasService.deleteAreaMedia(mediaId),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["areas"] });
       queryClient.invalidateQueries({ queryKey: ["areas", areaId, "media"] });
     },
   });
@@ -266,7 +269,7 @@ export function AreaDetailPage() {
           <h1 className="text-2xl font-bold">{area.name}</h1>
           <div className="flex items-center gap-2 mt-1 text-text-secondary">
             {/* <MapPin className="h-4 w-4" /> */}
-            <span>{[area.city, area.state].filter(Boolean).join(", ")}</span>
+            <span>{[area.city, area.state, getCountryName(area.countryCode ?? "")].filter(Boolean).join(", ")}</span>
           </div>
           {isAuthenticated && (
             <p className="text-sm text-text-secondary mt-1">

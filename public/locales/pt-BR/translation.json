@@ -1,13 +1,13 @@
 {
   "common": {
     "back": "Voltar",
-    "backToHome": "Voltar ao in\u00edcio",
+    "backToHome": "Voltar ao início",
     "cancel": "Cancelar",
     "confirm": "Confirmar",
     "save": "Salvar",
     "delete": "Excluir",
-    "next": "Pr\u00f3ximo",
-    "notFound": "N\u00e3o encontrado",
+    "next": "Próximo",
+    "notFound": "Não encontrado",
     "createdAt": "Criado em",
     "years": "anos",
     "details": "Detalhes",
@@ -60,105 +60,105 @@
     "newPassword": "Nova senha",
     "login": {
       "title": "Bem-vindo de volta",
-      "subtitle": "Acesse sua conta para gerenciar a\u00e7\u00f5es clim\u00e1ticas.",
+      "subtitle": "Acesse sua conta para gerenciar ações climáticas.",
       "submit": "Entrar",
       "forgotPassword": "Esqueci minha senha",
-      "noAccount": "N\u00e3o tem conta?",
+      "noAccount": "Não tem conta?",
       "register": "Criar uma conta",
-      "error": "E-mail ou senha inv\u00e1lidos."
+      "error": "E-mail ou senha inválidos."
     },
     "register": {
       "title": "Criar conta",
       "subtitle": "Cadastre-se para acessar a plataforma",
       "submit": "Criar conta",
-      "hasAccount": "J\u00e1 tem conta?",
-      "needHelpChoosingRole": "Ainda em d\u00favida sobre o tipo de conta?",
+      "hasAccount": "Já tem conta?",
+      "needHelpChoosingRole": "Ainda em dúvida sobre o tipo de conta?",
       "howToUseLink": "Veja como usar a plataforma",
       "login": "Entrar",
       "role": "Tipo de conta",
       "roleHelpAria": "Ajuda sobre tipos de conta",
       "roleHelpTitle": "Escolha o tipo que melhor representa seu uso da plataforma.",
-      "roleIndividual": "Pessoa F\u00edsica",
+      "roleIndividual": "Pessoa Física",
       "roleIndividualDescription": "Para uso pessoal, apoio a projetos e acompanhamento do seu impacto individual.",
-      "roleLegalEntity": "Pessoa Jur\u00eddica",
-      "roleLegalEntityDescription": "Para empresas e organiza\u00e7\u00f5es que desejam gerenciar impacto, apoio e certificados institucionais.",
+      "roleLegalEntity": "Pessoa Jurídica",
+      "roleLegalEntityDescription": "Para empresas e organizações que desejam gerenciar impacto, apoio e certificados institucionais.",
       "roleProducer": "Produtor",
-      "roleProducerDescription": "Para respons\u00e1veis por \u00e1reas e projetos ecol\u00f3gicos que desejam cadastrar, atualizar e receber apoio.",
+      "roleProducerDescription": "Para responsáveis por áreas e projetos ecológicos que desejam cadastrar, atualizar e receber apoio.",
       "rolePlaceholder": "Selecione um tipo de conta",
       "humanCheckLabel": "Resposta",
       "humanCheckPlaceholder": "Digite sua resposta",
       "humanCheckReload": "Trocar pergunta",
       "humanCheckLoading": "Carregando pergunta...",
       "humanCheckInvalid": "Resposta incorreta. Tente novamente.",
-      "humanCheckLoadError": "N\u00e3o foi poss\u00edvel carregar a verifica\u00e7\u00e3o humana. Tente novamente.",
+      "humanCheckLoadError": "Não foi possível carregar a verificação humana. Tente novamente.",
       "privacyAgreement": "Ao criar uma conta, você concorda com a nossa",
       "error": "Erro ao criar conta. Tente novamente."
     },
     "passwordReset": {
       "title": "Recuperar senha",
-      "description": "Informe seu e-mail para receber um link de redefini\u00e7\u00e3o.",
+      "description": "Informe seu e-mail para receber um link de redefinição.",
       "submit": "Enviar link",
       "backToLogin": "Voltar ao login",
-      "haveToken": "J\u00e1 tenho um token",
+      "haveToken": "Já tenho um token",
       "sentTitle": "Link enviado",
-      "sentMessage": "Se o e-mail existir, enviaremos instru\u00e7\u00f5es para redefinir a senha.",
+      "sentMessage": "Se o e-mail existir, enviaremos instruções para redefinir a senha.",
       "confirmTitle": "Definir nova senha",
       "confirmSubmit": "Atualizar senha",
       "successTitle": "Senha atualizada",
-      "successMessage": "Senha atualizada com sucesso. Fa\u00e7a login novamente.",
+      "successMessage": "Senha atualizada com sucesso. Faça login novamente.",
       "confirmError": "Erro ao redefinir senha. Verifique o token e tente novamente."
     },
     "confirmEmail": {
       "title": "Confirmar e-mail",
-      "description": "Cole o token que voc\u00ea recebeu por e-mail",
-      "token": "Token de confirma\u00e7\u00e3o",
+      "description": "Cole o token que você recebeu por e-mail",
+      "token": "Token de confirmação",
       "tokenPlaceholder": "Cole o token aqui",
-      "noToken": "N\u00e3o recebeu o token?",
+      "noToken": "Não recebeu o token?",
       "submit": "Confirmar e-mail",
-      "resend": "Reenviar e-mail de confirma\u00e7\u00e3o",
-      "resent": "E-mail de confirma\u00e7\u00e3o reenviado com sucesso!",
+      "resend": "Reenviar e-mail de confirmação",
+      "resent": "E-mail de confirmação reenviado com sucesso!",
       "successTitle": "E-mail confirmado!",
-      "successMessage": "E-mail confirmado com sucesso! Voc\u00ea j\u00e1 pode fazer login.",
+      "successMessage": "E-mail confirmado com sucesso! Você já pode fazer login.",
       "error": "Erro ao confirmar e-mail. Verifique o token.",
       "resendError": "Erro ao reenviar e-mail. Tente novamente."
     },
     "validation": {
       "generic": {
-        "required": "{{field}} \u00e9 obrigat\u00f3rio.",
-        "tooShort": "{{field}} est\u00e1 muito curto.",
-        "tooLong": "{{field}} est\u00e1 muito longo.",
-        "invalid": "{{field}} \u00e9 inv\u00e1lido."
+        "required": "{{field}} é obrigatório.",
+        "tooShort": "{{field}} está muito curto.",
+        "tooLong": "{{field}} está muito longo.",
+        "invalid": "{{field}} é inválido."
       },
       "email": {
-        "invalidEmail": "Informe um e-mail v\u00e1lido."
+        "invalidEmail": "Informe um e-mail válido."
       },
       "password": {
         "tooShort": "A senha deve ter pelo menos 8 caracteres."
       },
       "passwordConfirm": {
-        "mismatch": "As senhas informadas n\u00e3o coincidem."
+        "mismatch": "As senhas informadas não coincidem."
       }
     }
   },
   "nav": {
-    "home": "In\u00edcio",
-    "map": "Mapa de \u00c1reas",
+    "home": "Início",
+    "map": "Mapa de Áreas",
     "about": "Sobre o Projeto",
     "howToUse": "Como usar",
-    "privacyPolicy": "Pol\u00edtica de Privacidade",
+    "privacyPolicy": "Política de Privacidade",
     "calculator": "Calculadora de Pegada",
-    "history": "Hist\u00f3rico de Pegadas",
+    "history": "Histórico de Pegadas",
     "profile": "Meu perfil",
     "certificates": "Certificados",
-    "compensations": "Contribui\u00e7\u00f5es",
+    "compensations": "Contribuições",
     "validateCertificate": "Validar Certificado",
-    "myAreas": "Minhas \u00c1reas",
-    "areas": "\u00c1reas Dispon\u00edveis",
+    "myAreas": "Minhas Áreas",
+    "areas": "Áreas Disponíveis",
     "account": "Conta",
     "audit": "Auditoria",
-    "pendingAreas": "\u00c1reas Pendentes",
-    "admin": "Administra\u00e7\u00e3o",
-    "users": "Usu\u00e1rios (Admin)",
+    "pendingAreas": "Áreas Pendentes",
+    "admin": "Administração",
+    "users": "Usuários (Admin)",
     "auditLog": "Auditoria (Admin)",
     "publicAreas": "Ver Áreas",
     "login": "Entrar",
@@ -170,38 +170,38 @@
   "home": {
     "welcome": {
       "title": "Bem-vindo ao ClimaBalance",
-      "description": "Plataforma de impacto clim\u00e1tico voltada ao apoio de projetos de Agroecologia, Agrofloresta, Permacultura, Agricultura Org\u00e2nica e outras iniciativas de produ\u00e7\u00e3o agr\u00edcola ecol\u00f3gica.",
-      "transferNotice": "O valor das contribui\u00e7\u00f5es \u00e9 transferido ao produtor respons\u00e1vel pela \u00e1rea, com cobran\u00e7a de uma taxa para manuten\u00e7\u00e3o e evolu\u00e7\u00e3o da plataforma.",
+      "description": "Plataforma de impacto climático voltada ao apoio de projetos de Agroecologia, Agrofloresta, Permacultura, Agricultura Orgânica e outras iniciativas de produção agrícola ecológica.",
+      "transferNotice": "O valor das contribuições é transferido ao produtor responsável pela área, com cobrança de uma taxa para manutenção e evolução da plataforma.",
       "inDevelopment": "Projeto em desenvolvimento",
-      "getStarted": "Come\u00e7ar",
+      "getStarted": "Começar",
       "exploreMap": "Explorar Mapa",
       "howToUse": "Como usar a plataforma",
       "learnMore": "Sobre o projeto",
       "step1Title": "Calcule sua Pegada",
-      "step1Description": "Responda perguntas simples sobre seu consumo para calcular suas emiss\u00f5es de CO\u2082.",
-      "step2Title": "Apoie projetos ecol\u00f3gicos",
-      "step2Description": "Direcione apoio para iniciativas auditadas de restaura\u00e7\u00e3o, agroecologia e produ\u00e7\u00e3o agr\u00edcola sustent\u00e1vel.",
+      "step1Description": "Responda perguntas simples sobre seu consumo para calcular suas emissões de CO₂.",
+      "step2Title": "Apoie projetos ecológicos",
+      "step2Description": "Direcione apoio para iniciativas auditadas de restauração, agroecologia e produção agrícola sustentável.",
       "step3Title": "Receba Certificados",
-      "step3Description": "Obtenha certificados e acompanhe contribui\u00e7\u00f5es com rastreabilidade e transpar\u00eancia."
+      "step3Description": "Obtenha certificados e acompanhe contribuições com rastreabilidade e transparência."
     },
     "dashboard": {
-      "title": "Seu Impacto Clim\u00e1tico",
+      "title": "Seu Impacto Climático",
       "totalFootprint": "Pegada Total",
       "balance": "Saldo",
       "compensated": "Compensado",
-      "treesPlanted": "\u00c1rvores Plantadas",
+      "treesPlanted": "Árvores Plantadas",
       "recentActivity": "Atividade Recente",
       "noActivity": "Nenhuma atividade recente",
-      "noActivityDescription": "Seus c\u00e1lculos e compensa\u00e7\u00f5es recentes aparecer\u00e3o aqui",
+      "noActivityDescription": "Seus cálculos e compensações recentes aparecerão aqui",
       "calculateAction": "Calcular Pegada",
-      "calculateDescription": "Calcule suas emiss\u00f5es de CO\u2082",
+      "calculateDescription": "Calcule suas emissões de CO₂",
       "compensateAction": "Compensar Agora",
-      "compensateDescription": "Apoie projetos de agroecologia, agrofloresta e restaura\u00e7\u00e3o",
+      "compensateDescription": "Apoie projetos de agroecologia, agrofloresta e restauração",
       "certificatesAction": "Certificados",
-      "certificatesDescription": "Veja seus certificados de compensa\u00e7\u00e3o",
-      "myAreas": "Minhas \u00c1reas",
-      "noAreas": "Nenhuma \u00e1rea cadastrada",
-      "noAreasDescription": "Cadastre projetos de restaura\u00e7\u00e3o e receba apoio para plantar \u00e1rvores"
+      "certificatesDescription": "Veja seus certificados de compensação",
+      "myAreas": "Minhas Áreas",
+      "noAreas": "Nenhuma área cadastrada",
+      "noAreasDescription": "Cadastre projetos de restauração e receba apoio para plantar árvores"
     }
   },
   "about": {
@@ -274,11 +274,26 @@
       "forWho": "Ideal para usuários individuais e apoiadores.",
       "steps": {
         "title": "Como funciona",
-        "step1": { "title": "Criar conta", "description": "Cadastre-se como pessoa física." },
-        "step2": { "title": "Calcular pegada", "description": "Preencha seus dados de emissões." },
-        "step3": { "title": "Explorar áreas", "description": "Veja áreas e projetos no mapa." },
-        "step4": { "title": "Compensar", "description": "Escolha como apoiar e concluir a compensação." },
-        "step5": { "title": "Acompanhar", "description": "Consulte histórico, certificados e impacto." }
+        "step1": {
+          "title": "Criar conta",
+          "description": "Cadastre-se como pessoa física."
+        },
+        "step2": {
+          "title": "Calcular pegada",
+          "description": "Preencha seus dados de emissões."
+        },
+        "step3": {
+          "title": "Explorar áreas",
+          "description": "Veja áreas e projetos no mapa."
+        },
+        "step4": {
+          "title": "Compensar",
+          "description": "Escolha como apoiar e concluir a compensação."
+        },
+        "step5": {
+          "title": "Acompanhar",
+          "description": "Consulte histórico, certificados e impacto."
+        }
       },
       "features": {
         "title": "O que pode fazer",
@@ -300,11 +315,26 @@
       "forWho": "Ideal para negócios, cooperativas e instituições.",
       "steps": {
         "title": "Como funciona",
-        "step1": { "title": "Criar conta", "description": "Cadastre-se como pessoa jurídica." },
-        "step2": { "title": "Calcular emissões", "description": "Use a calculadora para sua operação." },
-        "step3": { "title": "Definir apoio", "description": "Escolha projetos alinhados aos seus objetivos." },
-        "step4": { "title": "Compensar", "description": "Realize operações de compensação." },
-        "step5": { "title": "Documentar", "description": "Acompanhe resultados e certificados." }
+        "step1": {
+          "title": "Criar conta",
+          "description": "Cadastre-se como pessoa jurídica."
+        },
+        "step2": {
+          "title": "Calcular emissões",
+          "description": "Use a calculadora para sua operação."
+        },
+        "step3": {
+          "title": "Definir apoio",
+          "description": "Escolha projetos alinhados aos seus objetivos."
+        },
+        "step4": {
+          "title": "Compensar",
+          "description": "Realize operações de compensação."
+        },
+        "step5": {
+          "title": "Documentar",
+          "description": "Acompanhe resultados e certificados."
+        }
       },
       "features": {
         "title": "O que pode fazer",
@@ -326,11 +356,26 @@
       "forWho": "Ideal para produtores e responsáveis por áreas.",
       "steps": {
         "title": "Como funciona",
-        "step1": { "title": "Criar conta", "description": "Cadastre-se como produtor." },
-        "step2": { "title": "Cadastrar área", "description": "Preencha dados, localização e capacidade." },
-        "step3": { "title": "Adicionar evidências", "description": "Inclua mídias e informações de apoio." },
-        "step4": { "title": "Enviar para auditoria", "description": "Submeta a área para revisão." },
-        "step5": { "title": "Receber apoio", "description": "Com a área ativa, o produtor recebe transferências das contribuições, descontada a taxa da plataforma." }
+        "step1": {
+          "title": "Criar conta",
+          "description": "Cadastre-se como produtor."
+        },
+        "step2": {
+          "title": "Cadastrar área",
+          "description": "Preencha dados, localização e capacidade."
+        },
+        "step3": {
+          "title": "Adicionar evidências",
+          "description": "Inclua mídias e informações de apoio."
+        },
+        "step4": {
+          "title": "Enviar para auditoria",
+          "description": "Submeta a área para revisão."
+        },
+        "step5": {
+          "title": "Receber apoio",
+          "description": "Com a área ativa, o produtor recebe transferências das contribuições, descontada a taxa da plataforma."
+        }
       },
       "features": {
         "title": "O que pode fazer",
@@ -350,73 +395,73 @@
   "privacy": {
     "hero": {
       "eyebrow": "Privacidade e dados",
-      "title": "Pol\u00edtica de Privacidade",
-      "description": "Esta pol\u00edtica descreve quais informa\u00e7\u00f5es o ClimaBalance pode armazenar, como elas s\u00e3o utilizadas, por quanto tempo podem ser mantidas e quais direitos voc\u00ea pode exercer sobre seus dados.",
-      "versionDateLabel": "Vers\u00e3o desta pol\u00edtica",
+      "title": "Política de Privacidade",
+      "description": "Esta política descreve quais informações o ClimaBalance pode armazenar, como elas são utilizadas, por quanto tempo podem ser mantidas e quais direitos você pode exercer sobre seus dados.",
+      "versionDateLabel": "Versão desta política",
       "versionDate": "24 de abril de 2026",
-      "effectiveDate": "Esta pol\u00edtica pode ser atualizada conforme o projeto evolui."
+      "effectiveDate": "Esta política pode ser atualizada conforme o projeto evolui."
     },
     "summary": {
       "label": "Resumo",
-      "title": "Tratamos dados pessoais apenas para operar a plataforma com transpar\u00eancia, seguran\u00e7a e rastreabilidade.",
-      "paragraph1": "O ClimaBalance pode armazenar informa\u00e7\u00f5es de conta, perfil, c\u00e1lculos de pegada, compensa\u00e7\u00f5es, certificados, m\u00eddias enviadas e registros t\u00e9cnicos necess\u00e1rios para autentica\u00e7\u00e3o, seguran\u00e7a, auditoria e preven\u00e7\u00e3o de fraude.",
-      "paragraph2": "Nosso compromisso \u00e9 coletar o m\u00ednimo necess\u00e1rio para o funcionamento do servi\u00e7o, proteger essas informa\u00e7\u00f5es e respeitar pedidos de exclus\u00e3o, anonimiza\u00e7\u00e3o e revoga\u00e7\u00e3o sempre que isso for tecnicamente e legalmente poss\u00edvel."
+      "title": "Tratamos dados pessoais apenas para operar a plataforma com transparência, segurança e rastreabilidade.",
+      "paragraph1": "O ClimaBalance pode armazenar informações de conta, perfil, cálculos de pegada, compensações, certificados, mídias enviadas e registros técnicos necessários para autenticação, segurança, auditoria e prevenção de fraude.",
+      "paragraph2": "Nosso compromisso é coletar o mínimo necessário para o funcionamento do serviço, proteger essas informações e respeitar pedidos de exclusão, anonimização e revogação sempre que isso for tecnicamente e legalmente possível."
     },
     "sections": {
       "dataCollected": {
-        "title": "Quais informa\u00e7\u00f5es podem ser salvas",
-        "paragraph1": "Podemos salvar dados de cadastro como e-mail, senha protegida, idioma, perfil do usu\u00e1rio, informa\u00e7\u00f5es opcionais de identifica\u00e7\u00e3o e dados de contato. Tamb\u00e9m podemos armazenar informa\u00e7\u00f5es fornecidas por voc\u00ea no perfil, incluindo nome de exibi\u00e7\u00e3o, documento, telefone, data de nascimento e endere\u00e7o.",
-        "paragraph2": "Tamb\u00e9m podem ser salvos dados operacionais, como c\u00e1lculos de pegada, emiss\u00f5es informadas, sele\u00e7\u00e3o de \u00e1reas ou projetos, compensa\u00e7\u00f5es realizadas, certificados emitidos, m\u00eddias enviadas, registros de login, tokens de sess\u00e3o, logs de auditoria e endere\u00e7os IP usados para seguran\u00e7a."
+        "title": "Quais informações podem ser salvas",
+        "paragraph1": "Podemos salvar dados de cadastro como e-mail, senha protegida, idioma, perfil do usuário, informações opcionais de identificação e dados de contato. Também podemos armazenar informações fornecidas por você no perfil, incluindo nome de exibição, documento, telefone, data de nascimento e endereço.",
+        "paragraph2": "Também podem ser salvos dados operacionais, como cálculos de pegada, emissões informadas, seleção de áreas ou projetos, compensações realizadas, certificados emitidos, mídias enviadas, registros de login, tokens de sessão, logs de auditoria e endereços IP usados para segurança."
       },
       "howUsed": {
-        "title": "Como essas informa\u00e7\u00f5es s\u00e3o usadas",
-        "paragraph1": "Usamos essas informa\u00e7\u00f5es para criar e manter sua conta, autenticar acesso, permitir o uso das funcionalidades da plataforma, calcular pegada de carbono, registrar compensa\u00e7\u00f5es, emitir certificados, exibir hist\u00f3rico de atividades e dar suporte ao funcionamento geral do servi\u00e7o.",
-        "paragraph2": "Os dados tamb\u00e9m podem ser utilizados para seguran\u00e7a, preven\u00e7\u00e3o de abuso, resposta a incidentes, rastreabilidade operacional, auditoria de fluxos e melhoria t\u00e9cnica do produto."
+        "title": "Como essas informações são usadas",
+        "paragraph1": "Usamos essas informações para criar e manter sua conta, autenticar acesso, permitir o uso das funcionalidades da plataforma, calcular pegada de carbono, registrar compensações, emitir certificados, exibir histórico de atividades e dar suporte ao funcionamento geral do serviço.",
+        "paragraph2": "Os dados também podem ser utilizados para segurança, prevenção de abuso, resposta a incidentes, rastreabilidade operacional, auditoria de fluxos e melhoria técnica do produto."
       },
       "sharing": {
-        "title": "Compartilhamento e exposi\u00e7\u00e3o de dados",
-        "paragraph1": "O ClimaBalance n\u00e3o tem como objetivo vender dados pessoais. Algumas informa\u00e7\u00f5es podem ser exibidas dentro da plataforma quando isso fizer parte do fluxo do produto, como nome p\u00fablico, projetos associados, certificados e registros necess\u00e1rios para comprova\u00e7\u00e3o de contribui\u00e7\u00f5es.",
-        "paragraph2": "Tamb\u00e9m podemos compartilhar dados com provedores t\u00e9cnicos estritamente necess\u00e1rios para hospedagem, armazenamento, e-mail, seguran\u00e7a ou opera\u00e7\u00f5es de pagamento, sempre dentro do necess\u00e1rio para prestar o servi\u00e7o."
+        "title": "Compartilhamento e exposição de dados",
+        "paragraph1": "O ClimaBalance não tem como objetivo vender dados pessoais. Algumas informações podem ser exibidas dentro da plataforma quando isso fizer parte do fluxo do produto, como nome público, projetos associados, certificados e registros necessários para comprovação de contribuições.",
+        "paragraph2": "Também podemos compartilhar dados com provedores técnicos estritamente necessários para hospedagem, armazenamento, e-mail, segurança ou operações de pagamento, sempre dentro do necessário para prestar o serviço."
       },
       "security": {
-        "title": "Seguran\u00e7a e prote\u00e7\u00e3o",
-        "paragraph1": "Adotamos medidas t\u00e9cnicas e organizacionais razo\u00e1veis para proteger os dados armazenados. Isso inclui autentica\u00e7\u00e3o, controle de acesso, registros de auditoria, prote\u00e7\u00e3o de senha e mecanismos de seguran\u00e7a para reduzir abuso automatizado e acesso indevido.",
-        "paragraph2": "Mesmo com esfor\u00e7os de prote\u00e7\u00e3o, nenhum sistema conectado \u00e0 internet pode garantir risco zero. Por isso, monitoramos eventos relevantes e podemos ajustar controles de seguran\u00e7a sempre que necess\u00e1rio."
+        "title": "Segurança e proteção",
+        "paragraph1": "Adotamos medidas técnicas e organizacionais razoáveis para proteger os dados armazenados. Isso inclui autenticação, controle de acesso, registros de auditoria, proteção de senha e mecanismos de segurança para reduzir abuso automatizado e acesso indevido.",
+        "paragraph2": "Mesmo com esforços de proteção, nenhum sistema conectado à internet pode garantir risco zero. Por isso, monitoramos eventos relevantes e podemos ajustar controles de segurança sempre que necessário."
       },
       "deletion": {
-        "title": "Exclus\u00e3o de conta, direito ao esquecimento e reten\u00e7\u00e3o",
-        "paragraph1": "Voc\u00ea pode solicitar exclus\u00e3o da conta e dos dados pessoais vinculados a ela. Quando aplic\u00e1vel, esses dados ser\u00e3o removidos, anonimizados ou deixados inacess\u00edveis, de acordo com a natureza da informa\u00e7\u00e3o e com as limita\u00e7\u00f5es t\u00e9cnicas e legais do servi\u00e7o.",
-        "paragraph2": "Alguns registros podem precisar ser mantidos por mais tempo para cumprir obriga\u00e7\u00f5es legais, seguran\u00e7a, preven\u00e7\u00e3o de fraude, integridade de certificados, comprova\u00e7\u00e3o de transa\u00e7\u00f5es ou consist\u00eancia de auditoria. Nesses casos, retemos apenas o que for estritamente necess\u00e1rio."
+        "title": "Exclusão de conta, direito ao esquecimento e retenção",
+        "paragraph1": "Você pode solicitar exclusão da conta e dos dados pessoais vinculados a ela. Quando aplicável, esses dados serão removidos, anonimizados ou deixados inacessíveis, de acordo com a natureza da informação e com as limitações técnicas e legais do serviço.",
+        "paragraph2": "Alguns registros podem precisar ser mantidos por mais tempo para cumprir obrigações legais, segurança, prevenção de fraude, integridade de certificados, comprovação de transações ou consistência de auditoria. Nesses casos, retemos apenas o que for estritamente necessário."
       },
       "rights": {
         "title": "Seus direitos",
-        "paragraph1": "Voc\u00ea pode solicitar acesso, corre\u00e7\u00e3o, atualiza\u00e7\u00e3o ou exclus\u00e3o de informa\u00e7\u00f5es pessoais fornecidas ao ClimaBalance, bem como revogar consentimentos quando esse tratamento depender deles.",
-        "paragraph2": "Pedidos relacionados a privacidade e dados podem ser tratados pelos canais de suporte e contato disponibilizados pelo projeto. Em alguns casos, poderemos solicitar verifica\u00e7\u00e3o adicional de identidade antes de executar a solicita\u00e7\u00e3o."
+        "paragraph1": "Você pode solicitar acesso, correção, atualização ou exclusão de informações pessoais fornecidas ao ClimaBalance, bem como revogar consentimentos quando esse tratamento depender deles.",
+        "paragraph2": "Pedidos relacionados a privacidade e dados podem ser tratados pelos canais de suporte e contato disponibilizados pelo projeto. Em alguns casos, poderemos solicitar verificação adicional de identidade antes de executar a solicitação."
       }
     },
     "footer": {
-      "lastUpdatedLabel": "\u00daltima atualiza\u00e7\u00e3o"
+      "lastUpdatedLabel": "Última atualização"
     }
   },
   "onboarding": {
     "skip": "Pular",
-    "next": "Pr\u00f3ximo",
-    "finish": "Come\u00e7ar",
+    "next": "Próximo",
+    "finish": "Começar",
     "step1": {
       "title": "Bem-vindo ao ClimaBalance",
       "description": "Calcule sua pegada de carbono e contribua para projetos ecológicos e regenerativos no Brasil"
     },
     "step2": {
-      "title": "Me\u00e7a Seu Impacto",
-      "description": "Responda perguntas simples sobre seu consumo de energia, transporte e consumo para calcular suas emiss\u00f5es de CO\u2082"
+      "title": "Meça Seu Impacto",
+      "description": "Responda perguntas simples sobre seu consumo de energia, transporte e consumo para calcular suas emissões de CO₂"
     },
     "step3": {
-      "title": "Compense Atrav\u00e9s de Projetos Regenerativos",
-      "description": "Apoie projetos verificados de agroecologia, agrofloresta, agricultura org\u00e2nica e restaura\u00e7\u00e3o ecol\u00f3gica"
+      "title": "Compense Através de Projetos Regenerativos",
+      "description": "Apoie projetos verificados de agroecologia, agrofloresta, agricultura orgânica e restauração ecológica"
     },
     "step4": {
       "title": "Acompanhe Seu Progresso",
-      "description": "Veja seu hist\u00f3rico de compensa\u00e7\u00e3o e acompanhe seu impacto positivo crescer ao longo do tempo"
+      "description": "Veja seu histórico de compensação e acompanhe seu impacto positivo crescer ao longo do tempo"
     }
   },
   "footprint": {
@@ -429,7 +474,7 @@
       "profile": "Perfil",
       "energy": "Energia",
       "transport": "Transporte",
-      "fuel": "Combust\u00edveis",
+      "fuel": "Combustíveis",
       "flights": "Voos",
       "scope1": "Escopo 1",
       "scope2": "Escopo 2",
@@ -438,7 +483,7 @@
     },
     "categories": {
       "energy": "Energia",
-      "fuel": "Combust\u00edveis",
+      "fuel": "Combustíveis",
       "transport": "Transporte",
       "flights": "Voos",
       "scope1": "Escopo 1",
@@ -449,155 +494,155 @@
       "label": "Qualidade dos Dados",
       "real": "Dados Reais",
       "estimated": "Estimado",
-      "standard": "Padr\u00e3o"
+      "standard": "Padrão"
     },
     "profile": {
       "typeLabel": "Tipo de Perfil",
-      "typeSubtitle": "Selecione o tipo de perfil para o c\u00e1lculo",
-      "individual": "Pessoa F\u00edsica",
-      "individualSubtitle": "Calcula emiss\u00f5es de consumo pessoal",
-      "legalEntity": "Pessoa Jur\u00eddica",
-      "legalEntitySubtitle": "Calcula emiss\u00f5es empresariais (Escopos 1, 2 e 3)",
-      "legal_entity": "Pessoa Jur\u00eddica"
+      "typeSubtitle": "Selecione o tipo de perfil para o cálculo",
+      "individual": "Pessoa Física",
+      "individualSubtitle": "Calcula emissões de consumo pessoal",
+      "legalEntity": "Pessoa Jurídica",
+      "legalEntitySubtitle": "Calcula emissões empresariais (Escopos 1, 2 e 3)",
+      "legal_entity": "Pessoa Jurídica"
     },
     "period": {
-      "label": "Per\u00edodo de C\u00e1lculo",
-      "subtitle": "Escolha o per\u00edodo que deseja calcular",
+      "label": "Período de Cálculo",
+      "subtitle": "Escolha o período que deseja calcular",
       "monthly": "Mensal",
-      "monthlySubtitle": "C\u00e1lculo para um m\u00eas espec\u00edfico",
+      "monthlySubtitle": "Cálculo para um mês específico",
       "annual": "Anual",
-      "annualSubtitle": "C\u00e1lculo para um ano completo",
-      "start": "In\u00edcio",
+      "annualSubtitle": "Cálculo para um ano completo",
+      "start": "Início",
       "end": "Fim"
     },
     "energy": {
       "title": "Consumo de Energia",
-      "description": "Informe seu consumo de energia el\u00e9trica no per\u00edodo",
-      "electricity": "Energia El\u00e9trica Residencial",
+      "description": "Informe seu consumo de energia elétrica no período",
+      "electricity": "Energia Elétrica Residencial",
       "kwhLabel": "Consumo (kWh)",
       "kwhHint": "Digite o consumo em kWh",
       "kwhHelper": "Encontre este valor na sua conta de luz",
-      "tip": "Dica: O consumo m\u00e9dio residencial no Brasil \u00e9 cerca de 150\u2013200 kWh por m\u00eas",
-      "naturalGas": "G\u00e1s Natural (m\u00b3)",
+      "tip": "Dica: O consumo médio residencial no Brasil é cerca de 150–200 kWh por mês",
+      "naturalGas": "Gás Natural (m³)",
       "lpg": "GLP"
     },
     "fuel": {
-      "title": "Consumo de Combust\u00edveis",
-      "description": "Informe o consumo de combust\u00edveis no per\u00edodo",
+      "title": "Consumo de Combustíveis",
+      "description": "Informe o consumo de combustíveis no período",
       "gasoline": "Gasolina",
       "ethanol": "Etanol",
       "diesel": "Diesel",
-      "naturalGas": "G\u00e1s Natural (m\u00b3)",
+      "naturalGas": "Gás Natural (m³)",
       "quantityLabel": "Quantidade (litros)",
-      "tip": "Voc\u00ea pode deixar em branco os combust\u00edveis que n\u00e3o utilizou"
+      "tip": "Você pode deixar em branco os combustíveis que não utilizou"
     },
     "transport": {
       "title": "Transporte Terrestre",
-      "description": "Informe a dist\u00e2ncia percorrida por cada modal no per\u00edodo",
-      "car": "Autom\u00f3vel",
+      "description": "Informe a distância percorrida por cada modal no período",
+      "car": "Automóvel",
       "carSmall": "Carro Pequeno",
       "carSmallSubtitle": "Ex: Gol, Onix, HB20",
-      "carMedium": "Carro M\u00e9dio",
+      "carMedium": "Carro Médio",
       "carMediumSubtitle": "Ex: Civic, Corolla, Cruze",
       "carLarge": "Carro Grande/SUV",
       "carLargeSubtitle": "Ex: Hilux, SW4, Compass",
       "motorcycle": "Motocicleta",
-      "bus": "\u00d4nibus",
-      "metro": "Metr\u00f4",
+      "bus": "Ônibus",
+      "metro": "Metrô",
       "train": "Trem",
       "otherModals": "Outros Modais",
-      "tip": "Informe apenas os modais que voc\u00ea utilizou. Os demais podem ficar em branco.",
-      "distanceLabel": "Dist\u00e2ncia (km)"
+      "tip": "Informe apenas os modais que você utilizou. Os demais podem ficar em branco.",
+      "distanceLabel": "Distância (km)"
     },
     "flights": {
-      "title": "Viagens A\u00e9reas",
-      "description": "Informe os voos realizados no per\u00edodo",
+      "title": "Viagens Aéreas",
+      "description": "Informe os voos realizados no período",
       "emptyTitle": "Nenhum voo adicionado",
-      "emptySubtitle": "Adicione os voos que voc\u00ea realizou no per\u00edodo",
+      "emptySubtitle": "Adicione os voos que você realizou no período",
       "addAction": "Adicionar Voo",
-      "distanceLabel": "Dist\u00e2ncia (km)",
-      "distanceHint": "Digite a dist\u00e2ncia do voo",
+      "distanceLabel": "Distância (km)",
+      "distanceHint": "Digite a distância do voo",
       "typeLabel": "Tipo de Voo",
-      "typeDomestic": "Dom\u00e9stico",
+      "typeDomestic": "Doméstico",
       "typeInternational": "Internacional",
       "classLabel": "Classe",
-      "classEconomy": "Econ\u00f4mica",
+      "classEconomy": "Econômica",
       "classBusiness": "Executiva",
       "classFirst": "Primeira",
-      "tip": "Se voc\u00ea n\u00e3o fez nenhum voo no per\u00edodo, pode pular esta etapa",
+      "tip": "Se você não fez nenhum voo no período, pode pular esta etapa",
       "cardTitle": "Voo {{index}}",
-      "domesticShort": "Dom\u00e9stico Curta Dist\u00e2ncia",
-      "domesticLong": "Dom\u00e9stico Longa Dist\u00e2ncia",
+      "domesticShort": "Doméstico Curta Distância",
+      "domesticLong": "Doméstico Longa Distância",
       "international": "Internacional",
-      "domesticEconomy": "Dom\u00e9stico - Econ\u00f4mica",
-      "domesticBusiness": "Dom\u00e9stico - Executiva",
-      "internationalEconomy": "Internacional - Econ\u00f4mica",
+      "domesticEconomy": "Doméstico - Econômica",
+      "domesticBusiness": "Doméstico - Executiva",
+      "internationalEconomy": "Internacional - Econômica",
       "internationalBusiness": "Internacional - Executiva"
     },
     "scope1": {
-      "title": "Escopo 1 \u2013 Emiss\u00f5es Diretas",
-      "description": "Emiss\u00f5es de fontes controladas diretamente pela empresa",
-      "whatIsTitle": "O que \u00e9 Escopo 1?",
-      "whatIsDescription": "Combust\u00e3o estacion\u00e1ria (geradores, caldeiras), combust\u00e3o m\u00f3vel (frota pr\u00f3pria), emiss\u00f5es fugitivas (ar-condicionado, refrigera\u00e7\u00e3o)",
-      "fuelFleet": "Combust\u00edveis \u2013 Frota Pr\u00f3pria",
-      "tip": "Deixe em branco os itens que n\u00e3o se aplicam \u00e0 sua empresa",
-      "stationaryCombustion": "Combust\u00e3o Estacion\u00e1ria",
-      "mobileCombustion": "Combust\u00e3o M\u00f3vel",
-      "fugitiveEmissions": "Emiss\u00f5es Fugitivas",
-      "processEmissions": "Emiss\u00f5es de Processos"
+      "title": "Escopo 1 – Emissões Diretas",
+      "description": "Emissões de fontes controladas diretamente pela empresa",
+      "whatIsTitle": "O que é Escopo 1?",
+      "whatIsDescription": "Combustão estacionária (geradores, caldeiras), combustão móvel (frota própria), emissões fugitivas (ar-condicionado, refrigeração)",
+      "fuelFleet": "Combustíveis – Frota Própria",
+      "tip": "Deixe em branco os itens que não se aplicam à sua empresa",
+      "stationaryCombustion": "Combustão Estacionária",
+      "mobileCombustion": "Combustão Móvel",
+      "fugitiveEmissions": "Emissões Fugitivas",
+      "processEmissions": "Emissões de Processos"
     },
     "scope2": {
-      "title": "Escopo 2 \u2013 Energia Comprada",
-      "description": "Emiss\u00f5es indiretas do consumo de energia el\u00e9trica comprada",
-      "whatIsTitle": "O que \u00e9 Escopo 2?",
-      "whatIsDescription": "Emiss\u00f5es indiretas da gera\u00e7\u00e3o de energia el\u00e9trica comprada e consumida pela empresa. Inclui todas as unidades (escrit\u00f3rios, f\u00e1bricas, lojas, etc.)",
-      "electricityLabel": "Energia El\u00e9trica",
+      "title": "Escopo 2 – Energia Comprada",
+      "description": "Emissões indiretas do consumo de energia elétrica comprada",
+      "whatIsTitle": "O que é Escopo 2?",
+      "whatIsDescription": "Emissões indiretas da geração de energia elétrica comprada e consumida pela empresa. Inclui todas as unidades (escritórios, fábricas, lojas, etc.)",
+      "electricityLabel": "Energia Elétrica",
       "consumptionLabel": "Consumo Total (kWh)",
       "consumptionHint": "Digite o consumo total de energia",
-      "consumptionHelper": "Some todas as contas de energia do per\u00edodo",
+      "consumptionHelper": "Some todas as contas de energia do período",
       "purchasedElectricity": "Eletricidade Comprada",
       "purchasedHeat": "Calor Comprado",
       "purchasedSteam": "Vapor Comprado"
     },
     "scope3": {
-      "title": "Escopo 3 \u2013 Cadeia de Valor",
-      "description": "Emiss\u00f5es indiretas da cadeia de valor da empresa",
-      "whatIsTitle": "O que \u00e9 Escopo 3?",
-      "whatIsDescription": "Emiss\u00f5es indiretas de atividades n\u00e3o controladas diretamente: log\u00edstica de produtos, deslocamento de funcion\u00e1rios, viagens corporativas, fornecedores, entre outros",
+      "title": "Escopo 3 – Cadeia de Valor",
+      "description": "Emissões indiretas da cadeia de valor da empresa",
+      "whatIsTitle": "O que é Escopo 3?",
+      "whatIsDescription": "Emissões indiretas de atividades não controladas diretamente: logística de produtos, deslocamento de funcionários, viagens corporativas, fornecedores, entre outros",
       "mainCategories": "Principais Categorias",
-      "freightLabel": "Log\u00edstica e Transporte de Cargas",
-      "employeeCommuteLabel": "Deslocamento de Funcion\u00e1rios",
+      "freightLabel": "Logística e Transporte de Cargas",
+      "employeeCommuteLabel": "Deslocamento de Funcionários",
       "businessTravelLabel": "Viagens Corporativas",
-      "tip": "Escopo 3 pode ser estimado. Deixe em branco as categorias que voc\u00ea n\u00e3o tem dados",
+      "tip": "Escopo 3 pode ser estimado. Deixe em branco as categorias que você não tem dados",
       "businessTravel": "Viagens Corporativas",
-      "employeeCommuting": "Deslocamento de Funcion\u00e1rios",
-      "purchasedGoods": "Bens e Servi\u00e7os Comprados",
-      "waste": "Res\u00edduos",
+      "employeeCommuting": "Deslocamento de Funcionários",
+      "purchasedGoods": "Bens e Serviços Comprados",
+      "waste": "Resíduos",
       "upstreamTransport": "Transporte Upstream"
     },
     "result": {
-      "title": "Resultado do C\u00e1lculo",
+      "title": "Resultado do Cálculo",
       "subtitle": "Sua pegada de carbono foi calculada",
-      "totalEmissions": "Total de Emiss\u00f5es",
+      "totalEmissions": "Total de Emissões",
       "breakdown": "Detalhamento por Categoria",
-      "breakdownEmpty": "Nenhum dado de detalhamento dispon\u00edvel",
+      "breakdownEmpty": "Nenhum dado de detalhamento disponível",
       "compensate": "Compensar Agora",
-      "compensateTitle": "Compense suas emiss\u00f5es!",
-      "compensateDescription": "Apoie projetos de reflorestamento certificados e neutralize sua pegada de carbono plantando \u00e1rvores nativas.",
-      "viewHistory": "Ver Hist\u00f3rico",
-      "chartTitle": "Distribui\u00e7\u00e3o de Emiss\u00f5es",
+      "compensateTitle": "Compense suas emissões!",
+      "compensateDescription": "Apoie projetos de reflorestamento certificados e neutralize sua pegada de carbono plantando árvores nativas.",
+      "viewHistory": "Ver Histórico",
+      "chartTitle": "Distribuição de Emissões",
       "saveDraft": "Salvar Rascunho",
-      "finalize": "Finalizar C\u00e1lculo",
-      "comparison": "Como Voc\u00ea se Compara?",
+      "finalize": "Finalizar Cálculo",
+      "comparison": "Como Você se Compara?",
       "you": "Seu Total",
-      "brazilAvg": "M\u00e9dia Nacional (Brasil)",
-      "globalAvg": "M\u00e9dia Global",
-      "belowAverage": "Abaixo da M\u00e9dia \u2013 Parab\u00e9ns!",
-      "aboveAverage": "Acima da M\u00e9dia"
+      "brazilAvg": "Média Nacional (Brasil)",
+      "globalAvg": "Média Global",
+      "belowAverage": "Abaixo da Média – Parabéns!",
+      "aboveAverage": "Acima da Média"
     },
     "category": {
       "energy": "Energia",
-      "fuel": "Combust\u00edveis",
+      "fuel": "Combustíveis",
       "transport": "Transporte",
       "flights": "Voos",
       "scope1": "Escopo 1",
@@ -605,66 +650,66 @@
       "scope3": "Escopo 3"
     },
     "history": {
-      "title": "Hist\u00f3rico de C\u00e1lculos",
-      "empty": "Voc\u00ea ainda n\u00e3o fez nenhum c\u00e1lculo",
-      "emptyDescription": "Voc\u00ea ainda n\u00e3o realizou nenhum c\u00e1lculo de pegada",
+      "title": "Histórico de Cálculos",
+      "empty": "Você ainda não fez nenhum cálculo",
+      "emptyDescription": "Você ainda não realizou nenhum cálculo de pegada",
       "startCalculation": "Iniciar Nova Calculadora",
       "newCalculation": "Nova Calculadora",
       "filter": "Filtrar",
-      "filterTitle": "Filtrar C\u00e1lculos",
+      "filterTitle": "Filtrar Cálculos",
       "filterApply": "Aplicar",
       "filterClear": "Limpar"
     },
     "detail": {
-      "title": "Detalhes do C\u00e1lculo",
-      "period": "Detalhes de Per\u00edodo",
+      "title": "Detalhes do Cálculo",
+      "period": "Detalhes de Período",
       "inputs": "Entradas registradas",
       "breakdown": "Desdobramento",
       "noInputs": "Nenhum input salvo",
-      "noBreakdown": "Sem desdobramento dispon\u00edvel",
-      "deleteTitle": "Confirmar Exclus\u00e3o",
-      "deleteMessage": "Tem certeza que deseja excluir este rascunho? Esta a\u00e7\u00e3o n\u00e3o pode ser desfeita.",
+      "noBreakdown": "Sem desdobramento disponível",
+      "deleteTitle": "Confirmar Exclusão",
+      "deleteMessage": "Tem certeza que deseja excluir este rascunho? Esta ação não pode ser desfeita.",
       "deleteAction": "Excluir rascunho",
-      "continueEditing": "Continuar Edi\u00e7\u00e3o"
+      "continueEditing": "Continuar Edição"
     },
     "status": {
       "draft": "Rascunho",
       "finalized": "Finalizado"
     },
     "error": {
-      "requiredField": "Campo obrigat\u00f3rio",
-      "invalidNumber": "Digite um n\u00famero v\u00e1lido",
+      "requiredField": "Campo obrigatório",
+      "invalidNumber": "Digite um número válido",
       "calculationFailed": "Erro ao calcular pegada",
       "saveFailed": "Erro ao salvar rascunho",
-      "loadFailed": "Erro ao carregar c\u00e1lculo",
-      "createFailed": "Erro ao criar c\u00e1lculo"
+      "loadFailed": "Erro ao carregar cálculo",
+      "createFailed": "Erro ao criar cálculo"
     },
     "success": {
       "draftSaved": "Rascunho salvo com sucesso!",
       "calculated": "Pegada calculada com sucesso!",
-      "deleted": "Rascunho exclu\u00eddo com sucesso!"
+      "deleted": "Rascunho excluído com sucesso!"
     }
   },
   "map": {
-    "title": "Mapa de \u00c1reas",
-    "allCountries": "Todos os pa\u00edses",
+    "title": "Mapa de Áreas",
+    "allCountries": "Todos os países",
     "allBiomes": "Todos os Biomas",
-    "areasCount": "{{count}} \u00e1reas",
-    "available": "Dispon\u00edvel",
+    "areasCount": "{{count}} áreas",
+    "available": "Disponível",
     "capacity": "Capacidade",
     "biome": "Bioma",
     "compensate": "Apoiar projeto",
     "viewDetails": "Ver Detalhes",
     "biomes": {
-      "amazonia": "Amaz\u00f4nia",
+      "amazonia": "Amazônia",
       "cerrado": "Cerrado",
-      "mataAtlantica": "Mata Atl\u00e2ntica",
+      "mataAtlantica": "Mata Atlântica",
       "caatinga": "Caatinga",
       "pampa": "Pampa",
       "pantanal": "Pantanal"
     },
     "filter": {
-      "title": "Filtrar \u00c1reas",
+      "title": "Filtrar Áreas",
       "byBiome": "Filtrar por Bioma",
       "clear": "Limpar Filtros",
       "apply": "Aplicar",
@@ -674,37 +719,38 @@
       "loadFailed": "Erro ao carregar mapa"
     },
     "locate": {
-      "title": "Mostrar minha localiza\u00e7\u00e3o"
+      "title": "Mostrar minha localização"
     },
-    "treesPlanted": "\u00e1rvores plantadas",
-    "plantTrees": "Plantar \u00c1rvores",
-    "plantTreesHint": "Clique no mapa para adicionar um ponto para cada \u00e1rvore plantada. Clique em um ponto para remov\u00ea-lo.",
-    "clearTreesTitle": "Limpar \u00e1rvores plantadas?",
-    "clearTreesConfirm": "Todas as \u00e1rvores plantadas nesta \u00e1rea ser\u00e3o removidas. Esta a\u00e7\u00e3o n\u00e3o pode ser desfeita.",
-    "noAreas": "Nenhuma \u00e1rea dispon\u00edvel no momento"
+    "treesPlanted": "árvores plantadas",
+    "plantTrees": "Plantar Árvores",
+    "plantTreesHint": "Clique no mapa para adicionar um ponto para cada árvore plantada. Clique em um ponto para removê-lo.",
+    "clearTreesTitle": "Limpar árvores plantadas?",
+    "clearTreesConfirm": "Todas as árvores plantadas nesta área serão removidas. Esta ação não pode ser desfeita.",
+    "noAreas": "Nenhuma área disponível no momento",
+    "treesCompensated": "árvores compensadas"
   },
   "area": {
-    "available": "Dispon\u00edvel",
-    "availableOf": "dispon\u00edvel de",
+    "available": "Disponível",
+    "availableOf": "disponível de",
     "committed": "Comprometido",
-    "trees": "\u00e1rvores",
-    "tCO2ePerTree": "CO\u2082 estimado por \u00e1rvore/ano",
+    "trees": "árvores",
+    "tCO2ePerTree": "CO₂ estimado por árvore/ano",
     "totalCapacity": "Capacidade Total",
-    "usage": "Utiliza\u00e7\u00e3o",
-    "contributions": "Contribui\u00e7\u00f5es por \u00e1rvores",
+    "usage": "Utilização",
+    "contributions": "Contribuições por árvores",
     "supporters": "Supporters",
-    "contributionsEmpty": "Ainda n\u00e3o h\u00e1 contribui\u00e7\u00f5es pagas para esta \u00e1rea.",
+    "contributionsEmpty": "Ainda não há contribuições pagas para esta área.",
     "anonymousContributor": "Apoiador",
-    "ownerEmail": "Respons\u00e1vel (e-mail)",
-    "media": "M\u00eddias da \u00e1rea",
-    "mediaEmpty": "Nenhuma foto ou v\u00eddeo enviado ainda.",
+    "ownerEmail": "Responsável (e-mail)",
+    "media": "Mídias da área",
+    "mediaEmpty": "Nenhuma foto ou vídeo enviado ainda.",
     "mediaLightbox": {
-      "title": "Visualiza\u00e7\u00e3o da imagem",
+      "title": "Visualização da imagem",
       "open": "Abrir imagem em tamanho maior",
-      "close": "Fechar visualiza\u00e7\u00e3o"
+      "close": "Fechar visualização"
     },
     "uploadMedia": "Enviar",
-    "uploadMediaError": "Falha ao enviar m\u00eddia. Tente novamente.",
+    "uploadMediaError": "Falha ao enviar mídia. Tente novamente.",
     "compensateNow": "Apoiar este projeto",
     "status": {
       "draft": "Rascunho",
@@ -715,20 +761,20 @@
       "suspended": "Suspenso"
     },
     "form": {
-      "createTitle": "Cadastrar Nova \u00c1rea",
-      "editTitle": "Editar \u00c1rea",
-      "create": "Criar \u00c1rea",
-      "update": "Atualizar \u00c1rea",
-      "name": "Nome da \u00c1rea",
-      "description": "Descri\u00e7\u00e3o",
+      "createTitle": "Cadastrar Nova Área",
+      "editTitle": "Editar Área",
+      "create": "Criar Área",
+      "update": "Atualizar Área",
+      "name": "Nome da Área",
+      "description": "Descrição",
       "latitude": "Latitude",
       "longitude": "Longitude",
       "status": "Status",
       "pickOnMap": "Selecionar ponto no mapa",
       "mapHint": "Clique no mapa para definir latitude e longitude automaticamente.",
-      "country": "Pa\u00eds",
-      "selectCountry": "Selecione um pa\u00eds",
-      "selectCountryFirst": "Selecione um pa\u00eds primeiro",
+      "country": "País",
+      "selectCountry": "Selecione um país",
+      "selectCountryFirst": "Selecione um país primeiro",
       "state": "Estado",
       "city": "Cidade",
       "biome": "Bioma",
@@ -738,12 +784,12 @@
       "selectStateFirst": "Selecione um estado primeiro",
       "loadingCities": "Carregando cidades...",
       "noCitiesAvailable": "Nenhuma cidade disponível",
-      "totalCapacity": "Capacidade Total (tCO\u2082e)",
-      "tCO2ePerTree": "CO\u2082 estimado por \u00e1rvore/ano",
-      "pricePerTree": "Pre\u00e7o por \u00c1rvore",
-      "pricePerTCO2e": "Pre\u00e7o por tCO\u2082e",
-      "defaultHorizonYears": "Horizonte padr\u00e3o (anos)",
-      "error": "Erro ao salvar \u00e1rea. Tente novamente."
+      "totalCapacity": "Capacidade Total (tCO₂e)",
+      "tCO2ePerTree": "CO₂ estimado por árvore/ano",
+      "pricePerTree": "Preço por Árvore",
+      "pricePerTCO2e": "Preço por tCO₂e",
+      "defaultHorizonYears": "Horizonte padrão (anos)",
+      "error": "Erro ao salvar área. Tente novamente."
     },
     "actions": {
       "submitForAudit": "Enviar para Auditoria",
@@ -751,33 +797,33 @@
       "reject": "Rejeitar",
       "activate": "Ativar",
       "suspend": "Suspender",
-      "delete": "Excluir \u00e1rea"
+      "delete": "Excluir área"
     },
     "deleteConfirm": {
-      "title": "Excluir \u00e1rea",
-      "message": "Tem certeza de que deseja excluir esta \u00e1rea? As m\u00eddias associadas tamb\u00e9m ser\u00e3o removidas.",
-      "error": "Falha ao excluir \u00e1rea. Tente novamente."
+      "title": "Excluir área",
+      "message": "Tem certeza de que deseja excluir esta área? As mídias associadas também serão removidas.",
+      "error": "Falha ao excluir área. Tente novamente."
     },
     "submitConfirm": {
       "title": "Enviar para Auditoria",
-      "message": "Esta \u00e1rea ser\u00e1 enviada para revis\u00e3o por um analista. Voc\u00ea n\u00e3o poder\u00e1 edit\u00e1-la at\u00e9 que a auditoria seja conclu\u00edda.",
-      "notesLabel": "Observa\u00e7\u00f5es (opcional)",
-      "notesPlaceholder": "Adicione observa\u00e7\u00f5es para o auditor...",
-      "error": "Falha ao enviar \u00e1rea para auditoria. Tente novamente."
+      "message": "Esta área será enviada para revisão por um analista. Você não poderá editá-la até que a auditoria seja concluída.",
+      "notesLabel": "Observações (opcional)",
+      "notesPlaceholder": "Adicione observações para o auditor...",
+      "error": "Falha ao enviar área para auditoria. Tente novamente."
     },
     "suspendConfirm": {
-      "title": "Suspender \u00c1rea",
-      "message": "Suspender esta \u00e1rea impedir\u00e1 novas compensa\u00e7\u00f5es. Compensa\u00e7\u00f5es existentes n\u00e3o ser\u00e3o afetadas.",
+      "title": "Suspender Área",
+      "message": "Suspender esta área impedirá novas compensações. Compensações existentes não serão afetadas.",
       "reasonLabel": "Motivo (opcional)",
-      "reasonPlaceholder": "Motivo da suspens\u00e3o...",
-      "error": "Falha ao suspender \u00e1rea. Tente novamente."
+      "reasonPlaceholder": "Motivo da suspensão...",
+      "error": "Falha ao suspender área. Tente novamente."
     }
   },
   "areas": {
     "list": {
-      "title": "Minhas \u00c1reas",
-      "create": "Criar Nova \u00c1rea",
-      "empty": "Nenhuma \u00e1rea cadastrada ainda",
+      "title": "Minhas Áreas",
+      "create": "Criar Nova Área",
+      "empty": "Nenhuma área cadastrada ainda",
       "searchLabel": "Busca",
       "searchPlaceholder": "Nome, cidade ou estado",
       "cityPlaceholder": "Filtrar por cidade",
@@ -785,14 +831,14 @@
       "clearFilters": "Limpar filtros"
     },
     "my": {
-      "title": "Minhas \u00c1reas",
-      "empty": "Voc\u00ea ainda n\u00e3o cadastrou nenhuma \u00e1rea",
-      "emptyDescription": "Cadastre uma \u00e1rea para come\u00e7ar a receber compensa\u00e7\u00f5es"
+      "title": "Minhas Áreas",
+      "empty": "Você ainda não cadastrou nenhuma área",
+      "emptyDescription": "Cadastre uma área para começar a receber compensações"
     },
     "available": {
-      "title": "\u00c1reas Dispon\u00edveis",
-      "empty": "Nenhuma \u00e1rea dispon\u00edvel no momento",
-      "emptyHint": "Volte mais tarde para ver novas \u00e1reas"
+      "title": "Áreas Disponíveis",
+      "empty": "Nenhuma área disponível no momento",
+      "emptyHint": "Volte mais tarde para ver novas áreas"
     },
     "public": {
       "title": "Áreas públicas",
@@ -805,24 +851,24 @@
   },
   "compensation": {
     "review": {
-      "title": "Revisar Sua Compensa\u00e7\u00e3o",
+      "title": "Revisar Sua Compensação",
       "subtitle": "Por favor, revise os detalhes antes de prosseguir",
-      "modeLabel": "Modalidade de Compensa\u00e7\u00e3o",
-      "treePurchase": "Compra de \u00c1rvores",
-      "treePurchaseDesc": "Escolha quantas \u00e1rvores quer plantar (horizonte de 20 anos)",
-      "directTCO2e": "Compensa\u00e7\u00e3o por tCO\u2082e",
-      "directTCO2eDesc": "Compense uma quantidade espec\u00edfica de tCO\u2082e",
-      "treesCount": "Quantidade de \u00c1rvores",
-      "pricePerTree": "Pre\u00e7o por \u00e1rvore",
-      "estimatedCO2": "Carbono estimado (tCO\u2082e)",
+      "modeLabel": "Modalidade de Compensação",
+      "treePurchase": "Compra de Árvores",
+      "treePurchaseDesc": "Escolha quantas árvores quer plantar (horizonte de 20 anos)",
+      "directTCO2e": "Compensação por tCO₂e",
+      "directTCO2eDesc": "Compense uma quantidade específica de tCO₂e",
+      "treesCount": "Quantidade de Árvores",
+      "pricePerTree": "Preço por árvore",
+      "estimatedCO2": "Carbono estimado (tCO₂e)",
       "total": "Custo total",
       "transferNotice": "O valor pago será transferido ao produtor responsável por esta área. A plataforma cobra uma taxa para manutenção e evolução do serviço.",
-      "tco2eAmount": "Total a compensar (tCO\u2082e)",
+      "tco2eAmount": "Total a compensar (tCO₂e)",
       "proceed": "Prosseguir para Pagamento"
     },
     "mode": {
-      "tree_purchase": "Compra de \u00e1rvores (20 anos)",
-      "tco2e": "Compensa\u00e7\u00e3o por tCO\u2082e"
+      "tree_purchase": "Compra de árvores (20 anos)",
+      "tco2e": "Compensação por tCO₂e"
     },
     "report": {
       "title": "Relatório da compensação",
@@ -851,33 +897,33 @@
     }
   },
   "compensations": {
-    "title": "Hist\u00f3rico de Compensa\u00e7\u00f5es",
-    "empty": "Nenhuma compensa\u00e7\u00e3o ainda.",
-    "emptyDescription": "Suas compensa\u00e7\u00f5es aparecer\u00e3o aqui ap\u00f3s compensar sua pegada de carbono.",
-    "page": "P\u00e1gina {{page}}"
+    "title": "Histórico de Compensações",
+    "empty": "Nenhuma compensação ainda.",
+    "emptyDescription": "Suas compensações aparecerão aqui após compensar sua pegada de carbono.",
+    "page": "Página {{page}}"
   },
   "checkout": {
-    "title": "Checkout da compensa\u00e7\u00e3o",
+    "title": "Checkout da compensação",
     "summary": "Resumo do Pedido",
-    "area": "\u00c1rea selecionada",
+    "area": "Área selecionada",
     "mode": "Modalidade",
-    "trees": "\u00c1rvores",
-    "tco2e": "tCO\u2082e",
+    "trees": "Árvores",
+    "tco2e": "tCO₂e",
     "total": "Total",
     "transferNotice": "Ao concluir o pagamento, o valor será transferido ao produtor responsável pela área, com cobrança de uma taxa para manutenção e evolução da plataforma.",
     "paymentDetails": "Dados do Pagamento",
-    "cardNumber": "N\u00famero do cart\u00e3o",
+    "cardNumber": "Número do cartão",
     "cardholder": "Nome do titular",
-    "expiryMonth": "M\u00eas de validade",
+    "expiryMonth": "Mês de validade",
     "expiryYear": "Ano de validade",
     "cvv": "CVV",
     "installments": "Parcelas",
-    "testCardNote": "Cart\u00f5es de teste: 4111...1111 autorizado, 4000...0002 recusado, 4000...0101 em an\u00e1lise",
+    "testCardNote": "Cartões de teste: 4111...1111 autorizado, 4000...0002 recusado, 4000...0101 em análise",
     "pay": "Pagar agora",
     "processing": "Processando pagamento...",
     "success": {
-      "title": "Compensa\u00e7\u00e3o registrada com sucesso!",
-      "message": "Seu pagamento foi aprovado e a compensa\u00e7\u00e3o foi finalizada.",
+      "title": "Compensação registrada com sucesso!",
+      "message": "Seu pagamento foi aprovado e a compensação foi finalizada.",
       "amount": "Valor compensado",
       "status": "Status do pagamento",
       "certificate": "Certificado emitido",
@@ -888,19 +934,19 @@
     "title": "Meu perfil",
     "edit": "Editar perfil",
     "editTitle": "Editar perfil",
-    "personalInfo": "Informa\u00e7\u00f5es Pessoais",
+    "personalInfo": "Informações Pessoais",
     "accountType": "Tipo de conta",
     "compensated": "Offset estimado apoiado",
-    "treesPlanted": "\u00c1rvores Plantadas",
-    "recentCompensations": "Contribui\u00e7\u00f5es Recentes",
+    "treesPlanted": "Árvores Plantadas",
+    "recentCompensations": "Contribuições Recentes",
     "viewCertificates": "Ver Certificados",
     "documentType": "Tipo de documento",
-    "documentNumber": "N\u00famero do documento",
+    "documentNumber": "Número do documento",
     "phone": "Telefone",
     "birthDate": "Data de nascimento",
-    "address": "Endere\u00e7o",
+    "address": "Endereço",
     "memberSince": "Membro desde",
-    "lastLogin": "\u00daltimo login:",
+    "lastLogin": "Último login:",
     "changePassword": "Alterar senha",
     "oldPassword": "Senha atual",
     "newPassword": "Nova senha",
@@ -909,15 +955,15 @@
     "form": {
       "displayName": "Nome exibido",
       "documentType": "Tipo de documento",
-      "documentNumber": "N\u00famero do documento",
+      "documentNumber": "Número do documento",
       "birthDate": "Data de nascimento",
       "phone": "Telefone",
-      "addressLine1": "Endere\u00e7o",
+      "addressLine1": "Endereço",
       "addressLine2": "Complemento",
       "city": "Cidade",
       "state": "Estado",
       "postalCode": "CEP",
-      "country": "Pa\u00eds",
+      "country": "País",
       "countryPlaceholder": "Digite para buscar...",
       "passport": "Passaporte"
     }
@@ -925,69 +971,69 @@
   "certificates": {
     "title": "Certificados",
     "empty": "Nenhum certificado emitido ainda.",
-    "emptyDescription": "Certificados s\u00e3o emitidos ap\u00f3s compensa\u00e7\u00e3o bem-sucedida",
+    "emptyDescription": "Certificados são emitidos após compensação bem-sucedida",
     "validate": {
       "title": "Validar Certificado",
-      "description": "Insira o n\u00famero do certificado e o hash de verifica\u00e7\u00e3o para validar sua autenticidade.",
-      "certificateNumber": "N\u00famero do Certificado",
+      "description": "Insira o número do certificado e o hash de verificação para validar sua autenticidade.",
+      "certificateNumber": "Número do Certificado",
       "certificateNumberPlaceholder": "Ex: CERT-2025-001",
-      "hash": "Hash de Verifica\u00e7\u00e3o",
+      "hash": "Hash de Verificação",
       "hashPlaceholder": "Ex: abc123def456...",
       "submit": "Validar",
-      "valid": "Certificado V\u00e1lido",
-      "validDescription": "Este certificado \u00e9 aut\u00eantico e v\u00e1lido.",
-      "invalid": "Certificado Inv\u00e1lido",
-      "invalidDescription": "Este certificado n\u00e3o p\u00f4de ser verificado.",
+      "valid": "Certificado Válido",
+      "validDescription": "Este certificado é autêntico e válido.",
+      "invalid": "Certificado Inválido",
+      "invalidDescription": "Este certificado não pôde ser verificado.",
       "issuedAt": "Emitido em",
-      "error": "Certificado n\u00e3o encontrado ou dados inv\u00e1lidos. Verifique e tente novamente."
+      "error": "Certificado não encontrado ou dados inválidos. Verifique e tente novamente."
     }
   },
   "audit": {
     "pending": {
-      "title": "\u00c1reas Pendentes de Auditoria",
-      "empty": "Nenhuma \u00e1rea pendente",
-      "emptyDescription": "Todas as \u00e1reas foram auditadas"
+      "title": "Áreas Pendentes de Auditoria",
+      "empty": "Nenhuma área pendente",
+      "emptyDescription": "Todas as áreas foram auditadas"
     },
     "review": {
-      "title": "Auditoria da \u00c1rea",
-      "details": "Detalhes da \u00c1rea",
-      "decision": "Decis\u00e3o de Auditoria",
-      "criteria": "Crit\u00e9rios Socioambientais",
+      "title": "Auditoria da Área",
+      "details": "Detalhes da Área",
+      "decision": "Decisão de Auditoria",
+      "criteria": "Critérios Socioambientais",
       "approve": "Aprovar",
       "reject": "Rejeitar",
       "activate": "Ativar",
-      "notes": "Observa\u00e7\u00f5es",
-      "rejectReason": "Motivo da Rejei\u00e7\u00e3o",
-      "notesPlaceholder": "Registre observa\u00e7\u00f5es relevantes sobre a auditoria.",
-      "rejectReasonPlaceholder": "Descreva o motivo da rejei\u00e7\u00e3o",
-      "approveError": "Erro ao aprovar \u00e1rea. Tente novamente.",
-      "rejectError": "Erro ao rejeitar \u00e1rea. Tente novamente."
+      "notes": "Observações",
+      "rejectReason": "Motivo da Rejeição",
+      "notesPlaceholder": "Registre observações relevantes sobre a auditoria.",
+      "rejectReasonPlaceholder": "Descreva o motivo da rejeição",
+      "approveError": "Erro ao aprovar área. Tente novamente.",
+      "rejectError": "Erro ao rejeitar área. Tente novamente."
     }
   },
   "admin": {
     "users": {
-      "title": "Usu\u00e1rios",
+      "title": "Usuários",
       "email": "E-mail",
       "status": "Status",
-      "roles": "Fun\u00e7\u00f5es",
+      "roles": "Funções",
       "createdAt": "Criado em",
-      "lastLogin": "\u00daltimo login",
+      "lastLogin": "Último login",
       "locale": "Idioma",
       "searchPlaceholder": "Buscar por e-mail",
-      "empty": "Nenhum usu\u00e1rio encontrado.",
-      "editTitle": "Editar usu\u00e1rio",
+      "empty": "Nenhum usuário encontrado.",
+      "editTitle": "Editar usuário",
       "newPassword": "Nova senha (opcional)",
       "passwordPlaceholder": "Deixe em branco para manter a senha atual",
-      "deleteTitle": "Excluir usu\u00e1rio",
-      "deleteMessage": "Isso desativar\u00e1 a conta e remover\u00e1 o acesso.",
-      "updateError": "Erro ao atualizar usu\u00e1rio. Tente novamente."
+      "deleteTitle": "Excluir usuário",
+      "deleteMessage": "Isso desativará a conta e removerá o acesso.",
+      "updateError": "Erro ao atualizar usuário. Tente novamente."
     },
     "auditLog": {
       "title": "Auditoria",
       "filterEntity": "Filtrar por entidade",
       "timestamp": "Data",
-      "actor": "Usu\u00e1rio",
-      "action": "A\u00e7\u00e3o",
+      "actor": "Usuário",
+      "action": "Ação",
       "entity": "Entidade",
       "ip": "IP",
       "status": "Status",
@@ -999,156 +1045,156 @@
     "registerPrompt": "Crie uma conta gratuita para salvar seus resultados e compensar sua pegada de carbono",
     "demo": {
       "title": "Demo: Calculadora Embutida",
-      "description": "Veja como a calculadora aparecer\u00e1 quando embarcada em sites externos",
-      "codeTitle": "C\u00f3digo HTML para incorporar"
+      "description": "Veja como a calculadora aparecerá quando embarcada em sites externos",
+      "codeTitle": "Código HTML para incorporar"
     }
   },
   "errors": {
     "accessDenied": "Acesso negado",
-    "accessDeniedDescription": "Voc\u00ea n\u00e3o tem permiss\u00e3o para acessar esta p\u00e1gina.",
+    "accessDeniedDescription": "Você não tem permissão para acessar esta página.",
     "generic": "Algo deu errado. Tente novamente.",
-    "network": "Erro de conex\u00e3o. Verifique sua internet e tente novamente.",
-    "request.failed": "N\u00e3o foi poss\u00edvel concluir a solicita\u00e7\u00e3o. Tente novamente.",
-    "request.invalid_body": "Os dados enviados s\u00e3o inv\u00e1lidos. Revise os campos e tente novamente.",
-    "request.validation_failed": "Alguns campos s\u00e3o inv\u00e1lidos. Revise os dados informados e tente novamente.",
-    "request.invalid_content_type": "Formato de envio inv\u00e1lido. Tente novamente.",
-    "request.payload_too_large": "O arquivo ou conte\u00fado enviado \u00e9 grande demais.",
+    "network": "Erro de conexão. Verifique sua internet e tente novamente.",
+    "request.failed": "Não foi possível concluir a solicitação. Tente novamente.",
+    "request.invalid_body": "Os dados enviados são inválidos. Revise os campos e tente novamente.",
+    "request.validation_failed": "Alguns campos são inválidos. Revise os dados informados e tente novamente.",
+    "request.invalid_content_type": "Formato de envio inválido. Tente novamente.",
+    "request.payload_too_large": "O arquivo ou conteúdo enviado é grande demais.",
     "request.rate_limited": "Muitas tentativas em pouco tempo. Aguarde um instante e tente novamente.",
-    "auth.login.error": "N\u00e3o foi poss\u00edvel entrar. Tente novamente.",
-    "auth.invalid_credentials": "E-mail ou senha inv\u00e1lidos.",
-    "auth.email_not_confirmed": "Seu e-mail ainda n\u00e3o foi confirmado.",
-    "auth.user_not_active": "Sua conta n\u00e3o est\u00e1 ativa no momento.",
-    "auth.invalid_token": "O token informado \u00e9 inv\u00e1lido.",
+    "auth.login.error": "Não foi possível entrar. Tente novamente.",
+    "auth.invalid_credentials": "E-mail ou senha inválidos.",
+    "auth.email_not_confirmed": "Seu e-mail ainda não foi confirmado.",
+    "auth.user_not_active": "Sua conta não está ativa no momento.",
+    "auth.invalid_token": "O token informado é inválido.",
     "auth.token_expired": "O token informado expirou.",
-    "auth.token_already_used": "Este token j\u00e1 foi utilizado.",
-    "auth.required": "Voc\u00ea precisa fazer login para continuar.",
-    "auth.invalid": "Sua sess\u00e3o \u00e9 inv\u00e1lida. Fa\u00e7a login novamente.",
-    "auth.unauthorized": "Sua sess\u00e3o expirou. Fa\u00e7a login novamente.",
-    "auth.forbidden": "Voc\u00ea n\u00e3o tem permiss\u00e3o para executar esta a\u00e7\u00e3o.",
+    "auth.token_already_used": "Este token já foi utilizado.",
+    "auth.required": "Você precisa fazer login para continuar.",
+    "auth.invalid": "Sua sessão é inválida. Faça login novamente.",
+    "auth.unauthorized": "Sua sessão expirou. Faça login novamente.",
+    "auth.forbidden": "Você não tem permissão para executar esta ação.",
     "auth.register.error": "Erro ao criar conta. Tente novamente.",
-    "auth.register.passwordMismatch": "As senhas informadas n\u00e3o coincidem.",
+    "auth.register.passwordMismatch": "As senhas informadas não coincidem.",
     "auth.register.humanCheckInvalid": "Resposta incorreta. Tente novamente.",
-    "auth.register.humanCheckLoadError": "N\u00e3o foi poss\u00edvel carregar a verifica\u00e7\u00e3o humana. Tente novamente.",
+    "auth.register.humanCheckLoadError": "Não foi possível carregar a verificação humana. Tente novamente.",
     "auth.register.roleRequired": "Selecione um tipo de conta para continuar.",
-    "auth.passwordReset.requestError": "N\u00e3o foi poss\u00edvel solicitar a redefini\u00e7\u00e3o de senha. Tente novamente.",
+    "auth.passwordReset.requestError": "Não foi possível solicitar a redefinição de senha. Tente novamente.",
     "auth.passwordReset.confirmError": "Erro ao redefinir senha. Verifique o token.",
     "auth.confirmEmail.error": "Erro ao confirmar e-mail. Verifique o token.",
     "auth.confirmEmail.resendError": "Erro ao reenviar e-mail. Tente novamente.",
-    "user.email_already_exists": "J\u00e1 existe uma conta cadastrada com este e-mail.",
-    "database.error": "Ocorreu um erro interno ao processar sua solicita\u00e7\u00e3o.",
+    "user.email_already_exists": "Já existe uma conta cadastrada com este e-mail.",
+    "database.error": "Ocorreu um erro interno ao processar sua solicitação.",
     "payment.error": "Erro ao processar pagamento. Tente novamente.",
-    "compensation.error": "Erro ao registrar compensa\u00e7\u00e3o. Tente novamente.",
-    "footprint.error.createFailed": "Erro ao criar c\u00e1lculo. Tente novamente.",
-    "footprint.error.finalizeFailed": "Erro ao finalizar c\u00e1lculo. Tente novamente.",
+    "compensation.error": "Erro ao registrar compensação. Tente novamente.",
+    "footprint.error.createFailed": "Erro ao criar cálculo. Tente novamente.",
+    "footprint.error.finalizeFailed": "Erro ao finalizar cálculo. Tente novamente.",
     "footprint.error.inputsRequired": "Adicione pelo menos um dado antes de calcular.",
-    "area.form.error": "Erro ao salvar \u00e1rea. Tente novamente.",
+    "area.form.error": "Erro ao salvar área. Tente novamente.",
     "profile.saveError": "Erro ao salvar perfil. Tente novamente.",
-    "admin.users.updateError": "Erro ao atualizar usu\u00e1rio. Tente novamente.",
-    "audit.approveError": "Erro ao aprovar \u00e1rea. Tente novamente.",
-    "audit.rejectError": "Erro ao rejeitar \u00e1rea. Tente novamente."
+    "admin.users.updateError": "Erro ao atualizar usuário. Tente novamente.",
+    "audit.approveError": "Erro ao aprovar área. Tente novamente.",
+    "audit.rejectError": "Erro ao rejeitar área. Tente novamente."
   },
   "tooltips": {
     "dashboard": {
-      "totalFootprint": "Soma das emiss\u00f5es calculadas nos registros dispon\u00edveis para este usu\u00e1rio.",
-      "compensated": "Volume de emiss\u00f5es j\u00e1 compensado em registros pagos e confirmados.",
-      "balance": "Diferen\u00e7a entre o total estimado de emiss\u00f5es e o total j\u00e1 compensado.",
-      "treesPlanted": "Quantidade total de \u00e1rvores vinculadas \u00e0s compensa\u00e7\u00f5es confirmadas."
+      "totalFootprint": "Soma das emissões calculadas nos registros disponíveis para este usuário.",
+      "compensated": "Volume de emissões já compensado em registros pagos e confirmados.",
+      "balance": "Diferença entre o total estimado de emissões e o total já compensado.",
+      "treesPlanted": "Quantidade total de árvores vinculadas às compensações confirmadas."
     },
     "home": {
       "inDevelopmentAria": "Ajuda sobre o status de desenvolvimento do projeto",
-      "inDevelopment": "Esta POC est\u00e1 em evolu\u00e7\u00e3o. Algumas funcionalidades podem mudar, e o projeto busca parceiros para continuar o desenvolvimento."
+      "inDevelopment": "Esta POC está em evolução. Algumas funcionalidades podem mudar, e o projeto busca parceiros para continuar o desenvolvimento."
     },
     "shared": {
       "tco2eAria": "Ajuda sobre tCO2e",
-      "tco2e": "tCO2e significa toneladas de CO2 equivalente, uma medida que soma diferentes gases de efeito estufa em uma unidade compar\u00e1vel.",
-      "tco2ePerTreeAria": "Ajuda sobre tCO2e por \u00e1rvore por ano",
-      "tco2ePerTree": "Este valor estima quanto carbono uma \u00e1rvore associada ao projeto pode contribuir por ano. \u00c9 uma refer\u00eancia de proje\u00e7\u00e3o, n\u00e3o uma garantia isolada por unidade."
+      "tco2e": "tCO2e significa toneladas de CO2 equivalente, uma medida que soma diferentes gases de efeito estufa em uma unidade comparável.",
+      "tco2ePerTreeAria": "Ajuda sobre tCO2e por árvore por ano",
+      "tco2ePerTree": "Este valor estima quanto carbono uma árvore associada ao projeto pode contribuir por ano. É uma referência de projeção, não uma garantia isolada por unidade."
     },
     "footprint": {
       "dataQualityAria": "Ajuda sobre qualidade dos dados",
-      "dataQuality": "Escolha o n\u00edvel que melhor representa a qualidade das informa\u00e7\u00f5es usadas no c\u00e1lculo. Dados reais tendem a gerar estimativas mais confi\u00e1veis.",
+      "dataQuality": "Escolha o nível que melhor representa a qualidade das informações usadas no cálculo. Dados reais tendem a gerar estimativas mais confiáveis.",
       "profileTypeAria": "Ajuda sobre tipo de perfil",
-      "profileType": "Use Pessoa F\u00edsica para c\u00e1lculos pessoais e Pessoa Jur\u00eddica para emiss\u00f5es ligadas a empresa ou organiza\u00e7\u00e3o.",
-      "periodAria": "Ajuda sobre per\u00edodo do c\u00e1lculo",
-      "period": "O resultado considera apenas o intervalo informado. O ideal \u00e9 usar um per\u00edodo representativo do consumo analisado.",
+      "profileType": "Use Pessoa Física para cálculos pessoais e Pessoa Jurídica para emissões ligadas a empresa ou organização.",
+      "periodAria": "Ajuda sobre período do cálculo",
+      "period": "O resultado considera apenas o intervalo informado. O ideal é usar um período representativo do consumo analisado.",
       "scope1Aria": "Ajuda sobre Escopo 1",
-      "scope1": "Escopo 1 inclui emiss\u00f5es diretas sob seu controle, como combust\u00e3o, processos e perdas fugitivas.",
+      "scope1": "Escopo 1 inclui emissões diretas sob seu controle, como combustão, processos e perdas fugitivas.",
       "scope2Aria": "Ajuda sobre Escopo 2",
-      "scope2": "Escopo 2 cobre emiss\u00f5es associadas \u00e0 energia adquirida, como eletricidade, calor ou vapor.",
+      "scope2": "Escopo 2 cobre emissões associadas à energia adquirida, como eletricidade, calor ou vapor.",
       "scope3Aria": "Ajuda sobre Escopo 3",
-      "scope3": "Escopo 3 re\u00fane emiss\u00f5es indiretas da cadeia de valor, como viagens, deslocamento, compras e res\u00edduos.",
-      "calculationStatusAria": "Ajuda sobre status do c\u00e1lculo",
-      "statusDraft": "Rascunho pode ser editado antes da finaliza\u00e7\u00e3o.",
-      "statusFinalized": "Finalizado indica que o c\u00e1lculo foi conclu\u00eddo e est\u00e1 pronto para uso e compensa\u00e7\u00e3o.",
-      "totalEmissionsAria": "Ajuda sobre emiss\u00f5es totais",
-      "totalEmissions": "Este \u00e9 o total estimado de emiss\u00f5es do per\u00edodo selecionado com base nos dados informados.",
-      "compensateAria": "Ajuda sobre compensa\u00e7\u00e3o",
-      "compensate": "Voc\u00ea pode usar este resultado para direcionar apoio a projetos ecol\u00f3gicos e compensar as emiss\u00f5es estimadas.",
+      "scope3": "Escopo 3 reúne emissões indiretas da cadeia de valor, como viagens, deslocamento, compras e resíduos.",
+      "calculationStatusAria": "Ajuda sobre status do cálculo",
+      "statusDraft": "Rascunho pode ser editado antes da finalização.",
+      "statusFinalized": "Finalizado indica que o cálculo foi concluído e está pronto para uso e compensação.",
+      "totalEmissionsAria": "Ajuda sobre emissões totais",
+      "totalEmissions": "Este é o total estimado de emissões do período selecionado com base nos dados informados.",
+      "compensateAria": "Ajuda sobre compensação",
+      "compensate": "Você pode usar este resultado para direcionar apoio a projetos ecológicos e compensar as emissões estimadas.",
       "units": {
         "kwhAria": "Ajuda sobre kWh",
-        "kwh": "kWh \u00e9 a unidade usada para consumo de energia el\u00e9trica.",
-        "kmAria": "Ajuda sobre quil\u00f4metros",
-        "km": "Informe a dist\u00e2ncia percorrida em quil\u00f4metros.",
+        "kwh": "kWh é a unidade usada para consumo de energia elétrica.",
+        "kmAria": "Ajuda sobre quilômetros",
+        "km": "Informe a distância percorrida em quilômetros.",
         "literAria": "Ajuda sobre litros",
         "liter": "Informe o volume consumido em litros."
       }
     },
     "compensation": {
-      "modeAria": "Ajuda sobre modos de compensa\u00e7\u00e3o",
-      "treePurchase": "Ideal para apoiar projetos ecol\u00f3gicos por meio do plantio e manejo vinculado a \u00e1rvores ao longo do tempo.",
-      "directTco2e": "Ideal para informar diretamente o volume de emiss\u00f5es que voc\u00ea deseja compensar em tCO2e.",
+      "modeAria": "Ajuda sobre modos de compensação",
+      "treePurchase": "Ideal para apoiar projetos ecológicos por meio do plantio e manejo vinculado a árvores ao longo do tempo.",
+      "directTco2e": "Ideal para informar diretamente o volume de emissões que você deseja compensar em tCO2e.",
       "paymentStatusAria": "Ajuda sobre status do pagamento",
-      "paymentStatus": "O status do pagamento indica se a opera\u00e7\u00e3o financeira foi conclu\u00edda, est\u00e1 pendente ou falhou."
+      "paymentStatus": "O status do pagamento indica se a operação financeira foi concluída, está pendente ou falhou."
     },
     "checkout": {
       "modeAria": "Ajuda sobre modo selecionado",
-      "mode": "Mostra como esta compensa\u00e7\u00e3o foi estruturada: por compra de \u00e1rvores ou por volume direto em tCO2e.",
-      "treesAria": "Ajuda sobre quantidade de \u00e1rvores",
-      "trees": "Quantidade de \u00e1rvores ou unidades equivalentes vinculadas \u00e0 compensa\u00e7\u00e3o.",
+      "mode": "Mostra como esta compensação foi estruturada: por compra de árvores ou por volume direto em tCO2e.",
+      "treesAria": "Ajuda sobre quantidade de árvores",
+      "trees": "Quantidade de árvores ou unidades equivalentes vinculadas à compensação.",
       "totalAria": "Ajuda sobre valor total",
-      "total": "Valor financeiro total estimado para esta opera\u00e7\u00e3o.",
+      "total": "Valor financeiro total estimado para esta operação.",
       "installmentsAria": "Ajuda sobre parcelas",
-      "installments": "N\u00famero de parcelas usado na simula\u00e7\u00e3o de pagamento.",
-      "testCardAria": "Ajuda sobre cart\u00e3o de teste",
-      "testCard": "Este fluxo usa um pagamento simulado para demonstra\u00e7\u00e3o da POC."
+      "installments": "Número de parcelas usado na simulação de pagamento.",
+      "testCardAria": "Ajuda sobre cartão de teste",
+      "testCard": "Este fluxo usa um pagamento simulado para demonstração da POC."
     },
     "area": {
-      "statusAria": "Ajuda sobre status da \u00e1rea",
-      "statusSummary": "O status mostra em que etapa a \u00e1rea est\u00e1, desde o cadastro inicial at\u00e9 a ativa\u00e7\u00e3o ou suspens\u00e3o.",
-      "locationAria": "Ajuda sobre localiza\u00e7\u00e3o da \u00e1rea",
-      "location": "As coordenadas ajudam a identificar a \u00e1rea no mapa e a vincular evid\u00eancias, auditoria e contexto territorial.",
+      "statusAria": "Ajuda sobre status da área",
+      "statusSummary": "O status mostra em que etapa a área está, desde o cadastro inicial até a ativação ou suspensão.",
+      "locationAria": "Ajuda sobre localização da área",
+      "location": "As coordenadas ajudam a identificar a área no mapa e a vincular evidências, auditoria e contexto territorial.",
       "biomeAria": "Ajuda sobre bioma",
-      "biome": "O bioma ajuda a contextualizar a \u00e1rea ambientalmente e pode influenciar crit\u00e9rios de avalia\u00e7\u00e3o e comunica\u00e7\u00e3o do projeto.",
+      "biome": "O bioma ajuda a contextualizar a área ambientalmente e pode influenciar critérios de avaliação e comunicação do projeto.",
       "totalCapacityAria": "Ajuda sobre capacidade total",
-      "totalCapacity": "Capacidade total estimada de compensa\u00e7\u00e3o que a \u00e1rea pode suportar ao longo do projeto.",
+      "totalCapacity": "Capacidade total estimada de compensação que a área pode suportar ao longo do projeto.",
       "committedAria": "Ajuda sobre volume comprometido",
-      "committed": "Parte da capacidade total que j\u00e1 foi reservada ou vinculada a compensa\u00e7\u00f5es.",
-      "availableAria": "Ajuda sobre volume dispon\u00edvel",
-      "available": "Parcela da capacidade ainda dispon\u00edvel para novas opera\u00e7\u00f5es de apoio e compensa\u00e7\u00e3o.",
+      "committed": "Parte da capacidade total que já foi reservada ou vinculada a compensações.",
+      "availableAria": "Ajuda sobre volume disponível",
+      "available": "Parcela da capacidade ainda disponível para novas operações de apoio e compensação.",
       "usageAria": "Ajuda sobre uso da capacidade",
-      "usage": "Percentual da capacidade total da \u00e1rea que j\u00e1 est\u00e1 comprometido.",
-      "pricePerTreeAria": "Ajuda sobre pre\u00e7o por \u00e1rvore",
-      "pricePerTree": "Use este valor quando o apoio for modelado por n\u00famero de \u00e1rvores ou unidades equivalentes do projeto.",
-      "defaultHorizonYearsAria": "Ajuda sobre horizonte padr\u00e3o do projeto",
-      "defaultHorizonYears": "Define o horizonte de anos usado como refer\u00eancia padr\u00e3o para estimativas e opera\u00e7\u00f5es vinculadas a esta \u00e1rea.",
-      "pricePerTco2eAria": "Ajuda sobre pre\u00e7o por tCO2e",
-      "pricePerTco2e": "Use este valor quando a compensa\u00e7\u00e3o for ofertada diretamente por volume de emiss\u00f5es em tCO2e.",
-      "media": "As m\u00eddias ajudam a documentar a \u00e1rea, fortalecer a credibilidade e apoiar auditoria e transpar\u00eancia.",
-      "contributions": "Lista de contribui\u00e7\u00f5es registradas para esta \u00e1rea, com volume compensado e quantidade de \u00e1rvores associadas quando aplic\u00e1vel.",
-      "statusDraft": "A \u00e1rea ainda est\u00e1 em edi\u00e7\u00e3o e n\u00e3o foi enviada para auditoria.",
-      "statusPendingAudit": "A \u00e1rea foi enviada e aguarda revis\u00e3o antes de poder ser aprovada.",
-      "statusApproved": "A \u00e1rea passou pela revis\u00e3o e est\u00e1 pronta para ativa\u00e7\u00e3o operacional.",
-      "statusActive": "A \u00e1rea est\u00e1 dispon\u00edvel para apoio e compensa\u00e7\u00e3o na plataforma.",
-      "statusSuspended": "A \u00e1rea foi temporariamente interrompida e n\u00e3o deve receber novas opera\u00e7\u00f5es."
+      "usage": "Percentual da capacidade total da área que já está comprometido.",
+      "pricePerTreeAria": "Ajuda sobre preço por árvore",
+      "pricePerTree": "Use este valor quando o apoio for modelado por número de árvores ou unidades equivalentes do projeto.",
+      "defaultHorizonYearsAria": "Ajuda sobre horizonte padrão do projeto",
+      "defaultHorizonYears": "Define o horizonte de anos usado como referência padrão para estimativas e operações vinculadas a esta área.",
+      "pricePerTco2eAria": "Ajuda sobre preço por tCO2e",
+      "pricePerTco2e": "Use este valor quando a compensação for ofertada diretamente por volume de emissões em tCO2e.",
+      "media": "As mídias ajudam a documentar a área, fortalecer a credibilidade e apoiar auditoria e transparência.",
+      "contributions": "Lista de contribuições registradas para esta área, com volume compensado e quantidade de árvores associadas quando aplicável.",
+      "statusDraft": "A área ainda está em edição e não foi enviada para auditoria.",
+      "statusPendingAudit": "A área foi enviada e aguarda revisão antes de poder ser aprovada.",
+      "statusApproved": "A área passou pela revisão e está pronta para ativação operacional.",
+      "statusActive": "A área está disponível para apoio e compensação na plataforma.",
+      "statusSuspended": "A área foi temporariamente interrompida e não deve receber novas operações."
     },
     "certificates": {
-      "validationAria": "Ajuda sobre valida\u00e7\u00e3o de certificado",
-      "validation": "A valida\u00e7\u00e3o confere se o n\u00famero do certificado e o hash informado correspondem a um registro emitido pela plataforma.",
-      "certificateNumberAria": "Ajuda sobre n\u00famero do certificado",
-      "certificateNumber": "Informe o identificador do certificado exatamente como ele aparece no PDF ou no registro de emiss\u00e3o.",
+      "validationAria": "Ajuda sobre validação de certificado",
+      "validation": "A validação confere se o número do certificado e o hash informado correspondem a um registro emitido pela plataforma.",
+      "certificateNumberAria": "Ajuda sobre número do certificado",
+      "certificateNumber": "Informe o identificador do certificado exatamente como ele aparece no PDF ou no registro de emissão.",
       "hashAria": "Ajuda sobre hash do certificado",
-      "hash": "O hash \u00e9 um identificador de integridade usado para verificar se o certificado corresponde ao documento emitido.",
-      "status": "O status indica a situa\u00e7\u00e3o atual do certificado na plataforma."
+      "hash": "O hash é um identificador de integridade usado para verificar se o certificado corresponde ao documento emitido.",
+      "status": "O status indica a situação atual do certificado na plataforma."
     }
   }
 }

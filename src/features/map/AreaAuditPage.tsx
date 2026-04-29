@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Textarea } from '@/components/ui/Textarea';
 import { StatusBadge } from '@/components/StatusBadge';
+import { getCountryName } from '@/lib/countries';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
@@ -63,7 +64,7 @@ export function AreaAuditPage() {
       <div className="flex items-start justify-between">
         <div>
           <h1 className="text-2xl font-bold">{t('audit.review.title')}: {area.name}</h1>
-          <div className="flex items-center gap-2 mt-1 text-text-secondary"><MapPin className="h-4 w-4" /> {[area.city, area.state].filter(Boolean).join(', ')}</div>
+          <div className="flex items-center gap-2 mt-1 text-text-secondary"><MapPin className="h-4 w-4" /> {[area.city, area.state, getCountryName(area.countryCode ?? '')].filter(Boolean).join(', ')}</div>
         </div>
         <div className="flex items-center gap-2">
           <StatusBadge status={area.status} />

@@ -12,8 +12,7 @@ import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
 import { StatusBadge } from '@/components/StatusBadge';
 import { formatCurrency, formatKgCO2e } from '@/lib/format';
-import { filterAreas } from '@/features/map/lib/area-filters';
-import { getAreaStatusOptions } from '@/features/map/lib/area-filters';
+import { filterAreas, getAreaStatusOptions } from '@/features/map/lib/area-filters';
 import { countries, getCountryName } from '@/lib/countries';
 import { MapPin, TreePine, FilterX } from 'lucide-react';
 
@@ -91,34 +90,39 @@ export function PublicAreasPage() {
       {isLoading ? (
         <SkeletonList />
       ) : filteredAreas.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {filteredAreas.map((area) => (
             <Card
               key={area.id}
-              className="cursor-pointer hover:shadow-md transition-shadow"
+              className="cursor-pointer hover:shadow-lg transition-shadow"
               onClick={() => navigate(`/areas/${area.id}`)}
             >
-              <CardContent className="py-4 space-y-3">
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="font-semibold">{area.name}</h3>
+              <CardContent className="p-5 h-full flex flex-col gap-4">
+                <div className="flex justify-between items-start gap-3">
+                  <h3 className="text-lg font-bold leading-snug">{area.name}</h3>
                   <StatusBadge status={area.status} />
                 </div>
-                <div className="flex items-center gap-1 text-sm text-text-secondary">
-                  <MapPin className="h-3 w-3 shrink-0" />
+                <div className="flex items-center gap-1.5 text-sm text-text-secondary">
+                  <MapPin className="h-4 w-4 shrink-0" />
                   <span>{[area.city, area.state, getCountryName(area.countryCode ?? '')].filter(Boolean).join(', ') || '-'}</span>
                 </div>
-                <div className="grid grid-cols-3 gap-2 text-center">
-                  <div className="rounded-md bg-primary-50 p-2">
-                    <p className="text-xs text-text-secondary">{t('area.form.pricePerTree')}</p>
-                    <p className="text-xs font-semibold text-primary">{area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</p>
+                <div className="flex-1 min-h-0">
+                  {area.description && (
+                    <p className="text-sm text-text-secondary line-clamp-3 leading-relaxed">{area.description}</p>
+                  )}
+                </div>
+                <div className="grid grid-cols-3 gap-3 text-center">
+                  <div className="rounded-lg bg-primary-50 p-3">
+                    <p className="text-xs text-text-secondary mb-0.5">{t('area.form.pricePerTree')}</p>
+                    <p className="text-sm font-bold text-primary">{area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</p>
                   </div>
-                  <div className="rounded-md bg-amber-50 p-2">
-                    <p className="text-xs text-text-secondary">{t('area.tCO2ePerTree')}</p>
-                    <p className="text-xs font-semibold text-amber-700">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</p>
+                  <div className="rounded-lg bg-amber-50 p-3">
+                    <p className="text-xs text-text-secondary mb-0.5">{t('area.tCO2ePerTree')}</p>
+                    <p className="text-sm font-bold text-amber-700">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</p>
                   </div>
-                  <div className="rounded-md bg-gray-100 p-2">
-                    <p className="text-xs text-text-secondary">{t('area.form.defaultHorizonYears')}</p>
-                    <p className="text-xs font-semibold text-text-primary">{area.defaultHorizonYears ?? 20} {t('common.years')}</p>
+                  <div className="rounded-lg bg-gray-100 p-3">
+                    <p className="text-xs text-text-secondary mb-0.5">{t('area.form.defaultHorizonYears')}</p>
+                    <p className="text-sm font-bold text-text-primary">{area.defaultHorizonYears ?? 20} {t('common.years')}</p>
                   </div>
                 </div>
               </CardContent>

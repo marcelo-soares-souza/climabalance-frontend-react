@@ -7,6 +7,7 @@ import { EmptyState } from '@/components/EmptyState';
 import { SkeletonList } from '@/components/ui/Skeleton';
 import { StatusBadge } from '@/components/StatusBadge';
 import { formatCurrency, formatDate } from '@/lib/format';
+import { getCountryName } from '@/lib/countries';
 import { FileCheck, MapPin } from 'lucide-react';
 
 export function PendingAreasPage() {
@@ -30,7 +31,7 @@ export function PendingAreasPage() {
                   <h3 className="font-medium">{area.name}</h3>
                   <StatusBadge status={area.status} />
                 </div>
-                <div className="flex items-center gap-1 text-sm text-text-secondary mb-1"><MapPin className="h-3 w-3" /> {[area.city, area.state].filter(Boolean).join(', ')}</div>
+                <div className="flex items-center gap-1 text-sm text-text-secondary mb-1"><MapPin className="h-3 w-3" /> {[area.city, area.state, getCountryName(area.countryCode ?? '')].filter(Boolean).join(', ')}</div>
                 <div className="flex justify-between text-sm">
                   <span>{t('area.form.pricePerTree')}: {area.pricePerTree != null ? formatCurrency(area.pricePerTree) : '-'}</span>
                   <span className="text-text-secondary">{formatDate(area.createdAt)}</span>
