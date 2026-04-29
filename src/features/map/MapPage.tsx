@@ -7,7 +7,6 @@ import {
   TileLayer,
   Marker,
   Popup,
-  useMap,
 } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -25,7 +24,6 @@ import { useAuth } from "@/hooks/use-auth";
 import { countries, getCountryName } from "@/lib/countries";
 import { MapPin, TreePine, Sprout } from "lucide-react";
 import type { Area } from "@/types/area";
-import type { LeafletEvent } from "leaflet";
 
 const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
@@ -315,10 +313,6 @@ export function MapPage() {
     [setSelection, effectiveCalculationId, selectedTotalTCO2e, isAuthenticated, navigate],
   );
 
-  const handleZoomChange = useCallback((zoom: number) => {
-    setMapZoom(zoom);
-  }, []);
-
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-3">
@@ -341,7 +335,6 @@ export function MapPage() {
             <Skeleton className="w-full h-full" />
           ) : (
             <MapContainer center={center} zoom={3} className="h-full w-full">
-              <MapZoomListener onZoomChange={handleZoomChange} />
               <LocateControl title={t("map.locate.title")} />
               <MapLayerControl
                 satellite={satellite}
@@ -374,16 +367,4 @@ export function MapPage() {
   );
 }
 
-function MapZoomListener({
-  onZoomChange,
-}: {
-  onZoomChange: (zoom: number) => void;
-}) {
-  const map = useMap();
-  useEffect(() => {
-    const handler = (e: LeafletEvent) => onZoomChange(e.target.getZoom());
-    map.on("zoomend", handler);
-    return () => { map.off("zoomend", handler); };
-  }, [map, onZoomChange]);
-  return null;
-}
+

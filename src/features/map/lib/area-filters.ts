@@ -1,9 +1,13 @@
 import type { Area } from '@/types/area';
+import type { TFunction } from 'i18next';
 
 export interface AreaFilterValues {
   search?: string;
   country?: string;
   biome?: string;
+  status?: string;
+  city?: string;
+  state?: string;
 }
 
 function normalizeFilterValue(value?: string): string {
