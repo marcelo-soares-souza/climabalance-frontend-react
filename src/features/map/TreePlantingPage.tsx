@@ -1,10 +1,10 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
 import { plantedTreesService } from "@/services/planted-trees";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Rectangle, useMapEvents, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Card } from "@/components/ui/Card";
@@ -20,7 +20,7 @@ import { ErrorBanner } from "@/components/ErrorBanner";
 import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
 import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
 import { getCountryName } from "@/lib/countries";
-import { ArrowLeft, TreePine, Check, Trash2, MapPin } from "lucide-react";
+import { ArrowLeft, TreePine, Check, Trash2, MapPin, MousePointer2, Square } from "lucide-react";
 
 const treeIcon = L.divIcon({
   className: "",
@@ -44,6 +44,104 @@ const existingTreeIcon = L.divIcon({
   iconAnchor: [12, 12],
 });
 
+interface DrawingBounds {
+  minLat: number;
+  maxLat: number;
+  minLng: number;
+  maxLng: number;
+}
+
+function generateGridPoints(
+  bounds: DrawingBounds,
+  count: number,
+): { latitude: number; longitude: number }[] {
+  if (count <= 0) return [];
+
+  const latSpan = bounds.maxLat - bounds.minLat;
+  const lngSpan = bounds.maxLng - bounds.minLng;
+
+  if (latSpan < 0.00001 || lngSpan < 0.00001) return [];
+
+  const aspectRatio = latSpan > 0 ? lngSpan / latSpan : 1;
+  const cols = Math.max(1, Math.round(Math.sqrt(count * aspectRatio)));
+  const rows = Math.max(1, Math.ceil(count / cols));
+
+  const cellLat = latSpan / rows;
+  const cellLng = lngSpan / cols;
+  const points: { latitude: number; longitude: number }[] = [];
+
+  for (let r = 0; r < rows && points.length < count; r++) {
+    for (let c = 0; c < cols && points.length < count; c++) {
+      const lat = bounds.minLat + cellLat * (r + 0.5) + (Math.random() - 0.5) * cellLat * 0.6;
+      const lng = bounds.minLng + cellLng * (c + 0.5) + (Math.random() - 0.5) * cellLng * 0.6;
+      points.push({ latitude: lat, longitude: lng });
+    }
+  }
+
+  return points;
+}
+
+function AreaDrawHandler({
+  areaMode,
+  maxPoints,
+  currentCount,
+  onAreaSelected,
+}: {
+  areaMode: boolean;
+  maxPoints: number;
+  currentCount: number;
+  onAreaSelected: (bounds: DrawingBounds) => void;
+}) {
+  const map = useMap();
+  const drawingRef = useRef(false);
+  const startRef = useRef<[number, number] | null>(null);
+  const [rectStart, setRectStart] = useState<[number, number] | null>(null);
+  const [rectEnd, setRectEnd] = useState<[number, number] | null>(null);
+
+  useEffect(() => {
+    const container = map.getContainer();
+    container.style.cursor = areaMode ? 'crosshair' : '';
+    return () => { container.style.cursor = ''; };
+  }, [map, areaMode]);
+
+  useMapEvents({
+    mousedown: (e) => {
+      if (!areaMode) return;
+      if (!e.originalEvent.shiftKey) return;
+      if (maxPoints > 0 && currentCount >= maxPoints) return;
+      drawingRef.current = true;
+      startRef.current = [e.latlng.lat, e.latlng.lng];
+      setRectStart([e.latlng.lat, e.latlng.lng]);
+      setRectEnd([e.latlng.lat, e.latlng.lng]);
+    },
+    mousemove: (e) => {
+      if (!drawingRef.current || !startRef.current) return;
+      setRectEnd([e.latlng.lat, e.latlng.lng]);
+    },
+    mouseup: (e) => {
+      if (!drawingRef.current || !startRef.current) return;
+      const start = startRef.current;
+      drawingRef.current = false;
+      startRef.current = null;
+      setRectStart(null);
+      setRectEnd(null);
+      const minLat = Math.min(start[0], e.latlng.lat);
+      const maxLat = Math.max(start[0], e.latlng.lat);
+      const minLng = Math.min(start[1], e.latlng.lng);
+      const maxLng = Math.max(start[1], e.latlng.lng);
+      onAreaSelected({ minLat, maxLat, minLng, maxLng });
+    },
+  });
+
+  if (!rectStart || !rectEnd) return null;
+  return (
+    <Rectangle
+      bounds={[[rectStart[0], rectStart[1]], [rectEnd[0], rectEnd[1]]]}
+      pathOptions={{ color: "#2D6A4F", weight: 2, fillOpacity: 0.15 }}
+    />
+  );
+}
+
 function MapClickHandler({
   onMapClick,
 }: {
@@ -66,6 +164,7 @@ export function TreePlantingPage() {
   const [error, setError] = useState<string | null>(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [satellite, setSatellite] = useState(false);
+  const [areaMode, setAreaMode] = useState(false);
 
   const { data: area, isLoading: areaLoading } = useQuery({
     queryKey: ["areas", areaId],
@@ -115,11 +214,23 @@ export function TreePlantingPage() {
 
   const handleMapClick = useCallback(
     (lat: number, lng: number) => {
-      if (!pendingCount) return;
-      if (points.length >= pendingCount.pending) return;
+      if (areaMode) return;
       setPoints((prev) => [...prev, { latitude: lat, longitude: lng }]);
     },
-    [points.length, pendingCount],
+    [areaMode],
+  );
+
+  const handleAreaSelected = useCallback(
+    (bounds: DrawingBounds) => {
+      if (!pendingCount) return;
+      setPoints((prev) => {
+        const remaining = pendingCount.pending - prev.length;
+        if (remaining <= 0) return prev;
+        const generated = generateGridPoints(bounds, remaining);
+        return [...prev, ...generated];
+      });
+    },
+    [pendingCount],
   );
 
   const handleRemovePoint = useCallback((index: number) => {
@@ -176,20 +287,52 @@ export function TreePlantingPage() {
             </span>
             <span className="text-text-secondary">{t("map.treesPlanted")}</span>
           </div>
-          <div className="w-48 h-2 bg-gray-100 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-primary rounded-full transition-all duration-300"
-              style={{
-                width: `${totalCompensated > 0 ? (totalPlanted / totalCompensated) * 100 : 0}%`,
-              }}
-            />
+          <div className="flex items-center gap-2">
+            <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setAreaMode(false)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
+                  !areaMode
+                    ? "bg-primary text-white"
+                    : "bg-white text-text-secondary hover:bg-gray-50"
+                }`}
+              >
+                <MousePointer2 className="h-3.5 w-3.5" />
+                {t("map.manualMode")}
+              </button>
+              <button
+                type="button"
+                onClick={() => setAreaMode(true)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
+                  areaMode
+                    ? "bg-primary text-white"
+                    : "bg-white text-text-secondary hover:bg-gray-50"
+                }`}
+              >
+                <Square className="h-3.5 w-3.5" />
+                {t("map.areaMode")}
+              </button>
+            </div>
+            <div className="w-48 h-2 bg-gray-100 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-primary rounded-full transition-all duration-300"
+                style={{
+                  width: `${totalCompensated > 0 ? (totalPlanted / totalCompensated) * 100 : 0}%`,
+                }}
+              />
+            </div>
           </div>
         </div>
 
         <p className="text-sm text-text-secondary mb-3">
-          {existingCount > 0
-            ? `${existingCount} j\u00e1 plantadas. Clique no mapa para adicionar mais ${maxNewPoints}.`
-            : t("map.plantTreesHint")}
+          {areaMode
+            ? t("map.areaModeHint")
+            : maxNewPoints > 0 && existingCount > 0
+              ? `${existingCount} j\u00e1 plantadas. Clique no mapa para adicionar mais ${maxNewPoints}.`
+              : maxNewPoints === 0 && existingCount > 0
+                ? t("map.allPlantedHint")
+                : t("map.plantTreesHint")}
         </p>
 
         <div className="h-[550px] rounded-lg overflow-hidden border border-gray-200">
@@ -207,6 +350,12 @@ export function TreePlantingPage() {
               onToggle={() => setSatellite((s) => !s)}
             />
             <MapClickHandler onMapClick={handleMapClick} />
+            <AreaDrawHandler
+              areaMode={areaMode}
+              maxPoints={maxNewPoints}
+              currentCount={points.length}
+              onAreaSelected={handleAreaSelected}
+            />
             <Marker
               position={[area.latitude, area.longitude]}
               icon={L.divIcon({
