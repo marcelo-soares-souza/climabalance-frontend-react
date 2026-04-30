@@ -27,20 +27,25 @@ import type { Area } from "@/types/area";
 
 const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
-const DEFAULT_ICON = L.divIcon({
-  className: "",
-  html: '<div style="background:#0B5F4B;width:28px;height:28px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3 7 10h3l-2 4h3v5h2v-5h3l-2-4h3L12 3Z" fill="white"/></svg></div>',
-  iconSize: [28, 28],
-  iconAnchor: [14, 14],
-});
-
-const CLUSTER_ICON = (count: number) =>
-  L.divIcon({
+function areaIcon(hasContributions: boolean): L.DivIcon {
+  const color = hasContributions ? '#2563EB' : '#0B5F4B';
+  return L.divIcon({
     className: "",
-    html: `<div style="background:#0B5F4B;width:38px;height:38px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">${count}</div>`,
+    html: `<div style="background:${color};width:28px;height:28px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3 7 10h3l-2 4h3v5h2v-5h3l-2-4h3L12 3Z" fill="white"/></svg></div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
+  });
+}
+
+function clusterIcon(count: number, hasContributions: boolean): L.DivIcon {
+  const color = hasContributions ? '#2563EB' : '#0B5F4B';
+  return L.divIcon({
+    className: "",
+    html: `<div style="background:${color};width:38px;height:38px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">${count}</div>`,
     iconSize: [38, 38],
     iconAnchor: [19, 19],
   });
+}
 
 function haversineMeters(
   aLat: number, aLng: number,
@@ -123,11 +128,12 @@ function ClusterMarker({
 }) {
   if (cluster.areas.length === 1) {
     const area = cluster.areas[0];
+    const hasContributions = (area.totalCompensatedTreesCount ?? 0) > 0;
 
     return (
       <Marker
         position={[area.latitude, area.longitude]}
-        icon={DEFAULT_ICON}
+        icon={areaIcon(hasContributions)}
       >
         <Popup>
           <div className="min-w-[220px] cursor-pointer" onClick={() => navigate(`/areas/${area.id}`)}>
@@ -218,10 +224,12 @@ function ClusterZoomMarker({
   navigate: (path: string) => void;
   onSelectArea: (area: Area) => void;
 }) {
+  const clusterHasContributions = cluster.areas.some((a) => (a.totalCompensatedTreesCount ?? 0) > 0);
+
   return (
     <Marker
       position={[cluster.latitude, cluster.longitude]}
-      icon={CLUSTER_ICON(cluster.areas.length)}
+      icon={clusterIcon(cluster.areas.length, clusterHasContributions)}
     >
       <Popup>
         <div className="min-w-[260px] max-h-[320px] overflow-y-auto space-y-3">
