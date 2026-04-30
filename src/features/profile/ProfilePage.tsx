@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
 import { authService } from '@/services/auth';
 import { usersService } from '@/services/users';
+import { areasService } from '@/services/areas';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -16,7 +17,7 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { ApiError } from '@/lib/api-client';
 import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber } from '@/lib/format';
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
-import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone } from 'lucide-react';
+import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone, ArrowRight, MapPin } from 'lucide-react';
 
 function formatProfileTCO2e(value: number): { amount: string; unit: string } {
   const abs = Math.abs(value);
@@ -81,6 +82,13 @@ export function ProfilePage() {
     queryKey: ['users', targetUserId, 'climate-balance'],
     queryFn: () => usersService.getClimateBalance(targetUserId!),
     enabled: !!targetUserId,
+  });
+
+  const isProducer = user?.roles?.includes('producer');
+  const { data: userAreas } = useQuery({
+    queryKey: ['areas', 'owner', targetUserId],
+    queryFn: () => areasService.listAreas({ ownerUserId: targetUserId! }),
+    enabled: !!targetUserId && !!isProducer,
   });
 
   if (loadingUser || loadingProfile) return <PageSkeleton />;
@@ -235,6 +243,36 @@ export function ProfilePage() {
                 </div>
               ))}
             </div>
+          </CardContent>
+        </Card>
+      )}
+
+      {isProducer && userAreas && userAreas.length > 0 && (
+        <Card>
+          <CardHeader><h3 className="font-medium">{t('nav.myAreas')}</h3></CardHeader>
+          <CardContent className="space-y-2">
+            {userAreas.map((area) => (
+              <Link
+                key={area.id}
+                to={`/areas/${area.id}`}
+                className="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors"
+              >
+                <div className="flex items-center gap-3 min-w-0">
+                  <MapPin className="h-4 w-4 text-primary shrink-0" />
+                  <div className="min-w-0">
+                    <p className="font-medium text-sm truncate">{area.name}</p>
+                    <p className="text-xs text-text-secondary truncate">
+                      {[area.city, area.state].filter(Boolean).join(', ')}
+                      {area.biome && <span className="ml-1">· {t(`biome.${area.biome}`, area.biome)}</span>}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <StatusBadge status={area.status} />
+                  <ArrowRight className="h-4 w-4 text-text-secondary" />
+                </div>
+              </Link>
+            ))}
           </CardContent>
         </Card>
       )}
