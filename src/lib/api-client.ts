@@ -91,6 +91,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 
   const token = tokenStorage.getAccessToken();
   const headers: Record<string, string> = {
+    'x-requested-by': 'clm-balance',
     ...(fetchOptions.headers as Record<string, string>),
   };
 
