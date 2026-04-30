@@ -49,6 +49,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   };
 
   const isAnalystOrAdmin = hasRole("analyst") || hasRole("administrator");
+  const canManageAreas = hasRole("producer") || isAdmin;
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     cn(
@@ -180,16 +181,18 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 <History className="h-4 w-4" /> {t("nav.history")}
               </NavLink>
 
-              <>
-                {sectionLabel(t("nav.areas"))}
-                <NavLink
-                  to="/areas"
-                  className={() => linkClassByValue(isMyAreasActive)}
-                  onClick={onClose}
-                >
-                  <TreePine className="h-4 w-4" /> {t("nav.myAreas")}
-                </NavLink>
-              </>
+              {canManageAreas && (
+                <>
+                  {sectionLabel(t("nav.areas"))}
+                  <NavLink
+                    to="/areas"
+                    className={() => linkClassByValue(isMyAreasActive)}
+                    onClick={onClose}
+                  >
+                    <TreePine className="h-4 w-4" /> {t("nav.myAreas")}
+                  </NavLink>
+                </>
+              )}
 
               {sectionLabel(t("nav.account"))}
               <NavLink to={profilePath} className={linkClass} onClick={onClose}>

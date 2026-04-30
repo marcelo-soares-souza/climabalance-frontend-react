@@ -14,6 +14,8 @@ export type AuthFieldErrors = Record<string, string>;
 
 function fieldLabelKey(field: string): string {
   switch (field) {
+    case 'name':
+      return 'auth.name';
     case 'email':
       return 'auth.email';
     case 'password':

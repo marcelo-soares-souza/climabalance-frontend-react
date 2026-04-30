@@ -52,8 +52,10 @@
     }
   },
   "auth": {
-    "email": "Correo electrónico",
-    "emailPlaceholder": "tu@correo.com",
+  "name": "Nombre",
+  "namePlaceholder": "Tu nombre",
+  "email": "Correo electrónico",
+  "emailPlaceholder": "tu@correo.com",
     "password": "Contraseña",
     "passwordPlaceholder": "Tu contraseña",
     "confirmPassword": "Confirmar contraseña",
@@ -1030,6 +1032,7 @@
       "roles": "Funciones",
       "createdAt": "Creado el",
       "lastLogin": "Último acceso",
+      "emailConfirmed": "Correo confirmado",
       "locale": "Idioma",
       "searchPlaceholder": "Buscar por correo",
       "empty": "No se encontraron usuarios.",

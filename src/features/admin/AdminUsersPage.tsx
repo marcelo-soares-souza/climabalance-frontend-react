@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersService } from '@/services/users';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Select } from '@/components/ui/Select';
 import { StatusBadge } from '@/components/StatusBadge';
 import { SkeletonTable } from '@/components/ui/Skeleton';
 import { EmptyState } from '@/components/EmptyState';
+import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { formatDate, formatDateTime } from '@/lib/format';
 import { getPrimaryAccountType, getAdditionalRoleLabels } from '@/lib/user-display';
-import { Users, Edit, Eye, Search, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
+import { Users, Edit, Eye, Trash2, Search, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { getUserStatusOptions } from '@/lib/options';
 
@@ -32,9 +33,20 @@ export function AdminUsersPage() {
   const [sort, setSort] = useState<SortConfig>({ column: 'updated_at', order: 'desc' });
   const statusOptions = getUserStatusOptions(t, { includeAll: true });
 
+  const queryClient = useQueryClient();
+  const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
+
   const { data: users, isLoading } = useQuery({
     queryKey: ['admin-users', { search, status: statusFilter, sort_by: sort.column, sort_order: sort.order }],
     queryFn: () => usersService.listUsers({ search: search || undefined, status: statusFilter || undefined, sort_by: sort.column, sort_order: sort.order }),
+  });
+
+  const deleteMutation = useMutation({
+    mutationFn: (userId: string) => usersService.deleteUser(userId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-users'] });
+      setDeleteTarget(null);
+    },
   });
 
   const handleSort = (column: string) => {
@@ -73,6 +85,7 @@ export function AdminUsersPage() {
                   <div className="flex items-center gap-1">{t('admin.users.status')} <SortIcon sort={sort} column="status" /></div>
                 </th>
                 <th className="text-left px-4 py-3 font-medium">{t('admin.users.roles')}</th>
+                <th className="text-left px-4 py-3 font-medium">{t('admin.users.emailConfirmed')}</th>
                 <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('created_at')}>
                   <div className="flex items-center gap-1">{t('admin.users.createdAt')} <SortIcon sort={sort} column="created_at" /></div>
                 </th>
@@ -94,11 +107,17 @@ export function AdminUsersPage() {
                         return `${primaryRole}${additionalRoles.length > 0 ? ` (${additionalRoles.join(', ')})` : ''}`;
                       })()}
                     </td>
+                    <td className="px-4 py-3">
+                      <span className="text-text-secondary">{user.emailConfirmedAt ? formatDateTime(user.emailConfirmedAt) : '—'}</span>
+                    </td>
                     <td className="px-4 py-3 text-text-secondary">{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
                     <td className="px-4 py-3 text-text-secondary">{user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-'}</td>
                     <td className="px-4 py-3"><div className="flex items-center gap-1">
                       <Button variant="ghost" size="sm" onClick={() => navigate(`/users/${user.id}/profile`)}><Eye className="h-3 w-3" /></Button>
                       <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/users/edit/${user.id}`)}><Edit className="h-3 w-3" /></Button>
+                      {!user.roles.includes('administrator') && (
+                        <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(user.id)}><Trash2 className="h-3 w-3 text-error" /></Button>
+                      )}
                     </div></td>
                   </tr>
                 ))}
@@ -107,6 +126,17 @@ export function AdminUsersPage() {
           ) : <div className="p-8"><EmptyState icon={<Users className="h-12 w-12" />} title={t('admin.users.empty')} /></div>}
         </CardContent>
       </Card>
+
+      <ConfirmDialog
+        open={deleteTarget !== null}
+        onClose={() => setDeleteTarget(null)}
+        onConfirm={() => { if (deleteTarget) deleteMutation.mutate(deleteTarget); }}
+        title={t('admin.users.deleteTitle')}
+        message={t('admin.users.deleteMessage')}
+        confirmLabel={t('common.delete')}
+        danger
+        loading={deleteMutation.isPending}
+      />
     </div>
   );
 }

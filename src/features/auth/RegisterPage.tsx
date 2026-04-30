@@ -17,6 +17,7 @@ export function RegisterPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { locale } = useLocale();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -63,6 +64,7 @@ export function RegisterPage() {
     setLoading(true);
     try {
       await authService.register({
+        name,
         email,
         password,
         password_confirm: passwordConfirm,
@@ -99,7 +101,8 @@ export function RegisterPage() {
         </Link>
       </p>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <Input id="email" type="email" label={t('auth.email')} value={email} onChange={(e) => { setEmail(e.target.value); setFieldErrors((current) => ({ ...current, email: '' })); }} error={fieldErrors.email} required autoFocus />
+        <Input id="name" type="text" label={t('auth.name')} placeholder={t('auth.namePlaceholder')} value={name} onChange={(e) => { setName(e.target.value); setFieldErrors((current) => ({ ...current, name: '' })); }} error={fieldErrors.name} required autoFocus />
+        <Input id="email" type="email" label={t('auth.email')} value={email} onChange={(e) => { setEmail(e.target.value); setFieldErrors((current) => ({ ...current, email: '' })); }} error={fieldErrors.email} required />
         <Input id="password" type="password" label={t('auth.password')} value={password} onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }} error={fieldErrors.password} required />
         <Input id="passwordConfirm" type="password" label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => { setPasswordConfirm(e.target.value); setFieldErrors((current) => ({ ...current, password_confirm: '' })); }} error={fieldErrors.password_confirm} required />
         <Select

@@ -52,8 +52,10 @@
     }
   },
   "auth": {
-    "email": "E-mail",
-    "emailPlaceholder": "votre@email.com",
+  "name": "Nom",
+  "namePlaceholder": "Votre nom",
+  "email": "E-mail",
+  "emailPlaceholder": "votre@email.com",
     "password": "Mot de passe",
     "passwordPlaceholder": "Votre mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
@@ -1030,6 +1032,7 @@
       "roles": "Rôles",
       "createdAt": "Créé le",
       "lastLogin": "Dernière connexion",
+      "emailConfirmed": "E-mail confirmé",
       "locale": "Langue",
       "searchPlaceholder": "Rechercher par e-mail",
       "empty": "Aucun utilisateur trouvé.",
