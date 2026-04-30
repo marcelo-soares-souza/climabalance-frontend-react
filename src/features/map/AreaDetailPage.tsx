@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
@@ -23,6 +23,7 @@ import {
   formatKgCO2e,
   formatNumber,
   formatTCO2e,
+  maskEmail,
 } from "@/lib/format";
 import {
   ArrowLeft,
@@ -271,9 +272,15 @@ export function AreaDetailPage() {
             {/* <MapPin className="h-4 w-4" /> */}
             <span>{[area.city, area.state, getCountryName(area.countryCode ?? "")].filter(Boolean).join(", ")}</span>
           </div>
-          {isAuthenticated && (
-            <p className="text-sm text-text-secondary mt-1">
-              {t("area.ownerEmail")}: {area.ownerEmail || "-"}
+          {area.ownerUserId && (
+            <p className="text-sm mt-1">
+              <span className="text-text-secondary">{t("area.owner")}: </span>
+              <Link
+                to={`/users/${area.ownerUserId}/profile`}
+                className="text-primary hover:underline"
+              >
+                {maskEmail(area.ownerEmail) || t("area.anonymousContributor")}
+              </Link>
             </p>
           )}
         </div>
@@ -626,7 +633,16 @@ export function AreaDetailPage() {
                   key={c.id}
                   className="flex justify-between py-2 border-b border-gray-50 last:border-0 text-sm"
                 >
-                  <span>{c.userEmail || t("area.anonymousContributor")}</span>
+                  {c.userId ? (
+                    <Link
+                      to={`/users/${c.userId}/profile`}
+                      className="text-primary hover:underline"
+                    >
+                      {c.userEmail || t("area.anonymousContributor")}
+                    </Link>
+                  ) : (
+                    <span>{t("area.anonymousContributor")}</span>
+                  )}
                   <span className="font-medium">
                     {formatTCO2e(c.totalTCO2e)} ({c.treesCount}{" "}
                     {t("area.trees")})

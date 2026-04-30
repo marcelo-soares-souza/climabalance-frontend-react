@@ -15,7 +15,7 @@ import { RoleBadge } from '@/components/RoleBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { ApiError } from '@/lib/api-client';
-import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber } from '@/lib/format';
+import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber, maskEmail } from '@/lib/format';
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
 import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone, ArrowRight, MapPin } from 'lucide-react';
 
@@ -34,7 +34,7 @@ function formatProfileTCO2e(value: number): { amount: string; unit: string } {
 export function ProfilePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { userId } = useAuth();
+  const { userId, isAdmin } = useAuth();
   const { userId: routeUserId } = useParams<{ userId: string }>();
   const targetUserId = routeUserId ?? userId ?? null;
   const isOwnProfile = !routeUserId || routeUserId === userId;
@@ -105,11 +105,13 @@ export function ProfilePage() {
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
-      <div className="flex justify-end">
-        <Button variant="outline" size="sm" onClick={() => navigate(editProfilePath)}>
-          <Edit className="h-4 w-4 mr-1" /> {t('profile.edit')}
-        </Button>
-      </div>
+      {isOwnProfile && (
+        <div className="flex justify-end">
+          <Button variant="outline" size="sm" onClick={() => navigate(editProfilePath)}>
+            <Edit className="h-4 w-4 mr-1" /> {t('profile.edit')}
+          </Button>
+        </div>
+      )}
 
       <Card>
         <CardContent className="py-6">
@@ -118,8 +120,8 @@ export function ProfilePage() {
               <User className="h-8 w-8 text-primary" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold">{profile?.displayName || user?.email}</h2>
-              <p className="text-text-secondary">{user?.email}</p>
+              <h2 className="text-xl font-semibold">{profile?.displayName || maskEmail(user?.email)}</h2>
+              <p className="text-text-secondary">{maskEmail(user?.email)}</p>
               <p className="text-sm text-text-secondary mt-1">
                 <span className="font-medium text-text-primary">{t('profile.accountType')}:</span> {primaryAccountType}
               </p>
@@ -277,9 +279,11 @@ export function ProfilePage() {
         </Card>
       )}
 
-      <Button variant="outline" className="w-full" onClick={() => navigate(certificatesPath)}>
-        <Award className="h-4 w-4 mr-2" /> {t('profile.viewCertificates')}
-      </Button>
+      {(isOwnProfile || isAdmin) && (
+        <Button variant="outline" className="w-full" onClick={() => navigate(certificatesPath)}>
+          <Award className="h-4 w-4 mr-2" /> {t('profile.viewCertificates')}
+        </Button>
+      )}
       {isOwnProfile && (
         <Button variant="outline" className="w-full" onClick={() => navigate(sessionsPath)}>
           <Smartphone className="h-4 w-4 mr-2" /> {t('profile.sessions')}

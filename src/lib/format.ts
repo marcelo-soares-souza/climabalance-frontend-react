@@ -33,3 +33,13 @@ export function maskDocumentNumber(value: string): string {
   const visible = value.trim().slice(-4);
   return visible ? `***${visible}` : '***';
 }
+
+export function maskEmail(value: string | null | undefined): string {
+  if (!value) return '';
+  const atIndex = value.indexOf('@');
+  if (atIndex <= 0) return value;
+  const local = value.slice(0, atIndex);
+  const domain = value.slice(atIndex);
+  if (local.length <= 2) return `${local.slice(0, 1)}***${domain}`;
+  return `${local.slice(0, 2)}***${domain}`;
+}

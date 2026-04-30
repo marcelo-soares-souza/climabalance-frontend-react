@@ -155,7 +155,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/users/:userId/profile',
-        element: <AuthGuard><UserScopeGuard><ProfilePage /></UserScopeGuard></AuthGuard>,
+        element: <ProfilePage />,
       },
       {
         path: '/profile/edit',
