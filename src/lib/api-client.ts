@@ -71,8 +71,17 @@ function buildUrl(path: string, params?: Record<string, string | number | boolea
   return url.toString();
 }
 
+const PUBLIC_AUTH_ROUTES = [
+  '/auth/login',
+  '/auth/register',
+  '/auth/confirm-email',
+  '/auth/password-reset',
+  '/auth/human-check',
+  '/auth/refresh',
+];
+
 function isAuthRoute(path: string): boolean {
-  return path.startsWith('/auth/');
+  return PUBLIC_AUTH_ROUTES.some((route) => path.startsWith(route));
 }
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
