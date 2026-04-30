@@ -36,9 +36,14 @@ function UnauthenticatedHome() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const { data: globalStats } = useQuery({
+    queryKey: ["global-stats"],
+    queryFn: () => areasService.getGlobalStats(),
+  });
+
   return (
     <div className="max-w-4xl mx-auto text-center py-2">
-      <div className="bg-gradient-to-br from-primary via-primary-light to-accent rounded-3xl px-8 py-16 mb-16 text-white relative overflow-hidden">
+      <div className="bg-gradient-to-br from-primary via-primary-light to-accent rounded-3xl px-8 py-16 mb-4 text-white relative overflow-hidden">
         <Leaf className="absolute -top-6 -right-6 h-40 w-40 text-white/5 rotate-12" />
         <Leaf className="absolute -bottom-4 -left-4 h-24 w-24 text-white/5 -rotate-45" />
         <img
@@ -99,6 +104,41 @@ function UnauthenticatedHome() {
           </Button>
         </div>
       </div>
+      {globalStats && (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4">
+          <Card className="border-l-4 border-l-emerald-400">
+            <CardContent className="py-4">
+              <p className="text-sm text-text-secondary mb-1">
+                {t("home.stats.totalAreas")}
+              </p>
+              <p className="text-2xl font-bold text-emerald-700">
+                {formatNumber(globalStats.totalAreas, "en-US", 0)}
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="border-l-4 border-l-primary">
+            <CardContent className="py-4">
+              <p className="text-sm text-text-secondary mb-1">
+                {t("home.stats.totalTrees")}
+              </p>
+              <p className="text-2xl font-bold text-primary">
+                {formatNumber(globalStats.totalTreesPlanted, "en-US", 0)}
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="border-l-4 border-l-amber-400">
+            <CardContent className="py-4">
+              <p className="text-sm text-text-secondary mb-1">
+                {t("home.stats.totalCO2")}
+              </p>
+              <p className="text-2xl font-bold text-amber-700">
+                {formatTCO2e(globalStats.totalCO2Captured)}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="hover:shadow-lg transition-shadow">
           <CardContent className="text-center py-8">
@@ -141,7 +181,7 @@ function UnauthenticatedHome() {
         </Card>
       </div>
 
-      <div className="mt-12 rounded-2xl border border-primary/10 bg-primary-50/40 px-6 py-5 text-center">
+      <div className="mt-6 rounded-2xl border border-primary/10 bg-primary-50/40 px-6 py-5 text-center">
         <Heart className="mx-auto mb-2 h-5 w-5 text-primary" />
         <p className="text-sm text-text-secondary">
           {t("support.description")}{" "}
@@ -331,10 +371,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
               <h2 className="font-semibold text-lg">
                 {t("home.dashboard.myAreas")}
               </h2>
-              <Button
-                size="sm"
-                onClick={() => navigate("/areas/create")}
-              >
+              <Button size="sm" onClick={() => navigate("/areas/create")}>
                 <Plus className="h-4 w-4 mr-1" /> {t("area.form.create")}
               </Button>
             </div>

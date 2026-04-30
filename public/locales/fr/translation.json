@@ -52,10 +52,10 @@
     }
   },
   "auth": {
-  "name": "Nom",
-  "namePlaceholder": "Votre nom",
-  "email": "E-mail",
-  "emailPlaceholder": "votre@email.com",
+    "name": "Nom",
+    "namePlaceholder": "Votre nom",
+    "email": "E-mail",
+    "emailPlaceholder": "votre@email.com",
     "password": "Mot de passe",
     "passwordPlaceholder": "Votre mot de passe",
     "confirmPassword": "Confirmer le mot de passe",
@@ -204,6 +204,11 @@
       "myAreas": "Mes Zones",
       "noAreas": "Aucune zone enregistrée",
       "noAreasDescription": "Enregistrez des projets de restauration et recevez du soutien pour planter des arbres"
+    },
+    "stats": {
+      "totalAreas": "Zones enregistrées",
+      "totalTrees": "Arbres plantés",
+      "totalCO2": "CO₂ capturé"
     }
   },
   "about": {
@@ -392,7 +397,12 @@
         "item3": "Conserver un historique structuré de la zone."
       },
       "cta": "Créer un compte producteur"
-    }
+    },
+    "videosLabel": "Vidéos",
+    "videosTitle": "Tutoriel Vidéo - Pas à Pas",
+    "videoTreePlanting": "Plantation d'Arbres",
+    "videoCarbonCalc": "Calcul Carbone et Compensation",
+    "videoFarmerOnboarding": "Inscription du Producteur"
   },
   "privacy": {
     "hero": {

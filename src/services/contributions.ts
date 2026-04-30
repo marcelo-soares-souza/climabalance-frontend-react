@@ -85,7 +85,7 @@ function normalizeQuote(raw: RawContributionQuote): ContributionQuote {
     estimatedTotalKgCO2e: asNumber(raw.estimated_total_kg_co2e),
     estimatedKgCO2PerTreePerYear: asNumber(raw.estimated_kg_co2_per_tree_per_year),
     horizonYears: asNumber(raw.horizon_years),
-    currency: asString(raw.currency, 'BRL'),
+    currency: asString(raw.currency, 'USD'),
   };
 }
 
@@ -120,7 +120,7 @@ function normalizeHistory(raw: RawContributionHistory): ContributionHistoryItem 
     totalTCO2e: asNumber(raw.total_t_co2e),
     treesCount: asNumber(raw.trees_count),
     totalAmount: asNumber(raw.total_amount),
-    currency: asString(raw.currency, 'BRL'),
+    currency: asString(raw.currency, 'USD'),
     status: asString(raw.status, 'pending') as ContributionHistoryItem['status'],
     createdAt: asString(raw.created_at),
     paidAt: asNullableString(raw.paid_at),
@@ -136,7 +136,7 @@ function normalizeAreaContribution(raw: RawAreaContribution): AreaContribution {
     treesCount: asNumber(raw.trees_count),
     totalTCO2e: asNumber(raw.total_t_co2e),
     totalAmount: 0,
-    currency: 'BRL',
+    currency: 'USD',
     compensationMode: 'tree_purchase',
     paidAt: asString(raw.compensated_at),
   };

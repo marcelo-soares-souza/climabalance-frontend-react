@@ -34,7 +34,7 @@ export function CompensationReviewPage() {
 
   const { data: quote, isLoading: quoteLoading, error: quoteError } = useQuery({
     queryKey: ['quote', areaId, treesRequested],
-    queryFn: () => contributionsService.getQuote({ area_id: areaId!, trees_requested: treesRequested, currency: 'BRL' }),
+    queryFn: () => contributionsService.getQuote({ area_id: areaId!, trees_requested: treesRequested,         currency: 'USD' }),
     enabled: !!areaId && treesRequested > 0,
   });
 

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Building2, Leaf, Sprout, ArrowRight } from 'lucide-react';
+import { Building2, Leaf, Sprout, ArrowRight, Play } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -42,6 +42,47 @@ export function HowToUsePlatformPage() {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="mb-4">
+          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            {t('howToUse.videosLabel')}
+          </span>
+          <h2 className="text-2xl font-bold font-display text-text-primary mt-1">
+            {t('howToUse.videosTitle')}
+          </h2>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
+          {[
+            { id: 'v3np9uHZTOs', title: t('howToUse.videoTreePlanting') },
+            { id: 'umeQNuL1nyU', title: t('howToUse.videoCarbonCalc') },
+            { id: 'VYkWEYp5eo8', title: t('howToUse.videoFarmerOnboarding') },
+          ].map((video) => (
+            <a
+              key={video.id}
+              href={`https://www.youtube.com/watch?v=${video.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block overflow-hidden rounded-xl bg-black"
+            >
+              <img
+                src={`https://img.youtube.com/vi/${video.id}/hqdefault.jpg`}
+                alt={video.title}
+                className="w-full aspect-video object-cover opacity-90 group-hover:opacity-100 transition-opacity"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg group-hover:bg-white transition-colors">
+                  <Play className="h-5 w-5 text-black ml-0.5" />
+                </div>
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3 pt-8">
+                <p className="text-sm font-medium text-white">{video.title}</p>
+              </div>
+            </a>
+          ))}
         </div>
       </section>
 

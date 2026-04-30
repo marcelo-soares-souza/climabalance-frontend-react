@@ -52,10 +52,10 @@
     }
   },
   "auth": {
-  "name": "Name",
-  "namePlaceholder": "Your name",
-  "email": "Email",
-  "emailPlaceholder": "your@email.com",
+    "name": "Name",
+    "namePlaceholder": "Your name",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
     "password": "Password",
     "passwordPlaceholder": "Your password",
     "confirmPassword": "Confirm password",
@@ -204,6 +204,11 @@
       "myAreas": "My Areas",
       "noAreas": "No areas registered",
       "noAreasDescription": "Register restoration projects and receive support to plant trees"
+    },
+    "stats": {
+      "totalAreas": "Registered areas",
+      "totalTrees": "Trees planted",
+      "totalCO2": "CO₂ captured"
     }
   },
   "about": {
@@ -392,7 +397,12 @@
         "item3": "Keep a structured area history."
       },
       "cta": "Create producer account"
-    }
+    },
+    "videosLabel": "Videos",
+    "videosTitle": "Video Tutorial - Step by Step",
+    "videoTreePlanting": "Tree Planting Demo",
+    "videoCarbonCalc": "Carbon Calculation & Offset",
+    "videoFarmerOnboarding": "Farmer Onboarding Tutorial"
   },
   "privacy": {
     "hero": {

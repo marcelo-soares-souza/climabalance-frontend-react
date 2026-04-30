@@ -186,7 +186,7 @@ function normalizeAreaContribution(raw: RawAreaContribution, areaId: string): Ar
     treesCount: asNumber(raw.trees_count),
     totalTCO2e: asNumber(raw.total_t_co2e),
     totalAmount: asNumber(raw.total_amount),
-    currency: asString(raw.currency, 'BRL'),
+    currency: asString(raw.currency, 'USD'),
     compensationMode: asString(raw.compensation_mode, 'tree_purchase'),
     paidAt: asString(raw.paid_at ?? raw.compensated_at ?? raw.created_at),
   };
@@ -325,5 +325,9 @@ export const areasService = {
 
   suspendArea(areaId: string, reason?: string) {
     return api.post<void>(`/areas/${areaId}/suspend`, { reason });
+  },
+
+  getGlobalStats(): Promise<{ totalAreas: number; totalTreesPlanted: number; totalCO2Captured: number }> {
+    return api.get('/stats/global');
   },
 };

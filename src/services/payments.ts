@@ -46,7 +46,7 @@ function normalizePayment(raw: RawPayment): PaymentResult {
     paymentStatus: asString(raw.payment_status, 'pending') as PaymentResult['paymentStatus'],
     compensationStatus: asString(raw.compensation_status),
     amount: asNumber(raw.amount),
-    currency: asString(raw.currency, 'BRL'),
+    currency: asString(raw.currency, 'USD'),
     installments: asNumber(raw.installments, 1),
     processedAt: asString(raw.processed_at),
     certificate: raw.certificate

@@ -52,10 +52,10 @@
     }
   },
   "auth": {
-  "name": "Nombre",
-  "namePlaceholder": "Tu nombre",
-  "email": "Correo electrónico",
-  "emailPlaceholder": "tu@correo.com",
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tu@correo.com",
     "password": "Contraseña",
     "passwordPlaceholder": "Tu contraseña",
     "confirmPassword": "Confirmar contraseña",
@@ -204,6 +204,11 @@
       "myAreas": "Mis Áreas",
       "noAreas": "Ninguna área registrada",
       "noAreasDescription": "Registra proyectos de restauración y recibe apoyo para plantar árboles"
+    },
+    "stats": {
+      "totalAreas": "Áreas registradas",
+      "totalTrees": "Árboles plantados",
+      "totalCO2": "CO₂ capturado"
     }
   },
   "about": {
@@ -392,7 +397,12 @@
         "item3": "Mantener historial estructurado del área."
       },
       "cta": "Crear cuenta de productor"
-    }
+    },
+    "videosLabel": "Videos",
+    "videosTitle": "Tutorial en Vídeos - Paso a Paso",
+    "videoTreePlanting": "Plantación de Árboles",
+    "videoCarbonCalc": "Cálculo de Carbono y Compensación",
+    "videoFarmerOnboarding": "Registro del Productor"
   },
   "privacy": {
     "hero": {

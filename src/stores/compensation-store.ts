@@ -26,7 +26,7 @@ const initialState: CompensationSelection = {
   treesRequested: null,
   totalTCO2e: null,
   totalAmount: null,
-  currency: 'BRL',
+      currency: 'USD',
 };
 
 export const useCompensationStore = create<CompensationStore>()(
