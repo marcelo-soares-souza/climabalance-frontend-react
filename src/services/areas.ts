@@ -291,12 +291,13 @@ export const areasService = {
       .then((rows) => rows.map((row) => normalizeArea(row)));
   },
 
-  listAreasPaginated(params?: { status?: string; biome?: string; cursor?: string; limit?: number }) {
+  listAreasPaginated(params?: { status?: string; biome?: string; cursor?: string; limit?: number; onlyActive?: boolean }) {
     const apiParams: Record<string, string | number | undefined> = {};
     if (params?.status) apiParams.status = params.status;
     if (params?.biome) apiParams.biome = params.biome;
     if (params?.cursor) apiParams.cursor = params.cursor;
     if (params?.limit !== undefined) apiParams.limit = String(params.limit);
+    if (params?.onlyActive) apiParams.onlyActive = 'true';
     return api
       .get<PaginatedAreasResponse>('/areas', { params: apiParams })
       .then((res) => ({

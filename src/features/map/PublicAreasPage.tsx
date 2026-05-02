@@ -33,6 +33,7 @@ export function PublicAreasPage() {
     queryFn: ({ pageParam }) =>
       areasService.listAreasPaginated({
         ...(statusFilter ? { status: statusFilter } : {}),
+        onlyActive: true,
         cursor: pageParam as string | undefined,
         limit: PAGE_SIZE,
       }),

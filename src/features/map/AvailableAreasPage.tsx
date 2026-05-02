@@ -25,7 +25,7 @@ export function AvailableAreasPage() {
     queryKey: ['areas', 'available', { status: 'active' }],
     queryFn: ({ pageParam }) =>
       areasService.listAreasPaginated({
-        status: 'active',
+        onlyActive: true,
         cursor: pageParam as string | undefined,
         limit: PAGE_SIZE,
       }),
