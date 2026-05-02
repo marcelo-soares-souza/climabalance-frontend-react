@@ -2,266 +2,22 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-} from "react-leaflet";
-import L from "leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { areasService } from "@/services/areas";
 import { Combobox } from "@/components/ui/Combobox";
-import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { LocateControl } from "@/components/leaflet/LocateControl";
 import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
+import { AreaMarkers } from "@/components/leaflet/AreaMarkers";
 import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
-import { formatCurrency, formatKgCO2e, formatNumber } from "@/lib/format";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useCompensationStore } from "@/stores/compensation-store";
 import { useAuth } from "@/hooks/use-auth";
-import { countries, getCountryName } from "@/lib/countries";
-import { MapPin, TreePine, Sprout } from "lucide-react";
+import { countries } from "@/lib/countries";
 import type { Area } from "@/types/area";
 
 const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
-
-function areaIcon(hasContributions: boolean): L.DivIcon {
-  const color = hasContributions ? '#2563EB' : '#0B5F4B';
-  return L.divIcon({
-    className: "",
-    html: `<div style="background:${color};width:28px;height:28px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3 7 10h3l-2 4h3v5h2v-5h3l-2-4h3L12 3Z" fill="white"/></svg></div>`,
-    iconSize: [28, 28],
-    iconAnchor: [14, 14],
-  });
-}
-
-function clusterIcon(count: number, hasContributions: boolean): L.DivIcon {
-  const color = hasContributions ? '#2563EB' : '#0B5F4B';
-  return L.divIcon({
-    className: "",
-    html: `<div style="background:${color};width:38px;height:38px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:14px;">${count}</div>`,
-    iconSize: [38, 38],
-    iconAnchor: [19, 19],
-  });
-}
-
-function haversineMeters(
-  aLat: number, aLng: number,
-  bLat: number, bLng: number,
-): number {
-  const R = 6371000;
-  const dLat = ((bLat - aLat) * Math.PI) / 180;
-  const dLng = ((bLng - aLng) * Math.PI) / 180;
-  const sinDLat = Math.sin(dLat / 2);
-  const sinDLng = Math.sin(dLng / 2);
-  const a =
-    sinDLat * sinDLat +
-    Math.cos((aLat * Math.PI) / 180) *
-      Math.cos((bLat * Math.PI) / 180) *
-      sinDLng * sinDLng;
-  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-}
-
-const CLUSTER_RADIUS_METERS = 120_000;
-
-interface AreaCluster {
-  id: string;
-  areas: Area[];
-  latitude: number;
-  longitude: number;
-}
-
-function buildClusters(areas: Area[]): AreaCluster[] {
-  const clusters: AreaCluster[] = [];
-
-  for (const area of areas) {
-    let added = false;
-    for (const cluster of clusters) {
-      const dist = haversineMeters(
-        area.latitude, area.longitude,
-        cluster.latitude, cluster.longitude,
-      );
-      if (dist <= CLUSTER_RADIUS_METERS) {
-        cluster.areas.push(area);
-        added = true;
-        break;
-      }
-    }
-    if (!added) {
-      clusters.push({
-        id: area.id,
-        areas: [area],
-        latitude: area.latitude,
-        longitude: area.longitude,
-      });
-    }
-  }
-
-  for (const cluster of clusters) {
-    if (cluster.areas.length > 1) {
-      const avgLat =
-        cluster.areas.reduce((s, a) => s + a.latitude, 0) /
-        cluster.areas.length;
-      const avgLng =
-        cluster.areas.reduce((s, a) => s + a.longitude, 0) /
-        cluster.areas.length;
-      cluster.latitude = avgLat;
-      cluster.longitude = avgLng;
-    }
-  }
-
-  return clusters;
-}
-
-function ClusterMarker({
-  cluster,
-  t,
-  navigate,
-  onSelectArea,
-}: {
-  cluster: AreaCluster;
-  t: (key: string, options?: Record<string, unknown>) => string;
-  navigate: (path: string) => void;
-  onSelectArea: (area: Area) => void;
-}) {
-  if (cluster.areas.length === 1) {
-    const area = cluster.areas[0];
-    const hasContributions = (area.totalCompensatedTreesCount ?? 0) > 0;
-
-    return (
-      <Marker
-        position={[area.latitude, area.longitude]}
-        icon={areaIcon(hasContributions)}
-      >
-        <Popup>
-          <div className="min-w-[220px] cursor-pointer" onClick={() => navigate(`/areas/${area.id}`)}>
-            {area.thumbnailUrl && (
-              <img
-                src={area.thumbnailUrl}
-                alt=""
-                className="w-full h-28 object-cover rounded-t-md -mt-1 -mx-1 mb-2"
-                style={{ width: "calc(100% + 8px)" }}
-              />
-            )}
-            <h3 className="font-semibold text-lg mb-1.5 leading-tight">
-              {area.name}
-            </h3>
-            <div className="space-y-1.5">
-              <p className="text-text-secondary text-sm">
-                <MapPin className="h-3.5 w-3.5 inline" />{" "}
-                {[area.city, area.state, getCountryName(area.countryCode ?? "")].filter(Boolean).join(", ") || "-"}
-              </p>
-              {area.description && (
-                <p className="text-sm text-text-secondary line-clamp-4">
-                  {area.description}
-                </p>
-              )}
-              <div className="flex gap-4 pt-1.5">
-                {area.pricePerTree != null && (
-                  <p className="text-sm">
-                    <span className="text-text-secondary">{t("area.form.pricePerTree")}:</span>{" "}
-                    <span className="font-medium">{formatCurrency(area.pricePerTree)}</span>
-                  </p>
-                )}
-                <p className="text-sm">
-                  <span className="text-text-secondary">
-                    {t("compensation.review.estimatedCO2")}:
-                  </span>{" "}
-                  <span className="font-medium">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span>
-                </p>
-              </div>
-              {(area.plantedTreesCount != null || area.totalCompensatedTreesCount != null) && (
-                <div className="flex gap-3 pt-1 text-xs text-text-secondary">
-                  {area.plantedTreesCount != null && (
-                    <span className="flex items-center gap-1">
-                      <TreePine className="h-3 w-3" />
-                      {t("map.treesPlanted")}: {formatNumber(area.plantedTreesCount, "pt-BR", 0)}
-                    </span>
-                  )}
-                  {area.totalCompensatedTreesCount != null && (
-                    <span className="flex items-center gap-1">
-                      <Sprout className="h-3 w-3" />
-                      {t("map.treesCompensated")}: {formatNumber(area.totalCompensatedTreesCount, "pt-BR", 0)}
-                    </span>
-                  )}
-                </div>
-              )}
-            </div>
-            <div className="flex gap-2 mt-3">
-              <Button
-                size="sm"
-                variant="outline"
-                onClick={(e) => { e.stopPropagation(); navigate(`/areas/${area.id}`); }}
-              >
-                {t("common.details")}
-              </Button>
-              <Button
-                size="sm"
-                onClick={(e) => { e.stopPropagation(); onSelectArea(area); }}
-              >
-                {t("map.compensate")}
-              </Button>
-            </div>
-          </div>
-        </Popup>
-      </Marker>
-    );
-  }
-
-  return <ClusterZoomMarker cluster={cluster} t={t} navigate={navigate} onSelectArea={onSelectArea} />;
-}
-
-function ClusterZoomMarker({
-  cluster,
-  t,
-  navigate,
-  onSelectArea,
-}: {
-  cluster: AreaCluster;
-  t: (key: string, options?: Record<string, unknown>) => string;
-  navigate: (path: string) => void;
-  onSelectArea: (area: Area) => void;
-}) {
-  const clusterHasContributions = cluster.areas.some((a) => (a.totalCompensatedTreesCount ?? 0) > 0);
-
-  return (
-    <Marker
-      position={[cluster.latitude, cluster.longitude]}
-      icon={clusterIcon(cluster.areas.length, clusterHasContributions)}
-    >
-      <Popup>
-        <div className="min-w-[260px] max-h-[320px] overflow-y-auto space-y-3">
-          <p className="font-semibold text-sm text-text-secondary sticky top-0 bg-white pb-1">
-            {t("map.areasCount", { count: cluster.areas.length })}
-          </p>
-          {cluster.areas.map((area) => (
-            <div key={area.id} className="border border-gray-100 rounded-lg p-3 space-y-2 hover:bg-gray-50 cursor-pointer" onClick={() => navigate(`/areas/${area.id}`)}>
-              {area.thumbnailUrl && (
-                <img src={area.thumbnailUrl} alt="" className="w-full h-20 object-cover rounded-md" />
-              )}
-              <p className="font-semibold text-sm leading-snug">{area.name}</p>
-              <p className="text-xs text-text-secondary">
-                <MapPin className="h-3 w-3 inline" />{" "}
-                {[area.city, area.state, getCountryName(area.countryCode ?? "")].filter(Boolean).join(", ") || "-"}
-              </p>
-              <div className="flex gap-2 text-xs">
-                {area.pricePerTree != null && (
-                  <span className="rounded bg-primary-50 px-2 py-1 font-medium text-primary">{formatCurrency(area.pricePerTree)}</span>
-                )}
-                <span className="rounded bg-amber-50 px-2 py-1 font-medium text-amber-700">{formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span>
-              </div>
-              <Button size="sm" className="w-full" onClick={(e) => { e.stopPropagation(); onSelectArea(area); }}>
-                {t("map.compensate")}
-              </Button>
-            </div>
-          ))}
-        </div>
-      </Popup>
-    </Marker>
-  );
-}
 
 export function MapPage() {
   const { t } = useTranslation();
@@ -305,16 +61,6 @@ export function MapPage() {
     return areas.filter((a) => a.countryCode === countryFilter);
   }, [areas, countryFilter]);
 
-  const visibleAreas = useMemo(() => {
-    if (!filteredAreas) return [];
-    return filteredAreas;
-  }, [filteredAreas]);
-
-  const clusters = useMemo(
-    () => buildClusters(visibleAreas),
-    [visibleAreas],
-  );
-
   const center = useMemo(() => {
     if (filteredAreas && filteredAreas.length > 0) {
       const lat = filteredAreas.reduce((s, a) => s + a.latitude, 0) / filteredAreas.length;
@@ -342,6 +88,13 @@ export function MapPage() {
       navigate("/compensation/review");
     },
     [setSelection, effectiveCalculationId, selectedTotalTCO2e, isAuthenticated, navigate],
+  );
+
+  const handleNavigateToArea = useCallback(
+    (areaId: string) => {
+      navigate(`/areas/${areaId}`);
+    },
+    [navigate],
   );
 
   return (
@@ -375,15 +128,12 @@ export function MapPage() {
                 attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
                 url={satellite ? SATELLITE_URL : OSM_URL}
               />
-              {clusters.map((cluster) => (
-                <ClusterMarker
-                  key={cluster.id}
-                  cluster={cluster}
-                  t={t}
-                  navigate={navigate}
-                  onSelectArea={handleSelectArea}
-                />
-              ))}
+              <AreaMarkers
+                areas={filteredAreas}
+                t={t}
+                onSelectArea={handleSelectArea}
+                onNavigateToArea={handleNavigateToArea}
+              />
             </MapContainer>
           )}
         </div>
@@ -391,11 +141,9 @@ export function MapPage() {
 
       {filteredAreas && (
         <p className="text-sm text-text-secondary">
-          {t("map.areasCount", { count: visibleAreas.length })}
+          {t("map.areasCount", { count: filteredAreas.length })}
         </p>
       )}
     </div>
   );
 }
-
-
