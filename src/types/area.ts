@@ -22,6 +22,7 @@ export interface Area {
   defaultHorizonYears: number | null;
   pricePerTCO2e: number | null;
   thumbnailUrl?: string;
+  imageUrl?: string;
   committedTreesCount?: number;
   plantedTreesCount?: number;
   totalCompensatedTreesCount?: number;

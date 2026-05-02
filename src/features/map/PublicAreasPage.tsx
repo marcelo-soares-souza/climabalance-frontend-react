@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Select } from '@/components/ui/Select';
@@ -9,14 +9,16 @@ import { Combobox } from '@/components/ui/Combobox';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { EmptyState } from '@/components/EmptyState';
-import { SkeletonList } from '@/components/ui/Skeleton';
 import { StatusBadge } from '@/components/StatusBadge';
 import { formatCurrency, formatKgCO2e } from '@/lib/format';
-import { filterAreas, getAreaStatusOptions } from '@/features/map/lib/area-filters';
+import { getAreaStatusOptions } from '@/features/map/lib/area-filters';
 import { countries, getCountryName } from '@/lib/countries';
-import { MapPin, TreePine, FilterX } from 'lucide-react';
+import { MapPin, TreePine, FilterX, Loader2 } from 'lucide-react';
+import { AreaThumbnail } from '@/components/AreaThumbnail';
+import type { Area } from '@/types/area';
 
 const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
+const PAGE_SIZE = 20;
 
 export function PublicAreasPage() {
   const { t } = useTranslation();
@@ -26,18 +28,40 @@ export function PublicAreasPage() {
   const [countryFilter, setCountryFilter] = useState('');
   const statusOptions = getAreaStatusOptions(t, { includeAll: true });
 
-  const { data: areas, isLoading } = useQuery({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
     queryKey: ['areas', 'public', { status: statusFilter || 'all' }],
-    queryFn: () => areasService.getMapAreas(statusFilter ? { status: statusFilter } : undefined),
+    queryFn: ({ pageParam }) =>
+      areasService.listAreasPaginated({
+        ...(statusFilter ? { status: statusFilter } : {}),
+        cursor: pageParam as string | undefined,
+        limit: PAGE_SIZE,
+      }),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
+  const allAreas = useMemo(
+    () => data?.pages.flatMap((page) => page.data) ?? [],
+    [data],
+  );
+
   const filteredAreas = useMemo(() => {
-    return filterAreas(areas, {
-      search: searchFilter,
-      country: countryFilter,
-      status: statusFilter,
-    });
-  }, [areas, searchFilter, countryFilter, statusFilter]);
+    let result = allAreas;
+    if (searchFilter) {
+      const q = searchFilter.toLowerCase();
+      result = result.filter(
+        (a) =>
+          a.name.toLowerCase().includes(q) ||
+          (a.description ?? '').toLowerCase().includes(q) ||
+          (a.city ?? '').toLowerCase().includes(q) ||
+          (a.state ?? '').toLowerCase().includes(q),
+      );
+    }
+    if (countryFilter) {
+      result = result.filter((a) => a.countryCode === countryFilter);
+    }
+    return result;
+  }, [allAreas, searchFilter, countryFilter]);
 
   const hasFilters = Boolean(searchFilter || countryFilter || statusFilter);
 
@@ -46,6 +70,29 @@ export function PublicAreasPage() {
     setCountryFilter('');
     setStatusFilter('');
   };
+
+  const handleIntersect = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      if (entries[0]?.isIntersecting && hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    },
+    [hasNextPage, isFetchingNextPage, fetchNextPage],
+  );
+
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const sentinelCallback = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (observerRef.current) observerRef.current.disconnect();
+      if (!node) return;
+      observerRef.current = new IntersectionObserver(handleIntersect, {
+        rootMargin: '200px',
+      });
+      observerRef.current.observe(node);
+    },
+    [handleIntersect],
+  );
 
   return (
     <div className="space-y-6">
@@ -88,15 +135,16 @@ export function PublicAreasPage() {
       )}
 
       {isLoading ? (
-        <SkeletonList />
+        <AreaCardsSkeleton />
       ) : filteredAreas.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredAreas.map((area) => (
+          {filteredAreas.map((area: Area) => (
             <Card
               key={area.id}
-              className="cursor-pointer hover:shadow-lg transition-shadow"
+              className="cursor-pointer hover:shadow-lg transition-shadow overflow-hidden"
               onClick={() => navigate(`/areas/${area.id}`)}
             >
+              <AreaThumbnail imageUrl={area.imageUrl} thumbnailUrl={area.thumbnailUrl} name={area.name} />
               <CardContent className="p-5 h-full flex flex-col gap-4">
                 <div className="flex justify-between items-start gap-3">
                   <h3 className="text-lg font-bold leading-snug">{area.name}</h3>
@@ -128,6 +176,12 @@ export function PublicAreasPage() {
               </CardContent>
             </Card>
           ))}
+          <div ref={sentinelCallback} />
+          {isFetchingNextPage && (
+            <div className="flex justify-center py-4">
+              <Loader2 className="h-6 w-6 animate-spin text-primary" />
+            </div>
+          )}
         </div>
       ) : (
         <EmptyState
@@ -136,6 +190,28 @@ export function PublicAreasPage() {
           description={t('areas.public.emptyDescription')}
         />
       )}
+    </div>
+  );
+}
+
+function AreaCardsSkeleton() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="bg-surface rounded-lg shadow-md animate-pulse">
+          <div className="h-40 bg-gray-200 rounded-t-lg" />
+          <div className="p-5 space-y-4">
+            <div className="h-5 bg-gray-200 rounded w-3/4" />
+            <div className="h-4 bg-gray-200 rounded w-1/2" />
+            <div className="h-3 bg-gray-200 rounded w-full" />
+            <div className="grid grid-cols-3 gap-3">
+              <div className="h-12 bg-gray-200 rounded-lg" />
+              <div className="h-12 bg-gray-200 rounded-lg" />
+              <div className="h-12 bg-gray-200 rounded-lg" />
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

@@ -2,6 +2,11 @@ import { api } from '@/lib/api-client';
 import { toApiUrl } from '@/config/api';
 import type { Area, AreaContribution, AreaMedia, AreaCapacity, CreateAreaRequest, UpdateAreaRequest, ApproveAreaRequest } from '@/types/area';
 
+type PaginatedAreasResponse = {
+  items: RawArea[];
+  nextCursor?: string;
+};
+
 type RawArea = {
   id?: string;
   owner_user_id?: string;
@@ -48,6 +53,8 @@ type RawArea = {
   totalCompensatedTreesCount?: number | string;
   thumbnail_url?: string;
   thumbnailUrl?: string;
+  image_url?: string;
+  imageUrl?: string;
   created_at?: string;
   createdAt?: string;
   updated_at?: string;
@@ -172,6 +179,7 @@ function normalizeArea(raw: RawArea): Area {
       raw.totalCompensatedTreesCount ?? raw.total_compensated_trees_count
     ) ?? undefined,
     thumbnailUrl: asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url) ? toApiUrl(asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url)!) : undefined,
+    imageUrl: asNullableString(raw.imageUrl ?? raw.image_url) ? toApiUrl(asNullableString(raw.imageUrl ?? raw.image_url)!) : undefined,
     createdAt: asString(raw.createdAt ?? raw.created_at),
     updatedAt: asString(raw.updatedAt ?? raw.updated_at),
   };
@@ -269,13 +277,32 @@ export const areasService = {
       owner_user_id: undefined,
     } as Record<string, string | number | undefined>;
 
-    return api.get<RawArea[]>('/areas', { params: apiParams }).then((rows) => rows.map(normalizeArea));
+    return api
+      .get<PaginatedAreasResponse>('/areas', { params: apiParams })
+      .then((res) => {
+        const items = res.items ?? res;
+        return Array.isArray(items) ? items.map(normalizeArea) : [];
+      });
   },
 
   getMapAreas(params?: { biome?: string; status?: string }) {
     return api
       .get<RawArea[]>('/map/areas', { params: params as Record<string, string> })
       .then((rows) => rows.map((row) => normalizeArea(row)));
+  },
+
+  listAreasPaginated(params?: { status?: string; biome?: string; cursor?: string; limit?: number }) {
+    const apiParams: Record<string, string | number | undefined> = {};
+    if (params?.status) apiParams.status = params.status;
+    if (params?.biome) apiParams.biome = params.biome;
+    if (params?.cursor) apiParams.cursor = params.cursor;
+    if (params?.limit !== undefined) apiParams.limit = String(params.limit);
+    return api
+      .get<PaginatedAreasResponse>('/areas', { params: apiParams })
+      .then((res) => ({
+        data: res.items.map(normalizeArea),
+        nextCursor: res.nextCursor,
+      }));
   },
 
   getAreaCapacity(id: string) {

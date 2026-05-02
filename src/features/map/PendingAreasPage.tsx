@@ -1,32 +1,82 @@
+import { useCallback, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
 import { Card, CardContent } from '@/components/ui/Card';
 import { EmptyState } from '@/components/EmptyState';
-import { SkeletonList } from '@/components/ui/Skeleton';
 import { StatusBadge } from '@/components/StatusBadge';
 import { formatCurrency, formatDate } from '@/lib/format';
 import { getCountryName } from '@/lib/countries';
-import { FileCheck, MapPin } from 'lucide-react';
+import { FileCheck, MapPin, Loader2 } from 'lucide-react';
+import { AreaThumbnail } from '@/components/AreaThumbnail';
+import type { Area } from '@/types/area';
+
+const PAGE_SIZE = 20;
 
 export function PendingAreasPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { data: areas, isLoading } = useQuery({
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
     queryKey: ['areas', { status: 'pending_audit' }],
-    queryFn: () => areasService.listAreas({ status: 'pending_audit' }),
+    queryFn: ({ pageParam }) =>
+      areasService.listAreasPaginated({
+        status: 'pending_audit',
+        cursor: pageParam as string | undefined,
+        limit: PAGE_SIZE,
+      }),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
+
+  const allAreas = useMemo(
+    () => data?.pages.flatMap((page) => page.data) ?? [],
+    [data],
+  );
+
+  const handleIntersect = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      if (entries[0]?.isIntersecting && hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    },
+    [hasNextPage, isFetchingNextPage, fetchNextPage],
+  );
+
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const sentinelCallback = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (observerRef.current) observerRef.current.disconnect();
+      if (!node) return;
+      observerRef.current = new IntersectionObserver(handleIntersect, {
+        rootMargin: '200px',
+      });
+      observerRef.current.observe(node);
+    },
+    [handleIntersect],
+  );
 
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-bold">{t('audit.pending.title')}</h1>
-      {isLoading ? <SkeletonList /> : areas && areas.length > 0 ? (
+      {isLoading ? (
         <div className="space-y-4">
-          {areas.map((area) => (
-            <Card key={area.id} className="cursor-pointer hover:shadow-md transition-shadow" onClick={() => navigate(`/audit/area/${area.id}`)}>
-              <CardContent className="py-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <div key={i} className="bg-surface rounded-lg shadow-md animate-pulse p-4 space-y-3">
+              <div className="h-40 bg-gray-200 rounded-lg" />
+              <div className="h-5 bg-gray-200 rounded w-3/4" />
+              <div className="h-4 bg-gray-200 rounded w-1/2" />
+            </div>
+          ))}
+        </div>
+      ) : allAreas.length > 0 ? (
+        <div className="space-y-4">
+          {allAreas.map((area: Area) => (
+            <Card key={area.id} className="cursor-pointer hover:shadow-md transition-shadow overflow-hidden" onClick={() => navigate(`/audit/area/${area.id}`)}>
+              <AreaThumbnail imageUrl={area.imageUrl} thumbnailUrl={area.thumbnailUrl} name={area.name} />
+              <CardContent className="p-4">
                 <div className="flex justify-between mb-2">
                   <h3 className="font-medium">{area.name}</h3>
                   <StatusBadge status={area.status} />
@@ -39,6 +89,12 @@ export function PendingAreasPage() {
               </CardContent>
             </Card>
           ))}
+          <div ref={sentinelCallback} />
+          {isFetchingNextPage && (
+            <div className="flex justify-center py-4">
+              <Loader2 className="h-6 w-6 animate-spin text-primary" />
+            </div>
+          )}
         </div>
       ) : <EmptyState icon={<FileCheck className="h-12 w-12" />} title={t('audit.pending.empty')} description={t('audit.pending.emptyDescription')} />}
     </div>

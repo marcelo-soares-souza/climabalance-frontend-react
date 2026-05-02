@@ -1,7 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Select } from '@/components/ui/Select';
@@ -9,12 +9,15 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { StatusBadge } from '@/components/StatusBadge';
 import { EmptyState } from '@/components/EmptyState';
-import { SkeletonList } from '@/components/ui/Skeleton';
 import { formatCurrency, formatKgCO2e } from '@/lib/format';
-import { filterAreas, getAreaStatusOptions } from '@/features/map/lib/area-filters';
+import { getAreaStatusOptions } from '@/features/map/lib/area-filters';
 import { getCountryName } from '@/lib/countries';
-import { MapPin, Plus, FilterX } from 'lucide-react';
+import { MapPin, Plus, FilterX, Loader2 } from 'lucide-react';
+import { AreaThumbnail } from '@/components/AreaThumbnail';
 import { useAuth } from '@/hooks/use-auth';
+import type { Area } from '@/types/area';
+
+const PAGE_SIZE = 20;
 
 export function AreaListPage() {
   const { t } = useTranslation();
@@ -27,19 +30,43 @@ export function AreaListPage() {
   const canCreate = hasRole('producer') || isAdmin;
   const areaStatusOptions = getAreaStatusOptions(t, { includeAll: true, includeRejected: true });
 
-  const { data: areas, isLoading } = useQuery({
-    queryKey: ['areas', { status: statusFilter || 'all' }],
-    queryFn: () => areasService.listAreas({ status: statusFilter || undefined }),
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useInfiniteQuery({
+    queryKey: ['areas', 'list', { status: statusFilter || 'all' }],
+    queryFn: ({ pageParam }) =>
+      areasService.listAreasPaginated({
+        ...(statusFilter ? { status: statusFilter } : {}),
+        cursor: pageParam as string | undefined,
+        limit: PAGE_SIZE,
+      }),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
 
+  const allAreas = useMemo(
+    () => data?.pages.flatMap((page) => page.data) ?? [],
+    [data],
+  );
+
   const filteredAreas = useMemo(() => {
-    return filterAreas(areas, {
-      search: searchFilter,
-      city: cityFilter,
-      state: stateFilter,
-      status: statusFilter,
-    });
-  }, [areas, searchFilter, cityFilter, stateFilter, statusFilter]);
+    let result = allAreas;
+    if (searchFilter) {
+      const q = searchFilter.toLowerCase();
+      result = result.filter(
+        (a) =>
+          a.name.toLowerCase().includes(q) ||
+          (a.description ?? '').toLowerCase().includes(q) ||
+          (a.city ?? '').toLowerCase().includes(q) ||
+          (a.state ?? '').toLowerCase().includes(q),
+      );
+    }
+    if (cityFilter) {
+      result = result.filter((a) => a.city?.toLowerCase() === cityFilter.toLowerCase());
+    }
+    if (stateFilter) {
+      result = result.filter((a) => a.state?.toLowerCase() === stateFilter.toLowerCase());
+    }
+    return result;
+  }, [allAreas, searchFilter, cityFilter, stateFilter]);
 
   const hasFilters = Boolean(searchFilter || cityFilter || stateFilter || statusFilter);
 
@@ -49,6 +76,29 @@ export function AreaListPage() {
     setStateFilter('');
     setStatusFilter('');
   };
+
+  const handleIntersect = useCallback(
+    (entries: IntersectionObserverEntry[]) => {
+      if (entries[0]?.isIntersecting && hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    },
+    [hasNextPage, isFetchingNextPage, fetchNextPage],
+  );
+
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  const sentinelCallback = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (observerRef.current) observerRef.current.disconnect();
+      if (!node) return;
+      observerRef.current = new IntersectionObserver(handleIntersect, {
+        rootMargin: '200px',
+      });
+      observerRef.current.observe(node);
+    },
+    [handleIntersect],
+  );
 
   return (
     <div className="space-y-6">
@@ -93,11 +143,18 @@ export function AreaListPage() {
           </Button>
         </div>
       )}
-      {isLoading ? <SkeletonList /> : filteredAreas.length > 0 ? (
+      {isLoading ? (
+        <AreaCardsSkeleton />
+      ) : filteredAreas.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredAreas.map((area) => (
-            <Card key={area.id} className="h-full cursor-pointer hover:shadow-lg transition-shadow" onClick={() => navigate(`/areas/${area.id}`)}>
-              <CardContent className="p-5 flex flex-col gap-4 h-full">
+          {filteredAreas.map((area: Area) => (
+            <Card
+              key={area.id}
+              className="cursor-pointer hover:shadow-lg transition-shadow overflow-hidden"
+              onClick={() => navigate(`/areas/${area.id}`)}
+            >
+              <AreaThumbnail imageUrl={area.imageUrl} thumbnailUrl={area.thumbnailUrl} name={area.name} />
+              <CardContent className="p-5 h-full flex flex-col gap-4">
                 <div className="flex justify-between items-start gap-3">
                   <h3 className="text-lg font-bold leading-snug">{area.name}</h3>
                   <StatusBadge status={area.status} />
@@ -128,8 +185,36 @@ export function AreaListPage() {
               </CardContent>
             </Card>
           ))}
+          <div ref={sentinelCallback} />
+          {isFetchingNextPage && (
+            <div className="flex justify-center py-4">
+              <Loader2 className="h-6 w-6 animate-spin text-primary" />
+            </div>
+          )}
         </div>
       ) : <EmptyState icon={<MapPin className="h-12 w-12" />} title={t('areas.list.empty')} action={canCreate ? <Button onClick={() => navigate('/areas/create')}>{t('areas.list.create')}</Button> : undefined} />}
+    </div>
+  );
+}
+
+function AreaCardsSkeleton() {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="bg-surface rounded-lg shadow-md animate-pulse">
+          <div className="h-40 bg-gray-200 rounded-t-lg" />
+          <div className="p-5 space-y-4">
+            <div className="h-5 bg-gray-200 rounded w-3/4" />
+            <div className="h-4 bg-gray-200 rounded w-1/2" />
+            <div className="h-3 bg-gray-200 rounded w-full" />
+            <div className="grid grid-cols-3 gap-3">
+              <div className="h-12 bg-gray-200 rounded-lg" />
+              <div className="h-12 bg-gray-200 rounded-lg" />
+              <div className="h-12 bg-gray-200 rounded-lg" />
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
