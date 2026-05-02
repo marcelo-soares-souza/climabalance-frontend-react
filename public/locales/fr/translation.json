@@ -148,6 +148,7 @@
     "about": "À Propos du Projet",
     "howToUse": "Comment utiliser",
     "privacyPolicy": "Politique de Confidentialité",
+    "termsOfUse": "Conditions d'Utilisation",
     "calculator": "Calculateur d'Empreinte",
     "history": "Historique des Calculs",
     "profile": "Mon profil",
@@ -449,6 +450,61 @@
         "title": "Vos droits",
         "paragraph1": "Vous pouvez demander l’accès, la correction, la mise à jour ou la suppression des informations personnelles fournies à ClimaBalance, ainsi que révoquer vos consentements lorsque le traitement en dépend.",
         "paragraph2": "Les demandes liées à la confidentialité et aux données peuvent être traitées par les canaux de support et de contact mis à disposition par le projet. Dans certains cas, nous pourrons demander une vérification d’identité supplémentaire avant d’exécuter la demande."
+      }
+    },
+    "footer": {
+      "lastUpdatedLabel": "Dernière mise à jour"
+    }
+  },
+  "termsOfUse": {
+    "hero": {
+      "eyebrow": "Conditions générales",
+      "title": "Conditions d'Utilisation",
+      "description": "En utilisant ClimaBalance, vous acceptez ces Conditions d'Utilisation. Veuillez les lire attentivement avant de continuer.",
+      "lastUpdatedLabel": "Dernière mise à jour",
+      "lastUpdated": "janvier 2026"
+    },
+    "summary": {
+      "label": "Résumé",
+      "title": "Ces conditions régissent l'utilisation de la plateforme ClimaBalance, y compris les calculs, les compensations et les certificats.",
+      "paragraph": "ClimaBalance est une plateforme de calcul d'empreinte carbone, de compensation par achat d'arbres et d'émission de certificats numériques. Les valeurs et projections sont des estimations basées sur des données scientifiques et ne constituent pas une garantie de résultats spécifiques."
+    },
+    "sections": {
+      "acceptance": {
+        "title": "1. Acceptation des Conditions",
+        "body": "En utilisant ClimaBalance, vous acceptez ces Conditions d'Utilisation. Si vous n'êtes pas d'accord, n'utilisez pas la plateforme."
+      },
+      "services": {
+        "title": "2. Description des Services",
+        "body": "ClimaBalance est une plateforme de calcul d'empreinte carbone, de compensation par achat d'arbres et d'émission de certificats numériques. Les valeurs et projections sont des estimations basées sur des données scientifiques et ne constituent pas une garantie de résultats spécifiques."
+      },
+      "account": {
+        "title": "3. Compte Utilisateur",
+        "body": "Vous êtes responsable de la confidentialité de votre compte et mot de passe. Fournissez des informations exactes et à jour. ClimaBalance se réserve le droit de suspendre les comptes qui violent ces conditions."
+      },
+      "payments": {
+        "title": "4. Paiements et Compensations",
+        "body": "Les compensations sont traitées via des passerelles de paiement sécurisées. Le montant payé est destiné à la plantation et à l'entretien d'arbres dans les zones enregistrées. Les remboursements suivent la politique spécifique de chaque compensation."
+      },
+      "content": {
+        "title": "5. Contenu et Propriété Intellectuelle",
+        "body": "Tout le contenu de la plateforme, y compris les textes, graphiques, logos et logiciels, est la propriété de ClimaBalance ou de ses concédants. La reproduction non autorisée est interdite."
+      },
+      "liability": {
+        "title": "6. Limitation de Responsabilité",
+        "body": "ClimaBalance n'est pas responsable des dommages indirects, accessoires ou consécutifs découlant de l'utilisation de la plateforme. Les estimations de capture de carbone sont basées sur des modèles scientifiques et peuvent varier."
+      },
+      "termination": {
+        "title": "7. Résiliation",
+        "body": "Vous pouvez résilier votre compte à tout moment via l'application. ClimaBalance peut suspendre ou résilier les comptes qui violent ces conditions, sur notification."
+      },
+      "changes": {
+        "title": "8. Modifications des Conditions",
+        "body": "Ces conditions peuvent être mises à jour périodiquement. Les modifications importantes seront communiquées par e-mail ou notification dans l'application."
+      },
+      "contact": {
+        "title": "9. Contact",
+        "body": "Des questions sur ces conditions ? Contact : termos@climabalance.com"
       }
     },
     "footer": {

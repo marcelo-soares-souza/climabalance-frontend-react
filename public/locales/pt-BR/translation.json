@@ -148,6 +148,7 @@
     "about": "Sobre o Projeto",
     "howToUse": "Como usar",
     "privacyPolicy": "Política de Privacidade",
+    "termsOfUse": "Termos de Uso",
     "calculator": "Calculadora de Pegada",
     "history": "Histórico de Pegadas",
     "profile": "Meu perfil",
@@ -449,6 +450,61 @@
         "title": "Seus direitos",
         "paragraph1": "Você pode solicitar acesso, correção, atualização ou exclusão de informações pessoais fornecidas ao ClimaBalance, bem como revogar consentimentos quando esse tratamento depender deles.",
         "paragraph2": "Pedidos relacionados a privacidade e dados podem ser tratados pelos canais de suporte e contato disponibilizados pelo projeto. Em alguns casos, poderemos solicitar verificação adicional de identidade antes de executar a solicitação."
+      }
+    },
+    "footer": {
+      "lastUpdatedLabel": "Última atualização"
+    }
+  },
+  "termsOfUse": {
+    "hero": {
+      "eyebrow": "Termos e condições",
+      "title": "Termos de Uso",
+      "description": "Ao utilizar o ClimaBalance, você concorda com estes Termos de Uso. Leia com atenção antes de continuar.",
+      "lastUpdatedLabel": "Última atualização",
+      "lastUpdated": "janeiro de 2026"
+    },
+    "summary": {
+      "label": "Resumo",
+      "title": "Estes termos regulam o uso da plataforma ClimaBalance, incluindo cálculos, compensações e certificados.",
+      "paragraph": "O ClimaBalance é uma plataforma para cálculo de pegada de carbono, compensação via compra de árvores e emissão de certificados digitais. Os valores e projeções são estimativas baseadas em dados científicos e não constituem garantia de resultados específicos."
+    },
+    "sections": {
+      "acceptance": {
+        "title": "1. Aceitação dos Termos",
+        "body": "Ao utilizar o ClimaBalance, você concorda com estes Termos de Uso. Se não concordar, não utilize a plataforma."
+      },
+      "services": {
+        "title": "2. Descrição dos Serviços",
+        "body": "O ClimaBalance é uma plataforma para cálculo de pegada de carbono, compensação via compra de árvores e emissão de certificados digitais. Os valores e projeções são estimativas baseadas em dados científicos e não constituem garantia de resultados específicos."
+      },
+      "account": {
+        "title": "3. Conta do Usuário",
+        "body": "Você é responsável por manter a confidencialidade de sua conta e senha. Forneça informações verdadeiras e atualizadas. O ClimaBalance reserva-se o direito de suspender contas que violem estes termos."
+      },
+      "payments": {
+        "title": "4. Pagamentos e Compensações",
+        "body": "As compensações são processadas através de gateways de pagamento seguros. O valor pago é destinado ao plantio e manutenção de árvores nas áreas cadastradas. Reembolsos seguem a política específica de cada compensação."
+      },
+      "content": {
+        "title": "5. Conteúdo e Propriedade Intelectual",
+        "body": "Todo o conteúdo da plataforma, incluindo textos, gráficos, logotipos e software, é propriedade do ClimaBalance ou de seus licenciadores. É proibida a reprodução não autorizada."
+      },
+      "liability": {
+        "title": "6. Limitação de Responsabilidade",
+        "body": "O ClimaBalance não se responsabiliza por danos indiretos, incidentais ou consequenciais decorrentes do uso da plataforma. As estimativas de captura de carbono são baseadas em modelos científicos e podem variar."
+      },
+      "termination": {
+        "title": "7. Encerramento",
+        "body": "Você pode encerrar sua conta a qualquer momento através do aplicativo. O ClimaBalance pode suspender ou encerrar contas que violem estes termos, mediante notificação."
+      },
+      "changes": {
+        "title": "8. Alterações nos Termos",
+        "body": "Estes termos podem ser atualizados periodicamente. Alterações significativas serão comunicadas por e-mail ou notificação no aplicativo."
+      },
+      "contact": {
+        "title": "9. Contato",
+        "body": "Dúvidas sobre estes termos? Entre em contato: termos@climabalance.com"
       }
     },
     "footer": {

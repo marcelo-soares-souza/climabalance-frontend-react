@@ -148,6 +148,7 @@
     "about": "Acerca del Proyecto",
     "howToUse": "Cómo usar",
     "privacyPolicy": "Política de Privacidad",
+    "termsOfUse": "Términos de Uso",
     "calculator": "Calculadora de Huella",
     "history": "Historial de Cálculos",
     "profile": "Mi perfil",
@@ -449,6 +450,61 @@
         "title": "Tus derechos",
         "paragraph1": "Puedes solicitar acceso, corrección, actualización o eliminación de la información personal proporcionada a ClimaBalance, así como revocar consentimientos cuando el tratamiento dependa de ellos.",
         "paragraph2": "Las solicitudes relacionadas con privacidad y datos pueden tratarse a través de los canales de soporte y contacto puestos a disposición por el proyecto. En algunos casos, podremos requerir verificación adicional de identidad antes de completar la solicitud."
+      }
+    },
+    "footer": {
+      "lastUpdatedLabel": "Última actualización"
+    }
+  },
+  "termsOfUse": {
+    "hero": {
+      "eyebrow": "Términos y condiciones",
+      "title": "Términos de Uso",
+      "description": "Al utilizar ClimaBalance, usted acepta estos Términos de Uso. Léalos con atención antes de continuar.",
+      "lastUpdatedLabel": "Última actualización",
+      "lastUpdated": "enero de 2026"
+    },
+    "summary": {
+      "label": "Resumen",
+      "title": "Estos términos regulan el uso de la plataforma ClimaBalance, incluyendo cálculos, compensaciones y certificados.",
+      "paragraph": "ClimaBalance es una plataforma para el cálculo de huella de carbono, compensación mediante compra de árboles y emisión de certificados digitales. Los valores y proyecciones son estimaciones basadas en datos científicos y no constituyen garantía de resultados específicos."
+    },
+    "sections": {
+      "acceptance": {
+        "title": "1. Aceptación de los Términos",
+        "body": "Al utilizar ClimaBalance, usted acepta estos Términos de Uso. Si no está de acuerdo, no utilice la plataforma."
+      },
+      "services": {
+        "title": "2. Descripción de los Servicios",
+        "body": "ClimaBalance es una plataforma para el cálculo de huella de carbono, compensación mediante compra de árboles y emisión de certificados digitales. Los valores y proyecciones son estimaciones basadas en datos científicos y no constituyen garantía de resultados específicos."
+      },
+      "account": {
+        "title": "3. Cuenta de Usuario",
+        "body": "Usted es responsable de mantener la confidencialidad de su cuenta y contraseña. Proporcione información veraz y actualizada. ClimaBalance se reserva el derecho de suspender cuentas que violen estos términos."
+      },
+      "payments": {
+        "title": "4. Pagos y Compensaciones",
+        "body": "Las compensaciones se procesan a través de pasarelas de pago seguras. El valor pagado se destina a la plantación y mantenimiento de árboles en las áreas registradas. Los reembolsos siguen la política específica de cada compensación."
+      },
+      "content": {
+        "title": "5. Contenido y Propiedad Intelectual",
+        "body": "Todo el contenido de la plataforma, incluyendo textos, gráficos, logotipos y software, es propiedad de ClimaBalance o de sus licenciantes. Está prohibida la reproducción no autorizada."
+      },
+      "liability": {
+        "title": "6. Limitación de Responsabilidad",
+        "body": "ClimaBalance no se responsabiliza por daños indirectos, incidentales o consecuentes derivados del uso de la plataforma. Las estimaciones de captura de carbono se basan en modelos científicos y pueden variar."
+      },
+      "termination": {
+        "title": "7. Terminación",
+        "body": "Usted puede cancelar su cuenta en cualquier momento a través de la aplicación. ClimaBalance puede suspender o cancelar cuentas que violen estos términos, previa notificación."
+      },
+      "changes": {
+        "title": "8. Cambios en los Términos",
+        "body": "Estos términos pueden actualizarse periódicamente. Los cambios significativos se comunicarán por correo electrónico o notificación en la aplicación."
+      },
+      "contact": {
+        "title": "9. Contacto",
+        "body": "¿Dudas sobre estos términos? Contacto: termos@climabalance.com"
       }
     },
     "footer": {

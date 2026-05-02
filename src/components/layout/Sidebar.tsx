@@ -258,6 +258,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           <NavLink to="/privacy-policy" className={linkClass} onClick={onClose}>
             <FileText className="h-4 w-4" /> {t("nav.privacyPolicy")}
           </NavLink>
+          <NavLink to="/terms-of-use" className={linkClass} onClick={onClose}>
+            <FileText className="h-4 w-4" /> {t("nav.termsOfUse")}
+          </NavLink>
         </nav>
 
         {/* Bottom: logout in drawer */}

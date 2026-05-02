@@ -15,6 +15,7 @@ import { HomePage } from '@/features/home/HomePage';
 import { AboutPage } from '@/features/about/AboutPage';
 import { HowToUsePlatformPage } from '@/features/how-to-use/HowToUsePlatformPage';
 import { PrivacyPolicyPage } from '@/features/privacy/PrivacyPolicyPage';
+import { TermsOfUsePage } from '@/features/privacy/TermsOfUsePage';
 import { OnboardingPage } from '@/features/onboarding/OnboardingPage';
 
 // Footprint
@@ -71,6 +72,7 @@ export const router = createBrowserRouter([
       { path: '/about', element: <AboutPage /> },
       { path: '/how-to-use', element: <HowToUsePlatformPage /> },
       { path: '/privacy-policy', element: <PrivacyPolicyPage /> },
+      { path: '/terms-of-use', element: <TermsOfUsePage /> },
 
       // Auth routes (inside shell)
       { path: '/login', element: <LoginPage /> },
