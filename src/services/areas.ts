@@ -171,7 +171,7 @@ function normalizeArea(raw: RawArea): Area {
     totalCompensatedTreesCount: asNullableNumber(
       raw.totalCompensatedTreesCount ?? raw.total_compensated_trees_count
     ) ?? undefined,
-    thumbnailUrl: asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url) ?? undefined,
+    thumbnailUrl: asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url) ? toApiUrl(asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url)!) : undefined,
     createdAt: asString(raw.createdAt ?? raw.created_at),
     updatedAt: asString(raw.updatedAt ?? raw.updated_at),
   };
