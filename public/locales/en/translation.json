@@ -756,17 +756,17 @@
       "draftSaved": "Draft saved successfully!",
       "calculated": "Footprint calculated successfully!",
       "deleted": "Draft deleted successfully!"
+    },
+    "guest": {
+      "title": "Carbon Footprint Calculator",
+      "saveTitle": "Save and Compensate",
+      "savePrompt": "Log in or create an account to save this result and offset your carbon footprint.",
+      "saveAndCompensate": "Log In and Compensate",
+      "compensateWithoutSaving": "Compensate without saving",
+      "returnTitle": "Welcome back!",
+      "returnPrompt": "You have a saved calculation. Would you like to save it to your account and offset?",
+      "discardAndRedo": "Discard and start over"
     }
-  },
-  "footprint.guest": {
-    "title": "Carbon Footprint Calculator",
-    "saveTitle": "Save and Compensate",
-    "savePrompt": "Log in or create an account to save this result and offset your carbon footprint.",
-    "saveAndCompensate": "Log In and Compensate",
-    "compensateWithoutSaving": "Compensate without saving",
-    "returnTitle": "Welcome back!",
-    "returnPrompt": "You have a saved calculation. Would you like to save it to your account and offset?",
-    "discardAndRedo": "Discard and start over"
   },
   "map": {
     "title": "Areas Map",

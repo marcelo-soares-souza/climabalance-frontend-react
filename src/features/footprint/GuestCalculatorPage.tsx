@@ -16,7 +16,7 @@ import { Scope2Step } from './components/steps/Scope2Step';
 import { Scope3Step } from './components/steps/Scope3Step';
 import { footprintService } from '@/services/footprint';
 import { useAuth } from '@/hooks/use-auth';
-import { Leaf, LogIn } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import type { CalculationResult } from '@/types/footprint';
 import type { DraftSnapshot } from './hooks/use-calculator';
 
@@ -248,28 +248,31 @@ export function GuestCalculatorPage() {
   };
 
   return (
-    <div className="max-w-lg mx-auto space-y-4 py-8">
-      <div className="flex items-center gap-2 px-2">
-        <Leaf className="h-5 w-5 text-primary" />
-        <h1 className="text-xl font-bold">{t('footprint.guest.title')}</h1>
-      </div>
+    <div className="space-y-6">
+      <h1 className="text-3xl font-bold font-display">{t('footprint.guest.title')}</h1>
 
-      <StepIndicator steps={calculator.steps} currentIndex={calculator.currentStepIndex} />
-
-      <Card>
-        <CardContent className="py-6">{renderStep()}</CardContent>
-      </Card>
-
-      {!(result && calculator.currentStep === 'result') && (
-        <div className="flex justify-between">
-          <Button variant="ghost" onClick={calculator.prevStep} disabled={calculator.isFirstStep}>
-            {t('common.back')}
-          </Button>
-          <Button onClick={shouldCalculate ? handleCalculate : calculator.nextStep} loading={loading}>
-            {shouldCalculate ? t('footprint.calculator.calculate') : t('common.next')}
-          </Button>
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="lg:w-56 shrink-0">
+          <StepIndicator steps={calculator.steps} currentIndex={calculator.currentStepIndex} onStepClick={calculator.goToStep} />
         </div>
-      )}
+
+        <div className="flex-1 min-w-0 space-y-6">
+          <Card>
+            <CardContent className="py-6">{renderStep()}</CardContent>
+          </Card>
+
+          {!(result && calculator.currentStep === 'result') && (
+            <div className="flex justify-between">
+              <Button variant="ghost" onClick={calculator.prevStep} disabled={calculator.isFirstStep}>
+                {t('common.back')}
+              </Button>
+              <Button onClick={shouldCalculate ? handleCalculate : calculator.nextStep} loading={loading}>
+                {shouldCalculate ? t('footprint.calculator.calculate') : t('common.next')}
+              </Button>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

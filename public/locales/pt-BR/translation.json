@@ -756,17 +756,17 @@
       "draftSaved": "Rascunho salvo com sucesso!",
       "calculated": "Pegada calculada com sucesso!",
       "deleted": "Rascunho excluído com sucesso!"
+    },
+    "guest": {
+      "title": "Calculadora de Pegada de Carbono",
+      "saveTitle": "Salvar e Compensar",
+      "savePrompt": "Faça login ou crie uma conta para salvar este resultado e compensar sua pegada de carbono.",
+      "saveAndCompensate": "Entrar e Compensar",
+      "compensateWithoutSaving": "Compensar sem salvar",
+      "returnTitle": "Bem-vindo de volta!",
+      "returnPrompt": "Você tem um cálculo salvo. Deseja salvá-lo na sua conta e compensar?",
+      "discardAndRedo": "Descartar e refazer"
     }
-  },
-  "footprint.guest": {
-    "title": "Calculadora de Pegada de Carbono",
-    "saveTitle": "Salvar e Compensar",
-    "savePrompt": "Faça login ou crie uma conta para salvar este resultado e compensar sua pegada de carbono.",
-    "saveAndCompensate": "Entrar e Compensar",
-    "compensateWithoutSaving": "Compensar sem salvar",
-    "returnTitle": "Bem-vindo de volta!",
-    "returnPrompt": "Você tem um cálculo salvo. Deseja salvá-lo na sua conta e compensar?",
-    "discardAndRedo": "Descartar e refazer"
   },
   "map": {
     "title": "Mapa de Áreas",
