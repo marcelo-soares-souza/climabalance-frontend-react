@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { paymentsService } from '@/services/payments';
 import { Button } from '@/components/ui/Button';
@@ -8,6 +8,7 @@ import { ArrowLeft, Copy, Check } from 'lucide-react';
 export function PixPaymentPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { paymentId } = useParams<{ paymentId: string }>();
   const [copied, setCopied] = useState(false);
   const [status, setStatus] = useState<string | null>(null);

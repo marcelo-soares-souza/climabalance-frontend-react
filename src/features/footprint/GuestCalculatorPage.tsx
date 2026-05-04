@@ -17,7 +17,8 @@ import { Scope3Step } from './components/steps/Scope3Step';
 import { footprintService } from '@/services/footprint';
 import { useAuth } from '@/hooks/use-auth';
 import { Leaf, LogIn } from 'lucide-react';
-import type { CalculationResult, DraftSnapshot } from '@/types/footprint';
+import type { CalculationResult } from '@/types/footprint';
+import type { DraftSnapshot } from './hooks/use-calculator';
 
 const GUEST_STORAGE_KEY = 'climabalance_guest_calc';
 

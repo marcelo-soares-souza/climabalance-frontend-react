@@ -231,6 +231,7 @@ export function CompensationCheckoutPage() {
             totalTCO2e: store.totalTCO2e,
             totalAmount: summaryTotalAmount,
             currency: store.currency,
+            installments: 1,
           },
         },
       });
@@ -252,8 +253,9 @@ export function CompensationCheckoutPage() {
       compensationMode: 'tree_purchase',
       treesRequested: store.treesRequested,
       totalTCO2e: store.totalTCO2e,
-      totalAmount: summaryTotalAmount || result.amount,
+      totalAmount: summaryTotalAmount ?? result.amount ?? 0,
       currency: store.currency,
+      installments: 1,
     };
 
     navigate('/compensation/report', {
