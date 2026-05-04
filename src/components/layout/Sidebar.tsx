@@ -72,7 +72,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
       new RegExp(`^/users/${userId}/impact/calculations/[^/]+/edit$`).test(
         pathname,
       )
-    : pathname === "/footprint/calculator";
+    : pathname === "/footprint/calculator" || pathname === "/calculator";
   const isHistoryActive = userId
     ? pathname === historyPath ||
       new RegExp(`^/users/${userId}/impact/calculations/(?!new$)[^/]+$`).test(
@@ -162,6 +162,15 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           >
             <TreePine className="h-4 w-4" /> {t("nav.publicAreas")}
           </NavLink>
+          {!isAuthenticated && (
+            <NavLink
+              to="/calculator"
+              className={() => linkClassByValue(isCalculatorActive)}
+              onClick={onClose}
+            >
+              <Calculator className="h-4 w-4" /> {t("nav.calculator")}
+            </NavLink>
+          )}
 
           {isAuthenticated && (
             <>
