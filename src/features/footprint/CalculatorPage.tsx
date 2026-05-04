@@ -23,7 +23,7 @@ import { ApiError } from '@/lib/api-client';
 import type { CreateCalculationRequest } from '@/types/footprint';
 
 export function CalculatorPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const { id: routeCalculationId } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
@@ -178,6 +178,19 @@ export function CalculatorPage() {
     calculator.nextStep();
   };
   const isLastInputStep = calculator.currentStepIndex === calculator.totalSteps - 2;
+  const formattedPeriod = useMemo(() => {
+    const start = new Date(calculator.state.periodStart);
+    const end = new Date(calculator.state.periodEnd);
+    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) {
+      return `${calculator.state.periodStart} - ${calculator.state.periodEnd}`;
+    }
+    const formatter = new Intl.DateTimeFormat(i18n.language, {
+      year: 'numeric',
+      month: 'short',
+      day: '2-digit',
+    });
+    return `${formatter.format(start)} - ${formatter.format(end)}`;
+  }, [calculator.state.periodEnd, calculator.state.periodStart, i18n.language]);
 
   const renderStep = () => {
     if (calculator.currentStep === 'result') {
@@ -228,6 +241,10 @@ export function CalculatorPage() {
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold font-display">{t('footprint.calculator.title')}</h1>
+      <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3">
+        <p className="text-sm font-medium text-primary">{t('footprint.period.label')}</p>
+        <p className="text-base font-semibold">{formattedPeriod}</p>
+      </div>
 
       <div className="flex flex-col lg:flex-row gap-6">
         {/* Stepper column */}
