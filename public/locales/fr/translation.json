@@ -758,6 +758,16 @@
       "deleted": "Brouillon supprimé avec succès !"
     }
   },
+  "footprint.guest": {
+    "title": "Calculateur d'Empreinte Carbone",
+    "saveTitle": "Sauvegarder et Compenser",
+    "savePrompt": "Connectez-vous ou créez un compte pour sauvegarder ce résultat et compenser votre empreinte carbone.",
+    "saveAndCompensate": "Se connecter et Compenser",
+    "compensateWithoutSaving": "Compenser sans sauvegarder",
+    "returnTitle": "Bon retour !",
+    "returnPrompt": "Vous avez un calcul sauvegardé. Voulez-vous l'enregistrer sur votre compte et compenser ?",
+    "discardAndRedo": "Jeter et recommencer"
+  },
   "map": {
     "title": "Carte des Zones",
     "allCountries": "Tous les pays",

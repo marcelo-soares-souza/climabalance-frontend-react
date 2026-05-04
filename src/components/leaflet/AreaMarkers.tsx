@@ -59,11 +59,12 @@ export function AreaMarkers({
     clusterRef.current = mcg;
     map.addLayer(mcg);
 
+    const markersMap = markersRef.current;
+
     return () => {
       map.removeLayer(mcg);
       clusterRef.current = null;
-      const markers = markersRef.current;
-      if (markers) markers.clear();
+      markersMap.clear();
     };
   }, [map]);
 

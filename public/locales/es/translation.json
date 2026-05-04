@@ -758,6 +758,16 @@
       "deleted": "Borrador eliminado con éxito!"
     }
   },
+  "footprint.guest": {
+    "title": "Calculadora de Huella de Carbono",
+    "saveTitle": "Guardar y Compensar",
+    "savePrompt": "Inicia sesión o crea una cuenta para guardar este resultado y compensar tu huella de carbono.",
+    "saveAndCompensate": "Iniciar sesión y Compensar",
+    "compensateWithoutSaving": "Compensar sin guardar",
+    "returnTitle": "¡Bienvenido de nuevo!",
+    "returnPrompt": "Tienes un cálculo guardado. ¿Quieres guardarlo en tu cuenta y compensar?",
+    "discardAndRedo": "Descartar y volver a empezar"
+  },
   "map": {
     "title": "Mapa de Áreas",
     "allCountries": "Todos los países",

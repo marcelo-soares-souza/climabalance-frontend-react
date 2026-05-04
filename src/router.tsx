@@ -42,6 +42,7 @@ import { CompensationCheckoutPage } from '@/features/compensation/CheckoutPage';
 import { CompensationReportPage } from '@/features/compensation/ReportPage';
 import { CompensationHistoryPage } from '@/features/compensation/HistoryPage';
 import { PixPaymentPage } from '@/features/compensation/PixPaymentPage';
+import { GuestCalculatorPage } from '@/features/footprint/GuestCalculatorPage';
 import { StripeSetupPage } from '@/features/how-to-use/StripeSetupPage';
 
 // Profile
@@ -84,6 +85,7 @@ export const router = createBrowserRouter([
       { path: '/password-reset/confirm', element: <PasswordResetConfirmPage /> },
       { path: '/map', element: <MapPage /> },
       { path: '/areas/public', element: <PublicAreasPage /> },
+      { path: '/calculator', element: <GuestCalculatorPage /> },
       { path: '/areas', element: <AuthGuard><AreaListPage /></AuthGuard> },
       { path: '/certificates/validate', element: <CertificateValidationPage /> },
       { path: '/access-denied', element: <AccessDeniedPage /> },
