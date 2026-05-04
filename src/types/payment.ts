@@ -10,6 +10,35 @@ export interface SimulatePaymentRequest {
   installments?: number;
 }
 
+export interface CreatePaymentIntentRequest {
+  compensation_id: string;
+  payment_method: 'card' | 'pix';
+}
+
+export interface CreatePaymentIntentResponse {
+  paymentId: string;
+  compensationId: string;
+  clientSecret?: string | null;
+  qrCode?: string;
+  copyPasteCode?: string;
+  paymentIntentId: string;
+  paymentMethod: 'card' | 'pix';
+}
+
+export interface PixPaymentDetails {
+  paymentIntentId: string;
+  qrCode: string;
+  copyPasteCode: string;
+}
+
+export interface StripeConnectStatus {
+  connected: boolean;
+  stripe_account_id?: string;
+  charges_enabled: boolean;
+  payouts_enabled: boolean;
+  country?: string;
+}
+
 export interface PaymentResult {
   paymentId: string;
   compensationId: string;

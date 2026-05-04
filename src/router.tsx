@@ -41,6 +41,8 @@ import { CompensationReviewPage } from '@/features/compensation/ReviewPage';
 import { CompensationCheckoutPage } from '@/features/compensation/CheckoutPage';
 import { CompensationReportPage } from '@/features/compensation/ReportPage';
 import { CompensationHistoryPage } from '@/features/compensation/HistoryPage';
+import { PixPaymentPage } from '@/features/compensation/PixPaymentPage';
+import { StripeSetupPage } from '@/features/how-to-use/StripeSetupPage';
 
 // Profile
 import { ProfilePage } from '@/features/profile/ProfilePage';
@@ -142,6 +144,14 @@ export const router = createBrowserRouter([
       {
         path: '/compensation/report',
         element: <AuthGuard><CompensationReportPage /></AuthGuard>,
+      },
+      {
+        path: '/payment/pix/:paymentId',
+        element: <AuthGuard><PixPaymentPage /></AuthGuard>,
+      },
+      {
+        path: '/how-to-use/stripe-setup',
+        element: <AuthGuard roles={['producer', 'administrator']}><StripeSetupPage /></AuthGuard>,
       },
       {
         path: '/profile/compensations',
