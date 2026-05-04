@@ -136,25 +136,6 @@ export function GuestCalculatorPage() {
     }
   };
 
-  const handleDiscard = () => {
-    clearGuestCalc();
-    calculator.reset();
-    setResult(null);
-    setLoading(false);
-    setDidRestore(false);
-  };
-
-  const handleDontSave = () => {
-    clearGuestCalc();
-    navigate('/compensation/review', {
-      state: {
-        totalTCO2e: result?.totalTCO2e,
-      },
-    });
-  };
-
-  const isReturningUser = didRestore && isAuthenticated;
-
   const renderStep = () => {
     if (loading) {
       return (
@@ -166,31 +147,6 @@ export function GuestCalculatorPage() {
     }
 
     if (result && calculator.currentStep === 'result') {
-      if (isReturningUser) {
-        return (
-          <div className="space-y-6">
-            <ResultStep result={result} showCompensateAction={false} />
-            <div className="bg-accent/5 border border-accent/20 rounded-xl p-6">
-              <div className="flex items-start gap-4 mb-4">
-                <LogIn className="h-6 w-6 text-accent mt-0.5" />
-                <div>
-                  <h3 className="font-semibold text-lg">{t('footprint.guest.returnTitle')}</h3>
-                  <p className="text-text-secondary text-sm mt-1">{t('footprint.guest.returnPrompt')}</p>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Button variant="outline" onClick={handleDiscard} className="flex-1">
-                  {t('footprint.guest.discardAndRedo')}
-                </Button>
-                <Button onClick={handleSaveAndCompensate} loading={saving} className="flex-1">
-                  {t('footprint.guest.saveAndCompensate')}
-                </Button>
-              </div>
-            </div>
-          </div>
-        );
-      }
-
       return (
         <div className="space-y-6">
           <ResultStep result={result} showCompensateAction={false} />
@@ -198,14 +154,15 @@ export function GuestCalculatorPage() {
             <div className="flex items-start gap-4 mb-4">
               <LogIn className="h-6 w-6 text-accent mt-0.5" />
               <div>
-                <h3 className="font-semibold text-lg">{t('footprint.guest.saveTitle')}</h3>
-                <p className="text-text-secondary text-sm mt-1">{t('footprint.guest.savePrompt')}</p>
+                <h3 className="font-semibold text-lg">
+                  {isAuthenticated ? t('footprint.guest.returnTitle') : t('footprint.guest.saveTitle')}
+                </h3>
+                <p className="text-text-secondary text-sm mt-1">
+                  {isAuthenticated ? t('footprint.guest.returnPrompt') : t('footprint.guest.savePrompt')}
+                </p>
               </div>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button variant="ghost" onClick={handleDontSave} className="flex-1">
-                {t('footprint.guest.compensateWithoutSaving')}
-              </Button>
+            <div className="flex">
               <Button onClick={handleSaveAndCompensate} loading={saving} className="flex-1">
                 {t('footprint.guest.saveAndCompensate')}
               </Button>
