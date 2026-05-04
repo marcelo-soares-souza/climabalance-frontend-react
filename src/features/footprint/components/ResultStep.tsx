@@ -13,9 +13,10 @@ interface Props {
   onSaveDraft?: () => void;
   onFinalize?: () => void;
   saving?: boolean;
+  showCompensateAction?: boolean;
 }
 
-export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
+export function ResultStep({ result, onSaveDraft, onFinalize, saving, showCompensateAction = true }: Props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const canFinalize = result.status === 'draft' && !!onFinalize;
@@ -102,17 +103,19 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving }: Props) {
             {t('footprint.result.finalize')}
           </Button>
         )}
-        <Button
-          onClick={() =>
-            navigate(
-              `/map?calculationId=${encodeURIComponent(result.id)}&tCO2e=${encodeURIComponent(result.totalTCO2e)}`
-            )
-          }
-          className="flex-1"
-        >
-          <TreePine className="h-4 w-4 mr-2" />
-          {t('footprint.result.compensate')}
-        </Button>
+        {showCompensateAction && (
+          <Button
+            onClick={() =>
+              navigate(
+                `/map?calculationId=${encodeURIComponent(result.id)}&tCO2e=${encodeURIComponent(result.totalTCO2e)}`
+              )
+            }
+            className="flex-1"
+          >
+            <TreePine className="h-4 w-4 mr-2" />
+            {t('footprint.result.compensate')}
+          </Button>
+        )}
       </div>
     </div>
   );

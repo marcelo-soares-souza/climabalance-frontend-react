@@ -169,7 +169,7 @@ export function GuestCalculatorPage() {
       if (isReturningUser) {
         return (
           <div className="space-y-6">
-            <ResultStep result={result} />
+            <ResultStep result={result} showCompensateAction={false} />
             <div className="bg-accent/5 border border-accent/20 rounded-xl p-6">
               <div className="flex items-start gap-4 mb-4">
                 <LogIn className="h-6 w-6 text-accent mt-0.5" />
@@ -193,7 +193,7 @@ export function GuestCalculatorPage() {
 
       return (
         <div className="space-y-6">
-          <ResultStep result={result} />
+          <ResultStep result={result} showCompensateAction={false} />
           <div className="bg-accent/5 border border-accent/20 rounded-xl p-6">
             <div className="flex items-start gap-4 mb-4">
               <LogIn className="h-6 w-6 text-accent mt-0.5" />
