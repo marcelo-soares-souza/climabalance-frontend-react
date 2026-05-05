@@ -43,5 +43,23 @@ export function mapCompensationApiError(error: unknown): string {
     return 'compensation.producer_not_onboarded';
   }
 
+  const hasPendingPayment = fieldErrors.some((fieldError) => {
+    if (typeof fieldError.message !== 'string') return false;
+    return fieldError.message.includes('payment_already_pending');
+  });
+
+  if (hasPendingPayment) {
+    return 'payment.already_pending';
+  }
+
+  const hasPixRequiresBrl = fieldErrors.some((fieldError) => {
+    if (typeof fieldError.message !== 'string') return false;
+    return fieldError.message.includes('pix_requires_brl');
+  });
+
+  if (hasPixRequiresBrl) {
+    return 'payment.pix_requires_brl';
+  }
+
   return error.messageKey;
 }

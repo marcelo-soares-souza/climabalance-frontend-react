@@ -44,6 +44,7 @@ import { CompensationHistoryPage } from '@/features/compensation/HistoryPage';
 import { PixPaymentPage } from '@/features/compensation/PixPaymentPage';
 import { GuestCalculatorPage } from '@/features/footprint/GuestCalculatorPage';
 import { StripeSetupPage } from '@/features/how-to-use/StripeSetupPage';
+import { StripePlatformSetupPage } from '@/features/how-to-use/StripePlatformSetupPage';
 
 // Profile
 import { ProfilePage } from '@/features/profile/ProfilePage';
@@ -154,6 +155,10 @@ export const router = createBrowserRouter([
       {
         path: '/how-to-use/stripe-setup',
         element: <AuthGuard roles={['producer', 'administrator']}><StripeSetupPage /></AuthGuard>,
+      },
+      {
+        path: '/how-to-use/stripe-platform-setup',
+        element: <AuthGuard roles={['administrator']}><StripePlatformSetupPage /></AuthGuard>,
       },
       {
         path: '/profile/compensations',

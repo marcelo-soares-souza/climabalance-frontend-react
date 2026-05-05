@@ -106,6 +106,26 @@ export function HowToUsePlatformPage() {
           </TabsContent>
         ))}
       </Tabs>
+
+      <Card className="border-0 shadow-sm ring-1 ring-black/5">
+        <CardContent className="flex flex-col gap-3 py-6 md:flex-row md:items-center md:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+              {t('platform.stripe.title')}
+            </p>
+            <p className="text-sm text-text-secondary mt-1">
+              {t('platform.stripe.short_desc')}
+            </p>
+          </div>
+          <Link
+            to="/how-to-use/stripe-platform-setup"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+          >
+            {t('platform.stripe.open_setup')}
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </CardContent>
+      </Card>
     </div>
   );
 }

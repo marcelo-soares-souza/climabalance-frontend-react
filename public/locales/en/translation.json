@@ -1161,6 +1161,8 @@
     "request.validation_failed": "Some fields are invalid. Review the submitted data and try again.",
     "compensation.tree_limit_exceeded": "This area currently has no trees available for purchase.",
     "compensation.producer_not_onboarded": "This area still cannot receive support because the producer has not completed Stripe payout setup yet.",
+    "payment.already_pending": "There is already a pending payment attempt for this compensation. Wait for confirmation or try again shortly.",
+    "payment.pix_requires_brl": "Pix is only available for BRL payments.",
     "request.invalid_content_type": "Invalid request format. Please try again.",
     "request.payload_too_large": "The uploaded file or content is too large.",
     "request.rate_limited": "Too many attempts in a short time. Please wait and try again.",

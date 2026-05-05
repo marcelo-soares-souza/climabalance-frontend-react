@@ -1161,6 +1161,8 @@
     "request.validation_failed": "Algunos campos son inválidos. Revisa los datos enviados e inténtalo de nuevo.",
     "compensation.tree_limit_exceeded": "Esta área no tiene árboles disponibles para compra en este momento.",
     "compensation.producer_not_onboarded": "Esta área todavía no puede recibir apoyo porque el productor aún no completó la configuración de cobro en Stripe.",
+    "payment.already_pending": "Ya existe un intento de pago pendiente para esta compensación. Espera la confirmación o inténtalo de nuevo en unos instantes.",
+    "payment.pix_requires_brl": "Pix solo está disponible para pagos en BRL.",
     "request.invalid_content_type": "Formato de envío inválido. Inténtalo de nuevo.",
     "request.payload_too_large": "El archivo o contenido enviado es demasiado grande.",
     "request.rate_limited": "Demasiados intentos en poco tiempo. Espera un momento e inténtalo de nuevo.",
