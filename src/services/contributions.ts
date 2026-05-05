@@ -18,6 +18,8 @@ type RawContributionQuote = {
   price_per_tree?: number | string;
   total_amount?: number | string;
   currency?: string;
+  max_purchasable_trees?: number | string;
+  remaining_purchasable_trees?: number | string;
 };
 
 type RawContributionConfirmation = {
@@ -86,6 +88,8 @@ function normalizeQuote(raw: RawContributionQuote): ContributionQuote {
     estimatedKgCO2PerTreePerYear: asNumber(raw.estimated_kg_co2_per_tree_per_year),
     horizonYears: asNumber(raw.horizon_years),
     currency: asString(raw.currency, 'USD'),
+    maxPurchasableTrees: asNumber(raw.max_purchasable_trees),
+    remainingPurchasableTrees: asNumber(raw.remaining_purchasable_trees),
   };
 }
 

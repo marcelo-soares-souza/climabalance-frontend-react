@@ -31,12 +31,25 @@ export function TabsList({ children, className }: { children: ReactNode; classNa
   );
 }
 
-export function TabsTrigger({ value, children, className }: { value: string; children: ReactNode; className?: string }) {
+export function TabsTrigger({
+  value,
+  children,
+  className,
+  onClick,
+}: {
+  value: string;
+  children: ReactNode;
+  className?: string;
+  onClick?: () => void;
+}) {
   const { activeTab, setActiveTab } = useContext(TabsContext);
   const isActive = activeTab === value;
   return (
     <button
-      onClick={() => setActiveTab(value)}
+      onClick={() => {
+        setActiveTab(value);
+        onClick?.();
+      }}
       data-active={isActive}
       className={cn(
         'px-4 py-2 text-sm font-medium border-b-2 transition-colors',

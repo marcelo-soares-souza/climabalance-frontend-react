@@ -946,6 +946,8 @@
       "pricePerTree": "Prix par arbre",
       "estimatedCO2": "Carbone estimé (tCO2e)",
       "total": "Coût total",
+      "remainingTrees": "Arbres disponibles à l'achat",
+      "limitReached": "La capacité maximale d'achat a été atteinte pour cette zone.",
       "transferNotice": "Le montant payé sera transféré au producteur responsable de cette zone. La plateforme prélève des frais pour la maintenance et l'évolution du service.",
       "tco2eAmount": "Total à compenser (tCO2e)",
       "proceed": "Continuer vers le Paiement"
@@ -1150,6 +1152,7 @@
     "request.failed": "Impossible de finaliser la requête. Veuillez réessayer.",
     "request.invalid_body": "Les données envoyées sont invalides. Vérifiez les champs et réessayez.",
     "request.validation_failed": "Certains champs sont invalides. Vérifiez les données envoyées et réessayez.",
+    "compensation.tree_limit_exceeded": "Cette zone n'a actuellement aucun arbre disponible à l'achat.",
     "request.invalid_content_type": "Format d'envoi invalide. Veuillez réessayer.",
     "request.payload_too_large": "Le fichier ou le contenu envoyé est trop volumineux.",
     "request.rate_limited": "Trop de tentatives en peu de temps. Veuillez patienter et réessayer.",

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import { contributionsService } from '@/services/contributions';
@@ -16,9 +16,9 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/Tabs';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { formatCurrency, formatTCO2e } from '@/lib/format';
-import { ApiError } from '@/lib/api-client';
 import { ArrowLeft, CreditCard } from 'lucide-react';
 import type { CompensationReportSummary } from '@/features/compensation/ReportPage';
+import { mapCompensationApiError } from './compensation-errors';
 
 let stripePromise: ReturnType<typeof loadStripe> | null = null;
 
@@ -45,10 +45,12 @@ type PaymentSuccessResult = {
 
 function CardCheckoutForm({
   compensationId,
+  ensureCompensationId,
   onSuccess,
   onError,
 }: {
-  compensationId: string;
+  compensationId: string | null;
+  ensureCompensationId: () => Promise<string>;
   onSuccess: (result: PaymentSuccessResult) => void;
   onError: (msg: string) => void;
 }) {
@@ -68,8 +70,9 @@ function CardCheckoutForm({
         return;
       }
 
+      const resolvedCompensationId = compensationId ?? (await ensureCompensationId());
       const intent = await stripeService.createPaymentIntent({
-        compensation_id: compensationId,
+        compensation_id: resolvedCompensationId,
         payment_method: 'card',
       });
 
@@ -101,7 +104,7 @@ function CardCheckoutForm({
         onSuccess({ pending: true, paymentId: intent.paymentId, paymentIntentId: intent.paymentIntentId });
       }
     } catch (err) {
-      onError(err instanceof ApiError ? err.messageKey : 'payment.error');
+      onError(mapCompensationApiError(err));
     } finally {
       setLoading(false);
     }
@@ -137,10 +140,12 @@ function CardCheckoutForm({
 
 function PixCheckoutForm({
   compensationId,
+  ensureCompensationId,
   onSuccess,
   onError,
 }: {
-  compensationId: string;
+  compensationId: string | null;
+  ensureCompensationId: () => Promise<string>;
   onSuccess: (data: PaymentSuccessResult) => void;
   onError: (msg: string) => void;
 }) {
@@ -150,8 +155,9 @@ function PixCheckoutForm({
   const handleSubmit = async () => {
     setLoading(true);
     try {
+      const resolvedCompensationId = compensationId ?? (await ensureCompensationId());
       const intent = await stripeService.createPaymentIntent({
-        compensation_id: compensationId,
+        compensation_id: resolvedCompensationId,
         payment_method: 'pix',
       });
 
@@ -162,7 +168,7 @@ function PixCheckoutForm({
         copyPasteCode: intent.copyPasteCode,
       });
     } catch (err) {
-      onError(err instanceof ApiError ? err.messageKey : 'payment.error');
+      onError(mapCompensationApiError(err));
     } finally {
       setLoading(false);
     }
@@ -188,6 +194,16 @@ export function CompensationCheckoutPage() {
   const [error, setError] = useState<string | null>(null);
   const [compensationId, setCompensationId] = useState<string | null>(null);
   const summaryTotalAmount = store.totalAmount;
+  const { data: checkoutQuote, error: checkoutQuoteError } = useQuery({
+    queryKey: ['checkout-quote', store.areaId, store.treesRequested, store.currency],
+    queryFn: () =>
+      contributionsService.getQuote({
+        area_id: store.areaId!,
+        trees_requested: store.treesRequested!,
+        currency: store.currency,
+      }),
+    enabled: !!store.areaId && typeof store.treesRequested === 'number' && store.treesRequested > 0,
+  });
 
   useEffect(() => {
     if (!store.areaId) {
@@ -266,17 +282,11 @@ export function CompensationCheckoutPage() {
     });
   };
 
-  const handleStartPayment = async (tab: PaymentMethodTab) => {
-    setError(null);
-    setActiveTab(tab);
-    try {
-      if (!compensationId) {
-        const contribution = await createContributionMutation.mutateAsync();
-        setCompensationId(contribution.compensationId);
-      }
-    } catch (err) {
-      setError(err instanceof ApiError ? err.messageKey : 'compensation.error');
-    }
+  const ensureCompensationId = async (): Promise<string> => {
+    if (compensationId) return compensationId;
+    const contribution = await createContributionMutation.mutateAsync();
+    setCompensationId(contribution.compensationId);
+    return contribution.compensationId;
   };
 
   const stripePromise = getStripePromise();
@@ -301,6 +311,9 @@ export function CompensationCheckoutPage() {
       <h1 className="text-2xl font-bold">{t('checkout.title')}</h1>
 
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
+      {!error && checkoutQuoteError && (
+        <ErrorBanner messageKey={mapCompensationApiError(checkoutQuoteError)} />
+      )}
 
       {/* Order Summary */}
       <Card>
@@ -363,38 +376,49 @@ export function CompensationCheckoutPage() {
           </h3>
         </CardHeader>
         <CardContent>
-          {!compensationId ? (
-            <Button
-              className="w-full"
-              onClick={() => handleStartPayment('card')}
-              loading={createContributionMutation.isPending}
-            >
-              {t('checkout.pay')}
-            </Button>
-          ) : (
-            <Tabs defaultValue="card">
-              <TabsList className="mb-4">
-                <TabsTrigger value="card">{t('payment.method.credit_card')}</TabsTrigger>
-                <TabsTrigger value="pix">{t('payment.method.pix')}</TabsTrigger>
-              </TabsList>
-              <TabsContent value="card">
-                <Elements stripe={stripePromise}>
-                  <CardCheckoutForm
+          <Tabs defaultValue="card">
+            <TabsList className="mb-4">
+              <TabsTrigger value="card" onClick={() => setActiveTab('card')}>
+                {t('payment.method.credit_card')}
+              </TabsTrigger>
+              <TabsTrigger value="pix" onClick={() => setActiveTab('pix')}>
+                {t('payment.method.pix')}
+              </TabsTrigger>
+            </TabsList>
+            {checkoutQuote ? (
+              <>
+                <TabsContent value="card">
+                  <Elements stripe={stripePromise}>
+                    <CardCheckoutForm
+                      compensationId={compensationId}
+                      ensureCompensationId={ensureCompensationId}
+                      onSuccess={handlePaymentSuccess}
+                      onError={setError}
+                    />
+                  </Elements>
+                </TabsContent>
+                <TabsContent value="pix">
+                  <PixCheckoutForm
                     compensationId={compensationId}
+                    ensureCompensationId={ensureCompensationId}
                     onSuccess={handlePaymentSuccess}
                     onError={setError}
                   />
-                </Elements>
-              </TabsContent>
-              <TabsContent value="pix">
-                <PixCheckoutForm
-                  compensationId={compensationId}
-                  onSuccess={handlePaymentSuccess}
-                  onError={setError}
-                />
-              </TabsContent>
-            </Tabs>
-          )}
+                </TabsContent>
+              </>
+            ) : (
+              <div className="pt-2">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => navigate('/compensation/review')}
+                >
+                  {t('common.edit')}
+                </Button>
+              </div>
+            )}
+          </Tabs>
         </CardContent>
       </Card>
     </div>

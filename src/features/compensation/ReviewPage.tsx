@@ -10,14 +10,15 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { formatTCO2e, formatCurrency } from '@/lib/format';
-import { ApiError } from '@/lib/api-client';
 import { ArrowLeft, TreePine, MapPin } from 'lucide-react';
+import { mapCompensationApiError } from './compensation-errors';
 
 export function CompensationReviewPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const {
     areaId,
+    currency,
     treesRequested: storedTreesRequested,
     setSelection,
   } = useCompensationStore();
@@ -34,7 +35,12 @@ export function CompensationReviewPage() {
 
   const { data: quote, isLoading: quoteLoading, error: quoteError } = useQuery({
     queryKey: ['quote', areaId, treesRequested],
-    queryFn: () => contributionsService.getQuote({ area_id: areaId!, trees_requested: treesRequested,         currency: 'USD' }),
+    queryFn: () =>
+      contributionsService.getQuote({
+        area_id: areaId!,
+        trees_requested: treesRequested,
+        currency,
+      }),
     enabled: !!areaId && treesRequested > 0,
   });
 
@@ -45,6 +51,11 @@ export function CompensationReviewPage() {
   const handleProceed = () => {
     if (!quote || treesRequested < 1) {
       setError('compensation.error');
+      return;
+    }
+
+    if (quote.remainingPurchasableTrees <= 0) {
+      setError('compensation.tree_limit_exceeded');
       return;
     }
 
@@ -59,7 +70,8 @@ export function CompensationReviewPage() {
 
   if (!areaId) return null;
 
-  const canProceed = treesRequested > 0 && !!quote && !quoteLoading;
+  const limitReached = !!quote && quote.remainingPurchasableTrees <= 0;
+  const canProceed = treesRequested > 0 && !!quote && !quoteLoading && !limitReached;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -70,7 +82,7 @@ export function CompensationReviewPage() {
 
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
       {!error && quoteError && (
-        <ErrorBanner messageKey={quoteError instanceof ApiError ? quoteError.messageKey : 'compensation.error'} />
+        <ErrorBanner messageKey={mapCompensationApiError(quoteError)} />
       )}
 
       {/* Area Info */}
@@ -106,6 +118,10 @@ export function CompensationReviewPage() {
           {quote && (
             <div className="bg-primary-50 rounded-lg p-4 space-y-2">
               <div className="flex justify-between text-sm">
+                <span>{t('compensation.review.remainingTrees')}</span>
+                <span className="font-medium">{quote.remainingPurchasableTrees}</span>
+              </div>
+              <div className="flex justify-between text-sm">
                 <span>{t('compensation.review.pricePerTree')}</span>
                 <span className="font-medium">{formatCurrency(quote.pricePerTree)}</span>
               </div>
@@ -120,6 +136,11 @@ export function CompensationReviewPage() {
               <p className="border-t border-primary-200 pt-3 text-xs leading-5 text-text-secondary">
                 {t('compensation.review.transferNotice')}
               </p>
+              {limitReached && (
+                <p className="text-sm text-error font-medium">
+                  {t('compensation.review.limitReached')}
+                </p>
+              )}
             </div>
           )}
         </CardContent>

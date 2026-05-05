@@ -946,6 +946,8 @@
       "pricePerTree": "Precio por árbol",
       "estimatedCO2": "Carbono estimado (tCO2e)",
       "total": "Costo total",
+      "remainingTrees": "Árboles disponibles para compra",
+      "limitReached": "Se alcanzó la capacidad máxima de compra para esta área.",
       "transferNotice": "El valor pagado se transferirá al productor responsable de esta área. La plataforma cobra una tasa para el mantenimiento y la evolución del servicio.",
       "tco2eAmount": "Total a compensar (tCO2e)",
       "proceed": "Continuar al Pago"
@@ -1150,6 +1152,7 @@
     "request.failed": "No fue posible completar la solicitud. Inténtalo de nuevo.",
     "request.invalid_body": "Los datos enviados son inválidos. Revisa los campos e inténtalo de nuevo.",
     "request.validation_failed": "Algunos campos son inválidos. Revisa los datos enviados e inténtalo de nuevo.",
+    "compensation.tree_limit_exceeded": "Esta área no tiene árboles disponibles para compra en este momento.",
     "request.invalid_content_type": "Formato de envío inválido. Inténtalo de nuevo.",
     "request.payload_too_large": "El archivo o contenido enviado es demasiado grande.",
     "request.rate_limited": "Demasiados intentos en poco tiempo. Espera un momento e inténtalo de nuevo.",

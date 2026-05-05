@@ -9,6 +9,8 @@ export interface ContributionQuote {
   estimatedKgCO2PerTreePerYear: number;
   horizonYears: number;
   currency: string;
+  maxPurchasableTrees: number;
+  remainingPurchasableTrees: number;
 }
 
 export interface CreateContributionRequest {
