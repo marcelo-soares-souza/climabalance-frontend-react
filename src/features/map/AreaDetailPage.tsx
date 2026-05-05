@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
 import { plantedTreesService } from "@/services/planted-trees";
+import { stripeService } from "@/services/stripe";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -39,6 +40,7 @@ import {
   Sprout,
   Leaf,
   MapPin,
+  AlertTriangle,
 } from "lucide-react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
@@ -112,6 +114,12 @@ export function AreaDetailPage() {
     queryKey: ["pending-tree-count", areaId],
     queryFn: () => plantedTreesService.getPendingTreeCount(areaId!),
     enabled: !!areaId,
+  });
+
+  const { data: stripeStatus } = useQuery({
+    queryKey: ["producer-stripe-status", userId],
+    queryFn: () => stripeService.getStripeOnboardingStatus(),
+    enabled: isAuthenticated && !!userId && userId === area?.ownerUserId,
   });
 
   const areaIdentifier = area?.id ?? areaId ?? "";
@@ -248,6 +256,13 @@ export function AreaDetailPage() {
   const compensatedDisplay = formatMetric(totalEstimatedTCO2e, "tCO2e");
 
   const isOwner = userId === area.ownerUserId;
+  const producerReadyToReceiveSupport =
+    stripeStatus?.connected && stripeStatus?.charges_enabled;
+  const shouldShowProducerStripeWarning =
+    isOwner &&
+    area.status === "active" &&
+    stripeStatus !== undefined &&
+    !producerReadyToReceiveSupport;
   const canManageMedia = isOwner || isAdmin;
   const canDelete = isOwner || isAdmin;
   const canSubmitForAudit = isOwner && area.status === "draft";
@@ -344,6 +359,36 @@ export function AreaDetailPage() {
                   : t("common.showMore")}
               </button>
             )}
+          </CardContent>
+        </Card>
+      )}
+
+      {shouldShowProducerStripeWarning && (
+        <Card className="border-amber-300 bg-amber-50">
+          <CardHeader>
+            <h2 className="text-lg font-semibold flex items-center gap-2 text-amber-900">
+              <AlertTriangle className="h-5 w-5" />
+              {t("area.stripeSetupRequiredTitle")}
+            </h2>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm text-amber-900">
+            <p>{t("area.stripeSetupRequiredDesc")}</p>
+            <p className="text-xs text-amber-900/80">
+              {t("area.stripeSetupStatusDebug", {
+                connected: stripeStatus?.connected ? "true" : "false",
+                charges: stripeStatus?.charges_enabled ? "true" : "false",
+                payouts: stripeStatus?.payouts_enabled ? "true" : "false",
+              })}
+            </p>
+            <p>{t("area.stripeSetupRequiredStep1")}</p>
+            <p>{t("area.stripeSetupRequiredStep2")}</p>
+            <p>{t("area.stripeSetupRequiredStep3")}</p>
+            <Button
+              size="sm"
+              onClick={() => navigate("/how-to-use/stripe-setup")}
+            >
+              {t("area.stripeSetupRequiredCta")}
+            </Button>
           </CardContent>
         </Card>
       )}

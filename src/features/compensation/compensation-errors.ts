@@ -34,5 +34,14 @@ export function mapCompensationApiError(error: unknown): string {
     return 'compensation.tree_limit_exceeded';
   }
 
+  const hasProducerNotOnboarded = fieldErrors.some((fieldError) => {
+    if (typeof fieldError.message !== 'string') return false;
+    return fieldError.message.includes('producer_not_onboarded');
+  });
+
+  if (hasProducerNotOnboarded) {
+    return 'compensation.producer_not_onboarded';
+  }
+
   return error.messageKey;
 }

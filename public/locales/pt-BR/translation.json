@@ -836,6 +836,12 @@
     "uploadMedia": "Enviar",
     "uploadMediaError": "Falha ao enviar mídia. Tente novamente.",
     "compensateNow": "Apoiar este projeto",
+    "stripeSetupRequiredTitle": "Você ainda não pode receber apoios nesta área",
+    "stripeSetupRequiredDesc": "Sua conta Stripe ainda não está habilitada para recebimento de pagamentos.",
+    "stripeSetupRequiredStep1": "1. Acesse a página de configuração do Stripe.",
+    "stripeSetupRequiredStep2": "2. Conecte sua conta e preencha os dados solicitados.",
+    "stripeSetupRequiredStep3": "3. Após aprovação do Stripe, esta área estará apta para receber apoios.",
+    "stripeSetupRequiredCta": "Configurar Stripe agora",
     "status": {
       "draft": "Rascunho",
       "pending_audit": "Aguardando Auditoria",
@@ -901,7 +907,8 @@
       "reasonLabel": "Motivo (opcional)",
       "reasonPlaceholder": "Motivo da suspensão...",
       "error": "Falha ao suspender área. Tente novamente."
-    }
+    },
+    "stripeSetupStatusDebug": "Status Stripe atual: connected={{connected}}, charges_enabled={{charges}}, payouts_enabled={{payouts}}."
   },
   "areas": {
     "list": {
@@ -1153,6 +1160,7 @@
     "request.invalid_body": "Os dados enviados são inválidos. Revise os campos e tente novamente.",
     "request.validation_failed": "Alguns campos são inválidos. Revise os dados informados e tente novamente.",
     "compensation.tree_limit_exceeded": "Esta área não possui árvores disponíveis para compra no momento.",
+    "compensation.producer_not_onboarded": "Esta área ainda não pode receber suporte porque o produtor ainda não concluiu a configuração de recebimento no Stripe.",
     "request.invalid_content_type": "Formato de envio inválido. Tente novamente.",
     "request.payload_too_large": "O arquivo ou conteúdo enviado é grande demais.",
     "request.rate_limited": "Muitas tentativas em pouco tempo. Aguarde um instante e tente novamente.",
@@ -1212,6 +1220,7 @@
   "producer.stripe.disabled": "Pendente",
   "producer.stripe.not_connected": "Você ainda não conectou sua conta Stripe.",
   "producer.stripe.connect_now": "Conectar ao Stripe",
+  "producer.stripe.connect_not_enabled": "Seu dashboard Stripe ainda não tem o Connect habilitado. Ative o Stripe Connect na conta da plataforma e tente novamente.",
   "producer.stripe.dashboard": "Acessar Dashboard Stripe",
   "producer.stripe.onboarding_title": "Como conectar sua conta Stripe",
   "producer.stripe.what_is": "O que é o Stripe Connect",

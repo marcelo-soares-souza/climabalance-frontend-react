@@ -836,6 +836,12 @@
     "uploadMedia": "Télécharger",
     "uploadMediaError": "Échec du téléchargement du fichier. Veuillez réessayer.",
     "compensateNow": "Compenser maintenant",
+    "stripeSetupRequiredTitle": "Vous ne pouvez pas encore recevoir de soutiens pour cette zone",
+    "stripeSetupRequiredDesc": "Votre compte Stripe n'est pas encore activé pour recevoir des paiements.",
+    "stripeSetupRequiredStep1": "1. Ouvrez la page de configuration Stripe.",
+    "stripeSetupRequiredStep2": "2. Connectez votre compte et remplissez les informations demandées.",
+    "stripeSetupRequiredStep3": "3. Après validation Stripe, cette zone pourra recevoir des soutiens.",
+    "stripeSetupRequiredCta": "Configurer Stripe maintenant",
     "status": {
       "draft": "Brouillon",
       "pending_audit": "En attente d'audit",
@@ -901,7 +907,8 @@
       "reasonLabel": "Motif (facultatif)",
       "reasonPlaceholder": "Motif de la suspension...",
       "error": "Échec de la suspension de la zone. Veuillez réessayer."
-    }
+    },
+    "stripeSetupStatusDebug": "Statut Stripe actuel : connected={{connected}}, charges_enabled={{charges}}, payouts_enabled={{payouts}}."
   },
   "areas": {
     "list": {
@@ -1153,6 +1160,7 @@
     "request.invalid_body": "Les données envoyées sont invalides. Vérifiez les champs et réessayez.",
     "request.validation_failed": "Certains champs sont invalides. Vérifiez les données envoyées et réessayez.",
     "compensation.tree_limit_exceeded": "Cette zone n'a actuellement aucun arbre disponible à l'achat.",
+    "compensation.producer_not_onboarded": "Cette zone ne peut pas encore recevoir de soutien, car le producteur n'a pas encore finalisé la configuration de paiement Stripe.",
     "request.invalid_content_type": "Format d'envoi invalide. Veuillez réessayer.",
     "request.payload_too_large": "Le fichier ou le contenu envoyé est trop volumineux.",
     "request.rate_limited": "Trop de tentatives en peu de temps. Veuillez patienter et réessayer.",
@@ -1212,6 +1220,7 @@
   "producer.stripe.disabled": "En attente",
   "producer.stripe.not_connected": "Vous n'avez pas encore connecté votre compte Stripe.",
   "producer.stripe.connect_now": "Se connecter à Stripe",
+  "producer.stripe.connect_not_enabled": "Votre tableau de bord Stripe n'a pas encore Connect activé. Activez Stripe Connect sur le compte de la plateforme et réessayez.",
   "producer.stripe.dashboard": "Accéder au Tableau de Bord Stripe",
   "producer.stripe.onboarding_title": "Comment connecter votre compte Stripe",
   "producer.stripe.what_is": "Qu'est-ce que Stripe Connect",

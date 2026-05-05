@@ -6,6 +6,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { authService } from '@/services/auth';
 import { usersService } from '@/services/users';
 import { areasService } from '@/services/areas';
+import { stripeService } from '@/services/stripe';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -85,6 +86,13 @@ export function ProfilePage() {
   });
 
   const isProducer = user?.roles?.includes('producer');
+  const { data: stripeStatus } = useQuery({
+    queryKey: ['profile', 'stripe-status', userId],
+    queryFn: () => stripeService.getStripeOnboardingStatus(),
+    enabled: isOwnProfile && !!isProducer,
+  });
+  const isProducerReadyToReceivePayments =
+    !!stripeStatus?.connected && !!stripeStatus?.charges_enabled;
   const { data: userAreas } = useQuery({
     queryKey: ['areas', 'owner', targetUserId],
     queryFn: () => areasService.listAreas({ ownerUserId: targetUserId! }),
@@ -171,6 +179,31 @@ export function ProfilePage() {
                 </div>
                 {passwordMutation.isSuccess && <p className="text-sm text-success">{t('profile.passwordChanged')}</p>}
               </form>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
+      {isOwnProfile && isProducer && (
+        <Card>
+          <CardHeader>
+            <h3 className="font-medium">{t('producer.stripe.title')}</h3>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm">
+            {isProducerReadyToReceivePayments ? (
+              <p className="text-success">{t('producer.stripe.enabled')}</p>
+            ) : (
+              <>
+                <p className="text-text-secondary">{t('producer.stripe.not_connected')}</p>
+                <div className="space-y-2 text-text-secondary">
+                  <p>{t('producer.stripe.step1_desc')}</p>
+                  <p>{t('producer.stripe.step2_desc')}</p>
+                  <p>{t('producer.stripe.step3_desc')}</p>
+                </div>
+                <Button size="sm" onClick={() => navigate('/how-to-use/stripe-setup')}>
+                  {t('producer.stripe.connect_now')}
+                </Button>
+              </>
             )}
           </CardContent>
         </Card>

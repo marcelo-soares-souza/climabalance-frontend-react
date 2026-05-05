@@ -11,6 +11,9 @@ export interface ContributionQuote {
   currency: string;
   maxPurchasableTrees: number;
   remainingPurchasableTrees: number;
+  producerStripeConnected: boolean;
+  producerChargesEnabled: boolean;
+  producerReadyToReceiveSupport: boolean;
 }
 
 export interface CreateContributionRequest {

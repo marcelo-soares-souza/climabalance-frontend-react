@@ -836,6 +836,12 @@
     "uploadMedia": "Upload",
     "uploadMediaError": "Failed to upload media. Please try again.",
     "compensateNow": "Support this project",
+    "stripeSetupRequiredTitle": "You still cannot receive support for this area",
+    "stripeSetupRequiredDesc": "Your Stripe account is not yet enabled to receive payments.",
+    "stripeSetupRequiredStep1": "1. Open the Stripe setup page.",
+    "stripeSetupRequiredStep2": "2. Connect your account and fill in the required information.",
+    "stripeSetupRequiredStep3": "3. After Stripe approval, this area will be ready to receive support.",
+    "stripeSetupRequiredCta": "Set up Stripe now",
     "status": {
       "draft": "Draft",
       "pending_audit": "Pending Audit",
@@ -901,7 +907,8 @@
       "reasonLabel": "Reason (optional)",
       "reasonPlaceholder": "Reason for suspension...",
       "error": "Failed to suspend area. Please try again."
-    }
+    },
+    "stripeSetupStatusDebug": "Current Stripe status: connected={{connected}}, charges_enabled={{charges}}, payouts_enabled={{payouts}}."
   },
   "areas": {
     "list": {
@@ -1153,6 +1160,7 @@
     "request.invalid_body": "The submitted data is invalid. Review the fields and try again.",
     "request.validation_failed": "Some fields are invalid. Review the submitted data and try again.",
     "compensation.tree_limit_exceeded": "This area currently has no trees available for purchase.",
+    "compensation.producer_not_onboarded": "This area still cannot receive support because the producer has not completed Stripe payout setup yet.",
     "request.invalid_content_type": "Invalid request format. Please try again.",
     "request.payload_too_large": "The uploaded file or content is too large.",
     "request.rate_limited": "Too many attempts in a short time. Please wait and try again.",
@@ -1212,6 +1220,7 @@
   "producer.stripe.disabled": "Pending",
   "producer.stripe.not_connected": "You haven't connected your Stripe account yet.",
   "producer.stripe.connect_now": "Connect to Stripe",
+  "producer.stripe.connect_not_enabled": "Your Stripe dashboard does not have Connect enabled yet. Enable Stripe Connect on the platform account and try again.",
   "producer.stripe.dashboard": "Access Stripe Dashboard",
   "producer.stripe.onboarding_title": "How to connect your Stripe account",
   "producer.stripe.what_is": "What is Stripe Connect",

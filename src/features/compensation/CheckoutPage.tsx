@@ -204,6 +204,7 @@ export function CompensationCheckoutPage() {
       }),
     enabled: !!store.areaId && typeof store.treesRequested === 'number' && store.treesRequested > 0,
   });
+  const producerReadyToReceiveSupport = checkoutQuote?.producerReadyToReceiveSupport ?? false;
 
   useEffect(() => {
     if (!store.areaId) {
@@ -314,6 +315,9 @@ export function CompensationCheckoutPage() {
       {!error && checkoutQuoteError && (
         <ErrorBanner messageKey={mapCompensationApiError(checkoutQuoteError)} />
       )}
+      {!error && checkoutQuote && !producerReadyToReceiveSupport && (
+        <ErrorBanner messageKey="compensation.producer_not_onboarded" />
+      )}
 
       {/* Order Summary */}
       <Card>
@@ -385,7 +389,7 @@ export function CompensationCheckoutPage() {
                 {t('payment.method.pix')}
               </TabsTrigger>
             </TabsList>
-            {checkoutQuote ? (
+            {checkoutQuote && producerReadyToReceiveSupport ? (
               <>
                 <TabsContent value="card">
                   <Elements stripe={stripePromise}>
@@ -406,6 +410,20 @@ export function CompensationCheckoutPage() {
                   />
                 </TabsContent>
               </>
+            ) : checkoutQuote ? (
+              <div className="space-y-3 pt-2">
+                <p className="text-sm text-text-secondary">
+                  {t('compensation.producer_not_onboarded')}
+                </p>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="w-full"
+                  onClick={() => navigate('/compensation/review')}
+                >
+                  {t('common.edit')}
+                </Button>
+              </div>
             ) : (
               <div className="pt-2">
                 <Button

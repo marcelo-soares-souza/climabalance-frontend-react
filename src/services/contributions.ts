@@ -20,6 +20,9 @@ type RawContributionQuote = {
   currency?: string;
   max_purchasable_trees?: number | string;
   remaining_purchasable_trees?: number | string;
+  producer_stripe_connected?: boolean;
+  producer_charges_enabled?: boolean;
+  producer_ready_to_receive_support?: boolean;
 };
 
 type RawContributionConfirmation = {
@@ -90,6 +93,9 @@ function normalizeQuote(raw: RawContributionQuote): ContributionQuote {
     currency: asString(raw.currency, 'USD'),
     maxPurchasableTrees: asNumber(raw.max_purchasable_trees),
     remainingPurchasableTrees: asNumber(raw.remaining_purchasable_trees),
+    producerStripeConnected: Boolean(raw.producer_stripe_connected),
+    producerChargesEnabled: Boolean(raw.producer_charges_enabled),
+    producerReadyToReceiveSupport: Boolean(raw.producer_ready_to_receive_support),
   };
 }
 
