@@ -84,6 +84,14 @@ function isAuthRoute(path: string): boolean {
   return PUBLIC_AUTH_ROUTES.some((route) => path.startsWith(route));
 }
 
+// Paths where a 401 response means the request itself is invalid
+// (e.g. wrong old password) rather than the session being expired.
+const NON_SESSION_401_PATHS = ['/users/change-password'];
+
+function isNonSession401Path(path: string): boolean {
+  return NON_SESSION_401_PATHS.some((route) => path.startsWith(route));
+}
+
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { params, ...fetchOptions } = options;
   const url = buildUrl(path, params);
@@ -110,7 +118,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 
   const res = await fetch(url, { ...fetchOptions, headers, credentials: 'include' });
 
-  if (res.status === 401 && shouldHandleSession) {
+  if (res.status === 401 && shouldHandleSession && !isNonSession401Path(path)) {
     const newToken = await handleUnauthorized();
     if (newToken) {
       headers['Authorization'] = `Bearer ${newToken}`;

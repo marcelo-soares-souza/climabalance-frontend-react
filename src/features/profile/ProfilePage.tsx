@@ -48,6 +48,7 @@ export function ProfilePage() {
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
   const [passwordError, setPasswordError] = useState<string | null>(null);
+  const [passwordSuccess, setPasswordSuccess] = useState(false);
 
   const passwordMutation = useMutation({
     mutationFn: () => authService.changePassword(oldPassword, newPassword, newPasswordConfirm),
@@ -57,8 +58,12 @@ export function ProfilePage() {
       setNewPasswordConfirm('');
       setShowPasswordForm(false);
       setPasswordError(null);
+      setPasswordSuccess(true);
     },
-    onError: (err) => setPasswordError(err instanceof ApiError ? err.messageKey : 'server.error'),
+    onError: (err) => {
+      setPasswordError(err instanceof ApiError ? err.messageKey : 'server.error');
+      setPasswordSuccess(false);
+    },
   });
 
   const { data: user, isLoading: loadingUser } = useQuery({
@@ -150,7 +155,13 @@ export function ProfilePage() {
           <CardContent className="py-4">
             <button
               type="button"
-              onClick={() => setShowPasswordForm(!showPasswordForm)}
+              onClick={() => {
+                setShowPasswordForm(!showPasswordForm);
+                if (!showPasswordForm) {
+                  setPasswordSuccess(false);
+                  setPasswordError(null);
+                }
+              }}
               className="flex w-full items-center justify-between text-left"
             >
               <div className="flex items-center gap-2">
@@ -159,10 +170,14 @@ export function ProfilePage() {
               </div>
               {showPasswordForm ? <ChevronUp className="h-4 w-4 text-text-secondary" /> : <ChevronDown className="h-4 w-4 text-text-secondary" />}
             </button>
+            {passwordSuccess && !showPasswordForm && (
+              <p className="mt-3 text-sm text-success border-t border-gray-100 pt-3">{t('profile.passwordChanged')}</p>
+            )}
             {showPasswordForm && (
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
+                  setPasswordSuccess(false);
                   if (newPassword !== newPasswordConfirm) {
                     setPasswordError('errors.auth.register.passwordMismatch');
                     return;
@@ -176,10 +191,9 @@ export function ProfilePage() {
                 <Input id="new_password" type="password" label={t('profile.newPassword')} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={8} />
                 <Input id="new_password_confirm" type="password" label={t('auth.confirmPassword')} value={newPasswordConfirm} onChange={(e) => setNewPasswordConfirm(e.target.value)} required />
                 <div className="flex justify-end gap-2">
-                  <Button variant="ghost" type="button" size="sm" onClick={() => { setShowPasswordForm(false); setPasswordError(null); setOldPassword(''); setNewPassword(''); setNewPasswordConfirm(''); }}>{t('common.cancel')}</Button>
+                  <Button variant="ghost" type="button" size="sm" onClick={() => { setShowPasswordForm(false); setPasswordError(null); setPasswordSuccess(false); setOldPassword(''); setNewPassword(''); setNewPasswordConfirm(''); }}>{t('common.cancel')}</Button>
                   <Button type="submit" size="sm" loading={passwordMutation.isPending}>{t('common.save')}</Button>
                 </div>
-                {passwordMutation.isSuccess && <p className="text-sm text-success">{t('profile.passwordChanged')}</p>}
               </form>
             )}
           </CardContent>
