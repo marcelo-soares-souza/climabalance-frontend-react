@@ -409,8 +409,6 @@
         "title": "Tarifas de transacción",
         "desc": "Stripe cobra una tarifa por transacción (generalmente un porcentaje + monto fijo). Esta tarifa se descuenta automáticamente al momento de la contribución y cubre procesamiento, prevención de fraude y soporte.",
         "note": "Además de la tarifa de Stripe, la plataforma aplica una tarifa administrativa, que se informa con transparencia antes de cada operación.",
-        "linkLabel": "Ver tarifas actualizadas",
-        "linkUrl": "https://stripe.com/es/pricing"
       },
       "integration": {
         "title": "Paso a paso de la integración",

@@ -409,8 +409,6 @@
         "title": "Transaction fees",
         "desc": "Stripe charges a fee per transaction (usually a percentage + fixed amount). This fee is automatically deducted at the time of contribution and covers processing, fraud prevention, and support.",
         "note": "In addition to Stripe's fee, the platform applies an administrative fee, which is transparently disclosed before each operation.",
-        "linkLabel": "View current pricing",
-        "linkUrl": "https://stripe.com/pricing"
       },
       "integration": {
         "title": "Integration step by step",

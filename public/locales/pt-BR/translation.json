@@ -409,8 +409,6 @@
         "title": "Taxas de transação",
         "desc": "A Stripe cobra uma taxa por transação (geralmente um percentual + valor fixo). Essa taxa é descontada automaticamente no momento da contribuição e cobre processamento, prevenção a fraudes e suporte.",
         "note": "Além da taxa da Stripe, a plataforma aplica uma taxa administrativa, que é informada com transparência antes de cada operação.",
-        "linkLabel": "Ver taxas atualizadas",
-        "linkUrl": "https://stripe.com/br/pricing"
       },
       "integration": {
         "title": "Passo a passo da integração",

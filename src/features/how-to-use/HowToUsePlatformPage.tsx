@@ -265,15 +265,6 @@ function TabPanel({ type }: { type: AccountTab }) {
               <p className="text-sm text-text-secondary">
                 {t(`howToUse.${type}.stripeManual.fees.note`)}
               </p>
-              <a
-                href={t(`howToUse.${type}.stripeManual.fees.linkUrl`)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-              >
-                {t(`howToUse.${type}.stripeManual.fees.linkLabel`)}
-                <ArrowRight className="h-4 w-4" />
-              </a>
             </CardContent>
           </Card>
 
