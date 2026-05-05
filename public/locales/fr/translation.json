@@ -399,6 +399,38 @@
       },
       "cta": "Créer un compte producteur"
     },
+    "stripeManual": {
+      "label": "Intégration Stripe",
+      "why": {
+        "title": "Pourquoi utilisons-nous Stripe ?",
+        "security": "Stripe est l'une des plateformes de paiement les plus sécurisées au monde, certifiée PCI DSS Niveau 1 — la norme de sécurité la plus élevée du secteur. Toutes les données financières sont cryptées et Stripe gère l'ensemble de la conformité réglementaire, vous protégeant ainsi que vos donateurs.",
+        "ease": "Avec Stripe, vous n'avez pas à vous soucier de l'infrastructure de paiement. L'intégration est simple et rapide : vous connectez votre compte, et le reste — répartition des paiements, transferts, rapports — est automatisé par la plateforme."
+      },
+      "fees": {
+        "title": "Frais de transaction",
+        "desc": "Stripe facture des frais par transaction (généralement un pourcentage + un montant fixe). Ces frais sont automatiquement déduits au moment de la contribution et couvrent le traitement, la prévention de la fraude et le support. Consultez le barème officiel de Stripe pour les tarifs à jour.",
+        "note": "En plus des frais Stripe, la plateforme applique des frais administratifs, qui sont communiqués de manière transparente avant chaque opération."
+      },
+      "integration": {
+        "title": "Intégration pas à pas",
+        "step1": {
+          "title": "Accédez à la page de paiement",
+          "desc": "Dans votre profil producteur, allez dans la section paiements et cliquez sur \"Se connecter à Stripe\"."
+        },
+        "step2": {
+          "title": "Remplissez vos informations",
+          "desc": "Vous serez redirigé vers l'environnement sécurisé de Stripe. Saisissez vos informations personnelles ou professionnelles, votre compte bancaire et les documents de vérification."
+        },
+        "step3": {
+          "title": "Attendez la vérification",
+          "desc": "Stripe analyse les informations soumises. Dans la plupart des cas, la vérification est terminée en quelques minutes. Vous recevrez la confirmation automatiquement."
+        },
+        "step4": {
+          "title": "Prêt !",
+          "desc": "Une fois votre compte vérifié, vous pouvez recevoir les transferts des contributions des donateurs. Les montants sont automatiquement reversés par la plateforme."
+        }
+      }
+    },
     "videosLabel": "Vidéos",
     "videosTitle": "Tutoriel Vidéo - Pas à Pas",
     "videoTreePlanting": "Plantation d'Arbres",

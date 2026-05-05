@@ -233,6 +233,60 @@ function TabPanel({ type }: { type: AccountTab }) {
           </CardContent>
         </Card>
       </div>
+
+      {type === 'producer' && (
+        <section className="space-y-4 pt-2">
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+            {t(`howToUse.${type}.stripeManual.label`)}
+          </p>
+
+          <Card className="border-0 shadow-sm ring-1 ring-black/5">
+            <CardContent className="space-y-3 py-6">
+              <h3 className="font-semibold text-text-primary">
+                {t(`howToUse.${type}.stripeManual.why.title`)}
+              </h3>
+              <p className="text-sm text-text-secondary">
+                {t(`howToUse.${type}.stripeManual.why.security`)}
+              </p>
+              <p className="text-sm text-text-secondary">
+                {t(`howToUse.${type}.stripeManual.why.ease`)}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm ring-1 ring-black/5">
+            <CardContent className="space-y-3 py-6">
+              <h3 className="font-semibold text-text-primary">
+                {t(`howToUse.${type}.stripeManual.fees.title`)}
+              </h3>
+              <p className="text-sm text-text-secondary">
+                {t(`howToUse.${type}.stripeManual.fees.desc`)}
+              </p>
+              <p className="text-sm text-text-secondary">
+                {t(`howToUse.${type}.stripeManual.fees.note`)}
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm ring-1 ring-black/5">
+            <CardContent className="space-y-4 py-6">
+              <h3 className="font-semibold text-text-primary">
+                {t(`howToUse.${type}.stripeManual.integration.title`)}
+              </h3>
+              {[1, 2, 3, 4].map((index) => (
+                <div key={index} className="space-y-1">
+                  <h4 className="font-medium text-sm text-text-primary">
+                    {t(`howToUse.${type}.stripeManual.integration.step${index}.title`)}
+                  </h4>
+                  <p className="text-sm text-text-secondary">
+                    {t(`howToUse.${type}.stripeManual.integration.step${index}.desc`)}
+                  </p>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+        </section>
+      )}
     </div>
   );
 }

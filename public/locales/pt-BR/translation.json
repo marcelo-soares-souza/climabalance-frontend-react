@@ -399,6 +399,38 @@
       },
       "cta": "Criar conta de produtor"
     },
+    "stripeManual": {
+      "label": "Integração com Stripe",
+      "why": {
+        "title": "Por que usamos Stripe?",
+        "security": "A Stripe é uma das plataformas de pagamento mais seguras do mundo, certificada PCI DSS Nível 1 — o mais alto padrão de segurança da indústria. Todos os dados financeiros são criptografados e a Stripe gerencia toda a conformidade regulatória, protegendo você e seus apoiadores.",
+        "ease": "Com a Stripe, você não precisa se preocupar com infraestrutura de pagamentos. A integração é simples e rápida: você conecta sua conta, e o restante — divisão de pagamentos, transferências, relatórios — é automatizado pela plataforma."
+      },
+      "fees": {
+        "title": "Taxas de transação",
+        "desc": "A Stripe cobra uma taxa por transação (geralmente um percentual + valor fixo). Essa taxa é descontada automaticamente no momento da contribuição e cobre processamento, prevenção a fraudes e suporte. Consulte a tabela oficial da Stripe para valores atualizados.",
+        "note": "Além da taxa da Stripe, a plataforma aplica uma taxa administrativa, que é informada com transparência antes de cada operação."
+      },
+      "integration": {
+        "title": "Passo a passo da integração",
+        "step1": {
+          "title": "Acesse a página de pagamentos",
+          "desc": "No seu perfil de produtor, vá até a seção de pagamentos e clique em \"Conectar ao Stripe\"."
+        },
+        "step2": {
+          "title": "Preencha seus dados",
+          "desc": "Você será redirecionado ao ambiente seguro da Stripe. Informe seus dados pessoais ou da empresa, conta bancária e documentos para verificação."
+        },
+        "step3": {
+          "title": "Aguarde a verificação",
+          "desc": "A Stripe analisa as informações enviadas. Na maioria dos casos, a verificação é concluída em alguns minutos. Você recebe a confirmação automaticamente."
+        },
+        "step4": {
+          "title": "Pronto!",
+          "desc": "Com a conta verificada, você já pode receber transferências das contribuições dos apoiadores. Os valores são automaticamente repassados pela plataforma."
+        }
+      }
+    },
     "videosLabel": "Vídeos",
     "videosTitle": "Tutorial em Vídeos - Passo a Passo",
     "videoTreePlanting": "Plantio de Árvores",

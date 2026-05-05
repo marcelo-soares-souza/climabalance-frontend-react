@@ -399,6 +399,38 @@
       },
       "cta": "Create producer account"
     },
+    "stripeManual": {
+      "label": "Stripe Integration",
+      "why": {
+        "title": "Why do we use Stripe?",
+        "security": "Stripe is one of the world's most secure payment platforms, certified PCI DSS Level 1 — the highest security standard in the industry. All financial data is encrypted and Stripe manages all regulatory compliance, protecting you and your supporters.",
+        "ease": "With Stripe, you don't need to worry about payment infrastructure. The integration is simple and fast: you connect your account, and everything else — payment splitting, transfers, reporting — is automated by the platform."
+      },
+      "fees": {
+        "title": "Transaction fees",
+        "desc": "Stripe charges a fee per transaction (usually a percentage + fixed amount). This fee is automatically deducted at the time of contribution and covers processing, fraud prevention, and support. Check Stripe's official pricing for current rates.",
+        "note": "In addition to Stripe's fee, the platform applies an administrative fee, which is transparently disclosed before each operation."
+      },
+      "integration": {
+        "title": "Integration step by step",
+        "step1": {
+          "title": "Go to the payments page",
+          "desc": "In your producer profile, navigate to the payments section and click \"Connect to Stripe\"."
+        },
+        "step2": {
+          "title": "Fill in your information",
+          "desc": "You'll be redirected to Stripe's secure environment. Enter your personal or business details, bank account, and documents for verification."
+        },
+        "step3": {
+          "title": "Wait for verification",
+          "desc": "Stripe reviews the submitted information. In most cases, verification is completed within minutes. You'll receive confirmation automatically."
+        },
+        "step4": {
+          "title": "Done!",
+          "desc": "With your account verified, you can now receive transfers from supporter contributions. Amounts are automatically forwarded by the platform."
+        }
+      }
+    },
     "videosLabel": "Videos",
     "videosTitle": "Video Tutorial - Step by Step",
     "videoTreePlanting": "Tree Planting Demo",

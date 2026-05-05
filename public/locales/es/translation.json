@@ -399,6 +399,38 @@
       },
       "cta": "Crear cuenta de productor"
     },
+    "stripeManual": {
+      "label": "Integración con Stripe",
+      "why": {
+        "title": "¿Por qué usamos Stripe?",
+        "security": "Stripe es una de las plataformas de pago más seguras del mundo, certificada PCI DSS Nivel 1 — el estándar de seguridad más alto de la industria. Todos los datos financieros están cifrados y Stripe gestiona todo el cumplimiento normativo, protegiéndote a ti y a tus seguidores.",
+        "ease": "Con Stripe, no tienes que preocuparte por la infraestructura de pagos. La integración es simple y rápida: conectas tu cuenta, y el resto — división de pagos, transferencias, informes — es automatizado por la plataforma."
+      },
+      "fees": {
+        "title": "Tarifas de transacción",
+        "desc": "Stripe cobra una tarifa por transacción (generalmente un porcentaje + monto fijo). Esta tarifa se descuenta automáticamente al momento de la contribución y cubre procesamiento, prevención de fraude y soporte. Consulta la tabla oficial de Stripe para conocer los valores actualizados.",
+        "note": "Además de la tarifa de Stripe, la plataforma aplica una tarifa administrativa, que se informa con transparencia antes de cada operación."
+      },
+      "integration": {
+        "title": "Paso a paso de la integración",
+        "step1": {
+          "title": "Accede a la página de pagos",
+          "desc": "En tu perfil de productor, ve a la sección de pagos y haz clic en \"Conectar a Stripe\"."
+        },
+        "step2": {
+          "title": "Completa tus datos",
+          "desc": "Serás redirigido al entorno seguro de Stripe. Ingresa tus datos personales o de la empresa, cuenta bancaria y documentos para verificación."
+        },
+        "step3": {
+          "title": "Espera la verificación",
+          "desc": "Stripe analiza la información enviada. En la mayoría de los casos, la verificación se completa en minutos. Recibirás la confirmación automáticamente."
+        },
+        "step4": {
+          "title": "¡Listo!",
+          "desc": "Con la cuenta verificada, ya puedes recibir transferencias de las contribuciones de los seguidores. Los valores son automáticamente repasados por la plataforma."
+        }
+      }
+    },
     "videosLabel": "Videos",
     "videosTitle": "Tutorial en Vídeos - Paso a Paso",
     "videoTreePlanting": "Plantación de Árboles",
