@@ -433,6 +433,11 @@ export function AreaDetailPage() {
           <span className="text-sm text-text-secondary">
             {defaultHorizonYears} {t("common.years")}
           </span>
+          {area.maxPurchasableTrees != null && (
+            <span className="text-sm text-text-secondary">
+              {t("area.maxPurchasableTrees")}: {area.maxPurchasableTrees}
+            </span>
+          )}
         </CardContent>
       </Card>
 

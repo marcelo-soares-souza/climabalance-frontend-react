@@ -21,6 +21,7 @@ export interface Area {
   pricePerTree: number | null;
   defaultHorizonYears: number | null;
   pricePerTCO2e: number | null;
+  maxPurchasableTrees?: number | null;
   thumbnailUrl?: string;
   imageUrl?: string;
   committedTreesCount?: number;
@@ -100,6 +101,7 @@ export interface UpdateAreaRequest {
   price_per_tree?: number;
   default_horizon_years?: number;
   price_per_t_co2e?: number;
+  max_purchasable_trees?: number | null;
 }
 
 export interface ApproveAreaRequest {

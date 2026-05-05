@@ -15,6 +15,8 @@ type RawCompensationQuote = {
   currency?: string;
   available_t_co2e?: number | string;
   has_capacity?: boolean;
+  max_purchasable_trees?: number | string | null;
+  remaining_purchasable_trees?: number | string;
 };
 
 type RawCompensationConfirmation = {
@@ -83,6 +85,11 @@ function normalizeQuote(raw: RawCompensationQuote): CompensationQuote {
     estimatedTotalKgCO2e20y: asNumber(raw.estimated_total_kg_co2e_20y),
     availableCapacity: asNumber(raw.available_t_co2e),
     currency: asString(raw.currency, 'USD'),
+    maxPurchasableTrees:
+      raw.max_purchasable_trees != null
+        ? asNumber(raw.max_purchasable_trees)
+        : null,
+    remainingPurchasableTrees: asNumber(raw.remaining_purchasable_trees),
   };
 }
 

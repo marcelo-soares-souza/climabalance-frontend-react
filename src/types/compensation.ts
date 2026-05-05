@@ -8,6 +8,8 @@ export interface CompensationQuote {
   estimatedTotalKgCO2e20y: number;
   availableCapacity: number;
   currency: string;
+  maxPurchasableTrees?: number | null;
+  remainingPurchasableTrees?: number;
 }
 
 export interface CreateCompensationRequest {

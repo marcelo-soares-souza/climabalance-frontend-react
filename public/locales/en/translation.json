@@ -818,6 +818,7 @@
     "trees": "trees",
     "tCO2ePerTree": "Estimated CO2 per tree/year",
     "totalCapacity": "Total Capacity",
+    "maxPurchasableTrees": "Tree Limit",
     "usage": "Usage",
     "contributions": "Tree contributions",
     "supporters": "Supporters",
