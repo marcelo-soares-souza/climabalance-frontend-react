@@ -93,6 +93,8 @@ export function ProfilePage() {
   });
   const isProducerReadyToReceivePayments =
     !!stripeStatus?.connected && !!stripeStatus?.charges_enabled;
+  const isStripePendingVerification =
+    stripeStatus?.onboarding_status === 'pending_verification';
   const { data: userAreas } = useQuery({
     queryKey: ['areas', 'owner', targetUserId],
     queryFn: () => areasService.listAreas({ ownerUserId: targetUserId! }),
@@ -192,6 +194,8 @@ export function ProfilePage() {
           <CardContent className="space-y-3 text-sm">
             {isProducerReadyToReceivePayments ? (
               <p className="text-success">{t('producer.stripe.enabled')}</p>
+            ) : isStripePendingVerification ? (
+              <p className="text-warning">{t('producer.stripe.pending_verification')}</p>
             ) : (
               <>
                 <p className="text-text-secondary">{t('producer.stripe.not_connected')}</p>

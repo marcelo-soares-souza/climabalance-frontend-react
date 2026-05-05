@@ -31,12 +31,16 @@ export interface PixPaymentDetails {
   copyPasteCode: string;
 }
 
+export type OnboardingStatus = 'complete' | 'incomplete' | 'pending_verification';
+
 export interface StripeConnectStatus {
   connected: boolean;
   stripe_account_id?: string;
   charges_enabled: boolean;
   payouts_enabled: boolean;
   country?: string;
+  onboarding_status?: OnboardingStatus;
+  pending_verification?: string[];
 }
 
 export interface PaymentResult {

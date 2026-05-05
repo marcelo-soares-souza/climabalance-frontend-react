@@ -26,6 +26,8 @@ type RawStripeStatus = {
   charges_enabled?: boolean;
   payouts_enabled?: boolean;
   country?: string;
+  onboarding_status?: string;
+  pending_verification?: string[];
 };
 
 function asString(value: unknown, fallback = ''): string {
@@ -54,12 +56,15 @@ export const stripeService = {
 
   async getStripeOnboardingStatus(): Promise<StripeConnectStatus> {
     const raw = await api.get<RawStripeStatus>('/producers/stripe/status');
+    const onboardingStatus = raw.onboarding_status as StripeConnectStatus['onboarding_status'] ?? undefined;
     return {
       connected: raw.connected ?? false,
       stripe_account_id: raw.stripe_account_id,
       charges_enabled: raw.charges_enabled ?? false,
       payouts_enabled: raw.payouts_enabled ?? false,
       country: raw.country,
+      onboarding_status: onboardingStatus,
+      pending_verification: raw.pending_verification,
     };
   },
 

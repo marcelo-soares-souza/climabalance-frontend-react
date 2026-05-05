@@ -11,6 +11,7 @@ export default defineConfig({
     },
   },
   server: {
+    allowedHosts: ['dev.climabalance.org', 'climabalance.org'],
     port: 5173,
     proxy: {
       '/api': {
