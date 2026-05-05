@@ -397,9 +397,8 @@
         "item2": "Receive transfers with clear platform fee rules.",
         "item3": "Keep a structured area history."
       },
-      "cta": "Create producer account"
-    },
-    "stripeManual": {
+      "cta": "Create producer account",
+      "stripeManual": {
       "label": "Stripe Integration",
       "why": {
         "title": "Why do we use Stripe?",
@@ -429,6 +428,8 @@
           "title": "Done!",
           "desc": "With your account verified, you can now receive transfers from supporter contributions. Amounts are automatically forwarded by the platform."
         }
+      },
+      "cta": "Connect my Stripe account"
       }
     },
     "videosLabel": "Videos",

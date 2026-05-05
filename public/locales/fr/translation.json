@@ -397,9 +397,8 @@
         "item2": "Recevoir des transferts avec des règles claires sur les frais de la plateforme.",
         "item3": "Conserver un historique structuré de la zone."
       },
-      "cta": "Créer un compte producteur"
-    },
-    "stripeManual": {
+      "cta": "Créer un compte producteur",
+      "stripeManual": {
       "label": "Intégration Stripe",
       "why": {
         "title": "Pourquoi utilisons-nous Stripe ?",
@@ -429,6 +428,8 @@
           "title": "Prêt !",
           "desc": "Une fois votre compte vérifié, vous pouvez recevoir les transferts des contributions des donateurs. Les montants sont automatiquement reversés par la plateforme."
         }
+      },
+      "cta": "Connecter mon compte Stripe"
       }
     },
     "videosLabel": "Vidéos",

@@ -397,9 +397,8 @@
         "item2": "Recibir transferencias con reglas claras sobre las tasas de la plataforma.",
         "item3": "Mantener historial estructurado del área."
       },
-      "cta": "Crear cuenta de productor"
-    },
-    "stripeManual": {
+      "cta": "Crear cuenta de productor",
+      "stripeManual": {
       "label": "Integración con Stripe",
       "why": {
         "title": "¿Por qué usamos Stripe?",
@@ -429,6 +428,8 @@
           "title": "¡Listo!",
           "desc": "Con la cuenta verificada, ya puedes recibir transferencias de las contribuciones de los seguidores. Los valores son automáticamente repasados por la plataforma."
         }
+      },
+      "cta": "Conectar mi cuenta Stripe"
       }
     },
     "videosLabel": "Videos",

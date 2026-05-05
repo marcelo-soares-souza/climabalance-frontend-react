@@ -397,10 +397,9 @@
         "item2": "Receber transferências com regras claras sobre taxas da plataforma.",
         "item3": "Manter histórico estruturado da área."
       },
-      "cta": "Criar conta de produtor"
-    },
-    "stripeManual": {
-      "label": "Integração com Stripe",
+      "cta": "Criar conta de produtor",
+      "stripeManual": {
+        "label": "Integração com Stripe",
       "why": {
         "title": "Por que usamos Stripe?",
         "security": "A Stripe é uma das plataformas de pagamento mais seguras do mundo, certificada PCI DSS Nível 1 — o mais alto padrão de segurança da indústria. Todos os dados financeiros são criptografados e a Stripe gerencia toda a conformidade regulatória, protegendo você e seus apoiadores.",
@@ -429,6 +428,8 @@
           "title": "Pronto!",
           "desc": "Com a conta verificada, você já pode receber transferências das contribuições dos apoiadores. Os valores são automaticamente repassados pela plataforma."
         }
+      },
+      "cta": "Conectar minha conta Stripe"
       }
     },
     "videosLabel": "Vídeos",

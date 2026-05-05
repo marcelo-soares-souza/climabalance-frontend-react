@@ -283,6 +283,13 @@ function TabPanel({ type }: { type: AccountTab }) {
                   </p>
                 </div>
               ))}
+              <Link
+                to="/how-to-use/stripe-setup"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline pt-2"
+              >
+                {t(`howToUse.${type}.stripeManual.cta`)}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </CardContent>
           </Card>
         </section>
