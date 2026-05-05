@@ -1132,14 +1132,19 @@
     },
     "auditLog": {
       "title": "Journal d'Audit",
-      "filterEntity": "Filtrer par entité",
+      "filterActor": "Filtrer par utilisateur",
+      "filterAction": "Filtrer par action",
+      "filterIp": "Filtrer par IP",
       "timestamp": "Date",
       "actor": "Utilisateur",
       "action": "Action",
       "entity": "Entité",
       "ip": "IP",
       "status": "Statut",
-      "empty": "Aucun enregistrement d'audit trouvé."
+      "empty": "Aucun enregistrement d'audit trouvé.",
+      "page": "Page {{page}}",
+      "prev": "Précédent",
+      "next": "Suivant"
     }
   },
   "embed": {

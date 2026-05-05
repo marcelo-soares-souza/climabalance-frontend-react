@@ -1132,14 +1132,19 @@
     },
     "auditLog": {
       "title": "Audit Log",
-      "filterEntity": "Filter by entity",
+      "filterActor": "Filter by user",
+      "filterAction": "Filter by action",
+      "filterIp": "Filter by IP",
       "timestamp": "Date",
       "actor": "Actor",
       "action": "Action",
       "entity": "Entity",
       "ip": "IP",
       "status": "Status",
-      "empty": "No audit log entries found."
+      "empty": "No audit log entries found.",
+      "page": "Page {{page}}",
+      "prev": "Previous",
+      "next": "Next"
     }
   },
   "embed": {

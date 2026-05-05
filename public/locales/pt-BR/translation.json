@@ -1132,14 +1132,19 @@
     },
     "auditLog": {
       "title": "Auditoria",
-      "filterEntity": "Filtrar por entidade",
+      "filterActor": "Filtrar por usuário",
+      "filterAction": "Filtrar por ação",
+      "filterIp": "Filtrar por IP",
       "timestamp": "Data",
       "actor": "Usuário",
       "action": "Ação",
       "entity": "Entidade",
       "ip": "IP",
       "status": "Status",
-      "empty": "Nenhum registro de auditoria encontrado."
+      "empty": "Nenhum registro de auditoria encontrado.",
+      "page": "Página {{page}}",
+      "prev": "Anterior",
+      "next": "Próximo"
     }
   },
   "embed": {

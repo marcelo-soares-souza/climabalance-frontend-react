@@ -54,7 +54,7 @@ function normalizeEntry(raw: RawAuditEntry): AuditLogEntry {
 }
 
 export const auditLogService = {
-  listAuditLog(params?: { actor_user_id?: string; entity_type?: string; entity_id?: string; limit?: number; offset?: number }) {
+  listAuditLog(params?: { actor_user_id?: string; actor_email?: string; action?: string; client_ip?: string; entity_type?: string; entity_id?: string; limit?: number; offset?: number }) {
     return api
       .get<RawAuditEntry[]>('/audit-log', { params: params as Record<string, string | number> })
       .then((rows) => rows.map(normalizeEntry));
