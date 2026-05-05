@@ -65,7 +65,8 @@ export function GuestCalculatorPage() {
     if (didRestore) {
       const saved = loadGuestCalc();
       if (saved) {
-        calculator.hydrateFromDraft(saved.state);
+        calculator.hydrateFromDraft(saved.state, true);
+        clearGuestCalc();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -116,14 +116,15 @@ export function useCalculator() {
     });
   }, []);
 
-  const hydrateFromDraft = useCallback((draft: DraftSnapshot) => {
+  const hydrateFromDraft = useCallback((draft: DraftSnapshot, goToResult = false) => {
+    const steps = draft.profileType === 'individual' ? INDIVIDUAL_STEPS : LEGAL_ENTITY_STEPS;
     setState({
       profileType: draft.profileType,
       periodStart: draft.periodStart,
       periodEnd: draft.periodEnd,
       dataQuality: draft.dataQuality,
       inputs: draft.inputs,
-      currentStepIndex: 0,
+      currentStepIndex: goToResult ? steps.length - 1 : 0,
     });
   }, []);
 
