@@ -407,22 +407,24 @@
       },
       "fees": {
         "title": "Frais de transaction",
-        "desc": "Stripe facture des frais par transaction (généralement un pourcentage + un montant fixe). Ces frais sont automatiquement déduits au moment de la contribution et couvrent le traitement, la prévention de la fraude et le support. Consultez le barème officiel de Stripe pour les tarifs à jour.",
-        "note": "En plus des frais Stripe, la plateforme applique des frais administratifs, qui sont communiqués de manière transparente avant chaque opération."
+        "desc": "Stripe facture des frais par transaction (généralement un pourcentage + un montant fixe). Ces frais sont automatiquement déduits au moment de la contribution et couvrent le traitement, la prévention de la fraude et le support.",
+        "note": "En plus des frais Stripe, la plateforme applique des frais administratifs, qui sont communiqués de manière transparente avant chaque opération.",
+        "linkLabel": "Voir les tarifs actualisés",
+        "linkUrl": "https://stripe.com/fr/pricing"
       },
       "integration": {
         "title": "Intégration pas à pas",
         "step1": {
-          "title": "Accédez à la page de paiement",
-          "desc": "Dans votre profil producteur, allez dans la section paiements et cliquez sur \"Se connecter à Stripe\"."
+          "title": "Connectez votre compte ou créez-en un",
+          "desc": "Dans votre profil producteur, allez dans la section paiements et cliquez sur \"Se connecter à Stripe\". Si vous n'avez pas encore de compte Stripe, le formulaire d'intégration vous guidera pour en créer un. Ayez sous la main : CPF ou CNPJ, compte bancaire et e-mail."
         },
         "step2": {
-          "title": "Remplissez vos informations",
-          "desc": "Vous serez redirigé vers l'environnement sécurisé de Stripe. Saisissez vos informations personnelles ou professionnelles, votre compte bancaire et les documents de vérification."
+          "title": "Remplissez vos données sur Stripe",
+          "desc": "Vous serez redirigé vers l'environnement sécurisé de Stripe. Saisissez vos informations personnelles ou professionnelles, votre adresse et votre compte bancaire. Stripe utilise ces informations pour vérifier votre identité et activer les paiements."
         },
         "step3": {
           "title": "Attendez la vérification",
-          "desc": "Stripe analyse les informations soumises. Dans la plupart des cas, la vérification est terminée en quelques minutes. Vous recevrez la confirmation automatiquement."
+          "desc": "Stripe analyse les informations et documents envoyés. Dans la plupart des cas, la vérification est terminée en quelques minutes. Vous recevrez la confirmation automatiquement."
         },
         "step4": {
           "title": "Prêt !",

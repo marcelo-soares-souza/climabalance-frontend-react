@@ -407,22 +407,24 @@
       },
       "fees": {
         "title": "Transaction fees",
-        "desc": "Stripe charges a fee per transaction (usually a percentage + fixed amount). This fee is automatically deducted at the time of contribution and covers processing, fraud prevention, and support. Check Stripe's official pricing for current rates.",
-        "note": "In addition to Stripe's fee, the platform applies an administrative fee, which is transparently disclosed before each operation."
+        "desc": "Stripe charges a fee per transaction (usually a percentage + fixed amount). This fee is automatically deducted at the time of contribution and covers processing, fraud prevention, and support.",
+        "note": "In addition to Stripe's fee, the platform applies an administrative fee, which is transparently disclosed before each operation.",
+        "linkLabel": "View current pricing",
+        "linkUrl": "https://stripe.com/pricing"
       },
       "integration": {
         "title": "Integration step by step",
         "step1": {
-          "title": "Go to the payments page",
-          "desc": "In your producer profile, navigate to the payments section and click \"Connect to Stripe\"."
+          "title": "Connect your account or create from scratch",
+          "desc": "In your producer profile, go to the payments section and click \"Connect to Stripe\". If you don't have a Stripe account yet, the integration form will guide you through creation. Have your CPF/CNPJ, bank account, and email ready."
         },
         "step2": {
-          "title": "Fill in your information",
-          "desc": "You'll be redirected to Stripe's secure environment. Enter your personal or business details, bank account, and documents for verification."
+          "title": "Fill in your details on Stripe",
+          "desc": "You'll be redirected to Stripe's secure environment. Enter your personal or business details, address, and bank account. Stripe uses this information to verify your identity and enable payments."
         },
         "step3": {
           "title": "Wait for verification",
-          "desc": "Stripe reviews the submitted information. In most cases, verification is completed within minutes. You'll receive confirmation automatically."
+          "desc": "Stripe reviews the submitted information and documents. In most cases verification is completed within minutes. You'll receive confirmation automatically."
         },
         "step4": {
           "title": "Done!",

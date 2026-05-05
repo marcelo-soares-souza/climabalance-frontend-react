@@ -407,22 +407,24 @@
       },
       "fees": {
         "title": "Tarifas de transacción",
-        "desc": "Stripe cobra una tarifa por transacción (generalmente un porcentaje + monto fijo). Esta tarifa se descuenta automáticamente al momento de la contribución y cubre procesamiento, prevención de fraude y soporte. Consulta la tabla oficial de Stripe para conocer los valores actualizados.",
-        "note": "Además de la tarifa de Stripe, la plataforma aplica una tarifa administrativa, que se informa con transparencia antes de cada operación."
+        "desc": "Stripe cobra una tarifa por transacción (generalmente un porcentaje + monto fijo). Esta tarifa se descuenta automáticamente al momento de la contribución y cubre procesamiento, prevención de fraude y soporte.",
+        "note": "Además de la tarifa de Stripe, la plataforma aplica una tarifa administrativa, que se informa con transparencia antes de cada operación.",
+        "linkLabel": "Ver tarifas actualizadas",
+        "linkUrl": "https://stripe.com/es/pricing"
       },
       "integration": {
         "title": "Paso a paso de la integración",
         "step1": {
-          "title": "Accede a la página de pagos",
-          "desc": "En tu perfil de productor, ve a la sección de pagos y haz clic en \"Conectar a Stripe\"."
+          "title": "Conecta tu cuenta o crea desde cero",
+          "desc": "En tu perfil de productor, ve a la sección de pagos y haz clic en \"Conectar a Stripe\". Si aún no tienes cuenta Stripe, el formulario de integración te guiará en la creación. Ten a mano: CPF o CNPJ, cuenta bancaria y correo electrónico."
         },
         "step2": {
-          "title": "Completa tus datos",
-          "desc": "Serás redirigido al entorno seguro de Stripe. Ingresa tus datos personales o de la empresa, cuenta bancaria y documentos para verificación."
+          "title": "Completa tus datos en Stripe",
+          "desc": "Serás redirigido al entorno seguro de Stripe. Ingresa tus datos personales o de la empresa, dirección y cuenta bancaria. Stripe usa esta información para verificar tu identidad y habilitar los pagos."
         },
         "step3": {
           "title": "Espera la verificación",
-          "desc": "Stripe analiza la información enviada. En la mayoría de los casos, la verificación se completa en minutos. Recibirás la confirmación automáticamente."
+          "desc": "Stripe analiza la información y documentos enviados. En la mayoría de los casos la verificación se completa en minutos. Recibirás la confirmación automáticamente."
         },
         "step4": {
           "title": "¡Listo!",
