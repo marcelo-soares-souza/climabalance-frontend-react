@@ -1420,6 +1420,11 @@
       "status": "El estado indica la situación actual del certificado en la plataforma."
     }
   },
+  "cookieConsent": {
+    "message": "Utilizamos cookies y tecnologías similares para mejorar su experiencia, analizar el uso y personalizar el contenido. Al continuar navegando, acepta nuestra <privacyLink>Política de Privacidad</privacyLink> y <termsLink>Términos de Uso</termsLink>.",
+    "accept": "Aceptar",
+    "reject": "Rechazar"
+  },
   "satellite": {
     "fetchNew": "Obtener imagen satelital",
     "captureDate": "Fecha",
