@@ -80,7 +80,7 @@ export function AreaDetailPage() {
   const queryClient = useQueryClient();
 
   const [satellite, setSatellite] = useState(false);
-  const [showOverlay, setShowOverlay] = useState(true);
+  const [showOverlay, setShowOverlay] = useState(false);
   const [submitDialogOpen, setSubmitDialogOpen] = useState(false);
   const [suspendDialogOpen, setSuspendDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
