@@ -12,9 +12,33 @@ import { Select } from '@/components/ui/Select';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ApiError } from '@/lib/api-client';
-import { ArrowLeft, Calendar } from 'lucide-react';
+import { ArrowLeft, Calendar, Upload, User } from 'lucide-react';
 import { Combobox } from '@/components/ui/Combobox';
 import { countries } from '@/lib/countries';
+import { API_URL } from '@/config/api';
+
+type FormField =
+  | 'display_name'
+  | 'document_type'
+  | 'document_number'
+  | 'birth_date'
+  | 'phone'
+  | 'country_code'
+  | 'address_line1'
+  | 'address_line2'
+  | 'address_city'
+  | 'address_state'
+  | 'address_postal_code'
+  | 'address_country'
+  | 'about'
+  | 'website_url'
+  | 'instagram_url'
+  | 'facebook_url'
+  | 'x_url'
+  | 'bluesky_url'
+  | 'mastodon_url'
+  | 'youtube_url'
+  | 'linkedin_url';
 
 export function ProfileEditPage() {
   const { t } = useTranslation();
@@ -25,20 +49,9 @@ export function ProfileEditPage() {
   const profilePath = targetUserId ? `/users/${targetUserId}/profile` : '/profile';
   const [error, setError] = useState<string | null>(null);
   const birthDatePickerRef = useRef<HTMLInputElement>(null);
-  const [form, setForm] = useState<Partial<{
-    display_name: string;
-    document_type: string;
-    document_number: string;
-    birth_date: string;
-    phone: string;
-    country_code: string;
-    address_line1: string;
-    address_line2: string;
-    address_city: string;
-    address_state: string;
-    address_postal_code: string;
-    address_country: string;
-  }>>({});
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [avatarUploading, setAvatarUploading] = useState(false);
+  const [form, setForm] = useState<Partial<Record<FormField, string>>>({});
 
   const { data: profile, isLoading } = useQuery({
     queryKey: ['users', targetUserId, 'profile'],
@@ -59,6 +72,15 @@ export function ProfileEditPage() {
     address_state: form.address_state ?? profile?.addressState ?? '',
     address_postal_code: form.address_postal_code ?? profile?.addressPostalCode ?? '',
     address_country: form.address_country ?? profile?.addressCountry ?? 'BR',
+    about: form.about ?? profile?.about ?? '',
+    website_url: form.website_url ?? profile?.websiteUrl ?? '',
+    instagram_url: form.instagram_url ?? profile?.instagramUrl ?? '',
+    facebook_url: form.facebook_url ?? profile?.facebookUrl ?? '',
+    x_url: form.x_url ?? profile?.xUrl ?? '',
+    bluesky_url: form.bluesky_url ?? profile?.blueskyUrl ?? '',
+    mastodon_url: form.mastodon_url ?? profile?.mastodonUrl ?? '',
+    youtube_url: form.youtube_url ?? profile?.youtubeUrl ?? '',
+    linkedin_url: form.linkedin_url ?? profile?.linkedinUrl ?? '',
   };
 
   const mutation = useMutation({
@@ -70,22 +92,49 @@ export function ProfileEditPage() {
     onError: (err) => setError(err instanceof ApiError ? err.messageKey : 'profile.saveError'),
   });
 
-  const update = (
-    field:
-      | 'display_name'
-      | 'document_type'
-      | 'document_number'
-      | 'birth_date'
-      | 'phone'
-      | 'country_code'
-      | 'address_line1'
-      | 'address_line2'
-      | 'address_city'
-      | 'address_state'
-      | 'address_postal_code'
-      | 'address_country',
-    value: string
-  ) => setForm((prev) => ({ ...prev, [field]: value }));
+  const update = (field: FormField, value: string) => setForm((prev) => ({ ...prev, [field]: value }));
+
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !targetUserId) return;
+
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      setError('profile.avatar.unsupported_type');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setError('profile.avatar.too_large');
+      return;
+    }
+
+    setAvatarUploading(true);
+    setError(null);
+
+    try {
+      const base64 = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result as string;
+          resolve(result.split(',')[1]);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+
+      await usersService.uploadAvatar(targetUserId, {
+        mime_type: file.type,
+        file_base64: base64,
+      });
+
+      queryClient.invalidateQueries({ queryKey: ['users', targetUserId, 'profile'] });
+    } catch (err) {
+      setError(err instanceof ApiError ? err.messageKey : 'profile.avatar.upload_error');
+    } finally {
+      setAvatarUploading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
+  };
 
   if (isLoading) return <PageSkeleton />;
 
@@ -101,6 +150,10 @@ export function ProfileEditPage() {
     pickerInput.click();
   };
 
+  const avatarSrc = profile?.avatarPath
+    ? `${API_URL}/api/v1/users/${targetUserId}/profile/avatar/file`
+    : null;
+
   return (
     <div className="max-w-2xl mx-auto space-y-6">
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
@@ -110,6 +163,28 @@ export function ProfileEditPage() {
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
       <form onSubmit={(e) => { e.preventDefault(); mutation.mutate(); }}>
         <Card><CardContent className="space-y-4 py-6">
+          <div className="flex items-center gap-4">
+            <div className="h-16 w-16 rounded-full bg-primary-100 flex items-center justify-center overflow-hidden">
+              {avatarSrc ? (
+                <img src={avatarSrc} alt="" className="h-full w-full object-cover" />
+              ) : (
+                <User className="h-8 w-8 text-primary" />
+              )}
+            </div>
+            <div>
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                className="hidden"
+                onChange={handleAvatarChange}
+              />
+              <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} loading={avatarUploading}>
+                <Upload className="h-4 w-4 mr-1" /> {t('profile.form.avatar')}
+              </Button>
+            </div>
+          </div>
+
           <Input id="display_name" label={t('profile.form.displayName')} value={formValues.display_name} onChange={(e) => update('display_name', e.target.value)} required />
           <div className="grid grid-cols-2 gap-4">
             <Select id="document_type" label={t('profile.form.documentType')} value={formValues.document_type} onChange={(e) => update('document_type', e.target.value)}
@@ -165,6 +240,33 @@ export function ProfileEditPage() {
             />
           </div>
         </CardContent></Card>
+
+        <Card><CardContent className="space-y-4 py-6">
+          <h3 className="font-medium">{t('profile.about')}</h3>
+          <textarea
+            id="about"
+            maxLength={4000}
+            rows={4}
+            className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            placeholder={t('profile.form.aboutPlaceholder')}
+            value={formValues.about}
+            onChange={(e) => update('about', e.target.value)}
+          />
+          <p className="text-xs text-text-secondary text-right">{formValues.about.length}/4000</p>
+        </CardContent></Card>
+
+        <Card><CardContent className="space-y-4 py-6">
+          <h3 className="font-medium">{t('profile.links')}</h3>
+          <Input id="website_url" label={t('profile.form.websiteUrl')} type="url" value={formValues.website_url} onChange={(e) => update('website_url', e.target.value)} placeholder="https://" />
+          <Input id="instagram_url" label="Instagram" type="url" value={formValues.instagram_url} onChange={(e) => update('instagram_url', e.target.value)} placeholder="https://instagram.com/..." />
+          <Input id="facebook_url" label="Facebook" type="url" value={formValues.facebook_url} onChange={(e) => update('facebook_url', e.target.value)} placeholder="https://facebook.com/..." />
+          <Input id="x_url" label="X (Twitter)" type="url" value={formValues.x_url} onChange={(e) => update('x_url', e.target.value)} placeholder="https://x.com/..." />
+          <Input id="bluesky_url" label="Bluesky" type="url" value={formValues.bluesky_url} onChange={(e) => update('bluesky_url', e.target.value)} placeholder="https://bsky.app/..." />
+          <Input id="mastodon_url" label="Mastodon" type="url" value={formValues.mastodon_url} onChange={(e) => update('mastodon_url', e.target.value)} placeholder="https://..." />
+          <Input id="youtube_url" label="YouTube" type="url" value={formValues.youtube_url} onChange={(e) => update('youtube_url', e.target.value)} placeholder="https://youtube.com/..." />
+          <Input id="linkedin_url" label="LinkedIn" type="url" value={formValues.linkedin_url} onChange={(e) => update('linkedin_url', e.target.value)} placeholder="https://linkedin.com/in/..." />
+        </CardContent></Card>
+
         <div className="flex gap-3 mt-4">
           <Button variant="ghost" type="button" onClick={() => navigate(-1)}>{t('common.cancel')}</Button>
           <Button type="submit" loading={mutation.isPending}>{t('common.save')}</Button>

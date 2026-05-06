@@ -18,7 +18,8 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { ApiError } from '@/lib/api-client';
 import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber, maskEmail } from '@/lib/format';
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
-import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone, ArrowRight, MapPin } from 'lucide-react';
+import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone, ArrowRight, MapPin, Globe, Camera } from 'lucide-react';
+import { API_URL } from '@/config/api';
 
 function formatProfileTCO2e(value: number): { amount: string; unit: string } {
   const abs = Math.abs(value);
@@ -131,8 +132,12 @@ export function ProfilePage() {
       <Card>
         <CardContent className="py-6">
           <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-full bg-primary-100 flex items-center justify-center">
-              <User className="h-8 w-8 text-primary" />
+            <div className="h-16 w-16 rounded-full bg-primary-100 flex items-center justify-center overflow-hidden">
+              {profile?.avatarPath ? (
+                <img src={`${API_URL}/api/v1/users/${targetUserId}/profile/avatar/file`} alt="" className="h-full w-full object-cover" />
+              ) : (
+                <User className="h-8 w-8 text-primary" />
+              )}
             </div>
             <div>
               <h2 className="text-xl font-semibold">{profile?.displayName || maskEmail(user?.email)}</h2>
@@ -236,6 +241,63 @@ export function ProfilePage() {
             {profile.phone && <div><span className="text-text-secondary">{t('profile.phone')}:</span> {profile.phone}</div>}
             {profile.birthDate && <div><span className="text-text-secondary">{t('profile.birthDate')}:</span> {formatDate(profile.birthDate)}</div>}
             {profile.addressCity && <div className="col-span-2"><span className="text-text-secondary">{t('profile.address')}:</span> {[profile.addressLine1, profile.addressCity, profile.addressState, profile.addressPostalCode].filter(Boolean).join(', ')}</div>}
+          </CardContent>
+        </Card>
+      )}
+
+      {profile?.about && (
+        <Card>
+          <CardHeader><h3 className="font-medium">{t('profile.about')}</h3></CardHeader>
+          <CardContent>
+            <p className="text-sm whitespace-pre-wrap">{profile.about}</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {profile && (profile.websiteUrl || profile.instagramUrl || profile.facebookUrl || profile.xUrl || profile.blueskyUrl || profile.mastodonUrl || profile.youtubeUrl || profile.linkedinUrl) && (
+        <Card>
+          <CardHeader><h3 className="font-medium">{t('profile.links')}</h3></CardHeader>
+          <CardContent className="flex flex-wrap gap-3">
+            {profile.websiteUrl && (
+              <a href={profile.websiteUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                <Globe className="h-4 w-4" /> {t('profile.website')}
+              </a>
+            )}
+            {profile.instagramUrl && (
+              <a href={profile.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                <Camera className="h-4 w-4" /> Instagram
+              </a>
+            )}
+            {profile.facebookUrl && (
+              <a href={profile.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                Facebook
+              </a>
+            )}
+            {profile.xUrl && (
+              <a href={profile.xUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                X
+              </a>
+            )}
+            {profile.blueskyUrl && (
+              <a href={profile.blueskyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                Bluesky
+              </a>
+            )}
+            {profile.mastodonUrl && (
+              <a href={profile.mastodonUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                Mastodon
+              </a>
+            )}
+            {profile.youtubeUrl && (
+              <a href={profile.youtubeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                YouTube
+              </a>
+            )}
+            {profile.linkedinUrl && (
+              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+                LinkedIn
+              </a>
+            )}
           </CardContent>
         </Card>
       )}

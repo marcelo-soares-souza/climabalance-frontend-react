@@ -1078,8 +1078,11 @@
     "newPassword": "Nouveau mot de passe",
     "passwordChanged": "Mot de passe changé avec succès !",
     "saveError": "Échec de l'enregistrement du profil. Veuillez réessayer.",
+    "about": "À propos",
+    "links": "Liens",
+    "website": "Site web",
     "form": {
-      "displayName": "Nom d'affichage",
+      "displayName": "Nom affiché",
       "documentType": "Type de document",
       "documentNumber": "Numéro de document",
       "birthDate": "Date de naissance",
@@ -1087,11 +1090,20 @@
       "addressLine1": "Adresse",
       "addressLine2": "Complément",
       "city": "Ville",
-      "state": "Région",
+      "state": "État",
       "postalCode": "Code postal",
       "country": "Pays",
       "countryPlaceholder": "Tapez pour rechercher...",
-      "passport": "Passeport"
+      "passport": "Passeport",
+      "about": "À propos",
+      "aboutPlaceholder": "Parlez-nous un peu de vous...",
+      "avatar": "Télécharger une photo",
+      "websiteUrl": "Site web"
+    },
+    "avatar": {
+      "unsupported_type": "Format d'image non pris en charge. Utilisez JPEG, PNG ou WebP.",
+      "too_large": "L'image doit faire 5 Mo ou moins.",
+      "upload_error": "Erreur lors du téléchargement de la photo. Veuillez réessayer."
     },
     "sessions": "Sessions Actives",
     "revokeAll": "Se déconnecter partout",

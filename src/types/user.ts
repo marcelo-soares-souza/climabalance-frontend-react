@@ -24,6 +24,16 @@ export interface UserProfile {
   addressState: string | null;
   addressPostalCode: string | null;
   addressCountry: string | null;
+  about: string | null;
+  websiteUrl: string | null;
+  instagramUrl: string | null;
+  facebookUrl: string | null;
+  xUrl: string | null;
+  blueskyUrl: string | null;
+  mastodonUrl: string | null;
+  youtubeUrl: string | null;
+  linkedinUrl: string | null;
+  avatarPath: string | null;
   createdAt: string;
   updatedAt: string;
 }
@@ -41,6 +51,15 @@ export interface UserProfileUpdate {
   address_state?: string;
   address_postal_code?: string;
   address_country?: string;
+  about?: string;
+  website_url?: string;
+  instagram_url?: string;
+  facebook_url?: string;
+  x_url?: string;
+  bluesky_url?: string;
+  mastodon_url?: string;
+  youtube_url?: string;
+  linkedin_url?: string;
 }
 
 export interface UserUpdate {

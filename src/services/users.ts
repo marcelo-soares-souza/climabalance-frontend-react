@@ -45,6 +45,25 @@ type RawUserProfile = {
   addressPostalCode?: string | null;
   address_country?: string | null;
   addressCountry?: string | null;
+  about?: string | null;
+  website_url?: string | null;
+  websiteUrl?: string | null;
+  instagram_url?: string | null;
+  instagramUrl?: string | null;
+  facebook_url?: string | null;
+  facebookUrl?: string | null;
+  x_url?: string | null;
+  xUrl?: string | null;
+  bluesky_url?: string | null;
+  blueskyUrl?: string | null;
+  mastodon_url?: string | null;
+  mastodonUrl?: string | null;
+  youtube_url?: string | null;
+  youtubeUrl?: string | null;
+  linkedin_url?: string | null;
+  linkedinUrl?: string | null;
+  avatar_path?: string | null;
+  avatarPath?: string | null;
   created_at?: string;
   createdAt?: string;
   updated_at?: string;
@@ -154,6 +173,16 @@ function normalizeUserProfile(raw: RawUserProfile): UserProfile {
     addressState: asNullableString(raw.address_state ?? raw.addressState),
     addressPostalCode: asNullableString(raw.address_postal_code ?? raw.addressPostalCode),
     addressCountry: asNullableString(raw.address_country ?? raw.addressCountry),
+    about: asNullableString(raw.about ?? raw.about),
+    websiteUrl: asNullableString(raw.website_url ?? raw.websiteUrl),
+    instagramUrl: asNullableString(raw.instagram_url ?? raw.instagramUrl),
+    facebookUrl: asNullableString(raw.facebook_url ?? raw.facebookUrl),
+    xUrl: asNullableString(raw.x_url ?? raw.xUrl),
+    blueskyUrl: asNullableString(raw.bluesky_url ?? raw.blueskyUrl),
+    mastodonUrl: asNullableString(raw.mastodon_url ?? raw.mastodonUrl),
+    youtubeUrl: asNullableString(raw.youtube_url ?? raw.youtubeUrl),
+    linkedinUrl: asNullableString(raw.linkedin_url ?? raw.linkedinUrl),
+    avatarPath: asNullableString(raw.avatar_path ?? raw.avatarPath),
     createdAt: asString(raw.created_at ?? raw.createdAt),
     updatedAt: asString(raw.updated_at ?? raw.updatedAt),
   };
@@ -268,6 +297,10 @@ export const usersService = {
     return api
       .get<RawClimateBalance>(`/users/${userId}/climate-balance`)
       .then(normalizeClimateBalance);
+  },
+
+  uploadAvatar(userId: string, data: { mime_type: string; file_base64: string }) {
+    return api.post<{ avatar_path: string; avatar_url: string }>(`/users/${userId}/profile/avatar`, data);
   },
 
   getUserCertificates(userId: string, params?: { limit?: number; offset?: number }) {

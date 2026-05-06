@@ -1078,6 +1078,9 @@
     "newPassword": "New password",
     "passwordChanged": "Password changed successfully!",
     "saveError": "Failed to save profile. Please try again.",
+    "about": "About",
+    "links": "Links",
+    "website": "Website",
     "form": {
       "displayName": "Display name",
       "documentType": "Document type",
@@ -1091,7 +1094,16 @@
       "postalCode": "Postal code",
       "country": "Country",
       "countryPlaceholder": "Type to search...",
-      "passport": "Passport"
+      "passport": "Passport",
+      "about": "About",
+      "aboutPlaceholder": "Tell us a bit about yourself...",
+      "avatar": "Upload photo",
+      "websiteUrl": "Website"
+    },
+    "avatar": {
+      "unsupported_type": "Image format not supported. Use JPEG, PNG or WebP.",
+      "too_large": "Image must be 5MB or less.",
+      "upload_error": "Error uploading photo. Please try again."
     },
     "sessions": "Active Sessions",
     "revokeAll": "Log out everywhere",

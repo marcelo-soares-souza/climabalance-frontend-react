@@ -1078,6 +1078,9 @@
     "newPassword": "Nova senha",
     "passwordChanged": "Senha alterada com sucesso!",
     "saveError": "Erro ao salvar perfil. Tente novamente.",
+    "about": "Sobre",
+    "links": "Links",
+    "website": "Site",
     "form": {
       "displayName": "Nome exibido",
       "documentType": "Tipo de documento",
@@ -1091,7 +1094,16 @@
       "postalCode": "CEP",
       "country": "País",
       "countryPlaceholder": "Digite para buscar...",
-      "passport": "Passaporte"
+      "passport": "Passaporte",
+      "about": "Sobre",
+      "aboutPlaceholder": "Conte um pouco sobre você...",
+      "avatar": "Enviar foto",
+      "websiteUrl": "Site"
+    },
+    "avatar": {
+      "unsupported_type": "Formato de imagem não suportado. Use JPEG, PNG ou WebP.",
+      "too_large": "A imagem deve ter no máximo 5MB.",
+      "upload_error": "Erro ao enviar foto. Tente novamente."
     },
     "sessions": "Sessões Ativas",
     "revokeAll": "Sair de todos",

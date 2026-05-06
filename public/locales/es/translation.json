@@ -1078,6 +1078,9 @@
     "newPassword": "Nueva contraseña",
     "passwordChanged": "¡Contraseña cambiada con éxito!",
     "saveError": "Error al guardar perfil. Inténtalo de nuevo.",
+    "about": "Acerca de",
+    "links": "Enlaces",
+    "website": "Sitio web",
     "form": {
       "displayName": "Nombre mostrado",
       "documentType": "Tipo de documento",
@@ -1091,7 +1094,16 @@
       "postalCode": "Código postal",
       "country": "País",
       "countryPlaceholder": "Escribe para buscar...",
-      "passport": "Pasaporte"
+      "passport": "Pasaporte",
+      "about": "Acerca de",
+      "aboutPlaceholder": "Cuéntanos un poco sobre ti...",
+      "avatar": "Subir foto",
+      "websiteUrl": "Sitio web"
+    },
+    "avatar": {
+      "unsupported_type": "Formato de imagen no compatible. Usa JPEG, PNG o WebP.",
+      "too_large": "La imagen debe tener 5MB o menos.",
+      "upload_error": "Error al subir la foto. Inténtalo de nuevo."
     },
     "sessions": "Sesiones Activas",
     "revokeAll": "Cerrar todas las sesiones",
