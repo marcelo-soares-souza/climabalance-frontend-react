@@ -1407,5 +1407,11 @@
       "hash": "The hash is an integrity identifier used to verify that the certificate matches the issued document.",
       "status": "The status indicates the current state of the certificate on the platform."
     }
+  },
+  "satellite": {
+    "fetchNew": "Get satellite image",
+    "captureDate": "Date",
+    "cloudCover": "Clouds",
+    "fallback": "Fallback image (visual)"
   }
 }

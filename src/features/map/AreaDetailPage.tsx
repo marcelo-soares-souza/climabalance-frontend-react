@@ -5,6 +5,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
 import { plantedTreesService } from "@/services/planted-trees";
 import { stripeService } from "@/services/stripe";
+import { satelliteService } from "@/services/satellite";
+import { SatelliteImageOverlay } from "@/components/leaflet/SatelliteImageOverlay";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/StatusBadge";
@@ -41,6 +43,7 @@ import {
   Leaf,
   MapPin,
   AlertTriangle,
+  Satellite,
 } from "lucide-react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
@@ -122,6 +125,12 @@ export function AreaDetailPage() {
     enabled: isAuthenticated && !!userId && userId === area?.ownerUserId,
   });
 
+  const { data: satelliteImage } = useQuery({
+    queryKey: ["satellite-image", areaId],
+    queryFn: () => satelliteService.getLatest(areaId!),
+    enabled: !!areaId,
+  });
+
   const areaIdentifier = area?.id ?? areaId ?? "";
 
   const handleCompensate = () => {
@@ -195,6 +204,13 @@ export function AreaDetailPage() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
       navigate("/areas/available");
+    },
+  });
+
+  const satelliteMutation = useMutation({
+    mutationFn: () => satelliteService.fetchNewImage(areaIdentifier),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["satellite-image", areaId] });
     },
   });
 
@@ -530,10 +546,41 @@ export function AreaDetailPage() {
                   icon={treeDotIcon}
                 />
               ))}
+              {satelliteImage && (
+                <SatelliteImageOverlay image={satelliteImage} />
+              )}
             </MapContainer>
           </div>
+          {satelliteImage && (
+            <div className="px-4 py-2 flex items-center justify-between text-xs text-text-secondary border-t">
+              <span>
+                {t("satellite.captureDate")}: {satelliteImage.captureDate}
+                {satelliteImage.cloudCover !== null && (
+                  <> &middot; {t("satellite.cloudCover")}: {satelliteImage.cloudCover}%</>
+                )}
+                &middot; {satelliteImage.collection}
+              </span>
+              {satelliteImage.isFallback && (
+                <span className="text-amber-600">{t("satellite.fallback")}</span>
+              )}
+            </div>
+          )}
         </CardContent>
       </Card>
+
+      {/* Satellite Image Button */}
+      {(isOwner || isAdmin) && (
+        <div className="flex">
+          <Button
+            onClick={() => satelliteMutation.mutate()}
+            disabled={satelliteMutation.isPending}
+            variant="outline"
+          >
+            <Satellite className="h-4 w-4 mr-1.5" />
+            {satelliteMutation.isPending ? t("common.loading") : t("satellite.fetchNew")}
+          </Button>
+        </div>
+      )}
 
       {/* Plant Trees Button */}
       {isAuthenticated && (area.ownerUserId === userId || isAdmin) && (

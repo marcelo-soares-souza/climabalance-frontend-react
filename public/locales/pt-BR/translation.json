@@ -1407,5 +1407,11 @@
       "hash": "O hash é um identificador de integridade usado para verificar se o certificado corresponde ao documento emitido.",
       "status": "O status indica a situação atual do certificado na plataforma."
     }
+  },
+  "satellite": {
+    "fetchNew": "Obter imagem de satélite",
+    "captureDate": "Data",
+    "cloudCover": "Nuvens",
+    "fallback": "Imagem alternativa (visual)"
   }
 }
