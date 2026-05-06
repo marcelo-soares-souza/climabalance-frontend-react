@@ -408,7 +408,7 @@
       "fees": {
         "title": "Tarifas de transacción",
         "desc": "Stripe cobra una tarifa por transacción (generalmente un porcentaje + monto fijo). Esta tarifa se descuenta automáticamente al momento de la contribución y cubre procesamiento, prevención de fraude y soporte.",
-        "note": "Además de la tarifa de Stripe, la plataforma aplica una tarifa administrativa, que se informa con transparencia antes de cada operación.",
+        "note": "Además de la tarifa de Stripe, la plataforma aplica una tarifa administrativa, que se informa con transparencia antes de cada operación."
       },
       "integration": {
         "title": "Paso a paso de la integración",
@@ -1407,5 +1407,11 @@
       "hash": "El hash es un identificador de integridad usado para verificar que el certificado coincide con el documento emitido.",
       "status": "El estado indica la situación actual del certificado en la plataforma."
     }
+  },
+  "satellite": {
+    "fetchNew": "Obtener imagen satelital",
+    "captureDate": "Fecha",
+    "cloudCover": "Nubes",
+    "fallback": "Imagen alternativa (visual)"
   }
 }

@@ -408,7 +408,7 @@
       "fees": {
         "title": "Frais de transaction",
         "desc": "Stripe facture des frais par transaction (généralement un pourcentage + un montant fixe). Ces frais sont automatiquement déduits au moment de la contribution et couvrent le traitement, la prévention de la fraude et le support.",
-        "note": "En plus des frais Stripe, la plateforme applique des frais administratifs, qui sont communiqués de manière transparente avant chaque opération.",
+        "note": "En plus des frais Stripe, la plateforme applique des frais administratifs, qui sont communiqués de manière transparente avant chaque opération."
       },
       "integration": {
         "title": "Intégration pas à pas",
@@ -1407,5 +1407,11 @@
       "hash": "Le hash est un identifiant d'intégrité utilisé pour vérifier que le certificat correspond bien au document émis.",
       "status": "Le statut indique l'état actuel du certificat sur la plateforme."
     }
+  },
+  "satellite": {
+    "fetchNew": "Obtenir une image satellite",
+    "captureDate": "Date",
+    "cloudCover": "Nuages",
+    "fallback": "Image de remplacement (visuelle)"
   }
 }
