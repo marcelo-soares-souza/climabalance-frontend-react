@@ -44,6 +44,8 @@ import {
   MapPin,
   AlertTriangle,
   Satellite,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
@@ -78,6 +80,7 @@ export function AreaDetailPage() {
   const queryClient = useQueryClient();
 
   const [satellite, setSatellite] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(true);
   const [submitDialogOpen, setSubmitDialogOpen] = useState(false);
   const [suspendDialogOpen, setSuspendDialogOpen] = useState(false);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -546,7 +549,7 @@ export function AreaDetailPage() {
                   icon={treeDotIcon}
                 />
               ))}
-              {satelliteImage && (
+              {satelliteImage && showOverlay && (
                 <SatelliteImageOverlay image={satelliteImage} />
               )}
             </MapContainer>
@@ -559,18 +562,30 @@ export function AreaDetailPage() {
                   <> &middot; {t("satellite.cloudCover")}: {satelliteImage.cloudCover}%</>
                 )}
                 &middot; {satelliteImage.collection}
+                {satelliteImage.isFallback && (
+                  <> &middot; <span className="text-amber-600">{t("satellite.fallback")}</span></>
+                )}
               </span>
-              {satelliteImage.isFallback && (
-                <span className="text-amber-600">{t("satellite.fallback")}</span>
-              )}
+              <button
+                onClick={() => setShowOverlay((s) => !s)}
+                className="p-1 hover:text-text-primary transition-colors"
+                title={showOverlay ? "Hide overlay" : "Show overlay"}
+              >
+                {showOverlay ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
+              </button>
             </div>
           )}
         </CardContent>
       </Card>
 
-      {/* Satellite Image Button */}
-      {(isOwner || isAdmin) && (
-        <div className="flex">
+      {/* Action Buttons */}
+      <div className="flex gap-2">
+        {isAuthenticated && (area.ownerUserId === userId || isAdmin) && (
+          <Button onClick={() => navigate(`/areas/${areaId}/plant-trees`)}>
+            <TreePine className="h-4 w-4 mr-1.5" /> {t("map.plantTrees")}
+          </Button>
+        )}
+        {(isOwner || isAdmin) && (
           <Button
             onClick={() => satelliteMutation.mutate()}
             disabled={satelliteMutation.isPending}
@@ -579,17 +594,8 @@ export function AreaDetailPage() {
             <Satellite className="h-4 w-4 mr-1.5" />
             {satelliteMutation.isPending ? t("common.loading") : t("satellite.fetchNew")}
           </Button>
-        </div>
-      )}
-
-      {/* Plant Trees Button */}
-      {isAuthenticated && (area.ownerUserId === userId || isAdmin) && (
-        <div className="flex">
-          <Button onClick={() => navigate(`/areas/${areaId}/plant-trees`)}>
-            <TreePine className="h-4 w-4 mr-1.5" /> {t("map.plantTrees")}
-          </Button>
-        </div>
-      )}
+        )}
+      </div>
 
       {/* Media Gallery */}
       <Card>
