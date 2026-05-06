@@ -18,19 +18,17 @@ export interface SatelliteImage {
 
 export const satelliteService = {
   async fetchNewImage(areaId: string): Promise<SatelliteImage> {
-    const raw = await api.post<{ data: SatelliteImage }>(
+    return api.post<SatelliteImage>(
       `/areas/${areaId}/satellite-image`,
       {},
     );
-    return raw.data;
   },
 
   async getLatest(areaId: string): Promise<SatelliteImage | null> {
     try {
-      const raw = await api.get<{ data: SatelliteImage }>(
+      return await api.get<SatelliteImage>(
         `/areas/${areaId}/satellite-image/latest`,
       );
-      return raw.data;
     } catch {
       return null;
     }
