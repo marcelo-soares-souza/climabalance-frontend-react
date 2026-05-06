@@ -161,7 +161,7 @@ export function ProfileEditPage() {
       </button>
       <h1 className="text-2xl font-bold">{t('profile.editTitle')}</h1>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
-      <form onSubmit={(e) => { e.preventDefault(); mutation.mutate(); }}>
+      <form onSubmit={(e) => { e.preventDefault(); mutation.mutate(); }} className="space-y-4">
         <Card><CardContent className="space-y-4 py-6">
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-full bg-primary-100 flex items-center justify-center overflow-hidden">
