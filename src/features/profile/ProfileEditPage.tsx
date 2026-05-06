@@ -186,11 +186,7 @@ export function ProfileEditPage() {
           </div>
 
           <Input id="display_name" label={t('profile.form.displayName')} value={formValues.display_name} onChange={(e) => update('display_name', e.target.value)} required />
-          <div className="grid grid-cols-2 gap-4">
-            <Select id="document_type" label={t('profile.form.documentType')} value={formValues.document_type} onChange={(e) => update('document_type', e.target.value)}
-              options={[{ value: '', label: '-' }, { value: 'CPF', label: 'CPF' }, { value: 'CNPJ', label: 'CNPJ' }, { value: 'passport', label: t('profile.form.passport') }]} />
-            <Input id="document_number" label={t('profile.form.documentNumber')} value={formValues.document_number} onChange={(e) => update('document_number', e.target.value)} />
-          </div>
+          <Input id="document_number" label={t('profile.form.documentNumber')} value={formValues.document_number} onChange={(e) => update('document_number', e.target.value)} />
           <div className="grid grid-cols-2 gap-4">
             <div className="w-full">
               <label htmlFor="birth_date" className="block text-base font-medium text-text-secondary mb-1.5">

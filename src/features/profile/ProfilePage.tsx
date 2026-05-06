@@ -247,54 +247,55 @@ export function ProfilePage() {
 
       {profile?.about && (
         <Card>
-          <CardHeader><h3 className="font-medium">{t('profile.about')}</h3></CardHeader>
-          <CardContent>
-            <p className="text-sm whitespace-pre-wrap">{profile.about}</p>
+          <CardContent className="py-6">
+            <p className="whitespace-pre-line text-text-secondary">{profile.about}</p>
           </CardContent>
         </Card>
       )}
 
       {profile && (profile.websiteUrl || profile.instagramUrl || profile.facebookUrl || profile.xUrl || profile.blueskyUrl || profile.mastodonUrl || profile.youtubeUrl || profile.linkedinUrl) && (
         <Card>
-          <CardHeader><h3 className="font-medium">{t('profile.links')}</h3></CardHeader>
+          <CardHeader>
+            <h3 className="font-medium flex items-center gap-2">{t('profile.links')}</h3>
+          </CardHeader>
           <CardContent className="flex flex-wrap gap-3">
             {profile.websiteUrl && (
-              <a href={profile.websiteUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+              <a href={profile.websiteUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 <Globe className="h-4 w-4" /> {t('profile.website')}
               </a>
             )}
             {profile.instagramUrl && (
-              <a href={profile.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+              <a href={profile.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 <Camera className="h-4 w-4" /> Instagram
               </a>
             )}
             {profile.facebookUrl && (
-              <a href={profile.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+              <a href={profile.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 Facebook
               </a>
             )}
             {profile.xUrl && (
-              <a href={profile.xUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+              <a href={profile.xUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 X
               </a>
             )}
             {profile.blueskyUrl && (
-              <a href={profile.blueskyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+              <a href={profile.blueskyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 Bluesky
               </a>
             )}
             {profile.mastodonUrl && (
-              <a href={profile.mastodonUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+              <a href={profile.mastodonUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 Mastodon
               </a>
             )}
             {profile.youtubeUrl && (
-              <a href={profile.youtubeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+              <a href={profile.youtubeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 YouTube
               </a>
             )}
             {profile.linkedinUrl && (
-              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline">
+              <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
                 LinkedIn
               </a>
             )}
