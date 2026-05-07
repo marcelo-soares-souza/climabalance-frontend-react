@@ -463,7 +463,6 @@
       "withdrawConsent": "Retrait du consentement"
     },
     "hero": {
-    "hero": {
       "eyebrow": "Vie privée et données",
       "title": "Politique de Confidentialité",
       "description": "Cette politique explique quelles informations ClimaBalance peut stocker, comment elles sont utilisées, combien de temps elles peuvent être conservées et quels droits vous pouvez exercer sur vos données.",
@@ -550,10 +549,6 @@
         "item3": "Contacter le DPO : envoyez un courriel à privacidade@climabalance.com.",
         "paragraph2": "Nous répondrons à votre demande dans un délai de 15 jours, comme prévu par la LGPD. Dans les cas complexes, ce délai peut être prolongé avec justification."
       }
-    },
-    "footer": {
-      "lastUpdatedLabel": "Dernière mise à jour"
-    }
     },
     "footer": {
       "lastUpdatedLabel": "Dernière mise à jour"
