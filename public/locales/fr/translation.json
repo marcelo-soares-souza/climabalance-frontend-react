@@ -136,7 +136,10 @@
         "invalidEmail": "Saisissez une adresse e-mail valide."
       },
       "password": {
-        "tooShort": "Le mot de passe doit contenir au moins 8 caractères."
+        "tooShort": "Le mot de passe doit contenir au moins 8 caractères.",
+        "noNumber": "Le mot de passe doit contenir au moins un chiffre.",
+        "noSpecial": "Le mot de passe doit contenir au moins un caractère spécial.",
+        "sequential": "Le mot de passe ne peut pas contenir de séquences (ex: 12345678, abcdefgh)."
       },
       "passwordConfirm": {
         "mismatch": "Les mots de passe ne correspondent pas."
@@ -170,7 +173,8 @@
     "logout": "Se déconnecter",
     "impact": "Votre Impact",
     "collapse": "Réduire le menu",
-    "expand": "Agrandir le menu"
+    "expand": "Agrandir le menu",
+    "contact": "Contactez-nous"
   },
   "home": {
     "welcome": {
@@ -1531,5 +1535,14 @@
     "pix": {
       "qrAlt": "QR Code Pix"
     }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "description": "Envoyez votre message à l'équipe ClimaBalance.",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Écrivez votre message ici...",
+    "send": "Envoyer",
+    "sending": "Envoi en cours...",
+    "success": "Message envoyé avec succès ! Nous vous répondrons bientôt."
   }
 }

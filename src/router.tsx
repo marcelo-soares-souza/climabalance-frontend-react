@@ -61,6 +61,9 @@ import { AuditLogPage } from '@/features/admin/AuditLogPage';
 // Certificates
 import { CertificateValidationPage } from '@/features/certificates/CertificateValidationPage';
 
+// Contact
+import { ContactPage } from '@/features/contact/ContactPage';
+
 // Shared
 import { AccessDeniedPage } from '@/features/shared/AccessDeniedPage';
 
@@ -213,6 +216,12 @@ export const router = createBrowserRouter([
       {
         path: '/audit/area/:areaId',
         element: <AuthGuard roles={['analyst', 'administrator']}><AreaAuditPage /></AuthGuard>,
+      },
+
+      // Contact
+      {
+        path: '/contact',
+        element: <AuthGuard><ContactPage /></AuthGuard>,
       },
 
       // Admin routes

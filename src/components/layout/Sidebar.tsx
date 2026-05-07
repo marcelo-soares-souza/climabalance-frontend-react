@@ -20,6 +20,7 @@ import {
   Waypoints,
   X,
   Lock,
+  MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 
@@ -232,6 +233,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
               </NavLink>
               <NavLink to="/privacy" className={linkClass} onClick={onClose}>
                 <Lock className="h-4 w-4" /> {t("nav.privacyCenter")}
+              </NavLink>
+              <NavLink to="/contact" className={linkClass} onClick={onClose}>
+                <MessageSquare className="h-4 w-4" /> {t("nav.contact")}
               </NavLink>
 
               {isAnalystOrAdmin && (

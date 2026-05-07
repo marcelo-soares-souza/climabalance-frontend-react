@@ -136,7 +136,10 @@
         "invalidEmail": "Informe um e-mail válido."
       },
       "password": {
-        "tooShort": "A senha deve ter pelo menos 8 caracteres."
+        "tooShort": "A senha deve ter pelo menos 8 caracteres.",
+        "noNumber": "A senha deve conter pelo menos um número.",
+        "noSpecial": "A senha deve conter pelo menos um caractere especial.",
+        "sequential": "A senha não pode conter sequências (ex: 12345678, abcdefgh)."
       },
       "passwordConfirm": {
         "mismatch": "As senhas informadas não coincidem."
@@ -170,7 +173,8 @@
     "logout": "Sair",
     "impact": "Seu Impacto",
     "collapse": "Recolher menu",
-    "expand": "Expandir menu"
+    "expand": "Expandir menu",
+    "contact": "Fale Conosco"
   },
   "home": {
     "welcome": {
@@ -1531,5 +1535,14 @@
     "pix": {
       "qrAlt": "QR Code Pix"
     }
+  },
+  "contact": {
+    "title": "Fale Conosco",
+    "description": "Envie sua mensagem para a equipe ClimaBalance.",
+    "messageLabel": "Mensagem",
+    "messagePlaceholder": "Digite sua mensagem aqui...",
+    "send": "Enviar",
+    "sending": "Enviando...",
+    "success": "Mensagem enviada com sucesso! Entraremos em contato em breve."
   }
 }

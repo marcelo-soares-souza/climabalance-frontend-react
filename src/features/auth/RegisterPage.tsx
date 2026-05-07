@@ -14,6 +14,30 @@ import { ApiError } from '@/lib/api-client';
 import { getAuthFieldErrors } from './auth-form-errors';
 import { cn } from '@/lib/cn';
 
+const PWD_SEQUENCES = [
+  '0123', '1234', '2345', '3456', '4567', '5678', '6789',
+  '9876', '8765', '7654', '6543', '5432', '4321', '3210',
+  'abcd', 'bcde', 'cdef', 'defg', 'efgh', 'fghi', 'ghij', 'hijk',
+  'ijkl', 'jklm', 'klmn', 'lmno', 'mnop', 'nopq', 'opqr', 'pqrs',
+  'qrst', 'rstu', 'stuv', 'tuvw', 'uvwx', 'vwxy', 'wxyz',
+  'zyxw', 'yxwv', 'xwvu', 'wvut', 'vuts', 'utsr', 'tsrq', 'srqp',
+  'rqpo', 'qpon', 'ponm', 'onml', 'nmlk', 'mlkj', 'lkji', 'kjih',
+  'jihg', 'ihgf', 'hgfe', 'gfed', 'fedc', 'edcb', 'dcba',
+];
+
+function hasSequential(value: string): boolean {
+  const lower = value.toLowerCase();
+  return PWD_SEQUENCES.some((seq) => lower.includes(seq));
+}
+
+function validatePassword(value: string): string | null {
+  if (value.length < 8) return 'auth.validation.password.tooShort';
+  if (!/[0-9]/.test(value)) return 'auth.validation.password.noNumber';
+  if (!/[!@#$%^&*(),.?":{}|<>_\-[\]\\/`~]/.test(value)) return 'auth.validation.password.noSpecial';
+  if (hasSequential(value)) return 'auth.validation.password.sequential';
+  return null;
+}
+
 export function RegisterPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -55,6 +79,11 @@ export function RegisterPage() {
     setConsentError(false);
     if (!roleKey) {
       setFieldErrors({ role_key: t('errors.auth.register.roleRequired') });
+      return;
+    }
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setFieldErrors({ password: t(passwordError) });
       return;
     }
     if (password !== passwordConfirm) {
