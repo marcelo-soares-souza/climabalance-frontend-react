@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
+import { useTranslation, Trans } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { AuthLayout } from './components/AuthLayout';
 import { Button } from '@/components/ui/Button';
@@ -12,6 +12,7 @@ import { authService } from '@/services/auth';
 import { useLocale } from '@/hooks/use-locale';
 import { ApiError } from '@/lib/api-client';
 import { getAuthFieldErrors } from './auth-form-errors';
+import { cn } from '@/lib/cn';
 
 export function RegisterPage() {
   const { t } = useTranslation();
@@ -23,6 +24,8 @@ export function RegisterPage() {
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const [roleKey, setRoleKey] = useState('');
   const [humanAnswer, setHumanAnswer] = useState('');
+  const [acceptedConsent, setAcceptedConsent] = useState(false);
+  const [consentError, setConsentError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
@@ -49,12 +52,17 @@ export function RegisterPage() {
     e.preventDefault();
     setError(null);
     setFieldErrors({});
+    setConsentError(false);
     if (!roleKey) {
       setFieldErrors({ role_key: t('errors.auth.register.roleRequired') });
       return;
     }
     if (password !== passwordConfirm) {
       setFieldErrors({ password_confirm: t('errors.auth.register.passwordMismatch') });
+      return;
+    }
+    if (!acceptedConsent) {
+      setConsentError(true);
       return;
     }
     if (!humanCheck?.challenge_id) {
@@ -72,6 +80,8 @@ export function RegisterPage() {
         human_answer: humanAnswer,
         locale,
         role_key: roleKey,
+        accepted_privacy: true,
+        accepted_terms: true,
       });
       navigate('/confirm-email', { state: { email } });
     } catch (err) {
@@ -141,14 +151,31 @@ export function RegisterPage() {
         <Button type="button" variant="outline" className="w-full" onClick={reloadHumanCheck} disabled={loadingHumanCheck}>
           {loadingHumanCheck ? t('auth.register.humanCheckLoading') : t('auth.register.humanCheckReload')}
         </Button>
+        <label className="flex items-start gap-3 rounded-lg border border-primary/20 bg-primary-50/30 p-3">
+          <input
+            type="checkbox"
+            checked={acceptedConsent}
+            onChange={(e) => { setAcceptedConsent(e.target.checked); setConsentError(false); }}
+            className={cn(
+              'mt-0.5 h-4 w-4 shrink-0 rounded border-primary text-primary focus:ring-primary',
+              consentError && 'border-error'
+            )}
+          />
+          <span className={cn('text-xs leading-relaxed text-text-secondary', consentError && 'text-error')}>
+            <Trans
+              i18nKey="auth.register.privacyAgreement"
+              components={{
+                privacyLink: <Link to="/privacy-policy" className="text-primary hover:underline" />,
+                termsLink: <Link to="/terms-of-use" className="text-primary hover:underline" />,
+              }}
+            />
+          </span>
+        </label>
+        {consentError && (
+          <p className="text-xs text-error">{t('auth.register.consentRequired')}</p>
+        )}
         <Button type="submit" className="w-full" loading={loading}>{t('auth.register.submit')}</Button>
       </form>
-      <p className="mt-4 text-center text-xs text-text-secondary">
-        {t('auth.register.privacyAgreement')}{' '}
-        <Link to="/privacy-policy" className="text-primary hover:underline">{t('nav.privacyPolicy')}</Link>
-        {' '}e{' '}
-        <Link to="/terms-of-use" className="text-primary hover:underline">{t('nav.termsOfUse')}</Link>
-      </p>
       <p className="mt-6 text-center text-sm text-text-secondary">
         {t('auth.register.hasAccount')}{' '}
         <Link to="/login" className="text-primary hover:underline">{t('auth.register.login')}</Link>

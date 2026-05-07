@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Card, CardContent } from "@/components/ui/Card";
-import { Database, FileText, Lock, ShieldCheck, Trash2, UserRound } from "lucide-react";
+import { Clock, Database, FileText, Gavel, Globe, Lock, Mail, ShieldCheck, Trash2, UserRound } from "lucide-react";
 
 export function PrivacyPolicyPage() {
   const { t } = useTranslation();
@@ -52,6 +52,62 @@ export function PrivacyPolicyPage() {
       paragraphs: [
         t("privacy.sections.rights.paragraph1"),
         t("privacy.sections.rights.paragraph2"),
+      ],
+    },
+    {
+      icon: <Gavel className="h-5 w-5 text-purple-700" />,
+      title: t("privacy.sections.legalBases.title"),
+      paragraphs: [
+        t("privacy.sections.legalBases.paragraph1"),
+        `• ${t("privacy.sections.legalBases.item1")}`,
+        `• ${t("privacy.sections.legalBases.item2")}`,
+        `• ${t("privacy.sections.legalBases.item3")}`,
+        `• ${t("privacy.sections.legalBases.item4")}`,
+        t("privacy.sections.legalBases.paragraph2"),
+      ],
+    },
+    {
+      icon: <Clock className="h-5 w-5 text-orange-700" />,
+      title: t("privacy.sections.dataRetention.title"),
+      paragraphs: [
+        t("privacy.sections.dataRetention.paragraph1"),
+        `• ${t("privacy.sections.dataRetention.item1")}`,
+        `• ${t("privacy.sections.dataRetention.item2")}`,
+        `• ${t("privacy.sections.dataRetention.item3")}`,
+        `• ${t("privacy.sections.dataRetention.item4")}`,
+        `• ${t("privacy.sections.dataRetention.item5")}`,
+        t("privacy.sections.dataRetention.paragraph2"),
+      ],
+    },
+    {
+      icon: <Mail className="h-5 w-5 text-teal-700" />,
+      title: t("privacy.sections.dpo.title"),
+      paragraphs: [
+        t("privacy.sections.dpo.paragraph1"),
+        `${t("privacy.sections.dpo.emailLabel")}: ${t("privacy.sections.dpo.email")}`,
+        t("privacy.sections.dpo.paragraph2"),
+      ],
+    },
+    {
+      icon: <Globe className="h-5 w-5 text-indigo-700" />,
+      title: t("privacy.sections.internationalTransfer.title"),
+      paragraphs: [
+        t("privacy.sections.internationalTransfer.paragraph1"),
+        `• ${t("privacy.sections.internationalTransfer.item1")}`,
+        `• ${t("privacy.sections.internationalTransfer.item2")}`,
+        `• ${t("privacy.sections.internationalTransfer.item3")}`,
+        t("privacy.sections.internationalTransfer.paragraph2"),
+      ],
+    },
+    {
+      icon: <UserRound className="h-5 w-5 text-blue-700" />,
+      title: t("privacy.sections.rightsProcedures.title"),
+      paragraphs: [
+        t("privacy.sections.rightsProcedures.paragraph1"),
+        `1. ${t("privacy.sections.rightsProcedures.item1")}`,
+        `2. ${t("privacy.sections.rightsProcedures.item2")}`,
+        `3. ${t("privacy.sections.rightsProcedures.item3")}`,
+        t("privacy.sections.rightsProcedures.paragraph2"),
       ],
     },
   ];

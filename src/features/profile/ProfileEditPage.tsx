@@ -8,7 +8,6 @@ import { queryClient } from '@/config/query-client';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Select } from '@/components/ui/Select';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ApiError } from '@/lib/api-client';

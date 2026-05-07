@@ -19,6 +19,7 @@ import {
   Info,
   Waypoints,
   X,
+  Lock,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
 
@@ -228,6 +229,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
               >
                 <ShieldCheck className="h-4 w-4" />{" "}
                 {t("nav.validateCertificate")}
+              </NavLink>
+              <NavLink to="/privacy" className={linkClass} onClick={onClose}>
+                <Lock className="h-4 w-4" /> {t("nav.privacyCenter")}
               </NavLink>
 
               {isAnalystOrAdmin && (

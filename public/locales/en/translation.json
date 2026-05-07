@@ -93,7 +93,8 @@
       "humanCheckLoading": "Loading question...",
       "humanCheckInvalid": "Incorrect answer. Please try again.",
       "humanCheckLoadError": "Unable to load the human check. Please try again.",
-      "privacyAgreement": "By creating an account, you agree to our",
+      "privacyAgreement": "I have read and agree to the <privacyLink>Privacy Policy</privacyLink> and <termsLink>Terms of Use</termsLink>.",
+      "consentRequired": "You must accept the Privacy Policy and Terms of Use to continue.",
       "error": "Failed to create account. Please try again."
     },
     "passwordReset": {
@@ -148,6 +149,7 @@
     "about": "About",
     "howToUse": "How to Use",
     "privacyPolicy": "Privacy Policy",
+    "privacyCenter": "Privacy Center",
     "termsOfUse": "Terms of Use",
     "calculator": "Footprint Calculator",
     "history": "Calculation History",
@@ -439,6 +441,28 @@
     "videoFarmerOnboarding": "Farmer Onboarding Tutorial"
   },
   "privacy": {
+    "exportData": "Export my data",
+    "exportDataDescription": "Download all your personal data stored on the platform in JSON format, including profile, compensations, certificates and footprint calculations.",
+    "requestExport": "Request export",
+    "exportRequested": "Your export request has been registered. We will contact you with instructions.",
+    "exportRequestDetails": "Data portability request - user requested full data export.",
+    "subjectRequest": "Data subject request",
+    "requestType": "Request type",
+    "selectRequestType": "Select type",
+    "details": "Details (optional)",
+    "detailsPlaceholder": "Describe your request in detail...",
+    "submitRequest": "Submit request",
+    "requestSubmitted": "Your request has been registered. We will respond within 15 business days.",
+    "requestTypes": {
+      "access": "Access my data",
+      "rectification": "Rectify data",
+      "erasure": "Delete data",
+      "portability": "Data portability",
+      "restrict": "Restrict processing",
+      "object": "Object to processing",
+      "withdrawConsent": "Withdraw consent"
+    },
+    "hero": {
     "hero": {
       "eyebrow": "Privacy and data",
       "title": "Privacy Policy",
@@ -481,9 +505,55 @@
       },
       "rights": {
         "title": "Your rights",
-        "paragraph1": "You may request access, correction, update, or deletion of personal information provided to ClimaBalance, as well as revoke consent whenever processing depends on it.",
-        "paragraph2": "Privacy and data-related requests may be handled through the support and contact channels made available by the project. In some cases, we may require additional identity verification before completing the request."
+        "paragraph1": "You may request access, correction, update or deletion of personal information provided to ClimaBalance, as well as withdraw consent when processing depends on it.",
+        "paragraph2": "Privacy and data requests can be handled through the support and contact channels made available by the project. In some cases, we may request additional identity verification before executing the request."
+      },
+      "legalBases": {
+        "title": "Legal bases for processing",
+        "paragraph1": "ClimaBalance processes personal data based on the following legal grounds, in accordance with the LGPD and GDPR:",
+        "item1": "Consent: for account creation, cookie acceptance and optional communications.",
+        "item2": "Contract performance: to operate the platform, process compensations and issue certificates.",
+        "item3": "Legal obligation: to comply with tax, accounting and regulatory requirements.",
+        "item4": "Legitimate interest: for security, fraud prevention, audit and service improvement.",
+        "paragraph2": "Consent may be withdrawn at any time, without affecting the lawfulness of processing carried out prior to withdrawal."
+      },
+      "dataRetention": {
+        "title": "Data retention periods",
+        "paragraph1": "We keep your personal data only for as long as necessary to fulfill the purposes for which it was collected:",
+        "item1": "Account data: retained while the account is active. After deletion, soft-delete for up to 90 days, then anonymization or permanent deletion.",
+        "item2": "Compensation and certificate data: retained for up to 5 years after the last transaction to meet tax and regulatory obligations.",
+        "item3": "Audit records: retained for up to 3 years.",
+        "item4": "Session and refresh tokens: retained until expiration or revocation, whichever occurs first.",
+        "item5": "Payment data: processed exclusively by Stripe. ClimaBalance does not store full credit card details.",
+        "paragraph2": "After the retention period, data is anonymized or permanently deleted."
+      },
+      "dpo": {
+        "title": "Data Protection Officer (DPO)",
+        "paragraph1": "For privacy and data protection matters, please contact our Data Protection Officer:",
+        "emailLabel": "Email",
+        "email": "privacidade@climabalance.com",
+        "paragraph2": "The DPO handles data subject rights requests, questions about data processing and guidance on this policy."
+      },
+      "internationalTransfer": {
+        "title": "International data transfer",
+        "paragraph1": "ClimaBalance uses third-party services that may involve data transfer outside Brazil and the European Union, including:",
+        "item1": "Stripe (USA): payment processing. Stripe is Privacy Shield certified and uses Standard Contractual Clauses (SCCs) for GDPR compliance.",
+        "item2": "Cloud hosting and infrastructure providers: may involve servers located in different countries.",
+        "item3": "Transactional email services: for sending notifications and confirmations.",
+        "paragraph2": "In such cases, we adopt contractual and technical mechanisms to ensure your data receives the same level of protection required by applicable law."
+      },
+      "rightsProcedures": {
+        "title": "How to exercise your rights",
+        "paragraph1": "You may exercise your data subject rights at any time through the following channels:",
+        "item1": "Directly on the platform: access your profile to edit, correct or update your personal data.",
+        "item2": "Formal request: use the subject request form available on the platform (Privacy menu).",
+        "item3": "Contact the DPO: send an email to privacidade@climabalance.com.",
+        "paragraph2": "We will respond to your request within 15 days, as provided by the LGPD. In complex cases, the deadline may be extended with justification."
       }
+    },
+    "footer": {
+      "lastUpdatedLabel": "Last updated"
+    }
     },
     "footer": {
       "lastUpdatedLabel": "Last updated"

@@ -2,6 +2,8 @@ import { useCallback, useState } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Button } from './ui/Button';
+import { api } from '@/lib/api-client';
+import { useAuthStore } from '@/stores/auth-store';
 
 const STORAGE_KEY = 'cb_cookie_consent';
 const EXPIRY_DAYS = 30;
@@ -41,16 +43,31 @@ function shouldShow(): boolean {
 export function CookieConsentBanner() {
   const { t } = useTranslation();
   const [visible, setVisible] = useState(shouldShow);
+  const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
+
+  const syncConsent = useCallback(async (accepted: boolean) => {
+    if (!isAuthenticated) return;
+    try {
+      await api.post('/privacy/cookie-consent', {
+        consent_type: 'analytics',
+        consented: accepted,
+      });
+    } catch {
+      // Silently fail - localStorage consent is sufficient
+    }
+  }, [isAuthenticated]);
 
   const handleAccept = useCallback(() => {
     saveConsent(true);
     setVisible(false);
-  }, []);
+    syncConsent(true);
+  }, [syncConsent]);
 
   const handleReject = useCallback(() => {
     saveConsent(false);
     setVisible(false);
-  }, []);
+    syncConsent(false);
+  }, [syncConsent]);
 
   if (!visible) return null;
 

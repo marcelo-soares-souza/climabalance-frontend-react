@@ -93,7 +93,8 @@
       "humanCheckLoading": "Chargement de la question...",
       "humanCheckInvalid": "Réponse incorrecte. Veuillez réessayer.",
       "humanCheckLoadError": "Impossible de charger la vérification humaine. Veuillez réessayer.",
-      "privacyAgreement": "En créant un compte, vous acceptez notre",
+      "privacyAgreement": "J'ai lu et j'accepte la <privacyLink>Politique de confidentialité</privacyLink> et les <termsLink>Conditions d'utilisation</termsLink>.",
+      "consentRequired": "Vous devez accepter la Politique de confidentialité et les Conditions d'utilisation pour continuer.",
       "error": "Échec de la création du compte. Veuillez réessayer."
     },
     "passwordReset": {
@@ -148,6 +149,7 @@
     "about": "À Propos du Projet",
     "howToUse": "Comment utiliser",
     "privacyPolicy": "Politique de Confidentialité",
+    "privacyCenter": "Centre de confidentialité",
     "termsOfUse": "Conditions d'Utilisation",
     "calculator": "Calculateur d'Empreinte",
     "history": "Historique des Calculs",
@@ -439,6 +441,28 @@
     "videoFarmerOnboarding": "Inscription du Producteur"
   },
   "privacy": {
+    "exportData": "Exporter mes données",
+    "exportDataDescription": "Téléchargez toutes vos données personnelles stockées sur la plateforme au format JSON, y compris le profil, les compensations, les certificats et les calculs d'empreinte.",
+    "requestExport": "Demander l'exportation",
+    "exportRequested": "Votre demande d'exportation a été enregistrée. Nous vous contacterons avec les instructions.",
+    "exportRequestDetails": "Demande de portabilité des données - l'utilisateur a demandé l'exportation complète des données.",
+    "subjectRequest": "Demande de personne concernée",
+    "requestType": "Type de demande",
+    "selectRequestType": "Sélectionnez le type",
+    "details": "Détails (optionnel)",
+    "detailsPlaceholder": "Décrivez votre demande en détail...",
+    "submitRequest": "Soumettre la demande",
+    "requestSubmitted": "Votre demande a été enregistrée. Nous répondrons dans un délai de 15 jours ouvrables.",
+    "requestTypes": {
+      "access": "Accès à mes données",
+      "rectification": "Rectification des données",
+      "erasure": "Suppression des données",
+      "portability": "Portabilité des données",
+      "restrict": "Limitation du traitement",
+      "object": "Opposition au traitement",
+      "withdrawConsent": "Retrait du consentement"
+    },
+    "hero": {
     "hero": {
       "eyebrow": "Vie privée et données",
       "title": "Politique de Confidentialité",
@@ -481,9 +505,55 @@
       },
       "rights": {
         "title": "Vos droits",
-        "paragraph1": "Vous pouvez demander l’accès, la correction, la mise à jour ou la suppression des informations personnelles fournies à ClimaBalance, ainsi que révoquer vos consentements lorsque le traitement en dépend.",
-        "paragraph2": "Les demandes liées à la confidentialité et aux données peuvent être traitées par les canaux de support et de contact mis à disposition par le projet. Dans certains cas, nous pourrons demander une vérification d’identité supplémentaire avant d’exécuter la demande."
+        "paragraph1": "Vous pouvez demander l'accès, la correction, la mise à jour ou la suppression des informations personnelles fournies à ClimaBalance, ainsi que retirer votre consentement lorsque le traitement en dépend.",
+        "paragraph2": "Les demandes relatives à la confidentialité et aux données peuvent être traitées via les canaux d'assistance et de contact mis à disposition par le projet. Dans certains cas, nous pouvons demander une vérification d'identité supplémentaire avant d'exécuter la demande."
+      },
+      "legalBases": {
+        "title": "Bases légales du traitement",
+        "paragraph1": "ClimaBalance traite les données personnelles sur la base des fondements juridiques suivants, conformément à la LGPD et au RGPD :",
+        "item1": "Consentement : pour la création de compte, l'acceptation des cookies et les communications optionnelles.",
+        "item2": "Exécution d'un contrat : pour faire fonctionner la plateforme, traiter les compensations et délivrer des certificats.",
+        "item3": "Obligation légale : pour se conformer aux exigences fiscales, comptables et réglementaires.",
+        "item4": "Intérêt légitime : pour la sécurité, la prévention de la fraude, l'audit et l'amélioration du service.",
+        "paragraph2": "Le consentement peut être retiré à tout moment, sans affecter la licéité du traitement effectué avant le retrait."
+      },
+      "dataRetention": {
+        "title": "Périodes de conservation des données",
+        "paragraph1": "Nous conservons vos données personnelles uniquement pendant la durée nécessaire aux fins pour lesquelles elles ont été collectées :",
+        "item1": "Données du compte : conservées tant que le compte est actif. Après suppression, soft-delete jusqu'à 90 jours, puis anonymisation ou suppression définitive.",
+        "item2": "Données de compensation et certificats : conservées jusqu'à 5 ans après la dernière transaction pour respecter les obligations fiscales et réglementaires.",
+        "item3": "Registres d'audit : conservés jusqu'à 3 ans.",
+        "item4": "Jetons de session et de rafraîchissement : conservés jusqu'à expiration ou révocation, selon la première éventualité.",
+        "item5": "Données de paiement : traitées exclusivement par Stripe. ClimaBalance ne stocke pas les données complètes des cartes de crédit.",
+        "paragraph2": "Après la période de conservation, les données sont anonymisées ou définitivement supprimées."
+      },
+      "dpo": {
+        "title": "Délégué à la protection des données (DPO)",
+        "paragraph1": "Pour toute question relative à la confidentialité et à la protection des données, veuillez contacter notre Délégué à la protection des données :",
+        "emailLabel": "Courriel",
+        "email": "privacidade@climabalance.com",
+        "paragraph2": "Le DPO traite les demandes relatives aux droits des personnes concernées, les questions sur le traitement des données et les conseils sur cette politique."
+      },
+      "internationalTransfer": {
+        "title": "Transfert international de données",
+        "paragraph1": "ClimaBalance utilise des services tiers qui peuvent impliquer un transfert de données en dehors du Brésil et de l'Union européenne, notamment :",
+        "item1": "Stripe (États-Unis) : traitement des paiements. Stripe est certifiée Privacy Shield et utilise des clauses contractuelles types (CCT) pour la conformité au RGPD.",
+        "item2": "Fournisseurs d'hébergement cloud et d'infrastructure : peuvent impliquer des serveurs situés dans différents pays.",
+        "item3": "Services de messagerie transactionnelle : pour l'envoi de notifications et de confirmations.",
+        "paragraph2": "Dans ces cas, nous adoptons des mécanismes contractuels et techniques pour garantir que vos données reçoivent le même niveau de protection exigé par la législation applicable."
+      },
+      "rightsProcedures": {
+        "title": "Comment exercer vos droits",
+        "paragraph1": "Vous pouvez exercer vos droits en tant que personne concernée à tout moment via les canaux suivants :",
+        "item1": "Directement sur la plateforme : accédez à votre profil pour modifier, corriger ou mettre à jour vos données personnelles.",
+        "item2": "Demande formelle : utilisez le formulaire de demande disponible sur la plateforme (menu Confidentialité).",
+        "item3": "Contacter le DPO : envoyez un courriel à privacidade@climabalance.com.",
+        "paragraph2": "Nous répondrons à votre demande dans un délai de 15 jours, comme prévu par la LGPD. Dans les cas complexes, ce délai peut être prolongé avec justification."
       }
+    },
+    "footer": {
+      "lastUpdatedLabel": "Dernière mise à jour"
+    }
     },
     "footer": {
       "lastUpdatedLabel": "Dernière mise à jour"

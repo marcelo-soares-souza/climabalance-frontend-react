@@ -19,6 +19,8 @@ export interface RegisterRequest {
   human_answer: string;
   locale?: string;
   role_key?: string;
+  accepted_privacy: boolean;
+  accepted_terms: boolean;
 }
 
 export interface RegisterResponse {
