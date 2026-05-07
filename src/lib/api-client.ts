@@ -1,6 +1,7 @@
 import { API_BASE } from '@/config/api';
 import { tokenStorage } from './token-storage';
 import { isTokenExpired } from './jwt';
+import i18n from '@/config/i18n';
 
 type RequestOptions = RequestInit & {
   params?: Record<string, string | number | boolean | undefined>;
@@ -100,6 +101,7 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   const token = tokenStorage.getAccessToken();
   const headers: Record<string, string> = {
     'x-requested-by': 'clm-balance',
+    'Accept-Language': i18n.language,
     ...(fetchOptions.headers as Record<string, string>),
   };
 
