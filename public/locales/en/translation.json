@@ -401,37 +401,37 @@
       },
       "cta": "Create producer account",
       "stripeManual": {
-      "label": "Stripe Integration",
-      "why": {
-        "title": "Why do we use Stripe?",
-        "security": "Stripe is one of the world's most secure payment platforms, certified PCI DSS Level 1 — the highest security standard in the industry. All financial data is encrypted and Stripe manages all regulatory compliance, protecting you and your supporters.",
-        "ease": "With Stripe, you don't need to worry about payment infrastructure. The integration is simple and fast: you connect your account, and everything else — payment splitting, transfers, reporting — is automated by the platform."
-      },
-      "fees": {
-        "title": "Transaction fees",
-        "desc": "Stripe charges a fee per transaction (usually a percentage + fixed amount). This fee is automatically deducted at the time of contribution and covers processing, fraud prevention, and support.",
-        "note": "In addition to Stripe's fee, the platform applies an administrative fee, which is transparently disclosed before each operation."
-      },
-      "integration": {
-        "title": "Integration step by step",
-        "step1": {
-          "title": "Connect your account or create from scratch",
-          "desc": "In your producer profile, go to the payments section and click \"Connect to Stripe\". If you don't have a Stripe account yet, the integration form will guide you through creation. Have your CPF/CNPJ, bank account, and email ready."
+        "label": "Stripe Integration",
+        "why": {
+          "title": "Why do we use Stripe?",
+          "security": "Stripe is one of the world's most secure payment platforms, certified PCI DSS Level 1 — the highest security standard in the industry. All financial data is encrypted and Stripe manages all regulatory compliance, protecting you and your supporters.",
+          "ease": "With Stripe, you don't need to worry about payment infrastructure. The integration is simple and fast: you connect your account, and everything else — payment splitting, transfers, reporting — is automated by the platform."
         },
-        "step2": {
-          "title": "Fill in your details on Stripe",
-          "desc": "You'll be redirected to Stripe's secure environment. Enter your personal or business details, address, and bank account. Stripe uses this information to verify your identity and enable payments."
+        "fees": {
+          "title": "Transaction fees",
+          "desc": "Stripe charges a fee per transaction (usually a percentage + fixed amount). This fee is automatically deducted at the time of contribution and covers processing, fraud prevention, and support.",
+          "note": "In addition to Stripe's fee, the platform applies an administrative fee, which is transparently disclosed before each operation."
         },
-        "step3": {
-          "title": "Wait for verification",
-          "desc": "Stripe reviews the submitted information and documents. In most cases verification is completed within minutes. You'll receive confirmation automatically."
+        "integration": {
+          "title": "Integration step by step",
+          "step1": {
+            "title": "Connect your account or create from scratch",
+            "desc": "In your producer profile, go to the payments section and click \"Connect to Stripe\". If you don't have a Stripe account yet, the integration form will guide you through creation. Have your CPF/CNPJ, bank account, and email ready."
+          },
+          "step2": {
+            "title": "Fill in your details on Stripe",
+            "desc": "You'll be redirected to Stripe's secure environment. Enter your personal or business details, address, and bank account. Stripe uses this information to verify your identity and enable payments."
+          },
+          "step3": {
+            "title": "Wait for verification",
+            "desc": "Stripe reviews the submitted information and documents. In most cases verification is completed within minutes. You'll receive confirmation automatically."
+          },
+          "step4": {
+            "title": "Done!",
+            "desc": "With your account verified, you can now receive transfers from supporter contributions. Amounts are automatically forwarded by the platform."
+          }
         },
-        "step4": {
-          "title": "Done!",
-          "desc": "With your account verified, you can now receive transfers from supporter contributions. Amounts are automatically forwarded by the platform."
-        }
-      },
-      "cta": "Connect my Stripe account"
+        "cta": "Connect my Stripe account"
       }
     },
     "videosLabel": "Videos",
@@ -907,7 +907,9 @@
     "clearTreesTitle": "Clear planted trees?",
     "clearTreesConfirm": "All planted trees in this area will be removed. This action cannot be undone.",
     "noAreas": "No areas available right now",
-    "treesCompensated": "trees compensated"
+    "treesCompensated": "trees compensated",
+    "streetMap": "Street Map",
+    "satelliteView": "Satellite"
   },
   "area": {
     "available": "Available",
@@ -1163,7 +1165,25 @@
       "about": "About",
       "aboutPlaceholder": "Tell us a bit about yourself...",
       "avatar": "Upload photo",
-      "websiteUrl": "Website"
+      "websiteUrl": "Website",
+      "birthDatePlaceholder": "YYYY-MM-DD",
+      "websitePlaceholder": "https://",
+      "social": {
+        "instagram": "Instagram",
+        "instagramPlaceholder": "https://instagram.com/...",
+        "facebook": "Facebook",
+        "facebookPlaceholder": "https://facebook.com/...",
+        "x": "X (Twitter)",
+        "xPlaceholder": "https://x.com/...",
+        "bluesky": "Bluesky",
+        "blueskyPlaceholder": "https://bsky.app/...",
+        "mastodon": "Mastodon",
+        "mastodonPlaceholder": "https://...",
+        "youtube": "YouTube",
+        "youtubePlaceholder": "https://youtube.com/...",
+        "linkedin": "LinkedIn",
+        "linkedinPlaceholder": "https://linkedin.com/in/..."
+      }
     },
     "avatar": {
       "unsupported_type": "Image format not supported. Use JPEG, PNG or WebP.",
@@ -1263,7 +1283,8 @@
     "demo": {
       "title": "Demo: Embedded Calculator",
       "description": "See how the calculator will appear when embedded on external websites",
-      "codeTitle": "HTML code to embed"
+      "codeTitle": "HTML code to embed",
+      "iframeTitle": "ClimaBalance Calculator"
     }
   },
   "errors": {
@@ -1494,6 +1515,21 @@
     "fetchNew": "Get satellite image",
     "captureDate": "Date",
     "cloudCover": "Clouds",
-    "fallback": "Fallback image (visual)"
+    "fallback": "Fallback image (visual)",
+    "showOverlay": "Show overlay",
+    "hideOverlay": "Hide overlay"
+  },
+  "app.name": "ClimaBalance",
+  "treePlanting": {
+    "saveError": "Error saving planting. Please try again.",
+    "clearError": "Error clearing trees. Please try again."
+  },
+  "combobox": {
+    "noResults": "No results"
+  },
+  "payment": {
+    "pix": {
+      "qrAlt": "Pix QR Code"
+    }
   }
 }

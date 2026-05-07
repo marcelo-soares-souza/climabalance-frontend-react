@@ -122,15 +122,15 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           <div className="flex items-center gap-2">
             <img
               src="/logo.png"
-              alt="ClimaBalance"
+              alt={t('app.name')}
               className="h-8 w-8 brightness-0 invert"
             />
             <div>
               <span className="font-semibold text-lg text-white">
-                ClimaBalance
+                {t('app.name')}
               </span>
               <p className="text-sm text-white/50">
-                {t("home.welcome.description").substring(0, 45)}...
+                {t("home.welcome.description")}
               </p>
             </div>
           </div>

@@ -48,7 +48,7 @@ function UnauthenticatedHome() {
         <Leaf className="absolute -bottom-4 -left-4 h-24 w-24 text-white/5 -rotate-45" />
         <img
           src={LOGO_URL}
-          alt="ClimaBalance"
+          alt={t('app.name')}
           className="h-28 w-28 mx-auto mb-6 drop-shadow-lg"
         />
         <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium mb-4">

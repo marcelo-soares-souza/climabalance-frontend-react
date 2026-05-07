@@ -13,7 +13,7 @@ export function EmbedDemoPage() {
             src="/embed/calculator"
             className="w-full border-0"
             style={{ height: '600px' }}
-            title="ClimaBalance Calculator"
+            title={t('embed.demo.iframeTitle')}
           />
         </CardContent>
       </Card>

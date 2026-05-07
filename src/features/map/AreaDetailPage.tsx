@@ -569,7 +569,7 @@ export function AreaDetailPage() {
               <button
                 onClick={() => setShowOverlay((s) => !s)}
                 className="p-1 hover:text-text-primary transition-colors"
-                title={showOverlay ? "Hide overlay" : "Show overlay"}
+                title={showOverlay ? t("satellite.hideOverlay") : t("satellite.showOverlay")}
               >
                 {showOverlay ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
               </button>

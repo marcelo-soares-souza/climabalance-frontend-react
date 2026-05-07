@@ -83,7 +83,7 @@ export function PixPaymentPage() {
         <div className="flex justify-center">
           <img
             src={qrCode}
-            alt="Pix QR Code"
+            alt={t('payment.pix.qrAlt')}
             className="w-64 h-64 border rounded-lg"
           />
         </div>

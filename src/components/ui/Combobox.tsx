@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, type ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/cn';
 
@@ -34,6 +35,7 @@ export function Combobox({
   className,
   required,
 }: ComboboxProps) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -156,7 +158,7 @@ export function Combobox({
               </button>
             )}
             {filtered.length === 0 ? (
-              <div className="px-4 py-3 text-sm text-text-secondary">No results</div>
+              <div className="px-4 py-3 text-sm text-text-secondary">{t('combobox.noResults')}</div>
             ) : (
               filtered.map((opt, idx) => (
                 <button

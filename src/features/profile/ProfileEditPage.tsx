@@ -205,7 +205,7 @@ export function ProfileEditPage() {
                   id="birth_date"
                   type="text"
                   inputMode="numeric"
-                  placeholder="YYYY-MM-DD"
+                  placeholder={t('profile.form.birthDatePlaceholder')}
                   value={formValues.birth_date}
                   onChange={(e) => update('birth_date', formatBirthDate(e.target.value))}
                 />
@@ -239,7 +239,7 @@ export function ProfileEditPage() {
               value={formValues.address_country}
               options={countries.map((c) => ({ value: c.code, label: c.name }))}
               emptyLabel="—"
-              placeholder={t('profile.form.countryPlaceholder') || 'Type to search...'}
+              placeholder={t('profile.form.countryPlaceholder')}
               onChange={(val) => update('address_country', val)}
             />
           </div>
@@ -261,14 +261,14 @@ export function ProfileEditPage() {
 
         <Card><CardContent className="space-y-4 py-6">
           <h3 className="font-medium">{t('profile.links')}</h3>
-          <Input id="website_url" label={t('profile.form.websiteUrl')} type="url" value={formValues.website_url} onChange={(e) => update('website_url', e.target.value)} placeholder="https://" />
-          <Input id="instagram_url" label="Instagram" type="url" value={formValues.instagram_url} onChange={(e) => update('instagram_url', e.target.value)} placeholder="https://instagram.com/..." />
-          <Input id="facebook_url" label="Facebook" type="url" value={formValues.facebook_url} onChange={(e) => update('facebook_url', e.target.value)} placeholder="https://facebook.com/..." />
-          <Input id="x_url" label="X (Twitter)" type="url" value={formValues.x_url} onChange={(e) => update('x_url', e.target.value)} placeholder="https://x.com/..." />
-          <Input id="bluesky_url" label="Bluesky" type="url" value={formValues.bluesky_url} onChange={(e) => update('bluesky_url', e.target.value)} placeholder="https://bsky.app/..." />
-          <Input id="mastodon_url" label="Mastodon" type="url" value={formValues.mastodon_url} onChange={(e) => update('mastodon_url', e.target.value)} placeholder="https://..." />
-          <Input id="youtube_url" label="YouTube" type="url" value={formValues.youtube_url} onChange={(e) => update('youtube_url', e.target.value)} placeholder="https://youtube.com/..." />
-          <Input id="linkedin_url" label="LinkedIn" type="url" value={formValues.linkedin_url} onChange={(e) => update('linkedin_url', e.target.value)} placeholder="https://linkedin.com/in/..." />
+          <Input id="website_url" label={t('profile.form.websiteUrl')} type="url" value={formValues.website_url} onChange={(e) => update('website_url', e.target.value)} placeholder={t('profile.form.websitePlaceholder')} />
+          <Input id="instagram_url" label={t('profile.form.social.instagram')} type="url" value={formValues.instagram_url} onChange={(e) => update('instagram_url', e.target.value)} placeholder={t('profile.form.social.instagramPlaceholder')} />
+          <Input id="facebook_url" label={t('profile.form.social.facebook')} type="url" value={formValues.facebook_url} onChange={(e) => update('facebook_url', e.target.value)} placeholder={t('profile.form.social.facebookPlaceholder')} />
+          <Input id="x_url" label={t('profile.form.social.x')} type="url" value={formValues.x_url} onChange={(e) => update('x_url', e.target.value)} placeholder={t('profile.form.social.xPlaceholder')} />
+          <Input id="bluesky_url" label={t('profile.form.social.bluesky')} type="url" value={formValues.bluesky_url} onChange={(e) => update('bluesky_url', e.target.value)} placeholder={t('profile.form.social.blueskyPlaceholder')} />
+          <Input id="mastodon_url" label={t('profile.form.social.mastodon')} type="url" value={formValues.mastodon_url} onChange={(e) => update('mastodon_url', e.target.value)} placeholder={t('profile.form.social.mastodonPlaceholder')} />
+          <Input id="youtube_url" label={t('profile.form.social.youtube')} type="url" value={formValues.youtube_url} onChange={(e) => update('youtube_url', e.target.value)} placeholder={t('profile.form.social.youtubePlaceholder')} />
+          <Input id="linkedin_url" label={t('profile.form.social.linkedin')} type="url" value={formValues.linkedin_url} onChange={(e) => update('linkedin_url', e.target.value)} placeholder={t('profile.form.social.linkedinPlaceholder')} />
         </CardContent></Card>
 
         <div className="flex gap-3 mt-4">

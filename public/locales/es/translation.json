@@ -401,37 +401,37 @@
       },
       "cta": "Crear cuenta de productor",
       "stripeManual": {
-      "label": "Integración con Stripe",
-      "why": {
-        "title": "¿Por qué usamos Stripe?",
-        "security": "Stripe es una de las plataformas de pago más seguras del mundo, certificada PCI DSS Nivel 1 — el estándar de seguridad más alto de la industria. Todos los datos financieros están cifrados y Stripe gestiona todo el cumplimiento normativo, protegiéndote a ti y a tus seguidores.",
-        "ease": "Con Stripe, no tienes que preocuparte por la infraestructura de pagos. La integración es simple y rápida: conectas tu cuenta, y el resto — división de pagos, transferencias, informes — es automatizado por la plataforma."
-      },
-      "fees": {
-        "title": "Tarifas de transacción",
-        "desc": "Stripe cobra una tarifa por transacción (generalmente un porcentaje + monto fijo). Esta tarifa se descuenta automáticamente al momento de la contribución y cubre procesamiento, prevención de fraude y soporte.",
-        "note": "Además de la tarifa de Stripe, la plataforma aplica una tarifa administrativa, que se informa con transparencia antes de cada operación."
-      },
-      "integration": {
-        "title": "Paso a paso de la integración",
-        "step1": {
-          "title": "Conecta tu cuenta o crea desde cero",
-          "desc": "En tu perfil de productor, ve a la sección de pagos y haz clic en \"Conectar a Stripe\". Si aún no tienes cuenta Stripe, el formulario de integración te guiará en la creación. Ten a mano: CPF o CNPJ, cuenta bancaria y correo electrónico."
+        "label": "Integración con Stripe",
+        "why": {
+          "title": "¿Por qué usamos Stripe?",
+          "security": "Stripe es una de las plataformas de pago más seguras del mundo, certificada PCI DSS Nivel 1 — el estándar de seguridad más alto de la industria. Todos los datos financieros están cifrados y Stripe gestiona todo el cumplimiento normativo, protegiéndote a ti y a tus seguidores.",
+          "ease": "Con Stripe, no tienes que preocuparte por la infraestructura de pagos. La integración es simple y rápida: conectas tu cuenta, y el resto — división de pagos, transferencias, informes — es automatizado por la plataforma."
         },
-        "step2": {
-          "title": "Completa tus datos en Stripe",
-          "desc": "Serás redirigido al entorno seguro de Stripe. Ingresa tus datos personales o de la empresa, dirección y cuenta bancaria. Stripe usa esta información para verificar tu identidad y habilitar los pagos."
+        "fees": {
+          "title": "Tarifas de transacción",
+          "desc": "Stripe cobra una tarifa por transacción (generalmente un porcentaje + monto fijo). Esta tarifa se descuenta automáticamente al momento de la contribución y cubre procesamiento, prevención de fraude y soporte.",
+          "note": "Además de la tarifa de Stripe, la plataforma aplica una tarifa administrativa, que se informa con transparencia antes de cada operación."
         },
-        "step3": {
-          "title": "Espera la verificación",
-          "desc": "Stripe analiza la información y documentos enviados. En la mayoría de los casos la verificación se completa en minutos. Recibirás la confirmación automáticamente."
+        "integration": {
+          "title": "Paso a paso de la integración",
+          "step1": {
+            "title": "Conecta tu cuenta o crea desde cero",
+            "desc": "En tu perfil de productor, ve a la sección de pagos y haz clic en \"Conectar a Stripe\". Si aún no tienes cuenta Stripe, el formulario de integración te guiará en la creación. Ten a mano: CPF o CNPJ, cuenta bancaria y correo electrónico."
+          },
+          "step2": {
+            "title": "Completa tus datos en Stripe",
+            "desc": "Serás redirigido al entorno seguro de Stripe. Ingresa tus datos personales o de la empresa, dirección y cuenta bancaria. Stripe usa esta información para verificar tu identidad y habilitar los pagos."
+          },
+          "step3": {
+            "title": "Espera la verificación",
+            "desc": "Stripe analiza la información y documentos enviados. En la mayoría de los casos la verificación se completa en minutos. Recibirás la confirmación automáticamente."
+          },
+          "step4": {
+            "title": "¡Listo!",
+            "desc": "Con la cuenta verificada, ya puedes recibir transferencias de las contribuciones de los seguidores. Los valores son automáticamente repasados por la plataforma."
+          }
         },
-        "step4": {
-          "title": "¡Listo!",
-          "desc": "Con la cuenta verificada, ya puedes recibir transferencias de las contribuciones de los seguidores. Los valores son automáticamente repasados por la plataforma."
-        }
-      },
-      "cta": "Conectar mi cuenta Stripe"
+        "cta": "Conectar mi cuenta Stripe"
       }
     },
     "videosLabel": "Videos",
@@ -907,7 +907,9 @@
     "clearTreesTitle": "¿Limpiar árboles plantados?",
     "clearTreesConfirm": "Todos los árboles plantados en esta área serán eliminados. Esta acción no se puede deshacer.",
     "noAreas": "No hay áreas disponibles en este momento",
-    "treesCompensated": "árboles compensadas"
+    "treesCompensated": "árboles compensadas",
+    "streetMap": "Mapa callejero",
+    "satelliteView": "Satélite"
   },
   "area": {
     "available": "Disponible",
@@ -1163,7 +1165,25 @@
       "about": "Acerca de",
       "aboutPlaceholder": "Cuéntanos un poco sobre ti...",
       "avatar": "Subir foto",
-      "websiteUrl": "Sitio web"
+      "websiteUrl": "Sitio web",
+      "birthDatePlaceholder": "AAAA-MM-DD",
+      "websitePlaceholder": "https://",
+      "social": {
+        "instagram": "Instagram",
+        "instagramPlaceholder": "https://instagram.com/...",
+        "facebook": "Facebook",
+        "facebookPlaceholder": "https://facebook.com/...",
+        "x": "X (Twitter)",
+        "xPlaceholder": "https://x.com/...",
+        "bluesky": "Bluesky",
+        "blueskyPlaceholder": "https://bsky.app/...",
+        "mastodon": "Mastodon",
+        "mastodonPlaceholder": "https://...",
+        "youtube": "YouTube",
+        "youtubePlaceholder": "https://youtube.com/...",
+        "linkedin": "LinkedIn",
+        "linkedinPlaceholder": "https://linkedin.com/in/..."
+      }
     },
     "avatar": {
       "unsupported_type": "Formato de imagen no compatible. Usa JPEG, PNG o WebP.",
@@ -1263,7 +1283,8 @@
     "demo": {
       "title": "Demo: Calculadora Embutida",
       "description": "Ve cómo la calculadora aparecerá cuando se incruste en sitios externos",
-      "codeTitle": "Código HTML para incrustar"
+      "codeTitle": "Código HTML para incrustar",
+      "iframeTitle": "Calculadora ClimaBalance"
     }
   },
   "errors": {
@@ -1494,6 +1515,21 @@
     "fetchNew": "Obtener imagen satelital",
     "captureDate": "Fecha",
     "cloudCover": "Nubes",
-    "fallback": "Imagen alternativa (visual)"
+    "fallback": "Imagen alternativa (visual)",
+    "showOverlay": "Mostrar superposición",
+    "hideOverlay": "Ocultar superposición"
+  },
+  "app.name": "ClimaBalance",
+  "treePlanting": {
+    "saveError": "Error al guardar la plantación. Intente de nuevo.",
+    "clearError": "Error al limpiar árboles. Intente de nuevo."
+  },
+  "combobox": {
+    "noResults": "Sin resultados"
+  },
+  "payment": {
+    "pix": {
+      "qrAlt": "Código QR Pix"
+    }
   }
 }

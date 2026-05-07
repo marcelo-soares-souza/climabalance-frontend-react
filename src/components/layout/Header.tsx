@@ -35,8 +35,8 @@ export function Header({ onMenuClick }: HeaderProps) {
         <Menu className="h-6 w-6" />
       </button>
       <button onClick={() => navigate('/')} className="flex items-center gap-2">
-        <img src="/logo.png" alt="ClimaBalance" className="h-7 w-7 max-sm:hidden" />
-        <span className="font-semibold text-primary hidden sm:inline">ClimaBalance</span>
+        <img src="/logo.png" alt={t('app.name')} className="h-7 w-7 max-sm:hidden" />
+        <span className="font-semibold text-primary hidden sm:inline">{t('app.name')}</span>
       </button>
 
       {/* Spacer */}

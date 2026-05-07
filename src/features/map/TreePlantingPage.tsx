@@ -194,7 +194,7 @@ export function TreePlantingPage() {
       navigate(`/areas/${areaId}`);
     },
     onError: () => {
-      setError("Erro ao salvar plantio. Tente novamente.");
+      setError(t("treePlanting.saveError"));
     },
   });
 
@@ -208,7 +208,7 @@ export function TreePlantingPage() {
       setPoints([]);
     },
     onError: () => {
-      setError("Erro ao limpar \u00e1rvores. Tente novamente.");
+      setError(t("treePlanting.clearError"));
     },
   });
 

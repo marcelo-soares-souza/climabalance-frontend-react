@@ -69,7 +69,7 @@ export function EmbedCalculatorPage() {
       <div className="max-w-lg mx-auto">
         <div className="flex items-center gap-2 mb-4">
           <Leaf className="h-5 w-5 text-primary" />
-          <span className="font-semibold text-primary">ClimaBalance</span>
+          <span className="font-semibold text-primary">{t('app.name')}</span>
         </div>
         <StepIndicator steps={calculator.steps} currentIndex={calculator.currentStepIndex} />
         <Card className="mt-4">
