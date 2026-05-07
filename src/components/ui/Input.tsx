@@ -6,11 +6,13 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   labelAdornment?: ReactNode;
   error?: string;
   suffix?: string;
+  suffixIcon?: ReactNode;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, labelAdornment, error, suffix, id, ...props }, ref) => {
+  ({ className, label, labelAdornment, error, suffix, suffixIcon, id, ...props }, ref) => {
     const isRequired = props.required;
+    const hasRightContent = !!(suffix || suffixIcon);
     return (
       <div className="w-full">
         {label && (
@@ -31,7 +33,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               'focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary',
               'placeholder:text-text-secondary/60',
               error ? 'border-error' : 'border-gray-200',
-              suffix && 'pr-14',
+              hasRightContent && 'pr-14',
               className,
             )}
             {...props}
@@ -39,6 +41,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
           {suffix && (
             <span className="absolute right-4 top-1/2 -translate-y-1/2 text-base text-text-secondary pointer-events-none">
               {suffix}
+            </span>
+          )}
+          {suffixIcon && (
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center">
+              {suffixIcon}
             </span>
           )}
         </div>

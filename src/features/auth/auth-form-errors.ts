@@ -55,8 +55,11 @@ function translateFieldError(field: string, code: string, t: TFunction): string 
     return t('auth.validation.email.invalidEmail');
   }
 
-  if (field === 'password' && code === 'too_short') {
-    return t('auth.validation.password.tooShort');
+  if (field === 'password') {
+    if (code === 'too_short') return t('auth.validation.password.tooShort');
+    if (code === 'password_no_number') return t('auth.validation.password.noNumber');
+    if (code === 'password_no_special') return t('auth.validation.password.noSpecial');
+    if (code === 'password_sequential') return t('auth.validation.password.sequential');
   }
 
   if (field === 'password_confirm' && code === 'mismatch') {

@@ -18,8 +18,32 @@ import { ErrorBanner } from '@/components/ErrorBanner';
 import { ApiError } from '@/lib/api-client';
 import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber, maskEmail } from '@/lib/format';
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
-import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone, ArrowRight, MapPin, Globe, Camera } from 'lucide-react';
+import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone, ArrowRight, MapPin, Globe, Camera, Eye, EyeOff } from 'lucide-react';
 import { API_URL } from '@/config/api';
+
+const PWD_SEQUENCES = [
+  '0123', '1234', '2345', '3456', '4567', '5678', '6789',
+  '9876', '8765', '7654', '6543', '5432', '4321', '3210',
+  'abcd', 'bcde', 'cdef', 'defg', 'efgh', 'fghi', 'ghij', 'hijk',
+  'ijkl', 'jklm', 'klmn', 'lmno', 'mnop', 'nopq', 'opqr', 'pqrs',
+  'qrst', 'rstu', 'stuv', 'tuvw', 'uvwx', 'vwxy', 'wxyz',
+  'zyxw', 'yxwv', 'xwvu', 'wvut', 'vuts', 'utsr', 'tsrq', 'srqp',
+  'rqpo', 'qpon', 'ponm', 'onml', 'nmlk', 'mlkj', 'lkji', 'kjih',
+  'jihg', 'ihgf', 'hgfe', 'gfed', 'fedc', 'edcb', 'dcba',
+];
+
+function hasSequential(value: string): boolean {
+  const lower = value.toLowerCase();
+  return PWD_SEQUENCES.some((seq) => lower.includes(seq));
+}
+
+function validatePassword(value: string): string | null {
+  if (value.length < 8) return 'auth.validation.password.tooShort';
+  if (!/[0-9]/.test(value)) return 'auth.validation.password.noNumber';
+  if (!/[!@#$%^&*(),.?":{}|<>_\-[\]\\/`~]/.test(value)) return 'auth.validation.password.noSpecial';
+  if (hasSequential(value)) return 'auth.validation.password.sequential';
+  return null;
+}
 
 function formatProfileTCO2e(value: number): { amount: string; unit: string } {
   const abs = Math.abs(value);
@@ -48,6 +72,9 @@ export function ProfilePage() {
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showNewPasswordConfirm, setShowNewPasswordConfirm] = useState(false);
   const [passwordError, setPasswordError] = useState<string | null>(null);
   const [passwordSuccess, setPasswordSuccess] = useState(false);
 
@@ -183,6 +210,11 @@ export function ProfilePage() {
                 onSubmit={(e) => {
                   e.preventDefault();
                   setPasswordSuccess(false);
+                  const pwdError = validatePassword(newPassword);
+                  if (pwdError) {
+                    setPasswordError(pwdError);
+                    return;
+                  }
                   if (newPassword !== newPasswordConfirm) {
                     setPasswordError('errors.auth.register.passwordMismatch');
                     return;
@@ -192,9 +224,9 @@ export function ProfilePage() {
                 className="mt-4 space-y-3 border-t border-gray-100 pt-4"
               >
                 {passwordError && <ErrorBanner messageKey={passwordError} onDismiss={() => setPasswordError(null)} />}
-                <Input id="old_password" type="password" label={t('profile.oldPassword')} value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required />
-                <Input id="new_password" type="password" label={t('profile.newPassword')} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={8} />
-                <Input id="new_password_confirm" type="password" label={t('auth.confirmPassword')} value={newPasswordConfirm} onChange={(e) => setNewPasswordConfirm(e.target.value)} required />
+                <Input id="old_password" type={showOldPassword ? 'text' : 'password'} label={t('profile.oldPassword')} value={oldPassword} onChange={(e) => setOldPassword(e.target.value)} required suffixIcon={<button type="button" tabIndex={-1} onClick={() => setShowOldPassword(!showOldPassword)} className="text-text-secondary hover:text-text-primary p-1">{showOldPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button>} />
+                <Input id="new_password" type={showNewPassword ? 'text' : 'password'} label={t('profile.newPassword')} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} required minLength={8} suffixIcon={<button type="button" tabIndex={-1} onClick={() => setShowNewPassword(!showNewPassword)} className="text-text-secondary hover:text-text-primary p-1">{showNewPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button>} />
+                <Input id="new_password_confirm" type={showNewPasswordConfirm ? 'text' : 'password'} label={t('auth.confirmPassword')} value={newPasswordConfirm} onChange={(e) => setNewPasswordConfirm(e.target.value)} required suffixIcon={<button type="button" tabIndex={-1} onClick={() => setShowNewPasswordConfirm(!showNewPasswordConfirm)} className="text-text-secondary hover:text-text-primary p-1">{showNewPasswordConfirm ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button>} />
                 <div className="flex justify-end gap-2">
                   <Button variant="ghost" type="button" size="sm" onClick={() => { setShowPasswordForm(false); setPasswordError(null); setPasswordSuccess(false); setOldPassword(''); setNewPassword(''); setNewPasswordConfirm(''); }}>{t('common.cancel')}</Button>
                   <Button type="submit" size="sm" loading={passwordMutation.isPending}>{t('common.save')}</Button>

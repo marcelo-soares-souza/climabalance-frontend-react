@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { AuthLayout } from './components/AuthLayout';
+import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
@@ -46,6 +47,8 @@ export function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const [roleKey, setRoleKey] = useState('');
   const [humanAnswer, setHumanAnswer] = useState('');
   const [acceptedConsent, setAcceptedConsent] = useState(false);
@@ -142,8 +145,8 @@ export function RegisterPage() {
       <form onSubmit={handleSubmit} className="space-y-4">
         <Input id="name" type="text" label={t('auth.name')} placeholder={t('auth.namePlaceholder')} value={name} onChange={(e) => { setName(e.target.value); setFieldErrors((current) => ({ ...current, name: '' })); }} error={fieldErrors.name} required autoFocus />
         <Input id="email" type="email" label={t('auth.email')} value={email} onChange={(e) => { setEmail(e.target.value); setFieldErrors((current) => ({ ...current, email: '' })); }} error={fieldErrors.email} required />
-        <Input id="password" type="password" label={t('auth.password')} value={password} onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }} error={fieldErrors.password} required />
-        <Input id="passwordConfirm" type="password" label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => { setPasswordConfirm(e.target.value); setFieldErrors((current) => ({ ...current, password_confirm: '' })); }} error={fieldErrors.password_confirm} required />
+        <Input id="password" type={showPassword ? 'text' : 'password'} label={t('auth.password')} value={password} onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }} error={fieldErrors.password} required suffixIcon={<button type="button" tabIndex={-1} onClick={() => setShowPassword(!showPassword)} className="text-text-secondary hover:text-text-primary p-1">{showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button>} />
+        <Input id="passwordConfirm" type={showPasswordConfirm ? 'text' : 'password'} label={t('auth.confirmPassword')} value={passwordConfirm} onChange={(e) => { setPasswordConfirm(e.target.value); setFieldErrors((current) => ({ ...current, password_confirm: '' })); }} error={fieldErrors.password_confirm} required suffixIcon={<button type="button" tabIndex={-1} onClick={() => setShowPasswordConfirm(!showPasswordConfirm)} className="text-text-secondary hover:text-text-primary p-1">{showPasswordConfirm ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button>} />
         <Select
           id="roleKey"
           label={t('auth.register.role')}

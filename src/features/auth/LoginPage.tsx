@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { AuthLayout } from './components/AuthLayout';
 import { Button } from '@/components/ui/Button';
@@ -16,6 +17,7 @@ export function LoginPage() {
   const { login, isLoading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
@@ -60,13 +62,14 @@ export function LoginPage() {
         />
         <Input
           id="password"
-          type="password"
+          type={showPassword ? 'text' : 'password'}
           label={t('auth.password')}
           value={password}
           onChange={(e) => { setPassword(e.target.value); setFieldErrors((current) => ({ ...current, password: '' })); }}
           placeholder={t('auth.passwordPlaceholder')}
           error={fieldErrors.password}
           required
+          suffixIcon={<button type="button" tabIndex={-1} onClick={() => setShowPassword(!showPassword)} className="text-text-secondary hover:text-text-primary p-1">{showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}</button>}
         />
         <Button type="submit" className="w-full" loading={isLoading}>
           {t('auth.login.submit')}
