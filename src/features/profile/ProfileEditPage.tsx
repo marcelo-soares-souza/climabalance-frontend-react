@@ -50,6 +50,15 @@ export function ProfileEditPage() {
   const birthDatePickerRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [avatarUploading, setAvatarUploading] = useState(false);
+
+  const formatBirthDate = (value: string): string => {
+    const digits = value.replace(/\D/g, '').slice(0, 8);
+    const parts: string[] = [];
+    if (digits.length > 0) parts.push(digits.slice(0, 4));
+    if (digits.length > 4) parts.push(digits.slice(4, 6));
+    if (digits.length > 6) parts.push(digits.slice(6, 8));
+    return parts.join('-');
+  };
   const [form, setForm] = useState<Partial<Record<FormField, string>>>({});
 
   const { data: profile, isLoading } = useQuery({
@@ -198,7 +207,7 @@ export function ProfileEditPage() {
                   inputMode="numeric"
                   placeholder="YYYY-MM-DD"
                   value={formValues.birth_date}
-                  onChange={(e) => update('birth_date', e.target.value)}
+                  onChange={(e) => update('birth_date', formatBirthDate(e.target.value))}
                 />
                 <Button type="button" variant="outline" onClick={openBirthDatePicker} aria-label={t('profile.form.birthDate')}>
                   <Calendar className="h-4 w-4" />
