@@ -11,6 +11,7 @@ export function useAuth() {
     logout,
     hasRole,
     userId: session?.userId ?? null,
+    userSlug: session?.userSlug ?? null,
     roles: session?.roles ?? [],
   };
 }

@@ -13,12 +13,17 @@ import { SkeletonList } from '@/components/ui/Skeleton';
 import { formatTCO2e, formatDate } from '@/lib/format';
 import { Award, Download } from 'lucide-react';
 import { saveAs } from 'file-saver';
+import { getUserPublicRef } from '@/lib/public-refs';
 
 export function CertificatesPage() {
   const { t } = useTranslation();
-  const { userId } = useAuth();
+  const { userId, userSlug } = useAuth();
   const { userId: routeUserId } = useParams<{ userId: string }>();
-  const targetUserId = routeUserId ?? userId ?? null;
+  const targetUserId = getUserPublicRef(
+    routeUserId
+      ? { id: routeUserId, slug: routeUserId }
+      : { id: userId, slug: userSlug },
+  );
 
   const { data: certificates, isLoading } = useQuery({
     queryKey: ['users', targetUserId, 'certificates'],

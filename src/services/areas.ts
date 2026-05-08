@@ -11,6 +11,8 @@ type RawArea = {
   id?: string;
   owner_user_id?: string;
   ownerUserId?: string;
+  owner_slug?: string | null;
+  ownerSlug?: string | null;
   owner_email?: string | null;
   ownerEmail?: string | null;
   name?: string;
@@ -71,6 +73,7 @@ type RawAreaContribution = {
   areaId?: string;
   user_id?: string;
   supporter_user_id?: string;
+  supporter_slug?: string | null;
   user_email?: string;
   supporter_display_name?: string;
   trees_count?: number | string;
@@ -148,6 +151,7 @@ function normalizeArea(raw: RawArea): Area {
   return {
     id: asString(raw.id),
     ownerUserId: asString(raw.ownerUserId ?? raw.owner_user_id),
+    ownerSlug: asNullableString(raw.ownerSlug ?? raw.owner_slug),
     ownerEmail: asNullableString(raw.ownerEmail ?? raw.owner_email),
     name: asString(raw.name),
     slug: asString(raw.slug),
@@ -195,6 +199,7 @@ function normalizeAreaContribution(raw: RawAreaContribution, areaId: string): Ar
     id: asString(raw.id ?? raw.compensation_id),
     areaId: asString(raw.areaId ?? raw.area_id, areaId),
     userId: asString(raw.user_id ?? raw.supporter_user_id),
+    userSlug: asNullableString(raw.supporter_slug),
     userEmail: asString(raw.supporter_display_name ?? raw.user_email),
     treesCount: asNumber(raw.trees_count),
     totalTCO2e: asNumber(raw.total_t_co2e),

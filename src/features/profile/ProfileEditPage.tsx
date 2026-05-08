@@ -15,6 +15,11 @@ import { ArrowLeft, Calendar, Upload, User } from 'lucide-react';
 import { Combobox } from '@/components/ui/Combobox';
 import { countries } from '@/lib/countries';
 import { API_URL } from '@/config/api';
+import {
+  getUserProfilePath,
+  getUserPublicRef,
+  matchesPublicRef,
+} from '@/lib/public-refs';
 
 type FormField =
   | 'display_name'
@@ -42,10 +47,9 @@ type FormField =
 export function ProfileEditPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { userId } = useAuth();
+  const { userId, userSlug } = useAuth();
   const { userId: routeUserId } = useParams<{ userId: string }>();
   const targetUserId = routeUserId ?? userId ?? null;
-  const profilePath = targetUserId ? `/users/${targetUserId}/profile` : '/profile';
   const [error, setError] = useState<string | null>(null);
   const birthDatePickerRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -90,6 +94,15 @@ export function ProfileEditPage() {
     youtube_url: form.youtube_url ?? profile?.youtubeUrl ?? '',
     linkedin_url: form.linkedin_url ?? profile?.linkedinUrl ?? '',
   };
+  const isOwnProfile = !routeUserId || matchesPublicRef(routeUserId, { id: userId, slug: userSlug });
+  const targetUserRef = getUserPublicRef(
+    isOwnProfile
+      ? { id: userId, slug: userSlug }
+      : { id: profile?.userId ?? targetUserId, slug: routeUserId },
+  );
+  const profilePath = getUserProfilePath(
+    targetUserRef ? { id: profile?.userId ?? targetUserId, slug: targetUserRef } : undefined,
+  );
 
   const targetUserIdSafe = profile?.userId ?? targetUserId!;
 
@@ -161,7 +174,7 @@ export function ProfileEditPage() {
   };
 
   const avatarSrc = profile?.avatarPath
-    ? `${API_URL}/api/v1/users/${targetUserId}/profile/avatar/file`
+    ? `${API_URL}/api/v1/users/${targetUserRef || targetUserId}/profile/avatar/file`
     : null;
 
   return (

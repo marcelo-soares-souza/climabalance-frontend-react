@@ -22,14 +22,19 @@ import {
   Plus,
   Heart,
 } from "lucide-react";
+import {
+  getAreaDetailPath,
+  getUserCertificatesPath,
+  getUserNewCalculationPath,
+} from "@/lib/public-refs";
 
 const LOGO_URL = "/logo.png";
 
 export function HomePage() {
-  const { isAuthenticated, userId } = useAuth();
+  const { isAuthenticated, userId, userSlug } = useAuth();
 
   if (!isAuthenticated) return <UnauthenticatedHome />;
-  return <AuthenticatedHome userId={userId!} />;
+  return <AuthenticatedHome userId={userId!} userSlug={userSlug} />;
 }
 
 function UnauthenticatedHome() {
@@ -207,13 +212,13 @@ function UnauthenticatedHome() {
   );
 }
 
-function AuthenticatedHome({ userId }: { userId: string }) {
+function AuthenticatedHome({ userId, userSlug }: { userId: string; userSlug: string | null }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { roles } = useAuth();
   const isProducer = roles.includes("producer");
-  const calculatorPath = `/users/${userId}/impact/calculations/new`;
-  const certificatesPath = `/users/${userId}/certificates`;
+  const calculatorPath = getUserNewCalculationPath({ id: userId, slug: userSlug });
+  const certificatesPath = getUserCertificatesPath({ id: userId, slug: userSlug });
 
   const { data: compensations, isLoading: loadingComp } = useQuery({
     queryKey: ["users", userId, "contributions"],
@@ -397,7 +402,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
                   <div
                     key={area.id}
                     className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-gray-50 cursor-pointer border border-gray-100"
-                    onClick={() => navigate(`/areas/${area.slug ?? area.id}`)}
+                    onClick={() => navigate(getAreaDetailPath(area))}
                   >
                     <div className="min-w-0 flex-1">
                       <p className="text-sm font-medium truncate">
@@ -447,7 +452,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
                 <div
                   key={c.id}
                   className="flex items-center justify-between py-2 px-1 rounded-lg hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0"
-                  onClick={() => navigate(`/areas/${c.areaSlug ?? c.areaId}`)}
+                  onClick={() => navigate(getAreaDetailPath({ id: c.areaId, slug: c.areaSlug }))}
                 >
                   <div>
                     <p className="text-base font-medium">{c.areaName}</p>

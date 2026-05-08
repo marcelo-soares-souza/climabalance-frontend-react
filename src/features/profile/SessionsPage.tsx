@@ -22,6 +22,7 @@ import {
   LogOut,
   ArrowLeft,
 } from "lucide-react";
+import { matchesPublicRef } from "@/lib/public-refs";
 
 function DeviceIcon({ userAgent }: { userAgent: string | null }) {
   const isMobile =
@@ -57,10 +58,10 @@ function parseOS(ua: string | null): string {
 export function SessionsPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { userId } = useAuth();
+  const { userId, userSlug } = useAuth();
   const { userId: routeUserId } = useParams<{ userId: string }>();
   const targetUserId = routeUserId ?? userId ?? null;
-  const isOwnProfile = !routeUserId || routeUserId === userId;
+  const isOwnProfile = !routeUserId || matchesPublicRef(routeUserId, { id: userId, slug: userSlug });
   const queryClient = useQueryClient();
   const [revokeAllOpen, setRevokeAllOpen] = useState(false);
 

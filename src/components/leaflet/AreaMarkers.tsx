@@ -34,7 +34,7 @@ interface AreaMarkersProps {
   areas: Area[];
   t: (key: string, options?: Record<string, unknown>) => string;
   onSelectArea: (area: Area) => void;
-  onNavigateToArea: (areaId: string) => void;
+  onNavigateToArea: (area: Area) => void;
 }
 
 export function AreaMarkers({
@@ -131,7 +131,7 @@ export function AreaMarkers({
         .querySelector(".cb-details-btn")
         ?.addEventListener("click", (e) => {
           e.stopPropagation();
-          onNavigateToArea(area.id);
+          onNavigateToArea(area);
         });
 
       container

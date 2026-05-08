@@ -14,6 +14,7 @@ import { getPrimaryAccountType, getAdditionalRoleLabels } from '@/lib/user-displ
 import { Users, Edit, Eye, Trash2, Search, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { getUserStatusOptions } from '@/lib/options';
+import { getUserProfilePath } from '@/lib/public-refs';
 
 type SortConfig = {
   column: string;
@@ -113,8 +114,8 @@ export function AdminUsersPage() {
                     <td className="px-4 py-3 text-text-secondary">{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
                     <td className="px-4 py-3 text-text-secondary">{user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-'}</td>
                     <td className="px-4 py-3"><div className="flex items-center gap-1">
-                      <Button variant="ghost" size="sm" onClick={() => navigate(`/users/${user.id}/profile`)}><Eye className="h-3 w-3" /></Button>
-                      <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/users/edit/${user.id}`)}><Edit className="h-3 w-3" /></Button>
+                      <Button variant="ghost" size="sm" onClick={() => navigate(getUserProfilePath(user))}><Eye className="h-3 w-3" /></Button>
+                      <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/users/edit/${user.slug || user.id}`)}><Edit className="h-3 w-3" /></Button>
                       {!user.roles.includes('administrator') && (
                         <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(user.id)}><Trash2 className="h-3 w-3 text-error" /></Button>
                       )}

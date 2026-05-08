@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/Button";
 import { Users, Trees, MapPin, FilterX } from "lucide-react";
 import { countries } from "@/lib/countries";
 import type { DirectoryItem } from "@/services/users";
+import { getUserProfilePath } from "@/lib/public-refs";
 
 const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
@@ -41,7 +42,7 @@ function UserCard({ user }: { user: DirectoryItem }) {
   return (
     <Card
       className="cursor-pointer hover:shadow-lg transition-shadow overflow-hidden"
-      onClick={() => navigate(`/users/${user.slug}/profile`)}
+      onClick={() => navigate(getUserProfilePath(user))}
     >
       <CardContent className="p-5 flex flex-col gap-4">
         <div className="flex items-center gap-4">

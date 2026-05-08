@@ -9,21 +9,29 @@ import { SkeletonList } from '@/components/ui/Skeleton';
 import { Button } from '@/components/ui/Button';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Calculator } from 'lucide-react';
+import {
+  getUserCalculationPath,
+  getUserNewCalculationPath,
+  getUserPublicRef,
+  matchesPublicRef,
+} from '@/lib/public-refs';
 
 export function HistoryPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { userId, isAdmin } = useAuth();
+  const { userId, userSlug, isAdmin } = useAuth();
   const { userId: routeUserId } = useParams<{ userId: string }>();
   const targetUserId = routeUserId ?? userId ?? null;
-  const isSelf = !!targetUserId && targetUserId === userId;
+  const isSelf = !!targetUserId && matchesPublicRef(targetUserId, { id: userId, slug: userSlug });
   const requiresUserEmailFilter = !!routeUserId && !isSelf && isAdmin;
-  const detailsBasePath = routeUserId
-    ? `/users/${routeUserId}/impact/calculations`
-    : '/footprint/calculation';
-  const newCalculationPath = routeUserId
-    ? `/users/${routeUserId}/impact/calculations/new`
-    : '/footprint/calculator';
+  const targetUserRef = getUserPublicRef(
+    routeUserId
+      ? { id: targetUserId, slug: routeUserId }
+      : { id: userId, slug: userSlug },
+  );
+  const newCalculationPath = getUserNewCalculationPath(
+    routeUserId ? { id: targetUserId, slug: targetUserRef } : { id: userId, slug: userSlug },
+  );
 
   const { data: targetUser } = useQuery({
     queryKey: ['users', targetUserId],
@@ -60,7 +68,12 @@ export function HistoryPage() {
             <CalculationCard
               key={calc.id}
               calculation={calc}
-              detailsBasePath={routeUserId ? detailsBasePath : undefined}
+              detailsPath={getUserCalculationPath(
+                calc.id,
+                routeUserId
+                  ? { id: targetUser?.id ?? targetUserId, slug: targetUser?.slug ?? targetUserRef }
+                  : undefined,
+              )}
             />
           ))}
         </div>

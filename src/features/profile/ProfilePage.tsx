@@ -20,6 +20,14 @@ import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber, maskEmail 
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
 import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone, ArrowRight, MapPin, Globe, Camera, Eye, EyeOff } from 'lucide-react';
 import { API_URL } from '@/config/api';
+import {
+  getAreaDetailPath,
+  getUserCertificatesPath,
+  getUserProfileEditPath,
+  getUserPublicRef,
+  getUserSessionsPath,
+  matchesPublicRef,
+} from '@/lib/public-refs';
 
 const PWD_SEQUENCES = [
   '0123', '1234', '2345', '3456', '4567', '5678', '6789',
@@ -60,13 +68,10 @@ function formatProfileTCO2e(value: number): { amount: string; unit: string } {
 export function ProfilePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { userId, isAdmin } = useAuth();
+  const { userId, userSlug, isAdmin } = useAuth();
   const { userId: routeUserId } = useParams<{ userId: string }>();
   const targetUserId = routeUserId ?? userId ?? null;
-  const isOwnProfile = !routeUserId || routeUserId === userId;
-  const editProfilePath = targetUserId ? `/users/${targetUserId}/profile/edit` : '/profile/edit';
-  const certificatesPath = targetUserId ? `/users/${targetUserId}/certificates` : '/profile/certificates';
-  const sessionsPath = targetUserId ? `/users/${targetUserId}/sessions` : '/profile/sessions';
+  const isOwnProfile = !routeUserId || matchesPublicRef(routeUserId, { id: userId, slug: userSlug });
 
   const [showPasswordForm, setShowPasswordForm] = useState(false);
   const [oldPassword, setOldPassword] = useState('');
@@ -145,6 +150,21 @@ export function ProfilePage() {
   const grossDisplay = formatProfileTCO2e(grossEmissions);
   const compensatedDisplay = formatProfileTCO2e(totalCompensated);
   const balanceDisplay = formatProfileTCO2e(netBalance);
+  const targetUserRef = getUserPublicRef(
+    isOwnProfile
+      ? { id: userId, slug: userSlug }
+      : { id: user?.id ?? targetUserId, slug: user?.slug ?? routeUserId },
+  );
+  const editProfilePath = getUserProfileEditPath(
+    targetUserRef ? { id: user?.id ?? targetUserId, slug: targetUserRef } : undefined,
+  );
+  const certificatesPath = getUserCertificatesPath(
+    targetUserRef ? { id: user?.id ?? targetUserId, slug: targetUserRef } : undefined,
+  );
+  const sessionsPath = getUserSessionsPath(
+    targetUserRef ? { id: user?.id ?? targetUserId, slug: targetUserRef } : undefined,
+  );
+  const avatarUserRef = targetUserRef || user?.id || targetUserId;
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -161,7 +181,7 @@ export function ProfilePage() {
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-full bg-primary-100 flex items-center justify-center overflow-hidden">
               {profile?.avatarPath ? (
-                <img src={`${API_URL}/api/v1/users/${targetUserId}/profile/avatar/file`} alt="" className="h-full w-full object-cover" />
+                <img src={`${API_URL}/api/v1/users/${avatarUserRef}/profile/avatar/file`} alt="" className="h-full w-full object-cover" />
               ) : (
                 <User className="h-8 w-8 text-primary" />
               )}
@@ -402,7 +422,7 @@ export function ProfilePage() {
             {userAreas.map((area) => (
               <Link
                 key={area.id}
-                to={`/areas/${area.slug ?? area.id}`}
+                to={getAreaDetailPath(area)}
                 className="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors"
               >
                 <div className="flex items-center gap-3 min-w-0">

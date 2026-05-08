@@ -58,6 +58,12 @@ import {
   SATELLITE_URL,
   SATELLITE_ATTR,
 } from "@/components/leaflet/map-layers";
+import {
+  getAreaAuditPath,
+  getAreaEditPath,
+  getAreaPlantTreesPath,
+  getUserProfilePath,
+} from "@/lib/public-refs";
 
 const treeDotIcon = L.divIcon({
   className: "",
@@ -310,7 +316,7 @@ export function AreaDetailPage() {
             <p className="text-sm mt-1">
               <span className="text-text-secondary">{t("area.owner")}: </span>
               <Link
-                to={`/users/${area.ownerUserId}/profile`}
+                to={getUserProfilePath({ id: area.ownerUserId, slug: area.ownerSlug })}
                 className="text-primary hover:underline"
               >
                 {maskEmail(area.ownerEmail) || t("area.anonymousContributor")}
@@ -581,7 +587,7 @@ export function AreaDetailPage() {
       {/* Action Buttons */}
       <div className="flex gap-2">
         {isAuthenticated && (area.ownerUserId === userId || isAdmin) && (
-          <Button onClick={() => navigate(`/areas/${areaId}/plant-trees`)}>
+          <Button onClick={() => navigate(getAreaPlantTreesPath(area))}>
             <TreePine className="h-4 w-4 mr-1.5" /> {t("map.plantTrees")}
           </Button>
         )}
@@ -738,7 +744,7 @@ export function AreaDetailPage() {
                 >
                   {c.userId ? (
                     <Link
-                      to={`/users/${c.userId}/profile`}
+                      to={getUserProfilePath({ id: c.userId, slug: c.userSlug })}
                       className="text-primary hover:underline"
                     >
                       {c.userEmail || t("area.anonymousContributor")}
@@ -769,7 +775,7 @@ export function AreaDetailPage() {
             size="lg"
             variant="secondary"
             className="flex-1"
-            onClick={() => navigate(`/audit/area/${area.slug ?? area.id}`)}
+            onClick={() => navigate(getAreaAuditPath(area))}
           >
             {t("audit.review.approve")}
           </Button>
@@ -779,7 +785,7 @@ export function AreaDetailPage() {
             size="lg"
             variant="secondary"
             className="flex-1"
-            onClick={() => navigate(`/audit/area/${area.slug ?? area.id}`)}
+            onClick={() => navigate(getAreaAuditPath(area))}
           >
             {t("audit.review.activate")}
           </Button>
@@ -809,7 +815,7 @@ export function AreaDetailPage() {
             size="lg"
             variant="outline"
             className="flex-1"
-            onClick={() => navigate(`/areas/edit/${area.slug ?? area.id}`)}
+            onClick={() => navigate(getAreaEditPath(area))}
           >
             <Edit className="h-5 w-5 mr-2" /> {t("common.edit")}
           </Button>

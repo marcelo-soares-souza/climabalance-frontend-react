@@ -14,12 +14,15 @@ import { ArrowLeft, TreePine, CheckCircle, Trash2, Edit } from 'lucide-react';
 import { useState } from 'react';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
 import { useAuth } from '@/hooks/use-auth';
+import {
+  getUserCalculationEditPath,
+} from '@/lib/public-refs';
 
 export function CalculationDetailPage() {
   const { id, userId: routeUserId } = useParams<{ id: string; userId: string }>();
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { userId: currentUserId, isAdmin } = useAuth();
+  const { userId: currentUserId, userSlug, isAdmin } = useAuth();
   const [showDelete, setShowDelete] = useState(false);
 
   const { data: calculation, isLoading } = useQuery({
@@ -42,11 +45,16 @@ export function CalculationDetailPage() {
   if (!calculation) return <div>{t('common.notFound')}</div>;
   const canEditDraft = calculation.status === 'draft'
     && (isAdmin || (calculation.userId != null && calculation.userId === currentUserId));
-  const editPath = routeUserId
-    ? `/users/${routeUserId}/impact/calculations/${calculation.id}/edit`
-    : calculation.userId
-      ? `/users/${calculation.userId}/impact/calculations/${calculation.id}/edit`
-      : `/footprint/calculator?draftId=${encodeURIComponent(calculation.id)}`;
+  const editPath = getUserCalculationEditPath(
+    calculation.id,
+    routeUserId
+      ? { id: calculation.userId ?? routeUserId, slug: routeUserId }
+      : calculation.userId === currentUserId
+        ? { id: currentUserId, slug: userSlug }
+        : calculation.userId
+          ? { id: calculation.userId }
+          : undefined,
+  );
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">

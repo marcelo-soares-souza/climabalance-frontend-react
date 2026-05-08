@@ -16,6 +16,7 @@ import { useCompensationStore } from "@/stores/compensation-store";
 import { useAuth } from "@/hooks/use-auth";
 import { countries } from "@/lib/countries";
 import type { Area } from "@/types/area";
+import { getAreaDetailPath } from "@/lib/public-refs";
 
 const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
 
@@ -91,8 +92,8 @@ export function MapPage() {
   );
 
   const handleNavigateToArea = useCallback(
-    (areaId: string) => {
-      navigate(`/areas/${areaId}`);
+    (area: Area) => {
+      navigate(getAreaDetailPath(area));
     },
     [navigate],
   );

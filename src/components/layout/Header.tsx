@@ -4,6 +4,7 @@ import { useAuth } from '@/hooks/use-auth';
 import { LanguageSelector } from '@/components/LanguageSelector';
 import { Menu, LogIn, LogOut, User } from 'lucide-react';
 import { cn } from '@/lib/cn';
+import { getUserProfilePath } from '@/lib/public-refs';
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -11,10 +12,10 @@ interface HeaderProps {
 
 export function Header({ onMenuClick }: HeaderProps) {
   const { t } = useTranslation();
-  const { isAuthenticated, logout, userId } = useAuth();
+  const { isAuthenticated, logout, userId, userSlug } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  const profilePath = userId ? `/users/${userId}/profile` : '/profile';
+  const profilePath = getUserProfilePath({ id: userId, slug: userSlug });
 
   const handleLogout = () => {
     logout();

@@ -23,6 +23,13 @@ import {
   MessageSquare,
 } from "lucide-react";
 import { cn } from "@/lib/cn";
+import {
+  getUserCertificatesPath,
+  getUserImpactPath,
+  getUserNewCalculationPath,
+  getUserProfilePath,
+  matchesPublicRef,
+} from "@/lib/public-refs";
 
 interface SidebarProps {
   open: boolean;
@@ -31,18 +38,15 @@ interface SidebarProps {
 
 export function Sidebar({ open, onClose }: SidebarProps) {
   const { t } = useTranslation();
-  const { isAuthenticated, isAdmin, hasRole, logout, userId } = useAuth();
+  const { isAuthenticated, isAdmin, hasRole, logout, userId, userSlug } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
-  const calculatorPath = userId
-    ? `/users/${userId}/impact/calculations/new`
-    : "/footprint/calculator";
-  const historyPath = userId ? `/users/${userId}/impact` : "/footprint/history";
-  const profilePath = userId ? `/users/${userId}/profile` : "/profile";
-  const certificatesPath = userId
-    ? `/users/${userId}/certificates`
-    : "/profile/certificates";
+  const currentUser = { id: userId, slug: userSlug };
+  const calculatorPath = getUserNewCalculationPath(currentUser);
+  const historyPath = getUserImpactPath(currentUser);
+  const profilePath = getUserProfilePath(currentUser);
+  const certificatesPath = getUserCertificatesPath(currentUser);
 
   const handleLogout = () => {
     logout();
@@ -69,17 +73,17 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         : "text-white/70 hover:bg-sidebar-hover hover:text-white",
     );
 
+  const userRouteRef = pathname.match(/^\/users\/([^/]+)/)?.[1] ?? null;
+  const isCurrentUserRoute = matchesPublicRef(userRouteRef, currentUser);
   const isCalculatorActive = userId
-    ? pathname === calculatorPath ||
-      new RegExp(`^/users/${userId}/impact/calculations/[^/]+/edit$`).test(
-        pathname,
-      )
+    ? (pathname === calculatorPath ||
+      (isCurrentUserRoute &&
+        /^\/users\/[^/]+\/impact\/calculations\/[^/]+\/edit$/.test(pathname)))
     : pathname === "/footprint/calculator" || pathname === "/calculator";
   const isHistoryActive = userId
-    ? pathname === historyPath ||
-      new RegExp(`^/users/${userId}/impact/calculations/(?!new$)[^/]+$`).test(
-        pathname,
-      )
+    ? (pathname === historyPath ||
+      (isCurrentUserRoute &&
+        /^\/users\/[^/]+\/impact\/calculations\/(?!new$)[^/]+$/.test(pathname)))
     : pathname === "/footprint/history" ||
       /^\/footprint\/calculation\/[^/]+$/.test(pathname);
   const isPublicAreasActive = pathname === "/areas/public";

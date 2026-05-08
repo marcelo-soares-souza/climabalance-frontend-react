@@ -21,6 +21,7 @@ import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
 import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
 import { getCountryName } from "@/lib/countries";
 import { ArrowLeft, TreePine, Check, Trash2, MapPin, MousePointer2, Square } from "lucide-react";
+import { getAreaDetailPath } from "@/lib/public-refs";
 
 const treeIcon = L.divIcon({
   className: "",
@@ -193,7 +194,7 @@ export function TreePlantingPage() {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
       queryClient.invalidateQueries({ queryKey: ["planted-trees", areaIdSafe] });
       queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaIdSafe] });
-      navigate(`/areas/${areaIdSafe}`);
+      navigate(getAreaDetailPath({ id: area?.id ?? areaIdSafe, slug: area?.slug }));
     },
     onError: () => {
       setError(t("treePlanting.saveError"));
@@ -391,7 +392,7 @@ export function TreePlantingPage() {
       <div className="flex gap-3">
         <Button
           variant="outline"
-          onClick={() => navigate(`/areas/${areaId}`)}
+          onClick={() => navigate(getAreaDetailPath({ id: area?.id ?? areaId, slug: area?.slug }))}
         >
           {t("common.cancel")}
         </Button>

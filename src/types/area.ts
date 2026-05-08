@@ -4,6 +4,7 @@ export type BiomeType = 'amazonia' | 'cerrado' | 'mata_atlantica' | 'caatinga' |
 export interface Area {
   id: string;
   ownerUserId: string;
+  ownerSlug?: string | null;
   ownerEmail: string | null;
   name: string;
   slug: string;
@@ -39,6 +40,7 @@ export interface AreaContribution {
   id: string;
   areaId: string;
   userId: string;
+  userSlug?: string | null;
   userEmail: string;
   treesCount: number;
   totalTCO2e: number;

@@ -55,6 +55,7 @@ export interface JwtPayload {
 
 export interface AuthSession {
   userId: string;
+  userSlug: string | null;
   email: string;
   roles: string[];
   accessToken: string;

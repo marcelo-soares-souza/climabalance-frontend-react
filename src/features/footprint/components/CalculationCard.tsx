@@ -8,10 +8,10 @@ import type { CalculationResult } from '@/types/footprint';
 
 export function CalculationCard({
   calculation,
-  detailsBasePath,
+  detailsPath,
 }: {
   calculation: CalculationResult;
-  detailsBasePath?: string;
+  detailsPath?: string;
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -21,8 +21,8 @@ export function CalculationCard({
       className="cursor-pointer hover:shadow-md transition-shadow"
       onClick={() =>
         navigate(
-          detailsBasePath
-            ? `${detailsBasePath}/${calculation.id}`
+          detailsPath
+            ? detailsPath
             : `/footprint/calculation/${calculation.id}`
         )
       }

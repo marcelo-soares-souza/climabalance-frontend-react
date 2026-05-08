@@ -4,6 +4,7 @@ import { tokenStorage } from '@/lib/token-storage';
 import { decodeToken, isTokenExpired } from '@/lib/jwt';
 import { queryClient } from '@/config/query-client';
 import { authService } from '@/services/auth';
+import { usersService } from '@/services/users';
 
 interface AuthState {
   session: AuthSession | null;
@@ -22,11 +23,24 @@ function buildSession(accessToken: string, email = ''): AuthSession | null {
 
   return {
     userId: payload.sub,
+    userSlug: null,
     email,
     roles: payload.roles,
     accessToken,
     expiresAt: payload.exp * 1000,
   };
+}
+
+async function hydrateSessionSlug(session: AuthSession): Promise<AuthSession> {
+  try {
+    const user = await usersService.getUser(session.userId);
+    return {
+      ...session,
+      userSlug: user.slug || null,
+    };
+  } catch {
+    return session;
+  }
 }
 
 function clearAuthState() {
@@ -49,7 +63,10 @@ export const useAuthStore = create<AuthState>()(
 
         tokenStorage.setAccessToken(data.accessToken);
 
-        const session = buildSession(data.accessToken, email);
+        const baseSession = buildSession(data.accessToken, email);
+        const session = baseSession
+          ? await hydrateSessionSlug(baseSession)
+          : null;
         if (!session) throw new Error('Invalid token');
 
         const isAdmin = session.roles.includes('administrator');
@@ -76,7 +93,10 @@ export const useAuthStore = create<AuthState>()(
       const accessToken = tokenStorage.getAccessToken();
 
       if (accessToken && !isTokenExpired(accessToken)) {
-        const session = buildSession(accessToken);
+        const baseSession = buildSession(accessToken);
+        const session = baseSession
+          ? await hydrateSessionSlug(baseSession)
+          : null;
         if (session) {
           set({
             session,
@@ -91,7 +111,10 @@ export const useAuthStore = create<AuthState>()(
       try {
         const data = await authService.refreshToken();
         tokenStorage.setAccessToken(data.accessToken);
-        const session = buildSession(data.accessToken);
+        const baseSession = buildSession(data.accessToken);
+        const session = baseSession
+          ? await hydrateSessionSlug(baseSession)
+          : null;
         if (!session) {
           set(clearAuthState());
           return;
