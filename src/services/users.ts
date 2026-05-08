@@ -1,4 +1,5 @@
 import { api } from '@/lib/api-client';
+import { toApiUrl } from '@/config/api';
 import type { UserSummary, UserProfile, UserProfileUpdate, UserUpdate } from '@/types/user';
 import type { CompensationHistoryItem } from '@/types/compensation';
 import type { ContributionHistoryItem } from '@/types/contribution';
@@ -256,6 +257,38 @@ function normalizeCertificate(raw: RawCertificate): CertificateHistoryItem {
   };
 }
 
+type RawDirectoryItem = {
+  slug?: string;
+  display_name?: string | null;
+  avatar_url?: string | null;
+  about?: string | null;
+  total_areas?: number | string;
+  total_trees?: number | string;
+  created_at?: string;
+};
+
+export type DirectoryItem = {
+  slug: string;
+  displayName: string | null;
+  avatarUrl: string | null;
+  about: string | null;
+  totalAreas: number;
+  totalTrees: number;
+  createdAt: string;
+};
+
+function normalizeDirectoryItem(raw: RawDirectoryItem): DirectoryItem {
+  return {
+    slug: asString(raw.slug),
+    displayName: asNullableString(raw.display_name),
+    avatarUrl: raw.avatar_url ? toApiUrl(raw.avatar_url) : null,
+    about: asNullableString(raw.about),
+    totalAreas: asNumber(raw.total_areas),
+    totalTrees: asNumber(raw.total_trees),
+    createdAt: asString(raw.created_at),
+  };
+}
+
 export const usersService = {
   getUser(userId: string) {
     return api.get<RawUserSummary>(`/users/${userId}`).then(normalizeUserSummary);
@@ -307,6 +340,12 @@ export const usersService = {
 
   uploadAvatar(userId: string, data: { mime_type: string; file_base64: string }) {
     return api.post<{ avatar_path: string; avatar_url: string }>(`/users/${userId}/profile/avatar`, data);
+  },
+
+  listDirectory(params?: { limit?: number; offset?: number }) {
+    return api
+      .get<RawDirectoryItem[]>('/directory/users', { params: params as Record<string, number> })
+      .then((rows) => rows.map(normalizeDirectoryItem));
   },
 
   getUserCertificates(userId: string, params?: { limit?: number; offset?: number }) {

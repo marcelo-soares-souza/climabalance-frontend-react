@@ -192,7 +192,8 @@
       "step2Description": "Orientez votre soutien vers des initiatives auditées de restauration, d'agroécologie et de production agricole durable.",
       "step3Title": "Recevez des Certificats",
       "step3Description": "Recevez des certificats et suivez les contributions avec transparence et traçabilité.",
-      "tryCalculator": "Calculer l'Empreinte"
+      "tryCalculator": "Calculer l'Empreinte",
+      "viewCommunity": "Communauté"
     },
     "dashboard": {
       "title": "Votre Impact Climatique",
@@ -218,6 +219,14 @@
       "totalTrees": "Arbres plantés",
       "totalCO2": "CO₂ capturé"
     }
+  },
+  "directory": {
+    "title": "Producteurs et soutiens",
+    "description": "Découvrez les personnes derrière ClimaBalance",
+    "noUsers": "Aucun profil trouvé",
+    "areas": "zones",
+    "trees": "arbres",
+    "viewProfile": "Voir le Profil"
   },
   "about": {
     "hero": {

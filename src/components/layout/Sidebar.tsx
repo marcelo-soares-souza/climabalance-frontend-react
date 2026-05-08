@@ -164,6 +164,9 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           >
             <TreePine className="h-4 w-4" /> {t("nav.publicAreas")}
           </NavLink>
+          <NavLink to="/users" className={linkClass} onClick={onClose}>
+            <Users className="h-4 w-4" /> {t("nav.directory")}
+          </NavLink>
           {!isAuthenticated && (
             <NavLink
               to="/calculator"

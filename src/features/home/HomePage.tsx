@@ -21,6 +21,7 @@ import {
   Leaf,
   Plus,
   Heart,
+  Users,
 } from "lucide-react";
 
 const LOGO_URL = "/logo.png";
@@ -101,6 +102,15 @@ function UnauthenticatedHome() {
             className="border-white/40 text-white hover:bg-white/10"
           >
             {t("home.welcome.learnMore")}
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            onClick={() => navigate("/users")}
+            className="border-white/40 text-white hover:bg-white/10"
+          >
+            <Users className="h-5 w-5 mr-2" />
+            {t("home.welcome.viewCommunity")}
           </Button>
           <Button
             size="lg"

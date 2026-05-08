@@ -63,6 +63,7 @@ import { CertificateValidationPage } from '@/features/certificates/CertificateVa
 
 // Contact
 import { ContactPage } from '@/features/contact/ContactPage';
+import { UserDirectoryPage } from '@/features/directory/UserDirectoryPage';
 
 // Shared
 import { AccessDeniedPage } from '@/features/shared/AccessDeniedPage';
@@ -176,6 +177,10 @@ export const router = createBrowserRouter([
       {
         path: '/profile',
         element: <AuthGuard><ProfilePage /></AuthGuard>,
+      },
+      {
+        path: '/users',
+        element: <UserDirectoryPage />,
       },
       {
         path: '/users/:userId/profile',

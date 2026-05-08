@@ -192,7 +192,8 @@
       "step2Description": "Direct support to audited initiatives in restoration, agroecology, and sustainable agricultural production.",
       "step3Title": "Receive Certificates",
       "step3Description": "Receive certificates and track contributions with transparency and traceability.",
-      "tryCalculator": "Calculate Footprint"
+      "tryCalculator": "Calculate Footprint",
+      "viewCommunity": "Community"
     },
     "dashboard": {
       "title": "Your Climate Impact",
@@ -218,6 +219,14 @@
       "totalTrees": "Trees planted",
       "totalCO2": "CO₂ captured"
     }
+  },
+  "directory": {
+    "title": "Producers and supporters",
+    "description": "Meet the people behind ClimaBalance",
+    "noUsers": "No profiles found",
+    "areas": "areas",
+    "trees": "trees",
+    "viewProfile": "View Profile"
   },
   "about": {
     "hero": {

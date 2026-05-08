@@ -192,7 +192,8 @@
       "step2Description": "Dirige apoyo a iniciativas auditadas de restauración, agroecología y producción agrícola sostenible.",
       "step3Title": "Recibe Certificados",
       "step3Description": "Recibe certificados y acompaña contribuciones con transparencia y trazabilidad.",
-      "tryCalculator": "Calcular Huella"
+      "tryCalculator": "Calcular Huella",
+      "viewCommunity": "Comunidad"
     },
     "dashboard": {
       "title": "Tu Impacto Climático",
@@ -218,6 +219,14 @@
       "totalTrees": "Árboles plantados",
       "totalCO2": "CO₂ capturado"
     }
+  },
+  "directory": {
+    "title": "Productores y seguidores",
+    "description": "Conoce a quienes forman parte de ClimaBalance",
+    "noUsers": "No se encontraron perfiles",
+    "areas": "áreas",
+    "trees": "árboles",
+    "viewProfile": "Ver Perfil"
   },
   "about": {
     "hero": {
