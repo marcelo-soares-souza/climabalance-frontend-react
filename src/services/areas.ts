@@ -15,6 +15,8 @@ type RawArea = {
   ownerSlug?: string | null;
   owner_email?: string | null;
   ownerEmail?: string | null;
+  owner_email_masked?: string | null;
+  ownerEmailMasked?: string | null;
   name?: string;
   slug?: string;
   description?: string | null;
@@ -153,6 +155,9 @@ function normalizeArea(raw: RawArea): Area {
     ownerUserId: asString(raw.ownerUserId ?? raw.owner_user_id),
     ownerSlug: asNullableString(raw.ownerSlug ?? raw.owner_slug),
     ownerEmail: asNullableString(raw.ownerEmail ?? raw.owner_email),
+    ownerEmailMasked: asNullableString(
+      raw.ownerEmailMasked ?? raw.owner_email_masked,
+    ),
     name: asString(raw.name),
     slug: asString(raw.slug),
     description: asNullableString(raw.description),

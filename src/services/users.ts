@@ -8,6 +8,8 @@ import type { CertificateHistoryItem } from '@/types/certificate';
 type RawUserSummary = {
   id?: string;
   email?: string;
+  email_masked?: string | null;
+  emailMasked?: string | null;
   slug?: string;
   status?: string;
   locale?: string;
@@ -30,8 +32,12 @@ type RawUserProfile = {
   documentType?: string | null;
   document_number?: string | null;
   documentNumber?: string | null;
+  document_number_masked?: string | null;
+  documentNumberMasked?: string | null;
   birth_date?: string | null;
   birthDate?: string | null;
+  birth_date_masked?: string | null;
+  birthDateMasked?: string | null;
   phone?: string | null;
   country_code?: string | null;
   countryCode?: string | null;
@@ -151,7 +157,8 @@ function normalizeUserSummary(raw: RawUserSummary): UserSummary {
 
   return {
     id: asString(raw.id),
-    email: asString(raw.email),
+    email: asNullableString(raw.email),
+    emailMasked: asNullableString(raw.email_masked ?? raw.emailMasked),
     slug: asString(raw.slug),
     status: asString(raw.status, 'pending'),
     locale: asString(raw.locale, 'pt-BR'),
@@ -169,7 +176,11 @@ function normalizeUserProfile(raw: RawUserProfile): UserProfile {
     displayName: asNullableString(raw.display_name ?? raw.displayName),
     documentType: asNullableString(raw.document_type ?? raw.documentType),
     documentNumber: asNullableString(raw.document_number ?? raw.documentNumber),
+    documentNumberMasked: asNullableString(
+      raw.document_number_masked ?? raw.documentNumberMasked,
+    ),
     birthDate: asNullableString(raw.birth_date ?? raw.birthDate),
+    birthDateMasked: asNullableString(raw.birth_date_masked ?? raw.birthDateMasked),
     phone: asNullableString(raw.phone),
     countryCode: asNullableString(raw.country_code ?? raw.countryCode),
     addressLine1: asNullableString(raw.address_line1 ?? raw.addressLine1),

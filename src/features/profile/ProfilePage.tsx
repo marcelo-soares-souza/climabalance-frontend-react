@@ -16,7 +16,7 @@ import { RoleBadge } from '@/components/RoleBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ErrorBanner } from '@/components/ErrorBanner';
 import { ApiError } from '@/lib/api-client';
-import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber, maskEmail } from '@/lib/format';
+import { formatTCO2e, formatDate, formatDateTime, maskDocumentNumber } from '@/lib/format';
 import { getPrimaryAccountType, getNormalizedRoles } from '@/lib/user-display';
 import { User, Edit, Award, TreePine, Calculator, Leaf, Scale, Lock, ChevronDown, ChevronUp, Smartphone, ArrowRight, MapPin, Globe, Camera, Eye, EyeOff } from 'lucide-react';
 import { API_URL } from '@/config/api';
@@ -165,6 +165,12 @@ export function ProfilePage() {
     targetUserRef ? { id: user?.id ?? targetUserId, slug: targetUserRef } : undefined,
   );
   const avatarUserRef = targetUserRef || user?.id || targetUserId;
+  const userEmailLabel = user?.email ?? user?.emailMasked ?? '';
+  const profileDocumentNumberLabel =
+    profile?.documentNumberMasked
+    ?? (profile?.documentNumber ? maskDocumentNumber(profile.documentNumber) : null);
+  const profileBirthDateLabel = profile?.birthDateMasked
+    ?? (profile?.birthDate ? formatDate(profile.birthDate) : null);
 
   return (
     <div className="max-w-2xl mx-auto space-y-6">
@@ -187,8 +193,8 @@ export function ProfilePage() {
               )}
             </div>
             <div>
-              <h2 className="text-xl font-semibold">{profile?.displayName || maskEmail(user?.email)}</h2>
-              <p className="text-text-secondary">{maskEmail(user?.email)}</p>
+              <h2 className="text-xl font-semibold">{profile?.displayName || userEmailLabel || '-'}</h2>
+              <p className="text-text-secondary">{userEmailLabel}</p>
               <p className="text-sm text-text-secondary mt-1">
                 <span className="font-medium text-text-primary">{t('profile.accountType')}:</span> {primaryAccountType}
               </p>
@@ -284,14 +290,14 @@ export function ProfilePage() {
         </Card>
       )}
 
-      {profile && (profile.documentNumber || profile.phone || profile.addressCity) && (
+      {profile && (profileDocumentNumberLabel || profile.phone || profile.addressCity) && (
         <Card>
           <CardHeader><h3 className="font-medium">{t('profile.personalInfo')}</h3></CardHeader>
           <CardContent className="grid grid-cols-2 gap-4 text-sm">
             {profile.documentType && <div><span className="text-text-secondary">{t('profile.documentType')}:</span> {profile.documentType}</div>}
-            {profile.documentNumber && <div><span className="text-text-secondary">{t('profile.documentNumber')}:</span> {maskDocumentNumber(profile.documentNumber)}</div>}
+            {profileDocumentNumberLabel && <div><span className="text-text-secondary">{t('profile.documentNumber')}:</span> {profileDocumentNumberLabel}</div>}
             {profile.phone && <div><span className="text-text-secondary">{t('profile.phone')}:</span> {profile.phone}</div>}
-            {profile.birthDate && <div><span className="text-text-secondary">{t('profile.birthDate')}:</span> {formatDate(profile.birthDate)}</div>}
+            {profileBirthDateLabel && <div><span className="text-text-secondary">{t('profile.birthDate')}:</span> {profileBirthDateLabel}</div>}
             {profile.addressCity && <div className="col-span-2"><span className="text-text-secondary">{t('profile.address')}:</span> {[profile.addressLine1, profile.addressCity, profile.addressState, profile.addressPostalCode].filter(Boolean).join(', ')}</div>}
           </CardContent>
         </Card>

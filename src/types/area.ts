@@ -6,6 +6,7 @@ export interface Area {
   ownerUserId: string;
   ownerSlug?: string | null;
   ownerEmail: string | null;
+  ownerEmailMasked: string | null;
   name: string;
   slug: string;
   description: string | null;

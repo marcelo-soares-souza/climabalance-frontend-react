@@ -27,7 +27,6 @@ import {
   formatKgCO2e,
   formatNumber,
   formatTCO2e,
-  maskEmail,
 } from "@/lib/format";
 import {
   ArrowLeft,
@@ -259,6 +258,7 @@ export function AreaDetailPage() {
   const totalTreesFunded =
     contributions?.reduce((sum, item) => sum + item.treesCount, 0) ?? 0;
   const ownerSlug = area.ownerSlug ?? ownerUser?.slug ?? null;
+  const ownerEmailLabel = area.ownerEmail ?? area.ownerEmailMasked ?? null;
   const ownerProfilePath = ownerSlug
     ? getUserProfilePath({
         id: area.ownerUserId,
@@ -338,11 +338,11 @@ export function AreaDetailPage() {
                   to={ownerProfilePath}
                   className="text-primary hover:underline"
                 >
-                  {maskEmail(area.ownerEmail) || t("area.anonymousContributor")}
+                  {ownerEmailLabel || t("area.anonymousContributor")}
                 </Link>
               ) : (
                 <span className="text-primary">
-                  {maskEmail(area.ownerEmail) || t("area.anonymousContributor")}
+                  {ownerEmailLabel || t("area.anonymousContributor")}
                 </span>
               )}
             </p>

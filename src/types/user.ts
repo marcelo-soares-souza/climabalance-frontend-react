@@ -1,6 +1,7 @@
 export interface UserSummary {
   id: string;
-  email: string;
+  email: string | null;
+  emailMasked: string | null;
   slug: string;
   status: string;
   locale: string;
@@ -16,7 +17,9 @@ export interface UserProfile {
   displayName: string | null;
   documentType: string | null;
   documentNumber: string | null;
+  documentNumberMasked: string | null;
   birthDate: string | null;
+  birthDateMasked: string | null;
   phone: string | null;
   countryCode: string | null;
   addressLine1: string | null;
