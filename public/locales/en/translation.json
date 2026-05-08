@@ -191,7 +191,8 @@
       "step2Title": "Support ecological projects",
       "step2Description": "Direct support to audited initiatives in restoration, agroecology, and sustainable agricultural production.",
       "step3Title": "Receive Certificates",
-      "step3Description": "Receive certificates and track contributions with transparency and traceability."
+      "step3Description": "Receive certificates and track contributions with transparency and traceability.",
+      "tryCalculator": "Calculate Footprint"
     },
     "dashboard": {
       "title": "Your Climate Impact",

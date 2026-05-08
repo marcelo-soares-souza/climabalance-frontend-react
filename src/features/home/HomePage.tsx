@@ -42,13 +42,13 @@ function UnauthenticatedHome() {
   });
 
   return (
-    <div className="max-w-4xl mx-auto text-center py-2">
-      <div className="bg-gradient-to-br from-primary via-primary-light to-accent rounded-3xl px-8 py-16 mb-4 text-white relative overflow-hidden">
+    <div className="max-w-5xl mx-auto text-center py-2">
+      <div className="bg-gradient-to-br from-primary via-primary-light to-accent rounded-3xl px-8 py-6 mb-4 text-white relative overflow-hidden">
         <Leaf className="absolute -top-6 -right-6 h-40 w-40 text-white/5 rotate-12" />
         <Leaf className="absolute -bottom-4 -left-4 h-24 w-24 text-white/5 -rotate-45" />
         <img
           src={LOGO_URL}
-          alt={t('app.name')}
+          alt={t("app.name")}
           className="h-28 w-28 mx-auto mb-6 drop-shadow-lg"
         />
         <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium mb-4">
@@ -101,6 +101,14 @@ function UnauthenticatedHome() {
             className="border-white/40 text-white hover:bg-white/10"
           >
             {t("home.welcome.learnMore")}
+          </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            onClick={() => navigate("/calculator")}
+            className="border-white/40 text-white hover:bg-white/10"
+          >
+            {t("home.welcome.tryCalculator")}
           </Button>
         </div>
       </div>

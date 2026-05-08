@@ -191,7 +191,8 @@
       "step2Title": "Soutenez des projets écologiques",
       "step2Description": "Orientez votre soutien vers des initiatives auditées de restauration, d'agroécologie et de production agricole durable.",
       "step3Title": "Recevez des Certificats",
-      "step3Description": "Recevez des certificats et suivez les contributions avec transparence et traçabilité."
+      "step3Description": "Recevez des certificats et suivez les contributions avec transparence et traçabilité.",
+      "tryCalculator": "Calculer l'Empreinte"
     },
     "dashboard": {
       "title": "Votre Impact Climatique",
