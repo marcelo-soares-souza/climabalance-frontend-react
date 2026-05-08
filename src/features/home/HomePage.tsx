@@ -237,7 +237,7 @@ function AuthenticatedHome({ userId, userSlug }: { userId: string; userSlug: str
 
   const { data: myAreas, isLoading: loadingAreas } = useQuery({
     queryKey: ["areas", "my", userId],
-    queryFn: () => areasService.listAreas({ ownerUserId: userId }),
+    queryFn: () => areasService.listAreas({ ownerUserId: userSlug ?? userId }),
     enabled: isProducer,
   });
 

@@ -135,7 +135,7 @@ export function ProfilePage() {
     stripeStatus?.onboarding_status === 'pending_verification';
   const { data: userAreas } = useQuery({
     queryKey: ['areas', 'owner', user?.id],
-    queryFn: () => areasService.listAreas({ ownerUserId: user!.id }),
+    queryFn: () => areasService.listAreas({ ownerUserId: user!.slug || user!.id }),
     enabled: !!user?.id && !!isProducer,
   });
 

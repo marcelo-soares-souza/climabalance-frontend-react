@@ -45,6 +45,7 @@ type RawContributionHistory = {
   id?: string;
   area_id?: string;
   area_name?: string | null;
+  area_slug?: string | null;
   calculation_id?: string | null;
   compensation_mode?: string;
   total_t_co2e?: number | string;
@@ -125,6 +126,7 @@ function normalizeHistory(raw: RawContributionHistory): ContributionHistoryItem 
     id: asString(raw.id),
     areaId: asString(raw.area_id),
     areaName: asString(raw.area_name),
+    areaSlug: asNullableString(raw.area_slug) ?? undefined,
     calculationId: asNullableString(raw.calculation_id),
     compensationMode: asString(raw.compensation_mode, 'tco2e') as ContributionHistoryItem['compensationMode'],
     totalTCO2e: asNumber(raw.total_t_co2e),

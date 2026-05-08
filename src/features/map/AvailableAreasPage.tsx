@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { EmptyState } from '@/components/EmptyState';
 import { formatCurrency, formatKgCO2e } from '@/lib/format';
 import { getCountryName } from '@/lib/countries';
+import { getAreaDetailPath } from '@/lib/public-refs';
 import { MapPin, TreePine, Plus, Loader2 } from 'lucide-react';
 import { AreaThumbnail } from '@/components/AreaThumbnail';
 import type { Area } from '@/types/area';
@@ -72,7 +73,7 @@ export function AvailableAreasPage() {
       ) : allAreas.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {allAreas.map((area: Area) => (
-            <Card key={area.id} className="cursor-pointer hover:shadow-md transition-shadow overflow-hidden" onClick={() => navigate(`/areas/${area.slug ?? area.id}`)}>
+            <Card key={area.id} className="cursor-pointer hover:shadow-md transition-shadow overflow-hidden" onClick={() => navigate(getAreaDetailPath(area))}>
               <AreaThumbnail imageUrl={area.imageUrl} thumbnailUrl={area.thumbnailUrl} name={area.name} />
               <CardContent className="p-5 h-full flex flex-col gap-3">
                 <h3 className="font-bold leading-snug">{area.name}</h3>

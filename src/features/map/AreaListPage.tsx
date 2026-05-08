@@ -12,6 +12,7 @@ import { EmptyState } from '@/components/EmptyState';
 import { formatCurrency, formatKgCO2e } from '@/lib/format';
 import { getAreaStatusOptions } from '@/features/map/lib/area-filters';
 import { getCountryName } from '@/lib/countries';
+import { getAreaDetailPath } from '@/lib/public-refs';
 import { MapPin, Plus, FilterX, Loader2 } from 'lucide-react';
 import { AreaThumbnail } from '@/components/AreaThumbnail';
 import { useAuth } from '@/hooks/use-auth';
@@ -151,7 +152,7 @@ export function AreaListPage() {
             <Card
               key={area.id}
               className="cursor-pointer hover:shadow-lg transition-shadow overflow-hidden"
-              onClick={() => navigate(`/areas/${area.slug ?? area.id}`)}
+              onClick={() => navigate(getAreaDetailPath(area))}
             >
               <AreaThumbnail imageUrl={area.imageUrl} thumbnailUrl={area.thumbnailUrl} name={area.name} />
               <CardContent className="p-5 h-full flex flex-col gap-4">

@@ -25,6 +25,7 @@ import { LocateControl } from '@/components/leaflet/LocateControl';
 import type { AreaStatus } from '@/types/area';
 import { countries } from '@/lib/countries';
 import { getCountryCenter } from '@/lib/country-coords';
+import { getAreaDetailPath } from '@/lib/public-refs';
 import { ArrowLeft } from 'lucide-react';
 
 const DEFAULT_CENTER: [number, number] = [-15.793889, -47.882778];
@@ -106,7 +107,7 @@ export function AreaFormPage() {
     },
     onSuccess: (area) => {
       queryClient.invalidateQueries({ queryKey: ['areas'] });
-      navigate(`/areas/${area.slug ?? area.id}`);
+      navigate(getAreaDetailPath(area));
     },
     onError: (err) => setError(err instanceof ApiError ? err.messageKey : 'area.form.error'),
   });
