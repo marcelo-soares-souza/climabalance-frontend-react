@@ -129,9 +129,9 @@ export function ProfilePage() {
   const isStripePendingVerification =
     stripeStatus?.onboarding_status === 'pending_verification';
   const { data: userAreas } = useQuery({
-    queryKey: ['areas', 'owner', targetUserId],
-    queryFn: () => areasService.listAreas({ ownerUserId: targetUserId! }),
-    enabled: !!targetUserId && !!isProducer,
+    queryKey: ['areas', 'owner', user?.id],
+    queryFn: () => areasService.listAreas({ ownerUserId: user!.id }),
+    enabled: !!user?.id && !!isProducer,
   });
 
   if (loadingUser || loadingProfile) return <PageSkeleton />;

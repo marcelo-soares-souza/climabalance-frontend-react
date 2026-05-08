@@ -92,10 +92,9 @@ export function MapPage() {
 
   const handleNavigateToArea = useCallback(
     (areaId: string) => {
-      const area = areas?.find((a) => a.id === areaId);
-      navigate(`/areas/${area?.slug ?? areaId}`);
+      navigate(`/areas/${areaId}`);
     },
-    [navigate, areas],
+    [navigate],
   );
 
   return (
