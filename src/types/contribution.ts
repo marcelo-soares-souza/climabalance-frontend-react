@@ -47,6 +47,7 @@ export interface ContributionHistoryItem {
   id: string;
   areaId: string;
   areaName: string;
+  areaSlug?: string;
   calculationId: string | null;
   compensationMode: ContributionMode;
   totalTCO2e: number;

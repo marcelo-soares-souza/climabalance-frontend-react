@@ -44,6 +44,7 @@ export interface CompensationHistoryItem {
   id: string;
   areaId: string;
   areaName: string;
+  areaSlug?: string;
   calculationId: string | null;
   compensationMode: CompensationMode;
   totalTCO2e: number;

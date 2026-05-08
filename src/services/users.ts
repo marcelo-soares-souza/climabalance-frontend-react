@@ -7,6 +7,7 @@ import type { CertificateHistoryItem } from '@/types/certificate';
 type RawUserSummary = {
   id?: string;
   email?: string;
+  slug?: string;
   status?: string;
   locale?: string;
   email_confirmed_at?: string | null;
@@ -76,6 +77,8 @@ type RawCompensation = {
   areaId?: string;
   area_name?: string | null;
   areaName?: string | null;
+  area_slug?: string | null;
+  areaSlug?: string | null;
   calculation_id?: string | null;
   calculationId?: string | null;
   compensation_mode?: string;
@@ -148,6 +151,7 @@ function normalizeUserSummary(raw: RawUserSummary): UserSummary {
   return {
     id: asString(raw.id),
     email: asString(raw.email),
+    slug: asString(raw.slug),
     status: asString(raw.status, 'pending'),
     locale: asString(raw.locale, 'pt-BR'),
     emailConfirmedAt: asNullableString(raw.email_confirmed_at ?? raw.emailConfirmedAt),
@@ -193,6 +197,7 @@ function normalizeCompensation(raw: RawCompensation): CompensationHistoryItem {
     id: asString(raw.id),
     areaId: asString(raw.area_id ?? raw.areaId),
     areaName: asString(raw.area_name ?? raw.areaName),
+    areaSlug: asNullableString(raw.area_slug ?? raw.areaSlug) ?? undefined,
     calculationId: asNullableString(raw.calculation_id ?? raw.calculationId),
     compensationMode: asString(raw.compensation_mode ?? raw.compensationMode, 'tco2e') as CompensationHistoryItem['compensationMode'],
     totalTCO2e: asNumber(raw.total_t_co2e ?? raw.totalTCO2e),
@@ -210,6 +215,7 @@ function normalizeContribution(raw: RawCompensation): ContributionHistoryItem {
     id: asString(raw.id),
     areaId: asString(raw.area_id ?? raw.areaId),
     areaName: asString(raw.area_name ?? raw.areaName),
+    areaSlug: asNullableString(raw.area_slug ?? raw.areaSlug) ?? undefined,
     calculationId: asNullableString(raw.calculation_id ?? raw.calculationId),
     compensationMode: asString(raw.compensation_mode ?? raw.compensationMode, 'tco2e') as ContributionHistoryItem['compensationMode'],
     totalTCO2e: asNumber(raw.total_t_co2e ?? raw.totalTCO2e),

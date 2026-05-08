@@ -447,7 +447,7 @@ function AuthenticatedHome({ userId }: { userId: string }) {
                 <div
                   key={c.id}
                   className="flex items-center justify-between py-2 px-1 rounded-lg hover:bg-gray-50 cursor-pointer border-b border-gray-50 last:border-0"
-                  onClick={() => navigate(`/areas/${c.areaId}`)}
+                  onClick={() => navigate(`/areas/${c.areaSlug ?? c.areaId}`)}
                 >
                   <div>
                     <p className="text-base font-medium">{c.areaName}</p>

@@ -1,6 +1,7 @@
 export interface UserSummary {
   id: string;
   email: string;
+  slug: string;
   status: string;
   locale: string;
   emailConfirmedAt: string | null;

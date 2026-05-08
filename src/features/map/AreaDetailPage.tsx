@@ -769,7 +769,7 @@ export function AreaDetailPage() {
             size="lg"
             variant="secondary"
             className="flex-1"
-            onClick={() => navigate(`/audit/area/${area.id}`)}
+            onClick={() => navigate(`/audit/area/${area.slug ?? area.id}`)}
           >
             {t("audit.review.approve")}
           </Button>
@@ -779,7 +779,7 @@ export function AreaDetailPage() {
             size="lg"
             variant="secondary"
             className="flex-1"
-            onClick={() => navigate(`/audit/area/${area.id}`)}
+            onClick={() => navigate(`/audit/area/${area.slug ?? area.id}`)}
           >
             {t("audit.review.activate")}
           </Button>
@@ -809,7 +809,7 @@ export function AreaDetailPage() {
             size="lg"
             variant="outline"
             className="flex-1"
-            onClick={() => navigate(`/areas/edit/${area.id}`)}
+            onClick={() => navigate(`/areas/edit/${area.slug ?? area.id}`)}
           >
             <Edit className="h-5 w-5 mr-2" /> {t("common.edit")}
           </Button>
