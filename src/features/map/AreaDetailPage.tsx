@@ -6,6 +6,7 @@ import { areasService } from "@/services/areas";
 import { plantedTreesService } from "@/services/planted-trees";
 import { stripeService } from "@/services/stripe";
 import { satelliteService } from "@/services/satellite";
+import { usersService } from "@/services/users";
 import { SatelliteImageOverlay } from "@/components/leaflet/SatelliteImageOverlay";
 import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -134,6 +135,12 @@ export function AreaDetailPage() {
     enabled: isAuthenticated && !!userId && userId === area?.ownerUserId,
   });
 
+  const { data: ownerUser, isFetched: isOwnerUserFetched } = useQuery({
+    queryKey: ["users", area?.ownerUserId, "owner-link"],
+    queryFn: () => usersService.getUser(area!.ownerUserId),
+    enabled: !!area?.ownerUserId && !area?.ownerSlug,
+  });
+
   const { data: satelliteImage } = useQuery({
     queryKey: ["satellite-image", areaId],
     queryFn: () => satelliteService.getLatest(areaId!),
@@ -251,6 +258,17 @@ export function AreaDetailPage() {
 
   const totalTreesFunded =
     contributions?.reduce((sum, item) => sum + item.treesCount, 0) ?? 0;
+  const ownerSlug = area.ownerSlug ?? ownerUser?.slug ?? null;
+  const ownerProfilePath = ownerSlug
+    ? getUserProfilePath({
+        id: area.ownerUserId,
+        slug: ownerSlug,
+      })
+    : isOwnerUserFetched
+      ? getUserProfilePath({
+          id: area.ownerUserId,
+        })
+      : null;
   const totalEstimatedTCO2e =
     contributions?.reduce((sum, item) => sum + item.totalTCO2e, 0) ?? 0;
   const supporterCount = contributions?.length ?? 0;
@@ -315,12 +333,18 @@ export function AreaDetailPage() {
           {area.ownerUserId && (
             <p className="text-sm mt-1">
               <span className="text-text-secondary">{t("area.owner")}: </span>
-              <Link
-                to={getUserProfilePath({ id: area.ownerUserId, slug: area.ownerSlug })}
-                className="text-primary hover:underline"
-              >
-                {maskEmail(area.ownerEmail) || t("area.anonymousContributor")}
-              </Link>
+              {ownerProfilePath ? (
+                <Link
+                  to={ownerProfilePath}
+                  className="text-primary hover:underline"
+                >
+                  {maskEmail(area.ownerEmail) || t("area.anonymousContributor")}
+                </Link>
+              ) : (
+                <span className="text-primary">
+                  {maskEmail(area.ownerEmail) || t("area.anonymousContributor")}
+                </span>
+              )}
             </p>
           )}
         </div>

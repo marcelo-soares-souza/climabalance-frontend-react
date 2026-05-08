@@ -41,10 +41,10 @@ function UserCard({ user }: { user: DirectoryItem }) {
 
   return (
     <Card
-      className="cursor-pointer hover:shadow-lg transition-shadow overflow-hidden"
+      className="h-full cursor-pointer overflow-hidden transition-shadow hover:shadow-lg"
       onClick={() => navigate(getUserProfilePath(user))}
     >
-      <CardContent className="p-5 flex flex-col gap-4">
+      <CardContent className="flex h-full flex-col gap-4 p-5">
         <div className="flex items-center gap-4">
           {user.avatarUrl ? (
             <img
@@ -77,7 +77,7 @@ function UserCard({ user }: { user: DirectoryItem }) {
           </p>
         )}
 
-        <div className="grid grid-cols-2 gap-3 text-center">
+        <div className="mt-auto grid grid-cols-2 gap-3 pt-2 text-center">
           <div className="rounded-lg bg-emerald-50 p-3">
             <MapPin className="h-4 w-4 mx-auto mb-1 text-emerald-600" />
             <p className="text-lg font-bold text-emerald-700">
