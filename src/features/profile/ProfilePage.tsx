@@ -402,7 +402,7 @@ export function ProfilePage() {
             {userAreas.map((area) => (
               <Link
                 key={area.id}
-                to={`/areas/${area.id}`}
+                to={`/areas/${area.slug ?? area.id}`}
                 className="flex items-center justify-between p-3 rounded-lg border border-gray-100 hover:bg-gray-50 transition-colors"
               >
                 <div className="flex items-center gap-3 min-w-0">

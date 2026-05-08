@@ -14,6 +14,7 @@ type RawArea = {
   owner_email?: string | null;
   ownerEmail?: string | null;
   name?: string;
+  slug?: string;
   description?: string | null;
   latitude?: number | string;
   longitude?: number | string;
@@ -149,6 +150,7 @@ function normalizeArea(raw: RawArea): Area {
     ownerUserId: asString(raw.ownerUserId ?? raw.owner_user_id),
     ownerEmail: asNullableString(raw.ownerEmail ?? raw.owner_email),
     name: asString(raw.name),
+    slug: asString(raw.slug),
     description: asNullableString(raw.description),
     latitude: asNumber(raw.latitude),
     longitude: asNumber(raw.longitude),

@@ -143,7 +143,7 @@ export function PublicAreasPage() {
             <Card
               key={area.id}
               className="cursor-pointer hover:shadow-lg transition-shadow overflow-hidden"
-              onClick={() => navigate(`/areas/${area.id}`)}
+              onClick={() => navigate(`/areas/${area.slug ?? area.id}`)}
             >
               <AreaThumbnail imageUrl={area.imageUrl} thumbnailUrl={area.thumbnailUrl} name={area.name} />
               <CardContent className="p-5 h-full flex flex-col gap-4">

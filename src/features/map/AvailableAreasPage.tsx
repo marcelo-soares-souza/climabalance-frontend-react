@@ -72,7 +72,7 @@ export function AvailableAreasPage() {
       ) : allAreas.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {allAreas.map((area: Area) => (
-            <Card key={area.id} className="cursor-pointer hover:shadow-md transition-shadow overflow-hidden" onClick={() => navigate(`/areas/${area.id}`)}>
+            <Card key={area.id} className="cursor-pointer hover:shadow-md transition-shadow overflow-hidden" onClick={() => navigate(`/areas/${area.slug ?? area.id}`)}>
               <AreaThumbnail imageUrl={area.imageUrl} thumbnailUrl={area.thumbnailUrl} name={area.name} />
               <CardContent className="p-5 h-full flex flex-col gap-3">
                 <h3 className="font-bold leading-snug">{area.name}</h3>

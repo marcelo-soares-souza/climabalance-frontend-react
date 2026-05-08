@@ -6,6 +6,7 @@ export interface Area {
   ownerUserId: string;
   ownerEmail: string | null;
   name: string;
+  slug: string;
   description: string | null;
   latitude: number;
   longitude: number;

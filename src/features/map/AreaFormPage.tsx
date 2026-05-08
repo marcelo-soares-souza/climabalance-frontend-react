@@ -106,7 +106,7 @@ export function AreaFormPage() {
     },
     onSuccess: (area) => {
       queryClient.invalidateQueries({ queryKey: ['areas'] });
-      navigate(`/areas/${area.id}`);
+      navigate(`/areas/${area.slug ?? area.id}`);
     },
     onError: (err) => setError(err instanceof ApiError ? err.messageKey : 'area.form.error'),
   });
