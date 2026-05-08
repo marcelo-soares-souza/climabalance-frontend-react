@@ -184,14 +184,16 @@ export function TreePlantingPage() {
     enabled: !!areaId,
   });
 
+  const areaIdSafe = area?.id ?? areaId!;
+
   const saveMutation = useMutation({
     mutationFn: (pts: { latitude: number; longitude: number }[]) =>
-      plantedTreesService.savePlantedTrees(areaId!, pts),
+      plantedTreesService.savePlantedTrees(areaIdSafe, pts),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
-      queryClient.invalidateQueries({ queryKey: ["planted-trees", areaId] });
-      queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaId] });
-      navigate(`/areas/${areaId}`);
+      queryClient.invalidateQueries({ queryKey: ["planted-trees", areaIdSafe] });
+      queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaIdSafe] });
+      navigate(`/areas/${areaIdSafe}`);
     },
     onError: () => {
       setError(t("treePlanting.saveError"));
@@ -199,11 +201,11 @@ export function TreePlantingPage() {
   });
 
   const clearMutation = useMutation({
-    mutationFn: () => plantedTreesService.clearPlantedTrees(areaId!),
+    mutationFn: () => plantedTreesService.clearPlantedTrees(areaIdSafe),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
-      queryClient.invalidateQueries({ queryKey: ["planted-trees", areaId] });
-      queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaId] });
+      queryClient.invalidateQueries({ queryKey: ["planted-trees", areaIdSafe] });
+      queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaIdSafe] });
       setShowClearConfirm(false);
       setPoints([]);
     },

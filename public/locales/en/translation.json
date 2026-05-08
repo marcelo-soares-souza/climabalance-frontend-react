@@ -169,6 +169,7 @@
     "users": "Users (Admin)",
     "auditLog": "Audit Log (Admin)",
     "publicAreas": "View Areas",
+    "directory": "Community",
     "login": "Sign in",
     "logout": "Sign out",
     "impact": "Your Impact",
@@ -224,8 +225,8 @@
     "title": "Producers and supporters",
     "description": "Meet the people behind ClimaBalance",
     "noUsers": "No profiles found",
-    "areas": "areas",
-    "trees": "trees",
+    "areas": "Areas",
+    "trees": "Trees",
     "viewProfile": "View Profile"
   },
   "about": {

@@ -102,7 +102,7 @@ export function AreaFormPage() {
         price_per_tree: parseFloat(formValues.price_per_tree) || undefined,
         default_horizon_years: parseInt(formValues.default_horizon_years, 10) || undefined,
       };
-      return isEdit ? areasService.updateArea(areaId!, data) : areasService.createArea(data);
+      return isEdit ? areasService.updateArea(existing?.id ?? areaId!, data) : areasService.createArea(data);
     },
     onSuccess: (area) => {
       queryClient.invalidateQueries({ queryKey: ['areas'] });

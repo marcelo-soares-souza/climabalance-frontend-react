@@ -35,20 +35,22 @@ export function AreaAuditPage() {
     enabled: !!areaId,
   });
 
+  const areaIdSafe = area?.id ?? areaId!;
+
   const approveMutation = useMutation({
-    mutationFn: () => areasService.approveArea(areaId!, { notes }),
+    mutationFn: () => areasService.approveArea(areaIdSafe, { notes }),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['areas'] }); navigate('/audit/pending-areas'); },
     onError: () => setError('audit.approveError'),
   });
 
   const rejectMutation = useMutation({
-    mutationFn: () => areasService.rejectArea(areaId!, rejectReason),
+    mutationFn: () => areasService.rejectArea(areaIdSafe, rejectReason),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['areas'] }); navigate('/audit/pending-areas'); },
     onError: () => setError('audit.rejectError'),
   });
 
   const activateMutation = useMutation({
-    mutationFn: () => areasService.activateArea(areaId!),
+    mutationFn: () => areasService.activateArea(areaIdSafe),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['areas'] }); navigate('/audit/pending-areas'); },
   });
 

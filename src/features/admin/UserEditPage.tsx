@@ -40,6 +40,8 @@ export function UserEditPage() {
     password_confirm: form.password_confirm ?? '',
   };
 
+  const userIdSafe = user?.id ?? userId!;
+
   const updateMutation = useMutation({
     mutationFn: () => {
       const data: Record<string, string> = {};
@@ -47,14 +49,14 @@ export function UserEditPage() {
       if (formValues.status !== user?.status) data.status = formValues.status;
       if (formValues.locale !== user?.locale) data.locale = formValues.locale;
       if (formValues.password) { data.password = formValues.password; data.password_confirm = formValues.password_confirm; }
-      return usersService.updateUser(userId!, data);
+      return usersService.updateUser(userIdSafe, data);
     },
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['users'] }); navigate('/admin/users'); },
     onError: (err) => setError(err instanceof ApiError ? err.messageKey : 'admin.users.updateError'),
   });
 
   const deleteMutation = useMutation({
-    mutationFn: () => usersService.deleteUser(userId!),
+    mutationFn: () => usersService.deleteUser(userIdSafe),
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ['users'] }); navigate('/admin/users'); },
   });
 

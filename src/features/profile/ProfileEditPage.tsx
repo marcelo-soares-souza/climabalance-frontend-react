@@ -91,10 +91,12 @@ export function ProfileEditPage() {
     linkedin_url: form.linkedin_url ?? profile?.linkedinUrl ?? '',
   };
 
+  const targetUserIdSafe = profile?.userId ?? targetUserId!;
+
   const mutation = useMutation({
-    mutationFn: () => usersService.upsertProfile(targetUserId!, formValues),
+    mutationFn: () => usersService.upsertProfile(targetUserIdSafe, formValues),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['users', targetUserId, 'profile'] });
+      queryClient.invalidateQueries({ queryKey: ['users', targetUserIdSafe, 'profile'] });
       navigate(profilePath);
     },
     onError: (err) => setError(err instanceof ApiError ? err.messageKey : 'profile.saveError'),
@@ -130,12 +132,12 @@ export function ProfileEditPage() {
         reader.readAsDataURL(file);
       });
 
-      await usersService.uploadAvatar(targetUserId, {
+      await usersService.uploadAvatar(targetUserIdSafe, {
         mime_type: file.type,
         file_base64: base64,
       });
 
-      queryClient.invalidateQueries({ queryKey: ['users', targetUserId, 'profile'] });
+      queryClient.invalidateQueries({ queryKey: ['users', targetUserIdSafe, 'profile'] });
     } catch (err) {
       setError(err instanceof ApiError ? err.messageKey : 'profile.avatar.upload_error');
     } finally {

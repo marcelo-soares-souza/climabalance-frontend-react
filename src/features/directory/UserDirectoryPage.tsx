@@ -1,58 +1,96 @@
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "@/services/users";
 import { Card, CardContent } from "@/components/ui/Card";
+import { Combobox } from "@/components/ui/Combobox";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { EmptyState } from "@/components/EmptyState";
-import { Trees, MapPin, Users, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { Users, Trees, MapPin, FilterX } from "lucide-react";
+import { countries } from "@/lib/countries";
 import type { DirectoryItem } from "@/services/users";
 
-const DEFAULT_AVATAR = "/avatar-placeholder.png";
+const countryOptions = countries.map((c) => ({ value: c.code, label: c.name }));
+
+function AvatarPlaceholder({ name, size }: { name: string; size: number }) {
+  const initials = name
+    .split(" ")
+    .map((w) => w[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+
+  return (
+    <div
+      className="flex items-center justify-center rounded-full bg-primary-50 text-primary font-bold shrink-0"
+      style={{ width: size, height: size, fontSize: size * 0.38 }}
+    >
+      {initials || "?"}
+    </div>
+  );
+}
 
 function UserCard({ user }: { user: DirectoryItem }) {
-  const navigate = useNavigate();
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const displayName = user.displayName ?? user.slug;
 
   return (
     <Card
-      className="cursor-pointer hover:shadow-lg transition-shadow"
+      className="cursor-pointer hover:shadow-lg transition-shadow overflow-hidden"
       onClick={() => navigate(`/users/${user.slug}/profile`)}
     >
-      <CardContent className="p-5">
-        <div className="flex items-center gap-4 mb-3">
-          <img
-            src={user.avatarUrl ?? DEFAULT_AVATAR}
-            alt={user.displayName ?? user.slug}
-            className="h-14 w-14 rounded-full object-cover bg-gray-100 shrink-0"
-            onError={(e) => {
-              (e.target as HTMLImageElement).src = DEFAULT_AVATAR;
-            }}
-          />
-          <div className="min-w-0 flex-1">
-            <h3 className="font-semibold text-base truncate">
-              {user.displayName ?? user.slug}
-            </h3>
-            <p className="text-xs text-text-secondary">@{user.slug}</p>
+      <CardContent className="p-5 flex flex-col gap-4">
+        <div className="flex items-center gap-4">
+          {user.avatarUrl ? (
+            <img
+              src={user.avatarUrl}
+              alt={displayName}
+              className="h-14 w-14 rounded-full object-cover bg-gray-100 shrink-0"
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.style.display = "none";
+                target.parentElement!.querySelector(".avatar-fallback")?.classList.remove("hidden");
+              }}
+            />
+          ) : null}
+          <div className={`${user.avatarUrl ? "hidden" : ""} avatar-fallback`}>
+            <AvatarPlaceholder name={displayName} size={56} />
           </div>
-          <ArrowRight className="h-4 w-4 text-text-secondary shrink-0" />
+          <div className="min-w-0 flex-1">
+            <h3 className="font-bold leading-snug">{displayName}</h3>
+            {user.countryCode && (
+              <p className="text-sm text-text-secondary">
+                {countries.find((c) => c.code === user.countryCode)?.name ?? user.countryCode}
+              </p>
+            )}
+          </div>
         </div>
 
         {user.about && (
-          <p className="text-sm text-text-secondary line-clamp-3 mb-3 leading-relaxed">
+          <p className="text-sm text-text-secondary line-clamp-3 leading-relaxed">
             {user.about}
           </p>
         )}
 
-        <div className="flex items-center gap-4 text-sm text-text-secondary">
-          <span className="inline-flex items-center gap-1.5">
-            <MapPin className="h-3.5 w-3.5" />
-            {user.totalAreas} {t("directory.areas")}
-          </span>
-          <span className="inline-flex items-center gap-1.5">
-            <Trees className="h-3.5 w-3.5" />
-            {user.totalTrees} {t("directory.trees")}
-          </span>
+        <div className="grid grid-cols-2 gap-3 text-center">
+          <div className="rounded-lg bg-emerald-50 p-3">
+            <MapPin className="h-4 w-4 mx-auto mb-1 text-emerald-600" />
+            <p className="text-lg font-bold text-emerald-700">
+              {user.totalAreas}
+            </p>
+            <p className="text-xs text-emerald-600">{t("directory.areas")}</p>
+          </div>
+          <div className="rounded-lg bg-primary-50 p-3">
+            <Trees className="h-4 w-4 mx-auto mb-1 text-primary" />
+            <p className="text-lg font-bold text-primary">
+              {user.totalTrees}
+            </p>
+            <p className="text-xs text-primary">{t("directory.trees")}</p>
+          </div>
         </div>
       </CardContent>
     </Card>
@@ -61,21 +99,25 @@ function UserCard({ user }: { user: DirectoryItem }) {
 
 function UserCardsSkeleton() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {[1, 2, 3, 4, 5, 6].map((i) => (
-        <Card key={i}>
-          <CardContent className="p-5">
-            <div className="flex items-center gap-4 mb-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {Array.from({ length: 4 }).map((_, i) => (
+        <div key={i} className="bg-surface rounded-lg shadow-md animate-pulse">
+          <div className="p-5 space-y-4">
+            <div className="flex items-center gap-4">
               <Skeleton className="h-14 w-14 rounded-full" />
               <div className="flex-1 space-y-2">
-                <Skeleton className="h-4 w-32" />
-                <Skeleton className="h-3 w-20" />
+                <Skeleton className="h-5 w-32" />
+                <Skeleton className="h-4 w-24" />
               </div>
             </div>
-            <Skeleton className="h-12 w-full mb-3" />
-            <Skeleton className="h-4 w-40" />
-          </CardContent>
-        </Card>
+            <Skeleton className="h-3 w-full" />
+            <Skeleton className="h-3 w-3/4" />
+            <div className="grid grid-cols-2 gap-3">
+              <div className="h-16 bg-gray-200 rounded-lg" />
+              <div className="h-16 bg-gray-200 rounded-lg" />
+            </div>
+          </div>
+        </div>
       ))}
     </div>
   );
@@ -83,34 +125,63 @@ function UserCardsSkeleton() {
 
 export function UserDirectoryPage() {
   const { t } = useTranslation();
+  const [countryFilter, setCountryFilter] = useState("");
 
   const { data: users, isLoading } = useQuery({
     queryKey: ["user-directory"],
     queryFn: () => usersService.listDirectory({ limit: 50 }),
   });
 
+  const filteredUsers = useMemo(() => {
+    if (!users) return [];
+    if (!countryFilter) return users;
+    return users.filter((u) => u.countryCode === countryFilter);
+  }, [users, countryFilter]);
+
+  const hasFilters = Boolean(countryFilter);
+
+  const clearFilters = () => {
+    setCountryFilter("");
+  };
+
   return (
-    <div className="max-w-5xl mx-auto space-y-6">
-      <div className="text-center">
-        <Users className="h-10 w-10 text-primary mx-auto mb-3" />
-        <h1 className="text-2xl font-bold font-display mb-2">
-          {t("directory.title")}
-        </h1>
-        <p className="text-text-secondary">
-          {t("directory.description")}
-        </p>
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold">{t("directory.title")}</h1>
+        <p className="text-text-secondary mt-1">{t("directory.description")}</p>
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <Combobox
+          id="directory-country"
+          label={t("area.form.country")}
+          value={countryFilter}
+          options={countryOptions}
+          emptyLabel={t("map.allCountries")}
+          placeholder={t("area.form.selectCountry")}
+          onChange={(val) => setCountryFilter(val)}
+        />
+      </div>
+
+      {hasFilters && (
+        <div>
+          <Button variant="ghost" size="sm" onClick={clearFilters}>
+            <FilterX className="h-4 w-4 mr-1" /> {t("areas.list.clearFilters")}
+          </Button>
+        </div>
+      )}
 
       {isLoading ? (
         <UserCardsSkeleton />
-      ) : users && users.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {users.map((user) => (
-            <UserCard key={user.slug} user={user} />
+      ) : filteredUsers.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {filteredUsers.map((user) => (
+            <UserCard key={user.id} user={user} />
           ))}
         </div>
       ) : (
         <EmptyState
+          icon={<Users className="h-12 w-12" />}
           title={t("directory.noUsers")}
         />
       )}

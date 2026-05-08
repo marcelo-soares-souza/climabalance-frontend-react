@@ -169,6 +169,7 @@
     "users": "Usuários (Admin)",
     "auditLog": "Auditoria (Admin)",
     "publicAreas": "Ver Áreas",
+    "directory": "Comunidade",
     "login": "Entrar",
     "logout": "Sair",
     "impact": "Seu Impacto",
@@ -224,8 +225,8 @@
     "title": "Produtores e apoiadores",
     "description": "Conheça quem faz parte da plataforma ClimaBalance",
     "noUsers": "Nenhum perfil encontrado",
-    "areas": "areas",
-    "trees": "arvores",
+    "areas": "Áreas",
+    "trees": "Árvores",
     "viewProfile": "Ver Perfil"
   },
   "about": {

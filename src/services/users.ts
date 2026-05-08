@@ -258,20 +258,24 @@ function normalizeCertificate(raw: RawCertificate): CertificateHistoryItem {
 }
 
 type RawDirectoryItem = {
+  id?: string;
   slug?: string;
   display_name?: string | null;
   avatar_url?: string | null;
   about?: string | null;
+  country_code?: string | null;
   total_areas?: number | string;
   total_trees?: number | string;
   created_at?: string;
 };
 
 export type DirectoryItem = {
+  id: string;
   slug: string;
   displayName: string | null;
   avatarUrl: string | null;
   about: string | null;
+  countryCode: string | null;
   totalAreas: number;
   totalTrees: number;
   createdAt: string;
@@ -279,9 +283,11 @@ export type DirectoryItem = {
 
 function normalizeDirectoryItem(raw: RawDirectoryItem): DirectoryItem {
   return {
+    id: asString(raw.id),
     slug: asString(raw.slug),
     displayName: asNullableString(raw.display_name),
     avatarUrl: raw.avatar_url ? toApiUrl(raw.avatar_url) : null,
+    countryCode: asNullableString(raw.country_code),
     about: asNullableString(raw.about),
     totalAreas: asNumber(raw.total_areas),
     totalTrees: asNumber(raw.total_trees),
