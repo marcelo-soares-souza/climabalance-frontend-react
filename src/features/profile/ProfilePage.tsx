@@ -124,6 +124,7 @@ export function ProfilePage() {
   });
 
   const isProducer = user?.roles?.includes('producer');
+  const canOwnAreas = user?.roles?.some((r) => r === 'producer' || r === 'administrator');
   const { data: stripeStatus } = useQuery({
     queryKey: ['profile', 'stripe-status', userId],
     queryFn: () => stripeService.getStripeOnboardingStatus(),
@@ -136,7 +137,7 @@ export function ProfilePage() {
   const { data: userAreas } = useQuery({
     queryKey: ['areas', 'owner', user?.id],
     queryFn: () => areasService.listAreas({ ownerUserId: user!.slug || user!.id }),
-    enabled: !!user?.id && !!isProducer,
+    enabled: !!user?.id && !!canOwnAreas,
   });
 
   if (loadingUser || loadingProfile) return <PageSkeleton />;
@@ -421,7 +422,7 @@ export function ProfilePage() {
         </Card>
       )}
 
-      {isProducer && userAreas && userAreas.length > 0 && (
+      {canOwnAreas && userAreas && userAreas.length > 0 && (
         <Card>
           <CardHeader><h3 className="font-medium">{t('nav.myAreas')}</h3></CardHeader>
           <CardContent className="space-y-2">
