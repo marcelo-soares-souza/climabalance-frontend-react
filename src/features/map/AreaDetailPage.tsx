@@ -258,7 +258,7 @@ export function AreaDetailPage() {
   const totalTreesFunded =
     contributions?.reduce((sum, item) => sum + item.treesCount, 0) ?? 0;
   const ownerSlug = area.ownerSlug ?? ownerUser?.slug ?? null;
-  const ownerEmailLabel = area.ownerEmail ?? area.ownerEmailMasked ?? null;
+  const ownerLabel = area.ownerName ?? area.ownerEmail ?? area.ownerEmailMasked ?? null;
   const ownerProfilePath = ownerSlug
     ? getUserProfilePath({
         id: area.ownerUserId,
@@ -338,11 +338,11 @@ export function AreaDetailPage() {
                   to={ownerProfilePath}
                   className="text-primary hover:underline"
                 >
-                  {ownerEmailLabel || t("area.anonymousContributor")}
+                  {ownerLabel || t("area.anonymousContributor")}
                 </Link>
               ) : (
                 <span className="text-primary">
-                  {ownerEmailLabel || t("area.anonymousContributor")}
+                  {ownerLabel || t("area.anonymousContributor")}
                 </span>
               )}
             </p>

@@ -4,6 +4,7 @@ export type BiomeType = 'amazonia' | 'cerrado' | 'mata_atlantica' | 'caatinga' |
 export interface Area {
   id: string;
   ownerUserId: string;
+  ownerName?: string | null;
   ownerSlug?: string | null;
   ownerEmail: string | null;
   ownerEmailMasked: string | null;
