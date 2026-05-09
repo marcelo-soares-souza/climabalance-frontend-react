@@ -2,7 +2,7 @@ ARG BUILD_VERSION=development
 ARG BUILD_TIMESTAMP
 
 # --- Stage 1: Build ---
-FROM oven/bun:1.2.22-alpine AS build
+FROM oven/bun:latest-alpine AS build
 
 WORKDIR /app
 
@@ -26,7 +26,7 @@ RUN if [ -z "$BUILD_TIMESTAMP" ]; then BUILD_TIMESTAMP=$(date +%s); fi && \
     echo "{\"buildId\":\"${BUILD_VERSION}\",\"timestamp\":${BUILD_TIMESTAMP}}" > /app/dist/version.json
 
 # --- Stage 2: Serve ---
-FROM nginx:1.27-alpine
+FROM nginx:1.30-alpine
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
