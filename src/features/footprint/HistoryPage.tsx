@@ -44,7 +44,7 @@ export function HistoryPage() {
     queryFn: () =>
       footprintService.listCalculations(
         requiresUserEmailFilter
-          ? { user_email: targetUser?.email }
+          ? { user_email: targetUser?.email ?? undefined }
           : undefined
       ),
     enabled: !!targetUserId && (!requiresUserEmailFilter || !!targetUser?.email),

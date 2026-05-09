@@ -7,12 +7,13 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   testDir: './specs',
+  testMatch: '**/*.e2e.ts',
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: 1,
   reporter: [
-    ['html', { outputFolder: '../test-results/playwright-report' }],
+    ['html', { outputFolder: '../playwright-report' }],
     ['list'],
   ],
   use: {
