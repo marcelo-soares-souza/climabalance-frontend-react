@@ -2,7 +2,7 @@ ARG BUILD_VERSION=development
 ARG BUILD_TIMESTAMP
 
 # --- Stage 1: Build ---
-FROM oven/bun:latest-alpine AS build
+FROM oven/bun:latest AS build
 
 WORKDIR /app
 
