@@ -8,6 +8,7 @@ export interface LoginResponse {
   tokenType: string;
   expiresIn: number;
   refreshExpiresIn: number;
+  csrfToken: string;
 }
 
 export interface RegisterRequest {
@@ -42,6 +43,7 @@ export interface RefreshResponse {
   tokenType: string;
   expiresIn: number;
   refreshExpiresIn: number;
+  csrfToken: string;
 }
 
 export interface JwtPayload {

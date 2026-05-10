@@ -62,6 +62,7 @@ export const useAuthStore = create<AuthState>()(
         const data = await authService.login(email, password);
 
         tokenStorage.setAccessToken(data.accessToken);
+        tokenStorage.setCsrfToken(data.csrfToken);
 
         const baseSession = buildSession(data.accessToken, email);
         const session = baseSession
@@ -111,6 +112,7 @@ export const useAuthStore = create<AuthState>()(
       try {
         const data = await authService.refreshToken();
         tokenStorage.setAccessToken(data.accessToken);
+        tokenStorage.setCsrfToken(data.csrfToken);
         const baseSession = buildSession(data.accessToken);
         const session = baseSession
           ? await hydrateSessionSlug(baseSession)

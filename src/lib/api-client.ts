@@ -21,9 +21,14 @@ function addRefreshSubscriber(cb: (token: string) => void): void {
 
 async function refreshTokenRequest(): Promise<string | null> {
   try {
+    const csrfToken = tokenStorage.getCsrfToken();
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+    if (csrfToken) {
+      headers['x-csrf-token'] = csrfToken;
+    }
     const res = await fetch(`${API_BASE}/auth/refresh`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       credentials: 'include',
       body: JSON.stringify({}),
     });
@@ -33,6 +38,9 @@ async function refreshTokenRequest(): Promise<string | null> {
     const json = await res.json();
     const data = json.data || json;
     tokenStorage.setAccessToken(data.accessToken);
+    if (data.csrfToken) {
+      tokenStorage.setCsrfToken(data.csrfToken);
+    }
     return data.accessToken;
   } catch {
     return null;
@@ -117,6 +125,10 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   if (!(fetchOptions.body instanceof FormData)) {
     headers['Content-Type'] = 'application/json';
   }
+  const currentCsrfToken = tokenStorage.getCsrfToken();
+  if (currentCsrfToken && fetchOptions.method && fetchOptions.method.toUpperCase() !== 'GET') {
+    headers['x-csrf-token'] = currentCsrfToken;
+  }
 
   const res = await fetch(url, { ...fetchOptions, headers, credentials: 'include' });
 
@@ -124,6 +136,10 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
     const newToken = await handleUnauthorized();
     if (newToken) {
       headers['Authorization'] = `Bearer ${newToken}`;
+      const refreshedCsrfToken = tokenStorage.getCsrfToken();
+      if (refreshedCsrfToken && fetchOptions.method && fetchOptions.method.toUpperCase() !== 'GET') {
+        headers['x-csrf-token'] = refreshedCsrfToken;
+      }
       const retryRes = await fetch(url, { ...fetchOptions, headers, credentials: 'include' });
       if (!retryRes.ok) {
         const err = await retryRes.json().catch(() => ({}));

@@ -7,6 +7,7 @@
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "audit": "bun audit",
     "test": "bun test --pass-with-no-tests",
     "preview": "vite preview",
     "test:e2e": "playwright test --config=e2e/playwright.config.ts",
@@ -59,5 +60,11 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.59.2",
     "vite": "^7.3.3"
+  },
+  "overrides": {
+    "flatted": "^3.4.0",
+    "picomatch": "^4.0.4",
+    "postcss": "^8.5.10",
+    "rollup": "^4.59.0"
   }
 }
