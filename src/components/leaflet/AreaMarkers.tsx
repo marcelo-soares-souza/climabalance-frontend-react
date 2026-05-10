@@ -8,14 +8,49 @@ import { getCountryName } from "@/lib/countries";
 import { formatCurrency, formatKgCO2e, formatNumber } from "@/lib/format";
 import type { Area } from "@/types/area";
 
+function safeImageUrl(value?: string): string | undefined {
+  if (!value) return undefined;
+  try {
+    const url = new URL(value, window.location.origin);
+    const sameOriginApi =
+      url.origin === window.location.origin && url.pathname.startsWith("/api/v1/");
+    const allowedHttps = url.protocol === "https:";
+    return sameOriginApi || allowedHttps ? url.toString() : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function escapeAttribute(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function appendText(
+  parent: HTMLElement,
+  tagName: keyof HTMLElementTagNameMap,
+  text: string,
+  styles: Partial<CSSStyleDeclaration>,
+): HTMLElement {
+  const element = document.createElement(tagName);
+  element.textContent = text;
+  Object.assign(element.style, styles);
+  parent.appendChild(element);
+  return element;
+}
+
 function areaIcon(hasContributions: boolean, thumbnailUrl?: string): L.DivIcon {
   const size = 36;
   const half = size / 2;
+  const safeThumbnailUrl = safeImageUrl(thumbnailUrl);
 
-  if (thumbnailUrl) {
+  if (safeThumbnailUrl) {
     return L.divIcon({
       className: "",
-      html: `<div style="width:${size}px;height:${size}px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.35);overflow:hidden;background:#e5e7eb;"><img src="${thumbnailUrl}" style="width:100%;height:100%;object-fit:cover;display:block;" alt="" onerror="this.style.display='none';this.parentElement.style.background='${hasContributions ? "#2563EB" : "#0B5F4B"}';this.parentElement.innerHTML='<svg width=18 height=18 viewBox=\\'0 0 24 24\\' fill=\\'none\\'><path d=\\'M12 3 7 10h3l-2 4h3v5h2v-5h3l-2-4h3L12 3Z\\' fill=\\'white\\'/></svg>';this.parentElement.style.display=\\'flex\\';this.parentElement.style.alignItems=\\'center\\';this.parentElement.style.justifyContent=\\'center\\';" /></div>`,
+      html: `<div style="width:${size}px;height:${size}px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.35);overflow:hidden;background:#e5e7eb;"><img src="${escapeAttribute(safeThumbnailUrl)}" style="width:100%;height:100%;object-fit:cover;display:block;" alt="" /></div>`,
       iconSize: [size, size],
       iconAnchor: [half, half],
     });
@@ -75,57 +110,156 @@ export function AreaMarkers({
 
       const hasContributions = (area.totalCompensatedTreesCount ?? 0) > 0;
       const color = hasContributions ? "#2563EB" : "#0B5F4B";
+      const safeThumbnailUrl = safeImageUrl(area.thumbnailUrl);
 
-      let html = "";
-
-      if (area.thumbnailUrl) {
-        html += `<img src="${area.thumbnailUrl}" alt="" style="width:calc(100% + 16px);height:112px;object-fit:cover;border-radius:6px 6px 0 0;margin:-8px -8px 8px -8px;display:block;" />`;
+      if (safeThumbnailUrl) {
+        const image = document.createElement("img");
+        image.src = safeThumbnailUrl;
+        image.alt = "";
+        Object.assign(image.style, {
+          width: "calc(100% + 16px)",
+          height: "112px",
+          objectFit: "cover",
+          borderRadius: "6px 6px 0 0",
+          margin: "-8px -8px 8px -8px",
+          display: "block",
+        });
+        container.appendChild(image);
       }
 
-      html += `<h3 style="font-weight:600;font-size:1.125rem;margin-bottom:6px;line-height:1.25;color:#111;">${area.name}</h3>`;
+      appendText(container, "h3", area.name, {
+        fontWeight: "600",
+        fontSize: "1.125rem",
+        marginBottom: "6px",
+        lineHeight: "1.25",
+        color: "#111",
+      });
 
       const location =
         [area.city, area.state, getCountryName(area.countryCode ?? "")]
           .filter(Boolean)
           .join(", ") || "-";
-      html += `<p style="color:#6b7280;font-size:0.875rem;margin-bottom:8px;">${location}</p>`;
+      appendText(container, "p", location, {
+        color: "#6b7280",
+        fontSize: "0.875rem",
+        marginBottom: "8px",
+      });
 
       if (area.description) {
-        html += `<p style="font-size:0.875rem;color:#6b7280;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;">${area.description}</p>`;
+        appendText(container, "p", area.description, {
+          fontSize: "0.875rem",
+          color: "#6b7280",
+          marginBottom: "8px",
+          display: "-webkit-box",
+          webkitLineClamp: "4",
+          webkitBoxOrient: "vertical",
+          overflow: "hidden",
+        });
       }
 
       if (
         area.pricePerTree != null ||
         area.estimatedKgCO2PerTreePerYear != null
       ) {
-        html += `<div style="display:flex;gap:16px;margin-bottom:8px;">`;
+        const metrics = document.createElement("div");
+        Object.assign(metrics.style, {
+          display: "flex",
+          gap: "16px",
+          marginBottom: "8px",
+        });
         if (area.pricePerTree != null) {
-          html += `<p style="font-size:0.875rem;"><span style="color:#6b7280;">${t("area.form.pricePerTree")}:</span> <span style="font-weight:500;">${formatCurrency(area.pricePerTree)}</span></p>`;
+          appendText(
+            metrics,
+            "p",
+            `${t("area.form.pricePerTree")}: ${formatCurrency(area.pricePerTree)}`,
+            { fontSize: "0.875rem" },
+          );
         }
-        html += `<p style="font-size:0.875rem;"><span style="color:#6b7280;">${t("compensation.review.estimatedCO2")}:</span> <span style="font-weight:500;">${formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}</span></p>`;
-        html += `</div>`;
+        if (area.estimatedKgCO2PerTreePerYear != null) {
+          appendText(
+            metrics,
+            "p",
+            `${t("compensation.review.estimatedCO2")}: ${formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}`,
+            { fontSize: "0.875rem" },
+          );
+        }
+        container.appendChild(metrics);
       }
 
       if (
         area.plantedTreesCount != null ||
         area.totalCompensatedTreesCount != null
       ) {
-        html += `<div style="display:flex;gap:12px;margin-bottom:12px;font-size:0.75rem;color:#6b7280;">`;
+        const trees = document.createElement("div");
+        Object.assign(trees.style, {
+          display: "flex",
+          gap: "12px",
+          marginBottom: "12px",
+          fontSize: "0.75rem",
+          color: "#6b7280",
+        });
         if (area.plantedTreesCount != null) {
-          html += `<span>🌲 ${t("map.treesPlanted")}: ${formatNumber(area.plantedTreesCount, "pt-BR", 0)}</span>`;
+          appendText(
+            trees,
+            "span",
+            `${t("map.treesPlanted")}: ${formatNumber(area.plantedTreesCount, "pt-BR", 0)}`,
+            {},
+          );
         }
         if (area.totalCompensatedTreesCount != null) {
-          html += `<span>🌱 ${t("map.treesCompensated")}: ${formatNumber(area.totalCompensatedTreesCount, "pt-BR", 0)}</span>`;
+          appendText(
+            trees,
+            "span",
+            `${t("map.treesCompensated")}: ${formatNumber(area.totalCompensatedTreesCount, "pt-BR", 0)}`,
+            {},
+          );
         }
-        html += `</div>`;
+        container.appendChild(trees);
       }
 
-      html += `<div style="display:flex;gap:8px;margin-top:8px;">`;
-      html += `<button class="cb-details-btn" data-area-id="${area.id}" style="flex:1;padding:6px 12px;font-size:0.875rem;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;color:#374151;">${t("common.details")}</button>`;
-      html += `<button class="cb-compensate-btn" data-area-id="${area.id}" style="flex:1;padding:6px 12px;font-size:0.875rem;border:none;border-radius:6px;background:${color};color:#fff;cursor:pointer;font-weight:500;">${t("map.compensate")}</button>`;
-      html += `</div>`;
+      const actions = document.createElement("div");
+      Object.assign(actions.style, {
+        display: "flex",
+        gap: "8px",
+        marginTop: "8px",
+      });
 
-      container.innerHTML = html;
+      const detailsButton = document.createElement("button");
+      detailsButton.type = "button";
+      detailsButton.className = "cb-details-btn";
+      detailsButton.dataset.areaId = area.id;
+      detailsButton.textContent = t("common.details");
+      Object.assign(detailsButton.style, {
+        flex: "1",
+        padding: "6px 12px",
+        fontSize: "0.875rem",
+        border: "1px solid #d1d5db",
+        borderRadius: "6px",
+        background: "#fff",
+        cursor: "pointer",
+        color: "#374151",
+      });
+
+      const compensateButton = document.createElement("button");
+      compensateButton.type = "button";
+      compensateButton.className = "cb-compensate-btn";
+      compensateButton.dataset.areaId = area.id;
+      compensateButton.textContent = t("map.compensate");
+      Object.assign(compensateButton.style, {
+        flex: "1",
+        padding: "6px 12px",
+        fontSize: "0.875rem",
+        border: "none",
+        borderRadius: "6px",
+        background: color,
+        color: "#fff",
+        cursor: "pointer",
+        fontWeight: "500",
+      });
+
+      actions.appendChild(detailsButton);
+      actions.appendChild(compensateButton);
+      container.appendChild(actions);
 
       container
         .querySelector(".cb-details-btn")
