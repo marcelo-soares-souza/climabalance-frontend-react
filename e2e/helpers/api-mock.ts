@@ -129,6 +129,8 @@ function handleMockRoute(method: string, path: string, url: URL, request: { post
   const areaMediaUploadMatch = path.match(/^\/areas\/([^/]+)\/media$/);
   if (areaMediaUploadMatch && method === 'POST') return jsonResponse({ id: 'media-new', type: 'image', url: '/media/test.png' });
 
+  if (path.match(/^\/areas\/media\/([^/]+)\/(file|thumbnail)$/) && method === 'GET') return jsonResponse({});
+
   if (path.match(/^\/areas\/media\/([^/]+)$/) && method === 'DELETE') return jsonResponse({ message: 'Deleted' });
 
   const areaSubmitAuditMatch = path.match(/^\/areas\/([^/]+)\/submit-audit$/);

@@ -20,6 +20,7 @@ export async function loginAsUser(page: Page, roles: string[] = ['individual']) 
   await page.waitForLoadState('networkidle');
   await page.evaluate((t) => {
     localStorage.setItem('cb_locale', 'pt-BR');
+    localStorage.setItem('cb_csrf_token', 'test-csrf-token');
     sessionStorage.setItem('cb_access_token', t);
   }, token);
 }

@@ -25,8 +25,8 @@ ARG BUILD_TIMESTAMP
 RUN bun run build
 
 # Generate version.json
-RUN if [ -z "$BUILD_TIMESTAMP" ]; then BUILD_TIMESTAMP=$(date +%s); fi && \
-    echo "{\"buildId\":\"${BUILD_VERSION}\",\"timestamp\":${BUILD_TIMESTAMP}}" > /app/dist/version.json
+RUN timestamp="${BUILD_TIMESTAMP:-$(date +%s)}"; \
+    printf '{"buildId":"%s","timestamp":%s}\n' "${BUILD_VERSION}" "${timestamp}" > /app/dist/version.json
 
 # --- Stage 2: Serve ---
 FROM nginxinc/nginx-unprivileged:1.27-alpine

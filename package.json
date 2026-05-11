@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "audit": "bun audit",
     "test": "bun test --pass-with-no-tests",
+    "scan:bundle-secrets": "bun scripts/scan-build-secrets.ts",
     "preview": "vite preview",
     "test:e2e": "playwright test --config=e2e/playwright.config.ts",
     "test:e2e:ui": "playwright test --ui",

@@ -26,6 +26,7 @@ export const MOCK_AUTH = {
     tokenType: 'Bearer',
     expiresIn: 3600,
     refreshExpiresIn: 86400,
+    csrfToken: 'test-csrf-token',
   },
   register: {
     id: MOCK_USER_ID,
