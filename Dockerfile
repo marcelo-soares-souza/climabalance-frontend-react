@@ -29,7 +29,7 @@ RUN timestamp="${BUILD_TIMESTAMP:-$(date +%s)}"; \
     printf '{"buildId":"%s","timestamp":%s}\n' "${BUILD_VERSION}" "${timestamp}" > /app/dist/version.json
 
 # --- Stage 2: Serve ---
-FROM nginxinc/nginx-unprivileged:1.27-alpine
+FROM nginxinc/nginx-unprivileged:1.30-alpine
 
 USER root
 RUN apk add --no-cache apache2-utils
