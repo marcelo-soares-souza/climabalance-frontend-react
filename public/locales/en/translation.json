@@ -44,9 +44,9 @@
       "revoked": "Revoked"
     },
     "roles": {
-      "individual": "Individual",
+      "individual": "Supporter",
       "legal_entity": "Legal Entity",
-      "producer": "Producer",
+      "producer": "Forester",
       "administrator": "Administrator",
       "analyst": "Analyst"
     }
@@ -80,11 +80,12 @@
       "role": "Account type",
       "roleHelpAria": "Help about account types",
       "roleHelpTitle": "Choose the type that best matches how you will use the platform.",
-      "roleIndividual": "Individual",
-      "roleIndividualDescription": "For personal use, supporting projects, and tracking your individual impact.",
+      "roleIndividual": "Supporter",
+      "roleIndividualDescription": "To support projects, offset emissions, and track your impact.",
+      "roleIndividualAction": "I want to support",
       "roleLegalEntity": "Legal Entity",
       "roleLegalEntityDescription": "For companies and organizations that want to manage impact, support, and institutional certificates.",
-      "roleProducer": "Producer",
+      "roleProducer": "Forester",
       "roleProducerDescription": "For people responsible for ecological areas and projects who want to register, update, and receive support.",
       "rolePlaceholder": "Select an account type",
       "humanCheckLabel": "Answer",
@@ -181,7 +182,7 @@
     "welcome": {
       "title": "Welcome to ClimaBalance",
       "description": "A climate impact platform focused on supporting Agroecology, Agroforestry, Permaculture, Organic Agriculture, and other ecological farming projects.",
-      "transferNotice": "Contribution amounts are transferred to the producer responsible for the area, with a fee charged for platform maintenance and evolution.",
+      "transferNotice": "Contribution amounts are transferred to the forester responsible for the area, with a fee charged for platform maintenance and evolution.",
       "inDevelopment": "Project in development",
       "getStarted": "Get Started",
       "exploreMap": "Explore Map",
@@ -222,7 +223,7 @@
     }
   },
   "directory": {
-    "title": "Producers and supporters",
+    "title": "Foresters and supporters",
     "description": "Meet the people behind ClimaBalance",
     "noUsers": "No profiles found",
     "areas": "Areas",
@@ -242,7 +243,7 @@
       "title": "A platform that turns climate intention into traceable action",
       "paragraph1": "ClimaBalance was created to make carbon compensation clearer, more trustworthy, and more connected to the territory. It helps users understand emissions and direct support to audited projects that combine environmental restoration with ecological agricultural production.",
       "paragraph2": "Instead of treating compensation as something abstract, the platform structures the process with an interactive map, socio-environmental criteria, contribution traceability, and validated impact certificates, prioritizing initiatives such as Agroecology, Agroforestry, Permaculture, and Organic Agriculture.",
-      "paragraph3": "When a contribution is made, the amount is transferred to the producer responsible for the supported area, while the platform charges a fee to sustain ongoing maintenance and evolution."
+      "paragraph3": "When a contribution is made, the amount is transferred to the forester responsible for the supported area, while the platform charges a fee to sustain ongoing maintenance and evolution."
     },
     "partnerCall": {
       "label": "Partnerships",
@@ -259,7 +260,7 @@
       "step2Title": "Choose on the map",
       "step2Description": "Users explore audited areas and projects, compare initiative details, and choose where to direct their compensation.",
       "step3Title": "Compensate and validate",
-      "step3Description": "After compensation, the platform records the operation, transfers the amount to the producer responsible for the area, charges a maintenance and evolution fee, and provides a certificate with validation mechanisms."
+      "step3Description": "After compensation, the platform records the operation, transfers the amount to the forester responsible for the area, charges a maintenance and evolution fee, and provides a certificate with validation mechanisms."
     },
     "objectives": {
       "label": "Objectives",
@@ -289,19 +290,19 @@
     "featuresLabel": "Features",
     "possibilitiesLabel": "Possibilities",
     "tabs": {
-      "individual": "Individual",
+      "individual": "Supporter",
       "legalEntity": "Legal Entity",
-      "producer": "Producer"
+      "producer": "Forester"
     },
     "individual": {
-      "title": "Individual",
-      "summary": "An account for people who want to calculate their footprint, support projects, and track impact.",
-      "forWho": "Best for individual users and supporters.",
+      "title": "Supporter",
+      "summary": "An account for people who want to support projects, offset emissions, and track their impact.",
+      "forWho": "Best for those who want to support environmental projects and track their impact.",
       "steps": {
         "title": "How it works",
         "step1": {
           "title": "Create account",
-          "description": "Sign up as an individual."
+          "description": "Sign up as a supporter."
         },
         "step2": {
           "title": "Calculate footprint",
@@ -332,7 +333,7 @@
         "item2": "Support audited projects.",
         "item3": "Keep records of completed offsets."
       },
-      "cta": "Create individual account"
+      "cta": "I want to support"
     },
     "legalEntity": {
       "title": "Legal Entity",
@@ -376,14 +377,14 @@
       "cta": "Create institutional account"
     },
     "producer": {
-      "title": "Producer",
+      "title": "Forester",
       "summary": "An account for people managing ecological areas or projects who want to register them on the platform.",
-      "forWho": "Best for producers and area managers.",
+      "forWho": "Best for foresters and area managers.",
       "steps": {
         "title": "How it works",
         "step1": {
           "title": "Create account",
-          "description": "Sign up as a producer."
+          "description": "Sign up as a forester."
         },
         "step2": {
           "title": "Register area",
@@ -399,7 +400,7 @@
         },
         "step5": {
           "title": "Receive support",
-          "description": "Once active, the producer receives contribution transfers minus the platform fee."
+          "description": "Once active, the forester receives contribution transfers minus the platform fee."
         }
       },
       "features": {
@@ -414,7 +415,7 @@
         "item2": "Receive transfers with clear platform fee rules.",
         "item3": "Keep a structured area history."
       },
-      "cta": "Create producer account",
+      "cta": "Create forester account",
       "stripeManual": {
         "label": "Stripe Integration",
         "why": {
@@ -431,7 +432,7 @@
           "title": "Integration step by step",
           "step1": {
             "title": "Connect your account or create from scratch",
-            "desc": "In your producer profile, go to the payments section and click \"Connect to Stripe\". If you don't have a Stripe account yet, the integration form will guide you through creation. Have your CPF/CNPJ, bank account, and email ready."
+            "desc": "In your forester profile, go to the payments section and click \"Connect to Stripe\". If you don't have a Stripe account yet, the integration form will guide you through creation. Have your CPF/CNPJ, bank account, and email ready."
           },
           "step2": {
             "title": "Fill in your details on Stripe",
@@ -453,7 +454,7 @@
     "videosTitle": "Video Tutorial - Step by Step",
     "videoTreePlanting": "Tree Planting Demo",
     "videoCarbonCalc": "Carbon Calculation & Offset",
-    "videoFarmerOnboarding": "Farmer Onboarding Tutorial"
+    "videoFarmerOnboarding": "Forester Onboarding Tutorial"
   },
   "privacy": {
     "exportData": "Export my data",
@@ -680,8 +681,8 @@
     "profile": {
       "typeLabel": "Profile Type",
       "typeSubtitle": "Select the profile type for calculation",
-      "individual": "Individual",
-      "individualSubtitle": "Calculates personal consumption emissions",
+      "individual": "Supporter",
+      "individualSubtitle": "Calculates personal emissions for offsetting",
       "legalEntity": "Legal Entity",
       "legalEntitySubtitle": "Calculates corporate emissions (Scopes 1, 2, and 3)",
       "legal_entity": "Legal Entity"
@@ -1073,7 +1074,7 @@
       "total": "Total cost",
       "remainingTrees": "Trees available for purchase",
       "limitReached": "Maximum purchase capacity has been reached for this area.",
-      "transferNotice": "The paid amount will be transferred to the producer responsible for this area. The platform charges a fee for maintenance and evolution of the service.",
+      "transferNotice": "The paid amount will be transferred to the forester responsible for this area. The platform charges a fee for maintenance and evolution of the service.",
       "tco2eAmount": "Total to offset (tCO2e)",
       "proceed": "Proceed to Payment"
     },
@@ -1121,7 +1122,7 @@
     "trees": "Trees",
     "tco2e": "tCO2e",
     "total": "Total",
-    "transferNotice": "When payment is completed, the amount will be transferred to the producer responsible for the area, with a fee charged for platform maintenance and evolution.",
+    "transferNotice": "When payment is completed, the amount will be transferred to the forester responsible for the area, with a fee charged for platform maintenance and evolution.",
     "paymentDetails": "Payment Details",
     "cardNumber": "Card number",
     "cardholder": "Cardholder name",
@@ -1314,7 +1315,7 @@
     "request.invalid_body": "The submitted data is invalid. Review the fields and try again.",
     "request.validation_failed": "Some fields are invalid. Review the submitted data and try again.",
     "compensation.tree_limit_exceeded": "This area currently has no trees available for purchase.",
-    "compensation.producer_not_onboarded": "This area still cannot receive support because the producer has not completed Stripe payout setup yet.",
+    "compensation.producer_not_onboarded": "This area still cannot receive support because the forester has not completed Stripe payout setup yet.",
     "payment.already_pending": "There is already a pending payment attempt for this compensation. Wait for confirmation or try again shortly.",
     "payment.pix_requires_brl": "Pix is only available for BRL payments.",
     "request.invalid_content_type": "Invalid request format. Please try again.",
@@ -1415,7 +1416,7 @@
   "platform.stripe.step2": "2. Configure STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET, and STRIPE_PLATFORM_FEE_PERCENT in the backend.",
   "platform.stripe.step3": "3. Configure VITE_STRIPE_PUBLISHABLE_KEY in the frontend to enable Stripe.js at checkout.",
   "platform.stripe.step4": "4. Create webhook endpoint at /api/v1/payments/webhook and subscribe to payment_intent.succeeded, payment_intent.payment_failed, and account.updated.",
-  "platform.stripe.step5": "5. Validate payment split in Stripe dashboard (5% platform, remaining connected producer).",
+  "platform.stripe.step5": "5. Validate payment split in Stripe dashboard (5% platform, remaining connected forester).",
   "platform.stripe.step6": "6. Monitor webhook signature errors and duplicate events to ensure reliability.",
   "platform.stripe.required_env_title": "Required variables",
   "platform.stripe.docs_title": "Operational documentation",

@@ -44,9 +44,9 @@
       "revoked": "Revogado"
     },
     "roles": {
-      "individual": "Pessoa Física",
+      "individual": "Apoiador",
       "legal_entity": "Pessoa Jurídica",
-      "producer": "Produtor",
+      "producer": "Reflorestador",
       "administrator": "Administrador",
       "analyst": "Analista"
     }
@@ -80,11 +80,12 @@
       "role": "Tipo de conta",
       "roleHelpAria": "Ajuda sobre tipos de conta",
       "roleHelpTitle": "Escolha o tipo que melhor representa seu uso da plataforma.",
-      "roleIndividual": "Pessoa Física",
-      "roleIndividualDescription": "Para uso pessoal, apoio a projetos e acompanhamento do seu impacto individual.",
+      "roleIndividual": "Apoiador",
+      "roleIndividualDescription": "Para apoiar projetos, compensar emissões e acompanhar seu impacto.",
+      "roleIndividualAction": "Quero apoiar",
       "roleLegalEntity": "Pessoa Jurídica",
       "roleLegalEntityDescription": "Para empresas e organizações que desejam gerenciar impacto, apoio e certificados institucionais.",
-      "roleProducer": "Produtor",
+      "roleProducer": "Reflorestador",
       "roleProducerDescription": "Para responsáveis por áreas e projetos ecológicos que desejam cadastrar, atualizar e receber apoio.",
       "rolePlaceholder": "Selecione um tipo de conta",
       "humanCheckLabel": "Resposta",
@@ -181,7 +182,7 @@
     "welcome": {
       "title": "Bem-vindo ao ClimaBalance",
       "description": "Plataforma de impacto climático voltada ao apoio de projetos de Agroecologia, Agrofloresta, Permacultura, Agricultura Orgânica e outras iniciativas de produção agrícola ecológica.",
-      "transferNotice": "O valor das contribuições é transferido ao produtor responsável pela área, com cobrança de uma taxa para manutenção e evolução da plataforma.",
+      "transferNotice": "O valor das contribuições é transferido ao reflorestador responsável pela área, com cobrança de uma taxa para manutenção e evolução da plataforma.",
       "inDevelopment": "Projeto em desenvolvimento",
       "getStarted": "Começar",
       "exploreMap": "Explorar Mapa",
@@ -222,7 +223,7 @@
     }
   },
   "directory": {
-    "title": "Produtores e apoiadores",
+    "title": "Reflorestadores e apoiadores",
     "description": "Conheça quem faz parte da plataforma ClimaBalance",
     "noUsers": "Nenhum perfil encontrado",
     "areas": "Áreas",
@@ -242,7 +243,7 @@
       "title": "Uma plataforma para transformar intenção climática em ação rastreável",
       "paragraph1": "O ClimaBalance foi criado para tornar a compensação de carbono mais clara, confiável e conectada ao território. A proposta é ajudar usuários a entender suas emissões e direcionar apoio para projetos auditados que combinam restauração ambiental com produção agrícola ecológica.",
       "paragraph2": "Em vez de tratar a compensação como algo abstrato, a plataforma organiza o processo com mapa interativo, critérios socioambientais, rastreabilidade da contribuição e certificados de impacto com validação, priorizando iniciativas como Agroecologia, Agrofloresta, Permacultura e Agricultura Orgânica.",
-      "paragraph3": "Quando uma contribuição é realizada, o valor é transferido ao produtor responsável pela área apoiada, enquanto a plataforma cobra uma taxa para viabilizar sua manutenção contínua e sua evolução."
+      "paragraph3": "Quando uma contribuição é realizada, o valor é transferido ao reflorestador responsável pela área apoiada, enquanto a plataforma cobra uma taxa para viabilizar sua manutenção contínua e sua evolução."
     },
     "partnerCall": {
       "label": "Parcerias",
@@ -259,7 +260,7 @@
       "step2Title": "Escolher no mapa",
       "step2Description": "O usuário explora áreas e projetos auditados, compara informações das iniciativas e seleciona onde deseja direcionar sua compensação.",
       "step3Title": "Compensar e validar",
-      "step3Description": "Após a compensação, a plataforma registra a operação, transfere o valor ao produtor responsável pela área, cobra uma taxa de manutenção e evolução e disponibiliza certificado com mecanismos de validação."
+      "step3Description": "Após a compensação, a plataforma registra a operação, transfere o valor ao reflorestador responsável pela área, cobra uma taxa de manutenção e evolução e disponibiliza certificado com mecanismos de validação."
     },
     "objectives": {
       "label": "Objetivos",
@@ -289,19 +290,19 @@
     "featuresLabel": "Funcionalidades",
     "possibilitiesLabel": "Possibilidades",
     "tabs": {
-      "individual": "Pessoa Física",
+      "individual": "Apoiador",
       "legalEntity": "Pessoa Jurídica",
-      "producer": "Produtor"
+      "producer": "Reflorestador"
     },
     "individual": {
-      "title": "Pessoa Física",
-      "summary": "Conta para quem quer calcular a própria pegada, apoiar projetos e acompanhar impacto.",
-      "forWho": "Ideal para usuários individuais e apoiadores.",
+      "title": "Apoiador",
+      "summary": "Conta para quem quer apoiar projetos, compensar emissões e acompanhar o impacto.",
+      "forWho": "Ideal para quem deseja apoiar projetos ambientais e acompanhar seu impacto.",
       "steps": {
         "title": "Como funciona",
         "step1": {
           "title": "Criar conta",
-          "description": "Cadastre-se como pessoa física."
+          "description": "Cadastre-se como apoiador."
         },
         "step2": {
           "title": "Calcular pegada",
@@ -332,7 +333,7 @@
         "item2": "Apoiar projetos auditados.",
         "item3": "Registrar compensações realizadas."
       },
-      "cta": "Criar conta individual"
+      "cta": "Quero apoiar"
     },
     "legalEntity": {
       "title": "Pessoa Jurídica",
@@ -376,14 +377,14 @@
       "cta": "Criar conta institucional"
     },
     "producer": {
-      "title": "Produtor",
+      "title": "Reflorestador",
       "summary": "Conta para quem gerencia áreas ou projetos ecológicos e quer cadastrá-los na plataforma.",
-      "forWho": "Ideal para produtores e responsáveis por áreas.",
+      "forWho": "Ideal para reflorestadores e responsáveis por áreas.",
       "steps": {
         "title": "Como funciona",
         "step1": {
           "title": "Criar conta",
-          "description": "Cadastre-se como produtor."
+          "description": "Cadastre-se como reflorestador."
         },
         "step2": {
           "title": "Cadastrar área",
@@ -399,7 +400,7 @@
         },
         "step5": {
           "title": "Receber apoio",
-          "description": "Com a área ativa, o produtor recebe transferências das contribuições, descontada a taxa da plataforma."
+          "description": "Com a área ativa, o reflorestador recebe transferências das contribuições, descontada a taxa da plataforma."
         }
       },
       "features": {
@@ -414,7 +415,7 @@
         "item2": "Receber transferências com regras claras sobre taxas da plataforma.",
         "item3": "Manter histórico estruturado da área."
       },
-      "cta": "Criar conta de produtor",
+      "cta": "Criar conta de reflorestador",
       "stripeManual": {
         "label": "Integração com Stripe",
         "why": {
@@ -431,7 +432,7 @@
           "title": "Passo a passo da integração",
           "step1": {
             "title": "Conecte sua conta ou crie do zero",
-            "desc": "No seu perfil de produtor, vá até a seção de pagamentos e clique em \"Conectar ao Stripe\". Se você ainda não tem conta Stripe, o formulário de integração vai guiar você na criação. Tenha em mãos: CPF ou CNPJ, conta bancária e e-mail."
+            "desc": "No seu perfil de reflorestador, vá até a seção de pagamentos e clique em \"Conectar ao Stripe\". Se você ainda não tem conta Stripe, o formulário de integração vai guiar você na criação. Tenha em mãos: CPF ou CNPJ, conta bancária e e-mail."
           },
           "step2": {
             "title": "Preencha seus dados no Stripe",
@@ -453,7 +454,7 @@
     "videosTitle": "Tutorial em Vídeos - Passo a Passo",
     "videoTreePlanting": "Plantio de Árvores",
     "videoCarbonCalc": "Cálculo de Carbono e Compensação",
-    "videoFarmerOnboarding": "Cadastro do Produtor"
+    "videoFarmerOnboarding": "Cadastro do Reflorestador"
   },
   "privacy": {
     "exportData": "Exportar meus dados",
@@ -680,8 +681,8 @@
     "profile": {
       "typeLabel": "Tipo de Perfil",
       "typeSubtitle": "Selecione o tipo de perfil para o cálculo",
-      "individual": "Pessoa Física",
-      "individualSubtitle": "Calcula emissões de consumo pessoal",
+      "individual": "Apoiador",
+      "individualSubtitle": "Calcula emissões pessoais para compensação",
       "legalEntity": "Pessoa Jurídica",
       "legalEntitySubtitle": "Calcula emissões empresariais (Escopos 1, 2 e 3)",
       "legal_entity": "Pessoa Jurídica"
@@ -1073,7 +1074,7 @@
       "total": "Custo total",
       "remainingTrees": "Árvores disponíveis para compra",
       "limitReached": "Capacidade máxima de compra atingida para esta área.",
-      "transferNotice": "O valor pago será transferido ao produtor responsável por esta área. A plataforma cobra uma taxa para manutenção e evolução do serviço.",
+      "transferNotice": "O valor pago será transferido ao reflorestador responsável por esta área. A plataforma cobra uma taxa para manutenção e evolução do serviço.",
       "tco2eAmount": "Total a compensar (tCO₂e)",
       "proceed": "Prosseguir para Pagamento"
     },
@@ -1121,7 +1122,7 @@
     "trees": "Árvores",
     "tco2e": "tCO₂e",
     "total": "Total",
-    "transferNotice": "Ao concluir o pagamento, o valor será transferido ao produtor responsável pela área, com cobrança de uma taxa para manutenção e evolução da plataforma.",
+    "transferNotice": "Ao concluir o pagamento, o valor será transferido ao reflorestador responsável pela área, com cobrança de uma taxa para manutenção e evolução da plataforma.",
     "paymentDetails": "Dados do Pagamento",
     "cardNumber": "Número do cartão",
     "cardholder": "Nome do titular",
@@ -1314,7 +1315,7 @@
     "request.invalid_body": "Os dados enviados são inválidos. Revise os campos e tente novamente.",
     "request.validation_failed": "Alguns campos são inválidos. Revise os dados informados e tente novamente.",
     "compensation.tree_limit_exceeded": "Esta área não possui árvores disponíveis para compra no momento.",
-    "compensation.producer_not_onboarded": "Esta área ainda não pode receber suporte porque o produtor ainda não concluiu a configuração de recebimento no Stripe.",
+    "compensation.producer_not_onboarded": "Esta área ainda não pode receber suporte porque o reflorestador ainda não concluiu a configuração de recebimento no Stripe.",
     "payment.already_pending": "Já existe uma tentativa de pagamento pendente para esta compensação. Aguarde a confirmação ou tente novamente em instantes.",
     "payment.pix_requires_brl": "Pix disponível apenas para pagamentos em BRL.",
     "request.invalid_content_type": "Formato de envio inválido. Tente novamente.",
@@ -1415,7 +1416,7 @@
   "platform.stripe.step2": "2. Configure as variáveis STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET e STRIPE_PLATFORM_FEE_PERCENT no backend.",
   "platform.stripe.step3": "3. Configure VITE_STRIPE_PUBLISHABLE_KEY no frontend para habilitar Stripe.js no checkout.",
   "platform.stripe.step4": "4. Crie endpoint de webhook em /api/v1/payments/webhook e assine os eventos payment_intent.succeeded, payment_intent.payment_failed e account.updated.",
-  "platform.stripe.step5": "5. Valide no dashboard Stripe o split da cobrança (5% plataforma, restante produtor conectado).",
+  "platform.stripe.step5": "5. Valide no dashboard Stripe o split da cobrança (5% plataforma, restante reflorestador conectado).",
   "platform.stripe.step6": "6. Monitore erros de assinatura de webhook e eventos duplicados para garantir confiabilidade.",
   "platform.stripe.required_env_title": "Variáveis obrigatórias",
   "platform.stripe.docs_title": "Documentação operacional",

@@ -44,9 +44,9 @@
       "revoked": "Révoqué"
     },
     "roles": {
-      "individual": "Particulier",
+      "individual": "Supporter",
       "legal_entity": "Personne morale",
-      "producer": "Producteur",
+      "producer": "Reboiseur",
       "administrator": "Administrateur",
       "analyst": "Analyste"
     }
@@ -80,11 +80,12 @@
       "role": "Type de compte",
       "roleHelpAria": "Aide sur les types de compte",
       "roleHelpTitle": "Choisissez le type qui correspond le mieux à votre usage de la plateforme.",
-      "roleIndividual": "Particulier",
-      "roleIndividualDescription": "Pour un usage personnel, le soutien de projets et le suivi de votre impact individuel.",
+      "roleIndividual": "Supporter",
+      "roleIndividualDescription": "Pour soutenir des projets, compenser des émissions et suivre votre impact.",
+      "roleIndividualAction": "Je veux soutenir",
       "roleLegalEntity": "Personne morale",
       "roleLegalEntityDescription": "Pour les entreprises et organisations qui souhaitent gérer leur impact, leur soutien et leurs certificats institutionnels.",
-      "roleProducer": "Producteur",
+      "roleProducer": "Reboiseur",
       "roleProducerDescription": "Pour les responsables de zones et de projets écologiques qui souhaitent enregistrer, mettre à jour et recevoir du soutien.",
       "rolePlaceholder": "Sélectionnez un type de compte",
       "humanCheckLabel": "Réponse",
@@ -181,7 +182,7 @@
     "welcome": {
       "title": "Bienvenue sur ClimaBalance",
       "description": "Plateforme d'impact climatique dédiée au soutien de projets d'Agroécologie, d'Agroforesterie, de Permaculture, d'Agriculture Biologique et d'autres initiatives de production agricole écologique.",
-      "transferNotice": "Le montant des contributions est transféré au producteur responsable de la zone, avec des frais prélevés pour la maintenance et l'évolution de la plateforme.",
+      "transferNotice": "Le montant des contributions est transféré au reboiseur responsable de la zone, avec des frais prélevés pour la maintenance et l'évolution de la plateforme.",
       "inDevelopment": "Projet en développement",
       "getStarted": "Commencer",
       "exploreMap": "Explorer la Carte",
@@ -222,7 +223,7 @@
     }
   },
   "directory": {
-    "title": "Producteurs et soutiens",
+    "title": "Reboiseurs et soutiens",
     "description": "Découvrez les personnes derrière ClimaBalance",
     "noUsers": "Aucun profil trouvé",
     "areas": "Zones",
@@ -242,7 +243,7 @@
       "title": "Une plateforme qui transforme l'intention climatique en action traçable",
       "paragraph1": "ClimaBalance a été créé pour rendre la compensation carbone plus claire, plus fiable et plus connectée au territoire. La plateforme aide les utilisateurs à comprendre leurs émissions et à orienter leur soutien vers des projets audités qui combinent restauration environnementale et production agricole écologique.",
       "paragraph2": "Au lieu de traiter la compensation comme quelque chose d'abstrait, la plateforme structure le processus avec une carte interactive, des critères socio-environnementaux, une traçabilité des contributions et des certificats validés d'impact, en priorisant des initiatives comme l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique.",
-      "paragraph3": "Lorsqu'une contribution est réalisée, le montant est transféré au producteur responsable de la zone soutenue, tandis que la plateforme prélève des frais pour assurer sa maintenance continue et son évolution."
+      "paragraph3": "Lorsqu'une contribution est réalisée, le montant est transféré au reboiseur responsable de la zone soutenue, tandis que la plateforme prélève des frais pour assurer sa maintenance continue et son évolution."
     },
     "partnerCall": {
       "label": "Partenariats",
@@ -259,7 +260,7 @@
       "step2Title": "Choisir sur la carte",
       "step2Description": "Les utilisateurs explorent des zones et des projets audités, comparent les informations des initiatives et choisissent où orienter leur compensation.",
       "step3Title": "Compenser et valider",
-      "step3Description": "Après la compensation, la plateforme enregistre l'opération, transfère le montant au producteur responsable de la zone, prélève des frais de maintenance et d'évolution et fournit un certificat avec des mécanismes de validation."
+      "step3Description": "Après la compensation, la plateforme enregistre l'opération, transfère le montant au reboiseur responsable de la zone, prélève des frais de maintenance et d'évolution et fournit un certificat avec des mécanismes de validation."
     },
     "objectives": {
       "label": "Objectifs",
@@ -289,19 +290,19 @@
     "featuresLabel": "Fonctionnalités",
     "possibilitiesLabel": "Possibilités",
     "tabs": {
-      "individual": "Particulier",
+      "individual": "Supporter",
       "legalEntity": "Personne morale",
-      "producer": "Producteur"
+      "producer": "Reboiseur"
     },
     "individual": {
-      "title": "Particulier",
-      "summary": "Compte pour les personnes qui veulent calculer leur empreinte, soutenir des projets et suivre leur impact.",
-      "forWho": "Idéal pour les utilisateurs individuels et les soutiens.",
+      "title": "Supporter",
+      "summary": "Compte pour soutenir des projets, compenser des émissions et suivre votre impact.",
+      "forWho": "Idéal pour ceux qui souhaitent soutenir des projets environnementaux et suivre leur impact.",
       "steps": {
         "title": "Comment cela fonctionne",
         "step1": {
           "title": "Créer un compte",
-          "description": "Inscrivez-vous comme particulier."
+          "description": "Inscrivez-vous comme supporter."
         },
         "step2": {
           "title": "Calculer l'empreinte",
@@ -332,7 +333,7 @@
         "item2": "Soutenir des projets audités.",
         "item3": "Conserver un registre des compensations."
       },
-      "cta": "Créer un compte particulier"
+      "cta": "Je veux soutenir"
     },
     "legalEntity": {
       "title": "Personne morale",
@@ -376,14 +377,14 @@
       "cta": "Créer un compte institutionnel"
     },
     "producer": {
-      "title": "Producteur",
+      "title": "Reboiseur",
       "summary": "Compte pour les personnes qui gèrent des zones ou projets écologiques et souhaitent les enregistrer sur la plateforme.",
-      "forWho": "Idéal pour les producteurs et responsables de zones.",
+      "forWho": "Idéal pour les reboiseurs et responsables de zones.",
       "steps": {
         "title": "Comment cela fonctionne",
         "step1": {
           "title": "Créer un compte",
-          "description": "Inscrivez-vous comme producteur."
+          "description": "Inscrivez-vous comme reboiseur."
         },
         "step2": {
           "title": "Enregistrer une zone",
@@ -399,7 +400,7 @@
         },
         "step5": {
           "title": "Recevoir du soutien",
-          "description": "Une fois la zone active, le producteur reçoit les transferts des contributions, déduction faite des frais de la plateforme."
+          "description": "Une fois la zone active, le reboiseur reçoit les transferts des contributions, déduction faite des frais de la plateforme."
         }
       },
       "features": {
@@ -414,7 +415,7 @@
         "item2": "Recevoir des transferts avec des règles claires sur les frais de la plateforme.",
         "item3": "Conserver un historique structuré de la zone."
       },
-      "cta": "Créer un compte producteur",
+      "cta": "Créer un compte reboiseur",
       "stripeManual": {
         "label": "Intégration Stripe",
         "why": {
@@ -431,7 +432,7 @@
           "title": "Intégration pas à pas",
           "step1": {
             "title": "Connectez votre compte ou créez-en un",
-            "desc": "Dans votre profil producteur, allez dans la section paiements et cliquez sur \"Se connecter à Stripe\". Si vous n'avez pas encore de compte Stripe, le formulaire d'intégration vous guidera pour en créer un. Ayez sous la main : CPF ou CNPJ, compte bancaire et e-mail."
+            "desc": "Dans votre profil reboiseur, allez dans la section paiements et cliquez sur \"Se connecter à Stripe\". Si vous n'avez pas encore de compte Stripe, le formulaire d'intégration vous guidera pour en créer un. Ayez sous la main : CPF ou CNPJ, compte bancaire et e-mail."
           },
           "step2": {
             "title": "Remplissez vos données sur Stripe",
@@ -453,7 +454,7 @@
     "videosTitle": "Tutoriel Vidéo - Pas à Pas",
     "videoTreePlanting": "Plantation d'Arbres",
     "videoCarbonCalc": "Calcul Carbone et Compensation",
-    "videoFarmerOnboarding": "Inscription du Producteur"
+    "videoFarmerOnboarding": "Inscription du Reboiseur"
   },
   "privacy": {
     "exportData": "Exporter mes données",
@@ -680,8 +681,8 @@
     "profile": {
       "typeLabel": "Type de Profil",
       "typeSubtitle": "Sélectionnez le type de profil pour le calcul",
-      "individual": "Particulier",
-      "individualSubtitle": "Calcule les émissions de consommation personnelle",
+      "individual": "Supporter",
+      "individualSubtitle": "Calcule les émissions personnelles pour la compensation",
       "legalEntity": "Personne Morale",
       "legalEntitySubtitle": "Calcule les émissions d'entreprise (Scopes 1, 2 et 3)",
       "legal_entity": "Personne Morale"
@@ -1073,7 +1074,7 @@
       "total": "Coût total",
       "remainingTrees": "Arbres disponibles à l'achat",
       "limitReached": "La capacité maximale d'achat a été atteinte pour cette zone.",
-      "transferNotice": "Le montant payé sera transféré au producteur responsable de cette zone. La plateforme prélève des frais pour la maintenance et l'évolution du service.",
+      "transferNotice": "Le montant payé sera transféré au reboiseur responsable de cette zone. La plateforme prélève des frais pour la maintenance et l'évolution du service.",
       "tco2eAmount": "Total à compenser (tCO2e)",
       "proceed": "Continuer vers le Paiement"
     },
@@ -1121,7 +1122,7 @@
     "trees": "Arbres",
     "tco2e": "tCO2e",
     "total": "Total",
-    "transferNotice": "Une fois le paiement terminé, le montant sera transféré au producteur responsable de la zone, avec des frais prélevés pour la maintenance et l'évolution de la plateforme.",
+    "transferNotice": "Une fois le paiement terminé, le montant sera transféré au reboiseur responsable de la zone, avec des frais prélevés pour la maintenance et l'évolution de la plateforme.",
     "paymentDetails": "Détails du Paiement",
     "cardNumber": "Numéro de carte",
     "cardholder": "Nom du titulaire",
@@ -1314,7 +1315,7 @@
     "request.invalid_body": "Les données envoyées sont invalides. Vérifiez les champs et réessayez.",
     "request.validation_failed": "Certains champs sont invalides. Vérifiez les données envoyées et réessayez.",
     "compensation.tree_limit_exceeded": "Cette zone n'a actuellement aucun arbre disponible à l'achat.",
-    "compensation.producer_not_onboarded": "Cette zone ne peut pas encore recevoir de soutien, car le producteur n'a pas encore finalisé la configuration de paiement Stripe.",
+    "compensation.producer_not_onboarded": "Cette zone ne peut pas encore recevoir de soutien, car le reboiseur n'a pas encore finalisé la configuration de paiement Stripe.",
     "payment.already_pending": "Une tentative de paiement est déjà en attente pour cette compensation. Attendez la confirmation ou réessayez dans un instant.",
     "payment.pix_requires_brl": "Pix est disponible uniquement pour les paiements en BRL.",
     "request.invalid_content_type": "Format d'envoi invalide. Veuillez réessayer.",
@@ -1415,7 +1416,7 @@
   "platform.stripe.step2": "2. Configurez STRIPE_SECRET_KEY, STRIPE_WEBHOOK_SECRET et STRIPE_PLATFORM_FEE_PERCENT dans le backend.",
   "platform.stripe.step3": "3. Configurez VITE_STRIPE_PUBLISHABLE_KEY dans le frontend pour activer Stripe.js au checkout.",
   "platform.stripe.step4": "4. Créez l'endpoint webhook sur /api/v1/payments/webhook et abonnez payment_intent.succeeded, payment_intent.payment_failed et account.updated.",
-  "platform.stripe.step5": "5. Validez le partage des paiements dans le dashboard Stripe (5% plateforme, reste producteur connecté).",
+  "platform.stripe.step5": "5. Validez le partage des paiements dans le dashboard Stripe (5% plateforme, reste reboiseur connecté).",
   "platform.stripe.step6": "6. Surveillez les erreurs de signature webhook et les événements dupliqués pour garantir la fiabilité.",
   "platform.stripe.required_env_title": "Variables obligatoires",
   "platform.stripe.docs_title": "Documentation opérationnelle",
