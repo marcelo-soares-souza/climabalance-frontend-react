@@ -994,8 +994,9 @@
       "pricePerTree": "Price per Tree",
       "pricePerTCO2e": "Price per tCO2e",
       "defaultHorizonYears": "Default horizon (years)",
-      "treeSpecies": "Tree species",
+      "treeSpecies": "Tree species that will be used in the planting",
       "externalLink": "External link",
+      "links": "Links",
       "error": "Error saving area. Please try again."
     },
     "actions": {

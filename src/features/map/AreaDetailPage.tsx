@@ -46,6 +46,8 @@ import {
   Satellite,
   Eye,
   EyeOff,
+  ExternalLink,
+  Globe,
 } from "lucide-react";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
@@ -412,21 +414,28 @@ export function AreaDetailPage() {
         </Card>
       )}
 
-      {(area.treeSpecies || area.externalLink) && (
+      {area.treeSpecies && (
         <Card>
-          <CardContent className="py-6 space-y-4">
-            {area.treeSpecies && (
-              <div>
-                <h4 className="text-sm font-semibold text-text-secondary mb-1">{t("area.form.treeSpecies")}</h4>
-                <p className="whitespace-pre-line text-text-secondary text-sm">{area.treeSpecies}</p>
-              </div>
-            )}
-            {area.externalLink && (
-              <div>
-                <h4 className="text-sm font-semibold text-text-secondary mb-1">{t("area.form.externalLink")}</h4>
-                <a href={area.externalLink} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm break-all">{area.externalLink}</a>
-              </div>
-            )}
+          <CardHeader>
+            <h3 className="font-medium">{t("area.form.treeSpecies")}</h3>
+          </CardHeader>
+          <CardContent>
+            <p className="whitespace-pre-line text-text-secondary">{area.treeSpecies}</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {area.externalLink && (
+        <Card>
+          <CardHeader>
+            <h3 className="font-medium flex items-center gap-2">
+              <ExternalLink className="h-4 w-4" /> {t("area.form.links")}
+            </h3>
+          </CardHeader>
+          <CardContent className="flex flex-wrap gap-3">
+            <a href={area.externalLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
+              <Globe className="h-4 w-4" /> {t("area.form.externalLink")}
+            </a>
           </CardContent>
         </Card>
       )}

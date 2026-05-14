@@ -994,8 +994,9 @@
       "pricePerTree": "Precio por Árbol",
       "pricePerTCO2e": "Precio por tCO2e",
       "defaultHorizonYears": "Horizonte predeterminado (años)",
-      "treeSpecies": "Especies de árboles",
+      "treeSpecies": "Especies de árboles que se utilizarán en la plantación",
       "externalLink": "Enlace externo",
+      "links": "Enlaces",
       "error": "Error al guardar el área. Inténtelo de nuevo."
     },
     "actions": {
