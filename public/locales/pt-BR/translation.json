@@ -925,7 +925,8 @@
     "noAreas": "Nenhuma área disponível no momento",
     "treesCompensated": "árvores compensadas",
     "streetMap": "Mapa de ruas",
-    "satelliteView": "Satélite"
+    "satelliteView": "Satélite",
+    "plantMoreHint": "{existingCount} já plantadas. Clique no mapa para adicionar mais {maxNewPoints}."
   },
   "area": {
     "available": "Disponível",
@@ -1216,7 +1217,16 @@
     "sessionCreated": "Criada em",
     "sessionExpires": "Expira em",
     "unknownDevice": "Dispositivo desconhecido",
-    "noSessions": "Nenhuma sessão ativa"
+    "noSessions": "Nenhuma sessão ativa",
+    "social": {
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "x": "X",
+      "bluesky": "Bluesky",
+      "mastodon": "Mastodon",
+      "youtube": "YouTube",
+      "linkedin": "LinkedIn"
+    }
   },
   "certificates": {
     "title": "Certificados",
@@ -1236,7 +1246,8 @@
       "invalidDescription": "Este certificado não pôde ser verificado.",
       "issuedAt": "Emitido em",
       "error": "Certificado não encontrado ou dados inválidos. Verifique e tente novamente."
-    }
+    },
+    "downloadLabel": "Baixar PDF"
   },
   "audit": {
     "pending": {
@@ -1563,5 +1574,9 @@
     "send": "Enviar",
     "sending": "Enviando...",
     "success": "Mensagem enviada com sucesso! Entraremos em contato em breve."
+  },
+  "units": {
+    "tco2e": "tCO2e",
+    "kgco2e": "kg CO2e"
   }
 }

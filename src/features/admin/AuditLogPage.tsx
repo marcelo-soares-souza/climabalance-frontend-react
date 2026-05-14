@@ -89,7 +89,7 @@ export function AuditLogPage() {
                     <td className="px-4 py-3">{entry.entityType}/{entry.entityId?.slice(0, 8)}</td>
                     <td className="px-4 py-3 font-mono text-xs whitespace-nowrap">{entry.clientIp ?? '-'}</td>
                     <td className="px-4 py-3">
-                      <Badge variant={entry.success ? 'success' : 'error'}>{entry.success ? 'OK' : `${entry.httpStatus}`}</Badge>
+                      <Badge variant={entry.success ? 'success' : 'error'}>{entry.success ? t('common.ok') : `${entry.httpStatus}`}</Badge>
                     </td>
                   </tr>
                 ))}

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import i18n from '@/config/i18n';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
 import { authService } from '@/services/auth';
@@ -61,7 +62,7 @@ function formatProfileTCO2e(value: number): { amount: string; unit: string } {
       minimumFractionDigits: decimals,
       maximumFractionDigits: decimals,
     }).format(value),
-    unit: 'tCO2e',
+    unit: i18n.t('units.tco2e'),
   };
 }
 
@@ -325,37 +326,37 @@ export function ProfilePage() {
             )}
             {profile.instagramUrl && (
               <a href={profile.instagramUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
-                <Camera className="h-4 w-4" /> Instagram
+                <Camera className="h-4 w-4" /> {t('profile.social.instagram')}
               </a>
             )}
             {profile.facebookUrl && (
               <a href={profile.facebookUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
-                Facebook
+                {t('profile.social.facebook')}
               </a>
             )}
             {profile.xUrl && (
               <a href={profile.xUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
-                X
+                {t('profile.social.x')}
               </a>
             )}
             {profile.blueskyUrl && (
               <a href={profile.blueskyUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
-                Bluesky
+                {t('profile.social.bluesky')}
               </a>
             )}
             {profile.mastodonUrl && (
               <a href={profile.mastodonUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
-                Mastodon
+                {t('profile.social.mastodon')}
               </a>
             )}
             {profile.youtubeUrl && (
               <a href={profile.youtubeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
-                YouTube
+                {t('profile.social.youtube')}
               </a>
             )}
             {profile.linkedinUrl && (
               <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-primary hover:underline">
-                LinkedIn
+                {t('profile.social.linkedin')}
               </a>
             )}
           </CardContent>

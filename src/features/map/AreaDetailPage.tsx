@@ -296,9 +296,9 @@ export function AreaDetailPage() {
   };
   const perTreeDisplay = formatMetric(
     (area.estimatedKgCO2PerTreePerYear ?? 0) / 1000,
-    "tCO2e",
+    t("units.tco2e"),
   );
-  const compensatedDisplay = formatMetric(totalEstimatedTCO2e, "tCO2e");
+  const compensatedDisplay = formatMetric(totalEstimatedTCO2e, t("units.tco2e"));
 
   const isOwner = userId === area.ownerUserId;
   const producerReadyToReceiveSupport =

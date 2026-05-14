@@ -332,7 +332,7 @@ export function TreePlantingPage() {
           {areaMode
             ? t("map.areaModeHint")
             : maxNewPoints > 0 && existingCount > 0
-              ? `${existingCount} j\u00e1 plantadas. Clique no mapa para adicionar mais ${maxNewPoints}.`
+              ? t("map.plantMoreHint", { existingCount, maxNewPoints })
               : maxNewPoints === 0 && existingCount > 0
                 ? t("map.allPlantedHint")
                 : t("map.plantTreesHint")}

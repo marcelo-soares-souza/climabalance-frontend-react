@@ -61,7 +61,7 @@ export function CertificatesPage() {
                       <InfoTooltip ariaLabel={t('tooltips.certificates.validationAria')} panelClassName="left-auto right-0" content={<p>{t('tooltips.certificates.status')}</p>} />
                     </div>
                     <Button variant="outline" size="sm" onClick={() => handleDownload(cert.id, cert.certificateNumber)}>
-                      <Download className="h-3 w-3 mr-1" /> PDF
+                      <Download className="h-3 w-3 mr-1" /> {t('certificates.downloadLabel')}
                     </Button>
                   </div>
                 </div>

@@ -39,7 +39,7 @@ export function ResultBreakdownChart({ breakdown }: Props) {
               <Cell key={i} fill={entry.color} />
             ))}
           </Pie>
-          <Tooltip formatter={(value: unknown) => `${Number(value).toFixed(1)} kg CO2e`} />
+          <Tooltip formatter={(value: unknown) => `${Number(value).toFixed(1)} ${t('units.kgco2e')}`} />
           <Legend />
         </PieChart>
       </ResponsiveContainer>

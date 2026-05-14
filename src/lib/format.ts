@@ -28,11 +28,11 @@ export function formatDateTime(dateStr: string, locale?: string): string {
 }
 
 export function formatTCO2e(value: number): string {
-  return `${formatNumber(value)} tCO2e`;
+  return `${formatNumber(value)} ${i18n.t('units.tco2e')}`;
 }
 
 export function formatKgCO2e(value: number): string {
-  return `${formatNumber(value, undefined, 1)} kg CO2e`;
+  return `${formatNumber(value, undefined, 1)} ${i18n.t('units.kgco2e')}`;
 }
 
 export function maskDocumentNumber(value: string): string {
