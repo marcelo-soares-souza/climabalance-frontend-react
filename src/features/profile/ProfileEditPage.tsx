@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
 import { usersService } from '@/services/users';
@@ -178,7 +179,9 @@ export function ProfileEditPage() {
     : null;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Editar Perfil" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
         <ArrowLeft className="h-4 w-4" /> {t('common.back')}
       </button>
@@ -292,5 +295,6 @@ export function ProfileEditPage() {
         </div>
       </form>
     </div>
+    </>
   );
 }

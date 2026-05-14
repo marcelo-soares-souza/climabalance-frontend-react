@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ErrorBanner } from '@/components/ErrorBanner';
@@ -34,7 +35,9 @@ export function ContactPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Contato" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center gap-3">
         <MessageSquare className="h-6 w-6 text-primary" />
         <h1 className="text-2xl font-bold">{t('contact.title')}</h1>
@@ -76,5 +79,6 @@ export function ContactPage() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

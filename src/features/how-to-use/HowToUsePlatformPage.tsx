@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 import { Leaf, Sprout, ArrowRight, Play } from 'lucide-react';
 // import { Building2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
@@ -148,11 +149,13 @@ function TabPanel({ type }: { type: AccountTab }) {
   );
 
   return (
-    <div className="space-y-6">
-      <Card className="border-0 shadow-sm ring-1 ring-black/5">
-        <CardContent className="space-y-3 py-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-            {t('howToUse.overviewLabel')}
+    <>
+      <SEO title={t('seo.howToUse.title')} description={t('seo.howToUse.description')} />
+      <div className="space-y-6">
+        <Card className="border-0 shadow-sm ring-1 ring-black/5">
+          <CardContent className="space-y-3 py-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+              {t('howToUse.overviewLabel')}
           </p>
           <h2 className="text-3xl font-bold font-display text-text-primary">
             {t(`howToUse.${type}.title`)}
@@ -296,5 +299,6 @@ function TabPanel({ type }: { type: AccountTab }) {
         </section>
       )}
     </div>
+    </>
   );
 }

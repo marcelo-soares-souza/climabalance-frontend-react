@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useAuth } from '@/hooks/use-auth';
 import { Button } from '@/components/ui/Button';
 import { Select } from '@/components/ui/Select';
@@ -69,7 +70,9 @@ export function PrivacyPage() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto space-y-8 py-2">
+    <>
+      <SEO title="Privacidade" />
+      <div className="max-w-3xl mx-auto space-y-8 py-2">
       <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-light to-accent px-8 py-14 text-white">
         <div className="max-w-2xl space-y-4">
           <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium">
@@ -143,5 +146,6 @@ export function PrivacyPage() {
         </div>
       )}
     </div>
+    </>
   );
 }

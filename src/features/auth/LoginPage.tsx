@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/hooks/use-auth';
 import { AuthLayout } from './components/AuthLayout';
@@ -45,7 +46,9 @@ export function LoginPage() {
   };
 
   return (
-    <AuthLayout>
+    <>
+      <SEO title={t('seo.login.title')} />
+      <AuthLayout>
       <h1 className="text-2xl font-bold text-center mb-6">{t('auth.login.title')}</h1>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -87,5 +90,6 @@ export function LoginPage() {
         </p>
       </div>
     </AuthLayout>
+    </>
   );
 }

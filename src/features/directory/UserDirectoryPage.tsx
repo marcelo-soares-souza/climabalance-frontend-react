@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "@/services/users";
 import { Card, CardContent } from "@/components/ui/Card";
@@ -146,9 +147,11 @@ export function UserDirectoryPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">{t("directory.title")}</h1>
+    <>
+      <SEO title={t('seo.userDirectory.title')} />
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-2xl font-bold">{t("directory.title")}</h1>
         <p className="text-text-secondary mt-1">{t("directory.description")}</p>
       </div>
 
@@ -187,5 +190,6 @@ export function UserDirectoryPage() {
         />
       )}
     </div>
+    </>
   );
 }

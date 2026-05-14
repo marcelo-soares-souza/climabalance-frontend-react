@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { stripeService } from '@/services/stripe';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
@@ -83,7 +84,9 @@ export function StripeSetupPage() {
   });
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Configurar Stripe" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">{t('producer.stripe.title')}</h1>
 
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
@@ -264,5 +267,6 @@ export function StripeSetupPage() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

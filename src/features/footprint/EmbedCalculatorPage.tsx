@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useCalculator } from './hooks/use-calculator';
@@ -65,7 +66,9 @@ export function EmbedCalculatorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background p-4">
+    <>
+      <SEO title={t('seo.embedCalculator.title')} description={t('seo.embedCalculator.description')} />
+      <div className="min-h-screen bg-background p-4">
       <div className="max-w-lg mx-auto">
         <div className="flex items-center gap-2 mb-4">
           <Leaf className="h-5 w-5 text-primary" />
@@ -85,5 +88,6 @@ export function EmbedCalculatorPage() {
         )}
       </div>
     </div>
+    </>
   );
 }

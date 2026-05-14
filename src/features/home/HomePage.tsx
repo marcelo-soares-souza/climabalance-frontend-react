@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "@/services/users";
@@ -47,7 +48,9 @@ function UnauthenticatedHome() {
   });
 
   return (
-    <div className="max-w-5xl mx-auto text-center py-2">
+    <>
+      <SEO title={t('seo.home.title')} description={t('seo.home.description')} />
+      <div className="max-w-5xl mx-auto text-center py-2">
       <div className="bg-gradient-to-br from-primary via-primary-light to-accent rounded-3xl px-8 py-6 mb-4 text-white relative overflow-hidden">
         <Leaf className="absolute -top-6 -right-6 h-40 w-40 text-white/5 rotate-12" />
         <Leaf className="absolute -bottom-4 -left-4 h-24 w-24 text-white/5 -rotate-45" />
@@ -209,6 +212,7 @@ function UnauthenticatedHome() {
         </p>
       </div>
     </div>
+    </>
   );
 }
 
@@ -260,10 +264,12 @@ function AuthenticatedHome({ userId, userSlug }: { userId: string; userSlug: str
     climateBalance?.netBalanceTCO2e ?? totalFootprint - totalCompensated;
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-3xl font-bold font-display">
-        {t("home.dashboard.title")}
-      </h1>
+    <>
+      <SEO title={t('seo.home.title')} description={t('seo.home.description')} />
+      <div className="space-y-6">
+        <h1 className="text-3xl font-bold font-display">
+          {t("home.dashboard.title")}
+        </h1>
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -479,6 +485,7 @@ function AuthenticatedHome({ userId, userSlug }: { userId: string; userSlug: str
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }
 

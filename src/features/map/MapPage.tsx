@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 import { useQuery } from "@tanstack/react-query";
 import { MapContainer, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
@@ -99,7 +100,9 @@ export function MapPage() {
   );
 
   return (
-    <div className="space-y-4">
+    <>
+      <SEO title={t('seo.map.title')} description={t('seo.map.description')} />
+      <div className="space-y-4">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <h1 className="text-2xl font-bold">{t("map.title")}</h1>
         <div className="w-48">
@@ -146,5 +149,6 @@ export function MapPage() {
         </p>
       )}
     </div>
+    </>
   );
 }

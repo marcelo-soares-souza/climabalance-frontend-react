@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery } from '@tanstack/react-query';
 import { footprintService } from '@/services/footprint';
 import { usersService } from '@/services/users';
@@ -51,7 +52,9 @@ export function HistoryPage() {
   });
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Histórico" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{t('footprint.history.title')}</h1>
         <Button onClick={() => navigate(newCalculationPath)} size="sm">
@@ -86,5 +89,6 @@ export function HistoryPage() {
         />
       )}
     </div>
+    </>
   );
 }

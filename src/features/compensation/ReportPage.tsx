@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { Button } from '@/components/ui/Button';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
@@ -93,7 +94,9 @@ export function CompensationReportPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Relatório" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <button onClick={() => navigate('/')} className="flex items-center gap-2 text-sm text-primary hover:underline">
         <ArrowLeft className="h-4 w-4" /> {t('common.backToHome')}
       </button>
@@ -196,5 +199,6 @@ export function CompensationReportPage() {
         </Button>
       </div>
     </div>
+    </>
   );
 }

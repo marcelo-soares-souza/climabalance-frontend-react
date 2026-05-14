@@ -1,10 +1,13 @@
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { Card, CardContent } from '@/components/ui/Card';
 
 export function EmbedDemoPage() {
   const { t } = useTranslation();
   return (
-    <div className="max-w-4xl mx-auto py-8 space-y-6">
+    <>
+      <SEO title={t('seo.embedCalculator.title')} description={t('seo.embedCalculator.description')} />
+      <div className="max-w-4xl mx-auto py-8 space-y-6">
       <h1 className="text-2xl font-bold">{t('embed.demo.title')}</h1>
       <p className="text-text-secondary">{t('embed.demo.description')}</p>
       <Card>
@@ -26,5 +29,6 @@ export function EmbedDemoPage() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

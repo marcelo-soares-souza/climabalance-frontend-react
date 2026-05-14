@@ -1,6 +1,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
 import { plantedTreesService } from "@/services/planted-trees";
@@ -261,7 +262,9 @@ export function TreePlantingPage() {
   const totalCompensated = pendingCount?.totalCompensated ?? 0;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-4">
+    <>
+      <SEO title="Plantar Árvores" />
+      <div className="max-w-4xl mx-auto space-y-4">
       <button
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-sm text-primary hover:underline"
@@ -439,5 +442,6 @@ export function TreePlantingPage() {
         </DialogActions>
       </Dialog>
     </div>
+    </>
   );
 }

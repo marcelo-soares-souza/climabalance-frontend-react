@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { useCalculator } from './hooks/use-calculator';
@@ -219,7 +220,9 @@ export function GuestCalculatorPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <SEO title={t('seo.calculator.title')} description={t('seo.calculator.description')} />
+      <div className="space-y-6">
       <h1 className="text-3xl font-bold font-display">{t('footprint.guest.title')}</h1>
       <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3">
         <p className="text-sm font-medium text-primary">{t('footprint.period.label')}</p>
@@ -249,5 +252,6 @@ export function GuestCalculatorPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

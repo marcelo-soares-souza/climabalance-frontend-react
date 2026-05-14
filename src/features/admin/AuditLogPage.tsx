@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery } from '@tanstack/react-query';
 import { auditLogService } from '@/services/audit-log';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -36,7 +37,9 @@ export function AuditLogPage() {
   const hasNext = entries != null && entries.length >= PAGE_SIZE;
 
   return (
-    <div className="space-y-6">
+    <>
+      <SEO title="Registro de Auditoria" />
+      <div className="space-y-6">
       <h1 className="text-2xl font-bold">{t('admin.auditLog.title')}</h1>
       <div className="flex flex-wrap gap-3">
         <div className="relative flex-1 min-w-[200px]">
@@ -123,5 +126,6 @@ export function AuditLogPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

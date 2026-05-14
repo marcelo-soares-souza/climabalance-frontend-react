@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
 import { plantedTreesService } from "@/services/planted-trees";
@@ -317,12 +318,14 @@ export function AreaDetailPage() {
     (isOwner && (area.status === "draft" || area.status === "active"));
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-sm text-primary hover:underline"
-      >
-        <ArrowLeft className="h-4 w-4" /> {t("common.back")}
+    <>
+      <SEO title={area?.name || t('seo.areaDetail.title')} description={area?.shortDescription || t('seo.areaDetail.description')} />
+      <div className="max-w-3xl mx-auto space-y-6">
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-sm text-primary hover:underline"
+        >
+          <ArrowLeft className="h-4 w-4" /> {t("common.back")}
       </button>
 
       <div className="flex items-start justify-between flex-wrap gap-3">
@@ -1020,6 +1023,7 @@ export function AreaDetailPage() {
         </div>
       )}
     </div>
+    </>
   );
 }
 

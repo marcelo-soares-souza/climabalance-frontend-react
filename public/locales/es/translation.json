@@ -1575,6 +1575,75 @@
     "sending": "Enviando...",
     "success": "¡Mensaje enviado con éxito! Le responderemos pronto."
   },
+  "seo": {
+    "home": {
+      "title": "Calculadora de Carbono",
+      "description": "Mida, reduzca y compense su huella de carbono. Calcule sus emisiones de CO₂ y contribuya a un futuro más sostenible."
+    },
+    "about": {
+      "title": "Sobre Nosotros",
+      "description": "Conozca ClimaBalance y nuestra misión de combatir el cambio climático mediante la compensación de carbono y la reforestación."
+    },
+    "howToUse": {
+      "title": "Cómo Usar",
+      "description": "Aprenda a calcular su huella de carbono, explorar áreas de reforestación y compensar sus emisiones con ClimaBalance."
+    },
+    "privacyPolicy": {
+      "title": "Política de Privacidad"
+    },
+    "termsOfUse": {
+      "title": "Términos de Uso"
+    },
+    "map": {
+      "title": "Mapa de Áreas",
+      "description": "Explore áreas de reforestación en el mapa interactivo. Vea proyectos de recuperación ambiental y compensación de carbono."
+    },
+    "publicAreas": {
+      "title": "Áreas Públicas",
+      "description": "Conozca las áreas de reforestación abiertas para contribución. Apoye proyectos de recuperación ambiental."
+    },
+    "calculator": {
+      "title": "Calculadora de Huella de Carbono",
+      "description": "Calcule su huella de carbono gratis. Descubra sus emisiones de CO₂ en transporte, energía, alimentación y más."
+    },
+    "certificateValidation": {
+      "title": "Validar Certificado",
+      "description": "Valide la autenticidad de certificados de compensación de carbono emitidos por ClimaBalance."
+    },
+    "userDirectory": {
+      "title": "Directorio de Usuarios"
+    },
+    "login": {
+      "title": "Iniciar Sesión"
+    },
+    "register": {
+      "title": "Crear Cuenta",
+      "description": "Cree su cuenta en ClimaBalance y comience a medir y compensar su huella de carbono."
+    },
+    "confirmEmail": {
+      "title": "Confirmar Correo"
+    },
+    "passwordReset": {
+      "title": "Restablecer Contraseña"
+    },
+    "passwordResetConfirm": {
+      "title": "Nueva Contraseña"
+    },
+    "accessDenied": {
+      "title": "Acceso Denegado"
+    },
+    "areaDetail": {
+      "title": "Detalles del Área",
+      "description": "Vea información detallada sobre áreas de reforestación, incluyendo progreso de siembra e impacto ambiental."
+    },
+    "profile": {
+      "title": "Perfil"
+    },
+    "embedCalculator": {
+      "title": "Calculadora de Carbono Integrable",
+      "description": "Añada la calculadora de huella de carbono a su sitio web. Herramienta gratuita de medición de emisiones de CO₂."
+    }
+  },
   "units": {
     "tco2e": "tCO2e",
     "kgco2e": "kg CO2e"

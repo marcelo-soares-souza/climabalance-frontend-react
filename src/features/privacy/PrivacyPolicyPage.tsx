@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Clock, Database, FileText, Gavel, Globe, Lock, Mail, ShieldCheck, Trash2, UserRound } from "lucide-react";
 
@@ -113,7 +114,9 @@ export function PrivacyPolicyPage() {
   ];
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 py-2">
+    <>
+      <SEO title={t('seo.privacyPolicy.title')} />
+      <div className="max-w-5xl mx-auto space-y-8 py-2">
       <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-light to-accent px-8 py-14 text-white">
         <div className="max-w-3xl space-y-4">
           <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium">
@@ -173,5 +176,6 @@ export function PrivacyPolicyPage() {
         {t("privacy.footer.lastUpdatedLabel")}: {t("privacy.hero.versionDate")}
       </div>
     </div>
+    </>
   );
 }

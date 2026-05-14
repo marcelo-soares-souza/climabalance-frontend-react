@@ -1575,6 +1575,75 @@
     "sending": "Sending...",
     "success": "Message sent successfully! We will get back to you soon."
   },
+  "seo": {
+    "home": {
+      "title": "Carbon Calculator",
+      "description": "Measure, reduce and offset your carbon footprint. Calculate your CO₂ emissions and contribute to a more sustainable future."
+    },
+    "about": {
+      "title": "About Us",
+      "description": "Learn about ClimaBalance and our mission to fight climate change through carbon offsetting and reforestation."
+    },
+    "howToUse": {
+      "title": "How to Use",
+      "description": "Learn how to calculate your carbon footprint, explore reforestation areas, and offset your emissions with ClimaBalance."
+    },
+    "privacyPolicy": {
+      "title": "Privacy Policy"
+    },
+    "termsOfUse": {
+      "title": "Terms of Use"
+    },
+    "map": {
+      "title": "Area Map",
+      "description": "Explore reforestation areas on the interactive map. View environmental recovery and carbon offset projects."
+    },
+    "publicAreas": {
+      "title": "Public Areas",
+      "description": "Discover reforestation areas open for contribution. Support environmental recovery projects."
+    },
+    "calculator": {
+      "title": "Carbon Footprint Calculator",
+      "description": "Calculate your carbon footprint for free. Discover your CO₂ emissions from transport, energy, food, and more."
+    },
+    "certificateValidation": {
+      "title": "Validate Certificate",
+      "description": "Verify the authenticity of carbon offset certificates issued by ClimaBalance."
+    },
+    "userDirectory": {
+      "title": "User Directory"
+    },
+    "login": {
+      "title": "Sign In"
+    },
+    "register": {
+      "title": "Create Account",
+      "description": "Create your ClimaBalance account and start measuring and offsetting your carbon footprint."
+    },
+    "confirmEmail": {
+      "title": "Confirm Email"
+    },
+    "passwordReset": {
+      "title": "Reset Password"
+    },
+    "passwordResetConfirm": {
+      "title": "New Password"
+    },
+    "accessDenied": {
+      "title": "Access Denied"
+    },
+    "areaDetail": {
+      "title": "Area Details",
+      "description": "View detailed information about reforestation areas, including planting progress and environmental impact."
+    },
+    "profile": {
+      "title": "Profile"
+    },
+    "embedCalculator": {
+      "title": "Embeddable Carbon Calculator",
+      "description": "Add the carbon footprint calculator to your website. Free CO₂ emissions measurement tool."
+    }
+  },
   "units": {
     "tco2e": "tCO2e",
     "kgco2e": "kg CO2e"

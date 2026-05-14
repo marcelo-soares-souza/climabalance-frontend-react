@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { footprintService } from '@/services/footprint';
 import { queryClient } from '@/config/query-client';
@@ -57,7 +58,9 @@ export function CalculationDetailPage() {
   );
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Detalhes do Cálculo" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
         <ArrowLeft className="h-4 w-4" /> {t('common.back')}
       </button>
@@ -160,5 +163,6 @@ export function CalculationDetailPage() {
         loading={deleteMutation.isPending}
       />
     </div>
+    </>
   );
 }

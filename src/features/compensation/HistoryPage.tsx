@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
 import { usersService } from '@/services/users';
@@ -28,7 +29,9 @@ export function CompensationHistoryPage() {
   const page = Math.floor(offset / PAGE_SIZE) + 1;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Histórico de Compensações" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">{t('compensations.title')}</h1>
 
       {isLoading ? (
@@ -90,5 +93,6 @@ export function CompensationHistoryPage() {
         />
       )}
     </div>
+    </>
   );
 }

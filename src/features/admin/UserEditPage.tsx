@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { usersService } from '@/services/users';
 import { queryClient } from '@/config/query-client';
@@ -67,7 +68,9 @@ export function UserEditPage() {
   if (!user) return <div>{t('common.notFound')}</div>;
 
   return (
-    <div className="max-w-lg mx-auto space-y-6">
+    <>
+      <SEO title="Editar Usuário" />
+      <div className="max-w-lg mx-auto space-y-6">
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
         <ArrowLeft className="h-4 w-4" /> {t('common.back')}
       </button>
@@ -96,5 +99,6 @@ export function UserEditPage() {
       <ConfirmDialog open={showDelete} onClose={() => setShowDelete(false)} onConfirm={() => deleteMutation.mutate()}
         title={t('admin.users.deleteTitle')} message={t('admin.users.deleteMessage')} danger loading={deleteMutation.isPending} />
     </div>
+    </>
   );
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { AuthLayout } from './components/AuthLayout';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -60,7 +61,9 @@ export function PasswordResetConfirmPage() {
   }
 
   return (
-    <AuthLayout>
+    <>
+      <SEO title={t('seo.passwordResetConfirm.title')} />
+      <AuthLayout>
       <h1 className="text-2xl font-bold text-center mb-6">{t('auth.passwordReset.confirmTitle')}</h1>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -71,5 +74,6 @@ export function PasswordResetConfirmPage() {
       </form>
       <Link to="/login" className="block text-center mt-4 text-sm text-primary hover:underline">{t('auth.passwordReset.backToLogin')}</Link>
     </AuthLayout>
+    </>
   );
 }

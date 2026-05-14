@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { authService } from "@/services/auth";
 import { useAuth } from "@/hooks/use-auth";
@@ -96,7 +97,9 @@ export function SessionsPage() {
   if (isLoading) return <PageSkeleton />;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Sessões" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <button
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-sm text-primary hover:underline"
@@ -190,5 +193,6 @@ export function SessionsPage() {
         </DialogActions>
       </Dialog>
     </div>
+    </>
   );
 }

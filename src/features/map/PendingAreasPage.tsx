@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useNavigate } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
@@ -59,7 +60,9 @@ export function PendingAreasPage() {
   );
 
   return (
-    <div className="space-y-6">
+    <>
+      <SEO title="Áreas Pendentes" />
+      <div className="space-y-6">
       <h1 className="text-2xl font-bold">{t('audit.pending.title')}</h1>
       {isLoading ? (
         <div className="space-y-4">
@@ -98,5 +101,6 @@ export function PendingAreasPage() {
         </div>
       ) : <EmptyState icon={<FileCheck className="h-12 w-12" />} title={t('audit.pending.empty')} description={t('audit.pending.emptyDescription')} />}
     </div>
+    </>
   );
 }

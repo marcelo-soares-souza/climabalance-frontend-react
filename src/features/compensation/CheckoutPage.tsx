@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
@@ -302,7 +303,9 @@ export function CompensationCheckoutPage() {
   }
 
   return (
-    <div className="max-w-lg mx-auto space-y-6">
+    <>
+      <SEO title="Checkout" />
+      <div className="max-w-lg mx-auto space-y-6">
       <button
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-sm text-primary hover:underline"
@@ -440,5 +443,6 @@ export function CompensationCheckoutPage() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

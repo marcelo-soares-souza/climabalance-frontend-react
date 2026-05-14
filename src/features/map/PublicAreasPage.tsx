@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { SEO } from '@/components/SEO';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -97,9 +98,11 @@ export function PublicAreasPage() {
   );
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">{t('areas.public.title')}</h1>
+    <>
+      <SEO title={t('seo.publicAreas.title')} description={t('seo.publicAreas.description')} />
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-2xl font-bold">{t('areas.public.title')}</h1>
         <p className="text-text-secondary mt-1">{t('areas.public.subtitle')}</p>
       </div>
 
@@ -193,6 +196,7 @@ export function PublicAreasPage() {
         />
       )}
     </div>
+    </>
   );
 }
 

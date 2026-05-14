@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { MapContainer, Marker, TileLayer, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
@@ -175,7 +176,9 @@ export function AreaFormPage() {
   if (isEdit && isLoading) return <PageSkeleton />;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Áreas" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
         <ArrowLeft className="h-4 w-4" /> {t('common.back')}
       </button>
@@ -292,6 +295,7 @@ export function AreaFormPage() {
         </div>
       </form>
     </div>
+    </>
   );
 }
 

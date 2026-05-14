@@ -1,11 +1,14 @@
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { Card, CardContent, CardHeader } from '@/components/ui/Card';
 
 export function StripePlatformSetupPage() {
   const { t } = useTranslation();
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <>
+      <SEO title="Configurar Stripe Platform" />
+      <div className="max-w-3xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">{t('platform.stripe.title')}</h1>
 
       <Card>
@@ -44,5 +47,6 @@ export function StripePlatformSetupPage() {
         </CardContent>
       </Card>
     </div>
+    </>
   );
 }

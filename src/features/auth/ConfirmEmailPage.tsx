@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { AuthLayout } from './components/AuthLayout';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -72,7 +73,9 @@ export function ConfirmEmailPage() {
   }
 
   return (
-    <AuthLayout>
+    <>
+      <SEO title={t('seo.confirmEmail.title')} />
+      <AuthLayout>
       <h1 className="text-2xl font-bold text-center mb-2">{t('auth.confirmEmail.title')}</h1>
       <p className="text-text-secondary text-center mb-6">{t('auth.confirmEmail.description')}</p>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
@@ -88,5 +91,6 @@ export function ConfirmEmailPage() {
         </div>
       </div>
     </AuthLayout>
+    </>
   );
 }

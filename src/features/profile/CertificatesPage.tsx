@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
 import { useParams } from 'react-router-dom';
@@ -39,7 +40,9 @@ export function CertificatesPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Certificados" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <h1 className="text-2xl font-bold">{t('certificates.title')}</h1>
       {isLoading ? <SkeletonList /> : certificates && certificates.length > 0 ? (
         <div className="space-y-4">
@@ -77,5 +80,6 @@ export function CertificatesPage() {
         />
       )}
     </div>
+    </>
   );
 }

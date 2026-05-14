@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -239,7 +240,9 @@ export function CalculatorPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <SEO title={t('seo.calculator.title')} />
+      <div className="space-y-6">
       <h1 className="text-3xl font-bold font-display">{t('footprint.calculator.title')}</h1>
       <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3">
         <p className="text-sm font-medium text-primary">{t('footprint.period.label')}</p>
@@ -283,5 +286,6 @@ export function CalculatorPage() {
         </div>
       </div>
     </div>
+    </>
   );
 }

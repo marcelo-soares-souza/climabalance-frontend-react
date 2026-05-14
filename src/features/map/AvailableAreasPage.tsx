@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useNavigate } from 'react-router-dom';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
@@ -63,7 +64,9 @@ export function AvailableAreasPage() {
   );
 
   return (
-    <div className="space-y-6">
+    <>
+      <SEO title={t('seo.publicAreas.title')} />
+      <div className="space-y-6">
       <div className="flex items-center justify-between flex-wrap gap-3">
         <h1 className="text-2xl font-bold">{t('areas.available.title')}</h1>
         {canCreate && <Button onClick={() => navigate('/areas/create')} size="sm"><Plus className="h-4 w-4 mr-1" /> {t('areas.list.create')}</Button>}
@@ -108,6 +111,7 @@ export function AvailableAreasPage() {
         </div>
       ) : <EmptyState icon={<TreePine className="h-12 w-12" />} title={t('areas.available.empty')} description={t('areas.available.emptyHint')} action={canCreate ? <Button onClick={() => navigate('/areas/create')}>{t('areas.list.create')}</Button> : undefined} />}
     </div>
+    </>
   );
 }
 

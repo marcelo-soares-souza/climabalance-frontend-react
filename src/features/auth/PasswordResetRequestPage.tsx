@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { AuthLayout } from './components/AuthLayout';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
@@ -54,7 +55,9 @@ export function PasswordResetRequestPage() {
   }
 
   return (
-    <AuthLayout>
+    <>
+      <SEO title={t('seo.passwordReset.title')} />
+      <AuthLayout>
       <h1 className="text-2xl font-bold text-center mb-2">{t('auth.passwordReset.title')}</h1>
       <p className="text-text-secondary text-center mb-6">{t('auth.passwordReset.description')}</p>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
@@ -64,5 +67,6 @@ export function PasswordResetRequestPage() {
       </form>
       <Link to="/login" className="block text-center mt-4 text-sm text-primary hover:underline">{t('auth.passwordReset.backToLogin')}</Link>
     </AuthLayout>
+    </>
   );
 }

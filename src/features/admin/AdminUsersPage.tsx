@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersService } from '@/services/users';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -58,7 +59,9 @@ export function AdminUsersPage() {
   };
 
   return (
-    <div className="space-y-6">
+    <>
+      <SEO title="Administrar Usuários" />
+      <div className="space-y-6">
       <h1 className="text-2xl font-bold">{t('admin.users.title')}</h1>
       <div className="flex gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[200px]">
@@ -139,5 +142,6 @@ export function AdminUsersPage() {
         loading={deleteMutation.isPending}
       />
     </div>
+    </>
   );
 }

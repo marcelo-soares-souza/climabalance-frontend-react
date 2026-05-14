@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import {
@@ -53,7 +54,9 @@ export function AboutPage() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto space-y-10 py-2">
+    <>
+      <SEO title={t('seo.about.title')} description={t('seo.about.description')} />
+      <div className="max-w-6xl mx-auto space-y-10 py-2">
       <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary via-primary-light to-accent px-8 py-14 text-white">
         <Leaf className="absolute -right-5 -top-5 h-36 w-36 rotate-12 text-white/10" />
         <Leaf className="absolute -bottom-6 -left-6 h-24 w-24 -rotate-45 text-white/10" />
@@ -220,5 +223,6 @@ export function AboutPage() {
         </p>
       </section>
     </div>
+    </>
   );
 }

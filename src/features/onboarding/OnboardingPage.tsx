@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { Button } from '@/components/ui/Button';
 import { Leaf, Calculator, TreePine, Award } from 'lucide-react';
 
@@ -24,7 +25,9 @@ export function OnboardingPage() {
   };
 
   return (
-    <div className="max-w-lg mx-auto text-center py-12">
+    <>
+      <SEO title="Onboarding" />
+      <div className="max-w-lg mx-auto text-center py-12">
       <div className="text-primary mb-6">{steps[step].icon}</div>
       <h1 className="text-2xl font-bold mb-4">{steps[step].title}</h1>
       <p className="text-text-secondary mb-8">{steps[step].description}</p>
@@ -44,5 +47,6 @@ export function OnboardingPage() {
         )}
       </div>
     </div>
+    </>
   );
 }

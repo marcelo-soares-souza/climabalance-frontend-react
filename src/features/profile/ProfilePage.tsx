@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from '@/config/i18n';
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useAuth } from '@/hooks/use-auth';
 import { authService } from '@/services/auth';
@@ -175,7 +176,9 @@ export function ProfilePage() {
     ?? (profile?.birthDate ? formatDate(profile.birthDate) : null);
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title={profile?.displayName || t('seo.profile.title')} />
+      <div className="max-w-2xl mx-auto space-y-6">
       {isOwnProfile && (
         <div className="flex justify-end">
           <Button variant="outline" size="sm" onClick={() => navigate(editProfilePath)}>
@@ -464,5 +467,6 @@ export function ProfilePage() {
         </Button>
       )}
     </div>
+    </>
   );
 }

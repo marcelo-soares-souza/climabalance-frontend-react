@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMutation } from '@tanstack/react-query';
+import { SEO } from '@/components/SEO';
 import { certificatesService } from '@/services/certificates';
 import type { CertificateValidation } from '@/types/certificate';
 import { Card, CardContent } from '@/components/ui/Card';
@@ -29,7 +30,9 @@ export function CertificateValidationPage() {
   const result = validateMutation.data as CertificateValidation | undefined;
 
   return (
-    <div className="max-w-xl mx-auto space-y-6">
+    <>
+      <SEO title={t('seo.certificateValidation.title')} description={t('seo.certificateValidation.description')} />
+      <div className="max-w-xl mx-auto space-y-6">
       <div className="text-center">
         <div className="flex items-center justify-center gap-2">
           <h1 className="text-2xl font-bold">{t('certificates.validate.title')}</h1>
@@ -123,5 +126,6 @@ export function CertificateValidationPage() {
         </Card>
       )}
     </div>
+    </>
   );
 }

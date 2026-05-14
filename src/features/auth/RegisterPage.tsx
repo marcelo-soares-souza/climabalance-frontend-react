@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation, Trans } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
+import { SEO } from '@/components/SEO';
 import { AuthLayout } from './components/AuthLayout';
 import { Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -133,7 +134,9 @@ export function RegisterPage() {
   };
 
   return (
-    <AuthLayout>
+    <>
+      <SEO title={t('seo.register.title')} description={t('seo.register.description')} />
+      <AuthLayout>
       <h1 className="text-2xl font-bold text-center mb-6">{t('auth.register.title')}</h1>
       {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} className="mb-4" />}
       <p className="mb-4 text-center text-sm text-text-secondary">
@@ -213,5 +216,6 @@ export function RegisterPage() {
         <Link to="/login" className="text-primary hover:underline">{t('auth.register.login')}</Link>
       </p>
     </AuthLayout>
+    </>
   );
 }

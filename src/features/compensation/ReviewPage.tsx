@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
 import { contributionsService } from '@/services/contributions';
@@ -74,7 +75,9 @@ export function CompensationReviewPage() {
   const canProceed = treesRequested > 0 && !!quote && !quoteLoading && !limitReached;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
+    <>
+      <SEO title="Revisar Compensação" />
+      <div className="max-w-2xl mx-auto space-y-6">
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
         <ArrowLeft className="h-4 w-4" /> {t('common.back')}
       </button>
@@ -150,5 +153,6 @@ export function CompensationReviewPage() {
         {t('compensation.review.proceed')}
       </Button>
     </div>
+    </>
   );
 }

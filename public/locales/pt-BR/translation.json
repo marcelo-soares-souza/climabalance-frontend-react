@@ -1575,6 +1575,75 @@
     "sending": "Enviando...",
     "success": "Mensagem enviada com sucesso! Entraremos em contato em breve."
   },
+  "seo": {
+    "home": {
+      "title": "Calculadora de Carbono",
+      "description": "Meça, reduza e compense sua pegada de carbono. Calcule suas emissões de CO₂ e contribua para um futuro mais sustentável."
+    },
+    "about": {
+      "title": "Sobre Nós",
+      "description": "Conheça a ClimaBalance e nossa missão de combater as mudanças climáticas através da compensação de carbono e reflorestamento."
+    },
+    "howToUse": {
+      "title": "Como Usar",
+      "description": "Aprenda como calcular sua pegada de carbono, explorar áreas de reflorestamento e compensar suas emissões na ClimaBalance."
+    },
+    "privacyPolicy": {
+      "title": "Política de Privacidade"
+    },
+    "termsOfUse": {
+      "title": "Termos de Uso"
+    },
+    "map": {
+      "title": "Mapa de Áreas",
+      "description": "Explore áreas de reflorestamento no mapa interativo. Veja projetos de recuperação ambiental e compensação de carbono."
+    },
+    "publicAreas": {
+      "title": "Áreas Públicas",
+      "description": "Conheça as áreas de reflorestamento abertas para contribuição. Apoie projetos de recuperação ambiental."
+    },
+    "calculator": {
+      "title": "Calculadora de Pegada de Carbono",
+      "description": "Calcule sua pegada de carbono gratuitamente. Descubra suas emissões de CO₂ em transporte, energia, alimentação e mais."
+    },
+    "certificateValidation": {
+      "title": "Validar Certificado",
+      "description": "Valide a autenticidade de certificados de compensação de carbono emitidos pela ClimaBalance."
+    },
+    "userDirectory": {
+      "title": "Diretório de Usuários"
+    },
+    "login": {
+      "title": "Entrar"
+    },
+    "register": {
+      "title": "Criar Conta",
+      "description": "Crie sua conta na ClimaBalance e comece a medir e compensar sua pegada de carbono."
+    },
+    "confirmEmail": {
+      "title": "Confirmar E-mail"
+    },
+    "passwordReset": {
+      "title": "Redefinir Senha"
+    },
+    "passwordResetConfirm": {
+      "title": "Nova Senha"
+    },
+    "accessDenied": {
+      "title": "Acesso Negado"
+    },
+    "areaDetail": {
+      "title": "Detalhes da Área",
+      "description": "Veja informações detalhadas sobre áreas de reflorestamento,包括 progresso de plantio e impacto ambiental."
+    },
+    "profile": {
+      "title": "Perfil"
+    },
+    "embedCalculator": {
+      "title": "Calculadora de Carbono Incorporável",
+      "description": "Adicione a calculadora de pegada de carbono ao seu site. Ferramenta gratuita de medição de emissões de CO₂."
+    }
+  },
   "units": {
     "tco2e": "tCO2e",
     "kgco2e": "kg CO2e"

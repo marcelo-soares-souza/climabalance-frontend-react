@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { areasService } from '@/services/areas';
 import { queryClient } from '@/config/query-client';
@@ -58,7 +59,9 @@ export function AreaAuditPage() {
   if (!area) return <div>{t('common.notFound')}</div>;
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
+    <>
+      <SEO title="Auditar Área" />
+      <div className="max-w-3xl mx-auto space-y-6">
       <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-sm text-primary hover:underline">
         <ArrowLeft className="h-4 w-4" /> {t('common.back')}
       </button>
@@ -138,5 +141,6 @@ export function AreaAuditPage() {
         </Button>
       )}
     </div>
+    </>
   );
 }

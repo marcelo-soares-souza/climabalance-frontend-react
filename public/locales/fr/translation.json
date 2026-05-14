@@ -1575,6 +1575,75 @@
     "sending": "Envoi en cours...",
     "success": "Message envoyé avec succès ! Nous vous répondrons bientôt."
   },
+  "seo": {
+    "home": {
+      "title": "Calculateur Carbone",
+      "description": "Mesurez, réduisez et compensez votre empreinte carbone. Calculez vos émissions de CO₂ et contribuez à un avenir plus durable."
+    },
+    "about": {
+      "title": "À Propos",
+      "description": "Découvrez ClimaBalance et notre mission de lutter contre le changement climatique par la compensation carbone et le reboisement."
+    },
+    "howToUse": {
+      "title": "Comment Utiliser",
+      "description": "Apprenez à calculer votre empreinte carbone, explorer les zones de reboisement et compenser vos émissions avec ClimaBalance."
+    },
+    "privacyPolicy": {
+      "title": "Politique de Confidentialité"
+    },
+    "termsOfUse": {
+      "title": "Conditions d'Utilisation"
+    },
+    "map": {
+      "title": "Carte des Zones",
+      "description": "Explorez les zones de reboisement sur la carte interactive. Découvrez les projets de restauration environnementale et de compensation carbone."
+    },
+    "publicAreas": {
+      "title": "Zones Publiques",
+      "description": "Découvrez les zones de reboisement ouvertes à la contribution. Soutenez les projets de restauration environnementale."
+    },
+    "calculator": {
+      "title": "Calculateur d'Empreinte Carbone",
+      "description": "Calculez gratuitement votre empreinte carbone. Découvrez vos émissions de CO₂ liées au transport, à l'énergie, à l'alimentation et plus."
+    },
+    "certificateValidation": {
+      "title": "Valider un Certificat",
+      "description": "Vérifiez l'authenticité des certificats de compensation carbone émis par ClimaBalance."
+    },
+    "userDirectory": {
+      "title": "Annuaire des Utilisateurs"
+    },
+    "login": {
+      "title": "Connexion"
+    },
+    "register": {
+      "title": "Créer un Compte",
+      "description": "Créez votre compte ClimaBalance et commencez à mesurer et compenser votre empreinte carbone."
+    },
+    "confirmEmail": {
+      "title": "Confirmer l'Email"
+    },
+    "passwordReset": {
+      "title": "Réinitialiser le Mot de Passe"
+    },
+    "passwordResetConfirm": {
+      "title": "Nouveau Mot de Passe"
+    },
+    "accessDenied": {
+      "title": "Accès Refusé"
+    },
+    "areaDetail": {
+      "title": "Détails de la Zone",
+      "description": "Consultez les informations détaillées sur les zones de reboisement, y compris l'avancement des plantations et l'impact environnemental."
+    },
+    "profile": {
+      "title": "Profil"
+    },
+    "embedCalculator": {
+      "title": "Calculateur Carbone Intégrable",
+      "description": "Ajoutez le calculateur d'empreinte carbone à votre site web. Outil gratuit de mesure des émissions de CO₂."
+    }
+  },
   "units": {
     "tco2e": "tCO2e",
     "kgco2e": "kg CO2e"

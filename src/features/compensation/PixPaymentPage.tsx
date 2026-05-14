@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { SEO } from '@/components/SEO';
 import { paymentsService } from '@/services/payments';
 import { Button } from '@/components/ui/Button';
 import { ArrowLeft, Copy, Check } from 'lucide-react';
@@ -67,7 +68,9 @@ export function PixPaymentPage() {
   }
 
   return (
-    <div className="max-w-lg mx-auto space-y-6">
+    <>
+      <SEO title="Pagamento PIX" />
+      <div className="max-w-lg mx-auto space-y-6">
       <button
         onClick={() => navigate(-1)}
         className="flex items-center gap-2 text-sm text-primary hover:underline"
@@ -113,5 +116,6 @@ export function PixPaymentPage() {
         <span>{t('payment.pix.waiting')}</span>
       </div>
     </div>
+    </>
   );
 }
