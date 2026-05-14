@@ -59,7 +59,7 @@ export function RegisterPage() {
 
   const roleOptions = [
     { value: 'individual', label: t('auth.register.roleIndividual') },
-    { value: 'legal_entity', label: t('auth.register.roleLegalEntity') },
+    // { value: 'legal_entity', label: t('auth.register.roleLegalEntity') },
     { value: 'producer', label: t('auth.register.roleProducer') },
   ];
 
@@ -158,7 +158,7 @@ export function RegisterPage() {
                 <>
                   <p className="font-semibold text-text-primary">{t('auth.register.roleHelpTitle')}</p>
                   <p className="mt-2"><strong className="text-text-primary">{t('auth.register.roleIndividual')}:</strong> {t('auth.register.roleIndividualDescription')}</p>
-                  <p className="mt-2"><strong className="text-text-primary">{t('auth.register.roleLegalEntity')}:</strong> {t('auth.register.roleLegalEntityDescription')}</p>
+                  {/* <p className="mt-2"><strong className="text-text-primary">{t('auth.register.roleLegalEntity')}:</strong> {t('auth.register.roleLegalEntityDescription')}</p> */}
                   <p className="mt-2"><strong className="text-text-primary">{t('auth.register.roleProducer')}:</strong> {t('auth.register.roleProducerDescription')}</p>
                 </>
               }

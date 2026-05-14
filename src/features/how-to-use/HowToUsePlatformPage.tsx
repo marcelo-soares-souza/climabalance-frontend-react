@@ -1,19 +1,20 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Building2, Leaf, Sprout, ArrowRight, Play } from 'lucide-react';
+import { Leaf, Sprout, ArrowRight, Play } from 'lucide-react';
+// import { Building2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 
-type AccountTab = 'individual' | 'legalEntity' | 'producer';
+type AccountTab = 'individual' /* | 'legalEntity' */ | 'producer';
 
 export function HowToUsePlatformPage() {
   const { t } = useTranslation();
 
   const tabMeta: Array<{ key: AccountTab; icon: ReactNode }> = [
     { key: 'individual', icon: <Leaf className="h-5 w-5 text-primary" /> },
-    { key: 'legalEntity', icon: <Building2 className="h-5 w-5 text-accent" /> },
+    // { key: 'legalEntity', icon: <Building2 className="h-5 w-5 text-accent" /> },
     { key: 'producer', icon: <Sprout className="h-5 w-5 text-emerald-700" /> },
   ];
 

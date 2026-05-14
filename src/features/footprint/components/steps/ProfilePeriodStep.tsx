@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/Input';
 import { Card, CardContent } from '@/components/ui/Card';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { cn } from '@/lib/cn';
-import { User, Building, BarChart3, ClipboardCheck, FileSpreadsheet } from 'lucide-react';
+import { User, /* Building, */ BarChart3, ClipboardCheck, FileSpreadsheet } from 'lucide-react';
 import type { ProfileType, DataQuality } from '@/types/footprint';
 
 interface Props {
@@ -39,7 +39,7 @@ export function ProfilePeriodStep({ profileType, periodStart, periodEnd, dataQua
         <div className="grid grid-cols-2 gap-3">
           {([
             { type: 'individual' as ProfileType, icon: <User className="h-6 w-6" />, subtitleKey: 'footprint.profile.individualSubtitle' },
-            { type: 'legal_entity' as ProfileType, icon: <Building className="h-6 w-6" />, subtitleKey: 'footprint.profile.legalEntitySubtitle' },
+            // { type: 'legal_entity' as ProfileType, icon: <Building className="h-6 w-6" />, subtitleKey: 'footprint.profile.legalEntitySubtitle' },
           ]).map(({ type, icon, subtitleKey }) => (
             <Card
               key={type}
