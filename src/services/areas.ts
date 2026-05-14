@@ -46,6 +46,10 @@ type RawArea = {
   defaultHorizonYears?: number | string | null;
   price_per_t_co2e?: number | string | null;
   pricePerTCO2e?: number | string | null;
+  tree_species?: string | null;
+  treeSpecies?: string | null;
+  external_link?: string | null;
+  externalLink?: string | null;
   max_purchasable_trees?: number | string | null;
   maxPurchasableTrees?: number | string | null;
   audit_notes?: string | null;
@@ -183,6 +187,8 @@ function normalizeArea(raw: RawArea): Area {
     ),
     pricePerTCO2e: asNullableNumber(raw.pricePerTCO2e ?? raw.price_per_t_co2e),
     maxPurchasableTrees: asNullableNumber(raw.maxPurchasableTrees ?? raw.max_purchasable_trees),
+    treeSpecies: asNullableString(raw.treeSpecies ?? raw.tree_species),
+    externalLink: asNullableString(raw.externalLink ?? raw.external_link),
     auditNotes: asNullableString(raw.auditNotes ?? raw.audit_notes),
     auditedBy: asNullableString(raw.auditedByUserId ?? raw.audited_by_user_id),
     auditedAt: asNullableString(raw.auditedAt ?? raw.audited_at),

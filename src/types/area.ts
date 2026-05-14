@@ -24,6 +24,8 @@ export interface Area {
   estimatedKgCO2PerTreePerYear: number;
   pricePerTree: number | null;
   defaultHorizonYears: number | null;
+  treeSpecies: string | null;
+  externalLink: string | null;
   pricePerTCO2e: number | null;
   maxPurchasableTrees?: number | null;
   thumbnailUrl?: string;
@@ -89,6 +91,8 @@ export interface CreateAreaRequest {
   price_per_tree?: number;
   default_horizon_years?: number;
   price_per_t_co2e?: number;
+  tree_species?: string;
+  external_link?: string;
 }
 
 export interface UpdateAreaRequest {
@@ -107,6 +111,8 @@ export interface UpdateAreaRequest {
   default_horizon_years?: number;
   price_per_t_co2e?: number;
   max_purchasable_trees?: number | null;
+  tree_species?: string;
+  external_link?: string;
 }
 
 export interface ApproveAreaRequest {

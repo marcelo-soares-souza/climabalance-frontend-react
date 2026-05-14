@@ -994,6 +994,8 @@
       "pricePerTree": "Price per Tree",
       "pricePerTCO2e": "Price per tCO2e",
       "defaultHorizonYears": "Default horizon (years)",
+      "treeSpecies": "Tree species",
+      "externalLink": "External link",
       "error": "Error saving area. Please try again."
     },
     "actions": {
@@ -1503,6 +1505,10 @@
       "defaultHorizonYears": "Defines the default year horizon used as the reference for estimates and operations linked to this area.",
       "pricePerTco2eAria": "Help about price per tCO2e",
       "pricePerTco2e": "Use this value when compensation is offered directly by emissions volume in tCO2e.",
+      "treeSpeciesAria": "Help about tree species",
+      "treeSpecies": "Describe the tree species you intend to plant in this area. This helps contextualize the project and provides transparency about planning.",
+      "externalLinkAria": "Help about external link",
+      "externalLink": "Add a link to an external page with more information about the project, such as website, portfolio, or social media.",
       "media": "Media helps document the area, strengthen credibility, and support audit and transparency.",
       "contributions": "List of recorded contributions for this area, including compensated volume and associated tree count when applicable.",
       "statusDraft": "The area is still being edited and has not been submitted for audit yet.",

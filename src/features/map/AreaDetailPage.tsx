@@ -412,6 +412,25 @@ export function AreaDetailPage() {
         </Card>
       )}
 
+      {(area.treeSpecies || area.externalLink) && (
+        <Card>
+          <CardContent className="py-6 space-y-4">
+            {area.treeSpecies && (
+              <div>
+                <h4 className="text-sm font-semibold text-text-secondary mb-1">{t("area.form.treeSpecies")}</h4>
+                <p className="whitespace-pre-line text-text-secondary text-sm">{area.treeSpecies}</p>
+              </div>
+            )}
+            {area.externalLink && (
+              <div>
+                <h4 className="text-sm font-semibold text-text-secondary mb-1">{t("area.form.externalLink")}</h4>
+                <a href={area.externalLink} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-sm break-all">{area.externalLink}</a>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      )}
+
       {shouldShowProducerStripeWarning && (
         <Card className="border-amber-300 bg-amber-50">
           <CardHeader>

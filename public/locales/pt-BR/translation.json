@@ -994,6 +994,8 @@
       "pricePerTree": "Preço por Árvore",
       "pricePerTCO2e": "Preço por tCO₂e",
       "defaultHorizonYears": "Horizonte padrão (anos)",
+      "treeSpecies": "Espécies de árvores",
+      "externalLink": "Link externo",
       "error": "Erro ao salvar área. Tente novamente."
     },
     "actions": {
@@ -1503,6 +1505,10 @@
       "defaultHorizonYears": "Define o horizonte de anos usado como referência padrão para estimativas e operações vinculadas a esta área.",
       "pricePerTco2eAria": "Ajuda sobre preço por tCO2e",
       "pricePerTco2e": "Use este valor quando a compensação for ofertada diretamente por volume de emissões em tCO2e.",
+      "treeSpeciesAria": "Ajuda sobre espécies de árvores",
+      "treeSpecies": "Descreva as espécies de árvores que pretende plantar nesta área. Isso ajuda a contextualizar o projeto e dá transparência sobre o planejamento.",
+      "externalLinkAria": "Ajuda sobre link externo",
+      "externalLink": "Adicione um link para página externa com mais informações sobre o projeto, como site, portfólio ou redes sociais.",
       "media": "As mídias ajudam a documentar a área, fortalecer a credibilidade e apoiar auditoria e transparência.",
       "contributions": "Lista de contribuições registradas para esta área, com volume compensado e quantidade de árvores associadas quando aplicável.",
       "statusDraft": "A área ainda está em edição e não foi enviada para auditoria.",

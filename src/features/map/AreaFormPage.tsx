@@ -53,6 +53,8 @@ export function AreaFormPage() {
     t_co2e_per_tree_per_year: string;
     price_per_tree: string;
     default_horizon_years: string;
+    tree_species: string;
+    external_link: string;
   }>>({});
   const [error, setError] = useState<string | null>(null);
 
@@ -75,6 +77,8 @@ export function AreaFormPage() {
     t_co2e_per_tree_per_year: form.t_co2e_per_tree_per_year ?? (existing?.tCO2ePerTreePerYear != null ? String(existing.tCO2ePerTreePerYear) : '10'),
     price_per_tree: form.price_per_tree ?? (existing?.pricePerTree != null ? String(existing.pricePerTree) : '15'),
     default_horizon_years: form.default_horizon_years ?? (existing?.defaultHorizonYears != null ? String(existing.defaultHorizonYears) : '20'),
+    tree_species: form.tree_species ?? existing?.treeSpecies ?? '',
+    external_link: form.external_link ?? existing?.externalLink ?? '',
   };
 
   const { data: states = [], isLoading: loadingStates } = useQuery({
@@ -102,6 +106,8 @@ export function AreaFormPage() {
         t_co2e_per_tree_per_year: parseFloat(formValues.t_co2e_per_tree_per_year) || undefined,
         price_per_tree: parseFloat(formValues.price_per_tree) || undefined,
         default_horizon_years: parseInt(formValues.default_horizon_years, 10) || undefined,
+        tree_species: formValues.tree_species || undefined,
+        external_link: formValues.external_link || undefined,
       };
       return isEdit ? areasService.updateArea(existing?.id ?? areaId!, data) : areasService.createArea(data);
     },
@@ -131,7 +137,9 @@ export function AreaFormPage() {
       | 'city'
       | 't_co2e_per_tree_per_year'
       | 'price_per_tree'
-      | 'default_horizon_years',
+      | 'default_horizon_years'
+      | 'tree_species'
+      | 'external_link',
     value: string
   ) => setForm((prev) => ({ ...prev, [field]: value }));
 
@@ -262,6 +270,8 @@ export function AreaFormPage() {
             />
           )}
           <Input id="biome" label={t('area.form.biome')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.biomeAria')} content={<p>{t('tooltips.area.biome')}</p>} />} value={formValues.biome} onChange={(e) => update('biome', e.target.value)} />
+          <Textarea id="tree_species" label={t('area.form.treeSpecies')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.treeSpeciesAria')} content={<p>{t('tooltips.area.treeSpecies')}</p>} />} value={formValues.tree_species} onChange={(e) => update('tree_species', e.target.value)} rows={4} />
+          <Input id="external_link" type="url" label={t('area.form.externalLink')} labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.externalLinkAria')} content={<p>{t('tooltips.area.externalLink')}</p>} />} value={formValues.external_link} onChange={(e) => update('external_link', e.target.value)} placeholder="https://" />
           <div className="grid grid-cols-2 gap-4">
             <Input id="tco2e_tree" type="number" step="any" label={t('area.form.tCO2ePerTree')}
               labelAdornment={<InfoTooltip ariaLabel={t('tooltips.shared.tco2ePerTreeAria')} content={<p>{t('tooltips.shared.tco2ePerTree')}</p>} />}

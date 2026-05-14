@@ -1,13 +1,14 @@
-import { forwardRef, type TextareaHTMLAttributes } from 'react';
+import { forwardRef, type ReactNode, type TextareaHTMLAttributes } from 'react';
 import { cn } from '@/lib/cn';
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
+  labelAdornment?: ReactNode;
   error?: string;
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, label, error, id, ...props }, ref) => {
+  ({ className, label, labelAdornment, error, id, ...props }, ref) => {
     const isRequired = props.required;
     return (
       <div className="w-full">
@@ -15,6 +16,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           <label htmlFor={id} className="block text-base font-medium text-text-secondary mb-1.5">
             {label}
             {isRequired && <span className="text-error ml-0.5">*</span>}
+            {labelAdornment}
           </label>
         )}
         <textarea

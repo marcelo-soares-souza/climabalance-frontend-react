@@ -18,8 +18,8 @@
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "@stripe/react-stripe-js": "^6.3.0",
-    "@stripe/stripe-js": "^9.4.0",
-    "@tanstack/react-query": "^5.100.9",
+    "@stripe/stripe-js": "^9.5.0",
+    "@tanstack/react-query": "^5.100.10",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "file-saver": "^2.0.5",
@@ -44,12 +44,12 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.59.1",
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.3.0",
     "@types/file-saver": "^2.0.7",
     "@types/leaflet": "^1.9.21",
     "@types/leaflet.markercluster": "^1.5.6",
-    "@types/node": "^25.6.2",
+    "@types/node": "^25.7.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.2.0",
@@ -59,7 +59,7 @@
     "globals": "^17.6.0",
     "tailwindcss": "^4.3.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.59.2",
+    "typescript-eslint": "^8.59.3",
     "vite": "^7.3.3"
   },
   "overrides": {

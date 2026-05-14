@@ -994,6 +994,8 @@
       "pricePerTree": "Prix par Arbre",
       "pricePerTCO2e": "Prix par tCO2e",
       "defaultHorizonYears": "Horizon par défaut (ans)",
+      "treeSpecies": "Espèces d'arbres",
+      "externalLink": "Lien externe",
       "error": "Erreur lors de l'enregistrement de la zone. Veuillez réessayer."
     },
     "actions": {
@@ -1503,6 +1505,10 @@
       "defaultHorizonYears": "Définit l'horizon en années utilisé comme référence par défaut pour les estimations et opérations liées à cette zone.",
       "pricePerTco2eAria": "Aide sur le prix par tCO2e",
       "pricePerTco2e": "Utilisez cette valeur lorsque la compensation est proposée directement par volume d'émissions en tCO2e.",
+      "treeSpeciesAria": "Aide sur les espèces d'arbres",
+      "treeSpecies": "Décrivez les espèces d'arbres que vous prévoyez de planter dans cette zone. Cela aide à contextualiser le projet et assure la transparence de la planification.",
+      "externalLinkAria": "Aide sur le lien externe",
+      "externalLink": "Ajoutez un lien vers une page externe avec plus d'informations sur le projet, comme un site web, un portfolio ou les réseaux sociaux.",
       "media": "Les médias aident à documenter la zone, renforcer la crédibilité et soutenir l'audit et la transparence.",
       "contributions": "Liste des contributions enregistrées pour cette zone, avec volume compensé et nombre d'arbres associé lorsque c'est applicable.",
       "statusDraft": "La zone est encore en cours d'édition et n'a pas encore été soumise à l'audit.",
