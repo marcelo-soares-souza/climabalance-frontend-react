@@ -20,6 +20,8 @@ import { useAuth } from '@/hooks/use-auth';
 import { LogIn } from 'lucide-react';
 import type { CalculationResult } from '@/types/footprint';
 import type { DraftSnapshot } from './hooks/use-calculator';
+import type { RegisteredInputItem } from './components/RegisteredInputsCard';
+
 
 const GUEST_STORAGE_KEY = 'climabalance_guest_calc';
 
@@ -72,6 +74,28 @@ export function GuestCalculatorPage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [didRestore]);
+
+  const registeredInputs: RegisteredInputItem[] = useMemo(() => {
+    return calculator.state.inputs.map((input) => {
+      const metadata = input.metadata ?? {};
+      const activityType =
+        (typeof metadata.subcategory === 'string' ? metadata.subcategory :
+         typeof metadata.fuel_type === 'string' ? metadata.fuel_type :
+         typeof metadata.vehicle_type === 'string' ? metadata.vehicle_type :
+         typeof metadata.flight_type === 'string' && typeof metadata.class === 'string'
+           ? `${metadata.flight_type}_${metadata.class}` :
+         typeof metadata.activity_subtype === 'string'
+           ? metadata.activity_subtype :
+         input.category === 'energy' ? 'electricity' :
+         '');
+      return {
+        category: input.category,
+        activityType,
+        quantity: input.value,
+        unit: input.unit,
+      };
+    });
+  }, [calculator.state.inputs]);
 
   const isLastInputStep = calculator.currentStepIndex === calculator.totalSteps - 2;
   const formattedPeriod = useMemo(() => {
@@ -164,7 +188,7 @@ export function GuestCalculatorPage() {
     if (result && calculator.currentStep === 'result') {
       return (
         <div className="space-y-6">
-          <ResultStep result={result} showCompensateAction={false} />
+          <ResultStep result={result} inputs={registeredInputs} showCompensateAction={false} />
           <div className="bg-accent/5 border border-accent/20 rounded-xl p-6">
             <div className="flex items-start gap-4 mb-4">
               <LogIn className="h-6 w-6 text-accent mt-0.5" />

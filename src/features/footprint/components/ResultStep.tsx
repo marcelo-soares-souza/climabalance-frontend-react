@@ -4,19 +4,21 @@ import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { ResultBreakdownChart } from './ResultBreakdownChart';
+import { RegisteredInputsCard, type RegisteredInputItem } from './RegisteredInputsCard';
 import { formatTCO2e, formatKgCO2e } from '@/lib/format';
 import type { CalculationResult } from '@/types/footprint';
 import { TreePine, BarChart3, Leaf, TrendingDown, TrendingUp } from 'lucide-react';
 
 interface Props {
   result: CalculationResult;
+  inputs?: RegisteredInputItem[];
   onSaveDraft?: () => void;
   onFinalize?: () => void;
   saving?: boolean;
   showCompensateAction?: boolean;
 }
 
-export function ResultStep({ result, onSaveDraft, onFinalize, saving, showCompensateAction = true }: Props) {
+export function ResultStep({ result, inputs, onSaveDraft, onFinalize, saving, showCompensateAction = true }: Props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const canFinalize = result.status === 'draft' && !!onFinalize;
@@ -71,6 +73,11 @@ export function ResultStep({ result, onSaveDraft, onFinalize, saving, showCompen
             <ResultBreakdownChart breakdown={result.breakdown} />
           </CardContent>
         </Card>
+      )}
+
+      {/* Registered Inputs */}
+      {inputs && inputs.length > 0 && (
+        <RegisteredInputsCard inputs={inputs} />
       )}
 
       {/* Compensate CTA */}

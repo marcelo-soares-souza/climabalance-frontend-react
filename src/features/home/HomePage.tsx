@@ -23,7 +23,6 @@ import {
   Plus,
   Heart,
   User,
-  Building2,
   Sprout,
 } from "lucide-react";
 import {
@@ -167,7 +166,7 @@ function UnauthenticatedHome() {
         <h2 className="text-xl font-bold text-text-primary mb-4 text-center">
           {t("home.profiles.title")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card
             className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/how-to-use")}
@@ -184,7 +183,7 @@ function UnauthenticatedHome() {
               </p>
             </CardContent>
           </Card>
-          <Card
+          {/* <Card
             className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/how-to-use")}
           >
@@ -199,7 +198,7 @@ function UnauthenticatedHome() {
                 {t("auth.register.roleLegalEntityDescription")}
               </p>
             </CardContent>
-          </Card>
+          </Card> */}
           <Card
             className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/how-to-use")}

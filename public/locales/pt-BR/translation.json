@@ -698,7 +698,9 @@
     "dataQuality": {
       "label": "Qualidade dos Dados",
       "real": "Dados Reais",
-      "estimated": "Estimado"
+      "realDescription": "Baseado em contas, notas fiscais ou registros oficiais. Maior precisão.",
+      "estimated": "Estimado",
+      "estimatedDescription": "Baseado em médias e padrões de consumo típicos. Menor precisão."
     },
     "profile": {
       "typeLabel": "Tipo de Perfil",

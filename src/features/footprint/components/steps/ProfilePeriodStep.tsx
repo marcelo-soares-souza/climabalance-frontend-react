@@ -80,19 +80,26 @@ export function ProfilePeriodStep({ profileType, periodStart, periodEnd, dataQua
             content={<p>{t('tooltips.footprint.dataQuality')}</p>}
           />
         </div>
-        <div className="flex gap-3">
+        <div className="grid grid-cols-2 gap-3">
           {(['real', 'estimated'] as DataQuality[]).map((q) => (
-            <button
-              key={q}
-              onClick={() => onDataQualityChange(q)}
-              className={cn(
-                'flex items-center gap-2 px-4 py-2.5 rounded-[var(--radius-button)] text-base border transition-all',
-                dataQuality === q ? 'bg-primary text-white border-primary shadow-sm' : 'border-gray-200 hover:border-primary hover:bg-primary-50',
-              )}
-            >
-              {QUALITY_ICONS[q]}
-              {t(`footprint.dataQuality.${q}`)}
-            </button>
+            <div key={q} className="space-y-2">
+              <button
+                onClick={() => onDataQualityChange(q)}
+                className={cn(
+                  'flex items-center gap-2 w-full px-4 py-2.5 rounded-[var(--radius-button)] text-base border transition-all',
+                  dataQuality === q ? 'bg-primary text-white border-primary shadow-sm' : 'border-gray-200 hover:border-primary hover:bg-primary-50',
+                )}
+              >
+                {QUALITY_ICONS[q]}
+                {t(`footprint.dataQuality.${q}`)}
+              </button>
+              <p className={cn(
+                'text-xs leading-relaxed px-1',
+                dataQuality === q ? 'text-primary' : 'text-text-secondary',
+              )}>
+                {t(`footprint.dataQuality.${q}Description`)}
+              </p>
+            </div>
           ))}
         </div>
       </div>

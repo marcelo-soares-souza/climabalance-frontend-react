@@ -10,7 +10,8 @@ import { InfoTooltip } from '@/components/ui/InfoTooltip';
 import { StatusBadge } from '@/components/StatusBadge';
 import { PageSkeleton } from '@/components/LoadingSkeleton';
 import { ResultBreakdownChart } from './components/ResultBreakdownChart';
-import { formatTCO2e, formatDate, formatKgCO2e } from '@/lib/format';
+import { RegisteredInputsCard } from './components/RegisteredInputsCard';
+import { formatTCO2e, formatDate } from '@/lib/format';
 import { ArrowLeft, TreePine, CheckCircle, Trash2, Edit } from 'lucide-react';
 import { useState } from 'react';
 import { ConfirmDialog } from '@/components/ConfirmDialog';
@@ -105,25 +106,7 @@ export function CalculationDetailPage() {
       )}
 
       {calculation.inputs && calculation.inputs.length > 0 && (
-        <Card>
-          <CardContent>
-              <h3 className="font-medium mb-4">{t('footprint.detail.inputs')}</h3>
-              <div className="space-y-2">
-              {calculation.inputs.map((input) => (
-                <div key={input.id} className="flex justify-between gap-3 py-2 border-b border-gray-50 last:border-0">
-                  <div className="min-w-0">
-                    <p className="text-sm font-medium truncate">{t(`footprint.categories.${input.category}`, input.category)}</p>
-                    <p className="text-xs text-text-secondary truncate">{input.activityType}</p>
-                  </div>
-                  <div className="text-right shrink-0">
-                    <p className="text-sm font-medium">{input.quantity} {input.unit}</p>
-                    <p className="text-xs text-text-secondary">{formatKgCO2e(input.kgCO2e)}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        <RegisteredInputsCard inputs={calculation.inputs} />
       )}
 
       <div className="flex gap-3">

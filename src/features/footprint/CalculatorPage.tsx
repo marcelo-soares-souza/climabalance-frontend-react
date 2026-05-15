@@ -19,7 +19,7 @@ import { ResultStep } from './components/ResultStep';
 import { useCalculator } from './hooks/use-calculator';
 import { footprintService } from '@/services/footprint';
 import { queryClient } from '@/config/query-client';
-import type { CalculationResult } from '@/types/footprint';
+import type { FootprintCalculation } from '@/types/footprint';
 import { ApiError } from '@/lib/api-client';
 import type { CreateCalculationRequest } from '@/types/footprint';
 
@@ -29,7 +29,7 @@ export function CalculatorPage() {
   const { id: routeCalculationId } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
   const calculator = useCalculator();
-  const [result, setResult] = useState<CalculationResult | null>(null);
+  const [result, setResult] = useState<FootprintCalculation | null>(null);
   const [error, setError] = useState<string | null>(null);
   const lastCalculatedSignatureRef = useRef<string | null>(null);
   const lastSubmittedSignatureRef = useRef<string | null>(null);
@@ -88,7 +88,10 @@ export function CalculatorPage() {
   );
 
   const createMutation = useMutation({
-    mutationFn: (payload: CreateCalculationRequest) => footprintService.createCalculation(payload),
+    mutationFn: async (payload: CreateCalculationRequest) => {
+      const result = await footprintService.createCalculation(payload);
+      return footprintService.getCalculation(result.id);
+    },
     onSuccess: (data, payload) => {
       setError(null);
       setResult(data);
@@ -207,6 +210,7 @@ export function CalculatorPage() {
         return (
           <ResultStep
             result={displayedResult}
+            inputs={displayedResult?.inputs}
             onFinalize={() => finalizeMutation.mutate(displayedResult.id)}
             saving={finalizeMutation.isPending}
           />
