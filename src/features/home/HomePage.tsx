@@ -201,7 +201,7 @@ function UnauthenticatedHome() {
           </Card> */}
           <Card
             className="cursor-pointer hover:shadow-lg transition-shadow"
-            onClick={() => navigate("/how-to-use")}
+            onClick={() => navigate("/how-to-use?tab=producer")}
           >
             <CardContent className="text-center py-8">
               <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">

@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
 import { Leaf, Sprout, ArrowRight, Play } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
@@ -11,11 +11,17 @@ type AccountTab = 'individual' | 'producer';
 
 export function HowToUsePlatformPage() {
   const { t } = useTranslation();
+  const [searchParams] = useSearchParams();
 
   const tabMeta: Array<{ key: AccountTab; icon: ReactNode }> = [
     { key: 'individual', icon: <Leaf className="h-5 w-5 text-primary" /> },
     { key: 'producer', icon: <Sprout className="h-5 w-5 text-emerald-700" /> },
   ];
+
+  const tabKeys = tabMeta.map((t) => t.key);
+  const initialTab = tabKeys.includes(searchParams.get('tab') as AccountTab)
+    ? (searchParams.get('tab') as AccountTab)
+    : 'individual';
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 py-2">
@@ -45,7 +51,7 @@ export function HowToUsePlatformPage() {
         </div>
       </section>
 
-      <Tabs defaultValue="individual" className="space-y-6">
+      <Tabs defaultValue={initialTab} className="space-y-6">
         <TabsList className="flex flex-wrap gap-2 border-b-0">
           {tabMeta.map((tab) => (
             <TabsTrigger

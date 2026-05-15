@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
+import { BarChart, Bar, Cell, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { useTranslation } from 'react-i18next';
 import type { BreakdownItem } from '@/types/footprint';
 
@@ -11,37 +11,50 @@ interface Props {
 export function ResultBreakdownChart({ breakdown }: Props) {
   const { t } = useTranslation();
 
-  const data = breakdown.map((item, i) => ({
-    name: t(`footprint.categories.${item.category}`, item.category),
-    value: item.totalKgCO2e,
-    percentage: item.percentage,
-    color: COLORS[i % COLORS.length],
-  }));
+  const data = breakdown
+    .map((item, i) => ({
+      name: t(`footprint.categories.${item.category}`, item.category),
+      value: item.totalKgCO2e,
+      percentage: item.percentage,
+      color: COLORS[i % COLORS.length],
+    }))
+    .sort((a, b) => b.value - a.value);
 
   return (
-    <div className="h-64">
+    <div className="h-72">
       <ResponsiveContainer width="100%" height="100%">
-        <PieChart>
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            innerRadius={60}
-            outerRadius={90}
+        <BarChart
+          data={data}
+          margin={{ top: 20, right: 16, bottom: 0, left: 8 }}
+        >
+          <XAxis
+            dataKey="name"
+            tick={{ fontSize: 12, fill: '#374151' }}
+            interval={0}
+          />
+          <YAxis
+            tick={{ fontSize: 12, fill: '#9CA3AF' }}
+            width={48}
+          />
+          <Tooltip
+            formatter={(value: unknown) => `${Number(value).toFixed(1)} ${t('units.kgco2e')}`}
+            cursor={{ fill: '#f3f4f6' }}
+          />
+          <Bar
             dataKey="value"
-            label={(props) => {
-              const p = props as unknown as { name: string; percentage: number };
-              return `${p.name} (${p.percentage.toFixed(1)}%)`;
-            }}
-            labelLine={false}
+            radius={[4, 4, 0, 0]}
+            barSize={32}
+            label={({ x, y, width, value }: { x: number; y: number; width: number; value: number }) => (
+              <text x={x + width / 2} y={y - 6} textAnchor="middle" fontSize={11} fill="#6B7280">
+                {value.toFixed(1)}
+              </text>
+            )}
           >
             {data.map((entry, i) => (
               <Cell key={i} fill={entry.color} />
             ))}
-          </Pie>
-          <Tooltip formatter={(value: unknown) => `${Number(value).toFixed(1)} ${t('units.kgco2e')}`} />
-          <Legend />
-        </PieChart>
+          </Bar>
+        </BarChart>
       </ResponsiveContainer>
     </div>
   );

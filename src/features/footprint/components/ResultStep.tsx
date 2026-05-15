@@ -68,8 +68,8 @@ export function ResultStep({ result, inputs, onSaveDraft, onFinalize, saving, sh
       {/* Breakdown Chart */}
       {result.breakdown && result.breakdown.length > 0 && (
         <Card>
-          <CardContent>
-            <h3 className="font-semibold text-lg mb-4">{t('footprint.result.breakdown')}</h3>
+          <CardContent className="px-0">
+            <h3 className="font-semibold text-lg mb-4 px-6">{t('footprint.result.breakdown')}</h3>
             <ResultBreakdownChart breakdown={result.breakdown} />
           </CardContent>
         </Card>
