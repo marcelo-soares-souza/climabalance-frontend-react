@@ -168,7 +168,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           >
             <TreePine className="h-4 w-4" /> {t("nav.publicAreas")}
           </NavLink>
-          <NavLink to="/users" className={linkClass} onClick={onClose}>
+          <NavLink to="/users" end className={linkClass} onClick={onClose}>
             <Users className="h-4 w-4" /> {t("nav.directory")}
           </NavLink>
           {!isAuthenticated && (
@@ -213,7 +213,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
               )}
 
               {sectionLabel(t("nav.account"))}
-              <NavLink to={profilePath} className={linkClass} onClick={onClose}>
+              <NavLink to={profilePath} end className={linkClass} onClick={onClose}>
                 <User className="h-4 w-4" /> {t("nav.profile")}
               </NavLink>
               <NavLink
@@ -238,7 +238,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 <ShieldCheck className="h-4 w-4" />{" "}
                 {t("nav.validateCertificate")}
               </NavLink>
-              <NavLink to="/privacy" className={linkClass} onClick={onClose}>
+              <NavLink to="/privacy" end className={linkClass} onClick={onClose}>
                 <Lock className="h-4 w-4" /> {t("nav.privacyCenter")}
               </NavLink>
               <NavLink to="/contact" className={linkClass} onClick={onClose}>
