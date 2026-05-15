@@ -44,9 +44,9 @@ export function ResultBreakdownChart({ breakdown }: Props) {
             dataKey="value"
             radius={[4, 4, 0, 0]}
             barSize={32}
-            label={({ x, y, width, value }: { x: number; y: number; width: number; value: number }) => (
-              <text x={x + width / 2} y={y - 6} textAnchor="middle" fontSize={11} fill="#6B7280">
-                {value.toFixed(1)}
+            label={(props: Record<string, unknown>) => (
+              <text x={Number(props.x ?? 0) + Number(props.width ?? 0) / 2} y={Number(props.y ?? 0) - 6} textAnchor="middle" fontSize={11} fill="#6B7280">
+                {Number(props.value ?? 0).toFixed(1)}
               </text>
             )}
           >
