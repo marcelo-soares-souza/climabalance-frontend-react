@@ -181,10 +181,10 @@
   "home": {
     "welcome": {
       "title": "Welcome to ClimaBalance",
-      "description": "A climate impact platform focused on supporting Agroecology, Agroforestry, Permaculture, Organic Agriculture, and other ecological farming projects.",
+      "description": "A climate mitigation platform dedicated to supporting local reforestation. We connect emission compensation to a multifaceted network of initiatives, encompassing native forest restoration, agroforestry systems, and agroecology.",
       "transferNotice": "Contribution amounts are transferred to the reforester responsible for the area, with a fee charged for platform maintenance and evolution.",
       "inDevelopment": "Project in development",
-      "getStarted": "Get Started",
+      "getStarted": "Register",
       "exploreMap": "Explore Map",
       "howToUse": "How to use the platform",
       "learnMore": "About the project",
@@ -196,6 +196,9 @@
       "step3Description": "Receive certificates and track contributions with transparency and traceability.",
       "tryCalculator": "Calculate Footprint",
       "viewCommunity": "Community"
+    },
+    "profiles": {
+      "title": "Who is the platform for?"
     },
     "dashboard": {
       "title": "Your Climate Impact",
@@ -217,6 +220,7 @@
       "noAreasDescription": "Register restoration projects and receive support to plant trees"
     },
     "stats": {
+      "title": "Results Achieved",
       "totalAreas": "Registered areas",
       "totalTrees": "Trees planted",
       "totalCO2": "CO₂ captured"
@@ -672,11 +676,29 @@
       "scope2": "Scope 2",
       "scope3": "Scope 3"
     },
+    "periodMultiplier": {
+      "label": "The values entered are for:",
+      "year": "Year",
+      "month": "Month",
+      "week": "Week"
+    },
+    "tripCalculator": {
+      "title": "Trip Calculator",
+      "description": "Estimate emissions for a flight between two cities",
+      "origin": "Origin",
+      "destination": "Destination",
+      "selectCity": "Select a city",
+      "class": "Flight class",
+      "economy": "Economy",
+      "business": "Business",
+      "resultLabel": "Estimated emissions for this route",
+      "distance": "Distance",
+      "compensate": "Offset this trip"
+    },
     "dataQuality": {
       "label": "Data Quality",
       "real": "Real Data",
-      "estimated": "Estimated",
-      "standard": "Standard"
+      "estimated": "Estimated"
     },
     "profile": {
       "typeLabel": "Profile Type",
@@ -1605,6 +1627,10 @@
     "calculator": {
       "title": "Carbon Footprint Calculator",
       "description": "Calculate your carbon footprint for free. Discover your CO₂ emissions from transport, energy, food, and more."
+    },
+    "tripCalculator": {
+      "title": "Trip Calculator",
+      "description": "Estimate CO₂ emissions for a flight between two cities and offset your trip."
     },
     "certificateValidation": {
       "title": "Validate Certificate",

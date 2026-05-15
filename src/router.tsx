@@ -44,6 +44,7 @@ import { CompensationReportPage } from '@/features/compensation/ReportPage';
 import { CompensationHistoryPage } from '@/features/compensation/HistoryPage';
 import { PixPaymentPage } from '@/features/compensation/PixPaymentPage';
 import { GuestCalculatorPage } from '@/features/footprint/GuestCalculatorPage';
+import { TripCalculatorPage } from '@/features/footprint/TripCalculatorPage';
 import { StripeSetupPage } from '@/features/how-to-use/StripeSetupPage';
 import { StripePlatformSetupPage } from '@/features/how-to-use/StripePlatformSetupPage';
 
@@ -93,6 +94,7 @@ export const router = createBrowserRouter([
       { path: '/map', element: <MapPage /> },
       { path: '/areas/public', element: <PublicAreasPage /> },
       { path: '/calculator', element: <GuestCalculatorPage /> },
+      { path: '/calculator/trip', element: <TripCalculatorPage /> },
       { path: '/areas', element: <AuthGuard><AreaListPage /></AuthGuard> },
       { path: '/certificates/validate', element: <CertificateValidationPage /> },
       { path: '/access-denied', element: <AccessDeniedPage /> },

@@ -1,10 +1,24 @@
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Zap, Info } from 'lucide-react';
 import { CategoryInputCard } from '../CategoryInputCard';
 import type { FootprintInput } from '@/types/footprint';
+import { PeriodMultiplier, PERIOD_MULTIPLIERS } from '../PeriodMultiplier';
 
 export function EnergyStep({ onSave, initialValues }: { onSave: (inputs: FootprintInput[], category: FootprintInput['category']) => void; initialValues?: Record<string, number> }) {
   const { t } = useTranslation();
+  const [period, setPeriod] = useState<string>('year');
+
+  const handleSave = useCallback((inputs: FootprintInput[], category: FootprintInput['category']) => {
+    const multiplier = PERIOD_MULTIPLIERS[period] ?? 1;
+    const adjusted = inputs.map((input) => ({
+      ...input,
+      value: input.value * multiplier,
+      metadata: { ...input.metadata, time_period: period },
+    }));
+    onSave(adjusted, category);
+  }, [onSave, period]);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -22,12 +36,14 @@ export function EnergyStep({ onSave, initialValues }: { onSave: (inputs: Footpri
         <p className="text-base text-text-secondary">{t('footprint.energy.tip')}</p>
       </div>
 
+      <PeriodMultiplier period={period} onChange={setPeriod} />
+
       <CategoryInputCard
         category="energy"
         fields={[
           { key: 'electricity', unit: 'kwh', displayUnit: 'kWh', labelKey: 'footprint.energy.electricity', metadata: {} },
         ]}
-        onSave={onSave}
+        onSave={handleSave}
         initialValues={initialValues}
       />
     </div>

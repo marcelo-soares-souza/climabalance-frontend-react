@@ -2,20 +2,19 @@ import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { SEO } from '@/components/SEO';
-import { Leaf, Sprout, ArrowRight, Play } from 'lucide-react';
-// import { Building2 } from 'lucide-react';
+import { Leaf, Sprout, Building2, ArrowRight, Play } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import { Card, CardContent } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 
-type AccountTab = 'individual' /* | 'legalEntity' */ | 'producer';
+type AccountTab = 'individual' | 'legalEntity' | 'producer';
 
 export function HowToUsePlatformPage() {
   const { t } = useTranslation();
 
   const tabMeta: Array<{ key: AccountTab; icon: ReactNode }> = [
     { key: 'individual', icon: <Leaf className="h-5 w-5 text-primary" /> },
-    // { key: 'legalEntity', icon: <Building2 className="h-5 w-5 text-accent" /> },
+    { key: 'legalEntity', icon: <Building2 className="h-5 w-5 text-accent" /> },
     { key: 'producer', icon: <Sprout className="h-5 w-5 text-emerald-700" /> },
   ];
 
@@ -46,6 +45,27 @@ export function HowToUsePlatformPage() {
           </div>
         </div>
       </section>
+
+      <Tabs defaultValue="individual" className="space-y-6">
+        <TabsList className="flex flex-wrap gap-2 border-b-0">
+          {tabMeta.map((tab) => (
+            <TabsTrigger
+              key={tab.key}
+              value={tab.key}
+              className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 data-[active=true]:border-primary"
+            >
+              {tab.icon}
+              {t(`howToUse.tabs.${tab.key}`)}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+
+        {tabMeta.map((tab) => (
+          <TabsContent key={tab.key} value={tab.key} className="pt-0">
+            <TabPanel type={tab.key} />
+          </TabsContent>
+        ))}
+      </Tabs>
 
       <section>
         <div className="mb-4">
@@ -86,48 +106,16 @@ export function HowToUsePlatformPage() {
             </a>
           ))}
         </div>
-      </section>
-
-      <Tabs defaultValue="individual" className="space-y-6">
-        <TabsList className="flex flex-wrap gap-2 border-b-0">
-          {tabMeta.map((tab) => (
-            <TabsTrigger
-              key={tab.key}
-              value={tab.key}
-              className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 data-[active=true]:border-primary"
-            >
-              {tab.icon}
-              {t(`howToUse.tabs.${tab.key}`)}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-
-        {tabMeta.map((tab) => (
-          <TabsContent key={tab.key} value={tab.key} className="pt-0">
-            <TabPanel type={tab.key} />
-          </TabsContent>
-        ))}
-      </Tabs>
-
-      <Card className="border-0 shadow-sm ring-1 ring-black/5">
-        <CardContent className="flex flex-col gap-3 py-6 md:flex-row md:items-center md:justify-between">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-              {t('platform.stripe.title')}
-            </p>
-            <p className="text-sm text-text-secondary mt-1">
-              {t('platform.stripe.short_desc')}
-            </p>
-          </div>
+        <div className="mt-6 text-center">
           <Link
-            to="/how-to-use/stripe-platform-setup"
+            to="/about"
             className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
           >
-            {t('platform.stripe.open_setup')}
+            {t('howToUse.secondaryCta')}
             <ArrowRight className="h-4 w-4" />
           </Link>
-        </CardContent>
-      </Card>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,10 +1,24 @@
+import { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Fuel, Info } from 'lucide-react';
 import { CategoryInputCard } from '../CategoryInputCard';
 import type { FootprintInput } from '@/types/footprint';
+import { PeriodMultiplier, PERIOD_MULTIPLIERS } from '../PeriodMultiplier';
 
 export function FuelStep({ onSave, initialValues }: { onSave: (inputs: FootprintInput[], category: FootprintInput['category']) => void; initialValues?: Record<string, number> }) {
   const { t } = useTranslation();
+  const [period, setPeriod] = useState<string>('year');
+
+  const handleSave = useCallback((inputs: FootprintInput[], category: FootprintInput['category']) => {
+    const multiplier = PERIOD_MULTIPLIERS[period] ?? 1;
+    const adjusted = inputs.map((input) => ({
+      ...input,
+      value: input.value * multiplier,
+      metadata: { ...input.metadata, time_period: period },
+    }));
+    onSave(adjusted, category);
+  }, [onSave, period]);
+
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
@@ -22,6 +36,8 @@ export function FuelStep({ onSave, initialValues }: { onSave: (inputs: Footprint
         <p className="text-base text-text-secondary">{t('footprint.fuel.tip')}</p>
       </div>
 
+      <PeriodMultiplier period={period} onChange={setPeriod} />
+
       <CategoryInputCard
         category="fuel"
         fields={[
@@ -29,7 +45,7 @@ export function FuelStep({ onSave, initialValues }: { onSave: (inputs: Footprint
           { key: 'ethanol', unit: 'liter', displayUnit: 'L', labelKey: 'footprint.fuel.ethanol', metadata: { fuel_type: 'ethanol' } },
           { key: 'diesel', unit: 'liter', displayUnit: 'L', labelKey: 'footprint.fuel.diesel', metadata: { fuel_type: 'diesel' } },
         ]}
-        onSave={onSave}
+        onSave={handleSave}
         initialValues={initialValues}
       />
     </div>

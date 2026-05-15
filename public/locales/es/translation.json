@@ -181,10 +181,10 @@
   "home": {
     "welcome": {
       "title": "Bienvenido a ClimaBalance",
-      "description": "Plataforma de impacto climático enfocada en apoyar proyectos de Agroecología, Agroforestería, Permacultura, Agricultura Orgánica y otras iniciativas de producción agrícola ecológica.",
+      "description": "Plataforma dedicada a la mitigación climática a través del apoyo a la reforestación local. Unimos la compensación de emisiones a una red multifacética de iniciativas, que abarca la restauración de cobertura nativa, sistemas agroforestales y agroecología.",
       "transferNotice": "El valor de las contribuciones se transfiere al reforestador responsable del área, con un cobro destinado al mantenimiento y la evolución de la plataforma.",
       "inDevelopment": "Proyecto en desarrollo",
-      "getStarted": "Comenzar",
+      "getStarted": "Registrarse",
       "exploreMap": "Explorar Mapa",
       "howToUse": "Cómo usar la plataforma",
       "learnMore": "Sobre el proyecto",
@@ -196,6 +196,9 @@
       "step3Description": "Recibe certificados y acompaña contribuciones con transparencia y trazabilidad.",
       "tryCalculator": "Calcular Huella",
       "viewCommunity": "Comunidad"
+    },
+    "profiles": {
+      "title": "¿Para quién es la plataforma?"
     },
     "dashboard": {
       "title": "Tu Impacto Climático",
@@ -217,6 +220,7 @@
       "noAreasDescription": "Registra proyectos de restauración y recibe apoyo para plantar árboles"
     },
     "stats": {
+      "title": "Resultados Obtenidos",
       "totalAreas": "Áreas registradas",
       "totalTrees": "Árboles plantados",
       "totalCO2": "CO₂ capturado"
@@ -672,11 +676,29 @@
       "scope2": "Alcance 2",
       "scope3": "Alcance 3"
     },
+    "periodMultiplier": {
+      "label": "Los valores informados corresponden a:",
+      "year": "Año",
+      "month": "Mes",
+      "week": "Semana"
+    },
+    "tripCalculator": {
+      "title": "Calculadora de Viaje",
+      "description": "Estima las emisiones de un vuelo entre dos ciudades",
+      "origin": "Origen",
+      "destination": "Destino",
+      "selectCity": "Selecciona una ciudad",
+      "class": "Clase del vuelo",
+      "economy": "Económica",
+      "business": "Ejecutiva",
+      "resultLabel": "Emisiones estimadas para esta ruta",
+      "distance": "Distancia",
+      "compensate": "Compensar este viaje"
+    },
     "dataQuality": {
       "label": "Calidad de Datos",
       "real": "Datos Reales",
-      "estimated": "Estimado",
-      "standard": "Estándar"
+      "estimated": "Estimado"
     },
     "profile": {
       "typeLabel": "Tipo de Perfil",
@@ -1605,6 +1627,10 @@
     "calculator": {
       "title": "Calculadora de Huella de Carbono",
       "description": "Calcule su huella de carbono gratis. Descubra sus emisiones de CO₂ en transporte, energía, alimentación y más."
+    },
+    "tripCalculator": {
+      "title": "Calculadora de Viaje",
+      "description": "Estima las emisiones de CO₂ de un vuelo entre dos ciudades y compensa tu viaje."
     },
     "certificateValidation": {
       "title": "Validar Certificado",

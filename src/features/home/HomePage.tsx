@@ -22,6 +22,9 @@ import {
   Leaf,
   Plus,
   Heart,
+  User,
+  Building2,
+  Sprout,
 } from "lucide-react";
 import {
   getAreaDetailPath,
@@ -81,18 +84,11 @@ function UnauthenticatedHome() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             size="lg"
-            onClick={() => navigate("/register")}
-            className="bg-white text-primary hover:bg-white/90 shadow-lg"
-          >
-            {t("home.welcome.getStarted")}
-          </Button>
-          <Button
-            size="lg"
             variant="outline"
-            onClick={() => navigate("/map")}
+            onClick={() => navigate("/about")}
             className="border-white/40 text-white hover:bg-white/10"
           >
-            {t("home.welcome.exploreMap")}
+            {t("home.welcome.learnMore")}
           </Button>
           <Button
             size="lg"
@@ -105,23 +101,34 @@ function UnauthenticatedHome() {
           <Button
             size="lg"
             variant="outline"
-            onClick={() => navigate("/about")}
-            className="border-white/40 text-white hover:bg-white/10"
-          >
-            {t("home.welcome.learnMore")}
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
             onClick={() => navigate("/calculator")}
             className="border-white/40 text-white hover:bg-white/10"
           >
             {t("home.welcome.tryCalculator")}
           </Button>
+          <Button
+            size="lg"
+            variant="outline"
+            onClick={() => navigate("/map")}
+            className="border-white/40 text-white hover:bg-white/10"
+          >
+            {t("home.welcome.exploreMap")}
+          </Button>
+          <Button
+            size="lg"
+            onClick={() => navigate("/register")}
+            className="bg-white text-primary hover:bg-white/90 shadow-lg"
+          >
+            {t("home.welcome.getStarted")}
+          </Button>
         </div>
       </div>
       {globalStats && (
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mb-4">
+        <div className="mb-4">
+          <h2 className="text-xl font-bold text-text-primary mb-3 text-center">
+            {t("home.stats.title")}
+          </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <Card className="border-l-4 border-l-emerald-400">
             <CardContent className="py-4">
               <p className="text-sm text-text-secondary mb-1">
@@ -153,7 +160,64 @@ function UnauthenticatedHome() {
             </CardContent>
           </Card>
         </div>
+        </div>
       )}
+
+      <div className="mb-6">
+        <h2 className="text-xl font-bold text-text-primary mb-4 text-center">
+          {t("home.profiles.title")}
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card
+            className="cursor-pointer hover:shadow-lg transition-shadow"
+            onClick={() => navigate("/how-to-use")}
+          >
+            <CardContent className="text-center py-8">
+              <div className="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
+                <User className="h-7 w-7 text-primary" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">
+                {t("auth.register.roleIndividual")}
+              </h3>
+              <p className="text-base text-text-secondary">
+                {t("auth.register.roleIndividualDescription")}
+              </p>
+            </CardContent>
+          </Card>
+          <Card
+            className="cursor-pointer hover:shadow-lg transition-shadow"
+            onClick={() => navigate("/how-to-use")}
+          >
+            <CardContent className="text-center py-8">
+              <div className="w-14 h-14 rounded-2xl bg-accent/15 flex items-center justify-center mx-auto mb-4">
+                <Building2 className="h-7 w-7 text-accent" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">
+                {t("auth.register.roleLegalEntity")}
+              </h3>
+              <p className="text-base text-text-secondary">
+                {t("auth.register.roleLegalEntityDescription")}
+              </p>
+            </CardContent>
+          </Card>
+          <Card
+            className="cursor-pointer hover:shadow-lg transition-shadow"
+            onClick={() => navigate("/how-to-use")}
+          >
+            <CardContent className="text-center py-8">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">
+                <Sprout className="h-7 w-7 text-emerald-700" />
+              </div>
+              <h3 className="font-semibold text-lg mb-2">
+                {t("auth.register.roleProducer")}
+              </h3>
+              <p className="text-base text-text-secondary">
+                {t("auth.register.roleProducerDescription")}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Card className="hover:shadow-lg transition-shadow">

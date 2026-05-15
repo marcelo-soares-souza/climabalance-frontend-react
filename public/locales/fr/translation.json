@@ -181,10 +181,10 @@
   "home": {
     "welcome": {
       "title": "Bienvenue sur ClimaBalance",
-      "description": "Plateforme d'impact climatique dédiée au soutien de projets d'Agroécologie, d'Agroforesterie, de Permaculture, d'Agriculture Biologique et d'autres initiatives de production agricole écologique.",
+      "description": "Plateforme dédiée à l'atténuation climatique via le soutien à la reforestation locale. Nous unissons la compensation des émissions à un réseau multi-facettes d'initiatives, englobant la restauration de couvertures natives, les systèmes agroforestiers et l'agroécologie.",
       "transferNotice": "Le montant des contributions est transféré au reboiseur responsable de la zone, avec des frais prélevés pour la maintenance et l'évolution de la plateforme.",
       "inDevelopment": "Projet en développement",
-      "getStarted": "Commencer",
+      "getStarted": "S'inscrire",
       "exploreMap": "Explorer la Carte",
       "howToUse": "Comment utiliser la plateforme",
       "learnMore": "À propos du projet",
@@ -196,6 +196,9 @@
       "step3Description": "Recevez des certificats et suivez les contributions avec transparence et traçabilité.",
       "tryCalculator": "Calculer l'Empreinte",
       "viewCommunity": "Communauté"
+    },
+    "profiles": {
+      "title": "À qui s'adresse la plateforme?"
     },
     "dashboard": {
       "title": "Votre Impact Climatique",
@@ -217,6 +220,7 @@
       "noAreasDescription": "Enregistrez des projets de restauration et recevez du soutien pour planter des arbres"
     },
     "stats": {
+      "title": "Résultats Obtenus",
       "totalAreas": "Zones enregistrées",
       "totalTrees": "Arbres plantés",
       "totalCO2": "CO₂ capturé"
@@ -672,11 +676,29 @@
       "scope2": "Scope 2",
       "scope3": "Scope 3"
     },
+    "periodMultiplier": {
+      "label": "Les valeurs saisies concernent :",
+      "year": "Année",
+      "month": "Mois",
+      "week": "Semaine"
+    },
+    "tripCalculator": {
+      "title": "Calculatrice de Voyage",
+      "description": "Estimez les émissions d'un vol entre deux villes",
+      "origin": "Origine",
+      "destination": "Destination",
+      "selectCity": "Sélectionnez une ville",
+      "class": "Classe du vol",
+      "economy": "Économique",
+      "business": "Affaires",
+      "resultLabel": "Émissions estimées pour ce trajet",
+      "distance": "Distance",
+      "compensate": "Compenser ce voyage"
+    },
     "dataQuality": {
       "label": "Qualité des Données",
       "real": "Données Réelles",
-      "estimated": "Estimé",
-      "standard": "Standard"
+      "estimated": "Estimé"
     },
     "profile": {
       "typeLabel": "Type de Profil",
@@ -1605,6 +1627,10 @@
     "calculator": {
       "title": "Calculateur d'Empreinte Carbone",
       "description": "Calculez gratuitement votre empreinte carbone. Découvrez vos émissions de CO₂ liées au transport, à l'énergie, à l'alimentation et plus."
+    },
+    "tripCalculator": {
+      "title": "Calculatrice de Voyage",
+      "description": "Estimez les émissions de CO₂ d'un vol entre deux villes et compensez votre voyage."
     },
     "certificateValidation": {
       "title": "Valider un Certificat",
