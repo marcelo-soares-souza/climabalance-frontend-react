@@ -194,14 +194,8 @@ export function AreaDetailPage() {
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
       if (!areaIdentifier) throw new Error("area.not_found");
-      const base64 = await fileToBase64(file);
       const mediaType = file.type.startsWith("video/") ? "video" : "photo";
-      return areasService.uploadAreaMedia(areaIdentifier, {
-        media_type: mediaType,
-        mime_type: file.type,
-        file_name: file.name,
-        file_base64: base64,
-      });
+      return areasService.uploadAreaMedia(areaIdentifier, file, mediaType);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
@@ -1027,15 +1021,3 @@ export function AreaDetailPage() {
   );
 }
 
-function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      const result = reader.result as string;
-      // Remove "data:mime/type;base64," prefix
-      resolve(result.split(",")[1]);
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}

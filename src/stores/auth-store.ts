@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import type { AuthSession } from '@/types/auth';
 import { tokenStorage } from '@/lib/token-storage';
+import { csrfToken } from '@/lib/csrf-token';
 import { decodeToken, isTokenExpired } from '@/lib/jwt';
 import { queryClient } from '@/config/query-client';
 import { authService } from '@/services/auth';
@@ -62,7 +63,7 @@ export const useAuthStore = create<AuthState>()(
         const data = await authService.login(email, password);
 
         tokenStorage.setAccessToken(data.accessToken);
-        tokenStorage.setCsrfToken(data.csrfToken);
+        csrfToken.set(data.csrfToken);
 
         const baseSession = buildSession(data.accessToken, email);
         const session = baseSession
@@ -112,7 +113,7 @@ export const useAuthStore = create<AuthState>()(
       try {
         const data = await authService.refreshToken();
         tokenStorage.setAccessToken(data.accessToken);
-        tokenStorage.setCsrfToken(data.csrfToken);
+        csrfToken.set(data.csrfToken);
         const baseSession = buildSession(data.accessToken);
         const session = baseSession
           ? await hydrateSessionSlug(baseSession)

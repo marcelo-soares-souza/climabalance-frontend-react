@@ -344,8 +344,12 @@ export const areasService = {
     return api.get<RawAreaMedia[]>(`/areas/${areaId}/media`).then((rows) => rows.map((row) => normalizeAreaMedia(row, areaId)));
   },
 
-  uploadAreaMedia(areaId: string, data: { media_type: string; description?: string; mime_type: string; file_name: string; file_base64: string }) {
-    return api.post<RawAreaMedia>(`/areas/${areaId}/media`, data).then((raw) => normalizeAreaMedia(raw, areaId));
+  uploadAreaMedia(areaId: string, file: File, mediaType: string, description?: string) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('media_type', mediaType);
+    if (description) formData.append('description', description);
+    return api.post<RawAreaMedia>(`/areas/${areaId}/media`, formData).then((raw) => normalizeAreaMedia(raw, areaId));
   },
 
   deleteAreaMedia(mediaId: string) {

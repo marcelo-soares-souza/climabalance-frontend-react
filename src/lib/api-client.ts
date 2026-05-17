@@ -1,11 +1,41 @@
-import { API_BASE } from '@/config/api';
+import { API_BASE, REQUEST_TIMEOUT } from '@/config/api';
 import { tokenStorage } from './token-storage';
+import { csrfToken } from './csrf-token';
 import { isTokenExpired } from './jwt';
 import i18n from '@/config/i18n';
 
 type RequestOptions = RequestInit & {
   params?: Record<string, string | number | boolean | undefined>;
 };
+
+function fetchWithTimeout(url: string | URL, options: RequestInit = {}): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+
+  const existingSignal = options.signal;
+  if (existingSignal) {
+    existingSignal.addEventListener('abort', () => {
+      clearTimeout(timeoutId);
+      controller.abort(existingSignal.reason);
+    });
+  }
+
+  const signal = existingSignal ? anySignal([existingSignal, controller.signal]) : controller.signal;
+
+  return fetch(url, { ...options, signal }).finally(() => clearTimeout(timeoutId));
+}
+
+function anySignal(signals: AbortSignal[]): AbortSignal {
+  const controller = new AbortController();
+  for (const signal of signals) {
+    if (signal.aborted) {
+      controller.abort(signal.reason);
+      return controller.signal;
+    }
+    signal.addEventListener('abort', () => controller.abort(signal.reason), { once: true });
+  }
+  return controller.signal;
+}
 
 let isRefreshing = false;
 let refreshSubscribers: Array<(token: string) => void> = [];
@@ -21,12 +51,12 @@ function addRefreshSubscriber(cb: (token: string) => void): void {
 
 async function refreshTokenRequest(): Promise<string | null> {
   try {
-    const csrfToken = tokenStorage.getCsrfToken();
+    const currentCsrfToken = csrfToken.get();
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
-    if (csrfToken) {
-      headers['x-csrf-token'] = csrfToken;
+    if (currentCsrfToken) {
+      headers['x-csrf-token'] = currentCsrfToken;
     }
-    const res = await fetch(`${API_BASE}/auth/refresh`, {
+    const res = await fetchWithTimeout(`${API_BASE}/auth/refresh`, {
       method: 'POST',
       headers,
       credentials: 'include',
@@ -39,7 +69,7 @@ async function refreshTokenRequest(): Promise<string | null> {
     const data = json.data || json;
     tokenStorage.setAccessToken(data.accessToken);
     if (data.csrfToken) {
-      tokenStorage.setCsrfToken(data.csrfToken);
+      csrfToken.set(data.csrfToken);
     }
     return data.accessToken;
   } catch {
@@ -125,22 +155,22 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   if (!(fetchOptions.body instanceof FormData)) {
     headers['Content-Type'] = 'application/json';
   }
-  const currentCsrfToken = tokenStorage.getCsrfToken();
+  const currentCsrfToken = csrfToken.get();
   if (currentCsrfToken && fetchOptions.method && fetchOptions.method.toUpperCase() !== 'GET') {
     headers['x-csrf-token'] = currentCsrfToken;
   }
 
-  const res = await fetch(url, { ...fetchOptions, headers, credentials: 'include' });
+  const res = await fetchWithTimeout(url, { ...fetchOptions, headers, credentials: 'include' });
 
   if (res.status === 401 && shouldHandleSession && !isNonSession401Path(path)) {
     const newToken = await handleUnauthorized();
     if (newToken) {
       headers['Authorization'] = `Bearer ${newToken}`;
-      const refreshedCsrfToken = tokenStorage.getCsrfToken();
+      const refreshedCsrfToken = csrfToken.get();
       if (refreshedCsrfToken && fetchOptions.method && fetchOptions.method.toUpperCase() !== 'GET') {
         headers['x-csrf-token'] = refreshedCsrfToken;
       }
-      const retryRes = await fetch(url, { ...fetchOptions, headers, credentials: 'include' });
+      const retryRes = await fetchWithTimeout(url, { ...fetchOptions, headers, credentials: 'include' });
       if (!retryRes.ok) {
         const err = await retryRes.json().catch(() => ({}));
         throw new ApiError(retryRes.status, err.error?.message_key || err.error || 'request.failed', err.error?.details);
@@ -186,10 +216,11 @@ export const api = {
     return request<T>(path, { ...options, method: 'GET' });
   },
   post<T>(path: string, body?: unknown, options?: RequestOptions): Promise<T> {
+    const serialized = body instanceof FormData ? body : body ? JSON.stringify(body) : undefined;
     return request<T>(path, {
       ...options,
       method: 'POST',
-      body: body ? JSON.stringify(body) : undefined,
+      body: serialized,
     });
   },
   put<T>(path: string, body?: unknown, options?: RequestOptions): Promise<T> {
@@ -216,7 +247,7 @@ export const api = {
     const headers: Record<string, string> = {};
     if (token) headers['Authorization'] = `Bearer ${token}`;
 
-    const res = await fetch(url, { ...fetchOptions, method: 'GET', headers, credentials: 'include' });
+    const res = await fetchWithTimeout(url, { ...fetchOptions, method: 'GET', headers, credentials: 'include' });
     if (!res.ok) throw new ApiError(res.status, 'download.failed');
     return res.blob();
   },

@@ -10,8 +10,11 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    sourcemap: false,
+  },
   server: {
-    allowedHosts: ['dev.climabalance.org', 'climabalance.org'],
+    allowedHosts: ['localhost', '127.0.0.1', 'dev.climabalance.org', 'climabalance.org', 'www.climabalance.org'],
     port: 5173,
     proxy: {
       '/api': {
