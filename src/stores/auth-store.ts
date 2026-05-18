@@ -10,6 +10,7 @@ import { usersService } from '@/services/users';
 interface AuthState {
   session: AuthSession | null;
   isLoading: boolean;
+  hasRestoredSession: boolean;
   isAuthenticated: boolean;
   isAdmin: boolean;
   login: (email: string, password: string) => Promise<void>;
@@ -47,13 +48,20 @@ async function hydrateSessionSlug(session: AuthSession): Promise<AuthSession> {
 function clearAuthState() {
   tokenStorage.clear();
   queryClient.clear();
-  return { session: null, isAuthenticated: false, isAdmin: false, isLoading: false };
+  return {
+    session: null,
+    isAuthenticated: false,
+    isAdmin: false,
+    isLoading: false,
+    hasRestoredSession: true,
+  };
 }
 
 export const useAuthStore = create<AuthState>()(
   (set, get) => ({
     session: null,
     isLoading: false,
+    hasRestoredSession: false,
     isAuthenticated: false,
     isAdmin: false,
 
@@ -78,6 +86,7 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: true,
           isAdmin,
           isLoading: false,
+          hasRestoredSession: true,
         });
       } catch (err) {
         set({ isLoading: false });
@@ -105,6 +114,7 @@ export const useAuthStore = create<AuthState>()(
             isAuthenticated: true,
             isAdmin: session.roles.includes('administrator'),
             isLoading: false,
+            hasRestoredSession: true,
           });
           return;
         }
@@ -128,6 +138,7 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: true,
           isAdmin: session.roles.includes('administrator'),
           isLoading: false,
+          hasRestoredSession: true,
         });
       } catch {
         set(clearAuthState());
