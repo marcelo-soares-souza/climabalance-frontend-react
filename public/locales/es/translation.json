@@ -1537,7 +1537,7 @@
       "usageAria": "Ayuda sobre uso de la capacidad",
       "usage": "Porcentaje de la capacidad total del área que ya está comprometido.",
       "pricePerTreeAria": "Ayuda sobre precio por árbol",
-      "pricePerTree": "Usa este valor cuando el apoyo se modele por número de árboles o unidades equivalentes del proyecto.",
+      "pricePerTree": "Usa este valor en USD cuando el apoyo se modele por número de árboles o unidades equivalentes del proyecto.",
       "defaultHorizonYearsAria": "Ayuda sobre el horizonte predeterminado del proyecto",
       "defaultHorizonYears": "Define el horizonte de años usado como referencia predeterminada para estimaciones y operaciones vinculadas a esta área.",
       "pricePerTco2eAria": "Ayuda sobre precio por tCO2e",

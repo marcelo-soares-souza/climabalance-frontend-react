@@ -1537,7 +1537,7 @@
       "usageAria": "Help about capacity usage",
       "usage": "Percentage of the area's total capacity that is already committed.",
       "pricePerTreeAria": "Help about price per tree",
-      "pricePerTree": "Use this value when support is modeled by number of trees or equivalent project units.",
+      "pricePerTree": "Use this USD amount when support is modeled by number of trees or equivalent project units.",
       "defaultHorizonYearsAria": "Help about the project's default horizon",
       "defaultHorizonYears": "Defines the default year horizon used as the reference for estimates and operations linked to this area.",
       "pricePerTco2eAria": "Help about price per tCO2e",

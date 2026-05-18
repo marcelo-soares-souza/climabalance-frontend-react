@@ -1537,7 +1537,7 @@
       "usageAria": "Aide sur l'utilisation de la capacité",
       "usage": "Pourcentage de la capacité totale de la zone déjà engagée.",
       "pricePerTreeAria": "Aide sur le prix par arbre",
-      "pricePerTree": "Utilisez cette valeur lorsque le soutien est modélisé par nombre d'arbres ou unités équivalentes du projet.",
+      "pricePerTree": "Utilisez cette valeur en USD lorsque le soutien est modélisé par nombre d'arbres ou unités équivalentes du projet.",
       "defaultHorizonYearsAria": "Aide sur l'horizon par défaut du projet",
       "defaultHorizonYears": "Définit l'horizon en années utilisé comme référence par défaut pour les estimations et opérations liées à cette zone.",
       "pricePerTco2eAria": "Aide sur le prix par tCO2e",

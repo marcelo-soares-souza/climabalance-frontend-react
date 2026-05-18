@@ -281,6 +281,7 @@ export function AreaFormPage() {
               value={formValues.t_co2e_per_tree_per_year} onChange={(e) => update('t_co2e_per_tree_per_year', e.target.value)} />
             <Input id="price_tree" type="number" step="any" label={t('area.form.pricePerTree')}
               labelAdornment={<InfoTooltip ariaLabel={t('tooltips.area.pricePerTreeAria')} content={<p>{t('tooltips.area.pricePerTree')}</p>} />}
+              suffix="USD"
               value={formValues.price_per_tree} onChange={(e) => update('price_per_tree', e.target.value)} />
           </div>
           <div className="grid grid-cols-1 gap-4">
