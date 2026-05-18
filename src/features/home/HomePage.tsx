@@ -13,6 +13,7 @@ import { Skeleton } from "@/components/ui/Skeleton";
 import { EmptyState } from "@/components/EmptyState";
 import { StatusBadge } from "@/components/StatusBadge";
 import { formatTCO2e, formatNumber, formatDate } from "@/lib/format";
+import { PageSkeleton } from "@/components/LoadingSkeleton";
 import {
   Calculator,
   MapPin,
@@ -34,7 +35,9 @@ import {
 const LOGO_URL = "/logo.png";
 
 export function HomePage() {
-  const { isAuthenticated, userId, userSlug } = useAuth();
+  const { isAuthenticated, userId, userSlug, hasRestoredSession } = useAuth();
+
+  if (!hasRestoredSession) return <PageSkeleton />;
 
   if (!isAuthenticated) return <UnauthenticatedHome />;
   return <AuthenticatedHome userId={userId!} userSlug={userSlug} />;

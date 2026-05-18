@@ -7,6 +7,8 @@ import { queryClient } from '@/config/query-client';
 import { authService } from '@/services/auth';
 import { usersService } from '@/services/users';
 
+let restoreSessionPromise: Promise<void> | null = null;
+
 interface AuthState {
   session: AuthSession | null;
   isLoading: boolean;
@@ -47,6 +49,7 @@ async function hydrateSessionSlug(session: AuthSession): Promise<AuthSession> {
 
 function clearAuthState() {
   tokenStorage.clear();
+  csrfToken.clear();
   queryClient.clear();
   return {
     session: null,
@@ -100,15 +103,44 @@ export const useAuthStore = create<AuthState>()(
     },
 
     restoreSession: async () => {
-      set({ isLoading: true });
-      const accessToken = tokenStorage.getAccessToken();
+      if (restoreSessionPromise) {
+        return restoreSessionPromise;
+      }
 
-      if (accessToken && !isTokenExpired(accessToken)) {
-        const baseSession = buildSession(accessToken);
-        const session = baseSession
-          ? await hydrateSessionSlug(baseSession)
-          : null;
-        if (session) {
+      restoreSessionPromise = (async () => {
+        set({ isLoading: true });
+        const accessToken = tokenStorage.getAccessToken();
+
+        if (accessToken && !isTokenExpired(accessToken)) {
+          const baseSession = buildSession(accessToken);
+          const session = baseSession
+            ? await hydrateSessionSlug(baseSession)
+            : null;
+          if (session) {
+            set({
+              session,
+              isAuthenticated: true,
+              isAdmin: session.roles.includes('administrator'),
+              isLoading: false,
+              hasRestoredSession: true,
+            });
+            return;
+          }
+        }
+
+        try {
+          const data = await authService.refreshToken();
+          tokenStorage.setAccessToken(data.accessToken);
+          csrfToken.set(data.csrfToken);
+          const baseSession = buildSession(data.accessToken);
+          const session = baseSession
+            ? await hydrateSessionSlug(baseSession)
+            : null;
+          if (!session) {
+            set(clearAuthState());
+            return;
+          }
+
           set({
             session,
             isAuthenticated: true,
@@ -116,32 +148,15 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
             hasRestoredSession: true,
           });
-          return;
+        } catch {
+          set(clearAuthState());
         }
-      }
+      })();
 
       try {
-        const data = await authService.refreshToken();
-        tokenStorage.setAccessToken(data.accessToken);
-        csrfToken.set(data.csrfToken);
-        const baseSession = buildSession(data.accessToken);
-        const session = baseSession
-          ? await hydrateSessionSlug(baseSession)
-          : null;
-        if (!session) {
-          set(clearAuthState());
-          return;
-        }
-
-        set({
-          session,
-          isAuthenticated: true,
-          isAdmin: session.roles.includes('administrator'),
-          isLoading: false,
-          hasRestoredSession: true,
-        });
-      } catch {
-        set(clearAuthState());
+        await restoreSessionPromise;
+      } finally {
+        restoreSessionPromise = null;
       }
     },
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { SEO } from '@/components/SEO';
@@ -15,7 +15,7 @@ export function LoginPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
-  const { login, isLoading } = useAuth();
+  const { login, isLoading, isAuthenticated, hasRestoredSession } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -23,6 +23,12 @@ export function LoginPage() {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const from = (location.state as { from?: string })?.from || '/';
+
+  useEffect(() => {
+    if (hasRestoredSession && isAuthenticated) {
+      navigate(from, { replace: true });
+    }
+  }, [from, hasRestoredSession, isAuthenticated, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

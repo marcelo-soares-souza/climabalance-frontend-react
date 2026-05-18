@@ -38,7 +38,7 @@ interface SidebarProps {
 
 export function Sidebar({ open, onClose }: SidebarProps) {
   const { t } = useTranslation();
-  const { isAuthenticated, isAdmin, hasRole, logout, userId, userSlug } = useAuth();
+  const { isAuthenticated, isAdmin, hasRole, logout, userId, userSlug, hasRestoredSession } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
@@ -171,7 +171,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           <NavLink to="/users" end className={linkClass} onClick={onClose}>
             <Users className="h-4 w-4" /> {t("nav.directory")}
           </NavLink>
-          {!isAuthenticated && (
+          {hasRestoredSession && !isAuthenticated && (
             <NavLink
               to="/calculator"
               className={() => linkClassByValue(isCalculatorActive)}
@@ -181,7 +181,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             </NavLink>
           )}
 
-          {isAuthenticated && (
+          {hasRestoredSession && isAuthenticated && (
             <>
               {sectionLabel(t("nav.impact"))}
               <NavLink
@@ -288,7 +288,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         </nav>
 
         {/* Bottom: logout in drawer */}
-        {isAuthenticated && (
+        {hasRestoredSession && isAuthenticated && (
           <div className="border-t border-white/10 p-3">
             <button
               onClick={handleLogout}
@@ -299,7 +299,7 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           </div>
         )}
 
-        {!isAuthenticated && (
+        {hasRestoredSession && !isAuthenticated && (
           <div className="border-t border-white/10 p-3">
             <NavLink
               to="/login"

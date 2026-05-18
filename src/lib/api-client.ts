@@ -2,6 +2,7 @@ import { API_BASE, REQUEST_TIMEOUT } from '@/config/api';
 import { tokenStorage } from './token-storage';
 import { csrfToken } from './csrf-token';
 import { isTokenExpired } from './jwt';
+import { ensureSessionCsrfToken } from './session-bootstrap';
 import i18n from '@/config/i18n';
 
 type RequestOptions = RequestInit & {
@@ -51,10 +52,12 @@ function addRefreshSubscriber(cb: (token: string) => void): void {
 
 async function refreshTokenRequest(): Promise<string | null> {
   try {
-    const currentCsrfToken = csrfToken.get();
+    const currentCsrfToken = await ensureSessionCsrfToken();
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
     if (currentCsrfToken) {
       headers['x-csrf-token'] = currentCsrfToken;
+    } else {
+      return null;
     }
     const res = await fetchWithTimeout(`${API_BASE}/auth/refresh`, {
       method: 'POST',

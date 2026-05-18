@@ -12,7 +12,7 @@ interface HeaderProps {
 
 export function Header({ onMenuClick }: HeaderProps) {
   const { t } = useTranslation();
-  const { isAuthenticated, logout, userId, userSlug } = useAuth();
+  const { isAuthenticated, logout, userId, userSlug, hasRestoredSession } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const profilePath = getUserProfilePath({ id: userId, slug: userSlug });
@@ -47,7 +47,9 @@ export function Header({ onMenuClick }: HeaderProps) {
       <div className="flex items-center gap-2">
         <LanguageSelector />
 
-        {isAuthenticated ? (
+        {!hasRestoredSession ? (
+          <div className="h-9 w-20 rounded-[var(--radius-button)] bg-primary-50/70 animate-pulse" />
+        ) : isAuthenticated ? (
           <>
             <button
               onClick={() => navigate(profilePath)}

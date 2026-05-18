@@ -1,6 +1,6 @@
 import { api } from '@/lib/api-client';
 import { API_BASE } from '@/config/api';
-import { csrfToken } from '@/lib/csrf-token';
+import { ensureSessionCsrfToken } from '@/lib/session-bootstrap';
 import type { HumanCheckChallenge, LoginResponse, RegisterRequest, RegisterResponse } from '@/types/auth';
 
 export const authService = {
@@ -33,10 +33,12 @@ export const authService = {
   },
 
   async refreshToken(): Promise<LoginResponse> {
-    const currentCsrfToken = csrfToken.get();
+    const currentCsrfToken = await ensureSessionCsrfToken();
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
     if (currentCsrfToken) {
       headers['x-csrf-token'] = currentCsrfToken;
+    } else {
+      throw new Error('Refresh failed');
     }
     const res = await fetch(`${API_BASE}/auth/refresh`, {
       method: 'POST',
