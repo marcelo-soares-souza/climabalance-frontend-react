@@ -42,7 +42,7 @@ export function OnboardingPage() {
 
   return (
     <>
-      <SEO title="Onboarding" />
+      <SEO title={t("seo.onboarding.title")} />
       <div className="max-w-lg mx-auto text-center py-12">
         <div className="text-primary mb-6">{steps[step].icon}</div>
         <h1 className="text-2xl font-bold mb-4">{steps[step].title}</h1>

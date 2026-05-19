@@ -99,7 +99,7 @@ export function AdminUsersPage() {
 
   return (
     <>
-      <SEO title="Administrar Usuários" />
+      <SEO title={t("seo.adminUsers.title")} />
       <div className="space-y-6">
         <h1 className="text-2xl font-bold">{t("admin.users.title")}</h1>
         <div className="flex gap-3 flex-wrap">

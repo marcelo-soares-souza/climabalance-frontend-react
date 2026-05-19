@@ -1670,6 +1670,75 @@
     "embedCalculator": {
       "title": "Calculadora de Carbono Incorporável",
       "description": "Adicione a calculadora de pegada de carbono ao seu site. Ferramenta gratuita de medição de emissões de CO₂."
+    },
+    "sessions": {
+      "title": "Sessões"
+    },
+    "profileEdit": {
+      "title": "Editar Perfil"
+    },
+    "certificates": {
+      "title": "Certificados"
+    },
+    "privacy": {
+      "title": "Privacidade"
+    },
+    "onboarding": {
+      "title": "Onboarding"
+    },
+    "treePlanting": {
+      "title": "Plantar Árvores"
+    },
+    "pendingAreas": {
+      "title": "Áreas Pendentes"
+    },
+    "areaForm": {
+      "title": "Áreas"
+    },
+    "areaAudit": {
+      "title": "Auditar Área"
+    },
+    "stripeSetup": {
+      "title": "Configurar Stripe"
+    },
+    "stripePlatformSetup": {
+      "title": "Configurar Stripe Platform"
+    },
+    "footprintHistory": {
+      "title": "Histórico"
+    },
+    "calculationDetail": {
+      "title": "Detalhes do Cálculo"
+    },
+    "contact": {
+      "title": "Contato"
+    },
+    "compensationReview": {
+      "title": "Revisar Compensação"
+    },
+    "compensationReport": {
+      "title": "Relatório"
+    },
+    "pixPayment": {
+      "title": "Pagamento PIX"
+    },
+    "compensationHistory": {
+      "title": "Histórico de Compensações"
+    },
+    "checkout": {
+      "title": "Checkout"
+    },
+    "adminUsers": {
+      "title": "Administrar Usuários"
+    },
+    "adminUserEdit": {
+      "title": "Editar Usuário"
+    },
+    "adminAuditLog": {
+      "title": "Registro de Auditoria"
+    },
+    "areaList": {
+      "title": "Minhas Áreas"
     }
   },
   "units": {

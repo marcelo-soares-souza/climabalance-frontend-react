@@ -83,7 +83,7 @@ export function CompensationReviewPage() {
 
   return (
     <>
-      <SEO title="Revisar Compensação" />
+      <SEO title={t("seo.compensationReview.title")} />
       <div className="max-w-2xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}

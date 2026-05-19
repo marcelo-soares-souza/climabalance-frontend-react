@@ -81,7 +81,7 @@ export function PrivacyPage() {
 
   return (
     <>
-      <SEO title="Privacidade" />
+      <SEO title={t("seo.privacy.title")} />
       <div className="max-w-3xl mx-auto space-y-8 py-2">
         <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-light to-accent px-8 py-14 text-white">
           <div className="max-w-2xl space-y-4">

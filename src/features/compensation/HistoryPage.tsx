@@ -31,7 +31,7 @@ export function CompensationHistoryPage() {
 
   return (
     <>
-      <SEO title="Histórico de Compensações" />
+      <SEO title={t("seo.compensationHistory.title")} />
       <div className="max-w-2xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("compensations.title")}</h1>
 

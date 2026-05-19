@@ -1670,6 +1670,75 @@
     "embedCalculator": {
       "title": "Embeddable Carbon Calculator",
       "description": "Add the carbon footprint calculator to your website. Free CO₂ emissions measurement tool."
+    },
+    "sessions": {
+      "title": "Sessions"
+    },
+    "profileEdit": {
+      "title": "Edit Profile"
+    },
+    "certificates": {
+      "title": "Certificates"
+    },
+    "privacy": {
+      "title": "Privacy"
+    },
+    "onboarding": {
+      "title": "Onboarding"
+    },
+    "treePlanting": {
+      "title": "Plant Trees"
+    },
+    "pendingAreas": {
+      "title": "Pending Areas"
+    },
+    "areaForm": {
+      "title": "Areas"
+    },
+    "areaAudit": {
+      "title": "Audit Area"
+    },
+    "stripeSetup": {
+      "title": "Stripe Setup"
+    },
+    "stripePlatformSetup": {
+      "title": "Stripe Platform Setup"
+    },
+    "footprintHistory": {
+      "title": "History"
+    },
+    "calculationDetail": {
+      "title": "Calculation Details"
+    },
+    "contact": {
+      "title": "Contact"
+    },
+    "compensationReview": {
+      "title": "Review Compensation"
+    },
+    "compensationReport": {
+      "title": "Report"
+    },
+    "pixPayment": {
+      "title": "PIX Payment"
+    },
+    "compensationHistory": {
+      "title": "Compensation History"
+    },
+    "checkout": {
+      "title": "Checkout"
+    },
+    "adminUsers": {
+      "title": "Manage Users"
+    },
+    "adminUserEdit": {
+      "title": "Edit User"
+    },
+    "adminAuditLog": {
+      "title": "Audit Log"
+    },
+    "areaList": {
+      "title": "My Areas"
     }
   },
   "units": {

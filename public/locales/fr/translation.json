@@ -1670,6 +1670,75 @@
     "embedCalculator": {
       "title": "Calculateur Carbone Intégrable",
       "description": "Ajoutez le calculateur d'empreinte carbone à votre site web. Outil gratuit de mesure des émissions de CO₂."
+    },
+    "sessions": {
+      "title": "Sessions"
+    },
+    "profileEdit": {
+      "title": "Modifier le Profil"
+    },
+    "certificates": {
+      "title": "Certificats"
+    },
+    "privacy": {
+      "title": "Confidentialité"
+    },
+    "onboarding": {
+      "title": "Onboarding"
+    },
+    "treePlanting": {
+      "title": "Planter des Arbres"
+    },
+    "pendingAreas": {
+      "title": "Zones en Attente"
+    },
+    "areaForm": {
+      "title": "Zones"
+    },
+    "areaAudit": {
+      "title": "Auditer la Zone"
+    },
+    "stripeSetup": {
+      "title": "Configurer Stripe"
+    },
+    "stripePlatformSetup": {
+      "title": "Configurer Stripe Platform"
+    },
+    "footprintHistory": {
+      "title": "Historique"
+    },
+    "calculationDetail": {
+      "title": "Détails du Calcul"
+    },
+    "contact": {
+      "title": "Contact"
+    },
+    "compensationReview": {
+      "title": "Réviser la Compensation"
+    },
+    "compensationReport": {
+      "title": "Rapport"
+    },
+    "pixPayment": {
+      "title": "Paiement PIX"
+    },
+    "compensationHistory": {
+      "title": "Historique des Compensations"
+    },
+    "checkout": {
+      "title": "Checkout"
+    },
+    "adminUsers": {
+      "title": "Gérer les Utilisateurs"
+    },
+    "adminUserEdit": {
+      "title": "Modifier l'Utilisateur"
+    },
+    "adminAuditLog": {
+      "title": "Journal d'Audit"
+    },
+    "areaList": {
+      "title": "Mes Zones"
     }
   },
   "units": {

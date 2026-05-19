@@ -306,7 +306,7 @@ export function TreePlantingPage() {
 
   return (
     <>
-      <SEO title="Plantar Árvores" />
+      <SEO title={t("seo.treePlanting.title")} />
       <div className="max-w-4xl mx-auto space-y-4">
         <button
           onClick={() => navigate(-1)}

@@ -67,7 +67,7 @@ export function CalculationDetailPage() {
 
   return (
     <>
-      <SEO title="Detalhes do Cálculo" />
+      <SEO title={t("seo.calculationDetail.title")} />
       <div className="max-w-2xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}

@@ -69,7 +69,7 @@ export function AreaAuditPage() {
 
   return (
     <>
-      <SEO title="Auditar Área" />
+      <SEO title={t("seo.areaAudit.title")} />
       <div className="max-w-3xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}

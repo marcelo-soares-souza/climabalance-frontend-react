@@ -91,7 +91,7 @@ export function UserEditPage() {
 
   return (
     <>
-      <SEO title="Editar Usuário" />
+      <SEO title={t("seo.adminUserEdit.title")} />
       <div className="max-w-lg mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}

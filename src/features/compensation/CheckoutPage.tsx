@@ -340,7 +340,7 @@ export function CompensationCheckoutPage() {
 
   return (
     <>
-      <SEO title="Checkout" />
+      <SEO title={t("seo.checkout.title")} />
       <div className="max-w-lg mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}

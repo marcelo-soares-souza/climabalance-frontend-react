@@ -114,7 +114,7 @@ export function AreaListPage() {
 
   return (
     <>
-      <SEO title={t("seo.userDirectory.title")} />
+      <SEO title={t("seo.areaList.title")} />
       <div className="space-y-6">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <h1 className="text-2xl font-bold">{t("areas.list.title")}</h1>

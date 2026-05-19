@@ -72,7 +72,7 @@ export function PixPaymentPage() {
 
   return (
     <>
-      <SEO title="Pagamento PIX" />
+      <SEO title={t("seo.pixPayment.title")} />
       <div className="max-w-lg mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}

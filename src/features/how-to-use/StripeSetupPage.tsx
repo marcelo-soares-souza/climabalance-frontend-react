@@ -90,7 +90,7 @@ export function StripeSetupPage() {
 
   return (
     <>
-      <SEO title="Configurar Stripe" />
+      <SEO title={t("seo.stripeSetup.title")} />
       <div className="max-w-2xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("producer.stripe.title")}</h1>
 

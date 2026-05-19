@@ -7,7 +7,7 @@ export function StripePlatformSetupPage() {
 
   return (
     <>
-      <SEO title="Configurar Stripe Platform" />
+      <SEO title={t("seo.stripePlatformSetup.title")} />
       <div className="max-w-3xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("platform.stripe.title")}</h1>
 

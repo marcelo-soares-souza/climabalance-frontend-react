@@ -47,7 +47,7 @@ export function AuditLogPage() {
 
   return (
     <>
-      <SEO title="Registro de Auditoria" />
+      <SEO title={t("seo.adminAuditLog.title")} />
       <div className="space-y-6">
         <h1 className="text-2xl font-bold">{t("admin.auditLog.title")}</h1>
         <div className="flex flex-wrap gap-3">

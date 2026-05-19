@@ -93,7 +93,7 @@ export function SessionsPage() {
 
   return (
     <>
-      <SEO title="Sessões" />
+      <SEO title={t("seo.sessions.title")} />
       <div className="max-w-2xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}

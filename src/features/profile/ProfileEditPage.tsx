@@ -195,7 +195,7 @@ export function ProfileEditPage() {
 
   return (
     <>
-      <SEO title="Editar Perfil" />
+      <SEO title={t("seo.profileEdit.title")} />
       <div className="max-w-2xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}

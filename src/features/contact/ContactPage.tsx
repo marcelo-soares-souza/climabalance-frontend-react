@@ -36,7 +36,7 @@ export function ContactPage() {
 
   return (
     <>
-      <SEO title="Contato" />
+      <SEO title={t("seo.contact.title")} />
       <div className="max-w-2xl mx-auto space-y-6">
         <div className="flex items-center gap-3">
           <MessageSquare className="h-6 w-6 text-primary" />

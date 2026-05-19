@@ -103,7 +103,7 @@ export function CompensationReportPage() {
 
   return (
     <>
-      <SEO title="Relatório" />
+      <SEO title={t("seo.compensationReport.title")} />
       <div className="max-w-2xl mx-auto space-y-6">
         <button
           onClick={() => navigate("/")}
