@@ -1496,11 +1496,20 @@
       "units": {
         "kwhAria": "Aide sur le kWh",
         "kwh": "Le kWh est l'unité utilisée pour la consommation d'électricité.",
-        "kmAria": "Aide sur les kilomètres",
-        "km": "Saisissez la distance parcourue en kilomètres.",
+        "kmAria": "Aide sur les km",
+        "km": "Saisissez la distance parcourue en km.",
         "literAria": "Aide sur les litres",
         "liter": "Saisissez le volume consommé en litres."
-      }
+      },
+      "comparison": "Compare vos émissions totales à la moyenne brésilienne (~2,0 tCO₂e/an par habitant) et à la moyenne mondiale (~4,0 tCO₂e/an par habitant).",
+      "stationaryCombustion": "La combustion stationnaire inclut le carburant brûlé dans des équipements fixes comme les générateurs, chaudières, fours et chauffages sur vos locaux.",
+      "mobileCombustion": "La combustion mobile couvre le carburant brûlé par les véhicules possédés ou contrôlés par l'entreprise, comme les camions de livraison, les fourgons et les voitures de fonction.",
+      "fugitiveEmissions": "Les émissions fugitives sont des rejets intentionnels ou non de gaz provenant d'équipements comme les systèmes de réfrigération, la climatisation et les gazoducs.",
+      "processEmissions": "Les émissions de procédé sont libérées lors de processus industriels ou chimiques, comme la production de ciment, la fabrication chimique ou la métallurgie.",
+      "domesticEconomy": "Vols domestiques en classe économique. La classe économique a des émissions plus faibles par passager en raison d'une densité de sièges plus élevée.",
+      "domesticBusiness": "Vols domestiques en classe affaires. La classe affaires a des émissions plus élevées par passager en raison d'une empreinte au sol plus grande.",
+      "internationalEconomy": "Vols internationaux en classe économique. La classe économique a des émissions plus faibles par passager.",
+      "internationalBusiness": "Vols internationaux en classe affaires. La classe affaires a des émissions plus élevées par passager."
     },
     "compensation": {
       "modeAria": "Aide sur les modes de compensation",
@@ -1607,6 +1616,14 @@
       "suspend": "Suspendre la zone la rend temporairement indisponible pour de nouvelles compensations. Les contributions existantes et les arbres plantés ne sont pas affectés.",
       "treesPlanted": "Arbres Plantés montre les arbres physiques déjà géoréférencés sur la carte. Le nombre après la barre est le total d'arbres financés par les compensations.",
       "compensated": "Total de CO₂ équivalent qui a été compensé via les contributions à cette zone, basé sur le taux de capture estimé par arbre."
+    },
+    "producer": {
+      "chargesEnabled": "Indique si votre compte Stripe peut recevoir les paiements des contributions. Doit être activé pour que les supporters puissent compenser dans vos zones.",
+      "payoutsEnabled": "Indique si les fonds peuvent être automatiquement transférés vers votre compte bancaire. Les deux doivent être activés pour recevoir des contributions.",
+      "pendingVerification": "Stripe vérifie votre identité et vos documents. Cela prend généralement quelques minutes. Vous recevrez une confirmation une fois terminé."
+    },
+    "profile": {
+      "sessions": "Les sessions actives montrent où votre compte est actuellement connecté. Vous pouvez révoquer des sessions individuelles ou toutes à la fois pour forcer la déconnexion sur d'autres appareils."
     }
   },
   "cookieConsent": {

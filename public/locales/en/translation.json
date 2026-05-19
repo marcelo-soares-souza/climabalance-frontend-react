@@ -1496,11 +1496,20 @@
       "units": {
         "kwhAria": "Help about kWh",
         "kwh": "kWh is the unit used for electricity consumption.",
-        "kmAria": "Help about kilometers",
-        "km": "Enter the distance traveled in kilometers.",
+        "kmAria": "Help about km",
+        "km": "Enter the distance traveled in km.",
         "literAria": "Help about liters",
         "liter": "Enter the consumed volume in liters."
-      }
+      },
+      "comparison": "Compares your total emissions to the Brazilian average (~2.0 tCO₂e/year per capita) and the global average (~4.0 tCO₂e/year per capita).",
+      "stationaryCombustion": "Stationary combustion includes fuel burned in fixed equipment like generators, boilers, furnaces, and heaters on your premises.",
+      "mobileCombustion": "Mobile combustion covers fuel burned by vehicles owned or controlled by the company, such as delivery trucks, service vans, and company cars.",
+      "fugitiveEmissions": "Fugitive emissions are intentional or unintentional releases of gases from equipment like refrigeration systems, air conditioning, and gas pipelines.",
+      "processEmissions": "Process emissions are released during industrial or chemical processes, such as cement production, chemical manufacturing, or metallurgy.",
+      "domesticEconomy": "Domestic flights in economy class. Economy class has lower emissions per passenger due to higher seat density.",
+      "domesticBusiness": "Domestic flights in business class. Business class has higher emissions per passenger due to larger seat footprint.",
+      "internationalEconomy": "International flights in economy class. Economy class has lower emissions per passenger due to higher seat density.",
+      "internationalBusiness": "International flights in business class. Business class has higher emissions per passenger due to larger seat footprint."
     },
     "compensation": {
       "modeAria": "Help about compensation modes",
@@ -1607,6 +1616,14 @@
       "suspend": "Suspending the area makes it temporarily unavailable for new compensations. Existing contributions and planted trees are not affected.",
       "treesPlanted": "Trees Planted shows the physical trees already geo-tagged on the map. The number after the slash is the total trees funded through compensations.",
       "compensated": "Total CO₂ equivalent that has been compensated through contributions to this area, based on the estimated capture rate per tree."
+    },
+    "producer": {
+      "chargesEnabled": "Indicates whether your Stripe account can receive payments from contributions. Needs to be enabled for supporters to compensate in your areas.",
+      "payoutsEnabled": "Indicates whether funds can be automatically transferred to your bank account. Both must be enabled to receive contributions.",
+      "pendingVerification": "Stripe is verifying your identity and documents. This usually takes a few minutes. You will receive confirmation when complete."
+    },
+    "profile": {
+      "sessions": "Active sessions show where your account is currently logged in. You can revoke individual sessions or all at once to force logout on other devices."
     }
   },
   "cookieConsent": {

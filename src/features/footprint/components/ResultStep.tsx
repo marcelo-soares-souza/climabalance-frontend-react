@@ -63,13 +63,19 @@ export function ResultStep({
             {formatKgCO2e(result.totalKgCO2e)}
           </p>
           {isBelowAvg && (
-            <div className="mt-4 inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-base">
+            <div
+              className="mt-4 inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-base"
+              title={t("tooltips.footprint.comparison")}
+            >
               <TrendingDown className="h-4 w-4" />
               {t("footprint.result.belowAverage")}
             </div>
           )}
           {!isBelowAvg && (
-            <div className="mt-4 inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-base">
+            <div
+              className="mt-4 inline-flex items-center gap-2 bg-white/15 rounded-full px-4 py-1.5 text-base"
+              title={t("tooltips.footprint.comparison")}
+            >
               <TrendingUp className="h-4 w-4" />
               {t("footprint.result.aboveAverage")}
             </div>

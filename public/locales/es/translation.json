@@ -1500,7 +1500,16 @@
         "km": "Ingresa la distancia recorrida en kilómetros.",
         "literAria": "Ayuda sobre litros",
         "liter": "Ingresa el volumen consumido en litros."
-      }
+      },
+      "comparison": "Compara tus emisiones totales con el promedio brasileño (~2,0 tCO₂e/año per cápita) y el promedio global (~4,0 tCO₂e/año per cápita).",
+      "stationaryCombustion": "La combustión estacionaria incluye la quema de combustibles en equipos fijos como generadores, calderas, hornos y calentadores en las instalaciones.",
+      "mobileCombustion": "La combustión móvil cubre el combustible quemado por vehículos propios o controlados por la empresa, como camiones de reparto, furgonetas y autos corporativos.",
+      "fugitiveEmissions": "Las emisiones fugitivas son liberaciones intencionales o no de gases de equipos como sistemas de refrigeración, aire acondicionado y gasoductos.",
+      "processEmissions": "Las emisiones de proceso se liberan durante procesos industriales o químicos, como producción de cemento, fabricación química o metalurgia.",
+      "domesticEconomy": "Vuelos domésticos en clase económica. La clase económica tiene menor emisión por pasajero debido a la mayor densidad de asientos.",
+      "domesticBusiness": "Vuelos domésticos en clase ejecutiva. La clase ejecutiva tiene mayor emisión por pasajero debido al mayor espacio por asiento.",
+      "internationalEconomy": "Vuelos internacionales en clase económica. La clase económica tiene menor emisión por pasajero debido a la mayor densidad de asientos.",
+      "internationalBusiness": "Vuelos internacionales en clase ejecutiva. La clase ejecutiva tiene mayor emisión por pasajero debido al mayor espacio por asiento."
     },
     "compensation": {
       "modeAria": "Ayuda sobre modos de compensación",
@@ -1607,6 +1616,14 @@
       "suspend": "Suspender el área la hace temporalmente no disponible para nuevas compensaciones. Las contribuciones existentes y los árboles plantados no se ven afectados.",
       "treesPlanted": "Árboles Plantados muestra los árboles físicos ya georreferenciados en el mapa. El número después de la barra es el total de árboles financiados mediante compensaciones.",
       "compensated": "Total de CO₂ equivalente que ha sido compensado a través de contribuciones a esta área, basado en la tasa de captura estimada por árbol."
+    },
+    "producer": {
+      "chargesEnabled": "Indica si tu cuenta de Stripe puede recibir pagos de contribuciones. Debe estar habilitado para que los partidarios puedan compensar en tus áreas.",
+      "payoutsEnabled": "Indica si los fondos pueden transferirse automáticamente a tu cuenta bancaria. Ambos deben estar habilitados para recibir contribuciones.",
+      "pendingVerification": "Stripe está verificando tu identidad y documentos. Esto generalmente toma unos minutos. Recibirás una confirmación cuando esté completo."
+    },
+    "profile": {
+      "sessions": "Las sesiones activas muestran dónde está conectada tu cuenta actualmente. Puedes revocar sesiones individuales o todas a la vez para forzar el cierre de sesión en otros dispositivos."
     }
   },
   "cookieConsent": {

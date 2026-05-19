@@ -45,24 +45,28 @@ export function FlightsStep({
             unit: "km",
             labelKey: "footprint.flights.domesticEconomy",
             metadata: { flight_type: "domestic", class: "economy" },
+            tooltipKey: "tooltips.footprint.domesticEconomy",
           },
           {
             key: "domestic_business",
             unit: "km",
             labelKey: "footprint.flights.domesticBusiness",
             metadata: { flight_type: "domestic", class: "business" },
+            tooltipKey: "tooltips.footprint.domesticBusiness",
           },
           {
             key: "international_economy",
             unit: "km",
             labelKey: "footprint.flights.internationalEconomy",
             metadata: { flight_type: "international", class: "economy" },
+            tooltipKey: "tooltips.footprint.internationalEconomy",
           },
           {
             key: "international_business",
             unit: "km",
             labelKey: "footprint.flights.internationalBusiness",
             metadata: { flight_type: "international", class: "business" },
+            tooltipKey: "tooltips.footprint.internationalBusiness",
           },
         ]}
         onSave={onSave}

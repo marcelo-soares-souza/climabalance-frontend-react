@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ErrorBanner } from "@/components/ErrorBanner";
 import { ApiError } from "@/lib/api-client";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { Check, X, ExternalLink, Loader } from "lucide-react";
 
 export function StripeSetupPage() {
@@ -154,7 +155,13 @@ export function StripeSetupPage() {
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-between items-center">
-                <span>{t("producer.stripe.charges_enabled")}</span>
+                <span className="flex items-center gap-1">
+                  {t("producer.stripe.charges_enabled")}
+                  <InfoTooltip
+                    ariaLabel={t("producer.stripe.charges_enabled")}
+                    content={<p>{t("tooltips.producer.chargesEnabled")}</p>}
+                  />
+                </span>
                 <span className="flex items-center gap-1">
                   {statusQuery.data?.charges_enabled ? (
                     <>
@@ -170,7 +177,13 @@ export function StripeSetupPage() {
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span>{t("producer.stripe.payouts_enabled")}</span>
+                <span className="flex items-center gap-1">
+                  {t("producer.stripe.payouts_enabled")}
+                  <InfoTooltip
+                    ariaLabel={t("producer.stripe.payouts_enabled")}
+                    content={<p>{t("tooltips.producer.payoutsEnabled")}</p>}
+                  />
+                </span>
                 <span className="flex items-center gap-1">
                   {statusQuery.data?.payouts_enabled ? (
                     <>

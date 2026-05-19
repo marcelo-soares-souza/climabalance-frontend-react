@@ -11,6 +11,7 @@ interface CategoryField {
   labelKey: string;
   placeholderKey?: string;
   metadata?: Record<string, unknown>;
+  tooltipKey?: string;
 }
 
 interface CategoryInputCardProps {
@@ -86,12 +87,20 @@ export function CategoryInputCard({
           step="0.01"
           label={t(field.labelKey)}
           labelAdornment={
-            getUnitTooltip(field.unit) ? (
-              <InfoTooltip
-                ariaLabel={getUnitTooltip(field.unit)!.aria}
-                content={<p>{getUnitTooltip(field.unit)!.content}</p>}
-              />
-            ) : undefined
+            <>
+              {field.tooltipKey && (
+                <InfoTooltip
+                  ariaLabel={t(field.labelKey)}
+                  content={<p>{t(field.tooltipKey)}</p>}
+                />
+              )}
+              {getUnitTooltip(field.unit) && (
+                <InfoTooltip
+                  ariaLabel={getUnitTooltip(field.unit)!.aria}
+                  content={<p>{getUnitTooltip(field.unit)!.content}</p>}
+                />
+              )}
+            </>
           }
           suffix={field.displayUnit ?? field.unit}
           value={values[field.key] || ""}

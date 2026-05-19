@@ -499,11 +499,25 @@ export function ProfilePage() {
             </CardHeader>
             <CardContent className="space-y-3 text-sm">
               {isProducerReadyToReceivePayments ? (
-                <p className="text-success">{t("producer.stripe.enabled")}</p>
+                <div className="flex items-center gap-2">
+                  <p className="text-success">{t("producer.stripe.enabled")}</p>
+                  <InfoTooltip
+                    ariaLabel={t("producer.stripe.enabled")}
+                    content={<p>{t("tooltips.producer.chargesEnabled")}</p>}
+                  />
+                </div>
               ) : isStripePendingVerification ? (
-                <p className="text-warning">
-                  {t("producer.stripe.pending_verification")}
-                </p>
+                <div className="flex items-center gap-2">
+                  <p className="text-warning">
+                    {t("producer.stripe.pending_verification")}
+                  </p>
+                  <InfoTooltip
+                    ariaLabel={t("producer.stripe.pending_verification")}
+                    content={
+                      <p>{t("tooltips.producer.pendingVerification")}</p>
+                    }
+                  />
+                </div>
               ) : (
                 <>
                   <p className="text-text-secondary">

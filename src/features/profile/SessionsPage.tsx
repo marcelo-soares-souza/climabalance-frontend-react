@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/Dialog";
 import { PageSkeleton } from "@/components/LoadingSkeleton";
 import { formatDateTime } from "@/lib/format";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { Smartphone, Monitor, Trash2, LogOut, ArrowLeft } from "lucide-react";
 import { matchesPublicRef } from "@/lib/public-refs";
 
@@ -103,7 +104,13 @@ export function SessionsPage() {
         </button>
 
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">{t("profile.sessions")}</h1>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold">{t("profile.sessions")}</h1>
+            <InfoTooltip
+              ariaLabel={t("profile.sessions")}
+              content={<p>{t("tooltips.profile.sessions")}</p>}
+            />
+          </div>
           {sessions && sessions.length > 0 && (
             <Button
               variant="outline"

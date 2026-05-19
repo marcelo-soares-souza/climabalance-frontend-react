@@ -58,6 +58,7 @@ export function Scope1Step({
             displayUnit: "tCO2e",
             labelKey: "footprint.scope1.stationaryCombustion",
             metadata: { activity_subtype: "scope1_stationary_combustion" },
+            tooltipKey: "tooltips.footprint.stationaryCombustion",
           },
           {
             key: "mobile_combustion",
@@ -65,6 +66,7 @@ export function Scope1Step({
             displayUnit: "tCO2e",
             labelKey: "footprint.scope1.mobileCombustion",
             metadata: { activity_subtype: "scope1_mobile_combustion" },
+            tooltipKey: "tooltips.footprint.mobileCombustion",
           },
           {
             key: "fugitive_emissions",
@@ -72,6 +74,7 @@ export function Scope1Step({
             displayUnit: "tCO2e",
             labelKey: "footprint.scope1.fugitiveEmissions",
             metadata: { activity_subtype: "scope1_fugitive_emissions" },
+            tooltipKey: "tooltips.footprint.fugitiveEmissions",
           },
           {
             key: "process_emissions",
@@ -79,6 +82,7 @@ export function Scope1Step({
             displayUnit: "tCO2e",
             labelKey: "footprint.scope1.processEmissions",
             metadata: { activity_subtype: "scope1_process_emissions" },
+            tooltipKey: "tooltips.footprint.processEmissions",
           },
         ]}
         onSave={onSave}
