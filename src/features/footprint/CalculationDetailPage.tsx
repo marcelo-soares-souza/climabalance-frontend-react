@@ -54,6 +54,11 @@ export function CalculationDetailPage() {
     calculation.status === "draft" &&
     (isAdmin ||
       (calculation.userId != null && calculation.userId === currentUserId));
+  const canDelete =
+    isAdmin ||
+    (calculation.status === "draft" &&
+      calculation.userId != null &&
+      calculation.userId === currentUserId);
   const editPath = getUserCalculationEditPath(
     calculation.id,
     routeUserId
@@ -165,10 +170,12 @@ export function CalculationDetailPage() {
                 <CheckCircle className="h-4 w-4 mr-2" />{" "}
                 {t("footprint.result.finalize")}
               </Button>
-              <Button variant="danger" onClick={() => setShowDelete(true)}>
-                <Trash2 className="h-4 w-4 mr-2" /> {t("common.delete")}
-              </Button>
             </>
+          )}
+          {canDelete && (
+            <Button variant="danger" onClick={() => setShowDelete(true)}>
+              <Trash2 className="h-4 w-4 mr-2" /> {t("common.delete")}
+            </Button>
           )}
           {calculation.status !== "draft" && (
             <Button
