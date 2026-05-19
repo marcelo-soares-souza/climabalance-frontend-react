@@ -40,10 +40,18 @@ import {
   ArrowRight,
   MapPin,
   Globe,
-  Camera,
   Eye,
   EyeOff,
 } from "lucide-react";
+import {
+  InstagramIcon,
+  FacebookIcon,
+  XIcon,
+  BlueskyIcon,
+  MastodonIcon,
+  YoutubeIcon,
+  LinkedinIcon,
+} from "@/components/SocialIcons";
 import { API_URL } from "@/config/api";
 import {
   getAreaDetailPath,
@@ -609,9 +617,11 @@ export function ProfilePage() {
                     href={profile.websiteUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    title={t("profile.website")}
+                    aria-label={t("profile.website")}
+                    className="inline-flex items-center gap-1.5 text-primary hover:text-primary-dark transition-colors"
                   >
-                    <Globe className="h-4 w-4" /> {t("profile.website")}
+                    <Globe className="h-5 w-5" />
                   </a>
                 )}
                 {profile.instagramUrl && (
@@ -619,10 +629,11 @@ export function ProfilePage() {
                     href={profile.instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    title={t("profile.social.instagram")}
+                    aria-label={t("profile.social.instagram")}
+                    className="inline-flex items-center gap-1.5 text-primary hover:text-primary-dark transition-colors"
                   >
-                    <Camera className="h-4 w-4" />{" "}
-                    {t("profile.social.instagram")}
+                    <InstagramIcon className="h-5 w-5" />
                   </a>
                 )}
                 {profile.facebookUrl && (
@@ -630,9 +641,11 @@ export function ProfilePage() {
                     href={profile.facebookUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    title={t("profile.social.facebook")}
+                    aria-label={t("profile.social.facebook")}
+                    className="inline-flex items-center gap-1.5 text-primary hover:text-primary-dark transition-colors"
                   >
-                    {t("profile.social.facebook")}
+                    <FacebookIcon className="h-5 w-5" />
                   </a>
                 )}
                 {profile.xUrl && (
@@ -640,9 +653,11 @@ export function ProfilePage() {
                     href={profile.xUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    title={t("profile.social.x")}
+                    aria-label={t("profile.social.x")}
+                    className="inline-flex items-center gap-1.5 text-primary hover:text-primary-dark transition-colors"
                   >
-                    {t("profile.social.x")}
+                    <XIcon className="h-5 w-5" />
                   </a>
                 )}
                 {profile.blueskyUrl && (
@@ -650,9 +665,11 @@ export function ProfilePage() {
                     href={profile.blueskyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    title={t("profile.social.bluesky")}
+                    aria-label={t("profile.social.bluesky")}
+                    className="inline-flex items-center gap-1.5 text-primary hover:text-primary-dark transition-colors"
                   >
-                    {t("profile.social.bluesky")}
+                    <BlueskyIcon className="h-5 w-5" />
                   </a>
                 )}
                 {profile.mastodonUrl && (
@@ -660,9 +677,11 @@ export function ProfilePage() {
                     href={profile.mastodonUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    title={t("profile.social.mastodon")}
+                    aria-label={t("profile.social.mastodon")}
+                    className="inline-flex items-center gap-1.5 text-primary hover:text-primary-dark transition-colors"
                   >
-                    {t("profile.social.mastodon")}
+                    <MastodonIcon className="h-5 w-5" />
                   </a>
                 )}
                 {profile.youtubeUrl && (
@@ -670,9 +689,11 @@ export function ProfilePage() {
                     href={profile.youtubeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    title={t("profile.social.youtube")}
+                    aria-label={t("profile.social.youtube")}
+                    className="inline-flex items-center gap-1.5 text-primary hover:text-primary-dark transition-colors"
                   >
-                    {t("profile.social.youtube")}
+                    <YoutubeIcon className="h-5 w-5" />
                   </a>
                 )}
                 {profile.linkedinUrl && (
@@ -680,9 +701,11 @@ export function ProfilePage() {
                     href={profile.linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                    title={t("profile.social.linkedin")}
+                    aria-label={t("profile.social.linkedin")}
+                    className="inline-flex items-center gap-1.5 text-primary hover:text-primary-dark transition-colors"
                   >
-                    {t("profile.social.linkedin")}
+                    <LinkedinIcon className="h-5 w-5" />
                   </a>
                 )}
               </CardContent>
