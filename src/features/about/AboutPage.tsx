@@ -7,7 +7,6 @@ import {
   ArrowRight,
   BadgeCheck,
   Globe,
-  Heart,
   Leaf,
   MapPinned,
   Target,
@@ -206,24 +205,6 @@ export function AboutPage() {
               </Card>
             ))}
           </div>
-        </section>
-
-        <section className="rounded-2xl border border-primary/10 bg-primary-50/40 px-8 py-6 text-center">
-          <Heart className="mx-auto mb-2 h-5 w-5 text-primary" />
-          <h3 className="text-lg font-semibold text-text-primary mb-1">
-            {t("support.title")}
-          </h3>
-          <p className="text-sm text-text-secondary">
-            {t("support.description")}{" "}
-            <a
-              href="https://ko-fi.com/agroecologymap"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-primary hover:underline"
-            >
-              {t("support.action")}
-            </a>
-          </p>
         </section>
       </div>
     </>

@@ -22,7 +22,6 @@ import {
   ArrowRight,
   Leaf,
   Plus,
-  Heart,
   User,
   Sprout,
 } from "lucide-react";
@@ -264,21 +263,6 @@ function UnauthenticatedHome() {
               </p>
             </CardContent>
           </Card>
-        </div>
-
-        <div className="mt-6 rounded-2xl border border-primary/10 bg-primary-50/40 px-6 py-5 text-center">
-          <Heart className="mx-auto mb-2 h-5 w-5 text-primary" />
-          <p className="text-sm text-text-secondary">
-            {t("support.description")}{" "}
-            <a
-              href="https://ko-fi.com/agroecologymap"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-medium text-primary hover:underline"
-            >
-              {t("support.action")}
-            </a>
-          </p>
         </div>
       </div>
     </>
