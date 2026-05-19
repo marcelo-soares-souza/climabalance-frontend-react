@@ -306,7 +306,7 @@
         "title": "Comment cela fonctionne",
         "step1": {
           "title": "Créer un compte",
-          "description": "Inscrivez-vous comme supporter."
+          "description": "Inscrivez-vous comme contributeur."
         },
         "step2": {
           "title": "Calculer l'empreinte",
@@ -962,7 +962,7 @@
     "maxPurchasableTrees": "Limite d'Arbres",
     "usage": "Utilisation",
     "contributions": "Contributions par arbres",
-    "supporters": "Supporters",
+    "supporters": "Contributeurs",
     "contributionsEmpty": "Aucune contribution payée pour cette zone pour le moment.",
     "anonymousContributor": "Contributeur",
     "owner": "Responsable",
@@ -1173,7 +1173,7 @@
     "editTitle": "Modifier le profil",
     "personalInfo": "Informations Personnelles",
     "accountType": "Type de compte",
-    "compensated": "Offset estimé soutenu",
+    "compensated": "Compensation estimée soutenue",
     "treesPlanted": "Arbres Plantés",
     "recentCompensations": "Contributions Récentes",
     "viewCertificates": "Voir les Certificats",
@@ -1535,7 +1535,7 @@
     },
     "area": {
       "statusAria": "Aide sur le statut de la zone",
-      "statusSummary": "Le statut indique l'étape de la zone, depuis son enregistrement initial jusqu'à son activation ou sa suspension.",
+      "statusSummary": "Le statut indique l'étape de la zone, depuis son enregistrement initial jusqu'à son approbation, activation, rejet ou suspension.",
       "locationAria": "Aide sur la localisation de la zone",
       "location": "Les coordonnées aident à identifier la zone sur la carte et à relier les preuves, l'audit et le contexte territorial.",
       "biomeAria": "Aide sur le biome",
@@ -1564,7 +1564,12 @@
       "statusPendingAudit": "La zone a été soumise et attend une révision avant de pouvoir être approuvée.",
       "statusApproved": "La zone a passé la révision et est prête pour une activation opérationnelle.",
       "statusActive": "La zone est disponible pour le soutien et la compensation sur la plateforme.",
-      "statusSuspended": "La zone a été temporairement suspendue et ne doit pas recevoir de nouvelles opérations."
+      "statusRejected": "La zone a été rejetée lors de l'audit et doit être corrigée avant une nouvelle soumission.",
+      "statusSuspended": "La zone a été temporairement suspendue et ne doit pas recevoir de nouvelles opérations.",
+      "submitForAudit": "Soumettre à l'audit envoie la zone pour révision par un analyste. Une fois soumise, la zone ne peut plus être modifiée jusqu'à la fin de l'audit.",
+      "suspend": "Suspendre la zone la rend temporairement indisponible pour de nouvelles compensations. Les contributions existantes et les arbres plantés ne sont pas affectés.",
+      "treesPlanted": "Arbres Plantés montre les arbres physiques déjà géoréférencés sur la carte. Le nombre après la barre est le total d'arbres financés par les compensations déjà enregistrées pour cette zone.",
+      "compensated": "Total estimé de CO2e déjà compensé via les contributions à cette zone, sur la base du taux de capture projeté par arbre."
     },
     "certificates": {
       "validationAria": "Aide sur la validation du certificat",
@@ -1578,7 +1583,7 @@
     "roles": {
       "individual": "Supporter Individuel : idéal pour calculer et compenser votre empreinte carbone personnelle, soutenir des projets et suivre votre impact.",
       "legal_entity": "Personne Morale : pour les entreprises et organisations qui souhaitent gérer les émissions institutionnelles, soutenir des projets et recevoir des certificats.",
-      "producer": "Reboiseur : peut enregistrer et gérer des zones, recevoir des transferts de compensation et suivre les contributions des supporters.",
+      "producer": "Reboiseur : peut enregistrer et gérer des zones, recevoir des transferts de compensation et suivre les contributions des contributeurs.",
       "analyst": "Analyste : révise et audite les enregistrements de zones, évalue les critères socio-environnementaux et approuve ou rejette les soumissions.",
       "administrator": "Administrateur : accès complet pour gérer les utilisateurs, les zones, les journaux d'audit et la configuration de la plateforme."
     },
@@ -1592,7 +1597,7 @@
         "paid": "Le paiement a été effectué avec succès et la compensation est enregistrée.",
         "failed": "Le paiement a échoué. Vous devrez peut-être réessayer avec un autre moyen de paiement.",
         "canceled": "La compensation a été annulée avant la fin du paiement.",
-        "refunded": "Le montant a été remboursé au supporter."
+        "refunded": "Le montant a été remboursé au contributeur."
       },
       "user": {
         "active": "Actif : le compte est opérationnel avec un accès complet à la plateforme.",
@@ -1601,10 +1606,10 @@
       }
     },
     "review": {
-      "remainingTrees": "Nombre d'arbres encore disponibles à l'achat dans cette zone, calculé comme la capacité totale moins les arbres déjà engagés.",
-      "pricePerTree": "Coût par arbre défini par le reboiseur responsable de la zone. Ce montant couvre la plantation, l'entretien et le suivi.",
-      "estimatedCO2": "Estimation totale de CO₂ équivalent que les arbres demandés captureront sur l'horizon du projet. C'est une projection, pas une garantie.",
-      "treesCount": "Indiquez le nombre d'arbres que vous souhaitez soutenir. Le montant total est calculé automatiquement en fonction du prix par arbre."
+      "remainingTrees": "Quantité actuellement disponible pour de nouvelles contributions dans cette zone. La limite tient compte du total prévu moins ce qui est déjà engagé.",
+      "pricePerTree": "Prix unitaire défini pour cette zone. Il est utilisé pour calculer cette contribution et peut refléter les coûts de plantation, d'entretien et de suivi du projet.",
+      "estimatedCO2": "Estimation du CO2e associée à la quantité sélectionnée, à partir du taux par arbre et de l'horizon par défaut du projet. Il s'agit d'une projection de référence, et non d'une garantie individuelle.",
+      "treesCount": "Indiquez le nombre d'arbres que vous souhaitez soutenir dans cette contribution. Le montant total et l'estimation de CO2e se mettent à jour automatiquement."
     },
     "treePlanting": {
       "manualMode": "Mode Manuel : cliquez sur la carte pour placer chaque arbre individuellement, un par un.",
@@ -1614,14 +1619,8 @@
       "pix": "PIX est un système de paiement instantané de la Banque Centrale du Brésil. Scannez ce code QR avec l'application de votre banque pour payer. La confirmation se fait en quelques secondes.",
       "pixCopyPaste": "Si votre banque ne prend pas en charge la lecture de code QR, copiez ce code et collez-le dans la zone de paiement PIX de l'application de votre banque."
     },
-    "area": {
-      "submitForAudit": "Soumettre à l'audit envoie la zone pour révision par un analyste. Une fois soumise, la zone ne peut plus être modifiée jusqu'à la fin de l'audit.",
-      "suspend": "Suspendre la zone la rend temporairement indisponible pour de nouvelles compensations. Les contributions existantes et les arbres plantés ne sont pas affectés.",
-      "treesPlanted": "Arbres Plantés montre les arbres physiques déjà géoréférencés sur la carte. Le nombre après la barre est le total d'arbres financés par les compensations.",
-      "compensated": "Total de CO₂ équivalent qui a été compensé via les contributions à cette zone, basé sur le taux de capture estimé par arbre."
-    },
     "producer": {
-      "chargesEnabled": "Indique si votre compte Stripe peut recevoir les paiements des contributions. Doit être activé pour que les supporters puissent compenser dans vos zones.",
+      "chargesEnabled": "Indique si votre compte Stripe peut recevoir les paiements des contributions. Doit être activé pour que les contributeurs puissent compenser dans vos zones.",
       "payoutsEnabled": "Indique si les fonds peuvent être automatiquement transférés vers votre compte bancaire. Les deux doivent être activés pour recevoir des contributions.",
       "pendingVerification": "Stripe vérifie votre identité et vos documents. Cela prend généralement quelques minutes. Vous recevrez une confirmation une fois terminé."
     },

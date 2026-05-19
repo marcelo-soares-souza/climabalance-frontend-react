@@ -1173,7 +1173,7 @@
     "editTitle": "Edit profile",
     "personalInfo": "Personal Information",
     "accountType": "Account type",
-    "compensated": "Estimated offset supported",
+    "compensated": "Estimated compensation supported",
     "treesPlanted": "Trees Planted",
     "recentCompensations": "Recent Contributions",
     "viewCertificates": "View Certificates",
@@ -1535,7 +1535,7 @@
     },
     "area": {
       "statusAria": "Help about area status",
-      "statusSummary": "The status shows which stage the area is in, from initial registration to activation or suspension.",
+      "statusSummary": "The status shows which stage the area is in, from initial registration to approval, activation, rejection, or suspension.",
       "locationAria": "Help about area location",
       "location": "The coordinates help identify the area on the map and connect evidence, audit, and territorial context.",
       "biomeAria": "Help about biome",
@@ -1564,7 +1564,12 @@
       "statusPendingAudit": "The area was submitted and is waiting for review before it can be approved.",
       "statusApproved": "The area passed review and is ready for operational activation.",
       "statusActive": "The area is available for support and compensation on the platform.",
-      "statusSuspended": "The area was temporarily paused and should not receive new operations."
+      "statusRejected": "The area was rejected during audit and needs adjustments before it can be submitted again.",
+      "statusSuspended": "The area was temporarily paused and should not receive new operations.",
+      "submitForAudit": "Submitting for audit sends the area for review by an analyst. Once submitted, the area cannot be edited until the audit is completed.",
+      "suspend": "Suspending the area makes it temporarily unavailable for new compensations. Existing contributions and planted trees are not affected.",
+      "treesPlanted": "Trees Planted shows the physical trees already geo-tagged on the map. The number after the slash is the total trees funded through compensations already recorded for this area.",
+      "compensated": "Estimated total CO2e already compensated through contributions to this area, based on the projected capture rate per tree."
     },
     "certificates": {
       "validationAria": "Help about certificate validation",
@@ -1601,10 +1606,10 @@
       }
     },
     "review": {
-      "remainingTrees": "Number of trees still available for purchase in this area, calculated as total capacity minus already committed trees.",
-      "pricePerTree": "Cost per tree set by the reforestador responsible for the area. This amount covers planting, maintenance, and monitoring.",
-      "estimatedCO2": "Estimated total CO₂ equivalent that the requested trees will capture over the project horizon. This is a projection, not a guarantee.",
-      "treesCount": "Enter how many trees you want to support. The total amount is calculated automatically based on the price per tree."
+      "remainingTrees": "Number currently available for new contributions in this area. The limit considers the planned total minus what has already been committed.",
+      "pricePerTree": "Unit price defined for this area. It is used to calculate this contribution and may reflect planting, maintenance, and project monitoring costs.",
+      "estimatedCO2": "Estimated CO2e associated with the selected quantity, using the per-tree rate and the project's default time horizon. It is a projection for reference, not an individual guarantee.",
+      "treesCount": "Enter how many trees you want to support in this contribution. The total amount and estimated CO2e update automatically."
     },
     "treePlanting": {
       "manualMode": "Manual Mode: click on the map to place each tree individually, one by one.",
@@ -1613,12 +1618,6 @@
     "payment": {
       "pix": "PIX is an instant payment system from the Brazilian Central Bank. Scan this QR Code with your bank's app to pay. Confirmation happens within seconds.",
       "pixCopyPaste": "If your banking app does not support QR code scanning, copy this code and paste it into the PIX payment area of your bank's app."
-    },
-    "area": {
-      "submitForAudit": "Submitting for audit sends the area for review by an analyst. Once submitted, the area cannot be edited until the audit is completed.",
-      "suspend": "Suspending the area makes it temporarily unavailable for new compensations. Existing contributions and planted trees are not affected.",
-      "treesPlanted": "Trees Planted shows the physical trees already geo-tagged on the map. The number after the slash is the total trees funded through compensations.",
-      "compensated": "Total CO₂ equivalent that has been compensated through contributions to this area, based on the estimated capture rate per tree."
     },
     "producer": {
       "chargesEnabled": "Indicates whether your Stripe account can receive payments from contributions. Needs to be enabled for supporters to compensate in your areas.",

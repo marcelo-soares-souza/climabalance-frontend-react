@@ -391,6 +391,12 @@ export function AreaDetailPage() {
                   </p>
                   <p className="mt-2">
                     <strong className="text-text-primary">
+                      {t("common.status.rejected")}:
+                    </strong>{" "}
+                    {t("tooltips.area.statusRejected")}
+                  </p>
+                  <p className="mt-2">
+                    <strong className="text-text-primary">
                       {t("common.status.suspended")}:
                     </strong>{" "}
                     {t("tooltips.area.statusSuspended")}

@@ -306,7 +306,7 @@
         "title": "Cómo funciona",
         "step1": {
           "title": "Crear cuenta",
-          "description": "Regístrate como partidario."
+          "description": "Regístrate como aportante."
         },
         "step2": {
           "title": "Calcular huella",
@@ -962,7 +962,7 @@
     "maxPurchasableTrees": "Límite de Árboles",
     "usage": "Utilización",
     "contributions": "Contribuciones por árboles",
-    "supporters": "Supporters",
+    "supporters": "Aportantes",
     "contributionsEmpty": "Aún no hay contribuciones pagadas para esta área.",
     "anonymousContributor": "Colaborador",
     "owner": "Responsable",
@@ -1535,7 +1535,7 @@
     },
     "area": {
       "statusAria": "Ayuda sobre el estado del área",
-      "statusSummary": "El estado muestra en qué etapa se encuentra el área, desde el registro inicial hasta la activación o suspensión.",
+      "statusSummary": "El estado muestra en qué etapa se encuentra el área, desde el registro inicial hasta la aprobación, activación, rechazo o suspensión.",
       "locationAria": "Ayuda sobre la ubicación del área",
       "location": "Las coordenadas ayudan a identificar el área en el mapa y a vincular evidencias, auditoría y contexto territorial.",
       "biomeAria": "Ayuda sobre bioma",
@@ -1564,7 +1564,12 @@
       "statusPendingAudit": "El área fue enviada y espera revisión antes de poder aprobarse.",
       "statusApproved": "El área pasó la revisión y está lista para activación operativa.",
       "statusActive": "El área está disponible para apoyo y compensación dentro de la plataforma.",
-      "statusSuspended": "El área fue pausada temporalmente y no debería recibir nuevas operaciones."
+      "statusRejected": "El área fue rechazada en la auditoría y necesita ajustes antes de volver a enviarse.",
+      "statusSuspended": "El área fue pausada temporalmente y no debería recibir nuevas operaciones.",
+      "submitForAudit": "Enviar a auditoría somete el área a revisión por un analista. Una vez enviada, el área no podrá editarse hasta que se complete la auditoría.",
+      "suspend": "Suspender el área la hace temporalmente no disponible para nuevas compensaciones. Las contribuciones existentes y los árboles plantados no se ven afectados.",
+      "treesPlanted": "Árboles Plantados muestra los árboles físicos ya georreferenciados en el mapa. El número después de la barra es el total de árboles financiados por compensaciones ya registradas para esta área.",
+      "compensated": "Total estimado de CO2e ya compensado mediante contribuciones a esta área, basado en la tasa de captura proyectada por árbol."
     },
     "certificates": {
       "validationAria": "Ayuda sobre validación de certificado",
@@ -1576,9 +1581,9 @@
       "status": "El estado indica la situación actual del certificado en la plataforma."
     },
     "roles": {
-      "individual": "Partidario Individual: ideal para calcular y compensar tu huella de carbono personal, apoyar proyectos y dar seguimiento a tu impacto.",
+      "individual": "Aportante Individual: ideal para calcular y compensar tu huella de carbono personal, apoyar proyectos y seguir tu impacto.",
       "legal_entity": "Persona Jurídica: para empresas y organizaciones que desean gestionar emisiones institucionales, apoyar proyectos y recibir certificados.",
-      "producer": "Reforestador: puede registrar y gestionar áreas, recibir transferencias de compensación y dar seguimiento a contribuciones de partidarios.",
+      "producer": "Reforestador: puede registrar y gestionar áreas, recibir transferencias de compensación y seguir las contribuciones de los aportantes.",
       "analyst": "Analista: revisa y audita registros de áreas, evalúa criterios socioambientales y aprueba o rechaza envíos.",
       "administrator": "Administrador: acceso completo para gestionar usuarios, áreas, registros de auditoría y configuración de la plataforma."
     },
@@ -1592,7 +1597,7 @@
         "paid": "El pago se completó con éxito y la compensación está registrada.",
         "failed": "El pago falló. Es posible que debas intentarlo nuevamente con otro método de pago.",
         "canceled": "La compensación fue cancelada antes de completar el pago.",
-        "refunded": "El monto ha sido devuelto al partidario."
+        "refunded": "El monto ha sido devuelto al aportante."
       },
       "user": {
         "active": "Activo: la cuenta está operativa con acceso completo a la plataforma.",
@@ -1601,10 +1606,10 @@
       }
     },
     "review": {
-      "remainingTrees": "Cantidad de árboles aún disponibles para adquisición en esta área, calculada como capacidad total menos los ya comprometidos.",
-      "pricePerTree": "Valor por árbol definido por el reforestador responsable del área. Este valor cubre siembra, mantenimiento y monitoreo.",
-      "estimatedCO2": "Total estimado de CO₂ equivalente que los árboles solicitados capturarán durante el horizonte del proyecto. Es una proyección, no una garantía.",
-      "treesCount": "Indica cuántos árboles deseas apoyar. El total se calcula automáticamente según el precio por árbol."
+      "remainingTrees": "Cantidad disponible en este momento para nuevas contribuciones en esta área. El límite considera el total planificado menos lo que ya fue comprometido.",
+      "pricePerTree": "Valor unitario definido para esta área. Se usa para calcular esta contribución y puede reflejar costos de plantación, mantenimiento y monitoreo del proyecto.",
+      "estimatedCO2": "Estimación de CO2e asociada con la cantidad seleccionada, usando la tasa por árbol y el horizonte predeterminado del proyecto. Es una proyección de referencia, no una garantía individual.",
+      "treesCount": "Indica cuántos árboles deseas apoyar en esta contribución. El total y la estimación de CO2e se actualizan automáticamente."
     },
     "treePlanting": {
       "manualMode": "Modo Manual: haz clic en el mapa para colocar cada árbol individualmente, uno por uno.",
@@ -1614,14 +1619,8 @@
       "pix": "PIX es un sistema de pago instantáneo del Banco Central de Brasil. Escanea este código QR con la aplicación de tu banco para pagar. La confirmación ocurre en segundos.",
       "pixCopyPaste": "Si tu banco no admite la lectura de código QR, copia este código y pégalo en el área de pago PIX de la aplicación de tu banco."
     },
-    "area": {
-      "submitForAudit": "Enviar a auditoría somete el área a revisión por un analista. Una vez enviada, el área no podrá editarse hasta que se complete la auditoría.",
-      "suspend": "Suspender el área la hace temporalmente no disponible para nuevas compensaciones. Las contribuciones existentes y los árboles plantados no se ven afectados.",
-      "treesPlanted": "Árboles Plantados muestra los árboles físicos ya georreferenciados en el mapa. El número después de la barra es el total de árboles financiados mediante compensaciones.",
-      "compensated": "Total de CO₂ equivalente que ha sido compensado a través de contribuciones a esta área, basado en la tasa de captura estimada por árbol."
-    },
     "producer": {
-      "chargesEnabled": "Indica si tu cuenta de Stripe puede recibir pagos de contribuciones. Debe estar habilitado para que los partidarios puedan compensar en tus áreas.",
+      "chargesEnabled": "Indica si tu cuenta de Stripe puede recibir pagos de contribuciones. Debe estar habilitada para que los aportantes puedan compensar en tus áreas.",
       "payoutsEnabled": "Indica si los fondos pueden transferirse automáticamente a tu cuenta bancaria. Ambos deben estar habilitados para recibir contribuciones.",
       "pendingVerification": "Stripe está verificando tu identidad y documentos. Esto generalmente toma unos minutos. Recibirás una confirmación cuando esté completo."
     },

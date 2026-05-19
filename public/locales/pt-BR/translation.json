@@ -1535,7 +1535,7 @@
     },
     "area": {
       "statusAria": "Ajuda sobre status da área",
-      "statusSummary": "O status mostra em que etapa a área está, desde o cadastro inicial até a ativação ou suspensão.",
+      "statusSummary": "O status mostra em que etapa a área está, desde o cadastro inicial até a aprovação, ativação, rejeição ou suspensão.",
       "locationAria": "Ajuda sobre localização da área",
       "location": "As coordenadas ajudam a identificar a área no mapa e a vincular evidências, auditoria e contexto territorial.",
       "biomeAria": "Ajuda sobre bioma",
@@ -1564,7 +1564,12 @@
       "statusPendingAudit": "A área foi enviada e aguarda revisão antes de poder ser aprovada.",
       "statusApproved": "A área passou pela revisão e está pronta para ativação operacional.",
       "statusActive": "A área está disponível para apoio e compensação na plataforma.",
-      "statusSuspended": "A área foi temporariamente interrompida e não deve receber novas operações."
+      "statusRejected": "A área foi reprovada na auditoria e precisa de ajustes antes de uma nova submissão.",
+      "statusSuspended": "A área foi temporariamente interrompida e não deve receber novas operações.",
+      "submitForAudit": "Enviar para auditoria submete a área para revisão por um analista. Após o envio, a área não poderá ser editada até a conclusão da auditoria.",
+      "suspend": "Suspender a área a torna temporariamente indisponível para novas compensações. Contribuições existentes e árvores plantadas não são afetadas.",
+      "treesPlanted": "Árvores Plantadas mostra as árvores físicas já georreferenciadas no mapa. O número após a barra é o total de árvores financiadas por compensações já registradas para esta área.",
+      "compensated": "Total estimado de CO2e já compensado por contribuições nesta área, com base na taxa de captura projetada por árvore."
     },
     "certificates": {
       "validationAria": "Ajuda sobre validação de certificado",
@@ -1601,10 +1606,10 @@
       }
     },
     "review": {
-      "remainingTrees": "Quantidade de árvores ainda disponíveis para aquisição nesta área, considerando a capacidade total menos as já comprometidas.",
-      "pricePerTree": "Valor por árvore definido pelo reflorestador responsável pela área. Este valor cobre plantio, manutenção e monitoramento.",
-      "estimatedCO2": "Total estimado de CO₂ equivalente que as árvores solicitadas capturarão ao longo do horizonte do projeto. É uma projeção, não uma garantia.",
-      "treesCount": "Informe quantas árvores deseja apoiar. O valor total é calculado automaticamente com base no preço por árvore."
+      "remainingTrees": "Quantidade disponível neste momento para novas contribuições nesta área. O limite considera o total planejado menos o que já foi comprometido.",
+      "pricePerTree": "Valor unitário definido para esta área. Ele é usado no cálculo desta contribuição e pode refletir custos de plantio, manutenção e monitoramento do projeto.",
+      "estimatedCO2": "Estimativa de CO2e associada à quantidade selecionada, usando a taxa por árvore e o horizonte padrão do projeto. É uma projeção para referência, não uma garantia individual.",
+      "treesCount": "Informe quantas árvores deseja apoiar nesta contribuição. O total e a estimativa de CO2e são atualizados automaticamente."
     },
     "treePlanting": {
       "manualMode": "Modo Manual: clique no mapa para posicionar cada árvore individualmente, uma por uma.",
@@ -1613,12 +1618,6 @@
     "payment": {
       "pix": "PIX é um sistema de pagamento instantâneo do Banco Central do Brasil. Escaneie o QR Code com o aplicativo do seu banco para pagar. A confirmação ocorre em segundos.",
       "pixCopyPaste": "Se seu banco não suportar leitura de QR Code, copie este código e cole na área de pagamento PIX do aplicativo do seu banco."
-    },
-    "area": {
-      "submitForAudit": "Enviar para auditoria submete a área para revisão por um analista. Após o envio, a área não poderá ser editada até a conclusão da auditoria.",
-      "suspend": "Suspender a área a torna temporariamente indisponível para novas compensações. Contribuições existentes e árvores plantadas não são afetadas.",
-      "treesPlanted": "Árvores Plantadas mostra as árvores físicas já georreferenciadas no mapa. O número após a barra é o total de árvores financiadas através de compensações.",
-      "compensated": "Total de CO₂ equivalente que já foi compensado através de contribuições para esta área, com base na taxa de captura estimada por árvore."
     },
     "producer": {
       "chargesEnabled": "Indica se sua conta Stripe está apta a receber pagamentos de contribuições. Precisa estar habilitado para que apoiadores possam compensar em suas áreas.",
