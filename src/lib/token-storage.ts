@@ -1,4 +1,4 @@
-const ACCESS_TOKEN_KEY = 'cb_access_token';
+const ACCESS_TOKEN_KEY = "cb_access_token";
 
 export const tokenStorage = {
   getAccessToken(): string | null {

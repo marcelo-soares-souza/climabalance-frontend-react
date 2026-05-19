@@ -1,11 +1,11 @@
-import { useCallback, useState } from 'react';
-import { useTranslation, Trans } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { Button } from './ui/Button';
-import { api } from '@/lib/api-client';
-import { useAuthStore } from '@/stores/auth-store';
+import { useCallback, useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
+import { Link } from "react-router-dom";
+import { Button } from "./ui/Button";
+import { api } from "@/lib/api-client";
+import { useAuthStore } from "@/stores/auth-store";
 
-const STORAGE_KEY = 'cb_cookie_consent';
+const STORAGE_KEY = "cb_cookie_consent";
 const EXPIRY_DAYS = 30;
 
 interface CookieConsent {
@@ -24,7 +24,10 @@ function loadConsent(): CookieConsent | null {
 }
 
 function saveConsent(accepted: boolean): void {
-  const consent: CookieConsent = { accepted, timestamp: new Date().toISOString() };
+  const consent: CookieConsent = {
+    accepted,
+    timestamp: new Date().toISOString(),
+  };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
 }
 
@@ -45,17 +48,20 @@ export function CookieConsentBanner() {
   const [visible, setVisible] = useState(shouldShow);
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
 
-  const syncConsent = useCallback(async (accepted: boolean) => {
-    if (!isAuthenticated) return;
-    try {
-      await api.post('/privacy/cookie-consent', {
-        consent_type: 'analytics',
-        consented: accepted,
-      });
-    } catch {
-      // Silently fail - localStorage consent is sufficient
-    }
-  }, [isAuthenticated]);
+  const syncConsent = useCallback(
+    async (accepted: boolean) => {
+      if (!isAuthenticated) return;
+      try {
+        await api.post("/privacy/cookie-consent", {
+          consent_type: "analytics",
+          consented: accepted,
+        });
+      } catch {
+        // Silently fail - localStorage consent is sufficient
+      }
+    },
+    [isAuthenticated],
+  );
 
   const handleAccept = useCallback(() => {
     saveConsent(true);
@@ -78,17 +84,27 @@ export function CookieConsentBanner() {
           <Trans
             i18nKey="cookieConsent.message"
             components={{
-              privacyLink: <Link to="/privacy-policy" className="underline hover:text-primary" />,
-              termsLink: <Link to="/terms-of-use" className="underline hover:text-primary" />,
+              privacyLink: (
+                <Link
+                  to="/privacy-policy"
+                  className="underline hover:text-primary"
+                />
+              ),
+              termsLink: (
+                <Link
+                  to="/terms-of-use"
+                  className="underline hover:text-primary"
+                />
+              ),
             }}
           />
         </p>
         <div className="flex shrink-0 gap-3">
           <Button variant="outline" size="sm" onClick={handleReject}>
-            {t('cookieConsent.reject')}
+            {t("cookieConsent.reject")}
           </Button>
           <Button variant="primary" size="sm" onClick={handleAccept}>
-            {t('cookieConsent.accept')}
+            {t("cookieConsent.accept")}
           </Button>
         </div>
       </div>

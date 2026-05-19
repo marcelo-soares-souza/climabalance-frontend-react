@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Input } from '@/components/ui/Input';
-import { InfoTooltip } from '@/components/ui/InfoTooltip';
-import type { FootprintInput } from '@/types/footprint';
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Input } from "@/components/ui/Input";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
+import type { FootprintInput } from "@/types/footprint";
 
 interface CategoryField {
   key: string;
@@ -16,35 +16,43 @@ interface CategoryField {
 interface CategoryInputCardProps {
   category: string;
   fields: CategoryField[];
-  onSave: (inputs: FootprintInput[], category: FootprintInput['category']) => void;
+  onSave: (
+    inputs: FootprintInput[],
+    category: FootprintInput["category"],
+  ) => void;
   initialValues?: Record<string, number>;
 }
 
-export function CategoryInputCard({ category, fields, onSave, initialValues = {} }: CategoryInputCardProps) {
+export function CategoryInputCard({
+  category,
+  fields,
+  onSave,
+  initialValues = {},
+}: CategoryInputCardProps) {
   const { t } = useTranslation();
   const [values, setValues] = useState<Record<string, number>>(initialValues);
 
   const getUnitTooltip = (unit: string) => {
     switch (unit) {
-      case 'tco2e':
+      case "tco2e":
         return {
-          aria: t('tooltips.shared.tco2eAria'),
-          content: t('tooltips.shared.tco2e'),
+          aria: t("tooltips.shared.tco2eAria"),
+          content: t("tooltips.shared.tco2e"),
         };
-      case 'kwh':
+      case "kwh":
         return {
-          aria: t('tooltips.footprint.units.kwhAria'),
-          content: t('tooltips.footprint.units.kwh'),
+          aria: t("tooltips.footprint.units.kwhAria"),
+          content: t("tooltips.footprint.units.kwh"),
         };
-      case 'km':
+      case "km":
         return {
-          aria: t('tooltips.footprint.units.kmAria'),
-          content: t('tooltips.footprint.units.km'),
+          aria: t("tooltips.footprint.units.kmAria"),
+          content: t("tooltips.footprint.units.km"),
         };
-      case 'liter':
+      case "liter":
         return {
-          aria: t('tooltips.footprint.units.literAria'),
-          content: t('tooltips.footprint.units.liter'),
+          aria: t("tooltips.footprint.units.literAria"),
+          content: t("tooltips.footprint.units.liter"),
         };
       default:
         return null;
@@ -59,12 +67,12 @@ export function CategoryInputCard({ category, fields, onSave, initialValues = {}
     const inputs: FootprintInput[] = fields
       .filter((f) => (newValues[f.key] || 0) > 0)
       .map((f) => ({
-        category: category as FootprintInput['category'],
+        category: category as FootprintInput["category"],
         unit: f.unit,
         value: newValues[f.key] || 0,
         metadata: f.metadata ?? { subcategory: f.key },
       }));
-    onSave(inputs, category as FootprintInput['category']);
+    onSave(inputs, category as FootprintInput["category"]);
   };
 
   return (
@@ -86,9 +94,9 @@ export function CategoryInputCard({ category, fields, onSave, initialValues = {}
             ) : undefined
           }
           suffix={field.displayUnit ?? field.unit}
-          value={values[field.key] || ''}
+          value={values[field.key] || ""}
           onChange={(e) => handleChange(field.key, e.target.value)}
-          placeholder={field.placeholderKey ? t(field.placeholderKey) : '0'}
+          placeholder={field.placeholderKey ? t(field.placeholderKey) : "0"}
         />
       ))}
     </div>

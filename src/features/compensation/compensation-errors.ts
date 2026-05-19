@@ -1,4 +1,4 @@
-import { ApiError } from '@/lib/api-client';
+import { ApiError } from "@/lib/api-client";
 
 type BackendFieldError = {
   field?: string;
@@ -11,10 +11,10 @@ type BackendErrorDetails = {
 
 export function mapCompensationApiError(error: unknown): string {
   if (!(error instanceof ApiError)) {
-    return 'compensation.error';
+    return "compensation.error";
   }
 
-  if (error.messageKey !== 'request.validation_failed') {
+  if (error.messageKey !== "request.validation_failed") {
     return error.messageKey;
   }
 
@@ -26,39 +26,39 @@ export function mapCompensationApiError(error: unknown): string {
   }
 
   const hasTreeLimitExceeded = fieldErrors.some((fieldError) => {
-    if (typeof fieldError.message !== 'string') return false;
-    return fieldError.message.includes('tree_limit_exceeded');
+    if (typeof fieldError.message !== "string") return false;
+    return fieldError.message.includes("tree_limit_exceeded");
   });
 
   if (hasTreeLimitExceeded) {
-    return 'compensation.tree_limit_exceeded';
+    return "compensation.tree_limit_exceeded";
   }
 
   const hasProducerNotOnboarded = fieldErrors.some((fieldError) => {
-    if (typeof fieldError.message !== 'string') return false;
-    return fieldError.message.includes('producer_not_onboarded');
+    if (typeof fieldError.message !== "string") return false;
+    return fieldError.message.includes("producer_not_onboarded");
   });
 
   if (hasProducerNotOnboarded) {
-    return 'compensation.producer_not_onboarded';
+    return "compensation.producer_not_onboarded";
   }
 
   const hasPendingPayment = fieldErrors.some((fieldError) => {
-    if (typeof fieldError.message !== 'string') return false;
-    return fieldError.message.includes('payment_already_pending');
+    if (typeof fieldError.message !== "string") return false;
+    return fieldError.message.includes("payment_already_pending");
   });
 
   if (hasPendingPayment) {
-    return 'payment.already_pending';
+    return "payment.already_pending";
   }
 
   const hasPixRequiresBrl = fieldErrors.some((fieldError) => {
-    if (typeof fieldError.message !== 'string') return false;
-    return fieldError.message.includes('pix_requires_brl');
+    if (typeof fieldError.message !== "string") return false;
+    return fieldError.message.includes("pix_requires_brl");
   });
 
   if (hasPixRequiresBrl) {
-    return 'payment.pix_requires_brl';
+    return "payment.pix_requires_brl";
   }
 
   return error.messageKey;

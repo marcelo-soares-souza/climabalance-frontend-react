@@ -1,50 +1,57 @@
-import type { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link, useSearchParams } from 'react-router-dom';
-import { SEO } from '@/components/SEO';
-import { Leaf, Sprout, ArrowRight, Play } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
-import { Card, CardContent } from '@/components/ui/Card';
-import { Button } from '@/components/ui/Button';
+import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { Link, useSearchParams } from "react-router-dom";
+import { SEO } from "@/components/SEO";
+import { Leaf, Sprout, ArrowRight, Play } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/Tabs";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Button } from "@/components/ui/Button";
 
-type AccountTab = 'individual' | 'producer';
+type AccountTab = "individual" | "producer";
 
 export function HowToUsePlatformPage() {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
 
   const tabMeta: Array<{ key: AccountTab; icon: ReactNode }> = [
-    { key: 'individual', icon: <Leaf className="h-5 w-5 text-primary" /> },
-    { key: 'producer', icon: <Sprout className="h-5 w-5 text-emerald-700" /> },
+    { key: "individual", icon: <Leaf className="h-5 w-5 text-primary" /> },
+    { key: "producer", icon: <Sprout className="h-5 w-5 text-emerald-700" /> },
   ];
 
   const tabKeys = tabMeta.map((t) => t.key);
-  const initialTab = tabKeys.includes(searchParams.get('tab') as AccountTab)
-    ? (searchParams.get('tab') as AccountTab)
-    : 'individual';
+  const initialTab = tabKeys.includes(searchParams.get("tab") as AccountTab)
+    ? (searchParams.get("tab") as AccountTab)
+    : "individual";
 
   return (
     <div className="max-w-5xl mx-auto space-y-8 py-2">
       <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-light to-accent px-8 py-12 text-white">
         <div className="max-w-3xl space-y-4">
           <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium">
-            {t('howToUse.eyebrow')}
+            {t("howToUse.eyebrow")}
           </span>
           <h1 className="text-4xl font-bold font-display md:text-5xl">
-            {t('howToUse.title')}
+            {t("howToUse.title")}
           </h1>
           <p className="max-w-2xl text-lg text-white/85">
-            {t('howToUse.description')}
+            {t("howToUse.description")}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Link to="/register">
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90">
-                {t('howToUse.primaryCta')}
+              <Button
+                size="lg"
+                className="bg-white text-primary hover:bg-white/90"
+              >
+                {t("howToUse.primaryCta")}
               </Button>
             </Link>
             <Link to="/about">
-              <Button size="lg" variant="outline" className="border-white/40 text-white hover:bg-white/10">
-                {t('howToUse.secondaryCta')}
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-white/40 text-white hover:bg-white/10"
+              >
+                {t("howToUse.secondaryCta")}
               </Button>
             </Link>
           </div>
@@ -75,17 +82,17 @@ export function HowToUsePlatformPage() {
       <section>
         <div className="mb-4">
           <span className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-            {t('howToUse.videosLabel')}
+            {t("howToUse.videosLabel")}
           </span>
           <h2 className="text-2xl font-bold font-display text-text-primary mt-1">
-            {t('howToUse.videosTitle')}
+            {t("howToUse.videosTitle")}
           </h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { id: 'v3np9uHZTOs', title: t('howToUse.videoTreePlanting') },
-            { id: 'umeQNuL1nyU', title: t('howToUse.videoCarbonCalc') },
-            { id: 'VYkWEYp5eo8', title: t('howToUse.videoFarmerOnboarding') },
+            { id: "v3np9uHZTOs", title: t("howToUse.videoTreePlanting") },
+            { id: "umeQNuL1nyU", title: t("howToUse.videoCarbonCalc") },
+            { id: "VYkWEYp5eo8", title: t("howToUse.videoFarmerOnboarding") },
           ].map((video) => (
             <a
               key={video.id}
@@ -116,7 +123,7 @@ export function HowToUsePlatformPage() {
             to="/about"
             className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
           >
-            {t('howToUse.secondaryCta')}
+            {t("howToUse.secondaryCta")}
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -134,164 +141,178 @@ function TabPanel({ type }: { type: AccountTab }) {
   }));
 
   const features = [1, 2, 3].map((index) =>
-    t(`howToUse.${type}.features.item${index}`)
+    t(`howToUse.${type}.features.item${index}`),
   );
 
   const possibilities = [1, 2, 3].map((index) =>
-    t(`howToUse.${type}.possibilities.item${index}`)
+    t(`howToUse.${type}.possibilities.item${index}`),
   );
 
   return (
     <>
-      <SEO title={t('seo.howToUse.title')} description={t('seo.howToUse.description')} />
+      <SEO
+        title={t("seo.howToUse.title")}
+        description={t("seo.howToUse.description")}
+      />
       <div className="space-y-6">
         <Card className="border-0 shadow-sm ring-1 ring-black/5">
           <CardContent className="space-y-3 py-8">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-              {t('howToUse.overviewLabel')}
-          </p>
-          <h2 className="text-3xl font-bold font-display text-text-primary">
-            {t(`howToUse.${type}.title`)}
-          </h2>
-          <p className="text-base text-text-secondary">
-            {t(`howToUse.${type}.summary`)}
-          </p>
-          <p className="text-base text-text-secondary">
-            {t(`howToUse.${type}.forWho`)}
-          </p>
-        </CardContent>
-      </Card>
-
-      <section className="space-y-4">
-        <div className="space-y-1">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-            {t('howToUse.stepsLabel')}
-          </p>
-          <h3 className="text-2xl font-bold font-display text-text-primary">
-            {t(`howToUse.${type}.steps.title`)}
-          </h3>
-        </div>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-          {steps.map((step, index) => (
-            <Card key={step.title} className="border-0 shadow-sm ring-1 ring-black/5">
-              <CardContent className="space-y-3 py-6">
-                <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-sm font-semibold text-primary">
-                  {index + 1}
-                </span>
-                <h4 className="font-semibold text-text-primary">{step.title}</h4>
-                <p className="text-sm text-text-secondary">{step.description}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <div className="grid gap-5 md:grid-cols-2">
-        <Card className="border-0 shadow-sm ring-1 ring-black/5">
-          <CardContent className="space-y-4 py-8">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-              {t('howToUse.featuresLabel')}
+              {t("howToUse.overviewLabel")}
             </p>
-            <h3 className="text-xl font-bold text-text-primary">
-              {t(`howToUse.${type}.features.title`)}
-            </h3>
-            <div className="space-y-3">
-              {features.map((item) => (
-                <p key={item} className="text-base text-text-secondary">
-                  {item}
-                </p>
-              ))}
-            </div>
+            <h2 className="text-3xl font-bold font-display text-text-primary">
+              {t(`howToUse.${type}.title`)}
+            </h2>
+            <p className="text-base text-text-secondary">
+              {t(`howToUse.${type}.summary`)}
+            </p>
+            <p className="text-base text-text-secondary">
+              {t(`howToUse.${type}.forWho`)}
+            </p>
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-sm ring-1 ring-black/5">
-          <CardContent className="space-y-4 py-8">
+        <section className="space-y-4">
+          <div className="space-y-1">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-              {t('howToUse.possibilitiesLabel')}
+              {t("howToUse.stepsLabel")}
             </p>
-            <h3 className="text-xl font-bold text-text-primary">
-              {t(`howToUse.${type}.possibilities.title`)}
+            <h3 className="text-2xl font-bold font-display text-text-primary">
+              {t(`howToUse.${type}.steps.title`)}
             </h3>
-            <div className="space-y-3">
-              {possibilities.map((item) => (
-                <p key={item} className="text-base text-text-secondary">
-                  {item}
-                </p>
-              ))}
-            </div>
-            <Link
-              to="/register"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-            >
-              {t(`howToUse.${type}.cta`)}
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </CardContent>
-        </Card>
-      </div>
-
-      {type === 'producer' && (
-        <section className="space-y-4 pt-2">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-            {t(`howToUse.${type}.stripeManual.label`)}
-          </p>
-
-          <Card className="border-0 shadow-sm ring-1 ring-black/5">
-            <CardContent className="space-y-3 py-6">
-              <h3 className="font-semibold text-text-primary">
-                {t(`howToUse.${type}.stripeManual.why.title`)}
-              </h3>
-              <p className="text-sm text-text-secondary">
-                {t(`howToUse.${type}.stripeManual.why.security`)}
-              </p>
-              <p className="text-sm text-text-secondary">
-                {t(`howToUse.${type}.stripeManual.why.ease`)}
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-sm ring-1 ring-black/5">
-            <CardContent className="space-y-3 py-6">
-              <h3 className="font-semibold text-text-primary">
-                {t(`howToUse.${type}.stripeManual.fees.title`)}
-              </h3>
-              <p className="text-sm text-text-secondary">
-                {t(`howToUse.${type}.stripeManual.fees.desc`)}
-              </p>
-              <p className="text-sm text-text-secondary">
-                {t(`howToUse.${type}.stripeManual.fees.note`)}
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border-0 shadow-sm ring-1 ring-black/5">
-            <CardContent className="space-y-4 py-6">
-              <h3 className="font-semibold text-text-primary">
-                {t(`howToUse.${type}.stripeManual.integration.title`)}
-              </h3>
-              {[1, 2, 3, 4].map((index) => (
-                <div key={index} className="space-y-1">
-                  <h4 className="font-medium text-sm text-text-primary">
-                    {t(`howToUse.${type}.stripeManual.integration.step${index}.title`)}
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {steps.map((step, index) => (
+              <Card
+                key={step.title}
+                className="border-0 shadow-sm ring-1 ring-black/5"
+              >
+                <CardContent className="space-y-3 py-6">
+                  <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-primary-50 text-sm font-semibold text-primary">
+                    {index + 1}
+                  </span>
+                  <h4 className="font-semibold text-text-primary">
+                    {step.title}
                   </h4>
                   <p className="text-sm text-text-secondary">
-                    {t(`howToUse.${type}.stripeManual.integration.step${index}.desc`)}
+                    {step.description}
                   </p>
-                </div>
-              ))}
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        <div className="grid gap-5 md:grid-cols-2">
+          <Card className="border-0 shadow-sm ring-1 ring-black/5">
+            <CardContent className="space-y-4 py-8">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                {t("howToUse.featuresLabel")}
+              </p>
+              <h3 className="text-xl font-bold text-text-primary">
+                {t(`howToUse.${type}.features.title`)}
+              </h3>
+              <div className="space-y-3">
+                {features.map((item) => (
+                  <p key={item} className="text-base text-text-secondary">
+                    {item}
+                  </p>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="border-0 shadow-sm ring-1 ring-black/5">
+            <CardContent className="space-y-4 py-8">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+                {t("howToUse.possibilitiesLabel")}
+              </p>
+              <h3 className="text-xl font-bold text-text-primary">
+                {t(`howToUse.${type}.possibilities.title`)}
+              </h3>
+              <div className="space-y-3">
+                {possibilities.map((item) => (
+                  <p key={item} className="text-base text-text-secondary">
+                    {item}
+                  </p>
+                ))}
+              </div>
               <Link
-                to="/how-to-use/stripe-setup"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline pt-2"
+                to="/register"
+                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
               >
-                {t(`howToUse.${type}.stripeManual.cta`)}
+                {t(`howToUse.${type}.cta`)}
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </CardContent>
           </Card>
-        </section>
-      )}
-    </div>
+        </div>
+
+        {type === "producer" && (
+          <section className="space-y-4 pt-2">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+              {t(`howToUse.${type}.stripeManual.label`)}
+            </p>
+
+            <Card className="border-0 shadow-sm ring-1 ring-black/5">
+              <CardContent className="space-y-3 py-6">
+                <h3 className="font-semibold text-text-primary">
+                  {t(`howToUse.${type}.stripeManual.why.title`)}
+                </h3>
+                <p className="text-sm text-text-secondary">
+                  {t(`howToUse.${type}.stripeManual.why.security`)}
+                </p>
+                <p className="text-sm text-text-secondary">
+                  {t(`howToUse.${type}.stripeManual.why.ease`)}
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-sm ring-1 ring-black/5">
+              <CardContent className="space-y-3 py-6">
+                <h3 className="font-semibold text-text-primary">
+                  {t(`howToUse.${type}.stripeManual.fees.title`)}
+                </h3>
+                <p className="text-sm text-text-secondary">
+                  {t(`howToUse.${type}.stripeManual.fees.desc`)}
+                </p>
+                <p className="text-sm text-text-secondary">
+                  {t(`howToUse.${type}.stripeManual.fees.note`)}
+                </p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-0 shadow-sm ring-1 ring-black/5">
+              <CardContent className="space-y-4 py-6">
+                <h3 className="font-semibold text-text-primary">
+                  {t(`howToUse.${type}.stripeManual.integration.title`)}
+                </h3>
+                {[1, 2, 3, 4].map((index) => (
+                  <div key={index} className="space-y-1">
+                    <h4 className="font-medium text-sm text-text-primary">
+                      {t(
+                        `howToUse.${type}.stripeManual.integration.step${index}.title`,
+                      )}
+                    </h4>
+                    <p className="text-sm text-text-secondary">
+                      {t(
+                        `howToUse.${type}.stripeManual.integration.step${index}.desc`,
+                      )}
+                    </p>
+                  </div>
+                ))}
+                <Link
+                  to="/how-to-use/stripe-setup"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline pt-2"
+                >
+                  {t(`howToUse.${type}.stripeManual.cta`)}
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </CardContent>
+            </Card>
+          </section>
+        )}
+      </div>
     </>
   );
 }

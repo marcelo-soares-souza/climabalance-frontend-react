@@ -1,5 +1,5 @@
-import { api } from '@/lib/api-client';
-import type { CertificateValidation } from '@/types/certificate';
+import { api } from "@/lib/api-client";
+import type { CertificateValidation } from "@/types/certificate";
 
 type RawCertificateValidation = {
   certificate_id?: string;
@@ -10,11 +10,13 @@ type RawCertificateValidation = {
   is_valid?: boolean;
 };
 
-function asString(value: unknown, fallback = ''): string {
-  return typeof value === 'string' ? value : fallback;
+function asString(value: unknown, fallback = ""): string {
+  return typeof value === "string" ? value : fallback;
 }
 
-function normalizeValidation(raw: RawCertificateValidation): CertificateValidation {
+function normalizeValidation(
+  raw: RawCertificateValidation,
+): CertificateValidation {
   return {
     certificateId: asString(raw.certificate_id),
     certificateNumber: asString(raw.certificate_number),
@@ -28,7 +30,7 @@ function normalizeValidation(raw: RawCertificateValidation): CertificateValidati
 export const certificatesService = {
   validateCertificate(certificateNumber: string, hash: string) {
     return api
-      .get<RawCertificateValidation>('/certificates/validate', {
+      .get<RawCertificateValidation>("/certificates/validate", {
         params: { certificate_number: certificateNumber, hash },
       })
       .then(normalizeValidation);

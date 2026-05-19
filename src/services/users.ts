@@ -1,9 +1,14 @@
-import { api } from '@/lib/api-client';
-import { toApiUrl } from '@/config/api';
-import type { UserSummary, UserProfile, UserProfileUpdate, UserUpdate } from '@/types/user';
-import type { CompensationHistoryItem } from '@/types/compensation';
-import type { ContributionHistoryItem } from '@/types/contribution';
-import type { CertificateHistoryItem } from '@/types/certificate';
+import { api } from "@/lib/api-client";
+import { toApiUrl } from "@/config/api";
+import type {
+  UserSummary,
+  UserProfile,
+  UserProfileUpdate,
+  UserUpdate,
+} from "@/types/user";
+import type { CompensationHistoryItem } from "@/types/compensation";
+import type { ContributionHistoryItem } from "@/types/contribution";
+import type { CertificateHistoryItem } from "@/types/certificate";
 
 type RawUserSummary = {
   id?: string;
@@ -133,17 +138,17 @@ type RawClimateBalance = {
   total_contribution_amount?: number | string;
 };
 
-function asString(value: unknown, fallback = ''): string {
-  return typeof value === 'string' ? value : fallback;
+function asString(value: unknown, fallback = ""): string {
+  return typeof value === "string" ? value : fallback;
 }
 
 function asNullableString(value: unknown): string | null {
-  return typeof value === 'string' ? value : null;
+  return typeof value === "string" ? value : null;
 }
 
 function asNumber(value: unknown, fallback = 0): number {
-  if (typeof value === 'number' && Number.isFinite(value)) return value;
-  if (typeof value === 'string') {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string") {
     const parsed = Number(value);
     return Number.isFinite(parsed) ? parsed : fallback;
   }
@@ -152,7 +157,7 @@ function asNumber(value: unknown, fallback = 0): number {
 
 function normalizeUserSummary(raw: RawUserSummary): UserSummary {
   const roles = Array.isArray(raw.roles)
-    ? raw.roles.filter((role): role is string => typeof role === 'string')
+    ? raw.roles.filter((role): role is string => typeof role === "string")
     : [];
 
   return {
@@ -160,9 +165,11 @@ function normalizeUserSummary(raw: RawUserSummary): UserSummary {
     email: asNullableString(raw.email),
     emailMasked: asNullableString(raw.email_masked ?? raw.emailMasked),
     slug: asString(raw.slug),
-    status: asString(raw.status, 'pending'),
-    locale: asString(raw.locale, 'pt-BR'),
-    emailConfirmedAt: asNullableString(raw.email_confirmed_at ?? raw.emailConfirmedAt),
+    status: asString(raw.status, "pending"),
+    locale: asString(raw.locale, "pt-BR"),
+    emailConfirmedAt: asNullableString(
+      raw.email_confirmed_at ?? raw.emailConfirmedAt,
+    ),
     lastLoginAt: asNullableString(raw.last_login_at ?? raw.lastLoginAt),
     createdAt: asString(raw.created_at ?? raw.createdAt),
     roles,
@@ -180,14 +187,18 @@ function normalizeUserProfile(raw: RawUserProfile): UserProfile {
       raw.document_number_masked ?? raw.documentNumberMasked,
     ),
     birthDate: asNullableString(raw.birth_date ?? raw.birthDate),
-    birthDateMasked: asNullableString(raw.birth_date_masked ?? raw.birthDateMasked),
+    birthDateMasked: asNullableString(
+      raw.birth_date_masked ?? raw.birthDateMasked,
+    ),
     phone: asNullableString(raw.phone),
     countryCode: asNullableString(raw.country_code ?? raw.countryCode),
     addressLine1: asNullableString(raw.address_line1 ?? raw.addressLine1),
     addressLine2: asNullableString(raw.address_line2 ?? raw.addressLine2),
     addressCity: asNullableString(raw.address_city ?? raw.addressCity),
     addressState: asNullableString(raw.address_state ?? raw.addressState),
-    addressPostalCode: asNullableString(raw.address_postal_code ?? raw.addressPostalCode),
+    addressPostalCode: asNullableString(
+      raw.address_postal_code ?? raw.addressPostalCode,
+    ),
     addressCountry: asNullableString(raw.address_country ?? raw.addressCountry),
     about: asNullableString(raw.about ?? raw.about),
     websiteUrl: asNullableString(raw.website_url ?? raw.websiteUrl),
@@ -211,12 +222,18 @@ function normalizeCompensation(raw: RawCompensation): CompensationHistoryItem {
     areaName: asString(raw.area_name ?? raw.areaName),
     areaSlug: asNullableString(raw.area_slug ?? raw.areaSlug) ?? undefined,
     calculationId: asNullableString(raw.calculation_id ?? raw.calculationId),
-    compensationMode: asString(raw.compensation_mode ?? raw.compensationMode, 'tco2e') as CompensationHistoryItem['compensationMode'],
+    compensationMode: asString(
+      raw.compensation_mode ?? raw.compensationMode,
+      "tco2e",
+    ) as CompensationHistoryItem["compensationMode"],
     totalTCO2e: asNumber(raw.total_t_co2e ?? raw.totalTCO2e),
     treesCount: asNumber(raw.trees_count ?? raw.treesCount),
     totalAmount: asNumber(raw.total_amount ?? raw.totalAmount),
-    currency: asString(raw.currency, 'USD'),
-    status: asString(raw.status, 'pending') as CompensationHistoryItem['status'],
+    currency: asString(raw.currency, "USD"),
+    status: asString(
+      raw.status,
+      "pending",
+    ) as CompensationHistoryItem["status"],
     createdAt: asString(raw.created_at ?? raw.createdAt),
     paidAt: asNullableString(raw.paid_at ?? raw.paidAt),
   };
@@ -229,12 +246,18 @@ function normalizeContribution(raw: RawCompensation): ContributionHistoryItem {
     areaName: asString(raw.area_name ?? raw.areaName),
     areaSlug: asNullableString(raw.area_slug ?? raw.areaSlug) ?? undefined,
     calculationId: asNullableString(raw.calculation_id ?? raw.calculationId),
-    compensationMode: asString(raw.compensation_mode ?? raw.compensationMode, 'tco2e') as ContributionHistoryItem['compensationMode'],
+    compensationMode: asString(
+      raw.compensation_mode ?? raw.compensationMode,
+      "tco2e",
+    ) as ContributionHistoryItem["compensationMode"],
     totalTCO2e: asNumber(raw.total_t_co2e ?? raw.totalTCO2e),
     treesCount: asNumber(raw.trees_count ?? raw.treesCount),
     totalAmount: asNumber(raw.total_amount ?? raw.totalAmount),
-    currency: asString(raw.currency, 'USD'),
-    status: asString(raw.status, 'pending') as ContributionHistoryItem['status'],
+    currency: asString(raw.currency, "USD"),
+    status: asString(
+      raw.status,
+      "pending",
+    ) as ContributionHistoryItem["status"],
     createdAt: asString(raw.created_at ?? raw.createdAt),
     paidAt: asNullableString(raw.paid_at ?? raw.paidAt),
   };
@@ -253,13 +276,17 @@ function normalizeClimateBalance(raw: RawClimateBalance) {
 function normalizeCertificate(raw: RawCertificate): CertificateHistoryItem {
   return {
     id: asString(raw.id),
-    certificateNumber: asString(raw.certificate_number ?? raw.certificateNumber),
+    certificateNumber: asString(
+      raw.certificate_number ?? raw.certificateNumber,
+    ),
     compensationId: asString(raw.compensation_id ?? raw.compensationId),
     status: asString(raw.status),
     issuedAt: asString(raw.issued_at ?? raw.issuedAt),
     fileName: asString(raw.file_name ?? raw.fileName),
-    mimeType: asString(raw.mime_type ?? raw.mimeType, 'application/pdf'),
-    authenticityHash: asNullableString(raw.authenticity_hash ?? raw.authenticityHash),
+    mimeType: asString(raw.mime_type ?? raw.mimeType, "application/pdf"),
+    authenticityHash: asNullableString(
+      raw.authenticity_hash ?? raw.authenticityHash,
+    ),
     validationUrl: asNullableString(raw.validation_url ?? raw.validationUrl),
     qrCodeData: asNullableString(raw.qr_code_data ?? raw.qrCodeData),
     areaName: null,
@@ -308,40 +335,63 @@ function normalizeDirectoryItem(raw: RawDirectoryItem): DirectoryItem {
 
 export const usersService = {
   getUser(userId: string) {
-    return api.get<RawUserSummary>(`/users/${userId}`).then(normalizeUserSummary);
+    return api
+      .get<RawUserSummary>(`/users/${userId}`)
+      .then(normalizeUserSummary);
   },
 
   getUserProfile(userId: string) {
-    return api.get<RawUserProfile | null>(`/users/${userId}/profile`).then((raw) =>
-      raw ? normalizeUserProfile(raw) : null
-    );
+    return api
+      .get<RawUserProfile | null>(`/users/${userId}/profile`)
+      .then((raw) => (raw ? normalizeUserProfile(raw) : null));
   },
 
   upsertProfile(userId: string, data: UserProfileUpdate) {
-    return api.put<RawUserProfile>(`/users/${userId}/profile`, data).then(normalizeUserProfile);
+    return api
+      .put<RawUserProfile>(`/users/${userId}/profile`, data)
+      .then(normalizeUserProfile);
   },
 
-  listUsers(params?: { search?: string; status?: string; sort_by?: string; sort_order?: string; limit?: number; offset?: number }) {
-    return api.get<RawUserSummary[]>('/users', { params: params as Record<string, string | number> }).then((rows) =>
-      rows.map(normalizeUserSummary)
-    );
+  listUsers(params?: {
+    search?: string;
+    status?: string;
+    sort_by?: string;
+    sort_order?: string;
+    limit?: number;
+    offset?: number;
+  }) {
+    return api
+      .get<
+        RawUserSummary[]
+      >("/users", { params: params as Record<string, string | number> })
+      .then((rows) => rows.map(normalizeUserSummary));
   },
 
   updateUser(userId: string, data: UserUpdate) {
-    return api.patch<RawUserSummary>(`/users/${userId}`, data).then(normalizeUserSummary);
+    return api
+      .patch<RawUserSummary>(`/users/${userId}`, data)
+      .then(normalizeUserSummary);
   },
 
   deleteUser(userId: string) {
     return api.delete<void>(`/users/${userId}`);
   },
 
-  getUserCompensations(userId: string, params?: { limit?: number; offset?: number }) {
+  getUserCompensations(
+    userId: string,
+    params?: { limit?: number; offset?: number },
+  ) {
     return api
-      .get<RawCompensation[]>(`/users/${userId}/compensations`, { params: params as Record<string, number> })
+      .get<
+        RawCompensation[]
+      >(`/users/${userId}/compensations`, { params: params as Record<string, number> })
       .then((rows) => rows.map(normalizeCompensation));
   },
 
-  getUserContributions(userId: string, params?: { limit?: number; offset?: number; status?: string }) {
+  getUserContributions(
+    userId: string,
+    params?: { limit?: number; offset?: number; status?: string },
+  ) {
     return api
       .get<RawCompensation[]>(`/users/${userId}/contributions`, {
         params: params as Record<string, string | number>,
@@ -355,19 +405,32 @@ export const usersService = {
       .then(normalizeClimateBalance);
   },
 
-  uploadAvatar(userId: string, data: { mime_type: string; file_base64: string }) {
-    return api.post<{ avatar_path: string; avatar_url: string }>(`/users/${userId}/profile/avatar`, data);
+  uploadAvatar(
+    userId: string,
+    data: { mime_type: string; file_base64: string },
+  ) {
+    return api.post<{ avatar_path: string; avatar_url: string }>(
+      `/users/${userId}/profile/avatar`,
+      data,
+    );
   },
 
   listDirectory(params?: { limit?: number; offset?: number }) {
     return api
-      .get<RawDirectoryItem[]>('/directory/users', { params: params as Record<string, number> })
+      .get<
+        RawDirectoryItem[]
+      >("/directory/users", { params: params as Record<string, number> })
       .then((rows) => rows.map(normalizeDirectoryItem));
   },
 
-  getUserCertificates(userId: string, params?: { limit?: number; offset?: number }) {
+  getUserCertificates(
+    userId: string,
+    params?: { limit?: number; offset?: number },
+  ) {
     return api
-      .get<RawCertificate[]>(`/users/${userId}/certificates`, { params: params as Record<string, number> })
+      .get<
+        RawCertificate[]
+      >(`/users/${userId}/certificates`, { params: params as Record<string, number> })
       .then((rows) => rows.map(normalizeCertificate));
   },
 };

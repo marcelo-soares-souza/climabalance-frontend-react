@@ -1,6 +1,6 @@
-import { ImageOverlay } from 'react-leaflet';
-import L from 'leaflet';
-import type { SatelliteImage } from '@/services/satellite';
+import { ImageOverlay } from "react-leaflet";
+import L from "leaflet";
+import type { SatelliteImage } from "@/services/satellite";
 
 type Props = {
   image: SatelliteImage;
@@ -14,10 +14,6 @@ export function SatelliteImageOverlay({ image, opacity = 0.85 }: Props) {
   );
 
   return (
-    <ImageOverlay
-      url={image.imageUrl}
-      bounds={bounds}
-      opacity={opacity}
-    />
+    <ImageOverlay url={image.imageUrl} bounds={bounds} opacity={opacity} />
   );
 }

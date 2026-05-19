@@ -1,5 +1,5 @@
-import type { HTMLAttributes, ReactNode } from 'react';
-import { cn } from '@/lib/cn';
+import type { HTMLAttributes, ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -7,7 +7,13 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
 
 export function Card({ className, children, ...props }: CardProps) {
   return (
-    <div className={cn('bg-surface rounded-[var(--radius-card)] shadow-md shadow-black/5 transition-shadow', className)} {...props}>
+    <div
+      className={cn(
+        "bg-surface rounded-[var(--radius-card)] shadow-md shadow-black/5 transition-shadow",
+        className,
+      )}
+      {...props}
+    >
       {children}
     </div>
   );
@@ -15,7 +21,10 @@ export function Card({ className, children, ...props }: CardProps) {
 
 export function CardHeader({ className, children, ...props }: CardProps) {
   return (
-    <div className={cn('px-6 py-4 border-b border-gray-100', className)} {...props}>
+    <div
+      className={cn("px-6 py-4 border-b border-gray-100", className)}
+      {...props}
+    >
       {children}
     </div>
   );
@@ -23,7 +32,7 @@ export function CardHeader({ className, children, ...props }: CardProps) {
 
 export function CardContent({ className, children, ...props }: CardProps) {
   return (
-    <div className={cn('px-6 py-4', className)} {...props}>
+    <div className={cn("px-6 py-4", className)} {...props}>
       {children}
     </div>
   );
@@ -31,7 +40,10 @@ export function CardContent({ className, children, ...props }: CardProps) {
 
 export function CardFooter({ className, children, ...props }: CardProps) {
   return (
-    <div className={cn('px-6 py-4 border-t border-gray-100', className)} {...props}>
+    <div
+      className={cn("px-6 py-4 border-t border-gray-100", className)}
+      {...props}
+    >
       {children}
     </div>
   );

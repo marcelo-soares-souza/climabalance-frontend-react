@@ -1,14 +1,20 @@
-import { useEffect, useRef } from 'react';
-import { useMap } from 'react-leaflet';
-import L from 'leaflet';
-import { ensureLeafletLocateControlLoaded, getLeafletLocateControlFactory } from '@/lib/leaflet-locatecontrol';
+import { useEffect, useRef } from "react";
+import { useMap } from "react-leaflet";
+import L from "leaflet";
+import {
+  ensureLeafletLocateControlLoaded,
+  getLeafletLocateControlFactory,
+} from "@/lib/leaflet-locatecontrol";
 
 type LocateControlProps = {
   position?: L.ControlPosition;
   title: string;
 };
 
-export function LocateControl({ position = 'topright', title }: LocateControlProps) {
+export function LocateControl({
+  position = "topright",
+  title,
+}: LocateControlProps) {
   const map = useMap();
   const controlRef = useRef<L.Control | null>(null);
 
@@ -24,7 +30,7 @@ export function LocateControl({ position = 'topright', title }: LocateControlPro
 
       const control = locateFactory({
         position,
-        setView: 'once',
+        setView: "once",
         flyTo: true,
         keepCurrentZoomLevel: false,
         showCompass: true,

@@ -1,5 +1,5 @@
-import { forwardRef, type ReactNode, type TextareaHTMLAttributes } from 'react';
-import { cn } from '@/lib/cn';
+import { forwardRef, type ReactNode, type TextareaHTMLAttributes } from "react";
+import { cn } from "@/lib/cn";
 
 interface TextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
@@ -13,7 +13,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="w-full">
         {label && (
-          <label htmlFor={id} className="block text-base font-medium text-text-secondary mb-1.5">
+          <label
+            htmlFor={id}
+            className="block text-base font-medium text-text-secondary mb-1.5"
+          >
             {label}
             {isRequired && <span className="text-error ml-0.5">*</span>}
             {labelAdornment}
@@ -23,10 +26,10 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           id={id}
           className={cn(
-            'w-full px-4 py-3 border rounded-[var(--radius-input)] bg-surface text-text-primary min-h-[96px]',
-            'focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary',
-            'placeholder:text-text-secondary/60',
-            error ? 'border-error' : 'border-gray-200',
+            "w-full px-4 py-3 border rounded-[var(--radius-input)] bg-surface text-text-primary min-h-[96px]",
+            "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
+            "placeholder:text-text-secondary/60",
+            error ? "border-error" : "border-gray-200",
             className,
           )}
           {...props}
@@ -36,4 +39,4 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     );
   },
 );
-Textarea.displayName = 'Textarea';
+Textarea.displayName = "Textarea";

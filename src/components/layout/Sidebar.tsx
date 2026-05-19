@@ -38,7 +38,15 @@ interface SidebarProps {
 
 export function Sidebar({ open, onClose }: SidebarProps) {
   const { t } = useTranslation();
-  const { isAuthenticated, isAdmin, hasRole, logout, userId, userSlug, hasRestoredSession } = useAuth();
+  const {
+    isAuthenticated,
+    isAdmin,
+    hasRole,
+    logout,
+    userId,
+    userSlug,
+    hasRestoredSession,
+  } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
@@ -76,14 +84,14 @@ export function Sidebar({ open, onClose }: SidebarProps) {
   const userRouteRef = pathname.match(/^\/users\/([^/]+)/)?.[1] ?? null;
   const isCurrentUserRoute = matchesPublicRef(userRouteRef, currentUser);
   const isCalculatorActive = userId
-    ? (pathname === calculatorPath ||
+    ? pathname === calculatorPath ||
       (isCurrentUserRoute &&
-        /^\/users\/[^/]+\/impact\/calculations\/[^/]+\/edit$/.test(pathname)))
+        /^\/users\/[^/]+\/impact\/calculations\/[^/]+\/edit$/.test(pathname))
     : pathname === "/footprint/calculator" || pathname === "/calculator";
   const isHistoryActive = userId
-    ? (pathname === historyPath ||
+    ? pathname === historyPath ||
       (isCurrentUserRoute &&
-        /^\/users\/[^/]+\/impact\/calculations\/(?!new$)[^/]+$/.test(pathname)))
+        /^\/users\/[^/]+\/impact\/calculations\/(?!new$)[^/]+$/.test(pathname))
     : pathname === "/footprint/history" ||
       /^\/footprint\/calculation\/[^/]+$/.test(pathname);
   const isPublicAreasActive = pathname === "/areas/public";
@@ -213,7 +221,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
               )}
 
               {sectionLabel(t("nav.account"))}
-              <NavLink to={profilePath} end className={linkClass} onClick={onClose}>
+              <NavLink
+                to={profilePath}
+                end
+                className={linkClass}
+                onClick={onClose}
+              >
                 <User className="h-4 w-4" /> {t("nav.profile")}
               </NavLink>
               <NavLink
@@ -238,7 +251,12 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 <ShieldCheck className="h-4 w-4" />{" "}
                 {t("nav.validateCertificate")}
               </NavLink>
-              <NavLink to="/privacy" end className={linkClass} onClick={onClose}>
+              <NavLink
+                to="/privacy"
+                end
+                className={linkClass}
+                onClick={onClose}
+              >
                 <Lock className="h-4 w-4" /> {t("nav.privacyCenter")}
               </NavLink>
               <NavLink to="/contact" className={linkClass} onClick={onClose}>

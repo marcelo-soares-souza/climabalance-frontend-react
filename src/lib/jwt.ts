@@ -1,5 +1,5 @@
-import { jwtDecode } from 'jwt-decode';
-import type { JwtPayload } from '@/types/auth';
+import { jwtDecode } from "jwt-decode";
+import type { JwtPayload } from "@/types/auth";
 
 export function decodeToken(token: string): JwtPayload | null {
   try {

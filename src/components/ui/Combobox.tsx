@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect, type ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
-import { ChevronDown } from 'lucide-react';
-import { cn } from '@/lib/cn';
+import { useState, useRef, useEffect, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { ChevronDown } from "lucide-react";
+import { cn } from "@/lib/cn";
 
 interface ComboboxOption {
   value: string;
@@ -41,7 +41,7 @@ export function Combobox({
   const containerRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
 
-  const selectedLabel = options.find((o) => o.value === value)?.label ?? '';
+  const selectedLabel = options.find((o) => o.value === value)?.label ?? "";
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -52,8 +52,8 @@ export function Combobox({
         setOpen(false);
       }
     }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   function toggleOpen() {
@@ -67,7 +67,7 @@ export function Combobox({
 
   function handleKeyDown(e: React.KeyboardEvent) {
     if (!open) {
-      if (e.key === 'ArrowDown' || e.key === 'Enter') {
+      if (e.key === "ArrowDown" || e.key === "Enter") {
         setOpen(true);
         e.preventDefault();
       }
@@ -75,25 +75,21 @@ export function Combobox({
     }
 
     switch (e.key) {
-      case 'ArrowDown':
+      case "ArrowDown":
         e.preventDefault();
-        setHighlightedIndex((i) =>
-          i < filtered.length - 1 ? i + 1 : 0,
-        );
+        setHighlightedIndex((i) => (i < filtered.length - 1 ? i + 1 : 0));
         break;
-      case 'ArrowUp':
+      case "ArrowUp":
         e.preventDefault();
-        setHighlightedIndex((i) =>
-          i > 0 ? i - 1 : filtered.length - 1,
-        );
+        setHighlightedIndex((i) => (i > 0 ? i - 1 : filtered.length - 1));
         break;
-      case 'Enter':
+      case "Enter":
         e.preventDefault();
         if (highlightedIndex >= 0 && highlightedIndex < filtered.length) {
           selectOption(filtered[highlightedIndex]);
         }
         break;
-      case 'Escape':
+      case "Escape":
         e.preventDefault();
         setOpen(false);
         break;
@@ -106,7 +102,10 @@ export function Combobox({
     <div className="w-full" ref={containerRef}>
       {label && (
         <div className="mb-1.5 flex items-center gap-2">
-          <label htmlFor={id} className="block text-base font-medium text-text-secondary">
+          <label
+            htmlFor={id}
+            className="block text-base font-medium text-text-secondary"
+          >
             {label}
             {required && <span className="text-error ml-0.5">*</span>}
           </label>
@@ -123,14 +122,14 @@ export function Combobox({
           onClick={toggleOpen}
           onKeyDown={handleKeyDown}
           className={cn(
-            'w-full px-4 py-3 pr-10 border rounded-[var(--radius-input)] bg-surface text-left',
-            'focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary',
-            error ? 'border-error' : 'border-gray-200',
-            value ? 'text-text-primary' : 'text-text-secondary',
+            "w-full px-4 py-3 pr-10 border rounded-[var(--radius-input)] bg-surface text-left",
+            "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
+            error ? "border-error" : "border-gray-200",
+            value ? "text-text-primary" : "text-text-secondary",
             className,
           )}
         >
-          {selectedLabel || placeholder || ''}
+          {selectedLabel || placeholder || ""}
         </button>
         <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-secondary" />
 
@@ -144,21 +143,25 @@ export function Combobox({
               <button
                 type="button"
                 role="option"
-                aria-selected={value === ''}
+                aria-selected={value === ""}
                 onClick={() => {
-                  onChange('');
+                  onChange("");
                   setOpen(false);
                 }}
                 className={cn(
-                  'w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100',
-                  value === '' ? 'bg-primary-50 font-medium' : 'text-text-secondary',
+                  "w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100",
+                  value === ""
+                    ? "bg-primary-50 font-medium"
+                    : "text-text-secondary",
                 )}
               >
                 {emptyLabel}
               </button>
             )}
             {filtered.length === 0 ? (
-              <div className="px-4 py-3 text-sm text-text-secondary">{t('combobox.noResults')}</div>
+              <div className="px-4 py-3 text-sm text-text-secondary">
+                {t("combobox.noResults")}
+              </div>
             ) : (
               filtered.map((opt, idx) => (
                 <button
@@ -169,9 +172,10 @@ export function Combobox({
                   onMouseEnter={() => setHighlightedIndex(idx)}
                   onClick={() => selectOption(opt)}
                   className={cn(
-                    'w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100',
-                    highlightedIndex === idx && 'bg-gray-100',
-                    value === opt.value && 'bg-primary-50 font-medium text-primary',
+                    "w-full px-4 py-2.5 text-left text-sm hover:bg-gray-100",
+                    highlightedIndex === idx && "bg-gray-100",
+                    value === opt.value &&
+                      "bg-primary-50 font-medium text-primary",
                   )}
                 >
                   {opt.label}

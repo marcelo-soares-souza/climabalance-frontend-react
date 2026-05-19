@@ -1,11 +1,18 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { SEO } from '@/components/SEO';
+import { SEO } from "@/components/SEO";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
 import { plantedTreesService } from "@/services/planted-trees";
-import { MapContainer, TileLayer, Marker, Rectangle, useMapEvents, useMap } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Rectangle,
+  useMapEvents,
+  useMap,
+} from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { Card } from "@/components/ui/Card";
@@ -19,9 +26,22 @@ import {
 import { PageSkeleton } from "@/components/LoadingSkeleton";
 import { ErrorBanner } from "@/components/ErrorBanner";
 import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
-import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
+import {
+  OSM_URL,
+  OSM_ATTR,
+  SATELLITE_URL,
+  SATELLITE_ATTR,
+} from "@/components/leaflet/map-layers";
 import { getCountryName } from "@/lib/countries";
-import { ArrowLeft, TreePine, Check, Trash2, MapPin, MousePointer2, Square } from "lucide-react";
+import {
+  ArrowLeft,
+  TreePine,
+  Check,
+  Trash2,
+  MapPin,
+  MousePointer2,
+  Square,
+} from "lucide-react";
 import { getAreaDetailPath } from "@/lib/public-refs";
 
 const treeIcon = L.divIcon({
@@ -74,8 +94,14 @@ function generateGridPoints(
 
   for (let r = 0; r < rows && points.length < count; r++) {
     for (let c = 0; c < cols && points.length < count; c++) {
-      const lat = bounds.minLat + cellLat * (r + 0.5) + (Math.random() - 0.5) * cellLat * 0.6;
-      const lng = bounds.minLng + cellLng * (c + 0.5) + (Math.random() - 0.5) * cellLng * 0.6;
+      const lat =
+        bounds.minLat +
+        cellLat * (r + 0.5) +
+        (Math.random() - 0.5) * cellLat * 0.6;
+      const lng =
+        bounds.minLng +
+        cellLng * (c + 0.5) +
+        (Math.random() - 0.5) * cellLng * 0.6;
       points.push({ latitude: lat, longitude: lng });
     }
   }
@@ -102,8 +128,10 @@ function AreaDrawHandler({
 
   useEffect(() => {
     const container = map.getContainer();
-    container.style.cursor = areaMode ? 'crosshair' : '';
-    return () => { container.style.cursor = ''; };
+    container.style.cursor = areaMode ? "crosshair" : "";
+    return () => {
+      container.style.cursor = "";
+    };
   }, [map, areaMode]);
 
   useMapEvents({
@@ -138,7 +166,10 @@ function AreaDrawHandler({
   if (!rectStart || !rectEnd) return null;
   return (
     <Rectangle
-      bounds={[[rectStart[0], rectStart[1]], [rectEnd[0], rectEnd[1]]]}
+      bounds={[
+        [rectStart[0], rectStart[1]],
+        [rectEnd[0], rectEnd[1]],
+      ]}
       pathOptions={{ color: "#2D6A4F", weight: 2, fillOpacity: 0.15 }}
     />
   );
@@ -162,7 +193,9 @@ export function TreePlantingPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
-  const [points, setPoints] = useState<{ latitude: number; longitude: number }[]>([]);
+  const [points, setPoints] = useState<
+    { latitude: number; longitude: number }[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
   const [showClearConfirm, setShowClearConfirm] = useState(false);
   const [satellite, setSatellite] = useState(false);
@@ -193,9 +226,15 @@ export function TreePlantingPage() {
       plantedTreesService.savePlantedTrees(areaIdSafe, pts),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
-      queryClient.invalidateQueries({ queryKey: ["planted-trees", areaIdSafe] });
-      queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaIdSafe] });
-      navigate(getAreaDetailPath({ id: area?.id ?? areaIdSafe, slug: area?.slug }));
+      queryClient.invalidateQueries({
+        queryKey: ["planted-trees", areaIdSafe],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["pending-tree-count", areaIdSafe],
+      });
+      navigate(
+        getAreaDetailPath({ id: area?.id ?? areaIdSafe, slug: area?.slug }),
+      );
     },
     onError: () => {
       setError(t("treePlanting.saveError"));
@@ -206,8 +245,12 @@ export function TreePlantingPage() {
     mutationFn: () => plantedTreesService.clearPlantedTrees(areaIdSafe),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
-      queryClient.invalidateQueries({ queryKey: ["planted-trees", areaIdSafe] });
-      queryClient.invalidateQueries({ queryKey: ["pending-tree-count", areaIdSafe] });
+      queryClient.invalidateQueries({
+        queryKey: ["planted-trees", areaIdSafe],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["pending-tree-count", areaIdSafe],
+      });
       setShowClearConfirm(false);
       setPoints([]);
     },
@@ -265,183 +308,206 @@ export function TreePlantingPage() {
     <>
       <SEO title="Plantar Árvores" />
       <div className="max-w-4xl mx-auto space-y-4">
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center gap-2 text-sm text-primary hover:underline"
-      >
-        <ArrowLeft className="h-4 w-4" /> {t("common.back")}
-      </button>
-
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <div>
-          <h1 className="text-2xl font-bold">{t("map.plantTrees")}</h1>
-          <p className="text-text-secondary text-sm mt-1">
-            <MapPin className="h-3.5 w-3.5 inline" /> {area.name}
-            {area.city && area.state && <> &mdash; {[area.city, area.state, getCountryName(area.countryCode ?? '')].filter(Boolean).join(', ')}</>}
-          </p>
-        </div>
-      </div>
-
-      {error && <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />}
-
-      <Card className="p-4">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2 text-sm">
-            <TreePine className="h-5 w-5 text-primary" />
-            <span className="font-medium">
-              {totalPlanted} / {totalCompensated}
-            </span>
-            <span className="text-text-secondary">{t("map.treesPlanted")}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex rounded-lg border border-gray-200 overflow-hidden">
-              <button
-                type="button"
-                onClick={() => setAreaMode(false)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
-                  !areaMode
-                    ? "bg-primary text-white"
-                    : "bg-white text-text-secondary hover:bg-gray-50"
-                }`}
-              >
-                <MousePointer2 className="h-3.5 w-3.5" />
-                {t("map.manualMode")}
-              </button>
-              <button
-                type="button"
-                onClick={() => setAreaMode(true)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
-                  areaMode
-                    ? "bg-primary text-white"
-                    : "bg-white text-text-secondary hover:bg-gray-50"
-                }`}
-              >
-                <Square className="h-3.5 w-3.5" />
-                {t("map.areaMode")}
-              </button>
-            </div>
-            <div className="w-48 h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-primary rounded-full transition-all duration-300"
-                style={{
-                  width: `${totalCompensated > 0 ? (totalPlanted / totalCompensated) * 100 : 0}%`,
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        <p className="text-sm text-text-secondary mb-3">
-          {areaMode
-            ? t("map.areaModeHint")
-            : maxNewPoints > 0 && existingCount > 0
-              ? t("map.plantMoreHint", { existingCount, maxNewPoints })
-              : maxNewPoints === 0 && existingCount > 0
-                ? t("map.allPlantedHint")
-                : t("map.plantTreesHint")}
-        </p>
-
-        <div className="h-[550px] rounded-lg overflow-hidden border border-gray-200">
-          <MapContainer
-            center={[area.latitude, area.longitude]}
-            zoom={16}
-            className="h-full w-full"
-          >
-            <TileLayer
-              attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
-              url={satellite ? SATELLITE_URL : OSM_URL}
-            />
-            <MapLayerControl
-              satellite={satellite}
-              onToggle={() => setSatellite((s) => !s)}
-            />
-            <MapClickHandler onMapClick={handleMapClick} />
-            <AreaDrawHandler
-              areaMode={areaMode}
-              maxPoints={maxNewPoints}
-              currentCount={points.length}
-              onAreaSelected={handleAreaSelected}
-            />
-            <Marker
-              position={[area.latitude, area.longitude]}
-              icon={L.divIcon({
-                className: "",
-                html: `<div style="background:#0B5F4B;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
-                iconSize: [16, 16],
-                iconAnchor: [8, 8],
-              })}
-            />
-            {existingTrees?.map((tree) => (
-              <Marker
-                key={tree.id}
-                position={[tree.latitude, tree.longitude]}
-                icon={existingTreeIcon}
-              />
-            ))}
-            {points.map((point, index) => (
-              <Marker
-                key={`new-${index}`}
-                position={[point.latitude, point.longitude]}
-                icon={treeIcon}
-                eventHandlers={{
-                  click: () => handleRemovePoint(index),
-                }}
-              />
-            ))}
-          </MapContainer>
-        </div>
-      </Card>
-
-      <div className="flex gap-3">
-        <Button
-          variant="outline"
-          onClick={() => navigate(getAreaDetailPath({ id: area?.id ?? areaId, slug: area?.slug }))}
+        <button
+          onClick={() => navigate(-1)}
+          className="flex items-center gap-2 text-sm text-primary hover:underline"
         >
-          {t("common.cancel")}
-        </Button>
-        <div className="flex-1" />
-        {existingCount > 0 && (
-          <Button
-            variant="outline"
-            className="text-error border-error/40 hover:bg-red-50"
-            onClick={() => setShowClearConfirm(true)}
-          >
-            <Trash2 className="h-4 w-4 mr-1.5" /> {t("common.clearAll")}
-          </Button>
+          <ArrowLeft className="h-4 w-4" /> {t("common.back")}
+        </button>
+
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <div>
+            <h1 className="text-2xl font-bold">{t("map.plantTrees")}</h1>
+            <p className="text-text-secondary text-sm mt-1">
+              <MapPin className="h-3.5 w-3.5 inline" /> {area.name}
+              {area.city && area.state && (
+                <>
+                  {" "}
+                  &mdash;{" "}
+                  {[
+                    area.city,
+                    area.state,
+                    getCountryName(area.countryCode ?? ""),
+                  ]
+                    .filter(Boolean)
+                    .join(", ")}
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+
+        {error && (
+          <ErrorBanner messageKey={error} onDismiss={() => setError(null)} />
         )}
-        <Button
-          onClick={handleSave}
-          disabled={points.length === 0 || saveMutation.isPending}
-          loading={saveMutation.isPending}
-        >
-          <Check className="h-4 w-4 mr-1.5" /> {t("common.save")}
-        </Button>
-      </div>
 
-      <Dialog open={showClearConfirm} onClose={() => setShowClearConfirm(false)}>
-        <DialogTitle>{t("map.clearTreesTitle")}</DialogTitle>
-        <DialogContent>
-          <p className="text-sm text-text-secondary">
-            {t("map.clearTreesConfirm")}
+        <Card className="p-4">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center gap-2 text-sm">
+              <TreePine className="h-5 w-5 text-primary" />
+              <span className="font-medium">
+                {totalPlanted} / {totalCompensated}
+              </span>
+              <span className="text-text-secondary">
+                {t("map.treesPlanted")}
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="flex rounded-lg border border-gray-200 overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setAreaMode(false)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
+                    !areaMode
+                      ? "bg-primary text-white"
+                      : "bg-white text-text-secondary hover:bg-gray-50"
+                  }`}
+                >
+                  <MousePointer2 className="h-3.5 w-3.5" />
+                  {t("map.manualMode")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAreaMode(true)}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
+                    areaMode
+                      ? "bg-primary text-white"
+                      : "bg-white text-text-secondary hover:bg-gray-50"
+                  }`}
+                >
+                  <Square className="h-3.5 w-3.5" />
+                  {t("map.areaMode")}
+                </button>
+              </div>
+              <div className="w-48 h-2 bg-gray-100 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-primary rounded-full transition-all duration-300"
+                  style={{
+                    width: `${totalCompensated > 0 ? (totalPlanted / totalCompensated) * 100 : 0}%`,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          <p className="text-sm text-text-secondary mb-3">
+            {areaMode
+              ? t("map.areaModeHint")
+              : maxNewPoints > 0 && existingCount > 0
+                ? t("map.plantMoreHint", { existingCount, maxNewPoints })
+                : maxNewPoints === 0 && existingCount > 0
+                  ? t("map.allPlantedHint")
+                  : t("map.plantTreesHint")}
           </p>
-        </DialogContent>
-        <DialogActions>
+
+          <div className="h-[550px] rounded-lg overflow-hidden border border-gray-200">
+            <MapContainer
+              center={[area.latitude, area.longitude]}
+              zoom={16}
+              className="h-full w-full"
+            >
+              <TileLayer
+                attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
+                url={satellite ? SATELLITE_URL : OSM_URL}
+              />
+              <MapLayerControl
+                satellite={satellite}
+                onToggle={() => setSatellite((s) => !s)}
+              />
+              <MapClickHandler onMapClick={handleMapClick} />
+              <AreaDrawHandler
+                areaMode={areaMode}
+                maxPoints={maxNewPoints}
+                currentCount={points.length}
+                onAreaSelected={handleAreaSelected}
+              />
+              <Marker
+                position={[area.latitude, area.longitude]}
+                icon={L.divIcon({
+                  className: "",
+                  html: `<div style="background:#0B5F4B;width:16px;height:16px;border-radius:50%;border:3px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);"></div>`,
+                  iconSize: [16, 16],
+                  iconAnchor: [8, 8],
+                })}
+              />
+              {existingTrees?.map((tree) => (
+                <Marker
+                  key={tree.id}
+                  position={[tree.latitude, tree.longitude]}
+                  icon={existingTreeIcon}
+                />
+              ))}
+              {points.map((point, index) => (
+                <Marker
+                  key={`new-${index}`}
+                  position={[point.latitude, point.longitude]}
+                  icon={treeIcon}
+                  eventHandlers={{
+                    click: () => handleRemovePoint(index),
+                  }}
+                />
+              ))}
+            </MapContainer>
+          </div>
+        </Card>
+
+        <div className="flex gap-3">
           <Button
             variant="outline"
-            onClick={() => setShowClearConfirm(false)}
+            onClick={() =>
+              navigate(
+                getAreaDetailPath({ id: area?.id ?? areaId, slug: area?.slug }),
+              )
+            }
           >
             {t("common.cancel")}
           </Button>
+          <div className="flex-1" />
+          {existingCount > 0 && (
+            <Button
+              variant="outline"
+              className="text-error border-error/40 hover:bg-red-50"
+              onClick={() => setShowClearConfirm(true)}
+            >
+              <Trash2 className="h-4 w-4 mr-1.5" /> {t("common.clearAll")}
+            </Button>
+          )}
           <Button
-            className="bg-error hover:bg-error/90"
-            onClick={() => clearMutation.mutate()}
-            loading={clearMutation.isPending}
+            onClick={handleSave}
+            disabled={points.length === 0 || saveMutation.isPending}
+            loading={saveMutation.isPending}
           >
-            <Trash2 className="h-4 w-4 mr-1.5" /> {t("common.clearAll")}
+            <Check className="h-4 w-4 mr-1.5" /> {t("common.save")}
           </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+        </div>
+
+        <Dialog
+          open={showClearConfirm}
+          onClose={() => setShowClearConfirm(false)}
+        >
+          <DialogTitle>{t("map.clearTreesTitle")}</DialogTitle>
+          <DialogContent>
+            <p className="text-sm text-text-secondary">
+              {t("map.clearTreesConfirm")}
+            </p>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              variant="outline"
+              onClick={() => setShowClearConfirm(false)}
+            >
+              {t("common.cancel")}
+            </Button>
+            <Button
+              className="bg-error hover:bg-error/90"
+              onClick={() => clearMutation.mutate()}
+              loading={clearMutation.isPending}
+            >
+              <Trash2 className="h-4 w-4 mr-1.5" /> {t("common.clearAll")}
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </>
   );
 }

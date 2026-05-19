@@ -1,7 +1,14 @@
-export type ProfileType = 'individual' | 'legal_entity';
-export type DataQuality = 'real' | 'estimated';
-export type CalculationStatus = 'draft' | 'finalized';
-export type InputCategory = 'energy' | 'fuel' | 'transport' | 'flights' | 'scope1' | 'scope2' | 'scope3';
+export type ProfileType = "individual" | "legal_entity";
+export type DataQuality = "real" | "estimated";
+export type CalculationStatus = "draft" | "finalized";
+export type InputCategory =
+  | "energy"
+  | "fuel"
+  | "transport"
+  | "flights"
+  | "scope1"
+  | "scope2"
+  | "scope3";
 
 export interface FootprintInput {
   category: InputCategory;

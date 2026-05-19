@@ -11,7 +11,12 @@ import { Card } from "@/components/ui/Card";
 import { LocateControl } from "@/components/leaflet/LocateControl";
 import { MapLayerControl } from "@/components/leaflet/MapLayerControl";
 import { AreaMarkers } from "@/components/leaflet/AreaMarkers";
-import { OSM_URL, OSM_ATTR, SATELLITE_URL, SATELLITE_ATTR } from "@/components/leaflet/map-layers";
+import {
+  OSM_URL,
+  OSM_ATTR,
+  SATELLITE_URL,
+  SATELLITE_ATTR,
+} from "@/components/leaflet/map-layers";
 import { Skeleton } from "@/components/ui/Skeleton";
 import { useCompensationStore } from "@/stores/compensation-store";
 import { useAuth } from "@/hooks/use-auth";
@@ -65,8 +70,12 @@ export function MapPage() {
 
   const center = useMemo(() => {
     if (filteredAreas && filteredAreas.length > 0) {
-      const lat = filteredAreas.reduce((s, a) => s + a.latitude, 0) / filteredAreas.length;
-      const lng = filteredAreas.reduce((s, a) => s + a.longitude, 0) / filteredAreas.length;
+      const lat =
+        filteredAreas.reduce((s, a) => s + a.latitude, 0) /
+        filteredAreas.length;
+      const lng =
+        filteredAreas.reduce((s, a) => s + a.longitude, 0) /
+        filteredAreas.length;
       return [lat, lng] as [number, number];
     }
     return [-14.235, -51.925] as [number, number];
@@ -89,7 +98,13 @@ export function MapPage() {
       }
       navigate("/compensation/review");
     },
-    [setSelection, effectiveCalculationId, selectedTotalTCO2e, isAuthenticated, navigate],
+    [
+      setSelection,
+      effectiveCalculationId,
+      selectedTotalTCO2e,
+      isAuthenticated,
+      navigate,
+    ],
   );
 
   const handleNavigateToArea = useCallback(
@@ -101,54 +116,54 @@ export function MapPage() {
 
   return (
     <>
-      <SEO title={t('seo.map.title')} description={t('seo.map.description')} />
+      <SEO title={t("seo.map.title")} description={t("seo.map.description")} />
       <div className="space-y-4">
-      <div className="flex items-center justify-between flex-wrap gap-3">
-        <h1 className="text-2xl font-bold">{t("map.title")}</h1>
-        <div className="w-48">
-          <Combobox
-            id="map-country-filter"
-            value={countryFilter}
-            options={countryOptions}
-            emptyLabel={t("map.allCountries")}
-            placeholder={t("area.form.selectCountry")}
-            onChange={(val) => setCountryFilter(val)}
-          />
+        <div className="flex items-center justify-between flex-wrap gap-3">
+          <h1 className="text-2xl font-bold">{t("map.title")}</h1>
+          <div className="w-48">
+            <Combobox
+              id="map-country-filter"
+              value={countryFilter}
+              options={countryOptions}
+              emptyLabel={t("map.allCountries")}
+              placeholder={t("area.form.selectCountry")}
+              onChange={(val) => setCountryFilter(val)}
+            />
+          </div>
         </div>
+
+        <Card className="overflow-hidden">
+          <div className="h-[calc(100vh-220px)] min-h-[400px] relative">
+            {isLoading ? (
+              <Skeleton className="w-full h-full" />
+            ) : (
+              <MapContainer center={center} zoom={3} className="h-full w-full">
+                <LocateControl title={t("map.locate.title")} />
+                <MapLayerControl
+                  satellite={satellite}
+                  onToggle={() => setSatellite((s) => !s)}
+                />
+                <TileLayer
+                  attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
+                  url={satellite ? SATELLITE_URL : OSM_URL}
+                />
+                <AreaMarkers
+                  areas={filteredAreas}
+                  t={t}
+                  onSelectArea={handleSelectArea}
+                  onNavigateToArea={handleNavigateToArea}
+                />
+              </MapContainer>
+            )}
+          </div>
+        </Card>
+
+        {filteredAreas && (
+          <p className="text-sm text-text-secondary">
+            {t("map.areasCount", { count: filteredAreas.length })}
+          </p>
+        )}
       </div>
-
-      <Card className="overflow-hidden">
-        <div className="h-[calc(100vh-220px)] min-h-[400px] relative">
-          {isLoading ? (
-            <Skeleton className="w-full h-full" />
-          ) : (
-            <MapContainer center={center} zoom={3} className="h-full w-full">
-              <LocateControl title={t("map.locate.title")} />
-              <MapLayerControl
-                satellite={satellite}
-                onToggle={() => setSatellite((s) => !s)}
-              />
-              <TileLayer
-                attribution={satellite ? SATELLITE_ATTR : OSM_ATTR}
-                url={satellite ? SATELLITE_URL : OSM_URL}
-              />
-              <AreaMarkers
-                areas={filteredAreas}
-                t={t}
-                onSelectArea={handleSelectArea}
-                onNavigateToArea={handleNavigateToArea}
-              />
-            </MapContainer>
-          )}
-        </div>
-      </Card>
-
-      {filteredAreas && (
-        <p className="text-sm text-text-secondary">
-          {t("map.areasCount", { count: filteredAreas.length })}
-        </p>
-      )}
-    </div>
     </>
   );
 }

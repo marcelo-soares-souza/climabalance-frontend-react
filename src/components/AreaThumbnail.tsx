@@ -1,4 +1,4 @@
-import { TreePine } from 'lucide-react';
+import { TreePine } from "lucide-react";
 
 interface AreaThumbnailProps {
   imageUrl?: string;
@@ -6,7 +6,11 @@ interface AreaThumbnailProps {
   name: string;
 }
 
-export function AreaThumbnail({ imageUrl, thumbnailUrl, name }: AreaThumbnailProps) {
+export function AreaThumbnail({
+  imageUrl,
+  thumbnailUrl,
+  name,
+}: AreaThumbnailProps) {
   const src = imageUrl || thumbnailUrl;
 
   if (src) {

@@ -1,4 +1,4 @@
-import { api } from '@/lib/api-client';
+import { api } from "@/lib/api-client";
 
 export interface SatelliteImage {
   id: string;
@@ -18,10 +18,7 @@ export interface SatelliteImage {
 
 export const satelliteService = {
   async fetchNewImage(areaId: string): Promise<SatelliteImage> {
-    return api.post<SatelliteImage>(
-      `/areas/${areaId}/satellite-image`,
-      {},
-    );
+    return api.post<SatelliteImage>(`/areas/${areaId}/satellite-image`, {});
   },
 
   async getLatest(areaId: string): Promise<SatelliteImage | null> {

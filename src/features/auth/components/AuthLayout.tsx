@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Card, CardContent } from '@/components/ui/Card';
-import { Leaf } from 'lucide-react';
+import type { ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Leaf } from "lucide-react";
 
 export function AuthLayout({ children }: { children: ReactNode }) {
   const { t } = useTranslation();
@@ -12,7 +12,7 @@ export function AuthLayout({ children }: { children: ReactNode }) {
       <Card className="w-full max-w-md relative z-10">
         <CardContent className="p-8">
           <div className="flex justify-center mb-6">
-            <img src="/logo.png" alt={t('app.name')} className="h-14 w-14" />
+            <img src="/logo.png" alt={t("app.name")} className="h-14 w-14" />
           </div>
           {children}
         </CardContent>

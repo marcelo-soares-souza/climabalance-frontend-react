@@ -1,6 +1,14 @@
-import { api } from '@/lib/api-client';
-import { toApiUrl } from '@/config/api';
-import type { Area, AreaContribution, AreaMedia, AreaCapacity, CreateAreaRequest, UpdateAreaRequest, ApproveAreaRequest } from '@/types/area';
+import { api } from "@/lib/api-client";
+import { toApiUrl } from "@/config/api";
+import type {
+  Area,
+  AreaContribution,
+  AreaMedia,
+  AreaCapacity,
+  CreateAreaRequest,
+  UpdateAreaRequest,
+  ApproveAreaRequest,
+} from "@/types/area";
 
 type PaginatedAreasResponse = {
   items: RawArea[];
@@ -98,8 +106,8 @@ type RawAreaMedia = {
   id?: string;
   area_id?: string;
   areaId?: string;
-  media_type?: 'photo' | 'video';
-  mediaType?: 'photo' | 'video';
+  media_type?: "photo" | "video";
+  mediaType?: "photo" | "video";
   description?: string | null;
   mime_type?: string;
   mimeType?: string;
@@ -122,17 +130,17 @@ type RawAreaCapacity = {
   availableTCO2e?: number | string;
 };
 
-function asString(value: unknown, fallback = ''): string {
-  return typeof value === 'string' ? value : fallback;
+function asString(value: unknown, fallback = ""): string {
+  return typeof value === "string" ? value : fallback;
 }
 
 function asNullableString(value: unknown): string | null {
-  return typeof value === 'string' ? value : null;
+  return typeof value === "string" ? value : null;
 }
 
 function asNumber(value: unknown, fallback = 0): number {
-  if (typeof value === 'number' && Number.isFinite(value)) return value;
-  if (typeof value === 'string') {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string") {
     const parsed = Number(value);
     return Number.isFinite(parsed) ? parsed : fallback;
   }
@@ -145,8 +153,8 @@ function asNullableNumber(value: unknown): number | null {
 }
 
 function normalizeAreaStatus(status: unknown): string {
-  if (status === 'pending') return 'pending_audit';
-  return asString(status, 'draft');
+  if (status === "pending") return "pending_audit";
+  return asString(status, "draft");
 }
 
 function normalizeArea(raw: RawArea): Area {
@@ -154,7 +162,10 @@ function normalizeArea(raw: RawArea): Area {
   const rawTotal = raw.totalCapacityTCO2e ?? raw.total_capacity_t_co2e;
   const total = rawTotal == null ? available : asNumber(rawTotal, available);
   const committedRaw = raw.committedTCO2e ?? raw.committed_t_co2e;
-  const committed = committedRaw == null ? Math.max(total - available, 0) : asNumber(committedRaw, 0);
+  const committed =
+    committedRaw == null
+      ? Math.max(total - available, 0)
+      : asNumber(committedRaw, 0);
 
   return {
     id: asString(raw.id),
@@ -174,41 +185,54 @@ function normalizeArea(raw: RawArea): Area {
     countryCode: asNullableString(raw.countryCode ?? raw.country_code),
     state: asNullableString(raw.state),
     city: asNullableString(raw.city),
-    status: normalizeAreaStatus(raw.status) as Area['status'],
+    status: normalizeAreaStatus(raw.status) as Area["status"],
     totalCapacityTCO2e: total,
     committedTCO2e: committed,
-    tCO2ePerTreePerYear: asNumber(raw.tCO2ePerTreePerYear ?? raw.t_co2e_per_tree_per_year),
+    tCO2ePerTreePerYear: asNumber(
+      raw.tCO2ePerTreePerYear ?? raw.t_co2e_per_tree_per_year,
+    ),
     estimatedKgCO2PerTreePerYear: asNumber(
-      raw.estimatedKgCO2PerTreePerYear ?? raw.estimated_kg_co2_per_tree_per_year
+      raw.estimatedKgCO2PerTreePerYear ??
+        raw.estimated_kg_co2_per_tree_per_year,
     ),
     pricePerTree: asNullableNumber(raw.pricePerTree ?? raw.price_per_tree),
     defaultHorizonYears: asNullableNumber(
-      raw.defaultHorizonYears ?? raw.default_horizon_years
+      raw.defaultHorizonYears ?? raw.default_horizon_years,
     ),
     pricePerTCO2e: asNullableNumber(raw.pricePerTCO2e ?? raw.price_per_t_co2e),
-    maxPurchasableTrees: asNullableNumber(raw.maxPurchasableTrees ?? raw.max_purchasable_trees),
+    maxPurchasableTrees: asNullableNumber(
+      raw.maxPurchasableTrees ?? raw.max_purchasable_trees,
+    ),
     treeSpecies: asNullableString(raw.treeSpecies ?? raw.tree_species),
     externalLink: asNullableString(raw.externalLink ?? raw.external_link),
     auditNotes: asNullableString(raw.auditNotes ?? raw.audit_notes),
     auditedBy: asNullableString(raw.auditedByUserId ?? raw.audited_by_user_id),
     auditedAt: asNullableString(raw.auditedAt ?? raw.audited_at),
-    committedTreesCount: asNullableNumber(
-      raw.committedTreesCount ?? raw.committed_trees_count
-    ) ?? undefined,
-    plantedTreesCount: asNullableNumber(
-      raw.plantedTreesCount ?? raw.planted_trees_count
-    ) ?? undefined,
-    totalCompensatedTreesCount: asNullableNumber(
-      raw.totalCompensatedTreesCount ?? raw.total_compensated_trees_count
-    ) ?? undefined,
-    thumbnailUrl: asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url) ? toApiUrl(asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url)!) : undefined,
-    imageUrl: asNullableString(raw.imageUrl ?? raw.image_url) ? toApiUrl(asNullableString(raw.imageUrl ?? raw.image_url)!) : undefined,
+    committedTreesCount:
+      asNullableNumber(raw.committedTreesCount ?? raw.committed_trees_count) ??
+      undefined,
+    plantedTreesCount:
+      asNullableNumber(raw.plantedTreesCount ?? raw.planted_trees_count) ??
+      undefined,
+    totalCompensatedTreesCount:
+      asNullableNumber(
+        raw.totalCompensatedTreesCount ?? raw.total_compensated_trees_count,
+      ) ?? undefined,
+    thumbnailUrl: asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url)
+      ? toApiUrl(asNullableString(raw.thumbnailUrl ?? raw.thumbnail_url)!)
+      : undefined,
+    imageUrl: asNullableString(raw.imageUrl ?? raw.image_url)
+      ? toApiUrl(asNullableString(raw.imageUrl ?? raw.image_url)!)
+      : undefined,
     createdAt: asString(raw.createdAt ?? raw.created_at),
     updatedAt: asString(raw.updatedAt ?? raw.updated_at),
   };
 }
 
-function normalizeAreaContribution(raw: RawAreaContribution, areaId: string): AreaContribution {
+function normalizeAreaContribution(
+  raw: RawAreaContribution,
+  areaId: string,
+): AreaContribution {
   return {
     id: asString(raw.id ?? raw.compensation_id),
     areaId: asString(raw.areaId ?? raw.area_id, areaId),
@@ -218,19 +242,24 @@ function normalizeAreaContribution(raw: RawAreaContribution, areaId: string): Ar
     treesCount: asNumber(raw.trees_count),
     totalTCO2e: asNumber(raw.total_t_co2e),
     totalAmount: asNumber(raw.total_amount),
-    currency: asString(raw.currency, 'USD'),
-    compensationMode: asString(raw.compensation_mode, 'tree_purchase'),
+    currency: asString(raw.currency, "USD"),
+    compensationMode: asString(raw.compensation_mode, "tree_purchase"),
     paidAt: asString(raw.paid_at ?? raw.compensated_at ?? raw.created_at),
   };
 }
 
 function normalizeAreaMedia(raw: RawAreaMedia, areaId: string): AreaMedia {
   const id = asString(raw.id);
-  const mediaPath = asString(raw.downloadUrl ?? raw.download_url, `/api/v1/areas/media/${id}/file`);
+  const mediaPath = asString(
+    raw.downloadUrl ?? raw.download_url,
+    `/api/v1/areas/media/${id}/file`,
+  );
   return {
     id,
     areaId: asString(raw.areaId ?? raw.area_id, areaId),
-    mediaType: (raw.mediaType ?? raw.media_type ?? 'photo') as AreaMedia['mediaType'],
+    mediaType: (raw.mediaType ??
+      raw.media_type ??
+      "photo") as AreaMedia["mediaType"],
     description: asNullableString(raw.description),
     mimeType: asString(raw.mimeType ?? raw.mime_type),
     fileName: asString(raw.fileName ?? raw.file_name),
@@ -245,7 +274,10 @@ function normalizeAreaCapacity(raw: RawAreaCapacity): AreaCapacity {
   const totalRaw = raw.totalCapacityTCO2e ?? raw.total_capacity_t_co2e;
   const total = totalRaw == null ? available : asNumber(totalRaw, available);
   const committedRaw = raw.committedTCO2e ?? raw.committed_t_co2e;
-  const committed = committedRaw == null ? Math.max(total - available, 0) : asNumber(committedRaw);
+  const committed =
+    committedRaw == null
+      ? Math.max(total - available, 0)
+      : asNumber(committedRaw);
 
   return {
     totalCapacityTCO2e: total,
@@ -255,7 +287,7 @@ function normalizeAreaCapacity(raw: RawAreaCapacity): AreaCapacity {
 }
 
 function normalizeAreaFilterStatus(status?: string): string | undefined {
-  if (status === 'pending') return 'pending_audit';
+  if (status === "pending") return "pending_audit";
   return status;
 }
 
@@ -265,7 +297,7 @@ function fetchArea(id: string): Promise<Area> {
 
 export const areasService = {
   async createArea(data: CreateAreaRequest) {
-    const raw = await api.post<RawArea>('/areas', data);
+    const raw = await api.post<RawArea>("/areas", data);
     if (raw.id) {
       return fetchArea(raw.id);
     }
@@ -302,7 +334,7 @@ export const areasService = {
     } as Record<string, string | number | undefined>;
 
     return api
-      .get<PaginatedAreasResponse>('/areas', { params: apiParams })
+      .get<PaginatedAreasResponse>("/areas", { params: apiParams })
       .then((res) => {
         const items = res.items ?? res;
         return Array.isArray(items) ? items.map(normalizeArea) : [];
@@ -311,19 +343,27 @@ export const areasService = {
 
   getMapAreas(params?: { biome?: string; status?: string }) {
     return api
-      .get<RawArea[]>('/map/areas', { params: params as Record<string, string> })
+      .get<
+        RawArea[]
+      >("/map/areas", { params: params as Record<string, string> })
       .then((rows) => rows.map((row) => normalizeArea(row)));
   },
 
-  listAreasPaginated(params?: { status?: string; biome?: string; cursor?: string; limit?: number; onlyActive?: boolean }) {
+  listAreasPaginated(params?: {
+    status?: string;
+    biome?: string;
+    cursor?: string;
+    limit?: number;
+    onlyActive?: boolean;
+  }) {
     const apiParams: Record<string, string | number | undefined> = {};
     if (params?.status) apiParams.status = params.status;
     if (params?.biome) apiParams.biome = params.biome;
     if (params?.cursor) apiParams.cursor = params.cursor;
     if (params?.limit !== undefined) apiParams.limit = String(params.limit);
-    if (params?.onlyActive) apiParams.onlyActive = 'true';
+    if (params?.onlyActive) apiParams.onlyActive = "true";
     return api
-      .get<PaginatedAreasResponse>('/areas', { params: apiParams })
+      .get<PaginatedAreasResponse>("/areas", { params: apiParams })
       .then((res) => ({
         data: res.items.map(normalizeArea),
         nextCursor: res.nextCursor,
@@ -331,25 +371,43 @@ export const areasService = {
   },
 
   getAreaCapacity(id: string) {
-    return api.get<RawAreaCapacity>(`/areas/${id}/capacity`).then(normalizeAreaCapacity);
+    return api
+      .get<RawAreaCapacity>(`/areas/${id}/capacity`)
+      .then(normalizeAreaCapacity);
   },
 
-  listAreaContributions(areaId: string, params?: { limit?: number; offset?: number }) {
+  listAreaContributions(
+    areaId: string,
+    params?: { limit?: number; offset?: number },
+  ) {
     return api
-      .get<RawAreaContribution[]>(`/areas/${areaId}/contributions`, { params: params as Record<string, number> })
-      .then((rows) => rows.map((row) => normalizeAreaContribution(row, areaId)));
+      .get<
+        RawAreaContribution[]
+      >(`/areas/${areaId}/contributions`, { params: params as Record<string, number> })
+      .then((rows) =>
+        rows.map((row) => normalizeAreaContribution(row, areaId)),
+      );
   },
 
   listAreaMedia(areaId: string) {
-    return api.get<RawAreaMedia[]>(`/areas/${areaId}/media`).then((rows) => rows.map((row) => normalizeAreaMedia(row, areaId)));
+    return api
+      .get<RawAreaMedia[]>(`/areas/${areaId}/media`)
+      .then((rows) => rows.map((row) => normalizeAreaMedia(row, areaId)));
   },
 
-  uploadAreaMedia(areaId: string, file: File, mediaType: string, description?: string) {
+  uploadAreaMedia(
+    areaId: string,
+    file: File,
+    mediaType: string,
+    description?: string,
+  ) {
     const formData = new FormData();
-    formData.append('file', file);
-    formData.append('media_type', mediaType);
-    if (description) formData.append('description', description);
-    return api.post<RawAreaMedia>(`/areas/${areaId}/media`, formData).then((raw) => normalizeAreaMedia(raw, areaId));
+    formData.append("file", file);
+    formData.append("media_type", mediaType);
+    if (description) formData.append("description", description);
+    return api
+      .post<RawAreaMedia>(`/areas/${areaId}/media`, formData)
+      .then((raw) => normalizeAreaMedia(raw, areaId));
   },
 
   deleteAreaMedia(mediaId: string) {
@@ -365,9 +423,17 @@ export const areasService = {
   },
 
   approveArea(areaId: string, data: ApproveAreaRequest) {
-    const criteria = data.criteria && data.criteria.length > 0
-      ? data.criteria
-      : [{ criterion_key: 'manual_review', criterion_label: 'Manual review', met: true, notes: data.notes }];
+    const criteria =
+      data.criteria && data.criteria.length > 0
+        ? data.criteria
+        : [
+            {
+              criterion_key: "manual_review",
+              criterion_label: "Manual review",
+              met: true,
+              notes: data.notes,
+            },
+          ];
     return api.post<void>(`/areas/${areaId}/approve`, { ...data, criteria });
   },
 
@@ -383,7 +449,11 @@ export const areasService = {
     return api.post<void>(`/areas/${areaId}/suspend`, { reason });
   },
 
-  getGlobalStats(): Promise<{ totalAreas: number; totalTreesPlanted: number; totalCO2Captured: number }> {
-    return api.get('/stats/global');
+  getGlobalStats(): Promise<{
+    totalAreas: number;
+    totalTreesPlanted: number;
+    totalCO2Captured: number;
+  }> {
+    return api.get("/stats/global");
   },
 };

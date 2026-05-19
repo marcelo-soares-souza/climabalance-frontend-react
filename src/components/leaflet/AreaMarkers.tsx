@@ -13,7 +13,8 @@ function safeImageUrl(value?: string): string | undefined {
   try {
     const url = new URL(value, window.location.origin);
     const sameOriginApi =
-      url.origin === window.location.origin && url.pathname.startsWith("/api/v1/");
+      url.origin === window.location.origin &&
+      url.pathname.startsWith("/api/v1/");
     const allowedHttps = url.protocol === "https:";
     return sameOriginApi || allowedHttps ? url.toString() : undefined;
   } catch {

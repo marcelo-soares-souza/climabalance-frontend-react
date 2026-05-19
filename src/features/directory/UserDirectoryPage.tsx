@@ -55,7 +55,9 @@ function UserCard({ user }: { user: DirectoryItem }) {
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.style.display = "none";
-                target.parentElement!.querySelector(".avatar-fallback")?.classList.remove("hidden");
+                target
+                  .parentElement!.querySelector(".avatar-fallback")
+                  ?.classList.remove("hidden");
               }}
             />
           ) : null}
@@ -66,7 +68,8 @@ function UserCard({ user }: { user: DirectoryItem }) {
             <h3 className="font-bold leading-snug">{displayName}</h3>
             {user.countryCode && (
               <p className="text-sm text-text-secondary">
-                {countries.find((c) => c.code === user.countryCode)?.name ?? user.countryCode}
+                {countries.find((c) => c.code === user.countryCode)?.name ??
+                  user.countryCode}
               </p>
             )}
           </div>
@@ -88,9 +91,7 @@ function UserCard({ user }: { user: DirectoryItem }) {
           </div>
           <div className="rounded-lg bg-primary-50 p-3">
             <Trees className="h-4 w-4 mx-auto mb-1 text-primary" />
-            <p className="text-lg font-bold text-primary">
-              {user.totalTrees}
-            </p>
+            <p className="text-lg font-bold text-primary">{user.totalTrees}</p>
             <p className="text-xs text-primary">{t("directory.trees")}</p>
           </div>
         </div>
@@ -148,48 +149,51 @@ export function UserDirectoryPage() {
 
   return (
     <>
-      <SEO title={t('seo.userDirectory.title')} />
+      <SEO title={t("seo.userDirectory.title")} />
       <div className="space-y-6">
         <div>
           <h1 className="text-2xl font-bold">{t("directory.title")}</h1>
-        <p className="text-text-secondary mt-1">{t("directory.description")}</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <Combobox
-          id="directory-country"
-          label={t("area.form.country")}
-          value={countryFilter}
-          options={countryOptions}
-          emptyLabel={t("map.allCountries")}
-          placeholder={t("area.form.selectCountry")}
-          onChange={(val) => setCountryFilter(val)}
-        />
-      </div>
-
-      {hasFilters && (
-        <div>
-          <Button variant="ghost" size="sm" onClick={clearFilters}>
-            <FilterX className="h-4 w-4 mr-1" /> {t("areas.list.clearFilters")}
-          </Button>
+          <p className="text-text-secondary mt-1">
+            {t("directory.description")}
+          </p>
         </div>
-      )}
 
-      {isLoading ? (
-        <UserCardsSkeleton />
-      ) : filteredUsers.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredUsers.map((user) => (
-            <UserCard key={user.id} user={user} />
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          <Combobox
+            id="directory-country"
+            label={t("area.form.country")}
+            value={countryFilter}
+            options={countryOptions}
+            emptyLabel={t("map.allCountries")}
+            placeholder={t("area.form.selectCountry")}
+            onChange={(val) => setCountryFilter(val)}
+          />
         </div>
-      ) : (
-        <EmptyState
-          icon={<Users className="h-12 w-12" />}
-          title={t("directory.noUsers")}
-        />
-      )}
-    </div>
+
+        {hasFilters && (
+          <div>
+            <Button variant="ghost" size="sm" onClick={clearFilters}>
+              <FilterX className="h-4 w-4 mr-1" />{" "}
+              {t("areas.list.clearFilters")}
+            </Button>
+          </div>
+        )}
+
+        {isLoading ? (
+          <UserCardsSkeleton />
+        ) : filteredUsers.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {filteredUsers.map((user) => (
+              <UserCard key={user.id} user={user} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState
+            icon={<Users className="h-12 w-12" />}
+            title={t("directory.noUsers")}
+          />
+        )}
+      </div>
     </>
   );
 }

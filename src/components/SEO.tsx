@@ -1,8 +1,8 @@
-import { Helmet } from 'react-helmet-async';
+import { Helmet } from "react-helmet-async";
 
-const BASE_URL = import.meta.env.VITE_SITE_URL || 'https://climabalance.com.br';
+const BASE_URL = import.meta.env.VITE_SITE_URL || "https://climabalance.com.br";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/logo.png`;
-const SITE_NAME = 'ClimaBalance';
+const SITE_NAME = "ClimaBalance";
 
 interface SEOProps {
   title: string;
@@ -30,9 +30,9 @@ export function SEO({
   const resolvedOgDescription = ogDescription || description;
   const resolvedOgImage = ogImage || DEFAULT_OG_IMAGE;
   const robots = [];
-  if (noIndex) robots.push('noindex');
-  if (noFollow) robots.push('nofollow');
-  const robotsContent = robots.length > 0 ? robots.join(', ') : undefined;
+  if (noIndex) robots.push("noindex");
+  if (noFollow) robots.push("nofollow");
+  const robotsContent = robots.length > 0 ? robots.join(", ") : undefined;
 
   return (
     <Helmet>
@@ -42,13 +42,17 @@ export function SEO({
       <meta property="og:type" content="website" />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:title" content={resolvedOgTitle} />
-      {resolvedOgDescription && <meta property="og:description" content={resolvedOgDescription} />}
+      {resolvedOgDescription && (
+        <meta property="og:description" content={resolvedOgDescription} />
+      )}
       <meta property="og:image" content={resolvedOgImage} />
       {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
       {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={resolvedOgTitle} />
-      {resolvedOgDescription && <meta name="twitter:description" content={resolvedOgDescription} />}
+      {resolvedOgDescription && (
+        <meta name="twitter:description" content={resolvedOgDescription} />
+      )}
       <meta name="twitter:image" content={resolvedOgImage} />
     </Helmet>
   );

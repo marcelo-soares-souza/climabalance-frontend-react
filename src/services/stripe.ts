@@ -1,9 +1,9 @@
-import { api } from '@/lib/api-client';
+import { api } from "@/lib/api-client";
 import type {
   CreatePaymentIntentRequest,
   CreatePaymentIntentResponse,
   StripeConnectStatus,
-} from '@/types/payment';
+} from "@/types/payment";
 
 type RawCreateIntentResponse = {
   payment_id?: string;
@@ -30,17 +30,17 @@ type RawStripeStatus = {
   pending_verification?: string[];
 };
 
-function asString(value: unknown, fallback = ''): string {
-  return typeof value === 'string' ? value : fallback;
+function asString(value: unknown, fallback = ""): string {
+  return typeof value === "string" ? value : fallback;
 }
 
 export const stripeService = {
   async createPaymentIntent(
-    data: CreatePaymentIntentRequest
+    data: CreatePaymentIntentRequest,
   ): Promise<CreatePaymentIntentResponse> {
     const raw = await api.post<RawCreateIntentResponse>(
-      '/payments/create-payment-intent',
-      data
+      "/payments/create-payment-intent",
+      data,
     );
 
     return {
@@ -50,13 +50,15 @@ export const stripeService = {
       qrCode: raw.qr_code,
       copyPasteCode: raw.copy_paste_code,
       paymentIntentId: asString(raw.payment_intent_id),
-      paymentMethod: (asString(raw.payment_method, 'card') as 'card' | 'pix'),
+      paymentMethod: asString(raw.payment_method, "card") as "card" | "pix",
     };
   },
 
   async getStripeOnboardingStatus(): Promise<StripeConnectStatus> {
-    const raw = await api.get<RawStripeStatus>('/producers/stripe/status');
-    const onboardingStatus = raw.onboarding_status as StripeConnectStatus['onboarding_status'] ?? undefined;
+    const raw = await api.get<RawStripeStatus>("/producers/stripe/status");
+    const onboardingStatus =
+      (raw.onboarding_status as StripeConnectStatus["onboarding_status"]) ??
+      undefined;
     return {
       connected: raw.connected ?? false,
       stripe_account_id: raw.stripe_account_id,
@@ -70,14 +72,14 @@ export const stripeService = {
 
   async startStripeOnboarding(): Promise<{ onboardingUrl: string }> {
     const raw = await api.post<{ onboarding_url: string }>(
-      '/producers/stripe/onboard'
+      "/producers/stripe/onboard",
     );
     return { onboardingUrl: raw.onboarding_url };
   },
 
   async getStripeDashboard(): Promise<{ dashboardUrl: string }> {
     const raw = await api.post<{ dashboard_url: string }>(
-      '/producers/stripe/dashboard'
+      "/producers/stripe/dashboard",
     );
     return { dashboardUrl: raw.dashboard_url };
   },

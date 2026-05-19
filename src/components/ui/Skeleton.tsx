@@ -1,11 +1,13 @@
-import { cn } from '@/lib/cn';
+import { cn } from "@/lib/cn";
 
 interface SkeletonProps {
   className?: string;
 }
 
 export function Skeleton({ className }: SkeletonProps) {
-  return <div className={cn('animate-pulse bg-gray-200 rounded-lg', className)} />;
+  return (
+    <div className={cn("animate-pulse bg-gray-200 rounded-lg", className)} />
+  );
 }
 
 export function SkeletonCard() {
@@ -32,7 +34,13 @@ export function SkeletonList({ count = 3 }: { count?: number }) {
   );
 }
 
-export function SkeletonTable({ rows = 5, cols = 4 }: { rows?: number; cols?: number }) {
+export function SkeletonTable({
+  rows = 5,
+  cols = 4,
+}: {
+  rows?: number;
+  cols?: number;
+}) {
   return (
     <div className="space-y-2">
       <div className="flex gap-4">

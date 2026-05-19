@@ -1,6 +1,11 @@
-import { api } from '@/lib/api-client';
-import type { CompensationQuote, CreateCompensationRequest, CompensationConfirmation, CompensationHistoryItem } from '@/types/compensation';
-import type { AreaContribution } from '@/types/area';
+import { api } from "@/lib/api-client";
+import type {
+  CompensationQuote,
+  CreateCompensationRequest,
+  CompensationConfirmation,
+  CompensationHistoryItem,
+} from "@/types/compensation";
+import type { AreaContribution } from "@/types/area";
 
 type RawCompensationQuote = {
   area_id?: string;
@@ -61,17 +66,17 @@ type RawAreaContribution = {
   compensated_at?: string;
 };
 
-function asString(value: unknown, fallback = ''): string {
-  return typeof value === 'string' ? value : fallback;
+function asString(value: unknown, fallback = ""): string {
+  return typeof value === "string" ? value : fallback;
 }
 
 function asNullableString(value: unknown): string | null {
-  return typeof value === 'string' ? value : null;
+  return typeof value === "string" ? value : null;
 }
 
 function asNumber(value: unknown, fallback = 0): number {
-  if (typeof value === 'number' && Number.isFinite(value)) return value;
-  if (typeof value === 'string') {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string") {
     const parsed = Number(value);
     return Number.isFinite(parsed) ? parsed : fallback;
   }
@@ -85,7 +90,7 @@ function normalizeQuote(raw: RawCompensationQuote): CompensationQuote {
     estimatedTotalTCO2e: asNumber(raw.estimated_total_t_co2e),
     estimatedTotalKgCO2e20y: asNumber(raw.estimated_total_kg_co2e_20y),
     availableCapacity: asNumber(raw.available_t_co2e),
-    currency: asString(raw.currency, 'USD'),
+    currency: asString(raw.currency, "USD"),
     maxPurchasableTrees:
       raw.max_purchasable_trees != null
         ? asNumber(raw.max_purchasable_trees)
@@ -96,39 +101,59 @@ function normalizeQuote(raw: RawCompensationQuote): CompensationQuote {
 
 function normalizeConfirmation(
   raw: RawCompensationConfirmation,
-  request: CreateCompensationRequest
+  request: CreateCompensationRequest,
 ): CompensationConfirmation {
   return {
     compensationId: asString(raw.compensation_id),
     areaId: asString(raw.area_id, request.area_id),
-    compensationMode: asString(raw.compensation_mode, request.compensation_mode) as CompensationConfirmation['compensationMode'],
+    compensationMode: asString(
+      raw.compensation_mode,
+      request.compensation_mode,
+    ) as CompensationConfirmation["compensationMode"],
     horizonYears: asNumber(raw.horizon_years ?? 0),
-    treesRequested: asNumber(raw.trees_requested ?? request.trees_requested ?? 0),
+    treesRequested: asNumber(
+      raw.trees_requested ?? request.trees_requested ?? 0,
+    ),
     pricePerTree: asNumber(raw.price_per_tree ?? 0),
-    estimatedTotalTCO2e: asNumber(raw.estimated_total_t_co2e ?? raw.total_t_co2e),
+    estimatedTotalTCO2e: asNumber(
+      raw.estimated_total_t_co2e ?? raw.total_t_co2e,
+    ),
     totalTCO2e: asNumber(raw.total_t_co2e ?? request.total_t_co2e),
-    treesCount: asNumber(raw.trees_count ?? request.trees_count ?? request.trees_requested),
+    treesCount: asNumber(
+      raw.trees_count ?? request.trees_count ?? request.trees_requested,
+    ),
     totalAmount: asNumber(raw.total_amount ?? request.total_amount),
     currency: asString(raw.currency, request.currency),
-    status: asString(raw.status, 'pending') as CompensationConfirmation['status'],
+    status: asString(
+      raw.status,
+      "pending",
+    ) as CompensationConfirmation["status"],
     remainingTCO2e: asNumber(raw.remaining_t_co2e),
     createdAt: asString(raw.created_at),
   };
 }
 
-function normalizeHistory(raw: RawCompensationHistory): CompensationHistoryItem {
+function normalizeHistory(
+  raw: RawCompensationHistory,
+): CompensationHistoryItem {
   return {
     id: asString(raw.id),
     areaId: asString(raw.area_id),
     areaName: asString(raw.area_name),
     areaSlug: asNullableString(raw.area_slug) ?? undefined,
     calculationId: asNullableString(raw.calculation_id),
-    compensationMode: asString(raw.compensation_mode, 'tco2e') as CompensationHistoryItem['compensationMode'],
+    compensationMode: asString(
+      raw.compensation_mode,
+      "tco2e",
+    ) as CompensationHistoryItem["compensationMode"],
     totalTCO2e: asNumber(raw.total_t_co2e),
     treesCount: asNumber(raw.trees_count),
     totalAmount: asNumber(raw.total_amount),
-    currency: asString(raw.currency, 'USD'),
-    status: asString(raw.status, 'pending') as CompensationHistoryItem['status'],
+    currency: asString(raw.currency, "USD"),
+    status: asString(
+      raw.status,
+      "pending",
+    ) as CompensationHistoryItem["status"],
     createdAt: asString(raw.created_at),
     paidAt: asNullableString(raw.paid_at),
   };
@@ -137,14 +162,17 @@ function normalizeHistory(raw: RawCompensationHistory): CompensationHistoryItem 
 function normalizeAreaContribution(raw: RawAreaContribution): AreaContribution {
   return {
     id: asString(raw.compensation_id),
-    areaId: '',
+    areaId: "",
     userId: asString(raw.supporter_user_id),
-    userEmail: asString(raw.supporter_display_name, asString(raw.supporter_user_id)),
+    userEmail: asString(
+      raw.supporter_display_name,
+      asString(raw.supporter_user_id),
+    ),
     treesCount: asNumber(raw.trees_count),
     totalTCO2e: asNumber(raw.total_t_co2e),
     totalAmount: 0,
-    currency: 'USD',
-    compensationMode: 'tree_purchase',
+    currency: "USD",
+    compensationMode: "tree_purchase",
     paidAt: asString(raw.compensated_at),
   };
 }
@@ -152,28 +180,45 @@ function normalizeAreaContribution(raw: RawAreaContribution): AreaContribution {
 export const compensationsService = {
   createCompensation(data: CreateCompensationRequest) {
     return api
-      .post<RawCompensationConfirmation>('/compensations', data)
+      .post<RawCompensationConfirmation>("/compensations", data)
       .then((raw) => normalizeConfirmation(raw, data));
   },
 
-  getQuote(data: { area_id: string; trees_requested: number; currency: string }) {
-    return api.post<RawCompensationQuote>('/compensations/quote', data).then(normalizeQuote);
+  getQuote(data: {
+    area_id: string;
+    trees_requested: number;
+    currency: string;
+  }) {
+    return api
+      .post<RawCompensationQuote>("/compensations/quote", data)
+      .then(normalizeQuote);
   },
 
-  listCompensations(params?: { status?: string; limit?: number; offset?: number }) {
+  listCompensations(params?: {
+    status?: string;
+    limit?: number;
+    offset?: number;
+  }) {
     return api
-      .get<RawCompensationHistory[]>('/compensations', { params: params as Record<string, string | number> })
+      .get<
+        RawCompensationHistory[]
+      >("/compensations", { params: params as Record<string, string | number> })
       .then((rows) => rows.map(normalizeHistory));
   },
 
-  listAreaContributions(areaId: string, params?: { limit?: number; offset?: number }) {
+  listAreaContributions(
+    areaId: string,
+    params?: { limit?: number; offset?: number },
+  ) {
     return api
-      .get<RawAreaContribution[]>(`/areas/${areaId}/contributions`, { params: params as Record<string, number> })
+      .get<
+        RawAreaContribution[]
+      >(`/areas/${areaId}/contributions`, { params: params as Record<string, number> })
       .then((rows) =>
         rows.map((row) => {
           const normalized = normalizeAreaContribution(row);
           return { ...normalized, areaId };
-        })
+        }),
       );
   },
 };

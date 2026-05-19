@@ -1,5 +1,5 @@
-import { API_BASE } from '@/config/api';
-import { csrfToken } from './csrf-token';
+import { API_BASE } from "@/config/api";
+import { csrfToken } from "./csrf-token";
 
 type SessionBootstrapResponse = {
   csrfToken: string;
@@ -10,10 +10,10 @@ export async function ensureSessionCsrfToken(): Promise<string | null> {
   if (currentToken) return currentToken;
 
   const response = await fetch(`${API_BASE}/auth/session`, {
-    method: 'GET',
-    credentials: 'include',
+    method: "GET",
+    credentials: "include",
     headers: {
-      Accept: 'application/json',
+      Accept: "application/json",
     },
   });
 
@@ -22,7 +22,7 @@ export async function ensureSessionCsrfToken(): Promise<string | null> {
   }
 
   if (!response.ok) {
-    throw new Error('Session bootstrap failed');
+    throw new Error("Session bootstrap failed");
   }
 
   const payload = await response.json();

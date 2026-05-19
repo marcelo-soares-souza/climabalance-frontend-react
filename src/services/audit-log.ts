@@ -1,5 +1,5 @@
-import { api } from '@/lib/api-client';
-import type { AuditLogEntry } from '@/types/audit';
+import { api } from "@/lib/api-client";
+import type { AuditLogEntry } from "@/types/audit";
 
 type RawAuditEntry = {
   id?: string;
@@ -21,12 +21,12 @@ type RawAuditEntry = {
   duration_ms?: number | null;
 };
 
-function asString(value: unknown, fallback = ''): string {
-  return typeof value === 'string' ? value : fallback;
+function asString(value: unknown, fallback = ""): string {
+  return typeof value === "string" ? value : fallback;
 }
 
 function asNullableString(value: unknown): string | null {
-  return typeof value === 'string' ? value : null;
+  return typeof value === "string" ? value : null;
 }
 
 function normalizeEntry(raw: RawAuditEntry): AuditLogEntry {
@@ -44,19 +44,30 @@ function normalizeEntry(raw: RawAuditEntry): AuditLogEntry {
     requestId: asNullableString(raw.request_id),
     success: raw.success !== false,
     errorCode: asNullableString(raw.error_code),
-    httpStatus: typeof raw.http_status === 'number' ? raw.http_status : null,
-    severity: asString(raw.severity, 'info'),
+    httpStatus: typeof raw.http_status === "number" ? raw.http_status : null,
+    severity: asString(raw.severity, "info"),
     category: Array.isArray(raw.category)
-      ? raw.category.filter((item): item is string => typeof item === 'string')
+      ? raw.category.filter((item): item is string => typeof item === "string")
       : [],
-    durationMs: typeof raw.duration_ms === 'number' ? raw.duration_ms : null,
+    durationMs: typeof raw.duration_ms === "number" ? raw.duration_ms : null,
   };
 }
 
 export const auditLogService = {
-  listAuditLog(params?: { actor_user_id?: string; actor_email?: string; action?: string; client_ip?: string; entity_type?: string; entity_id?: string; limit?: number; offset?: number }) {
+  listAuditLog(params?: {
+    actor_user_id?: string;
+    actor_email?: string;
+    action?: string;
+    client_ip?: string;
+    entity_type?: string;
+    entity_id?: string;
+    limit?: number;
+    offset?: number;
+  }) {
     return api
-      .get<RawAuditEntry[]>('/audit-log', { params: params as Record<string, string | number> })
+      .get<
+        RawAuditEntry[]
+      >("/audit-log", { params: params as Record<string, string | number> })
       .then((rows) => rows.map(normalizeEntry));
   },
 };

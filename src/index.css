@@ -1,29 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #0B5F4B;
+  --color-primary: #0b5f4b;
   --color-primary-light: #0d7a61;
   --color-primary-dark: #084a3a;
   --color-primary-50: #ecfdf5;
   --color-primary-100: #d1fae5;
   --color-primary-200: #a7f3d0;
-  --color-primary-500: #0B5F4B;
+  --color-primary-500: #0b5f4b;
   --color-primary-600: #084a3a;
   --color-primary-700: #064e3b;
-  --color-accent: #52B788;
-  --color-earth: #C4A882;
-  --color-background: #F4F7F5;
-  --color-surface: #FFFFFF;
-  --color-sidebar: #0B5F4B;
+  --color-accent: #52b788;
+  --color-earth: #c4a882;
+  --color-background: #f4f7f5;
+  --color-surface: #ffffff;
+  --color-sidebar: #0b5f4b;
   --color-sidebar-hover: #0d7a61;
-  --color-text-primary: #1A1A1A;
-  --color-text-secondary: #6B7280;
-  --color-error: #DC2626;
-  --color-success: #16A34A;
-  --color-warning: #D97706;
-  --color-info: #2563EB;
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --font-serif: Georgia, 'Times New Roman', serif;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b7280;
+  --color-error: #dc2626;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-info: #2563eb;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
   --radius-card: 16px;
   --radius-input: 12px;
   --radius-button: 12px;
@@ -42,7 +42,10 @@ body {
   box-sizing: border-box;
 }
 
-input, select, textarea, button {
+input,
+select,
+textarea,
+button {
   font-family: inherit;
 }
 

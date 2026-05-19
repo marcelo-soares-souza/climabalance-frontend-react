@@ -1,4 +1,4 @@
-import { api } from '@/lib/api-client';
+import { api } from "@/lib/api-client";
 import type {
   FootprintCalculation,
   CalculationResult,
@@ -12,8 +12,8 @@ import type {
   DataQuality,
   CalculationStatus,
   FootprintInputDetail,
-} from '@/types/footprint';
-import { API_BASE } from '@/config/api';
+} from "@/types/footprint";
+import { API_BASE } from "@/config/api";
 
 type ApiBreakdownItem = {
   category: string;
@@ -103,21 +103,28 @@ function normalizeBreakdown(items: ApiBreakdownItem[], totalKgCO2e: number) {
   }));
 }
 
-function normalizeCalculation(raw: ApiCalculationBase, defaults: Partial<CalculationResult> = {}): CalculationResult {
+function normalizeCalculation(
+  raw: ApiCalculationBase,
+  defaults: Partial<CalculationResult> = {},
+): CalculationResult {
   const now = new Date().toISOString();
   const totalKgCO2e = raw.total_kg_co2e ?? defaults.totalKgCO2e ?? 0;
 
   return {
-    id: raw.id ?? raw.calculation_id ?? defaults.id ?? '',
+    id: raw.id ?? raw.calculation_id ?? defaults.id ?? "",
     userId: raw.user_id ?? defaults.userId,
-    profileType: (raw.profile_type ?? defaults.profileType ?? 'individual') as ProfileType,
-    periodStart: raw.period_start ?? defaults.periodStart ?? '',
-    periodEnd: raw.period_end ?? defaults.periodEnd ?? '',
+    profileType: (raw.profile_type ??
+      defaults.profileType ??
+      "individual") as ProfileType,
+    periodStart: raw.period_start ?? defaults.periodStart ?? "",
+    periodEnd: raw.period_end ?? defaults.periodEnd ?? "",
     totalKgCO2e,
     totalTCO2e: raw.total_t_co2e ?? defaults.totalTCO2e ?? totalKgCO2e / 1000,
-    status: (raw.status ?? defaults.status ?? 'draft') as CalculationStatus,
-    dataQuality: (raw.data_quality ?? defaults.dataQuality ?? 'estimated') as DataQuality,
-    factorsVersion: raw.factors_version ?? defaults.factorsVersion ?? '',
+    status: (raw.status ?? defaults.status ?? "draft") as CalculationStatus,
+    dataQuality: (raw.data_quality ??
+      defaults.dataQuality ??
+      "estimated") as DataQuality,
+    factorsVersion: raw.factors_version ?? defaults.factorsVersion ?? "",
     region: raw.region ?? defaults.region,
     breakdown: normalizeBreakdown(raw.breakdown ?? [], totalKgCO2e),
     createdAt: raw.created_at ?? defaults.createdAt ?? now,
@@ -125,7 +132,10 @@ function normalizeCalculation(raw: ApiCalculationBase, defaults: Partial<Calcula
   };
 }
 
-function normalizeInput(raw: ApiGetCalculationResponse['inputs'][number], calculationId: string): FootprintInputDetail {
+function normalizeInput(
+  raw: ApiGetCalculationResponse["inputs"][number],
+  calculationId: string,
+): FootprintInputDetail {
   return {
     id: raw.id,
     calculationId,
@@ -139,11 +149,14 @@ function normalizeInput(raw: ApiGetCalculationResponse['inputs'][number], calcul
   };
 }
 
-function normalizeProjection(raw: ApiCompensationProjection, totalTCO2e: number): CompensationProjection {
+function normalizeProjection(
+  raw: ApiCompensationProjection,
+  totalTCO2e: number,
+): CompensationProjection {
   return {
-    projectionId: raw.projection_id ?? '',
-    calculationId: raw.calculation_id ?? '',
-    areaId: raw.area_id ?? '',
+    projectionId: raw.projection_id ?? "",
+    calculationId: raw.calculation_id ?? "",
+    areaId: raw.area_id ?? "",
     biome: raw.biome ?? null,
     totalTCO2e,
     treesNeeded: raw.trees_needed ?? 0,
@@ -154,26 +167,32 @@ function normalizeProjection(raw: ApiCompensationProjection, totalTCO2e: number)
 
 export const footprintService = {
   createCalculation(data: CreateCalculationRequest) {
-    return api.post<ApiCreateCalculationResponse>('/footprint/calculations', data).then((raw) =>
-      normalizeCalculation(raw, {
-        id: raw.calculation_id,
-        profileType: data.profile_type,
-        periodStart: data.period_start,
-        periodEnd: data.period_end,
-        dataQuality: data.data_quality ?? 'estimated',
-        status: 'draft',
-      })
-    );
+    return api
+      .post<ApiCreateCalculationResponse>("/footprint/calculations", data)
+      .then((raw) =>
+        normalizeCalculation(raw, {
+          id: raw.calculation_id,
+          profileType: data.profile_type,
+          periodStart: data.period_start,
+          periodEnd: data.period_end,
+          dataQuality: data.data_quality ?? "estimated",
+          status: "draft",
+        }),
+      );
   },
 
   getCalculation(id: string) {
-    return api.get<ApiGetCalculationResponse>(`/footprint/calculations/${id}`).then((raw) => {
-      const calculation = normalizeCalculation(raw);
-      return {
-        ...calculation,
-        inputs: raw.inputs.map((input) => normalizeInput(input, calculation.id)),
-      } as FootprintCalculation;
-    });
+    return api
+      .get<ApiGetCalculationResponse>(`/footprint/calculations/${id}`)
+      .then((raw) => {
+        const calculation = normalizeCalculation(raw);
+        return {
+          ...calculation,
+          inputs: raw.inputs.map((input) =>
+            normalizeInput(input, calculation.id),
+          ),
+        } as FootprintCalculation;
+      });
   },
 
   updateCalculation(id: string, data: UpdateCalculationRequest) {
@@ -188,23 +207,40 @@ export const footprintService = {
     return api.delete<void>(`/footprint/calculations/${id}`);
   },
 
-  listCalculations(params?: { status?: string; profile_type?: string; user_email?: string; limit?: number; offset?: number }) {
+  listCalculations(params?: {
+    status?: string;
+    profile_type?: string;
+    user_email?: string;
+    limit?: number;
+    offset?: number;
+  }) {
     return api
-      .get<ApiCalculationBase[]>('/footprint/calculations', { params: params as Record<string, string | number> })
+      .get<
+        ApiCalculationBase[]
+      >("/footprint/calculations", { params: params as Record<string, string | number> })
       .then((rows) => rows.map((row) => normalizeCalculation(row)));
   },
 
-  getEmissionFactors(params?: { category?: string; unit?: string; version?: string; region?: string }): Promise<EmissionFactor[]> {
-    return api.get<ApiEmissionFactor[]>('/footprint/emission-factors', { params: params as Record<string, string> }).then((rows) =>
-      rows.map((row) => ({
-        id: row.id,
-        category: row.activity_type,
-        factor: row.factor_value,
-        unit: row.factor_unit,
-        version: row.version,
-        region: row.region,
-      }))
-    );
+  getEmissionFactors(params?: {
+    category?: string;
+    unit?: string;
+    version?: string;
+    region?: string;
+  }): Promise<EmissionFactor[]> {
+    return api
+      .get<
+        ApiEmissionFactor[]
+      >("/footprint/emission-factors", { params: params as Record<string, string> })
+      .then((rows) =>
+        rows.map((row) => ({
+          id: row.id,
+          category: row.activity_type,
+          factor: row.factor_value,
+          unit: row.factor_unit,
+          version: row.version,
+          region: row.region,
+        })),
+      );
   },
 
   async calculateGuest(
@@ -212,11 +248,11 @@ export const footprintService = {
     periodStart: string,
     periodEnd: string,
     inputs: FootprintInput[],
-    dataQuality?: DataQuality
+    dataQuality?: DataQuality,
   ) {
     const res = await fetch(`${API_BASE}/footprint/calculate-guest`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         profile_type: profileType,
         period_start: periodStart,
@@ -225,27 +261,33 @@ export const footprintService = {
         inputs,
       }),
     });
-    if (!res.ok) throw new Error('Calculation failed');
+    if (!res.ok) throw new Error("Calculation failed");
     const json = await res.json();
     const raw = (json.data || json) as ApiGuestCalculationResponse;
     return normalizeCalculation(
       {
         ...raw,
-        status: 'finalized',
+        status: "finalized",
       },
       {
-        id: 'guest',
+        id: "guest",
         profileType,
         periodStart,
         periodEnd,
-        status: 'finalized',
-        dataQuality: dataQuality ?? raw.data_quality ?? 'estimated',
-      }
+        status: "finalized",
+        dataQuality: dataQuality ?? raw.data_quality ?? "estimated",
+      },
     );
   },
 
-  async getCompensationProjection(calcId: string, data: { area_id: string; horizon_years?: number }) {
-    const raw = await api.post<ApiCompensationProjection>(`/footprint/calculations/${calcId}/projection`, data);
+  async getCompensationProjection(
+    calcId: string,
+    data: { area_id: string; horizon_years?: number },
+  ) {
+    const raw = await api.post<ApiCompensationProjection>(
+      `/footprint/calculations/${calcId}/projection`,
+      data,
+    );
     const calculation = await this.getCalculation(calcId);
     return normalizeProjection(raw, calculation.totalTCO2e);
   },

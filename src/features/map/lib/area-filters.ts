@@ -1,5 +1,5 @@
-import type { Area } from '@/types/area';
-import type { TFunction } from 'i18next';
+import type { Area } from "@/types/area";
+import type { TFunction } from "i18next";
 
 export interface AreaFilterValues {
   search?: string;
@@ -11,10 +11,13 @@ export interface AreaFilterValues {
 }
 
 function normalizeFilterValue(value?: string): string {
-  return value?.trim().toLowerCase() ?? '';
+  return value?.trim().toLowerCase() ?? "";
 }
 
-export function filterAreas(areas: Area[] | undefined, filters: AreaFilterValues): Area[] {
+export function filterAreas(
+  areas: Area[] | undefined,
+  filters: AreaFilterValues,
+): Area[] {
   if (!areas) return [];
 
   const normalizedSearch = normalizeFilterValue(filters.search);
@@ -23,13 +26,14 @@ export function filterAreas(areas: Area[] | undefined, filters: AreaFilterValues
 
   return areas.filter((area) => {
     const name = area.name.toLowerCase();
-    const country = normalizeFilterValue(area.countryCode ?? '');
-    const biome = normalizeFilterValue(area.biome ?? '');
+    const country = normalizeFilterValue(area.countryCode ?? "");
+    const biome = normalizeFilterValue(area.biome ?? "");
 
-    const matchesSearch = !normalizedSearch
-      || name.includes(normalizedSearch)
-      || country.includes(normalizedSearch)
-      || biome.includes(normalizedSearch);
+    const matchesSearch =
+      !normalizedSearch ||
+      name.includes(normalizedSearch) ||
+      country.includes(normalizedSearch) ||
+      biome.includes(normalizedSearch);
     const matchesCountry = !normalizedCountry || country === normalizedCountry;
     const matchesBiome = !normalizedBiome || biome === normalizedBiome;
 
@@ -42,16 +46,18 @@ export function getAreaStatusOptions(
   options?: { includeAll?: boolean; includeRejected?: boolean },
 ) {
   const entries = [
-    { value: 'draft', label: t('common.status.draft') },
-    { value: 'pending_audit', label: t('common.status.pending_audit') },
-    { value: 'approved', label: t('common.status.approved') },
-    { value: 'active', label: t('common.status.active') },
-    ...(options?.includeRejected ? [{ value: 'rejected', label: t('common.status.rejected') }] : []),
-    { value: 'suspended', label: t('common.status.suspended') },
+    { value: "draft", label: t("common.status.draft") },
+    { value: "pending_audit", label: t("common.status.pending_audit") },
+    { value: "approved", label: t("common.status.approved") },
+    { value: "active", label: t("common.status.active") },
+    ...(options?.includeRejected
+      ? [{ value: "rejected", label: t("common.status.rejected") }]
+      : []),
+    { value: "suspended", label: t("common.status.suspended") },
   ];
 
   if (options?.includeAll) {
-    return [{ value: '', label: t('common.allStatuses') }, ...entries];
+    return [{ value: "", label: t("common.allStatuses") }, ...entries];
   }
 
   return entries;

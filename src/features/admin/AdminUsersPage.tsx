@@ -1,52 +1,86 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import { SEO } from '@/components/SEO';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { usersService } from '@/services/users';
-import { Card, CardContent } from '@/components/ui/Card';
-import { Select } from '@/components/ui/Select';
-import { StatusBadge } from '@/components/StatusBadge';
-import { SkeletonTable } from '@/components/ui/Skeleton';
-import { EmptyState } from '@/components/EmptyState';
-import { ConfirmDialog } from '@/components/ConfirmDialog';
-import { formatDate, formatDateTime } from '@/lib/format';
-import { getPrimaryAccountType, getAdditionalRoleLabels } from '@/lib/user-display';
-import { Users, Edit, Eye, Trash2, Search, ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
-import { getUserStatusOptions } from '@/lib/options';
-import { getUserProfilePath } from '@/lib/public-refs';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { SEO } from "@/components/SEO";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { usersService } from "@/services/users";
+import { Card, CardContent } from "@/components/ui/Card";
+import { Select } from "@/components/ui/Select";
+import { StatusBadge } from "@/components/StatusBadge";
+import { SkeletonTable } from "@/components/ui/Skeleton";
+import { EmptyState } from "@/components/EmptyState";
+import { ConfirmDialog } from "@/components/ConfirmDialog";
+import { formatDate, formatDateTime } from "@/lib/format";
+import {
+  getPrimaryAccountType,
+  getAdditionalRoleLabels,
+} from "@/lib/user-display";
+import {
+  Users,
+  Edit,
+  Eye,
+  Trash2,
+  Search,
+  ArrowUpDown,
+  ArrowUp,
+  ArrowDown,
+} from "lucide-react";
+import { Button } from "@/components/ui/Button";
+import { getUserStatusOptions } from "@/lib/options";
+import { getUserProfilePath } from "@/lib/public-refs";
 
 type SortConfig = {
   column: string;
-  order: 'asc' | 'desc';
+  order: "asc" | "desc";
 };
 
 function SortIcon({ sort, column }: { sort: SortConfig; column: string }) {
-  if (sort.column !== column) return <ArrowUpDown className="h-3 w-3 text-text-secondary" />;
-  return sort.order === 'asc' ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />;
+  if (sort.column !== column)
+    return <ArrowUpDown className="h-3 w-3 text-text-secondary" />;
+  return sort.order === "asc" ? (
+    <ArrowUp className="h-3 w-3" />
+  ) : (
+    <ArrowDown className="h-3 w-3" />
+  );
 }
 
 export function AdminUsersPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const [search, setSearch] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
-  const [sort, setSort] = useState<SortConfig>({ column: 'updated_at', order: 'desc' });
+  const [search, setSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState("");
+  const [sort, setSort] = useState<SortConfig>({
+    column: "updated_at",
+    order: "desc",
+  });
   const statusOptions = getUserStatusOptions(t, { includeAll: true });
 
   const queryClient = useQueryClient();
   const [deleteTarget, setDeleteTarget] = useState<string | null>(null);
 
   const { data: users, isLoading } = useQuery({
-    queryKey: ['admin-users', { search, status: statusFilter, sort_by: sort.column, sort_order: sort.order }],
-    queryFn: () => usersService.listUsers({ search: search || undefined, status: statusFilter || undefined, sort_by: sort.column, sort_order: sort.order }),
+    queryKey: [
+      "admin-users",
+      {
+        search,
+        status: statusFilter,
+        sort_by: sort.column,
+        sort_order: sort.order,
+      },
+    ],
+    queryFn: () =>
+      usersService.listUsers({
+        search: search || undefined,
+        status: statusFilter || undefined,
+        sort_by: sort.column,
+        sort_order: sort.order,
+      }),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (userId: string) => usersService.deleteUser(userId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['admin-users'] });
+      queryClient.invalidateQueries({ queryKey: ["admin-users"] });
       setDeleteTarget(null);
     },
   });
@@ -54,7 +88,12 @@ export function AdminUsersPage() {
   const handleSort = (column: string) => {
     setSort((prev) => ({
       column,
-      order: prev.column === column ? (prev.order === 'asc' ? 'desc' : 'asc') : 'desc',
+      order:
+        prev.column === column
+          ? prev.order === "asc"
+            ? "desc"
+            : "asc"
+          : "desc",
     }));
   };
 
@@ -62,86 +101,178 @@ export function AdminUsersPage() {
     <>
       <SEO title="Administrar Usuários" />
       <div className="space-y-6">
-      <h1 className="text-2xl font-bold">{t('admin.users.title')}</h1>
-      <div className="flex gap-3 flex-wrap">
-        <div className="relative flex-1 min-w-[200px]">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary" />
-          <input
-            className="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-[var(--radius-input)] bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
-            placeholder={t('admin.users.searchPlaceholder')}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+        <h1 className="text-2xl font-bold">{t("admin.users.title")}</h1>
+        <div className="flex gap-3 flex-wrap">
+          <div className="relative flex-1 min-w-[200px]">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-text-secondary" />
+            <input
+              className="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-[var(--radius-input)] bg-surface text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              placeholder={t("admin.users.searchPlaceholder")}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+          <Select
+            options={statusOptions}
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+            className="w-40"
           />
         </div>
-        <Select options={statusOptions}
-          value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-40" />
-      </div>
 
-      <Card>
-        <CardContent className="p-0 overflow-x-auto">
-          {isLoading ? <div className="p-4"><SkeletonTable /></div> : users && users.length > 0 ? (
-            <table className="w-full text-sm">
-              <thead><tr className="border-b border-gray-200 bg-gray-50">
-                <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('email')}>
-                  <div className="flex items-center gap-1">{t('admin.users.email')} <SortIcon sort={sort} column="email" /></div>
-                </th>
-                <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('status')}>
-                  <div className="flex items-center gap-1">{t('admin.users.status')} <SortIcon sort={sort} column="status" /></div>
-                </th>
-                <th className="text-left px-4 py-3 font-medium">{t('admin.users.roles')}</th>
-                <th className="text-left px-4 py-3 font-medium">{t('admin.users.emailConfirmed')}</th>
-                <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('created_at')}>
-                  <div className="flex items-center gap-1">{t('admin.users.createdAt')} <SortIcon sort={sort} column="created_at" /></div>
-                </th>
-                <th className="text-left px-4 py-3 font-medium cursor-pointer select-none" onClick={() => handleSort('last_login_at')}>
-                  <div className="flex items-center gap-1">{t('admin.users.lastLogin')} <SortIcon sort={sort} column="last_login_at" /></div>
-                </th>
-                <th className="px-4 py-3"></th>
-              </tr></thead>
-              <tbody>
-                {users.map((user) => (
-                  <tr key={user.id} className="border-b border-gray-50 hover:bg-gray-50">
-                    <td className="px-4 py-3">{user.email}</td>
-                    <td className="px-4 py-3"><StatusBadge status={user.status} /></td>
-                    <td className="px-4 py-3">
-                      {(() => {
-                        const primaryRole = getPrimaryAccountType(user.roles, t);
-                        const additionalRoles = getAdditionalRoleLabels(user.roles, t);
-                        if (!user.roles?.length) return '-';
-                        return `${primaryRole}${additionalRoles.length > 0 ? ` (${additionalRoles.join(', ')})` : ''}`;
-                      })()}
-                    </td>
-                    <td className="px-4 py-3">
-                      <span className="text-text-secondary">{user.emailConfirmedAt ? formatDateTime(user.emailConfirmedAt) : '—'}</span>
-                    </td>
-                    <td className="px-4 py-3 text-text-secondary">{user.createdAt ? formatDate(user.createdAt) : '-'}</td>
-                    <td className="px-4 py-3 text-text-secondary">{user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '-'}</td>
-                    <td className="px-4 py-3"><div className="flex items-center gap-1">
-                      <Button variant="ghost" size="sm" onClick={() => navigate(getUserProfilePath(user))}><Eye className="h-3 w-3" /></Button>
-                      <Button variant="ghost" size="sm" onClick={() => navigate(`/admin/users/edit/${user.slug || user.id}`)}><Edit className="h-3 w-3" /></Button>
-                      {!user.roles.includes('administrator') && (
-                        <Button variant="ghost" size="sm" onClick={() => setDeleteTarget(user.id)}><Trash2 className="h-3 w-3 text-error" /></Button>
-                      )}
-                    </div></td>
+        <Card>
+          <CardContent className="p-0 overflow-x-auto">
+            {isLoading ? (
+              <div className="p-4">
+                <SkeletonTable />
+              </div>
+            ) : users && users.length > 0 ? (
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-gray-200 bg-gray-50">
+                    <th
+                      className="text-left px-4 py-3 font-medium cursor-pointer select-none"
+                      onClick={() => handleSort("email")}
+                    >
+                      <div className="flex items-center gap-1">
+                        {t("admin.users.email")}{" "}
+                        <SortIcon sort={sort} column="email" />
+                      </div>
+                    </th>
+                    <th
+                      className="text-left px-4 py-3 font-medium cursor-pointer select-none"
+                      onClick={() => handleSort("status")}
+                    >
+                      <div className="flex items-center gap-1">
+                        {t("admin.users.status")}{" "}
+                        <SortIcon sort={sort} column="status" />
+                      </div>
+                    </th>
+                    <th className="text-left px-4 py-3 font-medium">
+                      {t("admin.users.roles")}
+                    </th>
+                    <th className="text-left px-4 py-3 font-medium">
+                      {t("admin.users.emailConfirmed")}
+                    </th>
+                    <th
+                      className="text-left px-4 py-3 font-medium cursor-pointer select-none"
+                      onClick={() => handleSort("created_at")}
+                    >
+                      <div className="flex items-center gap-1">
+                        {t("admin.users.createdAt")}{" "}
+                        <SortIcon sort={sort} column="created_at" />
+                      </div>
+                    </th>
+                    <th
+                      className="text-left px-4 py-3 font-medium cursor-pointer select-none"
+                      onClick={() => handleSort("last_login_at")}
+                    >
+                      <div className="flex items-center gap-1">
+                        {t("admin.users.lastLogin")}{" "}
+                        <SortIcon sort={sort} column="last_login_at" />
+                      </div>
+                    </th>
+                    <th className="px-4 py-3"></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          ) : <div className="p-8"><EmptyState icon={<Users className="h-12 w-12" />} title={t('admin.users.empty')} /></div>}
-        </CardContent>
-      </Card>
+                </thead>
+                <tbody>
+                  {users.map((user) => (
+                    <tr
+                      key={user.id}
+                      className="border-b border-gray-50 hover:bg-gray-50"
+                    >
+                      <td className="px-4 py-3">{user.email}</td>
+                      <td className="px-4 py-3">
+                        <StatusBadge status={user.status} />
+                      </td>
+                      <td className="px-4 py-3">
+                        {(() => {
+                          const primaryRole = getPrimaryAccountType(
+                            user.roles,
+                            t,
+                          );
+                          const additionalRoles = getAdditionalRoleLabels(
+                            user.roles,
+                            t,
+                          );
+                          if (!user.roles?.length) return "-";
+                          return `${primaryRole}${additionalRoles.length > 0 ? ` (${additionalRoles.join(", ")})` : ""}`;
+                        })()}
+                      </td>
+                      <td className="px-4 py-3">
+                        <span className="text-text-secondary">
+                          {user.emailConfirmedAt
+                            ? formatDateTime(user.emailConfirmedAt)
+                            : "—"}
+                        </span>
+                      </td>
+                      <td className="px-4 py-3 text-text-secondary">
+                        {user.createdAt ? formatDate(user.createdAt) : "-"}
+                      </td>
+                      <td className="px-4 py-3 text-text-secondary">
+                        {user.lastLoginAt
+                          ? formatDateTime(user.lastLoginAt)
+                          : "-"}
+                      </td>
+                      <td className="px-4 py-3">
+                        <div className="flex items-center gap-1">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => navigate(getUserProfilePath(user))}
+                          >
+                            <Eye className="h-3 w-3" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() =>
+                              navigate(
+                                `/admin/users/edit/${user.slug || user.id}`,
+                              )
+                            }
+                          >
+                            <Edit className="h-3 w-3" />
+                          </Button>
+                          {!user.roles.includes("administrator") && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => setDeleteTarget(user.id)}
+                            >
+                              <Trash2 className="h-3 w-3 text-error" />
+                            </Button>
+                          )}
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className="p-8">
+                <EmptyState
+                  icon={<Users className="h-12 w-12" />}
+                  title={t("admin.users.empty")}
+                />
+              </div>
+            )}
+          </CardContent>
+        </Card>
 
-      <ConfirmDialog
-        open={deleteTarget !== null}
-        onClose={() => setDeleteTarget(null)}
-        onConfirm={() => { if (deleteTarget) deleteMutation.mutate(deleteTarget); }}
-        title={t('admin.users.deleteTitle')}
-        message={t('admin.users.deleteMessage')}
-        confirmLabel={t('common.delete')}
-        danger
-        loading={deleteMutation.isPending}
-      />
-    </div>
+        <ConfirmDialog
+          open={deleteTarget !== null}
+          onClose={() => setDeleteTarget(null)}
+          onConfirm={() => {
+            if (deleteTarget) deleteMutation.mutate(deleteTarget);
+          }}
+          title={t("admin.users.deleteTitle")}
+          message={t("admin.users.deleteMessage")}
+          confirmLabel={t("common.delete")}
+          danger
+          loading={deleteMutation.isPending}
+        />
+      </div>
     </>
   );
 }

@@ -1,5 +1,5 @@
-export type CompensationMode = 'tco2e' | 'tree_purchase';
-export type CompensationStatus = 'pending' | 'paid' | 'canceled' | 'refunded';
+export type CompensationMode = "tco2e" | "tree_purchase";
+export type CompensationStatus = "pending" | "paid" | "canceled" | "refunded";
 
 export interface CompensationQuote {
   pricePerTree: number;

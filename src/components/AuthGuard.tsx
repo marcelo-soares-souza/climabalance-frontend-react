@@ -1,6 +1,6 @@
-import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/hooks/use-auth';
-import { PageSkeleton } from '@/components/LoadingSkeleton';
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "@/hooks/use-auth";
+import { PageSkeleton } from "@/components/LoadingSkeleton";
 
 interface AuthGuardProps {
   children: React.ReactNode;

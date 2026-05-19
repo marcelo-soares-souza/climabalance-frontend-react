@@ -1,11 +1,11 @@
-import { create } from 'zustand';
-import type { AuthSession } from '@/types/auth';
-import { tokenStorage } from '@/lib/token-storage';
-import { csrfToken } from '@/lib/csrf-token';
-import { decodeToken, isTokenExpired } from '@/lib/jwt';
-import { queryClient } from '@/config/query-client';
-import { authService } from '@/services/auth';
-import { usersService } from '@/services/users';
+import { create } from "zustand";
+import type { AuthSession } from "@/types/auth";
+import { tokenStorage } from "@/lib/token-storage";
+import { csrfToken } from "@/lib/csrf-token";
+import { decodeToken, isTokenExpired } from "@/lib/jwt";
+import { queryClient } from "@/config/query-client";
+import { authService } from "@/services/auth";
+import { usersService } from "@/services/users";
 
 let restoreSessionPromise: Promise<void> | null = null;
 
@@ -21,7 +21,7 @@ interface AuthState {
   hasRole: (role: string) => boolean;
 }
 
-function buildSession(accessToken: string, email = ''): AuthSession | null {
+function buildSession(accessToken: string, email = ""): AuthSession | null {
   const payload = decodeToken(accessToken);
   if (!payload) return null;
 
@@ -60,109 +60,107 @@ function clearAuthState() {
   };
 }
 
-export const useAuthStore = create<AuthState>()(
-  (set, get) => ({
-    session: null,
-    isLoading: false,
-    hasRestoredSession: false,
-    isAuthenticated: false,
-    isAdmin: false,
+export const useAuthStore = create<AuthState>()((set, get) => ({
+  session: null,
+  isLoading: false,
+  hasRestoredSession: false,
+  isAuthenticated: false,
+  isAdmin: false,
 
-    login: async (email: string, password: string) => {
+  login: async (email: string, password: string) => {
+    set({ isLoading: true });
+    try {
+      const data = await authService.login(email, password);
+
+      tokenStorage.setAccessToken(data.accessToken);
+      csrfToken.set(data.csrfToken);
+
+      const baseSession = buildSession(data.accessToken, email);
+      const session = baseSession
+        ? await hydrateSessionSlug(baseSession)
+        : null;
+      if (!session) throw new Error("Invalid token");
+
+      const isAdmin = session.roles.includes("administrator");
+
+      set({
+        session,
+        isAuthenticated: true,
+        isAdmin,
+        isLoading: false,
+        hasRestoredSession: true,
+      });
+    } catch (err) {
+      set({ isLoading: false });
+      throw err;
+    }
+  },
+
+  logout: () => {
+    authService.revokeToken().catch(() => {});
+    set(clearAuthState());
+  },
+
+  restoreSession: async () => {
+    if (restoreSessionPromise) {
+      return restoreSessionPromise;
+    }
+
+    restoreSessionPromise = (async () => {
       set({ isLoading: true });
-      try {
-        const data = await authService.login(email, password);
+      const accessToken = tokenStorage.getAccessToken();
 
-        tokenStorage.setAccessToken(data.accessToken);
-        csrfToken.set(data.csrfToken);
-
-        const baseSession = buildSession(data.accessToken, email);
+      if (accessToken && !isTokenExpired(accessToken)) {
+        const baseSession = buildSession(accessToken);
         const session = baseSession
           ? await hydrateSessionSlug(baseSession)
           : null;
-        if (!session) throw new Error('Invalid token');
+        if (session) {
+          set({
+            session,
+            isAuthenticated: true,
+            isAdmin: session.roles.includes("administrator"),
+            isLoading: false,
+            hasRestoredSession: true,
+          });
+          return;
+        }
+      }
 
-        const isAdmin = session.roles.includes('administrator');
+      try {
+        const data = await authService.refreshToken();
+        tokenStorage.setAccessToken(data.accessToken);
+        csrfToken.set(data.csrfToken);
+        const baseSession = buildSession(data.accessToken);
+        const session = baseSession
+          ? await hydrateSessionSlug(baseSession)
+          : null;
+        if (!session) {
+          set(clearAuthState());
+          return;
+        }
 
         set({
           session,
           isAuthenticated: true,
-          isAdmin,
+          isAdmin: session.roles.includes("administrator"),
           isLoading: false,
           hasRestoredSession: true,
         });
-      } catch (err) {
-        set({ isLoading: false });
-        throw err;
+      } catch {
+        set(clearAuthState());
       }
-    },
+    })();
 
-    logout: () => {
-      authService.revokeToken().catch(() => {});
-      set(clearAuthState());
-    },
+    try {
+      await restoreSessionPromise;
+    } finally {
+      restoreSessionPromise = null;
+    }
+  },
 
-    restoreSession: async () => {
-      if (restoreSessionPromise) {
-        return restoreSessionPromise;
-      }
-
-      restoreSessionPromise = (async () => {
-        set({ isLoading: true });
-        const accessToken = tokenStorage.getAccessToken();
-
-        if (accessToken && !isTokenExpired(accessToken)) {
-          const baseSession = buildSession(accessToken);
-          const session = baseSession
-            ? await hydrateSessionSlug(baseSession)
-            : null;
-          if (session) {
-            set({
-              session,
-              isAuthenticated: true,
-              isAdmin: session.roles.includes('administrator'),
-              isLoading: false,
-              hasRestoredSession: true,
-            });
-            return;
-          }
-        }
-
-        try {
-          const data = await authService.refreshToken();
-          tokenStorage.setAccessToken(data.accessToken);
-          csrfToken.set(data.csrfToken);
-          const baseSession = buildSession(data.accessToken);
-          const session = baseSession
-            ? await hydrateSessionSlug(baseSession)
-            : null;
-          if (!session) {
-            set(clearAuthState());
-            return;
-          }
-
-          set({
-            session,
-            isAuthenticated: true,
-            isAdmin: session.roles.includes('administrator'),
-            isLoading: false,
-            hasRestoredSession: true,
-          });
-        } catch {
-          set(clearAuthState());
-        }
-      })();
-
-      try {
-        await restoreSessionPromise;
-      } finally {
-        restoreSessionPromise = null;
-      }
-    },
-
-    hasRole: (role: string) => {
-      const { session } = get();
-      return session?.roles.includes(role) ?? false;
-    },
-  }),
-);
+  hasRole: (role: string) => {
+    const { session } = get();
+    return session?.roles.includes(role) ?? false;
+  },
+}));

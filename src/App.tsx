@@ -1,11 +1,11 @@
-import { RouterProvider } from 'react-router-dom';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { useEffect, Suspense } from 'react';
-import { router } from './router';
-import { queryClient } from './config/query-client';
-import { useAuthStore } from './stores/auth-store';
-import { PageSkeleton } from './components/LoadingSkeleton';
-import './config/i18n';
+import { RouterProvider } from "react-router-dom";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { useEffect, Suspense } from "react";
+import { router } from "./router";
+import { queryClient } from "./config/query-client";
+import { useAuthStore } from "./stores/auth-store";
+import { PageSkeleton } from "./components/LoadingSkeleton";
+import "./config/i18n";
 
 export default function App() {
   const restoreSession = useAuthStore((s) => s.restoreSession);
@@ -15,8 +15,8 @@ export default function App() {
     restoreSession();
 
     const handleLogout = () => logout();
-    window.addEventListener('auth:logout', handleLogout);
-    return () => window.removeEventListener('auth:logout', handleLogout);
+    window.addEventListener("auth:logout", handleLogout);
+    return () => window.removeEventListener("auth:logout", handleLogout);
   }, [restoreSession, logout]);
 
   return (

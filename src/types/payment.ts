@@ -1,4 +1,9 @@
-export type PaymentStatus = 'pending' | 'paid' | 'failed' | 'canceled' | 'refunded';
+export type PaymentStatus =
+  | "pending"
+  | "paid"
+  | "failed"
+  | "canceled"
+  | "refunded";
 
 export interface SimulatePaymentRequest {
   compensation_id: string;
@@ -12,7 +17,7 @@ export interface SimulatePaymentRequest {
 
 export interface CreatePaymentIntentRequest {
   compensation_id: string;
-  payment_method: 'card' | 'pix';
+  payment_method: "card" | "pix";
 }
 
 export interface CreatePaymentIntentResponse {
@@ -22,7 +27,7 @@ export interface CreatePaymentIntentResponse {
   qrCode?: string;
   copyPasteCode?: string;
   paymentIntentId: string;
-  paymentMethod: 'card' | 'pix';
+  paymentMethod: "card" | "pix";
 }
 
 export interface PixPaymentDetails {
@@ -31,7 +36,10 @@ export interface PixPaymentDetails {
   copyPasteCode: string;
 }
 
-export type OnboardingStatus = 'complete' | 'incomplete' | 'pending_verification';
+export type OnboardingStatus =
+  | "complete"
+  | "incomplete"
+  | "pending_verification";
 
 export interface StripeConnectStatus {
   connected: boolean;

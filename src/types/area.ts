@@ -1,5 +1,18 @@
-export type AreaStatus = 'draft' | 'pending' | 'pending_audit' | 'approved' | 'active' | 'rejected' | 'suspended';
-export type BiomeType = 'amazonia' | 'cerrado' | 'mata_atlantica' | 'caatinga' | 'pampa' | 'pantanal';
+export type AreaStatus =
+  | "draft"
+  | "pending"
+  | "pending_audit"
+  | "approved"
+  | "active"
+  | "rejected"
+  | "suspended";
+export type BiomeType =
+  | "amazonia"
+  | "cerrado"
+  | "mata_atlantica"
+  | "caatinga"
+  | "pampa"
+  | "pantanal";
 
 export interface Area {
   id: string;
@@ -68,7 +81,7 @@ export interface AreaCriterion {
 export interface AreaMedia {
   id: string;
   areaId: string;
-  mediaType: 'photo' | 'video';
+  mediaType: "photo" | "video";
   description: string | null;
   mimeType: string;
   fileName: string;

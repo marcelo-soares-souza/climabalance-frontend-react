@@ -1,5 +1,5 @@
-import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
-import { cn } from '@/lib/cn';
+import { forwardRef, type InputHTMLAttributes, type ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -10,14 +10,29 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, label, labelAdornment, error, suffix, suffixIcon, id, ...props }, ref) => {
+  (
+    {
+      className,
+      label,
+      labelAdornment,
+      error,
+      suffix,
+      suffixIcon,
+      id,
+      ...props
+    },
+    ref,
+  ) => {
     const isRequired = props.required;
     const hasRightContent = !!(suffix || suffixIcon);
     return (
       <div className="w-full">
         {label && (
           <div className="mb-1.5 flex items-center gap-2">
-            <label htmlFor={id} className="block text-base font-medium text-text-secondary">
+            <label
+              htmlFor={id}
+              className="block text-base font-medium text-text-secondary"
+            >
               {label}
               {isRequired && <span className="text-error ml-0.5">*</span>}
             </label>
@@ -29,11 +44,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             ref={ref}
             id={id}
             className={cn(
-              'w-full px-4 py-3 border rounded-[var(--radius-input)] bg-surface text-text-primary',
-              'focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary',
-              'placeholder:text-text-secondary/60',
-              error ? 'border-error' : 'border-gray-200',
-              hasRightContent && 'pr-14',
+              "w-full px-4 py-3 border rounded-[var(--radius-input)] bg-surface text-text-primary",
+              "focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary",
+              "placeholder:text-text-secondary/60",
+              error ? "border-error" : "border-gray-200",
+              hasRightContent && "pr-14",
               className,
             )}
             {...props}
@@ -54,4 +69,4 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     );
   },
 );
-Input.displayName = 'Input';
+Input.displayName = "Input";

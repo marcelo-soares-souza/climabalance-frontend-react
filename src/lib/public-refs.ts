@@ -4,13 +4,13 @@ type RefEntity = {
 };
 
 function sanitizeRef(value?: string | null): string | null {
-  if (typeof value !== 'string') return null;
+  if (typeof value !== "string") return null;
   const trimmed = value.trim();
   return trimmed.length > 0 ? trimmed : null;
 }
 
 export function getPublicRef(entity?: RefEntity | null): string {
-  return sanitizeRef(entity?.slug) ?? sanitizeRef(entity?.id) ?? '';
+  return sanitizeRef(entity?.slug) ?? sanitizeRef(entity?.id) ?? "";
 }
 
 export function getAreaPublicRef(area?: RefEntity | null): string {
@@ -27,38 +27,42 @@ export function matchesPublicRef(
 ): boolean {
   const normalizedRef = sanitizeRef(ref);
   if (!normalizedRef) return false;
-  return normalizedRef === sanitizeRef(entity?.slug)
-    || normalizedRef === sanitizeRef(entity?.id);
+  return (
+    normalizedRef === sanitizeRef(entity?.slug) ||
+    normalizedRef === sanitizeRef(entity?.id)
+  );
 }
 
 export function getUserProfilePath(user?: RefEntity | null): string {
   const ref = getUserPublicRef(user);
-  return ref ? `/users/${ref}/profile` : '/profile';
+  return ref ? `/users/${ref}/profile` : "/profile";
 }
 
 export function getUserProfileEditPath(user?: RefEntity | null): string {
   const ref = getUserPublicRef(user);
-  return ref ? `/users/${ref}/profile/edit` : '/profile/edit';
+  return ref ? `/users/${ref}/profile/edit` : "/profile/edit";
 }
 
 export function getUserCertificatesPath(user?: RefEntity | null): string {
   const ref = getUserPublicRef(user);
-  return ref ? `/users/${ref}/certificates` : '/profile/certificates';
+  return ref ? `/users/${ref}/certificates` : "/profile/certificates";
 }
 
 export function getUserSessionsPath(user?: RefEntity | null): string {
   const ref = getUserPublicRef(user);
-  return ref ? `/users/${ref}/sessions` : '/profile/sessions';
+  return ref ? `/users/${ref}/sessions` : "/profile/sessions";
 }
 
 export function getUserImpactPath(user?: RefEntity | null): string {
   const ref = getUserPublicRef(user);
-  return ref ? `/users/${ref}/impact` : '/footprint/history';
+  return ref ? `/users/${ref}/impact` : "/footprint/history";
 }
 
 export function getUserNewCalculationPath(user?: RefEntity | null): string {
   const ref = getUserPublicRef(user);
-  return ref ? `/users/${ref}/impact/calculations/new` : '/footprint/calculator';
+  return ref
+    ? `/users/${ref}/impact/calculations/new`
+    : "/footprint/calculator";
 }
 
 export function getUserCalculationPath(
@@ -83,20 +87,20 @@ export function getUserCalculationEditPath(
 
 export function getAreaDetailPath(area?: RefEntity | null): string {
   const ref = getAreaPublicRef(area);
-  return ref ? `/areas/${ref}` : '/areas';
+  return ref ? `/areas/${ref}` : "/areas";
 }
 
 export function getAreaEditPath(area?: RefEntity | null): string {
   const ref = getAreaPublicRef(area);
-  return ref ? `/areas/edit/${ref}` : '/areas';
+  return ref ? `/areas/edit/${ref}` : "/areas";
 }
 
 export function getAreaPlantTreesPath(area?: RefEntity | null): string {
   const ref = getAreaPublicRef(area);
-  return ref ? `/areas/${ref}/plant-trees` : '/areas';
+  return ref ? `/areas/${ref}/plant-trees` : "/areas";
 }
 
 export function getAreaAuditPath(area?: RefEntity | null): string {
   const ref = getAreaPublicRef(area);
-  return ref ? `/audit/area/${ref}` : '/audit/pending-areas';
+  return ref ? `/audit/area/${ref}` : "/audit/pending-areas";
 }

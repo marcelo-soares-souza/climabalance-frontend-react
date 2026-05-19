@@ -1,7 +1,7 @@
-import { useTranslation } from 'react-i18next';
-import { Card, CardContent } from '@/components/ui/Card';
-import { formatKgCO2e } from '@/lib/format';
-import type { InputCategory } from '@/types/footprint';
+import { useTranslation } from "react-i18next";
+import { Card, CardContent } from "@/components/ui/Card";
+import { formatKgCO2e } from "@/lib/format";
+import type { InputCategory } from "@/types/footprint";
 
 export interface RegisteredInputItem {
   category: InputCategory;
@@ -25,7 +25,7 @@ export function RegisteredInputsCard({ inputs }: Props) {
   return (
     <Card>
       <CardContent>
-        <h3 className="font-medium mb-4">{t('footprint.detail.inputs')}</h3>
+        <h3 className="font-medium mb-4">{t("footprint.detail.inputs")}</h3>
         <div className="space-y-2">
           {inputs.map((input, idx) => (
             <div

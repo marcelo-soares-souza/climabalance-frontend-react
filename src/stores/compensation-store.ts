@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-import type { CompensationMode } from '@/types/compensation';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
+import type { CompensationMode } from "@/types/compensation";
 
 interface CompensationSelection {
   areaId: string | null;
@@ -26,7 +26,7 @@ const initialState: CompensationSelection = {
   treesRequested: null,
   totalTCO2e: null,
   totalAmount: null,
-      currency: 'USD',
+  currency: "USD",
 };
 
 export const useCompensationStore = create<CompensationStore>()(
@@ -36,6 +36,6 @@ export const useCompensationStore = create<CompensationStore>()(
       setSelection: (data) => set((state) => ({ ...state, ...data })),
       clearSelection: () => set(initialState),
     }),
-    { name: 'cb_compensation' },
+    { name: "cb_compensation" },
   ),
 );

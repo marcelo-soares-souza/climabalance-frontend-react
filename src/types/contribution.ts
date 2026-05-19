@@ -1,5 +1,5 @@
-export type ContributionMode = 'tco2e' | 'tree_purchase';
-export type ContributionStatus = 'pending' | 'paid' | 'canceled' | 'refunded';
+export type ContributionMode = "tco2e" | "tree_purchase";
+export type ContributionStatus = "pending" | "paid" | "canceled" | "refunded";
 
 export interface ContributionQuote {
   pricePerTree: number;
