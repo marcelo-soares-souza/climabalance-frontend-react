@@ -1017,6 +1017,7 @@
       "defaultHorizonYears": "Default horizon (years)",
       "treeSpecies": "Tree species that will be used in the planting",
       "externalLink": "External link",
+      "maxPurchasableTrees": "Tree Limit",
       "links": "Links",
       "error": "Error saving area. Please try again."
     },
@@ -1553,6 +1554,8 @@
       "treeSpecies": "Describe the tree species you intend to plant in this area. This helps contextualize the project and provides transparency about planning.",
       "externalLinkAria": "Help about external link",
       "externalLink": "Add a link to an external page with more information about the project, such as website, portfolio, or social media.",
+      "maxPurchasableTreesAria": "Help about tree limit",
+      "maxPurchasableTrees": "Maximum number of trees that can be purchased for this area. Leave empty to use the system default.",
       "media": "Media helps document the area, strengthen credibility, and support audit and transparency.",
       "contributions": "List of recorded contributions for this area, including compensated volume and associated tree count when applicable.",
       "statusDraft": "The area is still being edited and has not been submitted for audit yet.",

@@ -68,6 +68,7 @@ export function AreaFormPage() {
       default_horizon_years: string;
       tree_species: string;
       external_link: string;
+      max_purchasable_trees: string;
     }>
   >({});
   const [error, setError] = useState<string | null>(null);
@@ -103,6 +104,11 @@ export function AreaFormPage() {
         : "20"),
     tree_species: form.tree_species ?? existing?.treeSpecies ?? "",
     external_link: form.external_link ?? existing?.externalLink ?? "",
+    max_purchasable_trees:
+      form.max_purchasable_trees ??
+      (existing?.maxPurchasableTrees != null
+        ? String(existing.maxPurchasableTrees)
+        : ""),
   };
 
   const { data: states = [], isLoading: loadingStates } = useQuery({
@@ -143,6 +149,10 @@ export function AreaFormPage() {
           parseInt(formValues.default_horizon_years, 10) || undefined,
         tree_species: formValues.tree_species || undefined,
         external_link: formValues.external_link || undefined,
+        max_purchasable_trees:
+          formValues.max_purchasable_trees === ""
+            ? null
+            : parseInt(formValues.max_purchasable_trees, 10) || undefined,
       };
       return isEdit
         ? areasService.updateArea(existing?.id ?? areaId!, data)
@@ -177,7 +187,8 @@ export function AreaFormPage() {
       | "price_per_tree"
       | "default_horizon_years"
       | "tree_species"
-      | "external_link",
+      | "external_link"
+      | "max_purchasable_trees",
     value: string,
   ) => setForm((prev) => ({ ...prev, [field]: value }));
 
@@ -353,29 +364,50 @@ export function AreaFormPage() {
                 />
               </div>
               {isEdit && isAdmin && (
-                <Select
-                  id="status"
-                  label={t("area.form.status")}
-                  labelAdornment={
-                    <InfoTooltip
-                      ariaLabel={t("tooltips.area.statusAria")}
-                      content={<p>{t("tooltips.area.statusSummary")}</p>}
-                    />
-                  }
-                  options={[
-                    { value: "draft", label: t("area.status.draft") },
-                    {
-                      value: "pending_audit",
-                      label: t("area.status.pending_audit"),
-                    },
-                    { value: "approved", label: t("area.status.approved") },
-                    { value: "active", label: t("area.status.active") },
-                    { value: "rejected", label: t("area.status.rejected") },
-                    { value: "suspended", label: t("area.status.suspended") },
-                  ]}
-                  value={formValues.status}
-                  onChange={(e) => update("status", e.target.value)}
-                />
+                <>
+                  <Select
+                    id="status"
+                    label={t("area.form.status")}
+                    labelAdornment={
+                      <InfoTooltip
+                        ariaLabel={t("tooltips.area.statusAria")}
+                        content={<p>{t("tooltips.area.statusSummary")}</p>}
+                      />
+                    }
+                    options={[
+                      { value: "draft", label: t("area.status.draft") },
+                      {
+                        value: "pending_audit",
+                        label: t("area.status.pending_audit"),
+                      },
+                      { value: "approved", label: t("area.status.approved") },
+                      { value: "active", label: t("area.status.active") },
+                      { value: "rejected", label: t("area.status.rejected") },
+                      { value: "suspended", label: t("area.status.suspended") },
+                    ]}
+                    value={formValues.status}
+                    onChange={(e) => update("status", e.target.value)}
+                  />
+                  <Input
+                    id="max_purchasable_trees"
+                    type="number"
+                    step="1"
+                    label={t("area.form.maxPurchasableTrees")}
+                    labelAdornment={
+                      <InfoTooltip
+                        ariaLabel={t("tooltips.area.maxPurchasableTreesAria")}
+                        content={
+                          <p>{t("tooltips.area.maxPurchasableTrees")}</p>
+                        }
+                      />
+                    }
+                    value={formValues.max_purchasable_trees}
+                    onChange={(e) =>
+                      update("max_purchasable_trees", e.target.value)
+                    }
+                    placeholder="—"
+                  />
+                </>
               )}
               <Input
                 id="biome"

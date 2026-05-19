@@ -1017,6 +1017,7 @@
       "defaultHorizonYears": "Horizonte predeterminado (años)",
       "treeSpecies": "Especies de árboles que se utilizarán en la plantación",
       "externalLink": "Enlace externo",
+      "maxPurchasableTrees": "Límite de Árboles",
       "links": "Enlaces",
       "error": "Error al guardar el área. Inténtelo de nuevo."
     },
@@ -1553,6 +1554,8 @@
       "treeSpecies": "Describe las especies de árboles que planeas plantar en esta área. Esto ayuda a contextualizar el proyecto y brinda transparencia sobre la planificación.",
       "externalLinkAria": "Ayuda sobre enlace externo",
       "externalLink": "Agrega un enlace a una página externa con más información sobre el proyecto, como sitio web, portafolio o redes sociales.",
+      "maxPurchasableTreesAria": "Ayuda sobre límite de árboles",
+      "maxPurchasableTrees": "Número máximo de árboles que se pueden comprar para esta área. Déjelo vacío para usar el valor predeterminado del sistema.",
       "media": "Los medios ayudan a documentar el área, fortalecer la credibilidad y apoyar auditoría y transparencia.",
       "contributions": "Lista de contribuciones registradas para esta área, con volumen compensado y cantidad de árboles asociada cuando corresponda.",
       "statusDraft": "El área aún está en edición y todavía no fue enviada a auditoría.",

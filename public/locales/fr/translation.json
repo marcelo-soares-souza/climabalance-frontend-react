@@ -1017,6 +1017,7 @@
       "defaultHorizonYears": "Horizon par défaut (ans)",
       "treeSpecies": "Espèces d'arbres qui seront utilisées dans la plantation",
       "externalLink": "Lien externe",
+      "maxPurchasableTrees": "Limite d'Arbres",
       "links": "Liens",
       "error": "Erreur lors de l'enregistrement de la zone. Veuillez réessayer."
     },
@@ -1553,6 +1554,8 @@
       "treeSpecies": "Décrivez les espèces d'arbres que vous prévoyez de planter dans cette zone. Cela aide à contextualiser le projet et assure la transparence de la planification.",
       "externalLinkAria": "Aide sur le lien externe",
       "externalLink": "Ajoutez un lien vers une page externe avec plus d'informations sur le projet, comme un site web, un portfolio ou les réseaux sociaux.",
+      "maxPurchasableTreesAria": "Aide sur la limite d'arbres",
+      "maxPurchasableTrees": "Nombre maximum d'arbres pouvant être achetés pour cette zone. Laissez vide pour utiliser la valeur par défaut du système.",
       "media": "Les médias aident à documenter la zone, renforcer la crédibilité et soutenir l'audit et la transparence.",
       "contributions": "Liste des contributions enregistrées pour cette zone, avec volume compensé et nombre d'arbres associé lorsque c'est applicable.",
       "statusDraft": "La zone est encore en cours d'édition et n'a pas encore été soumise à l'audit.",
