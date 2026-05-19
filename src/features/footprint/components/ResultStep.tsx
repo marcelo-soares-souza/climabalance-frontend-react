@@ -59,7 +59,10 @@ export function ResultStep({
           <p className="text-5xl font-bold mb-2">
             {formatTCO2e(result.totalTCO2e)}
           </p>
-          <p className="text-base opacity-70">
+          <p
+            className="text-base opacity-70"
+            title={t("tooltips.footprint.kgCO2e")}
+          >
             {formatKgCO2e(result.totalKgCO2e)}
           </p>
           {isBelowAvg && (

@@ -1509,7 +1509,9 @@
       "domesticEconomy": "Voos domésticos em classe econômica. A classe econômica tem menor emissão por passageiro devido à maior densidade de assentos.",
       "domesticBusiness": "Voos domésticos em classe executiva. A classe executiva tem maior emissão por passageiro devido ao maior espaço por assento.",
       "internationalEconomy": "Voos internacionais em classe econômica. A classe econômica tem menor emissão por passageiro devido à maior densidade de assentos.",
-      "internationalBusiness": "Voos internacionais em classe executiva. A classe executiva tem maior emissão por passageiro devido ao maior espaço por assento."
+      "internationalBusiness": "Voos internacionais em classe executiva. A classe executiva tem maior emissão por passageiro devido ao maior espaço por assento.",
+      "kgCO2e": "kgCO₂e é a mesma medida que tCO₂e, mas em quilogramas (1 tCO₂e = 1.000 kgCO₂e).",
+      "kwhHelper": "Você encontra o consumo mensal em kWh na sua conta de luz, no campo 'Consumo kWh' ou 'Leitura Atual'."
     },
     "compensation": {
       "modeAria": "Ajuda sobre modos de compensação",
@@ -1528,7 +1530,8 @@
       "installmentsAria": "Ajuda sobre parcelas",
       "installments": "Número de parcelas usado na simulação de pagamento.",
       "testCardAria": "Ajuda sobre cartão de teste",
-      "testCard": "Este fluxo usa um pagamento simulado para demonstração da POC."
+      "testCard": "Este fluxo usa um pagamento simulado para demonstração da POC.",
+      "simulationStatus": "Indica se esta transação foi um pagamento real ou uma simulação/teste usada durante desenvolvimento ou demonstração."
     },
     "area": {
       "statusAria": "Ajuda sobre status da área",
@@ -1624,6 +1627,9 @@
     },
     "profile": {
       "sessions": "Sessões ativas mostram onde sua conta está logada no momento. Você pode revogar sessões individuais ou todas de uma vez para forçar logout em outros dispositivos."
+    },
+    "satellite": {
+      "data": "As imagens de satélite são obtidas periodicamente. A data de captura mostra quando a imagem foi tirada e a cobertura de nuvens indica a visibilidade. Uma imagem alternativa é usada quando não há imagens sem nuvens disponíveis."
     }
   },
   "cookieConsent": {

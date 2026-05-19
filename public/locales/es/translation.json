@@ -1509,7 +1509,9 @@
       "domesticEconomy": "Vuelos domésticos en clase económica. La clase económica tiene menor emisión por pasajero debido a la mayor densidad de asientos.",
       "domesticBusiness": "Vuelos domésticos en clase ejecutiva. La clase ejecutiva tiene mayor emisión por pasajero debido al mayor espacio por asiento.",
       "internationalEconomy": "Vuelos internacionales en clase económica. La clase económica tiene menor emisión por pasajero debido a la mayor densidad de asientos.",
-      "internationalBusiness": "Vuelos internacionales en clase ejecutiva. La clase ejecutiva tiene mayor emisión por pasajero debido al mayor espacio por asiento."
+      "internationalBusiness": "Vuelos internacionales en clase ejecutiva. La clase ejecutiva tiene mayor emisión por pasajero debido al mayor espacio por asiento.",
+      "kgCO2e": "kgCO₂e es la misma medida que tCO₂e pero en kilogramos (1 tCO₂e = 1.000 kgCO₂e).",
+      "kwhHelper": "Puedes encontrar tu consumo mensual en kWh en tu factura de electricidad, en el campo 'Consumo kWh' o 'Lectura Actual'."
     },
     "compensation": {
       "modeAria": "Ayuda sobre modos de compensación",
@@ -1528,7 +1530,8 @@
       "installmentsAria": "Ayuda sobre cuotas",
       "installments": "Número de cuotas usado en la simulación de pago.",
       "testCardAria": "Ayuda sobre tarjeta de prueba",
-      "testCard": "Este flujo usa un pago simulado para demostración de la POC."
+      "testCard": "Este flujo usa un pago simulado para demostración de la POC.",
+      "simulationStatus": "Indica si esta transacción fue un pago real o una simulación/prueba usada durante desarrollo o demostración."
     },
     "area": {
       "statusAria": "Ayuda sobre el estado del área",
@@ -1624,6 +1627,9 @@
     },
     "profile": {
       "sessions": "Las sesiones activas muestran dónde está conectada tu cuenta actualmente. Puedes revocar sesiones individuales o todas a la vez para forzar el cierre de sesión en otros dispositivos."
+    },
+    "satellite": {
+      "data": "Las imágenes de satélite se obtienen periódicamente. La fecha de captura muestra cuándo se tomó la imagen y la cobertura de nubes indica la visibilidad. Se usa una imagen alternativa cuando no hay imágenes sin nubes disponibles."
     }
   },
   "cookieConsent": {

@@ -1509,7 +1509,9 @@
       "domesticEconomy": "Domestic flights in economy class. Economy class has lower emissions per passenger due to higher seat density.",
       "domesticBusiness": "Domestic flights in business class. Business class has higher emissions per passenger due to larger seat footprint.",
       "internationalEconomy": "International flights in economy class. Economy class has lower emissions per passenger due to higher seat density.",
-      "internationalBusiness": "International flights in business class. Business class has higher emissions per passenger due to larger seat footprint."
+      "internationalBusiness": "International flights in business class. Business class has higher emissions per passenger due to larger seat footprint.",
+      "kgCO2e": "kgCO₂e is the same measurement as tCO₂e but in kilograms (1 tCO₂e = 1,000 kgCO₂e).",
+      "kwhHelper": "You can find your monthly kWh consumption on your electricity bill, under 'Consumo kWh' or 'Current Reading'."
     },
     "compensation": {
       "modeAria": "Help about compensation modes",
@@ -1528,7 +1530,8 @@
       "installmentsAria": "Help about installments",
       "installments": "Number of installments used in the payment simulation.",
       "testCardAria": "Help about test card",
-      "testCard": "This flow uses a simulated payment for POC demonstration purposes."
+      "testCard": "This flow uses a simulated payment for POC demonstration purposes.",
+      "simulationStatus": "Indicates whether this transaction was a real payment or a simulation/test used during development or demonstration."
     },
     "area": {
       "statusAria": "Help about area status",
@@ -1624,6 +1627,9 @@
     },
     "profile": {
       "sessions": "Active sessions show where your account is currently logged in. You can revoke individual sessions or all at once to force logout on other devices."
+    },
+    "satellite": {
+      "data": "Satellite imagery is fetched periodically. The capture date shows when the image was taken, and cloud cover indicates visibility. A fallback image is used when cloud-free imagery is unavailable."
     }
   },
   "cookieConsent": {

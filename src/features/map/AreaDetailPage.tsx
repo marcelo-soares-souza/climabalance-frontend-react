@@ -642,7 +642,10 @@ export function AreaDetailPage() {
               </MapContainer>
             </div>
             {satelliteImage && (
-              <div className="px-4 py-2 flex items-center justify-between text-xs text-text-secondary border-t">
+              <div
+                className="px-4 py-2 flex items-center justify-between text-xs text-text-secondary border-t"
+                title={t("tooltips.satellite.data")}
+              >
                 <span>
                   {t("satellite.captureDate")}: {satelliteImage.captureDate}
                   {satelliteImage.cloudCover !== null && (

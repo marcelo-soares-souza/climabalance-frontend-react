@@ -1509,7 +1509,9 @@
       "domesticEconomy": "Vols domestiques en classe économique. La classe économique a des émissions plus faibles par passager en raison d'une densité de sièges plus élevée.",
       "domesticBusiness": "Vols domestiques en classe affaires. La classe affaires a des émissions plus élevées par passager en raison d'une empreinte au sol plus grande.",
       "internationalEconomy": "Vols internationaux en classe économique. La classe économique a des émissions plus faibles par passager.",
-      "internationalBusiness": "Vols internationaux en classe affaires. La classe affaires a des émissions plus élevées par passager."
+      "internationalBusiness": "Vols internationaux en classe affaires. La classe affaires a des émissions plus élevées par passager.",
+      "kgCO2e": "kgCO₂e est la même mesure que tCO₂e mais en kilogrammes (1 tCO₂e = 1 000 kgCO₂e).",
+      "kwhHelper": "Vous pouvez trouver votre consommation mensuelle en kWh sur votre facture d'électricité, sous 'Consommation kWh' ou 'Lecture Actuelle'."
     },
     "compensation": {
       "modeAria": "Aide sur les modes de compensation",
@@ -1528,7 +1530,8 @@
       "installmentsAria": "Aide sur les échéances",
       "installments": "Nombre d'échéances utilisé dans la simulation de paiement.",
       "testCardAria": "Aide sur la carte de test",
-      "testCard": "Ce flux utilise un paiement simulé à des fins de démonstration de la POC."
+      "testCard": "Ce flux utilise un paiement simulé à des fins de démonstration de la POC.",
+      "simulationStatus": "Indique si cette transaction était un paiement réel ou une simulation/test utilisée pendant le développement ou la démonstration."
     },
     "area": {
       "statusAria": "Aide sur le statut de la zone",
@@ -1624,6 +1627,9 @@
     },
     "profile": {
       "sessions": "Les sessions actives montrent où votre compte est actuellement connecté. Vous pouvez révoquer des sessions individuelles ou toutes à la fois pour forcer la déconnexion sur d'autres appareils."
+    },
+    "satellite": {
+      "data": "Les images satellite sont récupérées périodiquement. La date de capture indique quand l'image a été prise et la couverture nuageuse indique la visibilité. Une image de remplacement est utilisée lorsque des images sans nuages ne sont pas disponibles."
     }
   },
   "cookieConsent": {

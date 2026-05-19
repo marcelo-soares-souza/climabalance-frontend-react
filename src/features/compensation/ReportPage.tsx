@@ -202,7 +202,13 @@ export function CompensationReportPage() {
               />
             </div>
             <div className="flex justify-between">
-              <span>{t("compensation.report.simulationLabel")}</span>
+              <span className="flex items-center gap-1">
+                {t("compensation.report.simulationLabel")}
+                <InfoTooltip
+                  ariaLabel={t("compensation.report.simulationLabel")}
+                  content={<p>{t("tooltips.checkout.simulationStatus")}</p>}
+                />
+              </span>
               <span className="font-medium">
                 {safePaymentResult.simulationStatus}
               </span>

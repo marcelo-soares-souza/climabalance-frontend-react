@@ -48,7 +48,9 @@ export function EnergyStep({
       </div>
 
       <div className="bg-accent/10 border border-accent/20 rounded-[var(--radius-card)] p-4 flex gap-3">
-        <Info className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+        <span title={t("tooltips.footprint.kwhHelper")}>
+          <Info className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+        </span>
         <p className="text-base text-text-secondary">
           {t("footprint.energy.tip")}
         </p>
