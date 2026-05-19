@@ -27,7 +27,7 @@ export function CompensationReviewPage() {
   const [treesRequested, setTreesRequested] = useState(
     storedTreesRequested && storedTreesRequested > 0
       ? storedTreesRequested
-      : 100,
+      : 10,
   );
   const [error, setError] = useState<string | null>(null);
 
@@ -36,6 +36,13 @@ export function CompensationReviewPage() {
     queryFn: () => areasService.getArea(areaId!),
     enabled: !!areaId,
   });
+
+  const computedMaxTrees = (q: typeof quote) =>
+    q?.remainingPurchasableTrees ?? 0;
+  const computedEffective = (q: typeof quote) => {
+    const m = computedMaxTrees(q);
+    return m > 0 && treesRequested > m ? m : treesRequested;
+  };
 
   const {
     data: quote,
@@ -78,6 +85,8 @@ export function CompensationReviewPage() {
 
   if (!areaId) return null;
 
+  const maxTrees = computedMaxTrees(quote);
+  const effectiveTrees = computedEffective(quote);
   const limitReached = !!quote && quote.remainingPurchasableTrees <= 0;
   const canProceed =
     treesRequested > 0 && !!quote && !quoteLoading && !limitReached;
@@ -136,9 +145,10 @@ export function CompensationReviewPage() {
                 id="trees"
                 type="number"
                 min="1"
+                max={maxTrees > 0 ? maxTrees : undefined}
                 label={t("compensation.review.treesCount")}
                 required
-                value={treesRequested}
+                value={effectiveTrees}
                 onChange={(e) =>
                   setTreesRequested(parseInt(e.target.value) || 0)
                 }
