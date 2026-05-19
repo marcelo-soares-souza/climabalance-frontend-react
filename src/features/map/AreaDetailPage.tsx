@@ -528,9 +528,15 @@ export function AreaDetailPage() {
           <Card className="border-teal-200 bg-gradient-to-b from-teal-50 to-white shadow-sm">
             <CardContent className="text-center py-4">
               <TreePine className="mx-auto mb-2 h-6 w-6 text-teal-700" />
-              <p className="text-sm text-text-secondary">
-                {t("profile.treesPlanted")}
-              </p>
+              <div className="flex items-center justify-center gap-1">
+                <p className="text-sm text-text-secondary">
+                  {t("profile.treesPlanted")}
+                </p>
+                <InfoTooltip
+                  ariaLabel={t("profile.treesPlanted")}
+                  content={<p>{t("tooltips.area.treesPlanted")}</p>}
+                />
+              </div>
               <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-teal-700">
                 {formatNumber(plantedCount, "pt-BR", 0)}
                 {availableCount > 0 && (
@@ -544,9 +550,15 @@ export function AreaDetailPage() {
           <Card className="border-sky-200 bg-gradient-to-b from-sky-50 to-white shadow-sm">
             <CardContent className="text-center py-4">
               <Leaf className="mx-auto mb-2 h-6 w-6 text-sky-700" />
-              <p className="text-sm text-text-secondary">
-                {t("profile.compensated")}
-              </p>
+              <div className="flex items-center justify-center gap-1">
+                <p className="text-sm text-text-secondary">
+                  {t("profile.compensated")}
+                </p>
+                <InfoTooltip
+                  ariaLabel={t("profile.compensated")}
+                  content={<p>{t("tooltips.area.compensated")}</p>}
+                />
+              </div>
               <div className="space-y-1">
                 <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-sky-700">
                   {compensatedDisplay.amount}
@@ -888,6 +900,7 @@ export function AreaDetailPage() {
               variant="secondary"
               className="flex-1"
               onClick={() => setSubmitDialogOpen(true)}
+              title={t("tooltips.area.submitForAudit")}
             >
               <Send className="h-5 w-5 mr-2" />{" "}
               {t("area.actions.submitForAudit")}
@@ -899,6 +912,7 @@ export function AreaDetailPage() {
               variant="outline"
               className="flex-1 border-error text-error hover:bg-red-50"
               onClick={() => setSuspendDialogOpen(true)}
+              title={t("tooltips.area.suspend")}
             >
               <ShieldOff className="h-5 w-5 mr-2" /> {t("area.actions.suspend")}
             </Button>

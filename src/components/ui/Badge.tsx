@@ -11,6 +11,7 @@ interface BadgeProps {
     | "earth";
   children: React.ReactNode;
   className?: string;
+  title?: string;
 }
 
 const variants = {
@@ -27,9 +28,11 @@ export function Badge({
   variant = "default",
   children,
   className,
+  title,
 }: BadgeProps) {
   return (
     <span
+      title={title}
       className={cn(
         "inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium",
         variants[variant],

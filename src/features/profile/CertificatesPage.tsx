@@ -71,7 +71,12 @@ export function CertificatesPage() {
                     </div>
                     <div className="flex flex-col items-end gap-2">
                       <div className="flex items-center gap-2">
-                        <StatusBadge status={cert.status} />
+                        <StatusBadge
+                          status={cert.status}
+                          tooltip={t(
+                            `tooltips.status.certificate.${cert.status}`,
+                          )}
+                        />
                         <InfoTooltip
                           ariaLabel={t("tooltips.certificates.validationAria")}
                           panelClassName="left-auto right-0"

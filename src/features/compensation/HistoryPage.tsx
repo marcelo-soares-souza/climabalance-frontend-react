@@ -58,7 +58,10 @@ export function CompensationHistoryPage() {
                         </p>
                       </div>
                       <div className="flex flex-col items-end gap-2">
-                        <StatusBadge status={c.status} />
+                        <StatusBadge
+                          status={c.status}
+                          tooltip={t(`tooltips.status.payment.${c.status}`)}
+                        />
                         <p className="text-sm font-medium">
                           {formatCurrency(c.totalAmount, c.currency)}
                         </p>

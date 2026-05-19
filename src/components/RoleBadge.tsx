@@ -22,7 +22,11 @@ export function RoleBadge({ role, className }: RoleBadgeProps) {
   const variant = roleVariants[role] || "default";
 
   return (
-    <Badge variant={variant} className={className}>
+    <Badge
+      variant={variant}
+      className={className}
+      title={t(`tooltips.roles.${role}`, role)}
+    >
       {t(`common.roles.${role}`, role)}
     </Badge>
   );

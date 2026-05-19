@@ -10,6 +10,7 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { ErrorBanner } from "@/components/ErrorBanner";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { formatTCO2e, formatCurrency } from "@/lib/format";
 import { ArrowLeft, TreePine, MapPin } from "lucide-react";
 import { mapCompensationApiError } from "./compensation-errors";
@@ -130,31 +131,57 @@ export function CompensationReviewPage() {
                 {t("compensation.review.treePurchase")}
               </p>
             </div>
-            <Input
-              id="trees"
-              type="number"
-              min="1"
-              label={t("compensation.review.treesCount")}
-              required
-              value={treesRequested}
-              onChange={(e) => setTreesRequested(parseInt(e.target.value) || 0)}
-            />
+            <div className="flex items-center gap-2">
+              <Input
+                id="trees"
+                type="number"
+                min="1"
+                label={t("compensation.review.treesCount")}
+                required
+                value={treesRequested}
+                onChange={(e) =>
+                  setTreesRequested(parseInt(e.target.value) || 0)
+                }
+              />
+              <InfoTooltip
+                ariaLabel={t("compensation.review.treesCount")}
+                content={<p>{t("tooltips.review.treesCount")}</p>}
+              />
+            </div>
             {quote && (
               <div className="bg-primary-50 rounded-lg p-4 space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>{t("compensation.review.remainingTrees")}</span>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="flex items-center gap-1">
+                    {t("compensation.review.remainingTrees")}
+                    <InfoTooltip
+                      ariaLabel={t("compensation.review.remainingTrees")}
+                      content={<p>{t("tooltips.review.remainingTrees")}</p>}
+                    />
+                  </span>
                   <span className="font-medium">
                     {quote.remainingPurchasableTrees}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span>{t("compensation.review.pricePerTree")}</span>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="flex items-center gap-1">
+                    {t("compensation.review.pricePerTree")}
+                    <InfoTooltip
+                      ariaLabel={t("compensation.review.pricePerTree")}
+                      content={<p>{t("tooltips.review.pricePerTree")}</p>}
+                    />
+                  </span>
                   <span className="font-medium">
                     {formatCurrency(quote.pricePerTree)}
                   </span>
                 </div>
-                <div className="flex justify-between text-sm">
-                  <span>{t("compensation.review.estimatedCO2")}</span>
+                <div className="flex items-center justify-between text-sm">
+                  <span className="flex items-center gap-1">
+                    {t("compensation.review.estimatedCO2")}
+                    <InfoTooltip
+                      ariaLabel={t("compensation.review.estimatedCO2")}
+                      content={<p>{t("tooltips.review.estimatedCO2")}</p>}
+                    />
+                  </span>
                   <span className="font-medium">
                     {formatTCO2e(quote.estimatedTotalTCO2e)}
                   </span>

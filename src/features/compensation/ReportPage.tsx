@@ -194,7 +194,12 @@ export function CompensationReportPage() {
                   content={<p>{t("tooltips.compensation.paymentStatus")}</p>}
                 />
               </span>
-              <StatusBadge status={safePaymentResult.paymentStatus} />
+              <StatusBadge
+                status={safePaymentResult.paymentStatus}
+                tooltip={t(
+                  `tooltips.status.payment.${safePaymentResult.paymentStatus}`,
+                )}
+              />
             </div>
             <div className="flex justify-between">
               <span>{t("compensation.report.simulationLabel")}</span>
@@ -211,7 +216,12 @@ export function CompensationReportPage() {
             {certificate && (
               <div className="flex justify-between">
                 <span>{t("compensation.report.certificateStatus")}</span>
-                <StatusBadge status={certificate.status} />
+                <StatusBadge
+                  status={certificate.status}
+                  tooltip={t(
+                    `tooltips.status.certificate.${certificate.status}`,
+                  )}
+                />
               </div>
             )}
           </CardContent>

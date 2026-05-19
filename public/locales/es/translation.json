@@ -1562,6 +1562,51 @@
       "hashAria": "Ayuda sobre hash del certificado",
       "hash": "El hash es un identificador de integridad usado para verificar que el certificado coincide con el documento emitido.",
       "status": "El estado indica la situación actual del certificado en la plataforma."
+    },
+    "roles": {
+      "individual": "Partidario Individual: ideal para calcular y compensar tu huella de carbono personal, apoyar proyectos y dar seguimiento a tu impacto.",
+      "legal_entity": "Persona Jurídica: para empresas y organizaciones que desean gestionar emisiones institucionales, apoyar proyectos y recibir certificados.",
+      "producer": "Reforestador: puede registrar y gestionar áreas, recibir transferencias de compensación y dar seguimiento a contribuciones de partidarios.",
+      "analyst": "Analista: revisa y audita registros de áreas, evalúa criterios socioambientales y aprueba o rechaza envíos.",
+      "administrator": "Administrador: acceso completo para gestionar usuarios, áreas, registros de auditoría y configuración de la plataforma."
+    },
+    "status": {
+      "certificate": {
+        "issued": "Emitido: el certificado ha sido generado y es válido para verificación.",
+        "revoked": "Revocado: el certificado ha sido invalidado y no debe usarse para fines de verificación."
+      },
+      "payment": {
+        "pending": "El pago está siendo procesado. Puede tomar algunos momentos hasta la confirmación.",
+        "paid": "El pago se completó con éxito y la compensación está registrada.",
+        "failed": "El pago falló. Es posible que debas intentarlo nuevamente con otro método de pago.",
+        "canceled": "La compensación fue cancelada antes de completar el pago.",
+        "refunded": "El monto ha sido devuelto al partidario."
+      },
+      "user": {
+        "active": "Activo: la cuenta está operativa con acceso completo a la plataforma.",
+        "inactive": "Inactivo: la cuenta fue desactivada por el usuario o el sistema.",
+        "suspended": "Suspendido: la cuenta ha sido restringida temporalmente por un administrador."
+      }
+    },
+    "review": {
+      "remainingTrees": "Cantidad de árboles aún disponibles para adquisición en esta área, calculada como capacidad total menos los ya comprometidos.",
+      "pricePerTree": "Valor por árbol definido por el reforestador responsable del área. Este valor cubre siembra, mantenimiento y monitoreo.",
+      "estimatedCO2": "Total estimado de CO₂ equivalente que los árboles solicitados capturarán durante el horizonte del proyecto. Es una proyección, no una garantía.",
+      "treesCount": "Indica cuántos árboles deseas apoyar. El total se calcula automáticamente según el precio por árbol."
+    },
+    "treePlanting": {
+      "manualMode": "Modo Manual: haz clic en el mapa para colocar cada árbol individualmente, uno por uno.",
+      "areaMode": "Modo Área: mantén presionada la tecla Shift y arrastra para dibujar un rectángulo; los árboles se distribuirán automáticamente dentro del área seleccionada."
+    },
+    "payment": {
+      "pix": "PIX es un sistema de pago instantáneo del Banco Central de Brasil. Escanea este código QR con la aplicación de tu banco para pagar. La confirmación ocurre en segundos.",
+      "pixCopyPaste": "Si tu banco no admite la lectura de código QR, copia este código y pégalo en el área de pago PIX de la aplicación de tu banco."
+    },
+    "area": {
+      "submitForAudit": "Enviar a auditoría somete el área a revisión por un analista. Una vez enviada, el área no podrá editarse hasta que se complete la auditoría.",
+      "suspend": "Suspender el área la hace temporalmente no disponible para nuevas compensaciones. Las contribuciones existentes y los árboles plantados no se ven afectados.",
+      "treesPlanted": "Árboles Plantados muestra los árboles físicos ya georreferenciados en el mapa. El número después de la barra es el total de árboles financiados mediante compensaciones.",
+      "compensated": "Total de CO₂ equivalente que ha sido compensado a través de contribuciones a esta área, basado en la tasa de captura estimada por árbol."
     }
   },
   "cookieConsent": {

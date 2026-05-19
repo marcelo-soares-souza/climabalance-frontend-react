@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 interface StatusBadgeProps {
   status: string;
   className?: string;
+  tooltip?: string;
 }
 
 const statusVariants: Record<
@@ -27,11 +28,11 @@ const statusVariants: Record<
   revoked: "error",
 };
 
-export function StatusBadge({ status, className }: StatusBadgeProps) {
+export function StatusBadge({ status, className, tooltip }: StatusBadgeProps) {
   const { t } = useTranslation();
   const variant = statusVariants[status] || "default";
   return (
-    <Badge variant={variant} className={className}>
+    <Badge variant={variant} className={className} title={tooltip}>
       {t(`common.status.${status}`, status)}
     </Badge>
   );

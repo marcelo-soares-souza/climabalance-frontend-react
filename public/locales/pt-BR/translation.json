@@ -1562,6 +1562,51 @@
       "hashAria": "Ajuda sobre hash do certificado",
       "hash": "O hash é um identificador de integridade usado para verificar se o certificado corresponde ao documento emitido.",
       "status": "O status indica a situação atual do certificado na plataforma."
+    },
+    "roles": {
+      "individual": "Apoiador Individual: ideal para calcular e compensar sua pegada de carbono pessoal, apoiar projetos e acompanhar seu impacto.",
+      "legal_entity": "Pessoa Jurídica: para empresas e organizações que desejam gerenciar emissões institucionais, apoiar projetos e receber certificados.",
+      "producer": "Reflorestador: pode cadastrar e gerenciar áreas, receber transferências de compensação e acompanhar contribuições de apoiadores.",
+      "analyst": "Analista: revisa e audita cadastros de áreas, avalia critérios socioambientais e aprova ou rejeita submissões.",
+      "administrator": "Administrador: acesso completo para gerenciar usuários, áreas, logs de auditoria e configurações da plataforma."
+    },
+    "status": {
+      "certificate": {
+        "issued": "Emitido: o certificado foi gerado e é válido para verificação.",
+        "revoked": "Revogado: o certificado foi invalidado e não deve ser usado para fins de verificação."
+      },
+      "payment": {
+        "pending": "O pagamento está sendo processado. Pode levar alguns instantes até a confirmação.",
+        "paid": "O pagamento foi concluído com sucesso e a compensação está registrada.",
+        "failed": "O pagamento falhou. Pode ser necessário tentar novamente com outra forma de pagamento.",
+        "canceled": "A compensação foi cancelada antes da conclusão do pagamento.",
+        "refunded": "O valor foi estornado e devolvido ao apoiador."
+      },
+      "user": {
+        "active": "Ativo: a conta está operacional e com acesso completo à plataforma.",
+        "inactive": "Inativo: a conta foi desativada pelo usuário ou pelo sistema.",
+        "suspended": "Suspenso: a conta foi temporariamente restrita por um administrador."
+      }
+    },
+    "review": {
+      "remainingTrees": "Quantidade de árvores ainda disponíveis para aquisição nesta área, considerando a capacidade total menos as já comprometidas.",
+      "pricePerTree": "Valor por árvore definido pelo reflorestador responsável pela área. Este valor cobre plantio, manutenção e monitoramento.",
+      "estimatedCO2": "Total estimado de CO₂ equivalente que as árvores solicitadas capturarão ao longo do horizonte do projeto. É uma projeção, não uma garantia.",
+      "treesCount": "Informe quantas árvores deseja apoiar. O valor total é calculado automaticamente com base no preço por árvore."
+    },
+    "treePlanting": {
+      "manualMode": "Modo Manual: clique no mapa para posicionar cada árvore individualmente, uma por uma.",
+      "areaMode": "Modo Área: segure Shift e arraste para desenhar um retângulo; as árvores serão distribuídas automaticamente dentro da área selecionada."
+    },
+    "payment": {
+      "pix": "PIX é um sistema de pagamento instantâneo do Banco Central do Brasil. Escaneie o QR Code com o aplicativo do seu banco para pagar. A confirmação ocorre em segundos.",
+      "pixCopyPaste": "Se seu banco não suportar leitura de QR Code, copie este código e cole na área de pagamento PIX do aplicativo do seu banco."
+    },
+    "area": {
+      "submitForAudit": "Enviar para auditoria submete a área para revisão por um analista. Após o envio, a área não poderá ser editada até a conclusão da auditoria.",
+      "suspend": "Suspender a área a torna temporariamente indisponível para novas compensações. Contribuições existentes e árvores plantadas não são afetadas.",
+      "treesPlanted": "Árvores Plantadas mostra as árvores físicas já georreferenciadas no mapa. O número após a barra é o total de árvores financiadas através de compensações.",
+      "compensated": "Total de CO₂ equivalente que já foi compensado através de contribuições para esta área, com base na taxa de captura estimada por árvore."
     }
   },
   "cookieConsent": {

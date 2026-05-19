@@ -183,7 +183,10 @@ export function AdminUsersPage() {
                     >
                       <td className="px-4 py-3">{user.email}</td>
                       <td className="px-4 py-3">
-                        <StatusBadge status={user.status} />
+                        <StatusBadge
+                          status={user.status}
+                          tooltip={t(`tooltips.status.user.${user.status}`)}
+                        />
                       </td>
                       <td className="px-4 py-3">
                         {(() => {

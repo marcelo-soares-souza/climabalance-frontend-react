@@ -1562,6 +1562,51 @@
       "hashAria": "Help about certificate hash",
       "hash": "The hash is an integrity identifier used to verify that the certificate matches the issued document.",
       "status": "The status indicates the current state of the certificate on the platform."
+    },
+    "roles": {
+      "individual": "Individual Supporter: ideal for calculating and offsetting your personal carbon footprint, supporting projects, and tracking your impact.",
+      "legal_entity": "Legal Entity: for companies and organizations that want to manage institutional emissions, support projects, and receive certificates.",
+      "producer": "Reforester: can register and manage areas, receive compensation transfers, and track supporter contributions.",
+      "analyst": "Analyst: reviews and audits area registrations, evaluates socio-environmental criteria, and approves or rejects submissions.",
+      "administrator": "Administrator: full access to manage users, areas, audit logs, and platform configuration."
+    },
+    "status": {
+      "certificate": {
+        "issued": "Issued: the certificate has been generated and is valid for verification.",
+        "revoked": "Revoked: the certificate has been invalidated and should not be used for verification purposes."
+      },
+      "payment": {
+        "pending": "The payment is being processed. It may take a few moments to confirm.",
+        "paid": "The payment was completed successfully and the compensation is recorded.",
+        "failed": "The payment failed. You may need to try again with a different payment method.",
+        "canceled": "The compensation was canceled before payment was completed.",
+        "refunded": "The amount has been returned to the supporter."
+      },
+      "user": {
+        "active": "Active: the account is fully operational with complete platform access.",
+        "inactive": "Inactive: the account was deactivated by the user or the system.",
+        "suspended": "Suspended: the account has been temporarily restricted by an administrator."
+      }
+    },
+    "review": {
+      "remainingTrees": "Number of trees still available for purchase in this area, calculated as total capacity minus already committed trees.",
+      "pricePerTree": "Cost per tree set by the reforestador responsible for the area. This amount covers planting, maintenance, and monitoring.",
+      "estimatedCO2": "Estimated total CO₂ equivalent that the requested trees will capture over the project horizon. This is a projection, not a guarantee.",
+      "treesCount": "Enter how many trees you want to support. The total amount is calculated automatically based on the price per tree."
+    },
+    "treePlanting": {
+      "manualMode": "Manual Mode: click on the map to place each tree individually, one by one.",
+      "areaMode": "Area Mode: hold Shift and drag to draw a rectangle; trees will be automatically distributed within the selected area."
+    },
+    "payment": {
+      "pix": "PIX is an instant payment system from the Brazilian Central Bank. Scan this QR Code with your bank's app to pay. Confirmation happens within seconds.",
+      "pixCopyPaste": "If your banking app does not support QR code scanning, copy this code and paste it into the PIX payment area of your bank's app."
+    },
+    "area": {
+      "submitForAudit": "Submitting for audit sends the area for review by an analyst. Once submitted, the area cannot be edited until the audit is completed.",
+      "suspend": "Suspending the area makes it temporarily unavailable for new compensations. Existing contributions and planted trees are not affected.",
+      "treesPlanted": "Trees Planted shows the physical trees already geo-tagged on the map. The number after the slash is the total trees funded through compensations.",
+      "compensated": "Total CO₂ equivalent that has been compensated through contributions to this area, based on the estimated capture rate per tree."
     }
   },
   "cookieConsent": {

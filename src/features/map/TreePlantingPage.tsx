@@ -357,6 +357,7 @@ export function TreePlantingPage() {
                 <button
                   type="button"
                   onClick={() => setAreaMode(false)}
+                  title={t("tooltips.treePlanting.manualMode")}
                   className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
                     !areaMode
                       ? "bg-primary text-white"
@@ -369,6 +370,7 @@ export function TreePlantingPage() {
                 <button
                   type="button"
                   onClick={() => setAreaMode(true)}
+                  title={t("tooltips.treePlanting.areaMode")}
                   className={`flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium transition-colors ${
                     areaMode
                       ? "bg-primary text-white"

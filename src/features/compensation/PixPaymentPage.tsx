@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { SEO } from "@/components/SEO";
 import { paymentsService } from "@/services/payments";
 import { Button } from "@/components/ui/Button";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { ArrowLeft, Copy, Check } from "lucide-react";
 
 export function PixPaymentPage() {
@@ -83,7 +84,13 @@ export function PixPaymentPage() {
 
         <h1 className="text-2xl font-bold">{t("payment.pix.title")}</h1>
 
-        <p className="text-text-secondary">{t("payment.pix.instructions")}</p>
+        <div className="flex items-center gap-2">
+          <p className="text-text-secondary">{t("payment.pix.instructions")}</p>
+          <InfoTooltip
+            ariaLabel={t("payment.pix.instructions")}
+            content={<p>{t("tooltips.payment.pix")}</p>}
+          />
+        </div>
 
         {qrCode && (
           <div className="flex justify-center">
@@ -97,7 +104,15 @@ export function PixPaymentPage() {
 
         {copyPasteCode && (
           <div className="space-y-2">
-            <p className="text-sm font-medium">{t("payment.pix.copy_paste")}</p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm font-medium">
+                {t("payment.pix.copy_paste")}
+              </p>
+              <InfoTooltip
+                ariaLabel={t("payment.pix.copy_paste")}
+                content={<p>{t("tooltips.payment.pixCopyPaste")}</p>}
+              />
+            </div>
             <div className="flex gap-2">
               <code className="flex-1 bg-gray-100 p-3 rounded text-xs break-all">
                 {copyPasteCode}
