@@ -11,6 +11,7 @@ import {
   MapPinned,
   Target,
   Trees,
+  Calculator,
 } from "lucide-react";
 
 export function AboutPage() {
@@ -205,6 +206,36 @@ export function AboutPage() {
               </Card>
             ))}
           </div>
+        </section>
+
+        <section className="space-y-5">
+          <div className="space-y-2">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
+              {t("about.methodology.label")}
+            </p>
+            <h2 className="text-3xl font-bold font-display text-text-primary">
+              {t("about.methodology.title")}
+            </h2>
+            <p className="text-base leading-7 text-text-secondary">
+              {t("about.methodology.paragraph")}
+            </p>
+          </div>
+
+          <Card className="border border-primary/10 bg-gradient-to-br from-primary-50/30 to-accent-50/30 shadow-sm">
+            <CardContent className="flex items-start gap-4 py-8">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
+                <Calculator className="h-6 w-6 text-primary" />
+              </div>
+              <div className="space-y-2">
+                <p className="text-sm font-medium text-text-secondary">
+                  {t("about.methodology.label")}
+                </p>
+                <p className="text-base leading-7 text-text-secondary">
+                  {t("about.methodology.paragraph")}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
         </section>
       </div>
     </>

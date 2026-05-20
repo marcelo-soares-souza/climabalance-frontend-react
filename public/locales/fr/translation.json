@@ -276,6 +276,11 @@
       "card2Description": "Orienter les ressources vers des propriétés et des initiatives évaluées selon des critères socio-environnementaux, notamment l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique.",
       "card3Title": "Impact vérifiable",
       "card3Description": "Renforcer la confiance grâce à l'audit, aux certificats, aux preuves enregistrées et à la transparence sur la destination de la compensation."
+    },
+    "methodology": {
+      "label": "Méthodologie de Calcul",
+      "title": "Comment les calculs sont effectués",
+      "paragraph": "Les calculs d'empreinte carbone utilisent des facteurs d'émission basés sur des références techniques telles que le GHG Protocol, le GIEC et SEEG Brasil (2024). Ces valeurs sont des approximations techniques et ne représentent pas une méthodologie formellement certifiée ou réglementée par un organisme officiel. Les résultats sont des estimations à des fins de sensibilisation et de référence, ne remplaçant pas les inventaires d'émissions formels."
     }
   },
   "howToUse": {
@@ -648,7 +653,8 @@
   "footprint": {
     "calculator": {
       "title": "Calculateur d'Empreinte",
-      "calculate": "Calculer"
+      "calculate": "Calculer",
+      "methodologyTooltip": "Les calculs utilisent des facteurs d'émission basés sur le GHG Protocol, le GIEC et SEEG Brasil (2024). Les résultats sont des estimations techniques, pas une méthodologie formellement certifiée."
     },
     "calculating": "Calcul de votre empreinte...",
     "steps": {

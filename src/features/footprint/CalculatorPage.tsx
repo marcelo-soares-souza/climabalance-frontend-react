@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { InfoTooltip } from "@/components/ui/InfoTooltip";
 import { ErrorBanner } from "@/components/ErrorBanner";
 import { StepIndicator } from "./components/StepIndicator";
 import { ProfilePeriodStep } from "./components/steps/ProfilePeriodStep";
@@ -315,9 +316,15 @@ export function CalculatorPage() {
     <>
       <SEO title={t("seo.calculator.title")} />
       <div className="space-y-6">
-        <h1 className="text-3xl font-bold font-display">
-          {t("footprint.calculator.title")}
-        </h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-3xl font-bold font-display">
+            {t("footprint.calculator.title")}
+          </h1>
+          <InfoTooltip
+            content={<p>{t("footprint.calculator.methodologyTooltip")}</p>}
+            ariaLabel={t("footprint.calculator.methodologyTooltip")}
+          />
+        </div>
         <div className="rounded-xl border border-primary/20 bg-primary/5 px-4 py-3">
           <p className="text-sm font-medium text-primary">
             {t("footprint.period.label")}

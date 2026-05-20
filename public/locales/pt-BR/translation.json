@@ -276,6 +276,11 @@
       "card2Description": "Direcionar recursos para propriedades e iniciativas avaliadas com critérios socioambientais, incluindo Agroecologia, Agrofloresta, Permacultura e Agricultura Orgânica.",
       "card3Title": "Impacto verificável",
       "card3Description": "Fortalecer a confiança com auditoria, certificados, registros de evidência e transparência sobre o destino da compensação."
+    },
+    "methodology": {
+      "label": "Metodologia de Cálculo",
+      "title": "Como os cálculos são feitos",
+      "paragraph": "Os cálculos de pegada de carbono utilizam fatores de emissão baseados em referências técnicas como GHG Protocol, IPCC e SEEG Brasil (2024). Estes valores são aproximações técnicas e não representam uma metodologia formal certificada ou regulamentada por qualquer órgão oficial. Os resultados são estimativas para fins de conscientização e referência, não substituindo inventários formais de emissões."
     }
   },
   "howToUse": {
@@ -648,7 +653,8 @@
   "footprint": {
     "calculator": {
       "title": "Calculadora de Pegada",
-      "calculate": "Calcular"
+      "calculate": "Calcular",
+      "methodologyTooltip": "Os cálculos utilizam fatores de emissão baseados em GHG Protocol, IPCC e SEEG Brasil (2024). Os resultados são estimativas técnicas, não uma metodologia formal certificada."
     },
     "calculating": "Calculando sua pegada...",
     "steps": {

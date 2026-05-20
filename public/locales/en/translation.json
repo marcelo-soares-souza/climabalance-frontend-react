@@ -276,6 +276,11 @@
       "card2Description": "Direct resources to properties and initiatives evaluated with socio-environmental criteria, including Agroecology, Agroforestry, Permaculture, and Organic Agriculture.",
       "card3Title": "Verifiable impact",
       "card3Description": "Strengthen trust through audit trails, certificates, evidence records, and transparency about where compensation goes."
+    },
+    "methodology": {
+      "label": "Calculation Methodology",
+      "title": "How calculations are made",
+      "paragraph": "Carbon footprint calculations use emission factors based on technical references such as GHG Protocol, IPCC, and SEEG Brazil (2024). These values are technical approximations and do not represent a formally certified or regulated methodology by any official body. Results are estimates for awareness and reference purposes, not a substitute for formal emissions inventories."
     }
   },
   "howToUse": {
@@ -648,7 +653,8 @@
   "footprint": {
     "calculator": {
       "title": "Footprint Calculator",
-      "calculate": "Calculate"
+      "calculate": "Calculate",
+      "methodologyTooltip": "Calculations use emission factors based on GHG Protocol, IPCC, and SEEG Brazil (2024). Results are technical estimates, not a formally certified methodology."
     },
     "calculating": "Calculating your footprint...",
     "steps": {

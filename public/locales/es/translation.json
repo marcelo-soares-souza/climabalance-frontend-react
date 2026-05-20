@@ -276,6 +276,11 @@
       "card2Description": "Dirigir recursos a propiedades e iniciativas evaluadas con criterios socioambientales, incluyendo Agroecología, Agroforestería, Permacultura y Agricultura Orgánica.",
       "card3Title": "Impacto verificable",
       "card3Description": "Fortalecer la confianza mediante auditoría, certificados, registros de evidencia y transparencia sobre el destino de la compensación."
+    },
+    "methodology": {
+      "label": "Metodología de Cálculo",
+      "title": "Cómo se hacen los cálculos",
+      "paragraph": "Los cálculos de huella de carbono utilizan factores de emisión basados en referencias técnicas como GHG Protocol, IPCC y SEEG Brasil (2024). Estos valores son aproximaciones técnicas y no representan una metodología formal certificada o regulada por ningún organismo oficial. Los resultados son estimaciones para fines de concientización y referencia, no sustituyen inventarios formales de emisiones."
     }
   },
   "howToUse": {
@@ -648,7 +653,8 @@
   "footprint": {
     "calculator": {
       "title": "Calculadora de Huella",
-      "calculate": "Calcular"
+      "calculate": "Calcular",
+      "methodologyTooltip": "Los cálculos utilizan factores de emisión basados en GHG Protocol, IPCC y SEEG Brasil (2024). Los resultados son estimaciones técnicas, no una metodología formal certificada."
     },
     "calculating": "Calculando tu huella...",
     "steps": {
