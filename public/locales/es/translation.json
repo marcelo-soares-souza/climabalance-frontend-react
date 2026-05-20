@@ -49,7 +49,8 @@
       "producer": "Reforestador",
       "administrator": "Administrador",
       "analyst": "Analista"
-    }
+    },
+    "offline": "Estás offline. Es posible que algunas funciones no estén disponibles."
   },
   "auth": {
     "name": "Nombre",
@@ -1294,7 +1295,10 @@
       "notesPlaceholder": "Añade observaciones relevantes sobre la auditoría.",
       "rejectReasonPlaceholder": "Describe el motivo del rechazo",
       "approveError": "Error al aprobar área. Inténtalo de nuevo.",
-      "rejectError": "Error al rechazar área. Inténtalo de nuevo."
+      "rejectError": "Error al rechazar área. Inténtalo de nuevo.",
+      "criteriaLocation": "Ubicación verificada",
+      "criteriaBiome": "Bioma correcto",
+      "criteriaDocuments": "Documentación válida"
     }
   },
   "admin": {

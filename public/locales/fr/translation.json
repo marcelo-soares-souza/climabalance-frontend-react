@@ -49,7 +49,8 @@
       "producer": "Reboiseur",
       "administrator": "Administrateur",
       "analyst": "Analyste"
-    }
+    },
+    "offline": "Vous êtes hors ligne. Certaines fonctionnalités peuvent ne pas être disponibles."
   },
   "auth": {
     "name": "Nom",
@@ -1294,7 +1295,10 @@
       "notesPlaceholder": "Ajoutez des notes pertinentes sur l'audit.",
       "rejectReasonPlaceholder": "Décrivez le motif du rejet",
       "approveError": "Échec de l'approbation de la zone. Veuillez réessayer.",
-      "rejectError": "Échec du rejet de la zone. Veuillez réessayer."
+      "rejectError": "Échec du rejet de la zone. Veuillez réessayer.",
+      "criteriaLocation": "Emplacement vérifié",
+      "criteriaBiome": "Biome correct",
+      "criteriaDocuments": "Documents valides"
     }
   },
   "admin": {

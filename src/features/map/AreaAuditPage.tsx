@@ -23,6 +23,21 @@ export function AreaAuditPage() {
   const [notes, setNotes] = useState("");
   const [rejectReason, setRejectReason] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [criteria, setCriteria] = useState<
+    Array<{ key: string; label: string; met: boolean }>
+  >([
+    { key: "location_verified", label: t("audit.review.criteriaLocation"), met: false },
+    { key: "biome_correct", label: t("audit.review.criteriaBiome"), met: false },
+    { key: "documents_ok", label: t("audit.review.criteriaDocuments"), met: false },
+  ]);
+
+  const toggleCriterion = (key: string) => {
+    setCriteria((prev) =>
+      prev.map((c) => (c.key === key ? { ...c, met: !c.met } : c)),
+    );
+  };
+
+  const allCriteriaMet = criteria.every((c) => c.met);
 
   const { data: area, isLoading } = useQuery({
     queryKey: ["areas", areaId],
@@ -39,7 +54,16 @@ export function AreaAuditPage() {
   const areaIdSafe = area?.id ?? areaId!;
 
   const approveMutation = useMutation({
-    mutationFn: () => areasService.approveArea(areaIdSafe, { notes }),
+    mutationFn: () =>
+      areasService.approveArea(areaIdSafe, {
+        notes,
+        criteria: criteria.map((c) => ({
+          criterion_key: c.key,
+          criterion_label: c.label,
+          met: c.met,
+          notes: undefined,
+        })),
+      }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
       navigate("/audit/pending-areas");
@@ -192,6 +216,25 @@ export function AreaAuditPage() {
           <Card>
             <CardContent className="space-y-4">
               <h3 className="font-medium">{t("audit.review.decision")}</h3>
+              <div>
+                <h4 className="text-sm font-medium mb-2">{t("audit.review.criteria")}</h4>
+                <div className="space-y-2">
+                  {criteria.map((c) => (
+                    <label
+                      key={c.key}
+                      className="flex items-center gap-3 p-2 rounded hover:bg-gray-50 cursor-pointer text-sm"
+                    >
+                      <input
+                        type="checkbox"
+                        checked={c.met}
+                        onChange={() => toggleCriterion(c.key)}
+                        className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                      />
+                      {c.label}
+                    </label>
+                  ))}
+                </div>
+              </div>
               <Textarea
                 id="notes"
                 label={t("audit.review.notes")}
@@ -203,6 +246,7 @@ export function AreaAuditPage() {
                 <Button
                   onClick={() => approveMutation.mutate()}
                   loading={approveMutation.isPending}
+                  disabled={!allCriteriaMet}
                   className="flex-1"
                 >
                   <CheckCircle className="h-4 w-4 mr-2" />{" "}

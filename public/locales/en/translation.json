@@ -49,7 +49,8 @@
       "producer": "Reforester",
       "administrator": "Administrator",
       "analyst": "Analyst"
-    }
+    },
+    "offline": "You are offline. Some features may not be available."
   },
   "auth": {
     "name": "Name",
@@ -1294,7 +1295,10 @@
       "notesPlaceholder": "Add any relevant audit notes.",
       "rejectReasonPlaceholder": "Describe the rejection reason",
       "approveError": "Failed to approve area. Please try again.",
-      "rejectError": "Failed to reject area. Please try again."
+      "rejectError": "Failed to reject area. Please try again.",
+      "criteriaLocation": "Location verified",
+      "criteriaBiome": "Correct biome",
+      "criteriaDocuments": "Valid documents"
     }
   },
   "admin": {
