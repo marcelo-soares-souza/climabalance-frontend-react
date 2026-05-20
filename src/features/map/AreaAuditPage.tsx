@@ -26,9 +26,21 @@ export function AreaAuditPage() {
   const [criteria, setCriteria] = useState<
     Array<{ key: string; label: string; met: boolean }>
   >([
-    { key: "location_verified", label: t("audit.review.criteriaLocation"), met: false },
-    { key: "biome_correct", label: t("audit.review.criteriaBiome"), met: false },
-    { key: "documents_ok", label: t("audit.review.criteriaDocuments"), met: false },
+    {
+      key: "location_verified",
+      label: t("audit.review.criteriaLocation"),
+      met: false,
+    },
+    {
+      key: "biome_correct",
+      label: t("audit.review.criteriaBiome"),
+      met: false,
+    },
+    {
+      key: "documents_ok",
+      label: t("audit.review.criteriaDocuments"),
+      met: false,
+    },
   ]);
 
   const toggleCriterion = (key: string) => {
@@ -217,7 +229,9 @@ export function AreaAuditPage() {
             <CardContent className="space-y-4">
               <h3 className="font-medium">{t("audit.review.decision")}</h3>
               <div>
-                <h4 className="text-sm font-medium mb-2">{t("audit.review.criteria")}</h4>
+                <h4 className="text-sm font-medium mb-2">
+                  {t("audit.review.criteria")}
+                </h4>
                 <div className="space-y-2">
                   {criteria.map((c) => (
                     <label
