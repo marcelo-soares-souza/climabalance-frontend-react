@@ -13,62 +13,77 @@ import {
   RefreshCw,
   Mail,
 } from "lucide-react";
+import type { ReactNode } from "react";
+
+type SectionConfig = {
+  key: string;
+  icon: ReactNode;
+};
+
+const sectionConfig: SectionConfig[] = [
+  {
+    key: "electronicAcceptance",
+    icon: <Gavel className="h-5 w-5 text-primary" />,
+  },
+  { key: "acceptance", icon: <Gavel className="h-5 w-5 text-primary" /> },
+  { key: "definitions", icon: <FileText className="h-5 w-5 text-accent" /> },
+  { key: "platformRole", icon: <FileText className="h-5 w-5 text-accent" /> },
+  { key: "estimates", icon: <FileText className="h-5 w-5 text-emerald-700" /> },
+  {
+    key: "noGuarantee",
+    icon: <AlertTriangle className="h-5 w-5 text-amber-700" />,
+  },
+  {
+    key: "certificates",
+    icon: <ShieldCheck className="h-5 w-5 text-sky-700" />,
+  },
+  {
+    key: "userAccounts",
+    icon: <UserCircle className="h-5 w-5 text-emerald-700" />,
+  },
+  { key: "aml", icon: <ShieldCheck className="h-5 w-5 text-rose-700" /> },
+  {
+    key: "partnerAccounts",
+    icon: <UserCircle className="h-5 w-5 text-purple-700" />,
+  },
+  {
+    key: "projectInfo",
+    icon: <FileText className="h-5 w-5 text-indigo-700" />,
+  },
+  { key: "risks", icon: <AlertTriangle className="h-5 w-5 text-rose-700" /> },
+  { key: "payments", icon: <CreditCard className="h-5 w-5 text-amber-700" /> },
+  { key: "taxes", icon: <CreditCard className="h-5 w-5 text-cyan-700" /> },
+  { key: "refunds", icon: <RefreshCw className="h-5 w-5 text-teal-700" /> },
+  {
+    key: "intellectualProperty",
+    icon: <ShieldCheck className="h-5 w-5 text-sky-700" />,
+  },
+  { key: "privacy", icon: <ShieldCheck className="h-5 w-5 text-primary" /> },
+  {
+    key: "disclaimer",
+    icon: <AlertTriangle className="h-5 w-5 text-rose-700" />,
+  },
+  {
+    key: "liability",
+    icon: <AlertTriangle className="h-5 w-5 text-rose-700" />,
+  },
+  {
+    key: "indemnification",
+    icon: <ShieldCheck className="h-5 w-5 text-purple-700" />,
+  },
+  { key: "classAction", icon: <Gavel className="h-5 w-5 text-indigo-700" /> },
+  {
+    key: "compliance",
+    icon: <ShieldCheck className="h-5 w-5 text-cyan-700" />,
+  },
+  { key: "termination", icon: <Ban className="h-5 w-5 text-purple-700" /> },
+  { key: "governingLaw", icon: <Scale className="h-5 w-5 text-cyan-700" /> },
+  { key: "changes", icon: <RefreshCw className="h-5 w-5 text-indigo-700" /> },
+  { key: "contact", icon: <Mail className="h-5 w-5 text-teal-700" /> },
+];
 
 export function TermsOfUsePage() {
   const { t } = useTranslation();
-
-  const sections = [
-    {
-      icon: <Gavel className="h-5 w-5 text-primary" />,
-      title: t("termsOfUse.sections.acceptance.title"),
-      paragraphs: [t("termsOfUse.sections.acceptance.body")],
-    },
-    {
-      icon: <FileText className="h-5 w-5 text-accent" />,
-      title: t("termsOfUse.sections.services.title"),
-      paragraphs: [t("termsOfUse.sections.services.body")],
-    },
-    {
-      icon: <UserCircle className="h-5 w-5 text-emerald-700" />,
-      title: t("termsOfUse.sections.account.title"),
-      paragraphs: [t("termsOfUse.sections.account.body")],
-    },
-    {
-      icon: <CreditCard className="h-5 w-5 text-amber-700" />,
-      title: t("termsOfUse.sections.payments.title"),
-      paragraphs: [t("termsOfUse.sections.payments.body")],
-    },
-    {
-      icon: <ShieldCheck className="h-5 w-5 text-sky-700" />,
-      title: t("termsOfUse.sections.content.title"),
-      paragraphs: [t("termsOfUse.sections.content.body")],
-    },
-    {
-      icon: <AlertTriangle className="h-5 w-5 text-rose-700" />,
-      title: t("termsOfUse.sections.liability.title"),
-      paragraphs: [t("termsOfUse.sections.liability.body")],
-    },
-    {
-      icon: <Ban className="h-5 w-5 text-purple-700" />,
-      title: t("termsOfUse.sections.termination.title"),
-      paragraphs: [t("termsOfUse.sections.termination.body")],
-    },
-    {
-      icon: <Scale className="h-5 w-5 text-cyan-700" />,
-      title: t("termsOfUse.sections.governingLaw.title"),
-      paragraphs: [t("termsOfUse.sections.governingLaw.body")],
-    },
-    {
-      icon: <RefreshCw className="h-5 w-5 text-indigo-700" />,
-      title: t("termsOfUse.sections.changes.title"),
-      paragraphs: [t("termsOfUse.sections.changes.body")],
-    },
-    {
-      icon: <Mail className="h-5 w-5 text-teal-700" />,
-      title: t("termsOfUse.sections.contact.title"),
-      paragraphs: [t("termsOfUse.sections.contact.body")],
-    },
-  ];
 
   return (
     <>
@@ -97,9 +112,6 @@ export function TermsOfUsePage() {
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
               {t("termsOfUse.summary.label")}
             </p>
-            <h2 className="text-2xl font-bold font-display text-text-primary">
-              {t("termsOfUse.summary.title")}
-            </h2>
             <p className="text-base leading-7 text-text-secondary">
               {t("termsOfUse.summary.paragraph")}
             </p>
@@ -107,28 +119,20 @@ export function TermsOfUsePage() {
         </Card>
 
         <section className="grid gap-5 md:grid-cols-2">
-          {sections.map((section) => (
-            <Card
-              key={section.title}
-              className="border-0 shadow-sm ring-1 ring-black/5"
-            >
+          {sectionConfig.map(({ key, icon }) => (
+            <Card key={key} className="border-0 shadow-sm ring-1 ring-black/5">
               <CardContent className="space-y-4 py-8">
                 <div className="flex items-center gap-3">
                   <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-black/5">
-                    {section.icon}
+                    {icon}
                   </div>
                   <h2 className="text-xl font-semibold text-text-primary">
-                    {section.title}
+                    {t(`termsOfUse.sections.${key}.title`)}
                   </h2>
                 </div>
-                {section.paragraphs.map((paragraph) => (
-                  <p
-                    key={paragraph}
-                    className="text-base leading-7 text-text-secondary"
-                  >
-                    {paragraph}
-                  </p>
-                ))}
+                <p className="text-base leading-7 text-text-secondary">
+                  {t(`termsOfUse.sections.${key}.body`)}
+                </p>
               </CardContent>
             </Card>
           ))}

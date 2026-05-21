@@ -579,55 +579,118 @@
     "hero": {
       "eyebrow": "Términos y condiciones",
       "title": "Términos de Uso",
-      "description": "Al utilizar ClimaBalance, usted acepta estos Términos de Uso. Léalos con atención antes de continuar.",
+      "description": "Al usar ClimaBalance, usted acepta estos Términos de Uso. Léalos atentamente antes de continuar.",
       "lastUpdatedLabel": "Última actualización",
-      "lastUpdated": "mayo de 2026"
+      "lastUpdated": "Mayo de 2026"
     },
     "summary": {
       "label": "Resumen",
-      "title": "Estos términos regulan el uso de la plataforma ClimaBalance.",
-      "paragraph": "ClimaBalance es una plataforma tecnológica que conecta Usuarios (que desean calcular y compensar su huella de carbono) con Socios/Colaboradores (personas físicas o jurídicas independientes, responsables de la plantación y mantenimiento de los árboles). ClimaBalance actúa estrictamente como intermediario tecnológico y facilitador de procesamiento de pagos; no posee directamente las tierras de compensación ni realiza la plantación física. Todas las proyecciones de captura de carbono son estimaciones basadas en modelos científicos."
+      "paragraph": "ClimaBalance es una plataforma tecnológica que conecta a individuos y organizaciones que buscan apoyar iniciativas de restauración ambiental (\"Usuarios\") con custodios de tierras, agricultores, organizaciones y profesionales de restauración independientes (\"Socios\") que realizan plantación de árboles, agroforestería, restauración ecológica y actividades ambientales relacionadas. ClimaBalance no posee tierras de restauración, no realiza directamente actividades de plantación ni actúa como empleador, contratista, socio de joint venture o agente de ningún Socio. La plataforma facilita el descubrimiento de proyectos, pagos, transparencia, monitoreo y documentación."
     },
     "sections": {
+      "electronicAcceptance": {
+        "title": "Aceptación Electrónica",
+        "body": "Al crear una cuenta, marcar una casilla de aceptación, hacer clic en \"Acepto\" o acceder o utilizar la Plataforma de cualquier otro modo, usted otorga su consentimiento electrónico a estos Términos de Uso. Si no está de acuerdo con estos Términos, no debe utilizar la Plataforma."
+      },
       "acceptance": {
         "title": "1. Aceptación de los Términos",
-        "body": "Al acceder o utilizar ClimaBalance, usted acepta estar sujeto a estos Términos de Uso. Si no está de acuerdo con estos términos, no utilice la plataforma."
+        "body": "Al acceder, navegar, registrarse o utilizar ClimaBalance, usted reconoce haber leído, comprendido y aceptado estar sujeto a estos Términos de Uso y a todas las leyes y regulaciones aplicables."
       },
-      "services": {
-        "title": "2. Descripción de los Servicios y Función de la Plataforma",
-        "body": "ClimaBalance proporciona un ecosistema digital para el cálculo de la huella de carbono, la conexión con proyectos de regeneración localizados y la emisión de certificados digitales. Modelo de Intermediación: Usted reconoce que ClimaBalance no presta directamente servicios de plantación de árboles. La plataforma le conecta con Socios/Colaboradores independientes que ejecutan el trabajo de regeneración. Estimaciones: Los valores, métricas de captura de carbono y proyecciones ambientales mostrados en la plataforma son estimaciones basadas en datos científicos y no constituyen una garantía estricta de resultados físicos o comerciales específicos."
+      "definitions": {
+        "title": "2. Definiciones",
+        "body": "\"Plataforma\" significa el sitio web, las aplicaciones, las API, el software, los paneles y todos los servicios tecnológicos relacionados proporcionados por ClimaBalance. \"Usuario\" significa cualquier individuo, entidad u organización que utilice la Plataforma para calcular métricas ambientales, ver proyectos o proporcionar financiamiento para actividades ambientales. \"Socio\" significa cualquier individuo independiente, custodio de tierras, agricultor, profesional o entidad que ofrezca, administre, documente o ejecute actividades de restauración ambiental a través de la Plataforma."
       },
-      "account": {
-        "title": "3. Cuenta de Usuario y de Socio",
-        "body": "Responsabilidad de la Cuenta: Usted es responsable de mantener la confidencialidad de sus credenciales de cuenta y de todas las actividades bajo su cuenta. Acepta proporcionar información verdadera, precisa y actualizada. Socios Independientes (Colaboradores): Si se registra como Socio/Colaborador para recibir fondos para la regeneración de tierras, declara expresamente que no existe relación laboral, joint venture o subordinación entre usted y ClimaBalance. Opera con total autonomía técnica y de plazos. Suspensión: ClimaBalance se reserva el derecho de suspender o cancelar cuentas que violen estos términos, cometan fraude o proporcionen identificación falsa (incluyendo CPF/RFC inválidos)."
+      "platformRole": {
+        "title": "3. Función de la Plataforma y Descripción de los Servicios",
+        "body": "ClimaBalance proporciona herramientas de cálculo de huella de carbono, descubrimiento de proyectos de restauración ambiental, mecanismos de conexión entre Usuarios y Socios independientes, facilitación de pagos, herramientas de monitoreo de proyectos, certificados digitales de participación e informes de datos ambientales. ClimaBalance actúa únicamente como intermediario tecnológico. ClimaBalance no: posee ni controla tierras de restauración; planta árboles directamente; emplea a Socios; supervisa actividades diarias de restauración; garantiza resultados ambientales; ni vende créditos de carbono regulados a menos que se indique expresamente lo contrario. Todas las actividades de restauración son realizadas de forma independiente por los Socios."
+      },
+      "estimates": {
+        "title": "4. Estimaciones Ambientales y Proyecciones Científicas",
+        "body": "Las métricas ambientales mostradas en la plataforma, incluyendo entre otras estimaciones de captura de carbono, cálculos de huella de carbono, proyecciones de compensación de carbono, proyecciones de crecimiento de árboles, indicadores de biodiversidad, indicadores de restauración de ecosistemas, índices de vegetación y evaluaciones de impacto ambiental, son estimaciones derivadas de metodologías científicas, modelos, supuestos, datos de teledetección, observaciones de campo e información proporcionada por los Socios. Dichas estimaciones son inherentemente inciertas y pueden variar sustancialmente de los resultados reales. ClimaBalance no garantiza el carbono realmente capturado, el almacenamiento futuro de carbono, el rendimiento del ecosistema, los resultados de biodiversidad, el impacto climático ni las tasas de éxito de la restauración."
+      },
+      "noGuarantee": {
+        "title": "5. Sin Garantía de Neutralidad de Carbono ni Regulatoria",
+        "body": "La participación en proyectos disponibles a través de ClimaBalance no garantiza la neutralidad de carbono, el estado de cero emisiones netas, el cumplimiento de compromisos ESG, el cumplimiento de marcos de reporte de sostenibilidad, el cumplimiento de regulaciones del mercado de carbono ni el cumplimiento de requisitos ambientales gubernamentales o internacionales. Los Usuarios son los únicos responsables de evaluar si la participación en algún proyecto satisface sus objetivos ambientales, comerciales, legales, regulatorios o de reporte."
+      },
+      "certificates": {
+        "title": "6. Certificados Digitales",
+        "body": "Los certificados emitidos por ClimaBalance son registros informativos destinados a documentar la participación en iniciativas de restauración ambiental. A menos que se indique expresamente lo contrario, los certificados no son créditos de carbono regulados, no son valores, no son instrumentos financieros, no son certificaciones gubernamentales, no son compensaciones de carbono verificadas de forma independiente y no son activos ambientales comercializables. Los certificados no representan derechos de propiedad sobre tierras, árboles, reservas de carbono, materias primas ambientales ni beneficios ambientales futuros."
+      },
+      "userAccounts": {
+        "title": "7. Cuentas de Usuario",
+        "body": "Los Usuarios se comprometen a proporcionar información precisa, mantener actualizada la información de la cuenta, proteger las credenciales de la cuenta y aceptar la responsabilidad por toda actividad realizada bajo sus cuentas. ClimaBalance puede suspender, restringir o cancelar cuentas que violen estos Términos, incurran en fraude, tergiversen la identidad, presenten información falsa o violen las leyes aplicables."
+      },
+      "aml": {
+        "title": "8. Prevención de Lavado de Dinero (ALD/AML) y Cumplimiento Normativo",
+        "body": "Los Usuarios y Socios se comprometen a no utilizar la Plataforma para lavado de dinero, financiamiento del terrorismo, fraude, evasión de sanciones ni ninguna actividad financiera ilícita. ClimaBalance puede suspender cuentas, retrasar pagos, solicitar verificación de identidad y corporativa, o reportar actividades sospechosas a las autoridades competentes e instituciones financieras cuando así lo exija la ley o las políticas de las pasarelas de pago."
+      },
+      "partnerAccounts": {
+        "title": "9. Cuentas de Socio y Estatus Independiente",
+        "body": "Los Socios operan de forma independiente y conservan el control total sobre sus actividades, cronogramas, metodologías y operaciones. Nada de lo contenido en estos Términos crea una relación laboral, de asociación, joint venture, franquicia, agencia o fiduciaria entre ClimaBalance y ningún Socio. Los Socios son los únicos responsables de los derechos de acceso a la tierra, permisos y licencias, cumplimiento legal, cumplimiento ambiental, obligaciones fiscales, ejecución del proyecto y documentación del proyecto."
+      },
+      "projectInfo": {
+        "title": "10. Información del Proyecto y Verificación",
+        "body": "Las descripciones de proyectos, fotografías, videos, coordenadas, datos de restauración, información de monitoreo y actualizaciones pueden ser proporcionadas por los Socios o generadas a través de sistemas automatizados. Aunque ClimaBalance puede proporcionar herramientas de transparencia y monitoreo, ClimaBalance no garantiza la precisión, autenticidad, integridad, legalidad ni confiabilidad de la información proporcionada por los Socios. Los Usuarios reconocen que confían en dicha información bajo su propio riesgo."
+      },
+      "risks": {
+        "title": "11. Supervivencia de Árboles y Riesgos Ambientales",
+        "body": "La plantación de árboles y la restauración ecológica implican una incertidumbre significativa. Los árboles pueden morir, dañarse, ser removidos, destruidos, cosechados, desplazados o no sobrevivir debido a factores como sequías, inundaciones, incendios, plagas, enfermedades, acciones humanas, animales de pastoreo, cambio climático, eventos climáticos extremos, cambios en el uso del suelo, desastres naturales o eventos de fuerza mayor. ClimaBalance no garantiza la supervivencia, permanencia, mantenimiento o condición futura de ningún árbol plantado o actividad de restauración."
       },
       "payments": {
-        "title": "4. Pagos, División de Tarifas y Tributación",
-        "body": "Procesamiento de Pagos: Todas las transacciones se procesan de forma segura a través de Stripe. Mecanismo de División: Cuando un Usuario paga por una compensación, Stripe divide automáticamente los fondos: una tarifa de tecnología y facilitación (el porcentaje de la plataforma) se dirige a ClimaBalance, y el saldo restante (el fondo directo de regeneración) se transfiere directamente a la cuenta conectada del Socio independiente designado. Tributación y Facturación (Internacional y Nacional): ClimaBalance emitirá una Factura/Nota Fiscal formal únicamente por su porcentaje de intermediación tecnológica (la tarifa retenida por la plataforma). Por la parte restante del pago transferida al Socio, la plataforma generará automáticamente un Recibo/Factura en nombre del Socio para el Usuario. Los Socios (personas físicas/CPF) son los únicos responsables de declarar sus respectivos ingresos a las autoridades fiscales locales (como Carnê-Leão/Impuesto a la Renta en Brasil). Reembolsos y Contracargos: Los reembolsos siguen la política específica del proyecto elegido. En caso de disputa de tarjeta de crédito o contracargo iniciado por un Usuario debido al incumplimiento del Socio de entregar o probar la plantación, ClimaBalance se reserva el derecho de retener pagos futuros de ese Socio específico para cubrir las pérdidas de procesamiento."
+        "title": "12. Pagos, Tarifas y Servicios de Stripe",
+        "body": "Los pagos se procesan a través de Stripe y otros proveedores de pago autorizados. Los Usuarios autorizan a ClimaBalance y a sus proveedores de pago a procesar los pagos necesarios para completar las transacciones. La plataforma retiene una tarifa de tecnología y facilitación por sus servicios de intermediación. Al completar una transacción, los Usuarios y Socios reconocen y aceptan que los pagos se dividen directamente a nivel de procesamiento a través de Stripe, lo que significa que la porción destinada al Socio les pertenece exclusivamente desde el momento de la transacción y no constituye ingreso bruto para ClimaBalance. ClimaBalance no retiene fondos como banco, institución financiera, proveedor de custodia, gestor de inversiones ni fiduciario."
       },
-      "content": {
-        "title": "5. Contenido y Propiedad Intelectual",
-        "body": "Toda la infraestructura de la plataforma, algoritmos, calculadoras de carbono, logotipos y software son propiedad exclusiva de ClimaBalance o de sus licenciantes. Los Socios otorgan a ClimaBalance una licencia mundial, libre de regalías, para mostrar fotos, coordenadas y actualizaciones de los proyectos en la plataforma con fines de transparencia y verificación."
+      "taxes": {
+        "title": "13. Impuestos y Declaración Fiscal",
+        "body": "ClimaBalance es responsable únicamente de los impuestos aplicables a sus propias tarifas de servicio según lo exija la ley. ClimaBalance emitirá un documento fiscal formal (Nota Fiscal) que cubra exclusivamente sus tarifas retenidas de tecnología y facilitación. Por los fondos restantes transferidos al Socio, la plataforma podrá generar registros informativos no fiscales, resúmenes de transacciones o documentación de respaldo basada en la información proporcionada por el Socio. Los Socios son los únicos responsables de declarar ingresos, pagar impuestos, mantener registros contables y cumplir con las obligaciones fiscales en sus jurisdicciones. Los Usuarios son responsables de determinar el tratamiento fiscal aplicable a sus transacciones."
+      },
+      "refunds": {
+        "title": "14. Reembolsos, Disputas y Contracargos",
+        "body": "La elegibilidad para reembolsos puede variar según el proyecto específico y las leyes aplicables. Cuando la ley lo permita, ClimaBalance puede denegar solicitudes de reembolso, compensar pérdidas derivadas de contracargos, retener pagos futuros a Socios y recuperar los costos de procesamiento de transacciones. ClimaBalance conserva la facultad discrecional exclusiva respecto a la investigación de disputas y las soluciones a nivel de plataforma."
+      },
+      "intellectualProperty": {
+        "title": "15. Propiedad Intelectual",
+        "body": "Todo el software, bases de datos, código fuente, interfaces, diseños, marcas comerciales, logotipos, contenido, algoritmos, calculadoras de carbono, metodologías e infraestructura de la plataforma pertenecen a ClimaBalance o a sus licenciantes. No se transfieren derechos de propiedad a los Usuarios ni a los Socios. Los Socios otorgan a ClimaBalance una licencia mundial, no exclusiva y libre de regalías para almacenar, mostrar, reproducir, distribuir, publicar y promover el contenido relacionado con los proyectos enviado a la plataforma."
+      },
+      "privacy": {
+        "title": "16. Privacidad y Uso de Datos",
+        "body": "El uso de la plataforma también se rige por la Política de Privacidad de ClimaBalance. Al utilizar la plataforma, los Usuarios y Socios otorgan su consentimiento para la recopilación, procesamiento, almacenamiento y uso de la información según lo descrito en dicha política."
+      },
+      "disclaimer": {
+        "title": "17. Exclusión de Garantías",
+        "body": "LA PLATAFORMA SE PROPORCIONA \"TAL CUAL\" Y \"SEGÚN DISPONIBILIDAD\". EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, CLIMABALANCE RENUNCIA A TODAS LAS GARANTÍAS, EXPRESAS O IMPLÍCITAS, INCLUYENDO LAS GARANTÍAS DE COMERCIABILIDAD, IDONEIDAD PARA UN FIN PARTICULAR, NO INFRACCIÓN, PRECISIÓN, DISPONIBILIDAD, CONFIABILIDAD O RENDIMIENTO. CLIMABALANCE NO GARANTIZA QUE LA PLATAFORMA SEA ININTERRUMPIDA, LIBRE DE ERRORES, SEGURA O ESTÉ LIBRE DE COMPONENTES DAÑINOS."
       },
       "liability": {
-        "title": "6. Limitación de Responsabilidad",
-        "body": "ClimaBalance actúa como intermediario tecnológico y no será responsable por: Cualquier daño indirecto, incidental o consecuente derivado del uso de la plataforma. Desastres naturales, anomalías climáticas o eventos de fuerza mayor que puedan afectar la supervivencia física de los árboles plantados por los Socios. Inestabilidad temporal de la plataforma o tiempo de inactividad del servidor. Límite de Responsabilidad: En cualquier caso, la responsabilidad total de ClimaBalance ante cualquier usuario o socio se limitará estrictamente al monto de las tarifas de intermediación retenidas por la plataforma de las transacciones de ese usuario específico durante los tres (3) meses anteriores."
+        "title": "18. Limitación de Responsabilidad",
+        "body": "EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, CLIMABALANCE NO SERÁ RESPONSABLE POR DAÑOS INDIRECTOS, CONSECUENTES, INCIDENTALES, ESPECIALES, PUNITIVOS, PÉRDIDA DE GANANCIAS, PÉRDIDA DE OPORTUNIDADES, DAÑO REPUTACIONAL, PÉRDIDAS AMBIENTALES, SANCIONES REGULATORIAS NI RECLAMOS RELACIONADOS CON ESG. EN NINGÚN CASO LA RESPONSABILIDAD TOTAL DE CLIMABALANCE EXCEDERÁ EL TOTAL DE LAS TARIFAS DE LA PLATAFORMA RETENIDAS POR CLIMABALANCE DE LAS TRANSACCIONES DEL USUARIO PERTINENTE DURANTE LOS TRES (3) MESES ANTERIORES AL RECLAMO."
+      },
+      "indemnification": {
+        "title": "19. Indemnización",
+        "body": "Los Usuarios y Socios se comprometen a defender, indemnizar y mantener exentos a ClimaBalance, sus fundadores, voluntarios, colaboradores, afiliados, licenciantes, proveedores de servicios, directores, funcionarios y representantes de cualquier reclamo, pérdida, responsabilidad, daño, sentencia, sanción, costo y gasto, incluidos honorarios razonables de abogados, que surjan de: violación de estos Términos; uso indebido de la plataforma; información de proyecto falsa o engañosa; reclamos ambientales realizados por Usuarios o Socios; violaciones fiscales; violaciones regulatorias; infracción de propiedad intelectual; disputas entre Usuarios y Socios; o actividades ilegales o no autorizadas."
+      },
+      "classAction": {
+        "title": "20. Renuncia a Acciones Colectivas",
+        "body": "En la máxima medida permitida por la ley aplicable, los Usuarios y Socios aceptan que cualquier reclamo se presentará únicamente a título individual y no como parte de una acción colectiva, acción conjunta, acción representativa o procedimiento similar."
+      },
+      "compliance": {
+        "title": "21. Cumplimiento de Leyes",
+        "body": "Los Usuarios y Socios son los únicos responsables del cumplimiento de todas las leyes, regulaciones, permisos, obligaciones de reporte, requisitos ambientales, obligaciones fiscales y deberes legales aplicables en sus jurisdicciones."
       },
       "termination": {
-        "title": "7. Terminación",
-        "body": "Los Usuarios y Socios pueden cancelar sus cuentas en cualquier momento a través de la aplicación o mediante solicitud por escrito. ClimaBalance puede suspender o cancelar cuentas que violen estos términos inmediatamente mediante notificación."
+        "title": "22. Terminación y Supervivencia",
+        "body": "Los Usuarios y Socios pueden cancelar sus cuentas en cualquier momento. ClimaBalance puede suspender, restringir o cancelar el acceso de inmediato cuando sea necesario para proteger la plataforma, prevenir fraudes, cumplir con obligaciones legales o hacer cumplir estos Términos. Las disposiciones relativas a propiedad intelectual, obligaciones de pago, indemnización, limitación de responsabilidad, resolución de disputas, ley aplicable, cumplimiento de sanciones, ALD/AML y cualquier disposición que por su naturaleza deba sobrevivir a la terminación permanecerán en pleno vigor y efecto después de cualquier terminación o expiración de estos Términos."
       },
       "governingLaw": {
-        "title": "8. Ley Aplicable y Jurisdicción",
-        "body": "Estos Términos de Uso se rigen e interpretan de acuerdo con las leyes de la República Federativa de Brasil. Cualquier disputa legal, reclamo o procedimiento que surja de o en relación con estos términos se someterá exclusivamente a los tribunales de Brasília, DF, Brasil, independientemente del país de residencia del usuario o socio."
+        "title": "23. Ley Aplicable y Jurisdicción",
+        "body": "Estos Términos se regirán e interpretarán de acuerdo con las leyes de la República Federativa de Brasil. Cualquier disputa que surja de o se relacione con estos Términos se someterá exclusivamente a los tribunales ubicados en Brasília, Distrito Federal, Brasil. Los Usuarios y Socios renuncian expresamente a cualquier objeción basada en sede, jurisdicción o foro no conveniente."
       },
       "changes": {
-        "title": "9. Cambios en los Términos",
-        "body": "Estos términos pueden actualizarse periódicamente para reflejar nuevas funciones o requisitos legales. Los cambios significativos se comunicarán por correo electrónico o notificación en la aplicación."
+        "title": "24. Cambios en estos Términos",
+        "body": "ClimaBalance puede modificar estos Términos en cualquier momento. Las versiones actualizadas se publicarán en la plataforma. El uso continuado de la plataforma después de la publicación constituye la aceptación de los Términos revisados."
       },
       "contact": {
-        "title": "10. Contacto",
-        "body": "¿Preguntas sobre estos términos? Contáctenos en: termos@climabalance.com"
+        "title": "25. Información de Contacto",
+        "body": "Las preguntas sobre estos Términos pueden dirigirse a: ClimaBalance. Correo electrónico: termos@climabalance.com. Sitio web: https://climabalance.com"
       }
     },
     "footer": {

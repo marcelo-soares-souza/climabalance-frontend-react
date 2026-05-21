@@ -585,49 +585,112 @@
     },
     "summary": {
       "label": "Summary",
-      "title": "These terms govern the use of the ClimaBalance platform.",
-      "paragraph": "ClimaBalance is a technology platform that connects Users (who wish to calculate and offset their carbon footprint) with Partners/Collaborators (independent individuals or entities responsible for the actual planting and maintenance of trees). ClimaBalance acts strictly as an intermediary technology provider and payment processor facilitator; it does not directly own the offset lands or perform the physical planting. All carbon capture projections are estimates based on scientific models."
+      "paragraph": "ClimaBalance is a technology platform that connects individuals and organizations seeking to support environmental restoration initiatives (\"Users\") with independent land stewards, farmers, organizations, and restoration practitioners (\"Partners\") who carry out tree planting, agroforestry, ecological restoration, and related environmental activities. ClimaBalance does not own restoration lands, does not directly perform planting activities, and does not act as an employer, contractor, joint venture partner, or agent of any Partner. The platform facilitates project discovery, payments, transparency, monitoring, and documentation."
     },
     "sections": {
+      "electronicAcceptance": {
+        "title": "Electronic Acceptance",
+        "body": "By creating an account, checking an acceptance box, clicking \"I Agree\", or otherwise accessing or using the Platform, you consent to these Terms of Use electronically. If you do not agree with these Terms, you must not use the Platform."
+      },
       "acceptance": {
         "title": "1. Acceptance of Terms",
-        "body": "By accessing or using ClimaBalance, you agree to be bound by these Terms of Use. If you do not agree to these terms, do not use the platform."
+        "body": "By accessing, browsing, registering for, or using ClimaBalance, you acknowledge that you have read, understood, and agreed to be bound by these Terms of Use and all applicable laws and regulations."
       },
-      "services": {
-        "title": "2. Service Description and Platform Role",
-        "body": "ClimaBalance provides a digital ecosystem for carbon footprint calculation, connection to localized regeneration projects, and digital certificate issuance. The Intermediation Model: You acknowledge that ClimaBalance does not directly provide tree planting services. The platform connects you with independent Partners/Collaborators who execute the regeneration work. Estimates: Values, carbon capture metrics, and environmental projections displayed on the platform are estimates based on scientific data and do not constitute a strict guarantee of specific physical or commercial results."
+      "definitions": {
+        "title": "2. Definitions",
+        "body": "\"Platform\" means the ClimaBalance website, applications, APIs, software, dashboards, and all related technology services provided by ClimaBalance. \"User\" means any individual, entity, or organization using the Platform to calculate environmental metrics, view projects, or provide funding for environmental activities. \"Partner\" means any independent individual, land steward, farmer, practitioner, or entity that offers, manages, documents, or executes environmental restoration activities through the Platform."
       },
-      "account": {
-        "title": "3. User & Partner Accounts",
-        "body": "Account Responsibility: You are responsible for maintaining the confidentiality of your account credentials and for all activities under your account. You agree to provide true, accurate, and up-to-date information. Independent Partners (Collaborators): If you register as a Partner/Collaborator to receive funds for land regeneration, you expressly declare that no employment relationship, joint venture, or subordination exists between you and ClimaBalance. You operate with total technical and schedule autonomy. Suspension: ClimaBalance reserves the right to suspend or terminate accounts that violate these terms, engage in fraud, or provide false identification (including invalid Tax IDs/CPFs)."
+      "platformRole": {
+        "title": "3. Platform Role and Service Description",
+        "body": "ClimaBalance provides carbon footprint calculation tools, environmental restoration project discovery, connection mechanisms between Users and independent Partners, payment facilitation, project monitoring tools, digital participation certificates, and environmental data reporting. ClimaBalance acts solely as a technology intermediary. ClimaBalance does not: own or control restoration lands; directly plant trees; employ Partners; supervise day-to-day restoration activities; guarantee environmental outcomes; or sell regulated carbon credits unless explicitly stated otherwise. All restoration activities are performed independently by Partners."
+      },
+      "estimates": {
+        "title": "4. Environmental Estimates and Scientific Projections",
+        "body": "Environmental metrics displayed on the platform, including but not limited to carbon sequestration estimates, carbon footprint calculations, carbon offset projections, tree growth projections, biodiversity indicators, ecosystem restoration indicators, vegetation indices, and environmental impact assessments, are estimates derived from scientific methodologies, models, assumptions, remote sensing data, field observations, and Partner-provided information. Such estimates are inherently uncertain and may vary substantially from actual results. ClimaBalance makes no guarantee regarding actual carbon captured, future carbon storage, ecosystem performance, biodiversity outcomes, climate impact, or restoration success rates."
+      },
+      "noGuarantee": {
+        "title": "5. No Carbon Neutrality or Regulatory Guarantee",
+        "body": "Participation in projects available through ClimaBalance does not guarantee carbon neutrality, net-zero status, compliance with ESG commitments, compliance with sustainability reporting frameworks, compliance with carbon market regulations, or compliance with governmental or international environmental requirements. Users are solely responsible for evaluating whether participation in any project satisfies their environmental, commercial, legal, regulatory, or reporting objectives."
+      },
+      "certificates": {
+        "title": "6. Digital Certificates",
+        "body": "Certificates issued by ClimaBalance are informational records intended to document participation in environmental restoration initiatives. Unless explicitly stated otherwise, certificates are not regulated carbon credits, are not securities, are not financial instruments, are not government certifications, are not independently verified carbon offsets, and are not tradable environmental assets. Certificates do not represent ownership rights over land, trees, carbon stocks, environmental commodities, or future environmental benefits."
+      },
+      "userAccounts": {
+        "title": "7. User Accounts",
+        "body": "Users agree to provide accurate information, maintain current account information, protect account credentials, and accept responsibility for all activity conducted under their accounts. ClimaBalance may suspend, restrict, or terminate accounts that violate these Terms, engage in fraud, misrepresent identity, submit false information, or violate applicable laws."
+      },
+      "aml": {
+        "title": "8. Anti-Money Laundering (AML) and Compliance",
+        "body": "Users and Partners agree not to use the Platform for money laundering, terrorist financing, fraud, sanctions evasion, or any unlawful financial activity. ClimaBalance may suspend accounts, delay payouts, request identity and corporate verification, or report suspicious activity to competent authorities and financial institutions where required by law or gateway policies."
+      },
+      "partnerAccounts": {
+        "title": "9. Partner Accounts and Independent Status",
+        "body": "Partners operate independently and retain full control over their activities, schedules, methodologies, and operations. Nothing contained in these Terms creates employment, partnership, joint venture, franchise, agency relationship, or fiduciary relationship between ClimaBalance and any Partner. Partners are solely responsible for land access rights, permits and licenses, legal compliance, environmental compliance, tax obligations, project execution, and project documentation."
+      },
+      "projectInfo": {
+        "title": "10. Project Information and Verification",
+        "body": "Project descriptions, photographs, videos, coordinates, restoration data, monitoring information, and updates may be supplied by Partners or generated through automated systems. Although ClimaBalance may provide transparency and monitoring tools, ClimaBalance does not guarantee the accuracy, authenticity, completeness, legality, or reliability of any Partner-provided information. Users acknowledge that they rely on such information at their own risk."
+      },
+      "risks": {
+        "title": "11. Tree Survival and Environmental Risks",
+        "body": "Tree planting and ecological restoration involve significant uncertainty. Trees may die, be damaged, removed, destroyed, harvested, displaced, or otherwise fail to survive due to factors including drought, floods, fires, pests, disease, human actions, grazing animals, climate change, extreme weather events, land-use changes, natural disasters, or force majeure events. ClimaBalance does not guarantee the survival, permanence, maintenance, or future condition of any planted tree or restoration activity."
       },
       "payments": {
-        "title": "4. Payments, Split Fees, and Taxation",
-        "body": "Payment Processing: All transactions are processed securely via Stripe. The Split Mechanism: When a User pays for an offset, Stripe automatically splits the funds: a technology and facilitation fee (the platform percentage) is directed to ClimaBalance, and the remaining balance (the direct regeneration fund) is transferred directly to the designated independent Partner's connected account. Taxation & Invoicing (International & Domestic): ClimaBalance will issue a formal Invoice/Nota Fiscal solely for its technology intermediation percentage (the fee retained by the platform). For the remaining portion of the payment transferred to the Partner, the platform will automatically generate a digital Receipt/Invoice on behalf of the Partner to the User. Partners (individuals/CPFs) are solely responsible for declaring their respective earnings to their local tax authorities (such as Carnê-Leão/Imposto de Renda in Brazil). Refunds & Chargebacks: Refunds follow the specific policy of the chosen project. In the event of a credit card dispute or chargeback initiated by a User due to a Partner's failure to deliver or prove the planting, ClimaBalance reserves the right to withhold future payouts from that specific Partner to cover the processing losses."
+        "title": "12. Payments, Fees, and Stripe Services",
+        "body": "Payments are processed through Stripe and other authorized payment providers. Users authorize ClimaBalance and its payment providers to process payments necessary to complete transactions. The platform retains a technology and facilitation fee for its intermediation services. By completing a transaction, Users and Partners acknowledge and agree that payments are split directly at the processing level via Stripe, meaning the portion destined to the Partner belongs exclusively to them from the moment of transaction and does not constitute gross revenue for ClimaBalance. ClimaBalance does not hold funds as a bank, financial institution, escrow provider, investment manager, or fiduciary."
       },
-      "content": {
-        "title": "5. Content and Intellectual Property",
-        "body": "All platform infrastructure, algorithms, carbon calculators, logos, and software are the exclusive property of ClimaBalance or its licensors. Partners grant ClimaBalance a worldwide, royalty-free license to display project photos, coordinates, and updates within the platform for transparency and verification purposes."
+      "taxes": {
+        "title": "13. Taxes and Reporting",
+        "body": "ClimaBalance is responsible only for taxes applicable to its own service fees as required by law. ClimaBalance will issue a formal tax document (Nota Fiscal) solely covering its retained technology and facilitation fees. For the remaining funds transferred to the Partner, the platform may generate non-fiscal informational records, transaction summaries, or supporting documentation based on information supplied by the Partner. Partners are solely responsible for reporting income, paying taxes, maintaining accounting records, and complying with tax obligations in their jurisdictions. Users are responsible for determining any tax treatment applicable to their transactions."
+      },
+      "refunds": {
+        "title": "14. Refunds, Disputes, and Chargebacks",
+        "body": "Refund eligibility may vary depending on the specific project and applicable laws. Where permitted by law, ClimaBalance may deny refund requests, offset losses arising from chargebacks, withhold future Partner payouts, and recover transaction processing costs. ClimaBalance retains sole discretion regarding dispute investigation and platform-level remedies."
+      },
+      "intellectualProperty": {
+        "title": "15. Intellectual Property",
+        "body": "All software, databases, source code, interfaces, designs, trademarks, logos, content, algorithms, carbon calculators, methodologies, and platform infrastructure belong to ClimaBalance or its licensors. No ownership rights are transferred to Users or Partners. Partners grant ClimaBalance a worldwide, non-exclusive, royalty-free license to store, display, reproduce, distribute, publish, and promote project-related content submitted to the platform."
+      },
+      "privacy": {
+        "title": "16. Privacy and Data Usage",
+        "body": "Use of the platform is also governed by the ClimaBalance Privacy Policy. By using the platform, Users and Partners consent to the collection, processing, storage, and use of information as described in that policy."
+      },
+      "disclaimer": {
+        "title": "17. Disclaimer of Warranties",
+        "body": "THE PLATFORM IS PROVIDED ON AN \"AS IS\" AND \"AS AVAILABLE\" BASIS. TO THE MAXIMUM EXTENT PERMITTED BY LAW, CLIMABALANCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ACCURACY, AVAILABILITY, RELIABILITY, OR PERFORMANCE. CLIMABALANCE DOES NOT WARRANT THAT THE PLATFORM WILL BE UNINTERRUPTED, ERROR-FREE, SECURE, OR FREE OF HARMFUL COMPONENTS."
       },
       "liability": {
-        "title": "6. Limitation of Liability",
-        "body": "ClimaBalance acts as a technology intermediary and shall not be held liable for: Any indirect, incidental, or consequential damages arising from platform usage. Natural disasters, climate anomalies, or force majeure events that may affect the physical survival of the trees planted by Partners. Temporary platform instability or server downtimes. Liability Cap: In any event, ClimaBalance's total liability to any user or partner shall be strictly limited to the amount of intermediation fees retained by the platform from that specific user's transactions during the preceding three (3) months."
+        "title": "18. Limitation of Liability",
+        "body": "TO THE MAXIMUM EXTENT PERMITTED BY LAW, CLIMABALANCE SHALL NOT BE LIABLE FOR INDIRECT, CONSEQUENTIAL, INCIDENTAL, SPECIAL, PUNITIVE DAMAGES, LOST PROFITS, LOST OPPORTUNITIES, REPUTATIONAL HARM, ENVIRONMENTAL LOSSES, REGULATORY PENALTIES, OR ESG-RELATED CLAIMS. IN NO EVENT SHALL CLIMABALANCE'S TOTAL LIABILITY EXCEED THE TOTAL PLATFORM FEES RETAINED BY CLIMABALANCE FROM THE RELEVANT USER'S TRANSACTIONS DURING THE THREE (3) MONTHS PRECEDING THE CLAIM."
+      },
+      "indemnification": {
+        "title": "19. Indemnification",
+        "body": "Users and Partners agree to defend, indemnify, and hold harmless ClimaBalance, its founders, volunteers, contributors, affiliates, licensors, service providers, officers, directors, and representatives from any claims, losses, liabilities, damages, judgments, penalties, costs, and expenses, including reasonable attorneys' fees, arising from: violation of these Terms; misuse of the platform; false or misleading project information; environmental claims made by Users or Partners; tax violations; regulatory violations; intellectual property infringement; disputes between Users and Partners; or illegal or unauthorized activities."
+      },
+      "classAction": {
+        "title": "20. Class Action Waiver",
+        "body": "To the maximum extent permitted by applicable law, Users and Partners agree that any claim shall be brought solely in their individual capacity and not as part of any class action, collective action, representative action, or similar proceeding."
+      },
+      "compliance": {
+        "title": "21. Compliance with Laws",
+        "body": "Users and Partners are solely responsible for compliance with all laws, regulations, permits, reporting obligations, environmental requirements, tax obligations, and legal duties applicable in their jurisdictions."
       },
       "termination": {
-        "title": "7. Termination",
-        "body": "Users and Partners may terminate their accounts at any time through the app or by written request. ClimaBalance may suspend or terminate accounts that violate these terms immediately upon notice."
+        "title": "22. Termination and Survival",
+        "body": "Users and Partners may terminate their accounts at any time. ClimaBalance may suspend, restrict, or terminate access immediately when necessary to protect the platform, prevent fraud, comply with legal obligations, or enforce these Terms. The provisions relating to intellectual property, payment obligations, indemnification, limitation of liability, dispute resolution, governing law, sanctions compliance, AML, and any provisions that by their nature should survive termination shall remain in full force and effect after any termination or expiration of these Terms."
       },
       "governingLaw": {
-        "title": "8. Governing Law and Jurisdiction",
-        "body": "These Terms of Use are governed by and construed in accordance with the laws of the Federative Republic of Brazil. Any legal disputes, claims, or proceedings arising out of or in connection with these terms shall be brought exclusively before the courts of Brasília, DF, Brazil, regardless of the user's or partner's country of residence."
+        "title": "23. Governing Law and Jurisdiction",
+        "body": "These Terms shall be governed by and construed in accordance with the laws of the Federative Republic of Brazil. Any dispute arising from or relating to these Terms shall be exclusively submitted to the courts located in Brasília, Federal District, Brazil. Users and Partners expressly waive any objection based on venue, jurisdiction, or forum non conveniens."
       },
       "changes": {
-        "title": "9. Changes to Terms",
-        "body": "These terms may be updated periodically to reflect new features or legal requirements. Material changes will be communicated via email or in-app notification."
+        "title": "24. Changes to These Terms",
+        "body": "ClimaBalance may modify these Terms at any time. Updated versions will be published on the platform. Continued use of the platform after publication constitutes acceptance of the revised Terms."
       },
       "contact": {
-        "title": "10. Contact",
-        "body": "Questions regarding these terms? Please contact us at: termos@climabalance.com"
+        "title": "25. Contact Information",
+        "body": "Questions regarding these Terms may be directed to: ClimaBalance. Email: termos@climabalance.com. Website: https://climabalance.com"
       }
     },
     "footer": {
