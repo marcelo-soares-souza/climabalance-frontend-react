@@ -9,6 +9,7 @@ import {
   ShieldCheck,
   AlertTriangle,
   Ban,
+  Scale,
   RefreshCw,
   Mail,
 } from "lucide-react";
@@ -51,6 +52,11 @@ export function TermsOfUsePage() {
       icon: <Ban className="h-5 w-5 text-purple-700" />,
       title: t("termsOfUse.sections.termination.title"),
       paragraphs: [t("termsOfUse.sections.termination.body")],
+    },
+    {
+      icon: <Scale className="h-5 w-5 text-cyan-700" />,
+      title: t("termsOfUse.sections.governingLaw.title"),
+      paragraphs: [t("termsOfUse.sections.governingLaw.body")],
     },
     {
       icon: <RefreshCw className="h-5 w-5 text-indigo-700" />,
