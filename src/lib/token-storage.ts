@@ -1,13 +1,13 @@
-const ACCESS_TOKEN_KEY = "cb_access_token";
+let accessToken: string | null = null;
 
 export const tokenStorage = {
   getAccessToken(): string | null {
-    return sessionStorage.getItem(ACCESS_TOKEN_KEY);
+    return accessToken;
   },
   setAccessToken(token: string): void {
-    sessionStorage.setItem(ACCESS_TOKEN_KEY, token);
+    accessToken = token;
   },
   clear(): void {
-    sessionStorage.removeItem(ACCESS_TOKEN_KEY);
+    accessToken = null;
   },
 };

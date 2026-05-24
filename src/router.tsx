@@ -1,3 +1,4 @@
+import { lazy, type ComponentType } from "react";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { AppShell } from "@/components/layout/AppShell";
 import { AuthGuard } from "@/components/AuthGuard";
@@ -13,51 +14,24 @@ import { PasswordResetConfirmPage } from "@/features/auth/PasswordResetConfirmPa
 // Home
 import { HomePage } from "@/features/home/HomePage";
 import { AboutPage } from "@/features/about/AboutPage";
-import { HowToUsePlatformPage } from "@/features/how-to-use/HowToUsePlatformPage";
 import { PrivacyPolicyPage } from "@/features/privacy/PrivacyPolicyPage";
 import { TermsOfUsePage } from "@/features/privacy/TermsOfUsePage";
 import { PrivacyPage } from "@/features/privacy/PrivacyPage";
 import { OnboardingPage } from "@/features/onboarding/OnboardingPage";
 
 // Footprint
-import { CalculatorPage } from "@/features/footprint/CalculatorPage";
-import { HistoryPage } from "@/features/footprint/HistoryPage";
-import { CalculationDetailPage } from "@/features/footprint/CalculationDetailPage";
 import { EmbedCalculatorPage } from "@/features/footprint/EmbedCalculatorPage";
 import { EmbedDemoPage } from "@/features/footprint/EmbedDemoPage";
 
 // Map & Areas
-import { MapPage } from "@/features/map/MapPage";
-import { AreaDetailPage } from "@/features/map/AreaDetailPage";
-import { TreePlantingPage } from "@/features/map/TreePlantingPage";
-import { AreaListPage } from "@/features/map/AreaListPage";
-import { AvailableAreasPage } from "@/features/map/AvailableAreasPage";
-import { AreaFormPage } from "@/features/map/AreaFormPage";
-import { PendingAreasPage } from "@/features/map/PendingAreasPage";
-import { AreaAuditPage } from "@/features/map/AreaAuditPage";
 import { PublicAreasPage } from "@/features/map/PublicAreasPage";
 
 // Compensation
-import { CompensationReviewPage } from "@/features/compensation/ReviewPage";
-import { CompensationCheckoutPage } from "@/features/compensation/CheckoutPage";
-import { CompensationReportPage } from "@/features/compensation/ReportPage";
-import { CompensationHistoryPage } from "@/features/compensation/HistoryPage";
-import { PixPaymentPage } from "@/features/compensation/PixPaymentPage";
 import { GuestCalculatorPage } from "@/features/footprint/GuestCalculatorPage";
 import { TripCalculatorPage } from "@/features/footprint/TripCalculatorPage";
-import { StripeSetupPage } from "@/features/how-to-use/StripeSetupPage";
-import { StripePlatformSetupPage } from "@/features/how-to-use/StripePlatformSetupPage";
 
 // Profile
-import { ProfilePage } from "@/features/profile/ProfilePage";
-import { ProfileEditPage } from "@/features/profile/ProfileEditPage";
-import { CertificatesPage } from "@/features/profile/CertificatesPage";
-import { SessionsPage } from "@/features/profile/SessionsPage";
-
-// Admin
-import { AdminUsersPage } from "@/features/admin/AdminUsersPage";
 import { UserEditPage } from "@/features/admin/UserEditPage";
-import { AuditLogPage } from "@/features/admin/AuditLogPage";
 
 // Certificates
 import { CertificateValidationPage } from "@/features/certificates/CertificateValidationPage";
@@ -68,6 +42,117 @@ import { UserDirectoryPage } from "@/features/directory/UserDirectoryPage";
 
 // Shared
 import { AccessDeniedPage } from "@/features/shared/AccessDeniedPage";
+
+function lazyNamedPage<TModule, TKey extends keyof TModule & string>(
+  loader: () => Promise<TModule>,
+  key: TKey,
+) {
+  return lazy(async () => {
+    const module = await loader();
+    return { default: module[key] as ComponentType };
+  });
+}
+
+const HowToUsePlatformPage = lazyNamedPage(
+  () => import("@/features/how-to-use/HowToUsePlatformPage"),
+  "HowToUsePlatformPage",
+);
+const CalculatorPage = lazyNamedPage(
+  () => import("@/features/footprint/CalculatorPage"),
+  "CalculatorPage",
+);
+const HistoryPage = lazyNamedPage(
+  () => import("@/features/footprint/HistoryPage"),
+  "HistoryPage",
+);
+const CalculationDetailPage = lazyNamedPage(
+  () => import("@/features/footprint/CalculationDetailPage"),
+  "CalculationDetailPage",
+);
+const MapPage = lazyNamedPage(
+  () => import("@/features/map/MapPage"),
+  "MapPage",
+);
+const AreaDetailPage = lazyNamedPage(
+  () => import("@/features/map/AreaDetailPage"),
+  "AreaDetailPage",
+);
+const TreePlantingPage = lazyNamedPage(
+  () => import("@/features/map/TreePlantingPage"),
+  "TreePlantingPage",
+);
+const AreaListPage = lazyNamedPage(
+  () => import("@/features/map/AreaListPage"),
+  "AreaListPage",
+);
+const AvailableAreasPage = lazyNamedPage(
+  () => import("@/features/map/AvailableAreasPage"),
+  "AvailableAreasPage",
+);
+const AreaFormPage = lazyNamedPage(
+  () => import("@/features/map/AreaFormPage"),
+  "AreaFormPage",
+);
+const PendingAreasPage = lazyNamedPage(
+  () => import("@/features/map/PendingAreasPage"),
+  "PendingAreasPage",
+);
+const AreaAuditPage = lazyNamedPage(
+  () => import("@/features/map/AreaAuditPage"),
+  "AreaAuditPage",
+);
+const CompensationReviewPage = lazyNamedPage(
+  () => import("@/features/compensation/ReviewPage"),
+  "CompensationReviewPage",
+);
+const CompensationCheckoutPage = lazyNamedPage(
+  () => import("@/features/compensation/CheckoutPage"),
+  "CompensationCheckoutPage",
+);
+const CompensationReportPage = lazyNamedPage(
+  () => import("@/features/compensation/ReportPage"),
+  "CompensationReportPage",
+);
+const CompensationHistoryPage = lazyNamedPage(
+  () => import("@/features/compensation/HistoryPage"),
+  "CompensationHistoryPage",
+);
+const PixPaymentPage = lazyNamedPage(
+  () => import("@/features/compensation/PixPaymentPage"),
+  "PixPaymentPage",
+);
+const StripeSetupPage = lazyNamedPage(
+  () => import("@/features/how-to-use/StripeSetupPage"),
+  "StripeSetupPage",
+);
+const StripePlatformSetupPage = lazyNamedPage(
+  () => import("@/features/how-to-use/StripePlatformSetupPage"),
+  "StripePlatformSetupPage",
+);
+const ProfilePage = lazyNamedPage(
+  () => import("@/features/profile/ProfilePage"),
+  "ProfilePage",
+);
+const ProfileEditPage = lazyNamedPage(
+  () => import("@/features/profile/ProfileEditPage"),
+  "ProfileEditPage",
+);
+const CertificatesPage = lazyNamedPage(
+  () => import("@/features/profile/CertificatesPage"),
+  "CertificatesPage",
+);
+const SessionsPage = lazyNamedPage(
+  () => import("@/features/profile/SessionsPage"),
+  "SessionsPage",
+);
+const AdminUsersPage = lazyNamedPage(
+  () => import("@/features/admin/AdminUsersPage"),
+  "AdminUsersPage",
+);
+const AuditLogPage = lazyNamedPage(
+  () => import("@/features/admin/AuditLogPage"),
+  "AuditLogPage",
+);
 
 export const router = createBrowserRouter([
   // Embed routes (no shell)
