@@ -206,10 +206,7 @@ test.describe("Carbon Footprint Calculator", () => {
       page.getByRole("heading", { name: /Histórico de Cálculos/i }),
     ).toBeVisible();
 
-    await page
-      .getByText(/calc-e2e-001/i)
-      .first()
-      .click();
+    await page.getByText(/7,80/).first().click();
     await expect(page).toHaveURL(/\/footprint\/calculation\/calc-e2e-001$/);
     await expect(
       page.getByRole("button", { name: /Compensar/i }),

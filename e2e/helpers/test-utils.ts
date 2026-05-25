@@ -65,21 +65,34 @@ export async function loginAsUser(
 ) {
   const { email, password } = getCredentials(roles);
 
-  await page
-    .evaluate(() => {
-      localStorage.removeItem("cb_access_token");
-      localStorage.removeItem("cb_csrf_token");
-    })
-    .catch(() => {});
-  await page.goto("/login");
+  for (let attempt = 0; attempt < 3; attempt++) {
+    await page
+      .evaluate(() => {
+        localStorage.removeItem("cb_access_token");
+        localStorage.removeItem("cb_csrf_token");
+      })
+      .catch(() => {});
+    await page.goto("/login");
+    await page.waitForLoadState("networkidle");
 
-  await page.getByLabel(/E-mail/i).fill(email);
-  await page.getByLabel(/Senha/i).fill(password);
-  await page
-    .getByRole("button", { name: /Entrar/i })
-    .last()
-    .click();
-  await expect(page).not.toHaveURL(/\/login/, { timeout: 30000 });
+    await page.getByLabel(/E-mail/i).fill(email);
+    await page.getByLabel(/Senha/i).fill(password);
+    await page
+      .locator("main")
+      .getByRole("button", { name: /Entrar/i })
+      .click();
+
+    try {
+      await expect(page).not.toHaveURL(/\/login/, { timeout: 15000 });
+      return;
+    } catch {
+      if (attempt < 2) {
+        await page.waitForTimeout(1000);
+      }
+    }
+  }
+
+  throw new Error(`Login failed for role "${roles[0]}" after 3 attempts.`);
 }
 
 export async function loginAsAdmin(page: Page) {
