@@ -1,10 +1,5 @@
 import type { Page } from "@playwright/test";
-import {
-  test,
-  expect,
-  loginAsUser,
-  navigateWithState,
-} from "../helpers/test-utils";
+import { test, expect, navigateWithState } from "../helpers/test-utils";
 import { getMockApiState } from "../helpers/api-mock";
 import { MOCK_USER_ID } from "../fixtures/mock-data";
 
@@ -43,8 +38,6 @@ test.describe("Carbon Footprint Calculator", () => {
   test("should save a draft, finalize it, persist it in history, and show the finalized detail", async ({
     page,
   }) => {
-    await loginAsUser(page);
-
     await completeAuthenticatedCalculation(page);
 
     const mockState = getMockApiState(page);
@@ -77,8 +70,6 @@ test.describe("Carbon Footprint Calculator", () => {
   test("should cover scoped impact routes for the authenticated user", async ({
     page,
   }) => {
-    await loginAsUser(page);
-
     await page.goto("/users/maria-silva/impact");
     await expect(
       page.getByRole("heading", { name: /Histórico de Cálculos/i }),
@@ -131,7 +122,6 @@ test.describe("Carbon Footprint Calculator", () => {
   test("should render the compensation report route with payment summary state", async ({
     page,
   }) => {
-    await loginAsUser(page);
     await page.goto("/");
 
     await navigateWithState(page, "/compensation/report", {

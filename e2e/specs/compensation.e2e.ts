@@ -1,10 +1,5 @@
 import type { Page } from "@playwright/test";
-import {
-  test,
-  expect,
-  loginAsUser,
-  seedCompensationSelection,
-} from "../helpers/test-utils";
+import { test, expect, seedCompensationSelection } from "../helpers/test-utils";
 import { getMockApiState } from "../helpers/api-mock";
 import { MOCK_AREA_ID } from "../fixtures/mock-data";
 
@@ -22,7 +17,7 @@ async function seedReviewSelection(page: Page) {
 
 test.describe("Compensation Flow", () => {
   test.beforeEach(async ({ page }) => {
-    await loginAsUser(page);
+    await page.goto("/");
     await seedReviewSelection(page);
   });
 

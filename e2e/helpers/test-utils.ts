@@ -1,12 +1,10 @@
 import { test as base, type Page } from "@playwright/test";
 import { setupApiMocks } from "./api-mock";
-import {
-  createTestToken,
-  MOCK_USER_ID,
-  MOCK_USER,
-} from "../fixtures/mock-data";
+import { createTestToken, MOCK_USER } from "../fixtures/mock-data";
 
 export { expect } from "@playwright/test";
+
+const useRealBackend = process.env.E2E_USE_REAL_BACKEND === "1";
 
 export const test = base.extend({
   page: async ({ page }, use) => {
@@ -20,7 +18,9 @@ export const test = base.extend({
         }),
       );
     });
-    await setupApiMocks(page);
+    if (!useRealBackend) {
+      await setupApiMocks(page);
+    }
     await use(page);
   },
 });
@@ -29,6 +29,12 @@ export async function loginAsUser(
   page: Page,
   roles: string[] = ["individual"],
 ) {
+  if (useRealBackend) {
+    const { email, password } = getRealBackendCredentials(roles);
+    await loginWithRealBackend(page, email, password);
+    return;
+  }
+
   const token = createTestToken(roles);
   await page.goto("/");
   await page.waitForLoadState("networkidle");
@@ -64,6 +70,59 @@ export async function loginAsUser(
     },
     { accessToken: token, mockUser: MOCK_USER },
   );
+}
+
+function getRealBackendCredentials(roles: string[]) {
+  const primaryRole = roles[0] ?? "individual";
+
+  const roleMap: Record<string, { email?: string; password?: string }> = {
+    administrator: {
+      email: process.env.E2E_ADMIN_EMAIL,
+      password: process.env.E2E_ADMIN_PASSWORD,
+    },
+    admin: {
+      email: process.env.E2E_ADMIN_EMAIL,
+      password: process.env.E2E_ADMIN_PASSWORD,
+    },
+    analyst: {
+      email: process.env.E2E_ANALYST_EMAIL,
+      password: process.env.E2E_ANALYST_PASSWORD,
+    },
+    producer: {
+      email: process.env.E2E_PRODUCER_EMAIL,
+      password: process.env.E2E_PRODUCER_PASSWORD,
+    },
+    individual: {
+      email: process.env.E2E_USER_EMAIL,
+      password: process.env.E2E_USER_PASSWORD,
+    },
+  };
+
+  const fallback = {
+    email: process.env.E2E_USER_EMAIL,
+    password: process.env.E2E_USER_PASSWORD,
+  };
+
+  const creds = roleMap[primaryRole] ?? fallback;
+  if (!creds.email || !creds.password) {
+    throw new Error(
+      `Missing real-backend credentials for role "${primaryRole}". Set the appropriate E2E_*_EMAIL and E2E_*_PASSWORD environment variables.`,
+    );
+  }
+
+  return { email: creds.email, password: creds.password };
+}
+
+async function loginWithRealBackend(
+  page: Page,
+  email: string,
+  password: string,
+) {
+  await page.goto("/login");
+  await page.getByLabel(/E-mail/i).fill(email);
+  await page.getByLabel(/Senha/i).fill(password);
+  await page.getByRole("button", { name: /Entrar/i }).click();
+  await page.waitForLoadState("networkidle");
 }
 
 export async function navigateWithState(
