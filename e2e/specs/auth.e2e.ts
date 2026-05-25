@@ -6,6 +6,8 @@ import {
   ConfirmEmailPage,
 } from "../pages/auth.po";
 
+const API_URL = process.env.E2E_API_URL ?? "https://dev.climabalance.org";
+
 test.describe("Authentication", () => {
   test("should display login page and navigate to register", async ({
     page,
@@ -22,35 +24,29 @@ test.describe("Authentication", () => {
   });
 
   test("should login successfully and redirect to home", async ({ page }) => {
-    const loginPage = new LoginPage(page);
-    await loginPage.goto();
-    await loginPage.login("maria@example.com", "Test@1234");
-
+    await loginAsUser(page);
     await expect(page).toHaveURL("/");
     await expect(page.locator("h1")).toBeVisible();
   });
 
   test("should show error on invalid login", async ({ page }) => {
-    await page.route(
-      "http://localhost:3001/api/v1/auth/login",
-      async (route) => {
-        await route.fulfill({
-          status: 401,
-          contentType: "application/json",
-          body: JSON.stringify({
-            error: { message_key: "auth.login.invalidCredentials" },
-          }),
-        });
-      },
-    );
+    await page.route(`${API_URL}/api/v1/auth/login`, async (route) => {
+      await route.fulfill({
+        status: 401,
+        contentType: "application/json",
+        body: JSON.stringify({
+          error: { message_key: "auth.invalid_credentials" },
+        }),
+      });
+    });
 
     const loginPage = new LoginPage(page);
     await loginPage.goto();
     await loginPage.login("wrong@email.com", "wrongpassword");
 
-    await expect(
-      page.locator("text=auth.login.invalidCredentials"),
-    ).toBeVisible({ timeout: 5000 });
+    await expect(page.getByText(/E-mail ou senha inválidos/i)).toBeVisible({
+      timeout: 5000,
+    });
   });
 
   test("should display register page with all required fields", async ({
@@ -71,9 +67,35 @@ test.describe("Authentication", () => {
   test("should register successfully and redirect to email confirmation", async ({
     page,
   }) => {
+    await page.route(`${API_URL}/api/v1/auth/human-check`, async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: {
+            challenge_id: "mock-challenge-001",
+            question: "Quanto é 3 + 5?",
+          },
+        }),
+      });
+    });
+
+    await page.route(`${API_URL}/api/v1/auth/register`, async (route) => {
+      await route.fulfill({
+        status: 201,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: {
+            id: "registered-user-id",
+            email: "maria@example.com",
+            status: "pending_confirmation",
+          },
+        }),
+      });
+    });
+
     const registerPage = new RegisterPage(page);
     await registerPage.goto();
-
     await registerPage.register(
       "Maria Silva",
       "maria@example.com",
@@ -85,6 +107,14 @@ test.describe("Authentication", () => {
   });
 
   test("should confirm email", async ({ page }) => {
+    await page.route(`${API_URL}/api/v1/auth/confirm-email`, async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ data: { message: "Email confirmed" } }),
+      });
+    });
+
     const confirmPage = new ConfirmEmailPage(page);
     await confirmPage.goto();
     await confirmPage.confirm("valid-token-123");
@@ -95,6 +125,17 @@ test.describe("Authentication", () => {
   });
 
   test("should request password reset", async ({ page }) => {
+    await page.route(
+      `${API_URL}/api/v1/auth/password-reset/request`,
+      async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ data: { message: "Reset email sent" } }),
+        });
+      },
+    );
+
     const resetPage = new PasswordResetPage(page);
     await resetPage.gotoRequest();
     await resetPage.requestReset("maria@example.com");
@@ -103,6 +144,17 @@ test.describe("Authentication", () => {
   });
 
   test("should confirm password reset", async ({ page }) => {
+    await page.route(
+      `${API_URL}/api/v1/auth/password-reset/confirm`,
+      async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ data: { message: "Password reset" } }),
+        });
+      },
+    );
+
     const resetPage = new PasswordResetPage(page);
     await resetPage.gotoConfirm();
     await resetPage.confirmReset("reset-token-123", "New@789!aA");

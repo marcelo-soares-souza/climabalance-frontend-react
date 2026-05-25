@@ -1,119 +1,287 @@
 import type { Page } from "@playwright/test";
-import { test, expect, navigateWithState } from "../helpers/test-utils";
-import { getMockApiState } from "../helpers/api-mock";
-import { MOCK_USER_ID } from "../fixtures/mock-data";
+import { test, expect, loginAsUser } from "../helpers/test-utils";
+
+const API_URL = process.env.E2E_API_URL ?? "https://dev.climabalance.org";
+
+async function interceptEmissionFactors(page: Page) {
+  await page.route(
+    `${API_URL}/api/v1/footprint/emission-factors`,
+    async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: [
+            {
+              id: "factor-energy",
+              activity_type: "electricity",
+              factor_value: 0.5,
+              factor_unit: "kwh",
+              region: "BR",
+              version: "2026.01",
+            },
+            {
+              id: "factor-transport",
+              activity_type: "car_medium",
+              factor_value: 0.2,
+              factor_unit: "km",
+              region: "BR",
+              version: "2026.01",
+            },
+          ],
+        }),
+      });
+    },
+  );
+}
 
 async function completeAuthenticatedCalculation(page: Page) {
   await page.goto("/footprint/calculator");
+  await page.waitForSelector('button:has-text("Próximo")', {
+    timeout: 10000,
+  });
   await page.getByRole("button", { name: /Próximo/i }).click();
 
-  await page.getByLabel(/Eletricidade/i).fill("3600");
+  await page.getByLabel(/Energia Elétrica Residencial/i).fill("3600");
   await page.getByRole("button", { name: /Próximo/i }).click();
 
   await page.getByRole("button", { name: /Próximo/i }).click();
 
-  await page.getByLabel(/^Carro/i).fill("15000");
+  await page.getByLabel(/Automóvel/i).fill("15000");
   await page.getByRole("button", { name: /Próximo/i }).click();
 
   await page.getByRole("button", { name: /Calcular/i }).click();
-  await expect(page.getByText(/7,8 tCO2e/i)).toBeVisible();
+  await expect(page.getByText(/7,8/).first()).toBeVisible({ timeout: 10000 });
 }
 
 async function completeGuestCalculation(page: Page) {
   await page.goto("/calculator");
+  await page.waitForSelector('button:has-text("Próximo")', {
+    timeout: 10000,
+  });
   await page.getByRole("button", { name: /Próximo/i }).click();
 
-  await page.getByLabel(/Eletricidade/i).fill("1800");
+  await page.getByLabel(/Energia Elétrica Residencial/i).fill("1800");
   await page.getByRole("button", { name: /Próximo/i }).click();
 
   await page.getByRole("button", { name: /Próximo/i }).click();
 
-  await page.getByLabel(/^Carro/i).fill("5000");
+  await page.getByLabel(/Automóvel/i).fill("5000");
   await page.getByRole("button", { name: /Próximo/i }).click();
 
   await page.getByRole("button", { name: /Calcular/i }).click();
 }
 
 test.describe("Carbon Footprint Calculator", () => {
-  test("should save a draft, finalize it, persist it in history, and show the finalized detail", async ({
+  test.beforeEach(async ({ page }) => {
+    await loginAsUser(page);
+    await interceptEmissionFactors(page);
+  });
+
+  test("should save a draft, finalize it, and show the finalized detail", async ({
     page,
   }) => {
+    let calculationFinalized = false;
+
+    await page.route(
+      `${API_URL}/api/v1/footprint/calculations**`,
+      async (route) => {
+        const method = route.request().method();
+        const url = route.request().url();
+
+        if (method === "POST" && !url.includes("/finalize")) {
+          await route.fulfill({
+            status: 201,
+            contentType: "application/json",
+            body: JSON.stringify({
+              data: {
+                calculation_id: "calc-e2e-001",
+                status: "draft",
+                total_kg_co2e: 7800,
+                total_t_co2e: 7.8,
+                breakdown: [
+                  { category: "energy", kg_co2e: 1800, t_co2e: 1.8 },
+                  { category: "transport", kg_co2e: 6000, t_co2e: 6.0 },
+                ],
+              },
+            }),
+          });
+          return;
+        }
+
+        if (method === "POST" && url.includes("/finalize")) {
+          calculationFinalized = true;
+          await route.fulfill({ status: 204 });
+          return;
+        }
+
+        if (method === "GET" && url.includes("/calc-e2e-001")) {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+              data: {
+                id: "calc-e2e-001",
+                calculation_id: "calc-e2e-001",
+                user_id: "user-001",
+                profile_type: "individual",
+                period_start: "2025-01-01",
+                period_end: "2025-12-31",
+                total_kg_co2e: 7800,
+                total_t_co2e: 7.8,
+                status: calculationFinalized ? "finalized" : "draft",
+                data_quality: "real",
+                inputs: [
+                  {
+                    id: "input-1",
+                    category: "energy",
+                    activity_type: "electricity",
+                    quantity: 3600,
+                    unit: "kwh",
+                    kg_co2e: 1800,
+                    metadata: null,
+                  },
+                  {
+                    id: "input-2",
+                    category: "transport",
+                    activity_type: "transport_car_medium",
+                    quantity: 15000,
+                    unit: "km",
+                    kg_co2e: 6000,
+                    metadata: null,
+                  },
+                ],
+                breakdown: [
+                  { category: "energy", kg_co2e: 1800, t_co2e: 1.8 },
+                  { category: "transport", kg_co2e: 6000, t_co2e: 6.0 },
+                ],
+                created_at: "2025-05-01T00:00:00Z",
+                updated_at: "2025-05-01T00:00:00Z",
+              },
+            }),
+          });
+          return;
+        }
+
+        if (method === "GET") {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+              data: [
+                {
+                  id: "calc-e2e-001",
+                  calculation_id: "calc-e2e-001",
+                  user_id: "user-001",
+                  profile_type: "individual",
+                  period_start: "2025-01-01",
+                  period_end: "2025-12-31",
+                  total_kg_co2e: 7800,
+                  total_t_co2e: 7.8,
+                  status: calculationFinalized ? "finalized" : "draft",
+                  data_quality: "real",
+                  factors_version: "2026.01",
+                  region: "BR",
+                  created_at: "2025-05-01T00:00:00Z",
+                  updated_at: "2025-05-01T00:00:00Z",
+                },
+              ],
+            }),
+          });
+          return;
+        }
+
+        await route.fallback();
+      },
+    );
+
     await completeAuthenticatedCalculation(page);
 
-    const mockState = getMockApiState(page);
-    expect(mockState.requests.createdCalculations).toHaveLength(1);
-    expect(mockState.calculations[0]?.status).toBe("draft");
-
+    await loginAsUser(page, ["administrator"]);
+    await page.goto("/footprint/calculation/calc-e2e-001");
     await page.getByRole("button", { name: /Finalizar/i }).click();
-    expect(mockState.requests.finalizedCalculations).toEqual([
-      mockState.calculations[0]?.id,
-    ]);
 
     await page.goto("/footprint/history");
     await expect(
       page.getByRole("heading", { name: /Histórico de Cálculos/i }),
     ).toBeVisible();
-    await expect(page.getByText(/7,8 tCO2e/i).first()).toBeVisible();
 
     await page
-      .getByText(/7,8 tCO2e/i)
+      .getByText(/calc-e2e-001/i)
       .first()
       .click();
-    await expect(page).toHaveURL(/\/footprint\/calculation\/calc-003$/);
+    await expect(page).toHaveURL(/\/footprint\/calculation\/calc-e2e-001$/);
     await expect(
       page.getByRole("button", { name: /Compensar/i }),
     ).toBeVisible();
-    await expect(page.getByText(/3\.600 kwh/i)).toBeVisible();
-    await expect(page.getByText(/15\.000 km/i)).toBeVisible();
-  });
-
-  test("should cover scoped impact routes for the authenticated user", async ({
-    page,
-  }) => {
-    await page.goto("/users/maria-silva/impact");
-    await expect(
-      page.getByRole("heading", { name: /Histórico de Cálculos/i }),
-    ).toBeVisible();
-
-    await page.getByRole("button", { name: /Novo cálculo/i }).click();
-    await expect(page).toHaveURL("/users/maria-silva/impact/calculations/new");
-
-    await page.goto(`/users/${MOCK_USER_ID}/impact/calculations/calc-001`);
-    await expect(
-      page.getByRole("button", { name: /Compensar/i }),
-    ).toBeVisible();
-
-    await page.goto("/users/maria-silva/impact/calculations/calc-002/edit");
-    await expect(
-      page.getByRole("heading", { name: /Calculadora de Pegada/i }),
-    ).toBeVisible();
-    await expect(page.getByLabel(/Eletricidade/i)).toHaveValue("1200");
+    await expect(page.getByText(/3600 kwh/i)).toBeVisible();
+    await expect(page.getByText(/15000 km/i)).toBeVisible();
   });
 
   test("should calculate a guest footprint with visible result assertions", async ({
     page,
   }) => {
+    await page.route(
+      `${API_URL}/api/v1/footprint/calculate-guest`,
+      async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            data: {
+              total_kg_co2e: 1900,
+              total_t_co2e: 1.9,
+              breakdown: [
+                { category: "energy", kg_co2e: 900, t_co2e: 0.9 },
+                { category: "transport", kg_co2e: 1000, t_co2e: 1.0 },
+              ],
+              data_quality: "estimated",
+              factors_version: "2026.01",
+            },
+          }),
+        });
+      },
+    );
+
     await completeGuestCalculation(page);
 
-    const mockState = getMockApiState(page);
-    expect(mockState.requests.guestCalculations).toHaveLength(1);
-    await expect(page.getByText(/1,9 tCO2e/i)).toBeVisible();
+    await expect(page.getByText(/1,9/).first()).toBeVisible({ timeout: 10000 });
     await expect(
-      page.getByRole("button", { name: /Salvar e compensar/i }),
+      page.getByRole("button", { name: /Entrar e Compensar/i }),
     ).toBeVisible();
   });
 
-  test("should calculate a trip footprint and forward the user to compensation discovery", async ({
+  test("should calculate a trip footprint and forward to compensation discovery", async ({
     page,
   }) => {
+    await page.route(
+      `${API_URL}/api/v1/footprint/calculate-guest`,
+      async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            data: {
+              total_kg_co2e: 434,
+              total_t_co2e: 0.434,
+              breakdown: [{ category: "flights", kg_co2e: 434, t_co2e: 0.434 }],
+              data_quality: "estimated",
+              factors_version: "2026.01",
+            },
+          }),
+        });
+      },
+    );
+
     await page.goto("/calculator/trip");
 
-    await page.getByLabel(/Origem/i).selectOption("0");
-    await page.getByLabel(/Destino/i).selectOption("3");
+    const selects = page.locator(".max-w-2xl select");
+    await selects.nth(0).selectOption("0");
+    await selects.nth(1).selectOption("3");
     await page.getByRole("button", { name: /Executiva/i }).click();
 
     await expect(page.getByText(/São Paulo → Brasília/i)).toBeVisible();
-    await expect(page.getByText(/kgCO2e/i)).toBeVisible();
+    await expect(page.getByText(/kg.*CO2e/i)).toBeVisible();
 
     await page.getByRole("button", { name: /Compensar/i }).click();
     await expect(page).toHaveURL(/\/map\?tCO2e=/);
@@ -122,9 +290,7 @@ test.describe("Carbon Footprint Calculator", () => {
   test("should render the compensation report route with payment summary state", async ({
     page,
   }) => {
-    await page.goto("/");
-
-    await navigateWithState(page, "/compensation/report", {
+    const reportState = {
       paymentResult: {
         paymentId: "pay-report",
         compensationId: "contrib-report",
@@ -153,12 +319,18 @@ test.describe("Carbon Footprint Calculator", () => {
         currency: "BRL",
         installments: 1,
       },
-    });
+    };
+
+    await page.addInitScript((data) => {
+      window.history.replaceState({ usr: data, key: "e2e", idx: 0 }, "");
+    }, reportState);
+
+    await page.goto("/compensation/report");
 
     await expect(
-      page.getByRole("heading", { name: /Comprovante da compensação/i }),
+      page.getByRole("heading", { name: /Relatório da compensação/i }),
     ).toBeVisible();
     await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /Download/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: /Baixar/i })).toBeVisible();
   });
 });

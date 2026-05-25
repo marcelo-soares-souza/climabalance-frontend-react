@@ -4,18 +4,15 @@ import path from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const useRealBackend = process.env.E2E_USE_REAL_BACKEND === "1";
-const apiUrl = useRealBackend
-  ? (process.env.E2E_API_URL ?? "https://dev.climabalance.org")
-  : "http://localhost:3001";
+const apiUrl = process.env.E2E_API_URL ?? "https://dev.climabalance.org";
 
 export default defineConfig({
   testDir: "./specs",
   testMatch: "**/*.e2e.ts",
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
-  workers: 1,
+  workers: 2,
   reporter: [["html", { outputFolder: "../playwright-report" }], ["list"]],
   use: {
     baseURL: "http://127.0.0.1:5174",
@@ -29,7 +26,12 @@ export default defineConfig({
         ...devices["Desktop Chrome"],
         viewport: { width: 1280, height: 800 },
         launchOptions: {
-          args: ["--no-sandbox", "--disable-setuid-sandbox"],
+          args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox",
+            "--disable-web-security",
+            "--ignore-certificate-errors",
+          ],
         },
       },
     },
@@ -38,11 +40,10 @@ export default defineConfig({
     command:
       "/home/marcelo/.bun/bin/bun x vite --host 127.0.0.1 --strictPort --port 5174",
     url: "http://127.0.0.1:5174",
-    reuseExistingServer: !useRealBackend,
+    reuseExistingServer: false,
     cwd: path.resolve(__dirname, ".."),
     env: {
       VITE_API_URL: apiUrl,
-      E2E_USE_REAL_BACKEND: useRealBackend ? "1" : "0",
     },
     timeout: 120000,
   },

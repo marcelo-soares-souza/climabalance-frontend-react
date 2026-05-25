@@ -1,5 +1,7 @@
 import { test, expect, loginAsUser } from "../helpers/test-utils";
 
+const API_URL = process.env.E2E_API_URL ?? "https://dev.climabalance.org";
+
 test.describe("Profile", () => {
   test.beforeEach(async ({ page }) => {
     await loginAsUser(page);
@@ -35,18 +37,15 @@ test.describe("Profile", () => {
     page,
   }) => {
     let updatePayload: Record<string, unknown> | null = null;
-    await page.route(
-      "http://localhost:3001/api/v1/users/*/profile",
-      async (route) => {
-        if (route.request().method() === "PUT") {
-          updatePayload = route.request().postDataJSON() as Record<
-            string,
-            unknown
-          >;
-        }
-        await route.fallback();
-      },
-    );
+    await page.route(`${API_URL}/api/v1/users/*/profile`, async (route) => {
+      if (route.request().method() === "PUT") {
+        updatePayload = route.request().postDataJSON() as Record<
+          string,
+          unknown
+        >;
+      }
+      await route.fallback();
+    });
 
     await page.goto("/profile/edit");
     await page.waitForLoadState("networkidle");
@@ -62,15 +61,12 @@ test.describe("Profile", () => {
 
   test("should revoke all active sessions", async ({ page }) => {
     let revokeAllCalls = 0;
-    await page.route(
-      "http://localhost:3001/api/v1/auth/sessions",
-      async (route) => {
-        if (route.request().method() === "DELETE") {
-          revokeAllCalls += 1;
-        }
-        await route.fallback();
-      },
-    );
+    await page.route(`${API_URL}/api/v1/auth/sessions`, async (route) => {
+      if (route.request().method() === "DELETE") {
+        revokeAllCalls += 1;
+      }
+      await route.fallback();
+    });
 
     await page.goto("/profile/sessions");
     await page.waitForLoadState("networkidle");

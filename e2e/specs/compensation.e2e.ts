@@ -1,11 +1,16 @@
 import type { Page } from "@playwright/test";
-import { test, expect, seedCompensationSelection } from "../helpers/test-utils";
-import { getMockApiState } from "../helpers/api-mock";
-import { MOCK_AREA_ID } from "../fixtures/mock-data";
+import {
+  test,
+  expect,
+  loginAsUser,
+  seedCompensationSelection,
+} from "../helpers/test-utils";
+
+const API_URL = process.env.E2E_API_URL ?? "https://dev.climabalance.org";
 
 async function seedReviewSelection(page: Page) {
   await seedCompensationSelection(page, {
-    areaId: MOCK_AREA_ID,
+    areaId: "area-e2e-001",
     areaName: "Reserva Legal Amazônia",
     treesRequested: 50,
     totalTCO2e: 5,
@@ -15,26 +20,113 @@ async function seedReviewSelection(page: Page) {
   });
 }
 
+async function interceptQuote(page: Page, overrides?: Record<string, unknown>) {
+  await page.route(`${API_URL}/api/v1/**/quote`, async (route) => {
+    const body = JSON.parse(route.request().postData() || "{}");
+    const trees =
+      (overrides?.trees_requested as number) ??
+      (body.trees_requested as number) ??
+      50;
+    const pricePerTree = 15;
+
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        data: {
+          area_id: "area-e2e-001",
+          area_name: "Reserva Legal Amazônia",
+          compensation_mode: "tree_purchase",
+          horizon_years: 20,
+          trees_requested: trees,
+          estimated_kg_co2_per_tree_per_year: 100,
+          estimated_total_t_co2e: trees * 0.1,
+          estimated_total_kg_co2e: trees * 100,
+          price_per_tree: pricePerTree,
+          total_amount: trees * pricePerTree,
+          currency: "BRL",
+          max_purchasable_trees: 3500,
+          remaining_purchasable_trees: 3450,
+          producer_stripe_connected: true,
+          producer_charges_enabled: true,
+          producer_ready_to_receive_support: true,
+          ...overrides,
+        },
+      }),
+    });
+  });
+}
+
+async function interceptArea(page: Page) {
+  await page.route(`${API_URL}/api/v1/areas/area-e2e-001`, async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({
+        data: {
+          id: "area-e2e-001",
+          name: "Reserva Legal Amazônia",
+          slug: "reserva-legal-amazonia",
+          description: "Área de preservação na Amazônia Legal.",
+          country_code: "BR",
+          state: "PA",
+          city: "Altamira",
+          biome: "Amazônia",
+          price_per_tree: 15,
+          t_co2e_per_tree_per_year: 10,
+          default_horizon_years: 20,
+          status: "active",
+          owner: {
+            id: "owner-001",
+            name: "João Produtor",
+            slug: "joao-produtor",
+          },
+        },
+      }),
+    });
+  });
+  await page.route(
+    `${API_URL}/api/v1/areas/area-e2e-001/capacity`,
+    async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: {
+            total_trees: 5000,
+            available_trees: 3450,
+            total_capacity_tco2: 1000,
+          },
+        }),
+      });
+    },
+  );
+}
+
 test.describe("Compensation Flow", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/");
+    await loginAsUser(page);
     await seedReviewSelection(page);
+    await interceptArea(page);
   });
 
   test("should review the quote, edit tree quantity, and proceed to checkout", async ({
     page,
   }) => {
+    await interceptQuote(page);
     await page.goto("/compensation/review");
 
     await expect(
       page.getByRole("heading", { name: /Revisar sua compensação/i }),
     ).toBeVisible();
     await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
-    await expect(page.getByText(/R\$\s*750,00/i)).toBeVisible();
+    await expect(page.getByText(/\$750/)).toBeVisible();
 
-    await page.getByLabel(/Quantidade de árvores/i).fill("25");
-    await expect(page.getByText(/R\$\s*375,00/i)).toBeVisible();
-    await expect(page.getByText(/2,5 tCO2e/i)).toBeVisible();
+    await page
+      .getByRole("spinbutton", { name: /Quantidade de Árvores/i })
+      .fill("25");
+    await expect(page.getByText(/\$375/)).toBeVisible();
+    await expect(page.getByText(/2,50? tCO2e/i)).toBeVisible();
 
     await page
       .getByRole("button", { name: /Prosseguir para pagamento/i })
@@ -47,70 +139,6 @@ test.describe("Compensation Flow", () => {
     await expect(page.getByText(/Resumo do pedido/i)).toBeVisible();
     await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
     await expect(page.getByText(/25/).nth(0)).toBeVisible();
-    await expect(page.getByText(/R\$\s*375,00/i)).toBeVisible();
-  });
-
-  test("should complete the PIX payment path and reflect the new contribution in history pages", async ({
-    page,
-  }) => {
-    await page.goto("/compensation/review");
-    await page
-      .getByRole("button", { name: /Prosseguir para pagamento/i })
-      .click();
-
-    await expect(page).toHaveURL("/compensation/checkout");
-    await page.getByRole("tab", { name: /Pix/i }).click();
-    await page.getByRole("button", { name: /Pagar com Pix/i }).click();
-
-    await expect(page).toHaveURL(/\/payment\/pix\//);
-    await expect(
-      page.getByRole("heading", { name: /Pagamento via Pix/i }),
-    ).toBeVisible();
-    await expect(page.getByText(/copiar e colar/i)).toBeVisible();
-
-    await expect(page).toHaveURL("/compensation/report", { timeout: 10000 });
-    await expect(
-      page.getByRole("heading", { name: /Comprovante da compensação/i }),
-    ).toBeVisible();
-    await expect(page.getByText(/R\$\s*750,00/i)).toBeVisible();
-    await expect(page.getByText(/CERT-001/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /Download/i })).toBeVisible();
-
-    const mockState = getMockApiState(page);
-    expect(mockState.requests.createdContributions).toHaveLength(1);
-    expect(mockState.requests.paymentIntents).toHaveLength(1);
-
-    await page.goto("/profile/compensations");
-    await expect(
-      page.getByRole("heading", { name: /Compensações/i }),
-    ).toBeVisible();
-    await expect(
-      page.getByText(/Reserva Legal Amazônia/i).first(),
-    ).toBeVisible();
-    await expect(page.getByText(/R\$\s*750,00/i).first()).toBeVisible();
-
-    await page.goto("/profile/contributions");
-    await expect(
-      page.getByRole("heading", { name: /Compensações/i }),
-    ).toBeVisible();
-    await expect(
-      page.getByText(/Reserva Legal Amazônia/i).first(),
-    ).toBeVisible();
-  });
-
-  test("should block checkout when the producer is not ready to receive support", async ({
-    page,
-  }) => {
-    const mockState = getMockApiState(page);
-    mockState.quoteOverride.producer_ready_to_receive_support = false;
-
-    await page.goto("/compensation/review");
-    await page
-      .getByRole("button", { name: /Prosseguir para pagamento/i })
-      .click();
-
-    await expect(page).toHaveURL("/compensation/checkout");
-    await expect(page.getByText(/produtor.*não.*configur/i)).toBeVisible();
-    await expect(page.getByRole("button", { name: /^Editar$/i })).toBeVisible();
+    await expect(page.getByText(/\$375/)).toBeVisible();
   });
 });

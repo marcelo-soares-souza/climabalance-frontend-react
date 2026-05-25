@@ -11,7 +11,10 @@ export class LoginPage {
   async login(email: string, password: string) {
     await this.page.locator('input[id="email"]').fill(email);
     await this.page.locator('input[id="password"]').fill(password);
-    await this.page.getByRole("button", { name: "Entrar" }).click();
+    await this.page
+      .locator("main")
+      .getByRole("button", { name: "Entrar" })
+      .click();
   }
 
   get forgotPasswordLink() {

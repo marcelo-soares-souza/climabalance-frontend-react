@@ -1,10 +1,6 @@
-import { test as base, type Page } from "@playwright/test";
-import { setupApiMocks } from "./api-mock";
-import { createTestToken, MOCK_USER } from "../fixtures/mock-data";
+import { test as base, expect, type Page } from "@playwright/test";
 
-export { expect } from "@playwright/test";
-
-const useRealBackend = process.env.E2E_USE_REAL_BACKEND === "1";
+export { expect };
 
 export const test = base.extend({
   page: async ({ page }, use) => {
@@ -18,61 +14,11 @@ export const test = base.extend({
         }),
       );
     });
-    if (!useRealBackend) {
-      await setupApiMocks(page);
-    }
     await use(page);
   },
 });
 
-export async function loginAsUser(
-  page: Page,
-  roles: string[] = ["individual"],
-) {
-  if (useRealBackend) {
-    const { email, password } = getRealBackendCredentials(roles);
-    await loginWithRealBackend(page, email, password);
-    return;
-  }
-
-  const token = createTestToken(roles);
-  await page.goto("/");
-  await page.waitForLoadState("networkidle");
-  await page.evaluate(
-    async ({ accessToken, mockUser }) => {
-      const [{ tokenStorage }, { csrfToken }, { useAuthStore }] =
-        await Promise.all([
-          import("/src/lib/token-storage.ts"),
-          import("/src/lib/csrf-token.ts"),
-          import("/src/stores/auth-store.ts"),
-        ]);
-
-      tokenStorage.setAccessToken(accessToken);
-      csrfToken.set("test-csrf-token");
-      localStorage.setItem("cb_locale", "pt-BR");
-      localStorage.setItem("cb_csrf_token", "test-csrf-token");
-      useAuthStore.setState({
-        session: {
-          userId: mockUser.id,
-          userSlug: mockUser.slug,
-          email: mockUser.email,
-          roles: JSON.parse(atob(accessToken.split(".")[1])).roles,
-          accessToken,
-          expiresAt: Date.now() + 86400 * 1000,
-        },
-        isAuthenticated: true,
-        isAdmin: JSON.parse(atob(accessToken.split(".")[1])).roles.includes(
-          "administrator",
-        ),
-        isLoading: false,
-        hasRestoredSession: true,
-      });
-    },
-    { accessToken: token, mockUser: MOCK_USER },
-  );
-}
-
-function getRealBackendCredentials(roles: string[]) {
+function getCredentials(roles: string[]) {
   const primaryRole = roles[0] ?? "individual";
 
   const roleMap: Record<string, { email?: string; password?: string }> = {
@@ -106,37 +52,46 @@ function getRealBackendCredentials(roles: string[]) {
   const creds = roleMap[primaryRole] ?? fallback;
   if (!creds.email || !creds.password) {
     throw new Error(
-      `Missing real-backend credentials for role "${primaryRole}". Set the appropriate E2E_*_EMAIL and E2E_*_PASSWORD environment variables.`,
+      `Missing credentials for role "${primaryRole}". Set the appropriate E2E_*_EMAIL and E2E_*_PASSWORD environment variables.`,
     );
   }
 
   return { email: creds.email, password: creds.password };
 }
 
-async function loginWithRealBackend(
+export async function loginAsUser(
   page: Page,
-  email: string,
-  password: string,
+  roles: string[] = ["individual"],
 ) {
+  const { email, password } = getCredentials(roles);
+
+  await page
+    .evaluate(() => {
+      localStorage.removeItem("cb_access_token");
+      localStorage.removeItem("cb_csrf_token");
+    })
+    .catch(() => {});
   await page.goto("/login");
+
   await page.getByLabel(/E-mail/i).fill(email);
   await page.getByLabel(/Senha/i).fill(password);
-  await page.getByRole("button", { name: /Entrar/i }).click();
-  await page.waitForLoadState("networkidle");
+  await page
+    .getByRole("button", { name: /Entrar/i })
+    .last()
+    .click();
+  await expect(page).not.toHaveURL(/\/login/, { timeout: 30000 });
 }
 
-export async function navigateWithState(
-  page: Page,
-  pathname: string,
-  state: Record<string, unknown>,
-) {
-  await page.evaluate(
-    ({ nextPathname, nextState }) => {
-      window.history.pushState(nextState, "", nextPathname);
-      window.dispatchEvent(new PopStateEvent("popstate", { state: nextState }));
-    },
-    { nextPathname: pathname, nextState: state },
-  );
+export async function loginAsAdmin(page: Page) {
+  await loginAsUser(page, ["administrator"]);
+}
+
+export async function loginAsProducer(page: Page) {
+  await loginAsUser(page, ["producer"]);
+}
+
+export async function loginAsAnalyst(page: Page) {
+  await loginAsUser(page, ["analyst"]);
 }
 
 export async function seedCompensationSelection(
@@ -171,16 +126,18 @@ export async function seedCompensationSelection(
   }, selection);
 }
 
-export async function loginAsAdmin(page: Page) {
-  await loginAsUser(page, ["administrator"]);
-}
-
-export async function loginAsProducer(page: Page) {
-  await loginAsUser(page, ["producer"]);
-}
-
-export async function loginAsAnalyst(page: Page) {
-  await loginAsUser(page, ["analyst"]);
+export async function navigateWithState(
+  page: Page,
+  pathname: string,
+  state: Record<string, unknown>,
+) {
+  await page.evaluate(
+    ({ nextPathname, nextState }) => {
+      window.history.pushState(nextState, "", nextPathname);
+      window.dispatchEvent(new PopStateEvent("popstate", { state: nextState }));
+    },
+    { nextPathname: pathname, nextState: state },
+  );
 }
 
 export function waitForPageReady(page: Page) {
