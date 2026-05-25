@@ -83,7 +83,7 @@ test.describe("Map & Areas", () => {
   test("should display public areas list", async ({ page }) => {
     await page.goto("/areas/public");
     await page.waitForLoadState("networkidle");
-    await expect(page.locator("h1")).toBeVisible();
+    await expect(page.locator("h1")).toHaveText(/Áreas públicas/i);
   });
 
   test("should show access denied for non-admin on admin route", async ({
@@ -105,10 +105,49 @@ test.describe("Map & Areas", () => {
       await expect(page.locator("h1")).toBeVisible();
     });
 
+    test("should display available areas", async ({ page }) => {
+      await page.goto("/areas/available");
+      await page.waitForLoadState("networkidle");
+      await expect(page.locator("h1")).toHaveText(/Áreas Disponíveis/i);
+    });
+
     test("should view certificate validation page", async ({ page }) => {
       await page.goto("/certificates/validate");
       await page.waitForLoadState("networkidle");
       await expect(page.locator("h1")).toHaveText(/Validar Certificado/i);
+    });
+
+    test("should navigate to area detail from list", async ({ page }) => {
+      await page.route(`${API_URL}/api/v1/areas`, async (route) => {
+        if (route.request().method() === "GET") {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: [MOCK_AREA] }),
+          });
+          return;
+        }
+        await route.fallback();
+      });
+
+      await page.goto("/areas");
+      await page.waitForLoadState("networkidle");
+      await page.getByText(MOCK_AREA.name).first().click();
+      await expect(page).toHaveURL(/\/areas\//);
+    });
+
+    test("should redirect individual away from area creation", async ({
+      page,
+    }) => {
+      await page.goto("/areas/create");
+      await expect(page).toHaveURL(/\/access-denied/);
+    });
+
+    test("should redirect individual away from audit page", async ({
+      page,
+    }) => {
+      await page.goto("/audit/pending-areas");
+      await expect(page).toHaveURL(/\/access-denied/);
     });
   });
 
@@ -154,20 +193,41 @@ test.describe("Map & Areas", () => {
     });
 
     test("should edit an existing area", async ({ page }) => {
+      let updatePayload: Record<string, unknown> | null = null;
       await page.route(
         `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
         async (route) => {
-          await route.fulfill({
-            status: 200,
-            contentType: "application/json",
-            body: JSON.stringify({ data: MOCK_AREA }),
-          });
+          if (route.request().method() === "PATCH") {
+            updatePayload = route.request().postDataJSON();
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({
+                data: { ...MOCK_AREA, name: "Nome Editado" },
+              }),
+            });
+            return;
+          }
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({ data: MOCK_AREA }),
+            });
+            return;
+          }
+          await route.fallback();
         },
       );
 
       await page.goto("/areas/edit/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
       await page.waitForLoadState("networkidle");
-      await expect(page.locator("body")).toBeVisible();
+
+      await page.locator("#name").fill("Nome Editado");
+      await page.locator('button[type="submit"]').click();
+
+      await expect(page).toHaveURL(/\/areas\//);
+      await expect.poll(() => updatePayload?.name).toBe("Nome Editado");
     });
 
     test("should display tree planting page", async ({ page }) => {
@@ -190,6 +250,97 @@ test.describe("Map & Areas", () => {
         timeout: 10000,
       });
     });
+
+    test("should save planted trees", async ({ page }) => {
+      let saveCalled = false;
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
+        async (route) => {
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({ data: MOCK_AREA }),
+            });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/planted-trees`,
+        async (route) => {
+          if (route.request().method() === "POST") {
+            saveCalled = true;
+            await route.fulfill({ status: 201 });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+
+      await page.goto(
+        "/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/plant-trees",
+      );
+      await page.waitForLoadState("networkidle");
+
+      const map = page.locator(".leaflet-container");
+      await map.click({ position: { x: 300, y: 300 } });
+
+      await page.getByRole("button", { name: /Salvar/i }).click();
+      await expect.poll(() => saveCalled).toBe(true);
+    });
+
+    test("should redirect producer away from audit page", async ({ page }) => {
+      await page.goto("/audit/pending-areas");
+      await expect(page).toHaveURL(/\/access-denied/);
+    });
+
+    test("should submit area for audit", async ({ page }) => {
+      const draftArea = {
+        ...MOCK_AREA,
+        status: "draft",
+        audit_status: null,
+      };
+
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
+        async (route) => {
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({ data: draftArea }),
+            });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/submit-audit`,
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: { status: "pending_audit" } }),
+          });
+        },
+      );
+
+      await page.goto("/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
+      await page.waitForLoadState("networkidle");
+
+      await page
+        .getByRole("button", { name: /Enviar para Auditoria/i })
+        .click();
+
+      await page
+        .getByRole("button", { name: /Enviar para Auditoria/i })
+        .last()
+        .click();
+      await expect(page).toHaveURL(/\/areas\//);
+    });
   });
 
   test.describe("Analyst", () => {
@@ -197,10 +348,26 @@ test.describe("Map & Areas", () => {
       await loginAsAnalyst(page);
     });
 
-    test("should display pending areas for audit", async ({ page }) => {
+    test("should navigate from pending areas list to review", async ({
+      page,
+    }) => {
+      await page.route(`${API_URL}/api/v1/areas`, async (route) => {
+        if (route.request().method() === "GET") {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: MOCK_AREAS_LIST }),
+          });
+          return;
+        }
+        await route.fallback();
+      });
+
       await page.goto("/audit/pending-areas");
       await page.waitForLoadState("networkidle");
       await expect(page.locator("h1")).toHaveText(/Áreas Pendentes/i);
+      await page.getByText(MOCK_AREAS_LIST[0].name).first().click();
+      await expect(page).toHaveURL(/\/audit\/area\//);
     });
 
     test("should review area for audit", async ({ page }) => {
@@ -276,6 +443,88 @@ test.describe("Map & Areas", () => {
       await page.locator("#notes").fill("Todos os critérios conferidos.");
       await page.getByRole("button", { name: /Aprovar/i }).click();
 
+      await expect(page).toHaveURL("/audit/pending-areas");
+    });
+
+    test("should reject a pending area", async ({ page }) => {
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/reject`,
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: { status: "rejected" } }),
+          });
+        },
+      );
+
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
+        async (route) => {
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({
+                data: {
+                  ...MOCK_AREA,
+                  status: "pending_audit",
+                  audit_status: "pending",
+                },
+              }),
+            });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+
+      await page.goto("/audit/area/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
+      await page.waitForLoadState("networkidle");
+
+      await page.locator("#rejectReason").fill("Documentação insuficiente.");
+      await page.getByRole("button", { name: /Rejeitar/i }).click();
+
+      await expect(page).toHaveURL("/audit/pending-areas");
+    });
+
+    test("should activate an approved area", async ({ page }) => {
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/activate`,
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: { status: "active" } }),
+          });
+        },
+      );
+
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
+        async (route) => {
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({
+                data: {
+                  ...MOCK_AREA,
+                  status: "approved",
+                  audit_status: "approved",
+                },
+              }),
+            });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+
+      await page.goto("/audit/area/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
+      await page.waitForLoadState("networkidle");
+
+      await page.getByRole("button", { name: /Ativar/i }).click();
       await expect(page).toHaveURL("/audit/pending-areas");
     });
   });

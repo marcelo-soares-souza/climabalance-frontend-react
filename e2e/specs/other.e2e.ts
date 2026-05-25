@@ -12,13 +12,13 @@ test.describe("Other Pages & Flows", () => {
   test("should display about page", async ({ page }) => {
     await page.goto("/about");
     await page.waitForLoadState("networkidle");
-    await expect(page.locator("body")).toBeVisible();
+    await expect(page.locator("h1")).toBeVisible();
   });
 
   test("should display how-to-use page", async ({ page }) => {
     await page.goto("/how-to-use");
     await page.waitForLoadState("networkidle");
-    await expect(page.locator("body")).toBeVisible();
+    await expect(page.locator("h1")).toBeVisible();
   });
 
   test("should display privacy policy", async ({ page }) => {
@@ -50,7 +50,43 @@ test.describe("Other Pages & Flows", () => {
     await expect(page.locator("h1")).toHaveText(/Validar Certificado/i);
   });
 
-  test("should display user directory", async ({ page }) => {
+  test("should render embed calculator", async ({ page }) => {
+    await page.goto("/embed/calculator");
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator("text=/Calculadora de Pegada/i")).toBeVisible();
+  });
+
+  test("should render embed demo page", async ({ page }) => {
+    await page.goto("/demo/embed-calculator");
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator("h1")).toBeVisible();
+    await expect(page.locator("iframe")).toBeVisible();
+  });
+
+  test.describe("Unauthenticated redirects", () => {
+    test("should redirect to login when accessing profile", async ({
+      page,
+    }) => {
+      await page.goto("/profile");
+      await expect(page).toHaveURL(/\/login/);
+    });
+
+    test("should redirect to login when accessing compensation review", async ({
+      page,
+    }) => {
+      await page.goto("/compensation/review");
+      await expect(page).toHaveURL(/\/login/);
+    });
+
+    test("should redirect to login when accessing admin", async ({ page }) => {
+      await page.goto("/admin/users");
+      await expect(page).toHaveURL(/\/login/);
+    });
+  });
+
+  test("should display user directory and navigate to profile", async ({
+    page,
+  }) => {
     await page.route(`${API_URL}/api/v1/directory/users`, async (route) => {
       await route.fulfill({
         status: 200,
@@ -72,9 +108,11 @@ test.describe("Other Pages & Flows", () => {
     });
 
     await page.goto("/users");
-    await page.waitForSelector('h1:has-text("Reflorestadores")', {
-      timeout: 15000,
-    });
+    await expect(page.locator("h1")).toHaveText(
+      /Reflorestadores e apoiadores/i,
+    );
+    await page.getByText("Maria Silva").click();
+    await expect(page).toHaveURL(/\/users\/maria-silva\/profile/);
   });
 
   test.describe("Authenticated", () => {
@@ -89,10 +127,20 @@ test.describe("Other Pages & Flows", () => {
       await expect(page.locator("textarea")).toBeVisible();
     });
 
-    test("should display onboarding page", async ({ page }) => {
+    test("should display privacy center page", async ({ page }) => {
+      await page.goto("/privacy");
+      await page.waitForLoadState("networkidle");
+      await expect(page.locator("h1")).toHaveText(/Política de Privacidade/i);
+    });
+
+    test("should display onboarding page and skip to finish", async ({
+      page,
+    }) => {
       await page.goto("/onboarding");
       await page.waitForLoadState("networkidle");
       await expect(page.locator("h1")).toBeVisible();
+      await page.getByRole("button", { name: /Pular/i }).click();
+      await expect(page).toHaveURL("/");
     });
 
     test("should submit contact form successfully", async ({ page }) => {
@@ -116,6 +164,44 @@ test.describe("Other Pages & Flows", () => {
       await expect(
         page.getByText(/mensagem enviada com sucesso/i),
       ).toBeVisible();
+    });
+
+    test("should show empty state when no certificates exist", async ({
+      page,
+    }) => {
+      await page.route(
+        `${API_URL}/api/v1/users/*/certificates`,
+        async (route) => {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: [] }),
+          });
+        },
+      );
+
+      await page.goto("/profile/certificates");
+      await page.waitForLoadState("networkidle");
+      await expect(page.locator("h1")).toHaveText(/Certificados/i);
+      await expect(page.getByText(/Nenhum certificado/i)).toBeVisible();
+    });
+
+    test("should show error on contact form failure", async ({ page }) => {
+      await page.route(`${API_URL}/api/v1/contact`, async (route) => {
+        await route.fulfill({
+          status: 500,
+          contentType: "application/json",
+          body: JSON.stringify({
+            error: { message_key: "server.error" },
+          }),
+        });
+      });
+
+      await page.goto("/contact");
+      await page.waitForLoadState("networkidle");
+      await page.locator("#message").fill("Mensagem de teste.");
+      await page.getByRole("button", { name: /Enviar/i }).click();
+      await expect(page.getByText(/Algo deu errado/i)).toBeVisible();
     });
   });
 
@@ -155,5 +241,29 @@ test.describe("Other Pages & Flows", () => {
 
     await expect(page.getByText(/Certificado Válido/i)).toBeVisible();
     await expect(page.getByText("CERT-001")).toBeVisible();
+  });
+
+  test("should show error on invalid certificate validation", async ({
+    page,
+  }) => {
+    await page.route(
+      `${API_URL}/api/v1/certificates/validate**`,
+      async (route) => {
+        await route.fulfill({
+          status: 404,
+          contentType: "application/json",
+          body: JSON.stringify({
+            error: { message_key: "certificates.validate.error" },
+          }),
+        });
+      },
+    );
+
+    await page.goto("/certificates/validate");
+    await page.waitForLoadState("networkidle");
+    await page.getByPlaceholder("Ex: CERT-2025-001").fill("INVALID");
+    await page.getByPlaceholder("Ex: abc123def456...").fill("bad-hash");
+    await page.getByRole("button", { name: /Validar/i }).click();
+    await expect(page.getByText(/Certificado não encontrado/i)).toBeVisible();
   });
 });

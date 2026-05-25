@@ -141,4 +141,21 @@ test.describe("Compensation Flow", () => {
     await expect(page.getByText(/25/).nth(0)).toBeVisible();
     await expect(page.getByText(/\$375/)).toBeVisible();
   });
+
+  test("should show producer not onboarded error at checkout", async ({
+    page,
+  }) => {
+    await interceptQuote(page, { producer_ready_to_receive_support: false });
+    await page.goto("/compensation/review");
+    await page.waitForLoadState("networkidle");
+
+    await page
+      .getByRole("button", { name: /Prosseguir para pagamento/i })
+      .click();
+
+    await expect(page).toHaveURL("/compensation/checkout");
+    await expect(
+      page.getByText(/reflorestador ainda não concluiu a configuração/i),
+    ).toBeVisible();
+  });
 });

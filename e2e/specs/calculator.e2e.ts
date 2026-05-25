@@ -330,4 +330,32 @@ test.describe("Carbon Footprint Calculator", () => {
     await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
     await expect(page.getByRole("button", { name: /Baixar/i })).toBeVisible();
   });
+
+  test("should show empty state when no calculations exist", async ({
+    page,
+  }) => {
+    await page.route(
+      `${API_URL}/api/v1/footprint/calculations`,
+      async (route) => {
+        if (route.request().method() === "GET") {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: [] }),
+          });
+          return;
+        }
+        await route.fallback();
+      },
+    );
+
+    await page.goto("/footprint/history");
+    await page.waitForLoadState("networkidle");
+    await expect(
+      page.getByText(/Você ainda não fez nenhum cálculo/i),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /Iniciar Nova Calculadora/i }),
+    ).toBeVisible();
+  });
 });

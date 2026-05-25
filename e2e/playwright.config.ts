@@ -9,7 +9,7 @@ const apiUrl = process.env.E2E_API_URL ?? "https://dev.climabalance.org";
 export default defineConfig({
   testDir: "./specs",
   testMatch: "**/*.e2e.ts",
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: 2,
