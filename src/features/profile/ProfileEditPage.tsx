@@ -116,7 +116,7 @@ export function ProfileEditPage() {
     mutationFn: () => usersService.upsertProfile(targetUserIdSafe, formValues),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["users", targetUserIdSafe, "profile"],
+        queryKey: ["users", targetUserId, "profile"],
       });
       navigate(profilePath);
     },
@@ -161,7 +161,7 @@ export function ProfileEditPage() {
       });
 
       queryClient.invalidateQueries({
-        queryKey: ["users", targetUserIdSafe, "profile"],
+        queryKey: ["users", targetUserId, "profile"],
       });
     } catch (err) {
       setError(
