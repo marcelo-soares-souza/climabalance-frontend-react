@@ -111,5 +111,51 @@ test.describe("Map & Areas", () => {
       await page.waitForLoadState("networkidle");
       await expect(page.locator("h1")).toBeVisible();
     });
+
+    test("should approve a pending area after checking all criteria", async ({
+      page,
+    }) => {
+      await page.route(
+        "http://localhost:3001/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a",
+        async (route) => {
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({
+                data: {
+                  id: "0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a",
+                  slug: "reserva-legal-amazonia",
+                  name: "Reserva Legal Amazônia",
+                  description: "Área pendente para auditoria.",
+                  country_code: "BR",
+                  state: "PA",
+                  city: "Altamira",
+                  biome: "Amazônia",
+                  price_per_tree: 15,
+                  t_co2e_per_tree_per_year: 10,
+                  created_at: "2025-02-01T00:00:00Z",
+                  status: "pending_audit",
+                },
+              }),
+            });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+
+      await page.goto("/audit/area/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
+      await page.waitForLoadState("networkidle");
+
+      const criteria = page.locator('input[type="checkbox"]');
+      await criteria.nth(0).check();
+      await criteria.nth(1).check();
+      await criteria.nth(2).check();
+      await page.locator("#notes").fill("Todos os critérios conferidos.");
+      await page.getByRole("button", { name: /Aprovar/i }).click();
+
+      await expect(page).toHaveURL("/audit/pending-areas");
+    });
   });
 });

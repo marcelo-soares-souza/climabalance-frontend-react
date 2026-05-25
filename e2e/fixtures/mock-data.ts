@@ -42,10 +42,14 @@ export const MOCK_AUTH = {
     {
       id: "sess-001",
       user_agent: "Mozilla/5.0 Chrome/120",
+      userAgent: "Mozilla/5.0 Chrome/120",
       ip_address: "192.168.1.1",
       created_at: "2025-01-01T00:00:00Z",
+      createdAt: "2025-01-01T00:00:00Z",
+      expiresAt: "2026-01-01T00:00:00Z",
       last_activity: "2025-05-01T00:00:00Z",
       is_current: true,
+      hasFingerprint: true,
       device_info: { os: "Linux", browser: "Chrome 120" },
     },
   ],
@@ -239,23 +243,33 @@ export const MOCK_FOOTPRINT = {
 
 export const MOCK_COMPENSATION = {
   quote: {
-    remainingTrees: 3500,
-    pricePerTree: 15,
-    estimatedTotalTCO2e: 5,
-    estimatedTotalKgCO2e: 5000,
-    totalAmount: 750,
-    trees: 50,
+    area_id: MOCK_AREA_ID,
+    compensation_mode: "tree_purchase",
+    trees_requested: 50,
+    price_per_tree: 15,
+    estimated_total_t_co2e: 5,
+    estimated_total_kg_co2e: 5000,
+    total_amount: 750,
+    currency: "BRL",
+    max_purchasable_trees: 3500,
+    remaining_purchasable_trees: 3500,
+    producer_stripe_connected: true,
+    producer_charges_enabled: true,
+    producer_ready_to_receive_support: true,
     areaId: MOCK_AREA_ID,
   },
   confirmation: {
-    id: MOCK_COMPENSATION_ID,
+    compensation_id: MOCK_COMPENSATION_ID,
+    area_id: MOCK_AREA_ID,
+    compensation_mode: "tree_purchase",
+    trees_requested: 50,
+    trees_count: 50,
+    total_t_co2e: 5.0,
+    estimated_total_t_co2e: 5.0,
+    total_amount: 750.0,
+    currency: "BRL",
     status: "pending",
-    trees: 50,
-    tco2: 5.0,
-    totalPrice: 750.0,
-    paymentId: MOCK_PAYMENT_ID,
-    certificateId: null,
-    createdAt: "2025-05-01T00:00:00Z",
+    created_at: "2025-05-01T00:00:00Z",
   },
   history: [
     {
@@ -323,15 +337,25 @@ export const MOCK_COMPENSATION = {
 
 export const MOCK_PAYMENT = {
   intent: {
-    clientSecret: "pi_123_secret_456",
-    paymentIntentId: MOCK_PAYMENT_ID,
+    payment_id: MOCK_PAYMENT_ID,
+    compensation_id: MOCK_COMPENSATION_ID,
+    payment_status: "pending",
+    client_secret: "pi_123_secret_456",
+    payment_intent_id: "pi_123",
+    payment_method: "card",
+    qr_code: "data:image/png;base64,ZmFrZS1waXgtcXItY29kZQ==",
+    copy_paste_code:
+      "00020126580014br.gov.bcb.pix0136pix-test-code5204000053039865405750.005802BR5925ClimaBalance Teste6009Sao Paulo62070503***6304ABCD",
   },
   status: {
-    id: MOCK_PAYMENT_ID,
-    status: "completed",
+    payment_id: MOCK_PAYMENT_ID,
+    compensation_id: MOCK_COMPENSATION_ID,
+    payment_status: "pending",
     amount: 750.0,
+    currency: "BRL",
+    installments: 1,
     payment_method: "pix",
-    created_at: "2025-05-01T00:00:00Z",
+    processed_at: "2025-05-01T00:00:00Z",
   },
 };
 
@@ -380,6 +404,9 @@ export const MOCK_DIRECTORY = MOCK_USERS.map((u) => ({
 }));
 
 export const MOCK_CERTIFICATE_VALIDATION = {
+  certificate_id: MOCK_CERTIFICATE_ID,
+  status: "issued",
+  is_valid: true,
   valid: true,
   certificate_number: "CERT-001",
   holder_name: "Maria Silva",

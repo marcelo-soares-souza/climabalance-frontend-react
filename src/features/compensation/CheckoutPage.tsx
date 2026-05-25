@@ -327,17 +327,6 @@ export function CompensationCheckoutPage() {
 
   const stripePromise = getStripePromise();
 
-  if (!stripePromise) {
-    return (
-      <div className="max-w-lg mx-auto space-y-6">
-        <h1 className="text-2xl font-bold">{t("checkout.title")}</h1>
-        <p className="text-text-secondary">
-          {t("checkout.stripeNotConfigured")}
-        </p>
-      </div>
-    );
-  }
-
   return (
     <>
       <SEO title={t("seo.checkout.title")} />
@@ -459,14 +448,22 @@ export function CompensationCheckoutPage() {
               {checkoutQuote && producerReadyToReceiveSupport ? (
                 <>
                   <TabsContent value="card">
-                    <Elements stripe={stripePromise}>
-                      <CardCheckoutForm
-                        compensationId={compensationId}
-                        ensureCompensationId={ensureCompensationId}
-                        onSuccess={handlePaymentSuccess}
-                        onError={setError}
-                      />
-                    </Elements>
+                    {stripePromise ? (
+                      <Elements stripe={stripePromise}>
+                        <CardCheckoutForm
+                          compensationId={compensationId}
+                          ensureCompensationId={ensureCompensationId}
+                          onSuccess={handlePaymentSuccess}
+                          onError={setError}
+                        />
+                      </Elements>
+                    ) : (
+                      <div className="space-y-3 pt-2">
+                        <p className="text-sm text-text-secondary">
+                          {t("checkout.stripeNotConfigured")}
+                        </p>
+                      </div>
+                    )}
                   </TabsContent>
                   <TabsContent value="pix">
                     <PixCheckoutForm

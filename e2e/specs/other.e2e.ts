@@ -71,5 +71,34 @@ test.describe("Other Pages & Flows", () => {
       await page.waitForLoadState("networkidle");
       await expect(page.locator("h1")).toBeVisible();
     });
+
+    test("should submit contact form successfully", async ({ page }) => {
+      await page.goto("/contact");
+      await page.waitForLoadState("networkidle");
+
+      await page
+        .locator("#message")
+        .fill("Preciso de ajuda para apoiar uma área.");
+      await page.getByRole("button", { name: /Enviar/i }).click();
+
+      await expect(page.locator("#message")).toHaveValue("");
+      await expect(
+        page.getByText(/mensagem enviada com sucesso/i),
+      ).toBeVisible();
+    });
+  });
+
+  test("should validate a certificate and display the result", async ({
+    page,
+  }) => {
+    await page.goto("/certificates/validate");
+    await page.waitForLoadState("networkidle");
+
+    await page.getByPlaceholder("Ex: CERT-2025-001").fill("CERT-001");
+    await page.getByPlaceholder("Ex: abc123def456...").fill("hash-valido");
+    await page.getByRole("button", { name: /Validar/i }).click();
+
+    await expect(page.getByText(/Certificado Válido/i)).toBeVisible();
+    await expect(page.getByText("CERT-001")).toBeVisible();
   });
 });
