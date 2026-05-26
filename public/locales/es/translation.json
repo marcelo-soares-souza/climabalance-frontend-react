@@ -463,9 +463,9 @@
   },
   "privacy": {
     "exportData": "Exportar mis datos",
-    "exportDataDescription": "Descargue todos sus datos personales almacenados en la plataforma en formato JSON, incluyendo perfil, compensaciones, certificados y cálculos de huella.",
-    "requestExport": "Solicitar exportación",
-    "exportRequested": "Su solicitud de exportación ha sido registrada. Nos pondremos en contacto con instrucciones.",
+    "exportDataDescription": "Descargue sus datos personales almacenados en la plataforma en formato JSON. La exportación incluye su perfil, consentimientos, compensaciones, certificados y cálculos de huella.",
+    "requestExport": "Descargar exportación",
+    "exportRequested": "Su exportación se descargó en formato JSON.",
     "exportRequestDetails": "Solicitud de portabilidad de datos - el usuario solicitó exportación completa de datos.",
     "subjectRequest": "Solicitud de titular de datos",
     "requestType": "Tipo de solicitud",
@@ -473,7 +473,7 @@
     "details": "Detalles (opcional)",
     "detailsPlaceholder": "Describa su solicitud en detalle...",
     "submitRequest": "Enviar solicitud",
-    "requestSubmitted": "Su solicitud ha sido registrada. Responderemos dentro de 15 días hábiles.",
+    "requestSubmitted": "Su solicitud ha sido registrada. La revisaremos y responderemos lo antes posible. El tiempo de respuesta puede variar según la naturaleza y complejidad de la solicitud.",
     "requestTypes": {
       "access": "Acceso a mis datos",
       "rectification": "Corrección de datos",
@@ -495,7 +495,7 @@
       "label": "Resumen",
       "title": "Tratamos datos personales únicamente para operar la plataforma con transparencia, seguridad y trazabilidad.",
       "paragraph1": "ClimaBalance puede almacenar datos de cuenta, perfil, cálculos de huella, compensaciones, certificados, archivos enviados y registros técnicos necesarios para autenticación, seguridad, auditoría y prevención de fraude.",
-      "paragraph2": "Nuestro compromiso es recopilar solo lo necesario para el funcionamiento del servicio, proteger esa información y respetar solicitudes de eliminación, anonimización y revocación siempre que ello sea técnica y legalmente posible."
+      "paragraph2": "Nuestro compromiso es recopilar solo lo necesario para el funcionamiento del servicio, proteger esa información y respetar solicitudes de eliminación, restricción del tratamiento y revocación del consentimiento siempre que ello sea técnica y legalmente posible."
     },
     "sections": {
       "dataCollected": {
@@ -520,7 +520,7 @@
       },
       "deletion": {
         "title": "Eliminación de cuenta, derecho al olvido y retención",
-        "paragraph1": "Puedes solicitar la eliminación de tu cuenta y de los datos personales vinculados a ella. Cuando corresponda, esos datos serán eliminados, anonimizados o vueltos inaccesibles, según la naturaleza de la información y las limitaciones técnicas y legales del servicio.",
+        "paragraph1": "Puedes solicitar la eliminación de tu cuenta y la revisión de los datos personales vinculados a ella. Actualmente, la eliminación de la cuenta vuelve los datos inaccesibles para el uso regular de la plataforma mediante soft-delete, sin una promesa automática de anonimización o purge permanente inmediata.",
         "paragraph2": "Algunos registros pueden necesitar conservarse por más tiempo para cumplir obligaciones legales, seguridad, prevención de fraude, integridad de certificados, comprobación de transacciones o consistencia de auditoría. En esos casos, retenemos solo lo estrictamente necesario."
       },
       "rights": {
@@ -540,12 +540,12 @@
       "dataRetention": {
         "title": "Períodos de retención de datos",
         "paragraph1": "Conservamos sus datos personales solo durante el tiempo necesario para cumplir con los fines para los que fueron recopilados:",
-        "item1": "Datos de cuenta: retenidos mientras la cuenta esté activa. Después de la eliminación, soft-delete por hasta 90 días, luego anonimización o eliminación permanente.",
+        "item1": "Datos de cuenta: retenidos mientras la cuenta esté activa. Después de la eliminación, los datos quedan en soft-delete y pueden seguir retenidos mientras exista una necesidad legal, operativa o de auditoría.",
         "item2": "Datos de compensación y certificados: retenidos hasta 5 años después de la última transacción para cumplir con obligaciones fiscales y regulatorias.",
-        "item3": "Registros de auditoría: retenidos hasta 3 años.",
+        "item3": "Registros de auditoría: retenidos hasta 365 días (configurable por el operador de la plataforma).",
         "item4": "Tokens de sesión y refresco: retenidos hasta su expiración o revocación, lo que ocurra primero.",
         "item5": "Datos de pago: procesados exclusivamente por Stripe. ClimaBalance no almacena datos completos de tarjetas de crédito.",
-        "paragraph2": "Después del período de retención, los datos se anonimizan o eliminan permanentemente."
+        "paragraph2": "Después del período de retención, los datos pueden revisarse para su descarte o anonimización conforme a la política operativa vigente y a las obligaciones legales aplicables."
       },
       "dpo": {
         "title": "Delegado de Protección de Datos (DPO)",
@@ -557,10 +557,10 @@
       "internationalTransfer": {
         "title": "Transferencia internacional de datos",
         "paragraph1": "ClimaBalance utiliza servicios de terceros que pueden implicar la transferencia de datos fuera de Brasil y la Unión Europea, incluyendo:",
-        "item1": "Stripe (EE. UU.): procesamiento de pagos. Stripe está certificada por Privacy Shield y utiliza Cláusulas Contractuales Estándar (SCC) para el cumplimiento del GDPR.",
+        "item1": "Stripe (EE. UU.): procesamiento de pagos. Stripe utiliza Cláusulas Contractuales Estándar (SCC) como mecanismo de transferencia para el cumplimiento del GDPR.",
         "item2": "Proveedores de alojamiento en la nube e infraestructura: pueden implicar servidores ubicados en diferentes países.",
         "item3": "Servicios de correo electrónico transaccional: para el envío de notificaciones y confirmaciones.",
-        "paragraph2": "En tales casos, adoptamos mecanismos contractuales y técnicos para garantizar que sus datos reciban el mismo nivel de protección exigido por la legislación aplicable."
+        "paragraph2": "En tales casos, adoptamos salvaguardas contractuales y técnicas de acuerdo con los requisitos de protección de datos aplicables."
       },
       "rightsProcedures": {
         "title": "Cómo ejercer sus derechos",
@@ -568,7 +568,7 @@
         "item1": "Directamente en la plataforma: acceda a su perfil para editar, corregir o actualizar sus datos personales.",
         "item2": "Solicitud formal: utilice el formulario de solicitud de titular disponible en la plataforma (menú Privacidad).",
         "item3": "Contacto con el DPO: envíe un correo electrónico a dpo@climabalance.org.",
-        "paragraph2": "Responderemos a su solicitud en un plazo de 15 días, según lo previsto por la LGPD. En casos complejos, el plazo puede ampliarse mediante justificación."
+        "paragraph2": "Revisaremos su solicitud y responderemos lo antes posible. Los tiempos de respuesta dependen de la naturaleza y complejidad de la solicitud. Ciertas solicitudes pueden requerir revisión manual y verificación de identidad."
       }
     },
     "footer": {
@@ -646,7 +646,7 @@
       },
       "refunds": {
         "title": "14. Reembolsos, Disputas y Contracargos",
-        "body": "La elegibilidad para reembolsos puede variar según el proyecto específico y las leyes aplicables. Cuando la ley lo permita, ClimaBalance puede denegar solicitudes de reembolso, compensar pérdidas derivadas de contracargos, retener pagos futuros a Socios y recuperar los costos de procesamiento de transacciones. ClimaBalance conserva la facultad discrecional exclusiva respecto a la investigación de disputas y las soluciones a nivel de plataforma."
+        "body": "La elegibilidad para reembolsos puede variar según el proyecto específico y las leyes aplicables. Cuando la ley lo permita, ClimaBalance puede denegar solicitudes de reembolso, compensar pérdidas derivadas de contracargos, retener pagos futuros a Socios y recuperar los costos de procesamiento de transacciones. Las decisiones de reembolso se comunicarán con una justificación clara y, cuando corresponda, una vía de recurso."
       },
       "intellectualProperty": {
         "title": "15. Propiedad Intelectual",
@@ -662,7 +662,7 @@
       },
       "liability": {
         "title": "18. Limitación de Responsabilidad",
-        "body": "EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, CLIMABALANCE NO SERÁ RESPONSABLE POR DAÑOS INDIRECTOS, CONSECUENTES, INCIDENTALES, ESPECIALES, PUNITIVOS, PÉRDIDA DE GANANCIAS, PÉRDIDA DE OPORTUNIDADES, DAÑO REPUTACIONAL, PÉRDIDAS AMBIENTALES, SANCIONES REGULATORIAS NI RECLAMOS RELACIONADOS CON ESG. EN NINGÚN CASO LA RESPONSABILIDAD TOTAL DE CLIMABALANCE EXCEDERÁ EL TOTAL DE LAS TARIFAS DE LA PLATAFORMA RETENIDAS POR CLIMABALANCE DE LAS TRANSACCIONES DEL USUARIO PERTINENTE DURANTE LOS TRES (3) MESES ANTERIORES AL RECLAMO."
+        "body": "EN LA MÁXIMA MEDIDA PERMITIDA POR LA LEY, CLIMABALANCE NO SERÁ RESPONSABLE POR DAÑOS INDIRECTOS, CONSECUENTES, INCIDENTALES, ESPECIALES, PUNITIVOS, PÉRDIDA DE GANANCIAS, PÉRDIDA DE OPORTUNIDADES, DAÑO REPUTACIONAL, PÉRDIDAS AMBIENTALES, SANCIONES REGULATORIAS NI RECLAMOS RELACIONADOS CON ESG. EN NINGÚN CASO LA RESPONSABILIDAD TOTAL DE CLIMABALANCE EXCEDERÁ EL TOTAL DE LAS TARIFAS DE LA PLATAFORMA RETENIDAS POR CLIMABALANCE DE LAS TRANSACCIONES DEL USUARIO PERTINENTE DURANTE LOS SEIS (6) MESES ANTERIORES AL RECLAMO. ESTA LIMITACIÓN NO AFECTA LOS DERECHOS ESTATUTARIOS QUE NO PUEDAN SER RENUNCIADOS BAJO LAS LEYES DE PROTECCIÓN AL CONSUMIDOR O PROTECCIÓN DE DATOS APLICABLES."
       },
       "indemnification": {
         "title": "19. Indemnización",
@@ -670,7 +670,7 @@
       },
       "classAction": {
         "title": "20. Renuncia a Acciones Colectivas",
-        "body": "En la máxima medida permitida por la ley aplicable, los Usuarios y Socios aceptan que cualquier reclamo se presentará únicamente a título individual y no como parte de una acción colectiva, acción conjunta, acción representativa o procedimiento similar."
+        "body": "Cuando la ley aplicable lo permita, los Usuarios y Socios aceptan que cualquier reclamo se presentará únicamente a título individual. Esto no afecta los derechos obligatorios de participar en procedimientos colectivos otorgados por las leyes de protección al consumidor o protección de datos que no puedan ser renunciados."
       },
       "compliance": {
         "title": "21. Cumplimiento de Leyes",
@@ -682,15 +682,15 @@
       },
       "governingLaw": {
         "title": "23. Ley Aplicable y Jurisdicción",
-        "body": "Estos Términos se regirán e interpretarán de acuerdo con las leyes de la República Federativa de Brasil. Cualquier disputa que surja de o se relacione con estos Términos se someterá exclusivamente a los tribunales ubicados en Brasília, Distrito Federal, Brasil. Los Usuarios y Socios renuncian expresamente a cualquier objeción basada en sede, jurisdicción o foro no conveniente."
+        "body": "Estos Términos se regirán e interpretarán de acuerdo con las leyes de la República Federativa de Brasil. Cualquier disputa que surja de o se relacione con estos Términos se someterá a los tribunales ubicados en Brasília, Distrito Federal, Brasil, sin perjuicio de las reglas obligatorias de jurisdicción o competencia que puedan aplicarse bajo las leyes de protección al consumidor o protección de datos. Los Usuarios y Socios renuncian a cualquier objeción basada en sede, jurisdicción o foro no conveniente en la medida permitida por la ley."
       },
       "changes": {
         "title": "24. Cambios en estos Términos",
-        "body": "ClimaBalance puede modificar estos Términos en cualquier momento. Las versiones actualizadas se publicarán en la plataforma. El uso continuado de la plataforma después de la publicación constituye la aceptación de los Términos revisados."
+        "body": "ClimaBalance puede modificar estos Términos a medida que el proyecto evoluciona. Las versiones actualizadas se publicarán en la plataforma con la fecha de vigencia. Para cambios relevantes, notificaremos a los usuarios registrados por correo electrónico o mediante aviso destacado en la plataforma. El uso continuado después de la fecha de vigencia constituye la aceptación de los Términos revisados."
       },
       "contact": {
         "title": "25. Información de Contacto",
-        "body": "Las preguntas sobre estos Términos pueden dirigirse a: ClimaBalance. Correo electrónico: termos@climabalance.com. Sitio web: https://climabalance.com"
+        "body": "Las preguntas sobre estos Términos pueden dirigirse a: ClimaBalance. Correo electrónico: termos@climabalance.org. Sitio web: https://climabalance.org"
       }
     },
     "footer": {
@@ -1707,7 +1707,7 @@
     }
   },
   "cookieConsent": {
-    "message": "Utilizamos cookies y tecnologías similares para mejorar su experiencia, analizar el uso y personalizar el contenido. Al continuar navegando, acepta nuestra <privacyLink>Política de Privacidad</privacyLink> y <termsLink>Términos de Uso</termsLink>.",
+    "message": "Utilizamos cookies y tecnologías similares para seguridad y funcionalidad (Stripe, Google Fonts, Mapbox), análisis de uso (Cloudflare Insights) y marketing (YouTube). Elija si desea aceptar o rechazar estas categorías, como se describe en nuestra <privacyLink>Política de Privacidad</privacyLink> y en nuestros <termsLink>Términos de Uso</termsLink>.",
     "accept": "Aceptar",
     "reject": "Rechazar"
   },

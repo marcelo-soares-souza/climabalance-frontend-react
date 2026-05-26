@@ -163,13 +163,8 @@ async function request<T>(
     ...(fetchOptions.headers as Record<string, string>),
   };
 
-  if (shouldHandleSession && token && !isTokenExpired(token)) {
-    headers["Authorization"] = `Bearer ${token}`;
-  } else if (shouldHandleSession && token) {
-    const newToken = await handleUnauthorized();
-    if (newToken) {
-      headers["Authorization"] = `Bearer ${newToken}`;
-    }
+  if (shouldHandleSession && token && isTokenExpired(token)) {
+    await handleUnauthorized();
   }
 
   if (!(fetchOptions.body instanceof FormData)) {

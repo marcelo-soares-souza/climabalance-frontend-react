@@ -52,10 +52,15 @@ export function CookieConsentBanner() {
     async (accepted: boolean) => {
       if (!isAuthenticated) return;
       try {
-        await api.post("/privacy/cookie-consent", {
-          consent_type: "analytics",
-          consented: accepted,
-        });
+        const consentTypes = ["analytics", "functional", "marketing"];
+        await Promise.all(
+          consentTypes.map((consentType) =>
+            api.post("/privacy/cookie-consent", {
+              consent_type: consentType,
+              consented: accepted,
+            }),
+          ),
+        );
       } catch {
         // Silently fail - localStorage consent is sufficient
       }

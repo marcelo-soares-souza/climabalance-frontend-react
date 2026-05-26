@@ -463,9 +463,9 @@
   },
   "privacy": {
     "exportData": "Exporter mes données",
-    "exportDataDescription": "Téléchargez toutes vos données personnelles stockées sur la plateforme au format JSON, y compris le profil, les compensations, les certificats et les calculs d'empreinte.",
-    "requestExport": "Demander l'exportation",
-    "exportRequested": "Votre demande d'exportation a été enregistrée. Nous vous contacterons avec les instructions.",
+    "exportDataDescription": "Téléchargez vos données personnelles stockées sur la plateforme au format JSON. L'exportation inclut votre profil, vos consentements, vos compensations, vos certificats et vos calculs d'empreinte.",
+    "requestExport": "Télécharger l'export",
+    "exportRequested": "Votre export a été téléchargé au format JSON.",
     "exportRequestDetails": "Demande de portabilité des données - l'utilisateur a demandé l'exportation complète des données.",
     "subjectRequest": "Demande de personne concernée",
     "requestType": "Type de demande",
@@ -473,7 +473,7 @@
     "details": "Détails (optionnel)",
     "detailsPlaceholder": "Décrivez votre demande en détail...",
     "submitRequest": "Soumettre la demande",
-    "requestSubmitted": "Votre demande a été enregistrée. Nous répondrons dans un délai de 15 jours ouvrables.",
+    "requestSubmitted": "Votre demande a été enregistrée. Nous l'examinerons et y répondrons dans les meilleurs délais. Le délai de réponse peut varier selon la nature et la complexité de la demande.",
     "requestTypes": {
       "access": "Accès à mes données",
       "rectification": "Rectification des données",
@@ -495,7 +495,7 @@
       "label": "Résumé",
       "title": "Nous traitons les données personnelles uniquement pour faire fonctionner la plateforme avec transparence, sécurité et traçabilité.",
       "paragraph1": "ClimaBalance peut stocker des données de compte, de profil, des calculs d’empreinte, des compensations, des certificats, des médias envoyés et des enregistrements techniques nécessaires à l’authentification, à la sécurité, à l’audit et à la prévention de la fraude.",
-      "paragraph2": "Notre engagement est de ne collecter que ce qui est nécessaire au fonctionnement du service, de protéger ces informations et de respecter les demandes de suppression, d’anonymisation et de révocation chaque fois que cela est techniquement et légalement possible."
+      "paragraph2": "Notre engagement est de ne collecter que ce qui est nécessaire au fonctionnement du service, de protéger ces informations et de respecter les demandes de suppression, de limitation du traitement et de retrait du consentement chaque fois que cela est techniquement et légalement possible."
     },
     "sections": {
       "dataCollected": {
@@ -520,7 +520,7 @@
       },
       "deletion": {
         "title": "Suppression du compte, droit à l’oubli et conservation",
-        "paragraph1": "Vous pouvez demander la suppression de votre compte et des données personnelles qui y sont liées. Lorsque cela est applicable, ces données seront supprimées, anonymisées ou rendues inaccessibles, selon la nature des informations et les limites techniques et légales du service.",
+        "paragraph1": "Vous pouvez demander la suppression de votre compte et la révision des données personnelles qui y sont liées. À ce jour, la suppression du compte rend les données inaccessibles pour l'usage courant de la plateforme via un soft-delete, sans promesse automatique d'anonymisation ni de purge définitive immédiate.",
         "paragraph2": "Certains enregistrements peuvent devoir être conservés plus longtemps afin de respecter des obligations légales, la sécurité, la prévention de la fraude, l’intégrité des certificats, la preuve des transactions ou la cohérence de l’audit. Dans ces cas, nous ne conservons que ce qui est strictement nécessaire."
       },
       "rights": {
@@ -540,12 +540,12 @@
       "dataRetention": {
         "title": "Périodes de conservation des données",
         "paragraph1": "Nous conservons vos données personnelles uniquement pendant la durée nécessaire aux fins pour lesquelles elles ont été collectées :",
-        "item1": "Données du compte : conservées tant que le compte est actif. Après suppression, soft-delete jusqu'à 90 jours, puis anonymisation ou suppression définitive.",
+        "item1": "Données du compte : conservées tant que le compte est actif. Après suppression, les données passent en soft-delete et peuvent rester conservées tant qu'il existe un besoin légal, opérationnel ou d'audit.",
         "item2": "Données de compensation et certificats : conservées jusqu'à 5 ans après la dernière transaction pour respecter les obligations fiscales et réglementaires.",
-        "item3": "Registres d'audit : conservés jusqu'à 3 ans.",
+        "item3": "Registres d'audit : conservés jusqu'à 365 jours (configurable par l'opérateur de la plateforme).",
         "item4": "Jetons de session et de rafraîchissement : conservés jusqu'à expiration ou révocation, selon la première éventualité.",
         "item5": "Données de paiement : traitées exclusivement par Stripe. ClimaBalance ne stocke pas les données complètes des cartes de crédit.",
-        "paragraph2": "Après la période de conservation, les données sont anonymisées ou définitivement supprimées."
+        "paragraph2": "Après la période de conservation, les données peuvent être réévaluées pour suppression ou anonymisation selon la politique opérationnelle en vigueur et les obligations légales applicables."
       },
       "dpo": {
         "title": "Délégué à la protection des données (DPO)",
@@ -557,10 +557,10 @@
       "internationalTransfer": {
         "title": "Transfert international de données",
         "paragraph1": "ClimaBalance utilise des services tiers qui peuvent impliquer un transfert de données en dehors du Brésil et de l'Union européenne, notamment :",
-        "item1": "Stripe (États-Unis) : traitement des paiements. Stripe est certifiée Privacy Shield et utilise des clauses contractuelles types (CCT) pour la conformité au RGPD.",
+        "item1": "Stripe (États-Unis) : traitement des paiements. Stripe utilise des clauses contractuelles types (CCT) comme mécanisme de transfert pour la conformité au RGPD.",
         "item2": "Fournisseurs d'hébergement cloud et d'infrastructure : peuvent impliquer des serveurs situés dans différents pays.",
         "item3": "Services de messagerie transactionnelle : pour l'envoi de notifications et de confirmations.",
-        "paragraph2": "Dans ces cas, nous adoptons des mécanismes contractuels et techniques pour garantir que vos données reçoivent le même niveau de protection exigé par la législation applicable."
+        "paragraph2": "Dans ces cas, nous adoptons des garanties contractuelles et techniques conformément aux exigences de protection des données applicables."
       },
       "rightsProcedures": {
         "title": "Comment exercer vos droits",
@@ -568,7 +568,7 @@
         "item1": "Directement sur la plateforme : accédez à votre profil pour modifier, corriger ou mettre à jour vos données personnelles.",
         "item2": "Demande formelle : utilisez le formulaire de demande disponible sur la plateforme (menu Confidentialité).",
         "item3": "Contacter le DPO : envoyez un courriel à dpo@climabalance.org.",
-        "paragraph2": "Nous répondrons à votre demande dans un délai de 15 jours, comme prévu par la LGPD. Dans les cas complexes, ce délai peut être prolongé avec justification."
+        "paragraph2": "Nous examinerons votre demande et y répondrons dans les meilleurs délais. Les délais de réponse dépendent de la nature et de la complexité de la demande. Certaines demandes peuvent nécessiter un examen manuel et une vérification d'identité."
       }
     },
     "footer": {
@@ -646,7 +646,7 @@
       },
       "refunds": {
         "title": "14. Remboursements, Contestations et Chargebacks",
-        "body": "L\u0027éligibilité au remboursement peut varier selon le projet spécifique et les lois applicables. Lorsque la loi le permet, ClimaBalance peut refuser les demandes de remboursement, compenser les pertes découlant de chargebacks, retenir les paiements futurs aux Partenaires et récupérer les coûts de traitement des transactions. ClimaBalance conserve le pouvoir discrétionnaire exclusif concernant l\u0027enquête sur les contestations et les recours au niveau de la plateforme."
+        "body": "L\u0027éligibilité au remboursement peut varier selon le projet spécifique et les lois applicables. Lorsque la loi le permet, ClimaBalance peut refuser les demandes de remboursement, compenser les pertes découlant de chargebacks, retenir les paiements futurs aux Partenaires et récupérer les coûts de traitement des transactions. Les décisions de remboursement seront communiquées avec une justification claire et, le cas échéant, une voie de recours."
       },
       "intellectualProperty": {
         "title": "15. Propriété Intellectuelle",
@@ -662,7 +662,7 @@
       },
       "liability": {
         "title": "18. Limitation de Responsabilité",
-        "body": "DANS LA MESURE MAXIMALE AUTORISÉE PAR LA LOI, CLIMABALANCE NE POURRA ÊTRE TENUE RESPONSABLE DES DOMMAGES INDIRECTS, CONSÉCUTIFS, ACCESSOIRES, SPÉCIAUX OU PUNITIFS, DES PERTES DE PROFITS, DES PERTES D\u0027OPPORTUNITÉS, DU PRÉJUDICE À LA RÉPUTATION, DES PERTES ENVIRONNEMENTALES, DES SANCTIONS RÉGLEMENTAIRES OU DES RÉCLAMATIONS LIÉES AUX CRITÈRES ESG. EN AUCUN CAS LA RESPONSABILITÉ TOTALE DE CLIMABALANCE NE POURRA EXCÉDER LE TOTAL DES FRAIS DE PLATEFORME RETENUS PAR CLIMABALANCE SUR LES TRANSACTIONS DE L\u0027UTILISATEUR CONCERNÉ AU COURS DES TROIS (3) MOIS PRÉCÉDANT LA RÉCLAMATION."
+        "body": "DANS LA MESURE MAXIMALE AUTORISÉE PAR LA LOI, CLIMABALANCE NE POURRA ÊTRE TENUE RESPONSABLE DES DOMMAGES INDIRECTS, CONSÉCUTIFS, ACCESSOIRES, SPÉCIAUX OU PUNITIFS, DES PERTES DE PROFITS, DES PERTES D\u0027OPPORTUNITÉS, DU PRÉJUDICE À LA RÉPUTATION, DES PERTES ENVIRONNEMENTALES, DES SANCTIONS RÉGLEMENTAIRES OU DES RÉCLAMATIONS LIÉES AUX CRITÈRES ESG. EN AUCUN CAS LA RESPONSABILITÉ TOTALE DE CLIMABALANCE NE POURRA EXCÉDER LE TOTAL DES FRAIS DE PLATEFORME RETENUS PAR CLIMABALANCE SUR LES TRANSACTIONS DE L\u0027UTILISATEUR CONCERNÉ AU COURS DES SIX (6) MOIS PRÉCÉDANT LA RÉCLAMATION. CETTE LIMITATION N\u0027AFFECTE PAS LES DROITS STATUTAIRES QUI NE PEUVENT ÊTRE EXCLUS EN VERTU DES LOIS APPLICABLES EN MATIÈRE DE PROTECTION DES CONSOMMATEURS OU DE PROTECTION DES DONNÉES."
       },
       "indemnification": {
         "title": "19. Indemnisation",
@@ -670,7 +670,7 @@
       },
       "classAction": {
         "title": "20. Renonciation aux Recours Collectifs",
-        "body": "Dans la mesure maximale autorisée par la loi applicable, les Utilisateurs et les Partenaires conviennent que toute réclamation sera intentée uniquement à titre individuel et non dans le cadre d\u0027une action collective, d\u0027une action de groupe, d\u0027une action représentative ou de toute procédure similaire."
+        "body": "Lorsque la loi applicable le permet, les Utilisateurs et les Partenaires conviennent que toute réclamation sera intentée uniquement à titre individuel. Ceci n\u0027affecte pas les droits obligatoires de participer à des procédures collectives accordées par les lois sur la protection des consommateurs ou la protection des données qui ne peuvent être exclues."
       },
       "compliance": {
         "title": "21. Conformité aux Lois",
@@ -682,15 +682,15 @@
       },
       "governingLaw": {
         "title": "23. Droit Applicable et Juridiction",
-        "body": "Les présentes Conditions sont régies et interprétées conformément aux lois de la République fédérative du Brésil. Tout litige découlant des présentes Conditions ou s\u0027y rapportant sera soumis exclusivement aux tribunaux situés à Brasília, District Fédéral, Brésil. Les Utilisateurs et les Partenaires renoncent expressément à toute objection fondée sur le lieu, la compétence ou le forum non conveniens."
+        "body": "Les présentes Conditions sont régies et interprétées conformément aux lois de la République fédérative du Brésil. Tout litige découlant des présentes Conditions ou s\u0027y rapportant sera soumis aux tribunaux situés à Brasília, District Fédéral, Brésil, sans préjudice des règles de compétence ou de juridiction obligatoires qui peuvent s\u0027appliquer en vertu des lois sur la protection des consommateurs ou la protection des données. Les Utilisateurs et les Partenaires renoncent à toute objection fondée sur le lieu, la compétence ou le forum non conveniens dans la mesure permise par la loi."
       },
       "changes": {
         "title": "24. Modifications des Présentes Conditions",
-        "body": "ClimaBalance peut modifier les présentes Conditions à tout moment. Les versions mises à jour seront publiées sur la plateforme. L\u0027utilisation continue de la plateforme après la publication constitue une acceptation des Conditions révisées."
+        "body": "ClimaBalance peut modifier les présentes Conditions à mesure que le projet évolue. Les versions mises à jour seront publiées sur la plateforme avec la date d\u0027entrée en vigueur. Pour les modifications importantes, nous informerons les utilisateurs inscrits par courriel ou par un avis visible sur la plateforme. L\u0027utilisation continue après la date d\u0027entrée en vigueur constitue une acceptation des Conditions révisées."
       },
       "contact": {
         "title": "25. Coordonnées",
-        "body": "Les questions concernant les présentes Conditions peuvent être adressées à : ClimaBalance. Courriel : termos@climabalance.com. Site Web : https://climabalance.com"
+        "body": "Les questions concernant les présentes Conditions peuvent être adressées à : ClimaBalance. Courriel : termos@climabalance.org. Site Web : https://climabalance.org"
       }
     },
     "footer": {
@@ -1707,7 +1707,7 @@
     }
   },
   "cookieConsent": {
-    "message": "Nous utilisons des cookies et des technologies similaires pour améliorer votre expérience, analyser l'utilisation et personnaliser le contenu. En continuant à naviguer, vous acceptez notre <privacyLink>Politique de confidentialité</privacyLink> et nos <termsLink>Conditions d'utilisation</termsLink>.",
+    "message": "Nous utilisons des cookies et des technologies similaires pour la sécurité et la fonctionnalité (Stripe, Google Fonts, Mapbox), l'analyse d'utilisation (Cloudflare Insights) et le marketing (YouTube). Choisissez si vous souhaitez accepter ou refuser ces catégories, comme décrit dans notre <privacyLink>Politique de confidentialité</privacyLink> et nos <termsLink>Conditions d'utilisation</termsLink>.",
     "accept": "Accepter",
     "reject": "Refuser"
   },

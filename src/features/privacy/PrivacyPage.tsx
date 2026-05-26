@@ -7,6 +7,7 @@ import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
 import { Card, CardContent } from "@/components/ui/Card";
 import { api } from "@/lib/api-client";
+import { usersService } from "@/services/users";
 import { ShieldAlert, Download } from "lucide-react";
 
 type RequestType =
@@ -20,7 +21,7 @@ type RequestType =
 
 export function PrivacyPage() {
   const { t } = useTranslation();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, userId } = useAuth();
   const [requestType, setRequestType] = useState("");
   const [details, setDetails] = useState("");
   const [loading, setLoading] = useState(false);
@@ -67,10 +68,23 @@ export function PrivacyPage() {
     setError(null);
     setExportLoading(true);
     try {
-      await api.post("/privacy/subject-request", {
-        request_type: "portability",
-        details: t("privacy.exportRequestDetails"),
+      if (!userId) {
+        throw new Error("privacy.user_id_missing");
+      }
+
+      const data = await usersService.exportUserData(userId);
+      const blob = new Blob([JSON.stringify(data, null, 2)], {
+        type: "application/json",
       });
+      const downloadUrl = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const sanitizedDate = new Date().toISOString().replaceAll(":", "-");
+      link.href = downloadUrl;
+      link.download = `climabalance-data-export-${sanitizedDate}.json`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(downloadUrl);
       setMessage(t("privacy.exportRequested"));
     } catch {
       setError(t("errors.generic"));

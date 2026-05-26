@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 
-const BASE_URL = import.meta.env.VITE_SITE_URL || "https://climabalance.com.br";
+const BASE_URL = import.meta.env.VITE_SITE_URL || "https://climabalance.org";
 const DEFAULT_OG_IMAGE = `${BASE_URL}/logo.png`;
 const SITE_NAME = "ClimaBalance";
 

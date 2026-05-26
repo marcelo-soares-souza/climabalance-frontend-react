@@ -340,6 +340,10 @@ export const usersService = {
       .then(normalizeUserSummary);
   },
 
+  exportUserData(userId: string) {
+    return api.get<Record<string, unknown>>(`/users/${userId}/data-export`);
+  },
+
   getUserProfile(userId: string) {
     return api
       .get<RawUserProfile | null>(`/users/${userId}/profile`)

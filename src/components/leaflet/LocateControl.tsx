@@ -33,7 +33,7 @@ export function LocateControl({
         button.title = title;
         button.setAttribute("aria-label", title);
         button.innerHTML =
-          '<span aria-hidden="true" style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;font-size:16px;line-height:1">+</span>';
+          '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>';
 
         Object.assign(button.style, {
           width: "34px",
@@ -42,7 +42,9 @@ export function LocateControl({
           border: "0",
           cursor: "pointer",
           color: "#0b5f4b",
-          fontWeight: "700",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         });
 
         L.DomEvent.disableClickPropagation(container);
