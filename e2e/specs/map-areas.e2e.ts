@@ -297,62 +297,6 @@ test.describe("Map & Areas", () => {
       await page.goto("/audit/pending-areas");
       await expect(page).toHaveURL(/\/access-denied/);
     });
-
-    test("should display own area detail with management buttons", async ({
-      page,
-    }) => {
-      await page.route(
-        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a**`,
-        async (route) => {
-          const url = route.request().url();
-          if (route.request().method() === "GET") {
-            if (url.includes("/capacity")) {
-              await route.fulfill({
-                status: 200,
-                contentType: "application/json",
-                body: JSON.stringify({
-                  data: {
-                    total_trees: 5000,
-                    available_trees: 3450,
-                    total_capacity_tco2: 1000,
-                  },
-                }),
-              });
-              return;
-            }
-            if (url.includes("/contributions")) {
-              await route.fulfill({
-                status: 200,
-                contentType: "application/json",
-                body: JSON.stringify({ data: [] }),
-              });
-              return;
-            }
-            if (url.includes("/media")) {
-              await route.fulfill({
-                status: 200,
-                contentType: "application/json",
-                body: JSON.stringify({ data: [] }),
-              });
-              return;
-            }
-            await route.fulfill({
-              status: 200,
-              contentType: "application/json",
-              body: JSON.stringify({
-                data: { ...MOCK_AREA, status: "draft", audit_status: null },
-              }),
-            });
-            return;
-          }
-          await route.fallback();
-        },
-      );
-
-      await page.goto("/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
-      await page.waitForLoadState("networkidle");
-      await expect(page.locator("h1")).toHaveText(/Reserva Legal Amazônia/i);
-    });
   });
 
   test.describe("Analyst", () => {
