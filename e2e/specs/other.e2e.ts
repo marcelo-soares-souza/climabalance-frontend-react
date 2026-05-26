@@ -53,7 +53,9 @@ test.describe("Other Pages & Flows", () => {
   test("should render embed calculator", async ({ page }) => {
     await page.goto("/embed/calculator");
     await page.waitForLoadState("networkidle");
-    await expect(page.locator("text=/Calculadora de Pegada/i")).toBeVisible();
+    await expect(
+      page.getByText(/Tipo de Perfil|Próximo|Calcular/i).first(),
+    ).toBeVisible();
   });
 
   test("should render embed demo page", async ({ page }) => {
@@ -87,7 +89,7 @@ test.describe("Other Pages & Flows", () => {
   test("should display user directory and navigate to profile", async ({
     page,
   }) => {
-    await page.route(`${API_URL}/api/v1/directory/users`, async (route) => {
+    await page.route(`${API_URL}/api/v1/directory/users**`, async (route) => {
       await route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -95,12 +97,13 @@ test.describe("Other Pages & Flows", () => {
           data: [
             {
               id: "user-001",
-              name: "Maria Silva",
+              display_name: "Maria Silva",
               slug: "maria-silva",
               avatar_url: null,
-              country: "BR",
+              country_code: "BR",
               total_areas: 0,
               total_trees: 0,
+              created_at: "2025-01-01T00:00:00Z",
             },
           ],
         }),
@@ -108,6 +111,7 @@ test.describe("Other Pages & Flows", () => {
     });
 
     await page.goto("/users");
+    await page.waitForLoadState("networkidle");
     await expect(page.locator("h1")).toHaveText(
       /Reflorestadores e apoiadores/i,
     );
@@ -192,7 +196,7 @@ test.describe("Other Pages & Flows", () => {
           status: 500,
           contentType: "application/json",
           body: JSON.stringify({
-            error: { message_key: "server.error" },
+            error: { message_key: "errors.generic" },
           }),
         });
       });

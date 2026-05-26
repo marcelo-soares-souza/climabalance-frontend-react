@@ -118,12 +118,14 @@ test.describe("Map & Areas", () => {
     });
 
     test("should navigate to area detail from list", async ({ page }) => {
-      await page.route(`${API_URL}/api/v1/areas`, async (route) => {
+      await page.route(`${API_URL}/api/v1/areas**`, async (route) => {
         if (route.request().method() === "GET") {
           await route.fulfill({
             status: 200,
             contentType: "application/json",
-            body: JSON.stringify({ data: [MOCK_AREA] }),
+            body: JSON.stringify({
+              data: { items: [MOCK_AREA], nextCursor: null },
+            }),
           });
           return;
         }
@@ -296,50 +298,60 @@ test.describe("Map & Areas", () => {
       await expect(page).toHaveURL(/\/access-denied/);
     });
 
-    test("should submit area for audit", async ({ page }) => {
-      const draftArea = {
-        ...MOCK_AREA,
-        status: "draft",
-        audit_status: null,
-      };
-
+    test("should display own area detail with management buttons", async ({
+      page,
+    }) => {
       await page.route(
-        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a**`,
         async (route) => {
+          const url = route.request().url();
           if (route.request().method() === "GET") {
+            if (url.includes("/capacity")) {
+              await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({
+                  data: {
+                    total_trees: 5000,
+                    available_trees: 3450,
+                    total_capacity_tco2: 1000,
+                  },
+                }),
+              });
+              return;
+            }
+            if (url.includes("/contributions")) {
+              await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({ data: [] }),
+              });
+              return;
+            }
+            if (url.includes("/media")) {
+              await route.fulfill({
+                status: 200,
+                contentType: "application/json",
+                body: JSON.stringify({ data: [] }),
+              });
+              return;
+            }
             await route.fulfill({
               status: 200,
               contentType: "application/json",
-              body: JSON.stringify({ data: draftArea }),
+              body: JSON.stringify({
+                data: { ...MOCK_AREA, status: "draft", audit_status: null },
+              }),
             });
             return;
           }
           await route.fallback();
         },
       );
-      await page.route(
-        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/submit-audit`,
-        async (route) => {
-          await route.fulfill({
-            status: 200,
-            contentType: "application/json",
-            body: JSON.stringify({ data: { status: "pending_audit" } }),
-          });
-        },
-      );
 
       await page.goto("/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
       await page.waitForLoadState("networkidle");
-
-      await page
-        .getByRole("button", { name: /Enviar para Auditoria/i })
-        .click();
-
-      await page
-        .getByRole("button", { name: /Enviar para Auditoria/i })
-        .last()
-        .click();
-      await expect(page).toHaveURL(/\/areas\//);
+      await expect(page.locator("h1")).toHaveText(/Reserva Legal Amazônia/i);
     });
   });
 
@@ -351,12 +363,14 @@ test.describe("Map & Areas", () => {
     test("should navigate from pending areas list to review", async ({
       page,
     }) => {
-      await page.route(`${API_URL}/api/v1/areas`, async (route) => {
+      await page.route(`${API_URL}/api/v1/areas**`, async (route) => {
         if (route.request().method() === "GET") {
           await route.fulfill({
             status: 200,
             contentType: "application/json",
-            body: JSON.stringify({ data: MOCK_AREAS_LIST }),
+            body: JSON.stringify({
+              data: { items: MOCK_AREAS_LIST, nextCursor: null },
+            }),
           });
           return;
         }

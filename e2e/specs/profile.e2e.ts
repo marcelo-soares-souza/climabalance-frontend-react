@@ -100,7 +100,7 @@ test.describe("Profile", () => {
 
   test("should revoke a single session", async ({ page }) => {
     let revokeCalls = 0;
-    await page.route(`${API_URL}/api/v1/auth/sessions`, async (route) => {
+    await page.route(`${API_URL}/api/v1/auth/sessions**`, async (route) => {
       const url = route.request().url();
       if (route.request().method() === "GET") {
         await route.fulfill({
@@ -122,7 +122,7 @@ test.describe("Profile", () => {
       }
       if (
         route.request().method() === "DELETE" &&
-        url.includes("/session-001")
+        url.includes("/sessions/session-001")
       ) {
         revokeCalls += 1;
         await route.fulfill({ status: 204 });
@@ -134,10 +134,7 @@ test.describe("Profile", () => {
     await page.goto("/profile/sessions");
     await page.waitForLoadState("networkidle");
 
-    const deleteButton = page
-      .locator("button")
-      .filter({ has: page.locator("svg.lucide-trash2") });
-    await deleteButton.first().click();
+    await page.locator('button svg[class*="trash"]').first().click();
     await expect.poll(() => revokeCalls).toBe(1);
   });
 
@@ -252,21 +249,12 @@ test.describe("Profile", () => {
     await expect(page.getByText("Outro Usuário")).toBeVisible();
   });
 
-  test("should access scoped certificates route", async ({ page }) => {
-    await page.route(
-      `${API_URL}/api/v1/users/other-user/certificates`,
-      async (route) => {
-        await route.fulfill({
-          status: 200,
-          contentType: "application/json",
-          body: JSON.stringify({ data: [] }),
-        });
-      },
-    );
-
+  test("should restrict scoped certificates route to own user", async ({
+    page,
+  }) => {
     await page.goto("/users/other-user/certificates");
     await page.waitForLoadState("networkidle");
-    await expect(page.locator("h1")).toHaveText(/Certificados/i);
+    await expect(page.locator("h1")).toHaveText(/Acesso negado/i);
   });
 
   test("should show access denied on other user sessions", async ({ page }) => {

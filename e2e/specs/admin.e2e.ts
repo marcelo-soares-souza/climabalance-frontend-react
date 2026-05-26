@@ -33,7 +33,7 @@ test.describe("Admin", () => {
   });
 
   test("should list users and filter by search", async ({ page }) => {
-    await page.route(`${API_URL}/api/v1/users`, async (route) => {
+    await page.route(`${API_URL}/api/v1/users**`, async (route) => {
       if (route.request().method() === "GET") {
         await route.fulfill({
           status: 200,
@@ -154,7 +154,7 @@ test.describe("Admin", () => {
   });
 
   test("should show empty state when no users found", async ({ page }) => {
-    await page.route(`${API_URL}/api/v1/users`, async (route) => {
+    await page.route(`${API_URL}/api/v1/users**`, async (route) => {
       if (route.request().method() === "GET") {
         await route.fulfill({
           status: 200,
