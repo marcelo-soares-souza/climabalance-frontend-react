@@ -79,6 +79,7 @@ export function CompensationReviewPage() {
       treesRequested,
       totalTCO2e: quote.estimatedTotalTCO2e,
       totalAmount: quote.totalAmount,
+      currency: quote.currency,
     });
     navigate("/compensation/checkout");
   };
@@ -124,7 +125,7 @@ export function CompensationReviewPage() {
                 <p className="text-sm mt-2">
                   {t("area.form.pricePerTree")}:{" "}
                   <span className="font-medium text-success">
-                    {formatCurrency(area.pricePerTree)}
+                    {formatCurrency(area.pricePerTree, "USD")}
                   </span>
                 </p>
               )}
@@ -181,7 +182,7 @@ export function CompensationReviewPage() {
                     />
                   </span>
                   <span className="font-medium">
-                    {formatCurrency(quote.pricePerTree)}
+                    {formatCurrency(quote.pricePerTree, quote.currency)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between text-sm">
@@ -199,7 +200,7 @@ export function CompensationReviewPage() {
                 <div className="flex justify-between text-base font-bold border-t border-primary-200 pt-2">
                   <span>{t("compensation.review.total")}</span>
                   <span className="text-primary">
-                    {formatCurrency(quote.totalAmount)}
+                    {formatCurrency(quote.totalAmount, quote.currency)}
                   </span>
                 </div>
                 <p className="border-t border-primary-200 pt-3 text-xs leading-5 text-text-secondary">

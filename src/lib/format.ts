@@ -4,11 +4,17 @@ function getLocale(): string {
   return i18n.language || "pt-BR";
 }
 
-export function formatCurrency(
-  value: number,
-  currency = "USD",
-  locale = "en-US",
-): string {
+const CURRENCY_LOCALE_MAP: Record<string, string> = {
+  BRL: "pt-BR",
+  USD: "en-US",
+};
+
+function resolveLocale(currency: string): string {
+  return CURRENCY_LOCALE_MAP[currency.toUpperCase()] ?? "en-US";
+}
+
+export function formatCurrency(value: number, currency = "USD"): string {
+  const locale = resolveLocale(currency);
   return new Intl.NumberFormat(locale, { style: "currency", currency }).format(
     value,
   );

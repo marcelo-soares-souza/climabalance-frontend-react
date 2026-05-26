@@ -110,7 +110,7 @@ export function PendingAreasPage() {
                     <span>
                       {t("area.form.pricePerTree")}:{" "}
                       {area.pricePerTree != null
-                        ? formatCurrency(area.pricePerTree)
+                        ? formatCurrency(area.pricePerTree, "USD")
                         : "-"}
                     </span>
                     <span className="text-text-secondary">

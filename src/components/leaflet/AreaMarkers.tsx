@@ -172,7 +172,7 @@ export function AreaMarkers({
           appendText(
             metrics,
             "p",
-            `${t("area.form.pricePerTree")}: ${formatCurrency(area.pricePerTree)}`,
+            `${t("area.form.pricePerTree")}: ${formatCurrency(area.pricePerTree, "USD")}`,
             { fontSize: "0.875rem" },
           );
         }

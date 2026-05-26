@@ -409,7 +409,7 @@ export function CompensationCheckoutPage() {
                   />
                 </span>
                 <span className="text-primary">
-                  {formatCurrency(summaryTotalAmount)}
+                  {formatCurrency(summaryTotalAmount, store.currency)}
                 </span>
               </div>
             )}

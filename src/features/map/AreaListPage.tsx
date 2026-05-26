@@ -210,7 +210,7 @@ export function AreaListPage() {
                       </p>
                       <p className="text-sm font-bold text-primary">
                         {area.pricePerTree != null
-                          ? formatCurrency(area.pricePerTree)
+                          ? formatCurrency(area.pricePerTree, "USD")
                           : "-"}
                       </p>
                     </div>

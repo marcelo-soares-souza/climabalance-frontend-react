@@ -150,7 +150,7 @@ export function AreaAuditPage() {
                 </span>{" "}
                 <span className="font-medium">
                   {area.pricePerTree != null
-                    ? formatCurrency(area.pricePerTree)
+                    ? formatCurrency(area.pricePerTree, "USD")
                     : "-"}
                 </span>
               </div>

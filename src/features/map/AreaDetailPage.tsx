@@ -506,7 +506,7 @@ export function AreaDetailPage() {
               </div>
               <p className="break-words text-[clamp(1.35rem,2vw,1.7rem)] font-bold leading-none text-emerald-700">
                 {area.pricePerTree != null
-                  ? formatCurrency(area.pricePerTree)
+                  ? formatCurrency(area.pricePerTree, "USD")
                   : "-"}
               </p>
             </CardContent>
