@@ -540,9 +540,12 @@ export function ProfilePage() {
           </Card>
         )}
 
-        {profile &&
-          (profileDocumentNumberLabel ||
+        {(isOwnProfile || isAdmin) &&
+          profile &&
+          (profile.documentType ||
+            profileDocumentNumberLabel ||
             profile.phone ||
+            profileBirthDateLabel ||
             profile.addressCity) && (
             <Card>
               <CardHeader>
