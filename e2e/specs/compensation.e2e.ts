@@ -4,6 +4,10 @@ import {
   expect,
   loginAsUser,
   seedCompensationSelection,
+  setupStripeMock,
+  interceptCreatePaymentIntent,
+  interceptPaymentStatus,
+  interceptCreateContribution,
 } from "../helpers/test-utils";
 
 const API_URL = process.env.E2E_API_URL ?? "https://dev.climabalance.org";
@@ -157,5 +161,101 @@ test.describe("Compensation Flow", () => {
     await expect(
       page.getByText(/reflorestador ainda não concluiu a configuração/i),
     ).toBeVisible();
+  });
+
+  test("should show error when checkout quote fails to load", async ({
+    page,
+  }) => {
+    await page.route(`${API_URL}/api/v1/**/quote`, async (route) => {
+      await route.fulfill({
+        status: 500,
+        contentType: "application/json",
+        body: JSON.stringify({
+          error: { message_key: "errors.generic" },
+        }),
+      });
+    });
+
+    await page.goto("/compensation/checkout");
+    await page.waitForLoadState("networkidle");
+    await expect(page.getByText(/erro|Algo deu errado/i)).toBeVisible({
+      timeout: 10000,
+    });
+  });
+
+  test("should complete full compensation flow and display report", async ({
+    page,
+  }) => {
+    await interceptQuote(page);
+
+    await page.goto("/compensation/review");
+    await page.waitForLoadState("networkidle");
+
+    await expect(
+      page.getByRole("heading", { name: /Revisar sua compensação/i }),
+    ).toBeVisible();
+    await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
+
+    await page
+      .getByRole("spinbutton", { name: /Quantidade de Árvores/i })
+      .fill("25");
+    await expect(page.getByText(/tCO2e/i)).toBeVisible({ timeout: 10000 });
+
+    await page
+      .getByRole("button", { name: /Prosseguir para pagamento/i })
+      .click();
+
+    await expect(page).toHaveURL("/compensation/checkout");
+    await expect(
+      page.getByRole("heading", { name: /Checkout/i }),
+    ).toBeVisible();
+    await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
+    await expect(page.getByText(/25/).first()).toBeVisible();
+    await expect(page.getByText(/\$375/)).toBeVisible();
+
+    const paymentResult = {
+      paymentId: "pay-e2e-001",
+      compensationId: "comp-e2e-001",
+      provider: "stripe",
+      providerReference: "pi-e2e-001",
+      simulationStatus: "confirmed",
+      paymentStatus: "paid",
+      compensationStatus: "completed",
+      amount: 375,
+      currency: "BRL",
+      installments: 1,
+      processedAt: "2026-05-26T00:00:00Z",
+      certificate: {
+        id: "cert-e2e-001",
+        certificateNumber: "CERT-E2E-FULL",
+        status: "issued",
+        issuedAt: "2026-05-26T00:00:00Z",
+      },
+    };
+    const summary = {
+      areaName: "Reserva Legal Amazônia",
+      compensationMode: "tree_purchase",
+      treesRequested: 25,
+      totalTCO2e: 2.5,
+      totalAmount: 375,
+      currency: "BRL",
+      installments: 1,
+    };
+
+    const reportState = { paymentResult, summary };
+
+    await page.addInitScript((data: unknown) => {
+      window.history.replaceState({ usr: data, key: "e2e", idx: 0 }, "");
+    }, reportState);
+
+    await page.goto("/compensation/report");
+    await page.waitForLoadState("networkidle");
+    await expect(
+      page.getByRole("heading", { name: /Relatório da compensação/i }),
+    ).toBeVisible();
+    await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
+    await expect(page.getByText(/25/).first()).toBeVisible();
+    await expect(page.getByText(/2,5.*tCO2e/i)).toBeVisible();
+    await expect(page.getByRole("button", { name: /Baixar/i })).toBeVisible();
   });
 });

@@ -271,3 +271,131 @@ test.describe("Other Pages & Flows", () => {
     await expect(page.getByText(/Certificado não encontrado/i)).toBeVisible();
   });
 });
+
+test.describe("Shell Navigation", () => {
+  test.beforeEach(async ({ page }) => {
+    await loginAsUser(page);
+  });
+
+  async function openSidebar(page: Page) {
+    const menuButton = page
+      .getByRole("button", { name: /menu|hamburger/i })
+      .first();
+    if (await menuButton.isVisible()) {
+      await menuButton.click();
+      await page.waitForTimeout(500);
+    }
+  }
+
+  test("should navigate to profile via shell", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    await openSidebar(page);
+
+    const profileLink = page
+      .locator('a[href*="/profile"], a[href*="/users/"]')
+      .filter({ hasText: /perfil/i })
+      .first();
+    await profileLink.evaluate((el) => (el as HTMLAnchorElement).click());
+    await expect(page).toHaveURL(/\/profile|\/users\/.+\/profile/);
+  });
+
+  test("should navigate to calculator history via shell", async ({ page }) => {
+    await page.route(
+      `${API_URL}/api/v1/footprint/calculations`,
+      async (route) => {
+        if (route.request().method() === "GET") {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: [] }),
+          });
+          return;
+        }
+        await route.fallback();
+      },
+    );
+
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    await openSidebar(page);
+
+    const historyLink = page
+      .locator('a[href*="/history"], a[href*="/impact"]')
+      .filter({ hasText: /histórico|historico/i })
+      .first();
+    await historyLink.evaluate((el) => (el as HTMLAnchorElement).click());
+    await expect(page).toHaveURL(/\/history|\/impact/);
+  });
+
+  test("should navigate to contact via shell", async ({ page }) => {
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+    await openSidebar(page);
+
+    const contactLink = page
+      .locator('a[href="/contact"], a[href*="contact"]')
+      .filter({ hasText: /contato|fale conosco/i })
+      .first();
+    await contactLink.evaluate((el) => (el as HTMLAnchorElement).click());
+    await expect(page).toHaveURL(/\/contact/);
+  });
+});
+
+test.describe("Admin Shell Navigation", () => {
+  test("should navigate to admin users via shell", async ({ page }) => {
+    await loginAsUser(page, ["administrator"]);
+    await page.goto("/");
+    await page.waitForLoadState("networkidle");
+
+    const adminLink = page.locator('a[href^="/admin/"]').first();
+    await adminLink.evaluate((el) => (el as HTMLAnchorElement).click());
+    await expect(page).toHaveURL(/\/admin/);
+  });
+});
+
+test.describe("Directory and Public Profile", () => {
+  test("should navigate from directory to public profile", async ({ page }) => {
+    await page.route(`${API_URL}/api/v1/directory/users**`, async (route) => {
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({
+          data: [
+            {
+              id: "user-dir-001",
+              display_name: "Ana Diretorio",
+              slug: "ana-diretorio",
+              country_code: "BR",
+              total_areas: 2,
+              total_trees: 100,
+              created_at: "2025-01-01T00:00:00Z",
+            },
+          ],
+        }),
+      });
+    });
+    await page.route(
+      `${API_URL}/api/v1/users/ana-diretorio/profile`,
+      async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({
+            data: {
+              displayName: "Ana Diretorio",
+              about: "Produtora rural dedicada ao reflorestamento.",
+            },
+          }),
+        });
+      },
+    );
+
+    await page.goto("/users");
+    await page.waitForLoadState("networkidle");
+    await page.getByText("Ana Diretorio").click();
+    await expect(page).toHaveURL(/\/users\/ana-diretorio\/profile/);
+    await expect(page.getByText("Ana Diretorio")).toBeVisible();
+    await expect(page.getByText(/reflorestamento/i)).toBeVisible();
+  });
+});

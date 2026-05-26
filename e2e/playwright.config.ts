@@ -44,6 +44,7 @@ export default defineConfig({
     cwd: path.resolve(__dirname, ".."),
     env: {
       VITE_API_URL: apiUrl,
+      VITE_STRIPE_PUBLISHABLE_KEY: "pk_test_mock",
     },
     timeout: 120000,
   },

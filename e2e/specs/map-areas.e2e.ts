@@ -25,11 +25,9 @@ const MOCK_AREA = {
   committed_t_co2e: 50,
   status: "active",
   audit_status: "approved",
-  owner: {
-    id: "owner-001",
-    name: "João Produtor",
-    slug: "joao-produtor",
-  },
+  owner_user_id: "owner-001",
+  owner_name: "João Produtor",
+  owner_slug: "joao-produtor",
   media: [
     {
       id: "media-001",
@@ -63,7 +61,7 @@ test.describe("Map & Areas", () => {
     });
   });
 
-  test("should view public area detail", async ({ page }) => {
+  test("should view public area detail with full info", async ({ page }) => {
     await page.route(
       `${API_URL}/api/v1/areas/reserva-legal-amazonia`,
       async (route) => {
@@ -77,7 +75,14 @@ test.describe("Map & Areas", () => {
 
     await page.goto("/areas/reserva-legal-amazonia");
     await page.waitForLoadState("networkidle");
+
     await expect(page.locator("h1")).toHaveText(/Reserva Legal Amazônia/i);
+    await expect(page.getByText(/Amazônia/i).first()).toBeVisible();
+    await expect(page.getByText(/Altamira/i)).toBeVisible();
+    await expect(page.getByText(/João Produtor/i)).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /Apoiar este projeto/i }),
+    ).toBeVisible();
   });
 
   test("should display public areas list", async ({ page }) => {
@@ -136,6 +141,29 @@ test.describe("Map & Areas", () => {
       await page.waitForLoadState("networkidle");
       await page.getByText(MOCK_AREA.name).first().click();
       await expect(page).toHaveURL(/\/areas\//);
+    });
+
+    test("should show error when area detail fails to load", async ({
+      page,
+    }) => {
+      await page.route(
+        `${API_URL}/api/v1/areas/reserva-legal-amazonia`,
+        async (route) => {
+          await route.fulfill({
+            status: 500,
+            contentType: "application/json",
+            body: JSON.stringify({
+              error: { message_key: "errors.generic" },
+            }),
+          });
+        },
+      );
+
+      await page.goto("/areas/reserva-legal-amazonia");
+      await page.waitForLoadState("networkidle");
+      await expect(page.getByText(/Não encontrado/i)).toBeVisible({
+        timeout: 10000,
+      });
     });
 
     test("should redirect individual away from area creation", async ({
@@ -253,8 +281,13 @@ test.describe("Map & Areas", () => {
       });
     });
 
-    test("should save planted trees", async ({ page }) => {
-      let saveCalled = false;
+    test("should save planted trees and show success feedback", async ({
+      page,
+    }) => {
+      let postResolve: () => void;
+      const postDone = new Promise<void>((r) => {
+        postResolve = r;
+      });
       await page.route(
         `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
         async (route) => {
@@ -273,8 +306,12 @@ test.describe("Map & Areas", () => {
         `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/planted-trees`,
         async (route) => {
           if (route.request().method() === "POST") {
-            saveCalled = true;
-            await route.fulfill({ status: 201 });
+            await route.fulfill({
+              status: 201,
+              contentType: "application/json",
+              body: JSON.stringify({ data: { trees_planted: 1 } }),
+            });
+            postResolve();
             return;
           }
           await route.fallback();
@@ -290,7 +327,104 @@ test.describe("Map & Areas", () => {
       await map.click({ position: { x: 300, y: 300 } });
 
       await page.getByRole("button", { name: /Salvar/i }).click();
-      await expect.poll(() => saveCalled).toBe(true);
+      await postDone;
+      await expect(page).toHaveURL(/\/areas\//, { timeout: 10000 });
+    });
+
+    test("should show error when planting trees fails", async ({ page }) => {
+      let postResolve: () => void;
+      const postDone = new Promise<void>((r) => {
+        postResolve = r;
+      });
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
+        async (route) => {
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({ data: MOCK_AREA }),
+            });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/planted-trees`,
+        async (route) => {
+          if (route.request().method() === "POST") {
+            await route.fulfill({
+              status: 500,
+              contentType: "application/json",
+              body: JSON.stringify({
+                error: { message_key: "errors.generic" },
+              }),
+            });
+            postResolve();
+            return;
+          }
+          await route.fallback();
+        },
+      );
+
+      await page.goto(
+        "/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a/plant-trees",
+      );
+      await page.waitForLoadState("networkidle");
+
+      const map = page.locator(".leaflet-container");
+      await map.click({ position: { x: 300, y: 300 } });
+
+      await page.getByRole("button", { name: /Salvar/i }).click();
+      await postDone;
+      await expect(page.getByText(/erro|salvar plantio/i)).toBeVisible({
+        timeout: 10000,
+      });
+    });
+
+    test("should edit area with pre-filled form data", async ({ page }) => {
+      let updatePayload: Record<string, unknown> | null = null;
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
+        async (route) => {
+          if (route.request().method() === "PATCH") {
+            updatePayload = route.request().postDataJSON();
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({
+                data: { ...MOCK_AREA, name: "Nome Editado", biome: "Cerrado" },
+              }),
+            });
+            return;
+          }
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 200,
+              contentType: "application/json",
+              body: JSON.stringify({ data: MOCK_AREA }),
+            });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+
+      await page.goto("/areas/edit/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
+      await page.waitForLoadState("networkidle");
+
+      await expect(page.locator("#name")).toHaveValue(
+        /Reserva Legal Amazônia/i,
+      );
+
+      await page.locator("#name").fill("Nome Editado");
+      await page.locator("#biome").fill("Cerrado");
+      await page.locator('button[type="submit"]').click();
+
+      await expect(page).toHaveURL(/\/areas\//);
+      await expect.poll(() => updatePayload?.name).toBe("Nome Editado");
+      await expect.poll(() => updatePayload?.biome).toBe("Cerrado");
     });
 
     test("should redirect producer away from audit page", async ({ page }) => {
@@ -484,6 +618,34 @@ test.describe("Map & Areas", () => {
 
       await page.getByRole("button", { name: /Ativar/i }).click();
       await expect(page).toHaveURL("/audit/pending-areas");
+    });
+
+    test("should show error state when audit area fails to load", async ({
+      page,
+    }) => {
+      await page.route(
+        `${API_URL}/api/v1/areas/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a`,
+        async (route) => {
+          if (route.request().method() === "GET") {
+            await route.fulfill({
+              status: 500,
+              contentType: "application/json",
+              body: JSON.stringify({
+                error: { message_key: "errors.generic" },
+              }),
+            });
+            return;
+          }
+          await route.fallback();
+        },
+      );
+
+      await page.goto("/audit/area/0195f1e2-4b5c-6d7e-8f9a-0b1c2d3e4f5a");
+      await page.waitForLoadState("networkidle");
+
+      await expect(page.getByText(/Não encontrado/i)).toBeVisible({
+        timeout: 10000,
+      });
     });
   });
 });

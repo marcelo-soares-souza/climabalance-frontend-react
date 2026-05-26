@@ -1,4 +1,9 @@
-import { test, expect, loginAsUser } from "../helpers/test-utils";
+import {
+  test,
+  expect,
+  loginAsUser,
+  getCurrentUserRefFromPage,
+} from "../helpers/test-utils";
 
 const API_URL = process.env.E2E_API_URL ?? "https://dev.climabalance.org";
 
@@ -275,5 +280,120 @@ test.describe("Profile", () => {
   }) => {
     await page.goto("/users/other-user/impact");
     await expect(page).toHaveURL(/\/access-denied/);
+  });
+});
+
+test.describe("Scoped Routes — Positive", () => {
+  test.beforeEach(async ({ page }) => {
+    await loginAsUser(page);
+  });
+
+  test("should access own scoped certificates route", async ({ page }) => {
+    const userRef = await getCurrentUserRefFromPage(page);
+
+    await page.goto(`/users/${userRef}/certificates`);
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator("h1")).toHaveText(/Certificados/i);
+  });
+
+  test("should access own scoped sessions route", async ({ page }) => {
+    const userRef = await getCurrentUserRefFromPage(page);
+
+    await page.goto(`/users/${userRef}/sessions`);
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator("h1")).toHaveText(/Sessões Ativas/i);
+  });
+
+  test("should access own scoped profile edit route", async ({ page }) => {
+    const userRef = await getCurrentUserRefFromPage(page);
+
+    await page.goto(`/users/${userRef}/profile/edit`);
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator('input[id="display_name"]')).toBeVisible();
+  });
+
+  test("should access own scoped impact route", async ({ page }) => {
+    const userRef = await getCurrentUserRefFromPage(page);
+
+    await page.route(
+      `${API_URL}/api/v1/footprint/calculations`,
+      async (route) => {
+        if (route.request().method() === "GET") {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({ data: [] }),
+          });
+          return;
+        }
+        await route.fallback();
+      },
+    );
+
+    await page.goto(`/users/${userRef}/impact`);
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator("h1")).toHaveText(/Histórico de Cálculos/i);
+  });
+
+  test("should access own scoped new calculation route", async ({ page }) => {
+    const userRef = await getCurrentUserRefFromPage(page);
+
+    await page.route(
+      `${API_URL}/api/v1/footprint/emission-factors`,
+      async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify({ data: [] }),
+        });
+      },
+    );
+
+    await page.goto(`/users/${userRef}/impact/calculations/new`);
+    await page.waitForLoadState("networkidle");
+    await expect(page.getByRole("button", { name: /Próximo/i })).toBeVisible({
+      timeout: 10000,
+    });
+  });
+
+  test("should access own scoped calculation detail route", async ({
+    page,
+  }) => {
+    const userRef = await getCurrentUserRefFromPage(page);
+
+    await page.route(
+      `${API_URL}/api/v1/footprint/calculations/calc-scoped-001`,
+      async (route) => {
+        if (route.request().method() === "GET") {
+          await route.fulfill({
+            status: 200,
+            contentType: "application/json",
+            body: JSON.stringify({
+              data: {
+                id: "calc-scoped-001",
+                calculation_id: "calc-scoped-001",
+                user_id: userRef,
+                profile_type: "individual",
+                status: "finalized",
+                total_kg_co2e: 5000,
+                total_t_co2e: 5,
+                data_quality: "real",
+                inputs: [],
+                breakdown: [],
+                created_at: "2026-01-01T00:00:00Z",
+              },
+            }),
+          });
+          return;
+        }
+        await route.fallback();
+      },
+    );
+
+    await page.goto(`/users/${userRef}/impact/calculations/calc-scoped-001`);
+    await page.waitForLoadState("networkidle");
+    await expect(
+      page.getByRole("button", { name: /Compensar/i }),
+    ).toBeVisible();
   });
 });
