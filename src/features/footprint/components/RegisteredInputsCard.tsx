@@ -11,6 +11,13 @@ export interface RegisteredInputItem {
   kgCO2e?: number;
 }
 
+function formatActivityType(raw: string): string {
+  return raw
+    .split("_")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 interface Props {
   inputs: RegisteredInputItem[];
 }
@@ -34,10 +41,13 @@ export function RegisteredInputsCard({ inputs }: Props) {
             >
               <div className="min-w-0">
                 <p className="text-sm font-medium truncate">
-                  {t(`footprint.categories.${input.category}`, input.category)}
+                  {t(
+                    `footprint.categories.${input.category}`,
+                    formatActivityType(input.category),
+                  )}
                 </p>
                 <p className="text-xs text-text-secondary truncate">
-                  {input.activityType}
+                  {formatActivityType(input.activityType)}
                 </p>
               </div>
               <div className="text-right shrink-0">
