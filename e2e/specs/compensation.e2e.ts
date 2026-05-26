@@ -124,12 +124,12 @@ test.describe("Compensation Flow", () => {
       page.getByRole("heading", { name: /Revisar sua compensação/i }),
     ).toBeVisible();
     await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
-    await expect(page.getByText(/R\$ ?750/)).toBeVisible();
+    await expect(page.getByText(/750,00/)).toBeVisible();
 
     await page
       .getByRole("spinbutton", { name: /Quantidade de Árvores/i })
       .fill("25");
-    await expect(page.getByText(/R\$ ?375/)).toBeVisible();
+    await expect(page.getByText(/375,00/)).toBeVisible();
     await expect(page.getByText(/2,50? tCO2e/i)).toBeVisible();
 
     await page
@@ -143,7 +143,7 @@ test.describe("Compensation Flow", () => {
     await expect(page.getByText(/Resumo do pedido/i)).toBeVisible();
     await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
     await expect(page.getByText(/25/).nth(0)).toBeVisible();
-    await expect(page.getByText(/R\$ ?375/)).toBeVisible();
+    await expect(page.getByText(/375,00/)).toBeVisible();
   });
 
   test("should show producer not onboarded error at checkout", async ({
@@ -211,7 +211,7 @@ test.describe("Compensation Flow", () => {
     ).toBeVisible();
     await expect(page.getByText(/Reserva Legal Amazônia/i)).toBeVisible();
     await expect(page.getByText(/25/).first()).toBeVisible();
-    await expect(page.getByText(/R\$ ?375/)).toBeVisible();
+    await expect(page.getByText(/375,00/)).toBeVisible();
 
     const paymentResult = {
       paymentId: "pay-e2e-001",
