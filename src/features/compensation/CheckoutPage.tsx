@@ -477,7 +477,7 @@ export function CompensationCheckoutPage() {
               ) : checkoutQuote ? (
                 <div className="space-y-3 pt-2">
                   <p className="text-sm text-text-secondary">
-                    {t("compensation.producer_not_onboarded")}
+                    {t("errors.compensation.producer_not_onboarded")}
                   </p>
                   <Button
                     variant="ghost"
