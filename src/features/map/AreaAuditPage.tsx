@@ -78,6 +78,7 @@ export function AreaAuditPage() {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-approved-areas"] });
       navigate("/audit/pending-areas");
     },
     onError: () => setError("audit.approveError"),
@@ -96,6 +97,7 @@ export function AreaAuditPage() {
     mutationFn: () => areasService.activateArea(areaIdSafe),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["areas"] });
+      queryClient.invalidateQueries({ queryKey: ["admin-approved-areas"] });
       navigate("/audit/pending-areas");
     },
   });
