@@ -56,9 +56,7 @@ export function CalculationDetailPage() {
       (calculation.userId != null && calculation.userId === currentUserId));
   const canDelete =
     isAdmin ||
-    (calculation.status === "draft" &&
-      calculation.userId != null &&
-      calculation.userId === currentUserId);
+    (calculation.userId != null && calculation.userId === currentUserId);
   const editPath = getUserCalculationEditPath(
     calculation.id,
     routeUserId

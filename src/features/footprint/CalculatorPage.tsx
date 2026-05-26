@@ -23,6 +23,7 @@ import { queryClient } from "@/config/query-client";
 import type { FootprintCalculation } from "@/types/footprint";
 import { ApiError } from "@/lib/api-client";
 import type { CreateCalculationRequest } from "@/types/footprint";
+import { useAuth } from "@/hooks/use-auth";
 
 export function CalculatorPage() {
   const { t, i18n } = useTranslation();
@@ -30,6 +31,7 @@ export function CalculatorPage() {
   const { id: routeCalculationId } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
   const calculator = useCalculator();
+  const { userId } = useAuth();
   const [result, setResult] = useState<FootprintCalculation | null>(null);
   const [error, setError] = useState<string | null>(null);
   const lastCalculatedSignatureRef = useRef<string | null>(null);
@@ -102,6 +104,11 @@ export function CalculatorPage() {
       lastCalculatedSignatureRef.current = JSON.stringify(payload);
       lastSubmittedSignatureRef.current = JSON.stringify(payload);
       queryClient.invalidateQueries({ queryKey: ["calculations"] });
+      if (userId) {
+        queryClient.invalidateQueries({
+          queryKey: ["users", userId, "climate-balance"],
+        });
+      }
     },
     onError: (err) => {
       setError(
@@ -130,6 +137,11 @@ export function CalculatorPage() {
       lastSubmittedSignatureRef.current = JSON.stringify(payload);
       queryClient.invalidateQueries({ queryKey: ["calculations"] });
       queryClient.invalidateQueries({ queryKey: ["calculations", draftId] });
+      if (userId) {
+        queryClient.invalidateQueries({
+          queryKey: ["users", userId, "climate-balance"],
+        });
+      }
     },
     onError: (err) => {
       setError(
@@ -150,6 +162,11 @@ export function CalculatorPage() {
         setResult((prev) => (prev ? { ...prev, status: "finalized" } : prev));
       }
       queryClient.invalidateQueries({ queryKey: ["calculations"] });
+      if (userId) {
+        queryClient.invalidateQueries({
+          queryKey: ["users", userId, "climate-balance"],
+        });
+      }
     },
     onError: (err) => {
       setError(

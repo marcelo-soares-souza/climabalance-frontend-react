@@ -943,8 +943,8 @@
       "noInputs": "Nenhum input salvo",
       "noBreakdown": "Sem desdobramento disponível",
       "deleteTitle": "Confirmar Exclusão",
-      "deleteMessage": "Tem certeza que deseja excluir este rascunho? Esta ação não pode ser desfeita.",
-      "deleteAction": "Excluir rascunho",
+      "deleteMessage": "Tem certeza que deseja excluir este cálculo? Esta ação não pode ser desfeita.",
+      "deleteAction": "Excluir cálculo",
       "continueEditing": "Continuar Edição"
     },
     "status": {

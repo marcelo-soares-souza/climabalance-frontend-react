@@ -943,8 +943,8 @@
       "noInputs": "Aucune entrée enregistrée",
       "noBreakdown": "Aucune répartition disponible",
       "deleteTitle": "Confirmer la Suppression",
-      "deleteMessage": "Êtes-vous sûr de vouloir supprimer ce brouillon ? Cette action ne peut pas être annulée.",
-      "deleteAction": "Supprimer le brouillon",
+      "deleteMessage": "Êtes-vous sûr de vouloir supprimer ce calcul ? Cette action ne peut pas être annulée.",
+      "deleteAction": "Supprimer le calcul",
       "continueEditing": "Continuer l'Édition"
     },
     "status": {

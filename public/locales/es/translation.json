@@ -943,8 +943,8 @@
       "noInputs": "Ninguna entrada guardada",
       "noBreakdown": "Sin desglose disponible",
       "deleteTitle": "Confirmar Eliminación",
-      "deleteMessage": "Estás seguro de que deseas eliminar este borrador? Esta acción no se puede deshacer.",
-      "deleteAction": "Eliminar borrador",
+      "deleteMessage": "Estás seguro de que deseas eliminar este cálculo? Esta acción no se puede deshacer.",
+      "deleteAction": "Eliminar cálculo",
       "continueEditing": "Continuar Edición"
     },
     "status": {
