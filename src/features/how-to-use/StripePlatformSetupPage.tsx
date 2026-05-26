@@ -8,7 +8,7 @@ export function StripePlatformSetupPage() {
   return (
     <>
       <SEO title={t("seo.stripePlatformSetup.title")} />
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("platform.stripe.title")}</h1>
 
         <Card>

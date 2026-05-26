@@ -32,7 +32,7 @@ export function CompensationHistoryPage() {
   return (
     <>
       <SEO title={t("seo.compensationHistory.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("compensations.title")}</h1>
 
         {isLoading ? (
@@ -95,11 +95,15 @@ export function CompensationHistoryPage() {
             </div>
           </>
         ) : (
-          <EmptyState
-            icon={<TreePine className="h-12 w-12" />}
-            title={t("compensations.empty")}
-            description={t("compensations.emptyDescription")}
-          />
+          <Card>
+            <CardContent className="py-12">
+              <EmptyState
+                icon={<TreePine className="h-12 w-12" />}
+                title={t("compensations.empty")}
+                description={t("compensations.emptyDescription")}
+              />
+            </CardContent>
+          </Card>
         )}
       </div>
     </>

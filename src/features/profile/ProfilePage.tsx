@@ -17,6 +17,7 @@ import { StatusBadge } from "@/components/StatusBadge";
 import { RoleBadge } from "@/components/RoleBadge";
 import { PageSkeleton } from "@/components/LoadingSkeleton";
 import { ErrorBanner } from "@/components/ErrorBanner";
+import { SuccessBanner } from "@/components/SuccessBanner";
 import { ApiError } from "@/lib/api-client";
 import {
   formatTCO2e,
@@ -281,7 +282,7 @@ export function ProfilePage() {
   return (
     <>
       <SEO title={profile?.displayName || t("seo.profile.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         {isOwnProfile && (
           <div className="flex justify-end">
             <Button
@@ -364,10 +365,11 @@ export function ProfilePage() {
                   <ChevronDown className="h-4 w-4 text-text-secondary" />
                 )}
               </button>
-              {passwordSuccess && !showPasswordForm && (
-                <p className="mt-3 text-sm text-success border-t border-gray-100 pt-3">
-                  {t("profile.passwordChanged")}
-                </p>
+              {passwordSuccess && (
+                <SuccessBanner
+                  message={t("profile.passwordChanged")}
+                  onDismiss={() => setPasswordSuccess(false)}
+                />
               )}
               {showPasswordForm && (
                 <form

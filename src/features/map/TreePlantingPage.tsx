@@ -293,7 +293,7 @@ export function TreePlantingPage() {
 
   if (!area) {
     return (
-      <div className="max-w-2xl mx-auto space-y-4">
+      <div className="max-w-5xl mx-auto space-y-4">
         <ErrorBanner messageKey="area.notFound" />
       </div>
     );
@@ -307,7 +307,7 @@ export function TreePlantingPage() {
   return (
     <>
       <SEO title={t("seo.treePlanting.title")} />
-      <div className="max-w-4xl mx-auto space-y-4">
+      <div className="max-w-5xl mx-auto space-y-4">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-sm text-primary hover:underline"

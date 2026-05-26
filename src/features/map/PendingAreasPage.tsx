@@ -63,7 +63,7 @@ export function PendingAreasPage() {
   return (
     <>
       <SEO title={t("seo.pendingAreas.title")} />
-      <div className="space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("audit.pending.title")}</h1>
         {isLoading ? (
           <div className="space-y-4">

@@ -63,7 +63,7 @@ export function PixPaymentPage() {
 
   if (status === "failed") {
     return (
-      <div className="max-w-lg mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("payment.pix.title")}</h1>
         <p className="text-text-secondary">{t("payment.pix.expired")}</p>
         <Button onClick={() => navigate(-1)}>{t("common.back")}</Button>
@@ -74,7 +74,7 @@ export function PixPaymentPage() {
   return (
     <>
       <SEO title={t("seo.pixPayment.title")} />
-      <div className="max-w-lg mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-sm text-primary hover:underline"

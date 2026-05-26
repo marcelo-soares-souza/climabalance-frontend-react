@@ -100,7 +100,7 @@ export function TripCalculatorPage() {
   return (
     <>
       <SEO title={t("seo.tripCalculator.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex items-center gap-3">
           <div className="p-2.5 bg-primary-50 rounded-xl">
             <Plane className="h-6 w-6 text-primary" />

@@ -150,7 +150,7 @@ export function UserDirectoryPage() {
   return (
     <>
       <SEO title={t("seo.userDirectory.title")} />
-      <div className="space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <div>
           <h1 className="text-2xl font-bold">{t("directory.title")}</h1>
           <p className="text-text-secondary mt-1">
@@ -188,10 +188,14 @@ export function UserDirectoryPage() {
             ))}
           </div>
         ) : (
-          <EmptyState
-            icon={<Users className="h-12 w-12" />}
-            title={t("directory.noUsers")}
-          />
+          <Card>
+            <CardContent className="py-12">
+              <EmptyState
+                icon={<Users className="h-12 w-12" />}
+                title={t("directory.noUsers")}
+              />
+            </CardContent>
+          </Card>
         )}
       </div>
     </>

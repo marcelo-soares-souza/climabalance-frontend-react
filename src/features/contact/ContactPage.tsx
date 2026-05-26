@@ -4,6 +4,7 @@ import { SEO } from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { ErrorBanner } from "@/components/ErrorBanner";
+import { SuccessBanner } from "@/components/SuccessBanner";
 import { contactService } from "@/services/contact";
 import { ApiError } from "@/lib/api-client";
 import { MessageSquare } from "lucide-react";
@@ -37,7 +38,7 @@ export function ContactPage() {
   return (
     <>
       <SEO title={t("seo.contact.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex items-center gap-3">
           <MessageSquare className="h-6 w-6 text-primary" />
           <h1 className="text-2xl font-bold">{t("contact.title")}</h1>
@@ -50,9 +51,10 @@ export function ContactPage() {
             </p>
 
             {success && (
-              <div className="p-4 bg-success-50 border border-success/20 rounded-lg text-success text-sm">
-                {t("contact.success")}
-              </div>
+              <SuccessBanner
+                message={t("contact.success")}
+                onDismiss={() => setSuccess(false)}
+              />
             )}
 
             {error && (

@@ -84,7 +84,7 @@ export function SessionsPage() {
 
   if (!isOwnProfile) {
     return (
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <p className="text-text-secondary">{t("common.accessDenied")}</p>
       </div>
     );
@@ -95,7 +95,7 @@ export function SessionsPage() {
   return (
     <>
       <SEO title={t("seo.sessions.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-sm text-primary hover:underline"
@@ -164,10 +164,14 @@ export function SessionsPage() {
             ))}
           </div>
         ) : (
-          <EmptyState
-            icon={<Monitor className="h-12 w-12" />}
-            title={t("profile.noSessions")}
-          />
+          <Card>
+            <CardContent className="py-12">
+              <EmptyState
+                icon={<Monitor className="h-12 w-12" />}
+                title={t("profile.noSessions")}
+              />
+            </CardContent>
+          </Card>
         )}
 
         <Dialog open={revokeAllOpen} onClose={() => setRevokeAllOpen(false)}>

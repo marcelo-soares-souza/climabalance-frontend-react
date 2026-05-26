@@ -333,7 +333,7 @@ export function CalculatorPage() {
   return (
     <>
       <SEO title={t("seo.calculator.title")} />
-      <div className="space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex items-center gap-2">
           <h1 className="text-3xl font-bold font-display">
             {t("footprint.calculator.title")}

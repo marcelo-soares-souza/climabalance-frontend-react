@@ -44,7 +44,7 @@ export function CertificatesPage() {
   return (
     <>
       <SEO title={t("seo.certificates.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("certificates.title")}</h1>
         {isLoading ? (
           <SkeletonList />
@@ -100,11 +100,15 @@ export function CertificatesPage() {
             ))}
           </div>
         ) : (
-          <EmptyState
-            icon={<Award className="h-12 w-12" />}
-            title={t("certificates.empty")}
-            description={t("certificates.emptyDescription")}
-          />
+          <Card>
+            <CardContent className="py-12">
+              <EmptyState
+                icon={<Award className="h-12 w-12" />}
+                title={t("certificates.empty")}
+                description={t("certificates.emptyDescription")}
+              />
+            </CardContent>
+          </Card>
         )}
       </div>
     </>

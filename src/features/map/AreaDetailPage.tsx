@@ -321,7 +321,7 @@ export function AreaDetailPage() {
         title={area?.name || t("seo.areaDetail.title")}
         description={area?.description || t("seo.areaDetail.description")}
       />
-      <div className="max-w-3xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-sm text-primary hover:underline"

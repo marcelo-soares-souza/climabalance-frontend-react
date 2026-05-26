@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/Card";
 import { api } from "@/lib/api-client";
 import { usersService } from "@/services/users";
 import { ShieldAlert, Download } from "lucide-react";
+import { SuccessBanner } from "@/components/SuccessBanner";
 
 type RequestType =
   | "access"
@@ -96,7 +97,7 @@ export function PrivacyPage() {
   return (
     <>
       <SEO title={t("seo.privacy.title")} />
-      <div className="max-w-3xl mx-auto space-y-8 py-2">
+      <div className="max-w-5xl mx-auto space-y-8 py-2">
         <section className="rounded-3xl bg-gradient-to-br from-primary via-primary-light to-accent px-8 py-14 text-white">
           <div className="max-w-2xl space-y-4">
             <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium">
@@ -172,9 +173,7 @@ export function PrivacyPage() {
         )}
 
         {message && (
-          <div className="rounded-lg bg-emerald-50 border border-emerald-200 p-4 text-sm text-emerald-800">
-            {message}
-          </div>
+          <SuccessBanner message={message} onDismiss={() => setMessage(null)} />
         )}
         {error && (
           <div className="rounded-lg bg-red-50 border border-red-200 p-4 text-sm text-red-800">

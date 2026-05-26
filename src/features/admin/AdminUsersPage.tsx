@@ -100,7 +100,7 @@ export function AdminUsersPage() {
   return (
     <>
       <SEO title={t("seo.adminUsers.title")} />
-      <div className="space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <h1 className="text-2xl font-bold">{t("admin.users.title")}</h1>
         <div className="flex gap-3 flex-wrap">
           <div className="relative flex-1 min-w-[200px]">

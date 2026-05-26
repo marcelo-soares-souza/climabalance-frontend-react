@@ -41,7 +41,7 @@ export function AdminApprovedAreasPage() {
   return (
     <>
       <SEO title={t("seo.adminApprovedAreas.title")} />
-      <div className="space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <div>
           <h1 className="text-2xl font-bold">
             {t("admin.approvedAreas.title")}

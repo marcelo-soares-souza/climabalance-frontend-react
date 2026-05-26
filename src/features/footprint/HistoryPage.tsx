@@ -5,6 +5,7 @@ import { footprintService } from "@/services/footprint";
 import { usersService } from "@/services/users";
 import { useAuth } from "@/hooks/use-auth";
 import { CalculationCard } from "./components/CalculationCard";
+import { Card, CardContent } from "@/components/ui/Card";
 import { EmptyState } from "@/components/EmptyState";
 import { SkeletonList } from "@/components/ui/Skeleton";
 import { Button } from "@/components/ui/Button";
@@ -62,7 +63,7 @@ export function HistoryPage() {
   return (
     <>
       <SEO title={t("seo.footprintHistory.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">{t("footprint.history.title")}</h1>
           <Button onClick={() => navigate(newCalculationPath)} size="sm">
@@ -92,16 +93,20 @@ export function HistoryPage() {
             ))}
           </div>
         ) : (
-          <EmptyState
-            icon={<Calculator className="h-12 w-12" />}
-            title={t("footprint.history.empty")}
-            description={t("footprint.history.emptyDescription")}
-            action={
-              <Button onClick={() => navigate(newCalculationPath)}>
-                {t("footprint.history.startCalculation")}
-              </Button>
-            }
-          />
+          <Card>
+            <CardContent className="py-12">
+              <EmptyState
+                icon={<Calculator className="h-12 w-12" />}
+                title={t("footprint.history.empty")}
+                description={t("footprint.history.emptyDescription")}
+                action={
+                  <Button onClick={() => navigate(newCalculationPath)}>
+                    {t("footprint.history.startCalculation")}
+                  </Button>
+                }
+              />
+            </CardContent>
+          </Card>
         )}
       </div>
     </>

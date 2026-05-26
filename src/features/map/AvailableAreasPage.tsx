@@ -67,7 +67,7 @@ export function AvailableAreasPage() {
   return (
     <>
       <SEO title={t("seo.publicAreas.title")} />
-      <div className="space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <div className="flex items-center justify-between flex-wrap gap-3">
           <h1 className="text-2xl font-bold">{t("areas.available.title")}</h1>
           {canCreate && (
@@ -143,18 +143,22 @@ export function AvailableAreasPage() {
             )}
           </div>
         ) : (
-          <EmptyState
-            icon={<TreePine className="h-12 w-12" />}
-            title={t("areas.available.empty")}
-            description={t("areas.available.emptyHint")}
-            action={
-              canCreate ? (
-                <Button onClick={() => navigate("/areas/create")}>
-                  {t("areas.list.create")}
-                </Button>
-              ) : undefined
-            }
-          />
+          <Card>
+            <CardContent className="py-12">
+              <EmptyState
+                icon={<TreePine className="h-12 w-12" />}
+                title={t("areas.available.empty")}
+                description={t("areas.available.emptyHint")}
+                action={
+                  canCreate ? (
+                    <Button onClick={() => navigate("/areas/create")}>
+                      {t("areas.list.create")}
+                    </Button>
+                  ) : undefined
+                }
+              />
+            </CardContent>
+          </Card>
         )}
       </div>
     </>

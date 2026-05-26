@@ -228,7 +228,7 @@ export function AreaFormPage() {
   return (
     <>
       <SEO title={t("seo.areaForm.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <button
           onClick={() => navigate(-1)}
           className="flex items-center gap-2 text-sm text-primary hover:underline"

@@ -58,16 +58,20 @@ export function CompensationReportPage() {
 
   if (!hasReport) {
     return (
-      <EmptyState
-        title={t("compensation.report.missingTitle")}
-        description={t("compensation.report.missingDescription")}
-        icon={<Receipt className="h-12 w-12" />}
-        action={
-          <Button onClick={() => navigate("/")}>
-            {t("common.backToHome")}
-          </Button>
-        }
-      />
+      <Card>
+        <CardContent className="py-12">
+          <EmptyState
+            title={t("compensation.report.missingTitle")}
+            description={t("compensation.report.missingDescription")}
+            icon={<Receipt className="h-12 w-12" />}
+            action={
+              <Button onClick={() => navigate("/")}>
+                {t("common.backToHome")}
+              </Button>
+            }
+          />
+        </CardContent>
+      </Card>
     );
   }
 
@@ -104,7 +108,7 @@ export function CompensationReportPage() {
   return (
     <>
       <SEO title={t("seo.compensationReport.title")} />
-      <div className="max-w-2xl mx-auto space-y-6">
+      <div className="max-w-5xl mx-auto space-y-6">
         <button
           onClick={() => navigate("/")}
           className="flex items-center gap-2 text-sm text-primary hover:underline"
