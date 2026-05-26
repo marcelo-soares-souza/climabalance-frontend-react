@@ -128,11 +128,15 @@ export function PendingAreasPage() {
             )}
           </div>
         ) : (
-          <EmptyState
-            icon={<FileCheck className="h-12 w-12" />}
-            title={t("audit.pending.empty")}
-            description={t("audit.pending.emptyDescription")}
-          />
+          <Card>
+            <CardContent className="py-12">
+              <EmptyState
+                icon={<FileCheck className="h-12 w-12" />}
+                title={t("audit.pending.empty")}
+                description={t("audit.pending.emptyDescription")}
+              />
+            </CardContent>
+          </Card>
         )}
       </div>
     </>
