@@ -115,10 +115,11 @@
     },
     "confirmEmail": {
       "title": "Confirmar correo",
-      "description": "Pega el token que recibiste por correo",
+      "sentTo": "Se ha enviado un correo de confirmación a {{email}}.",
+      "checkInbox": "Revisa tu bandeja de entrada y haz clic en el enlace de confirmación para verificar tu dirección de correo.",
       "token": "Token de confirmación",
       "tokenPlaceholder": "Pega el token aquí",
-      "noToken": "No recibiste el token?",
+      "haveToken": "Tengo un token",
       "submit": "Confirmar correo",
       "resend": "Reenviar correo de confirmación",
       "resent": "Correo de confirmación reenviado con éxito!",
@@ -177,7 +178,8 @@
     "impact": "Tu Impacto",
     "collapse": "Contraer menú",
     "expand": "Expandir menú",
-    "contact": "Contáctenos"
+    "contact": "Contáctenos",
+    "legal": "Legal"
   },
   "home": {
     "welcome": {
@@ -1457,6 +1459,7 @@
     "footprint.error.finalizeFailed": "Error al finalizar el cálculo. Inténtalo de nuevo.",
     "footprint.error.inputsRequired": "Agrega al menos un dato antes de calcular.",
     "area.form.error": "Error al guardar área. Inténtalo de nuevo.",
+    "area.limit_reached": "Has alcanzado el límite máximo de 3 áreas. Contacta con soporte si necesitas más.",
     "profile.saveError": "Error al guardar perfil. Inténtalo de nuevo.",
     "admin.users.updateError": "Error al actualizar usuario. Inténtalo de nuevo.",
     "audit.approveError": "Error al aprobar área. Inténtalo de nuevo.",
@@ -1622,7 +1625,7 @@
       "usageAria": "Ayuda sobre uso de la capacidad",
       "usage": "Porcentaje de la capacidad total del área que ya está comprometido.",
       "pricePerTreeAria": "Ayuda sobre precio por árbol",
-      "pricePerTree": "Usa este valor en USD cuando el apoyo se modele por número de árboles o unidades equivalentes del proyecto.",
+      "pricePerTree": "Precio por árbol en Dólares Estadounidenses (USD). Usa este valor cuando el apoyo se modele por número de árboles o unidades equivalentes del proyecto.",
       "defaultHorizonYearsAria": "Ayuda sobre el horizonte predeterminado del proyecto",
       "defaultHorizonYears": "Define el horizonte de años usado como referencia predeterminada para estimaciones y operaciones vinculadas a esta área.",
       "pricePerTco2eAria": "Ayuda sobre precio por tCO2e",

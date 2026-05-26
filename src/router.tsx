@@ -153,6 +153,10 @@ const AuditLogPage = lazyNamedPage(
   () => import("@/features/admin/AuditLogPage"),
   "AuditLogPage",
 );
+const AdminApprovedAreasPage = lazyNamedPage(
+  () => import("@/features/admin/AdminApprovedAreasPage"),
+  "AdminApprovedAreasPage",
+);
 
 export const router = createBrowserRouter([
   // Embed routes (no shell)
@@ -495,6 +499,15 @@ export const router = createBrowserRouter([
         element: (
           <AuthGuard roles={["administrator"]}>
             <AuditLogPage />
+          </AuthGuard>
+        ),
+      },
+
+      {
+        path: "/admin/approved-areas",
+        element: (
+          <AuthGuard roles={["administrator"]}>
+            <AdminApprovedAreasPage />
           </AuthGuard>
         ),
       },

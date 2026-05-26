@@ -115,10 +115,11 @@
     },
     "confirmEmail": {
       "title": "Confirmar e-mail",
-      "description": "Cole o token que você recebeu por e-mail",
+      "sentTo": "Um e-mail de confirmação foi enviado para {{email}}.",
+      "checkInbox": "Verifique sua caixa de entrada e clique no link de confirmação para verificar seu endereço de e-mail.",
       "token": "Token de confirmação",
       "tokenPlaceholder": "Cole o token aqui",
-      "noToken": "Não recebeu o token?",
+      "haveToken": "Tenho um token",
       "submit": "Confirmar e-mail",
       "resend": "Reenviar e-mail de confirmação",
       "resent": "E-mail de confirmação reenviado com sucesso!",
@@ -170,6 +171,7 @@
     "admin": "Administração",
     "users": "Usuários (Admin)",
     "auditLog": "Auditoria (Admin)",
+    "approvedAreas": "Áreas Aprovadas",
     "publicAreas": "Ver Áreas",
     "directory": "Comunidade",
     "login": "Entrar",
@@ -177,7 +179,8 @@
     "impact": "Seu Impacto",
     "collapse": "Recolher menu",
     "expand": "Expandir menu",
-    "contact": "Fale Conosco"
+    "contact": "Fale Conosco",
+    "legal": "Legal"
   },
   "home": {
     "welcome": {
@@ -1402,6 +1405,15 @@
       "page": "Página {{page}}",
       "prev": "Anterior",
       "next": "Próximo"
+    },
+    "approvedAreas": {
+      "title": "Áreas Aprovadas",
+      "description": "Áreas que passaram pela auditoria e estão prontas para ativação.",
+      "owner": "Responsável",
+      "approvedAt": "Aprovada em",
+      "actions": "Ações",
+      "empty": "Nenhuma área aprovada",
+      "emptyDescription": "Todas as áreas já estão ativas ou ainda estão em revisão."
     }
   },
   "embed": {
@@ -1457,6 +1469,7 @@
     "footprint.error.finalizeFailed": "Erro ao finalizar cálculo. Tente novamente.",
     "footprint.error.inputsRequired": "Adicione pelo menos um dado antes de calcular.",
     "area.form.error": "Erro ao salvar área. Tente novamente.",
+    "area.limit_reached": "Você atingiu o limite máximo de 3 áreas. Entre em contato com o suporte se precisar de mais.",
     "profile.saveError": "Erro ao salvar perfil. Tente novamente.",
     "admin.users.updateError": "Erro ao atualizar usuário. Tente novamente.",
     "audit.approveError": "Erro ao aprovar área. Tente novamente.",
@@ -1622,7 +1635,7 @@
       "usageAria": "Ajuda sobre uso da capacidade",
       "usage": "Percentual da capacidade total da área que já está comprometido.",
       "pricePerTreeAria": "Ajuda sobre preço por árvore",
-      "pricePerTree": "Use este valor em USD quando o apoio for modelado por número de árvores ou unidades equivalentes do projeto.",
+      "pricePerTree": "Preço por árvore em Dólares Americanos (USD). Use este valor quando o apoio for modelado por número de árvores ou unidades equivalentes do projeto.",
       "defaultHorizonYearsAria": "Ajuda sobre horizonte padrão do projeto",
       "defaultHorizonYears": "Define o horizonte de anos usado como referência padrão para estimativas e operações vinculadas a esta área.",
       "pricePerTco2eAria": "Ajuda sobre preço por tCO2e",
@@ -1881,6 +1894,9 @@
     },
     "areaList": {
       "title": "Minhas Áreas"
+    },
+    "adminApprovedAreas": {
+      "title": "Áreas Aprovadas"
     }
   },
   "units": {

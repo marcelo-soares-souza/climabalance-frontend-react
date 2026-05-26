@@ -115,10 +115,11 @@
     },
     "confirmEmail": {
       "title": "Confirm email",
-      "description": "Paste the token you received by email",
+      "sentTo": "A confirmation email was sent to {{email}}.",
+      "checkInbox": "Check your inbox and click the confirmation link to verify your email address.",
       "token": "Confirmation token",
       "tokenPlaceholder": "Paste the token here",
-      "noToken": "Didn't receive the token?",
+      "haveToken": "I have a token instead",
       "submit": "Confirm email",
       "resend": "Resend confirmation email",
       "resent": "Confirmation email resent successfully!",
@@ -170,6 +171,7 @@
     "admin": "Administration",
     "users": "Users (Admin)",
     "auditLog": "Audit Log (Admin)",
+    "approvedAreas": "Approved Areas",
     "publicAreas": "View Areas",
     "directory": "Community",
     "login": "Sign in",
@@ -177,7 +179,8 @@
     "impact": "Your Impact",
     "collapse": "Collapse sidebar",
     "expand": "Expand sidebar",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "legal": "Legal"
   },
   "home": {
     "welcome": {
@@ -1402,6 +1405,15 @@
       "page": "Page {{page}}",
       "prev": "Previous",
       "next": "Next"
+    },
+    "approvedAreas": {
+      "title": "Approved Areas",
+      "description": "Areas that have passed audit and are ready for activation.",
+      "owner": "Owner",
+      "approvedAt": "Approved at",
+      "actions": "Actions",
+      "empty": "No approved areas",
+      "emptyDescription": "All areas are already active or still under review."
     }
   },
   "embed": {
@@ -1457,6 +1469,7 @@
     "footprint.error.finalizeFailed": "Failed to finalize calculation. Please try again.",
     "footprint.error.inputsRequired": "Add at least one input before calculating.",
     "area.form.error": "Failed to save area. Please try again.",
+    "area.limit_reached": "You have reached the maximum limit of 3 areas. Please contact support if you need more.",
     "profile.saveError": "Failed to save profile. Please try again.",
     "admin.users.updateError": "Failed to update user. Please try again.",
     "audit.approveError": "Failed to approve area. Please try again.",
@@ -1622,7 +1635,7 @@
       "usageAria": "Help about capacity usage",
       "usage": "Percentage of the area's total capacity that is already committed.",
       "pricePerTreeAria": "Help about price per tree",
-      "pricePerTree": "Use this USD amount when support is modeled by number of trees or equivalent project units.",
+      "pricePerTree": "Price per tree in US Dollars (USD). Use this amount when support is modeled by number of trees or equivalent project units.",
       "defaultHorizonYearsAria": "Help about the project's default horizon",
       "defaultHorizonYears": "Defines the default year horizon used as the reference for estimates and operations linked to this area.",
       "pricePerTco2eAria": "Help about price per tCO2e",
@@ -1881,6 +1894,9 @@
     },
     "areaList": {
       "title": "My Areas"
+    },
+    "adminApprovedAreas": {
+      "title": "Approved Areas"
     }
   },
   "units": {

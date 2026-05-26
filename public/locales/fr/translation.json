@@ -115,10 +115,11 @@
     },
     "confirmEmail": {
       "title": "Confirmer l'e-mail",
-      "description": "Collez le jeton reçu par e-mail",
+      "sentTo": "Un e-mail de confirmation a été envoyé à {{email}}.",
+      "checkInbox": "Vérifiez votre boîte de réception et cliquez sur le lien de confirmation pour vérifier votre adresse e-mail.",
       "token": "Jeton de confirmation",
       "tokenPlaceholder": "Collez le jeton ici",
-      "noToken": "Vous n'avez pas reçu le jeton ?",
+      "haveToken": "J'ai un jeton",
       "submit": "Confirmer l'e-mail",
       "resend": "Renvoyer l'e-mail de confirmation",
       "resent": "E-mail de confirmation renvoyé avec succès !",
@@ -177,7 +178,8 @@
     "impact": "Votre Impact",
     "collapse": "Réduire le menu",
     "expand": "Agrandir le menu",
-    "contact": "Contactez-nous"
+    "contact": "Contactez-nous",
+    "legal": "Légal"
   },
   "home": {
     "welcome": {
@@ -1457,6 +1459,7 @@
     "footprint.error.finalizeFailed": "Échec de la finalisation du calcul. Veuillez réessayer.",
     "footprint.error.inputsRequired": "Ajoutez au moins une donnée avant de calculer.",
     "area.form.error": "Échec de l'enregistrement de la zone. Veuillez réessayer.",
+    "area.limit_reached": "Vous avez atteint la limite maximale de 3 zones. Contactez l'assistance si vous avez besoin de plus.",
     "profile.saveError": "Échec de l'enregistrement du profil. Veuillez réessayer.",
     "admin.users.updateError": "Échec de la mise à jour de l'utilisateur. Veuillez réessayer.",
     "audit.approveError": "Échec de l'approbation de la zone. Veuillez réessayer.",
@@ -1622,7 +1625,7 @@
       "usageAria": "Aide sur l'utilisation de la capacité",
       "usage": "Pourcentage de la capacité totale de la zone déjà engagée.",
       "pricePerTreeAria": "Aide sur le prix par arbre",
-      "pricePerTree": "Utilisez cette valeur en USD lorsque le soutien est modélisé par nombre d'arbres ou unités équivalentes du projet.",
+      "pricePerTree": "Prix par arbre en Dollars Américains (USD). Utilisez cette valeur lorsque le soutien est modélisé par nombre d'arbres ou unités équivalentes du projet.",
       "defaultHorizonYearsAria": "Aide sur l'horizon par défaut du projet",
       "defaultHorizonYears": "Définit l'horizon en années utilisé comme référence par défaut pour les estimations et opérations liées à cette zone.",
       "pricePerTco2eAria": "Aide sur le prix par tCO2e",

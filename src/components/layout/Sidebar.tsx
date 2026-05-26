@@ -8,7 +8,8 @@ import {
   MapPin,
   User,
   Users,
-  FileCheck,
+  CheckCircle,
+  Clock,
   Shield,
   LogOut,
   LogIn,
@@ -263,19 +264,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                 <MessageSquare className="h-4 w-4" /> {t("nav.contact")}
               </NavLink>
 
-              {isAnalystOrAdmin && (
-                <>
-                  {sectionLabel(t("nav.audit"))}
-                  <NavLink
-                    to="/audit/pending-areas"
-                    className={linkClass}
-                    onClick={onClose}
-                  >
-                    <FileCheck className="h-4 w-4" /> {t("nav.pendingAreas")}
-                  </NavLink>
-                </>
-              )}
-
               {isAdmin && (
                 <>
                   {sectionLabel(t("nav.admin"))}
@@ -287,18 +275,41 @@ export function Sidebar({ open, onClose }: SidebarProps) {
                     <Users className="h-4 w-4" /> {t("nav.users")}
                   </NavLink>
                   <NavLink
-                    to="/admin/audit-log"
+                    to="/audit/pending-areas"
                     className={linkClass}
                     onClick={onClose}
                   >
-                    <Shield className="h-4 w-4" /> {t("nav.auditLog")}
+                    <Clock className="h-4 w-4" /> {t("nav.pendingAreas")}
                   </NavLink>
+                  <NavLink
+                    to="/admin/approved-areas"
+                    className={linkClass}
+                    onClick={onClose}
+                  >
+                    <CheckCircle className="h-4 w-4" /> {t("nav.approvedAreas")}
+                  </NavLink>
+                </>
+              )}
+
+              {isAnalystOrAdmin && (
+                <>
+                  {sectionLabel(t("nav.audit"))}
+                  {isAdmin && (
+                    <NavLink
+                      to="/admin/audit-log"
+                      className={linkClass}
+                      onClick={onClose}
+                    >
+                      <Shield className="h-4 w-4" /> {t("nav.auditLog")}
+                    </NavLink>
+                  )}
                 </>
               )}
             </>
           )}
+          {sectionLabel(t("nav.legal"))}
           <NavLink to="/privacy-policy" className={linkClass} onClick={onClose}>
-            <FileText className="h-4 w-4" /> {t("nav.privacyPolicy")}
+            <Shield className="h-4 w-4" /> {t("nav.privacyPolicy")}
           </NavLink>
           <NavLink to="/terms-of-use" className={linkClass} onClick={onClose}>
             <FileText className="h-4 w-4" /> {t("nav.termsOfUse")}
