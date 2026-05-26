@@ -120,6 +120,7 @@ export function GuestCalculatorPage() {
       year: "numeric",
       month: "short",
       day: "2-digit",
+      timeZone: "UTC",
     });
     return `${formatter.format(start)} - ${formatter.format(end)}`;
   }, [calculator.state.periodEnd, calculator.state.periodStart, i18n.language]);
