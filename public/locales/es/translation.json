@@ -186,7 +186,6 @@
       "title": "Bienvenido a ClimaBalance",
       "description": "Plataforma dedicada a la mitigación climática a través del apoyo a la reforestación local. Unimos la compensación de emisiones a una red multifacética de iniciativas, que abarca la restauración de cobertura nativa, sistemas agroforestales y agroecología.",
       "transferNotice": "El valor de las contribuciones se transfiere al reforestador responsable del área, con un cobro destinado al mantenimiento y la evolución de la plataforma.",
-      "inDevelopment": "Proyecto en desarrollo",
       "getStarted": "Registrarse",
       "exploreMap": "Explorar Mapa",
       "howToUse": "Cómo usar la plataforma",
@@ -239,7 +238,6 @@
   },
   "about": {
     "hero": {
-      "eyebrow": "Proyecto en desarrollo",
       "title": "Tecnología climática para conectar carbono, territorio e impacto real",
       "description": "ClimaBalance es una plataforma de impacto climático creada para conectar personas y empresas con iniciativas auditadas de Agroecología, Agroforestería, Permacultura, Agricultura Orgánica y otras formas de producción agrícola ecológica.",
       "primaryCta": "Explorar áreas",
@@ -251,12 +249,6 @@
       "paragraph1": "ClimaBalance fue creado para hacer que la compensación de carbono sea más clara, confiable y conectada al territorio. Ayuda a los usuarios a comprender sus emisiones y dirigir apoyo a proyectos auditados que combinan restauración ambiental con producción agrícola ecológica.",
       "paragraph2": "En lugar de tratar la compensación como algo abstracto, la plataforma organiza el proceso con un mapa interactivo, criterios socioambientales, trazabilidad de la contribución y certificados validados de impacto, priorizando iniciativas como Agroecología, Agroforestería, Permacultura y Agricultura Orgánica.",
       "paragraph3": "Cuando se realiza una contribución, el valor se transfiere al reforestador responsable del área apoyada, mientras la plataforma cobra una tasa para sostener su mantenimiento continuo y su evolución."
-    },
-    "partnerCall": {
-      "label": "Alianzas",
-      "title": "Buscamos socios para continuar construyendo el proyecto",
-      "description": "La plataforma está en desarrollo y buscamos socios estratégicos, técnicos e institucionales para ampliar el apoyo a proyectos ecológicos de producción agrícola, restauración territorial y regeneración socioambiental.",
-      "link": "Sumarse a la construcción"
     },
     "howItWorks": {
       "label": "Cómo funciona",
@@ -1540,10 +1532,6 @@
       "balance": "Diferencia entre el total estimado de emisiones y lo que ya fue compensado.",
       "treesPlanted": "Cantidad total de árboles vinculados a compensaciones confirmadas."
     },
-    "home": {
-      "inDevelopmentAria": "Ayuda sobre el estado de desarrollo del proyecto",
-      "inDevelopment": "Esta POC sigue en evolución. Algunas funciones pueden cambiar y el proyecto busca socios para continuar el desarrollo."
-    },
     "shared": {
       "tco2eAria": "Ayuda sobre tCO2e",
       "tco2e": "tCO2e significa toneladas de CO2 equivalente, una medida que reúne distintos gases de efecto invernadero en una sola unidad comparable.",
@@ -1607,8 +1595,7 @@
       "installmentsAria": "Ayuda sobre cuotas",
       "installments": "Número de cuotas usado en la simulación de pago.",
       "testCardAria": "Ayuda sobre tarjeta de prueba",
-      "testCard": "Este flujo usa un pago simulado para demostración de la POC.",
-      "simulationStatus": "Indica si esta transacción fue un pago real o una simulación/prueba usada durante desarrollo o demostración."
+      "testCard": "Este flujo usa un pago simulado para demostración de la POC."
     },
     "area": {
       "statusAria": "Ayuda sobre el estado del área",

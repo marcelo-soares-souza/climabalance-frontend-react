@@ -66,16 +66,6 @@ function UnauthenticatedHome() {
             alt={t("app.name")}
             className="h-28 w-28 mx-auto mb-6 drop-shadow-lg"
           />
-          <div className="inline-flex items-center rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium mb-4">
-            {t("home.welcome.inDevelopment")}
-            <InfoTooltip
-              className="ml-2"
-              buttonClassName="text-white/85 hover:bg-white/15 hover:text-white focus:ring-white/40"
-              ariaLabel={t("tooltips.home.inDevelopmentAria")}
-              panelClassName="left-auto right-0"
-              content={<p>{t("tooltips.home.inDevelopment")}</p>}
-            />
-          </div>
           <h1 className="text-4xl md:text-5xl font-bold font-display mb-4">
             {t("home.welcome.title")}
           </h1>

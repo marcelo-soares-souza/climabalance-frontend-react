@@ -186,7 +186,6 @@
       "title": "Bienvenue sur ClimaBalance",
       "description": "Plateforme dédiée à l'atténuation climatique via le soutien à la reforestation locale. Nous unissons la compensation des émissions à un réseau multi-facettes d'initiatives, englobant la restauration de couvertures natives, les systèmes agroforestiers et l'agroécologie.",
       "transferNotice": "Le montant des contributions est transféré au reboiseur responsable de la zone, avec des frais prélevés pour la maintenance et l'évolution de la plateforme.",
-      "inDevelopment": "Projet en développement",
       "getStarted": "S'inscrire",
       "exploreMap": "Explorer la Carte",
       "howToUse": "Comment utiliser la plateforme",
@@ -239,7 +238,6 @@
   },
   "about": {
     "hero": {
-      "eyebrow": "Projet en développement",
       "title": "Une technologie climatique qui relie carbone, territoire et impact réel",
       "description": "ClimaBalance est une plateforme d'impact climatique conçue pour relier personnes et entreprises à des initiatives auditées d'Agroécologie, d'Agroforesterie, de Permaculture, d'Agriculture Biologique et d'autres formes de production agricole écologique.",
       "primaryCta": "Explorer les zones",
@@ -251,12 +249,6 @@
       "paragraph1": "ClimaBalance a été créé pour rendre la compensation carbone plus claire, plus fiable et plus connectée au territoire. La plateforme aide les utilisateurs à comprendre leurs émissions et à orienter leur soutien vers des projets audités qui combinent restauration environnementale et production agricole écologique.",
       "paragraph2": "Au lieu de traiter la compensation comme quelque chose d'abstrait, la plateforme structure le processus avec une carte interactive, des critères socio-environnementaux, une traçabilité des contributions et des certificats validés d'impact, en priorisant des initiatives comme l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique.",
       "paragraph3": "Lorsqu'une contribution est réalisée, le montant est transféré au reboiseur responsable de la zone soutenue, tandis que la plateforme prélève des frais pour assurer sa maintenance continue et son évolution."
-    },
-    "partnerCall": {
-      "label": "Partenariats",
-      "title": "Nous recherchons des partenaires pour poursuivre le développement du projet",
-      "description": "La plateforme est en cours de développement et nous recherchons des partenaires stratégiques, techniques et institutionnels pour élargir le soutien à des projets de production agricole écologique, de restauration territoriale et de régénération socio-environnementale.",
-      "link": "Participer à la construction"
     },
     "howItWorks": {
       "label": "Fonctionnement",
@@ -1540,10 +1532,6 @@
       "balance": "Différence entre le total estimé des émissions et ce qui a déjà été compensé.",
       "treesPlanted": "Nombre total d'arbres liés aux compensations confirmées."
     },
-    "home": {
-      "inDevelopmentAria": "Aide sur l'état de développement du projet",
-      "inDevelopment": "Cette POC est encore en évolution. Certaines fonctionnalités peuvent changer et le projet recherche des partenaires pour poursuivre son développement."
-    },
     "shared": {
       "tco2eAria": "Aide sur le tCO2e",
       "tco2e": "tCO2e signifie tonnes de CO2 équivalent, une mesure qui regroupe différents gaz à effet de serre dans une unité comparable.",
@@ -1607,8 +1595,7 @@
       "installmentsAria": "Aide sur les échéances",
       "installments": "Nombre d'échéances utilisé dans la simulation de paiement.",
       "testCardAria": "Aide sur la carte de test",
-      "testCard": "Ce flux utilise un paiement simulé à des fins de démonstration de la POC.",
-      "simulationStatus": "Indique si cette transaction était un paiement réel ou une simulation/test utilisée pendant le développement ou la démonstration."
+      "testCard": "Ce flux utilise un paiement simulé à des fins de démonstration de la POC."
     },
     "area": {
       "statusAria": "Aide sur le statut de la zone",

@@ -4,7 +4,6 @@ import { SEO } from "@/components/SEO";
 import { Button } from "@/components/ui/Button";
 import { Card, CardContent } from "@/components/ui/Card";
 import {
-  ArrowRight,
   BadgeCheck,
   Globe,
   Leaf,
@@ -64,9 +63,6 @@ export function AboutPage() {
           <Leaf className="absolute -right-5 -top-5 h-36 w-36 rotate-12 text-white/10" />
           <Leaf className="absolute -bottom-6 -left-6 h-24 w-24 -rotate-45 text-white/10" />
           <div className="relative max-w-3xl space-y-5">
-            <span className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-1 text-sm font-medium">
-              {t("about.hero.eyebrow")}
-            </span>
             <h1 className="text-4xl font-bold font-display md:text-5xl">
               {t("about.hero.title")}
             </h1>
@@ -113,27 +109,6 @@ export function AboutPage() {
               <p className="text-base leading-7 text-text-secondary">
                 {t("about.whatIs.paragraph3")}
               </p>
-            </CardContent>
-          </Card>
-
-          <Card className="border border-primary/10 bg-primary-50/60 shadow-sm">
-            <CardContent className="space-y-4 py-8">
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-                {t("about.partnerCall.label")}
-              </p>
-              <h2 className="text-2xl font-bold font-display text-text-primary">
-                {t("about.partnerCall.title")}
-              </h2>
-              <p className="text-base leading-7 text-text-secondary">
-                {t("about.partnerCall.description")}
-              </p>
-              <Link
-                to="/register"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
-              >
-                {t("about.partnerCall.link")}
-                <ArrowRight className="h-4 w-4" />
-              </Link>
             </CardContent>
           </Card>
         </section>
