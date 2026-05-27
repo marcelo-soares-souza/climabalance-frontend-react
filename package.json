@@ -13,10 +13,7 @@
     "audit": "bun audit",
     "test": "bun test --pass-with-no-tests",
     "scan:bundle-secrets": "bun scripts/scan-build-secrets.ts",
-    "preview": "vite preview",
-    "test:e2e": "playwright test --config=e2e/playwright.config.ts",
-    "test:e2e:ui": "playwright test --ui",
-    "test:e2e:debug": "playwright test --debug"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.4.0",
@@ -48,7 +45,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@playwright/test": "^1.60.0",
     "@tailwindcss/vite": "^4.3.0",
     "@types/file-saver": "^2.0.7",
     "@types/leaflet": "^1.9.21",
