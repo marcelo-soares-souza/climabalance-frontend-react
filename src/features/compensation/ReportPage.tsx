@@ -22,7 +22,6 @@ export interface CompensationReportSummary {
   totalTCO2e: number | null;
   totalAmount: number;
   currency: string;
-  installments: number;
 }
 
 export interface CompensationReportState {
@@ -170,16 +169,6 @@ export function CompensationReportPage() {
               <span>{t("compensation.report.amount")}</span>
               <span className="text-primary">{formattedAmount}</span>
             </div>
-            <div className="flex justify-between text-sm">
-              <span className="inline-flex items-center gap-2">
-                {t("compensation.report.installments")}
-                <InfoTooltip
-                  ariaLabel={t("tooltips.checkout.installmentsAria")}
-                  content={<p>{t("tooltips.checkout.installments")}</p>}
-                />
-              </span>
-              <span className="font-medium">{safeSummary.installments}x</span>
-            </div>
           </CardContent>
         </Card>
 
@@ -205,18 +194,7 @@ export function CompensationReportPage() {
                 )}
               />
             </div>
-            <div className="flex justify-between">
-              <span className="flex items-center gap-1">
-                {t("compensation.report.simulationLabel")}
-                <InfoTooltip
-                  ariaLabel={t("compensation.report.simulationLabel")}
-                  content={<p>{t("tooltips.checkout.simulationStatus")}</p>}
-                />
-              </span>
-              <span className="font-medium">
-                {safePaymentResult.simulationStatus}
-              </span>
-            </div>
+
             <div className="flex justify-between">
               <span>{t("compensation.report.processedAt")}</span>
               <span className="font-medium">

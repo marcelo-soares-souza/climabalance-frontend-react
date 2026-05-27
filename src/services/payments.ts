@@ -1,9 +1,5 @@
 import { api } from "@/lib/api-client";
-import type {
-  SimulatePaymentRequest,
-  PaymentResult,
-  PaymentStatusResponse,
-} from "@/types/payment";
+import type { PaymentResult, PaymentStatusResponse } from "@/types/payment";
 
 type RawCertificate = {
   id?: string;
@@ -17,12 +13,10 @@ type RawPayment = {
   compensation_id?: string;
   provider?: string;
   provider_reference?: string;
-  simulation_status?: string;
   payment_status?: string;
   compensation_status?: string;
   amount?: number | string;
   currency?: string;
-  installments?: number | string;
   processed_at?: string;
   certificate?: RawCertificate | null;
 };
@@ -46,7 +40,6 @@ function normalizePayment(raw: RawPayment): PaymentResult {
     compensationId: asString(raw.compensation_id),
     provider: asString(raw.provider),
     providerReference: asString(raw.provider_reference),
-    simulationStatus: asString(raw.simulation_status),
     paymentStatus: asString(
       raw.payment_status,
       "pending",
@@ -54,7 +47,6 @@ function normalizePayment(raw: RawPayment): PaymentResult {
     compensationStatus: asString(raw.compensation_status),
     amount: asNumber(raw.amount),
     currency: asString(raw.currency, "USD"),
-    installments: asNumber(raw.installments, 1),
     processedAt: asString(raw.processed_at),
     certificate: raw.certificate
       ? {
@@ -68,12 +60,6 @@ function normalizePayment(raw: RawPayment): PaymentResult {
 }
 
 export const paymentsService = {
-  simulatePayment(data: SimulatePaymentRequest) {
-    return api
-      .post<RawPayment>("/payments/simulate", data)
-      .then(normalizePayment);
-  },
-
   getPaymentStatus(paymentId: string) {
     return api
       .get<RawPayment>(`/payments/${paymentId}/status`)

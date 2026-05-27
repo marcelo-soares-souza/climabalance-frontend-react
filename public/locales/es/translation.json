@@ -1428,6 +1428,7 @@
     "compensation.producer_not_onboarded": "Esta área todavía no puede recibir apoyo porque el reforestador aún no completó la configuración de cobro en Stripe.",
     "payment.already_pending": "Ya existe un intento de pago pendiente para esta compensación. Espera la confirmación o inténtalo de nuevo en unos instantes.",
     "payment.pix_requires_brl": "Pix solo está disponible para pagos en BRL.",
+    "payment.not_confirmed": "Pago no confirmado. Verifica el estado en tu historial o inténtalo de nuevo.",
     "request.invalid_content_type": "Formato de envío inválido. Inténtalo de nuevo.",
     "request.payload_too_large": "El archivo o contenido enviado es demasiado grande.",
     "request.rate_limited": "Demasiados intentos en poco tiempo. Espera un momento e inténtalo de nuevo.",

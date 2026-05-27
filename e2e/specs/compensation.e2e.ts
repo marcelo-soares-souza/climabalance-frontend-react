@@ -218,12 +218,10 @@ test.describe("Compensation Flow", () => {
       compensationId: "comp-e2e-001",
       provider: "stripe",
       providerReference: "pi-e2e-001",
-      simulationStatus: "confirmed",
       paymentStatus: "paid",
       compensationStatus: "completed",
       amount: 375,
       currency: "BRL",
-      installments: 1,
       processedAt: "2026-05-26T00:00:00Z",
       certificate: {
         id: "cert-e2e-001",
@@ -239,7 +237,6 @@ test.describe("Compensation Flow", () => {
       totalTCO2e: 2.5,
       totalAmount: 375,
       currency: "BRL",
-      installments: 1,
     };
 
     const reportState = { paymentResult, summary };

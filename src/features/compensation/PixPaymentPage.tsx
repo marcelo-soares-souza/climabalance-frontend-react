@@ -20,6 +20,16 @@ export function PixPaymentPage() {
     | undefined;
   const copyPasteCode = (location.state as Record<string, unknown> | null)
     ?.copyPasteCode as string | undefined;
+  const areaName = (location.state as Record<string, unknown> | null)
+    ?.areaName as string | undefined;
+  const treesRequested = (location.state as Record<string, unknown> | null)
+    ?.treesRequested as number | undefined;
+  const totalAmount = (location.state as Record<string, unknown> | null)
+    ?.totalAmount as number | undefined;
+  const currency = (location.state as Record<string, unknown> | null)
+    ?.currency as string | undefined;
+  const totalTCO2e = (location.state as Record<string, unknown> | null)
+    ?.totalTCO2e as number | undefined;
 
   useEffect(() => {
     if (!paymentId) return;
@@ -34,10 +44,12 @@ export function PixPaymentPage() {
             state: {
               paymentResult: result,
               summary: {
-                areaName: "",
+                areaName: areaName ?? "",
                 compensationMode: "tree_purchase",
-                totalAmount: result.amount,
-                currency: result.currency,
+                treesRequested: treesRequested,
+                totalTCO2e: totalTCO2e,
+                totalAmount: totalAmount ?? result.amount,
+                currency: currency ?? result.currency,
               },
             },
           });

@@ -355,12 +355,10 @@ export async function interceptPaymentStatus(
           compensation_id: "comp-e2e-001",
           provider: "stripe",
           provider_reference: "pi-e2e-001",
-          simulation_status: "confirmed",
           payment_status: "paid",
           compensation_status: "completed",
           amount: 375,
           currency: "BRL",
-          installments: 1,
           processed_at: "2026-05-26T00:00:00Z",
           certificate: {
             id: "cert-e2e-001",

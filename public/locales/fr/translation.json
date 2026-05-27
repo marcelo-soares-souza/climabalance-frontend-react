@@ -1428,6 +1428,7 @@
     "compensation.producer_not_onboarded": "Cette zone ne peut pas encore recevoir de soutien, car le reboiseur n'a pas encore finalisé la configuration de paiement Stripe.",
     "payment.already_pending": "Une tentative de paiement est déjà en attente pour cette compensation. Attendez la confirmation ou réessayez dans un instant.",
     "payment.pix_requires_brl": "Pix est disponible uniquement pour les paiements en BRL.",
+    "payment.not_confirmed": "Paiement non confirmé. Vérifiez le statut dans votre historique ou réessayez.",
     "request.invalid_content_type": "Format d'envoi invalide. Veuillez réessayer.",
     "request.payload_too_large": "Le fichier ou le contenu envoyé est trop volumineux.",
     "request.rate_limited": "Trop de tentatives en peu de temps. Veuillez patienter et réessayer.",

@@ -5,16 +5,6 @@ export type PaymentStatus =
   | "canceled"
   | "refunded";
 
-export interface SimulatePaymentRequest {
-  compensation_id: string;
-  card_number: string;
-  cardholder_name: string;
-  expiration_month: number;
-  expiration_year: number;
-  cvv: string;
-  installments?: number;
-}
-
 export interface CreatePaymentIntentRequest {
   compensation_id: string;
   payment_method: "card" | "pix";
@@ -56,12 +46,10 @@ export interface PaymentResult {
   compensationId: string;
   provider: string;
   providerReference: string;
-  simulationStatus: string;
   paymentStatus: PaymentStatus;
   compensationStatus: string;
   amount: number;
   currency: string;
-  installments: number;
   processedAt: string;
   certificate: {
     id: string;

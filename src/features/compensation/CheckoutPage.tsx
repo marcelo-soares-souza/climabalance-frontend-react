@@ -49,6 +49,28 @@ type PaymentSuccessResult = {
   currency?: string;
 };
 
+async function pollPaymentStatus(
+  paymentId: string,
+  maxAttempts = 10,
+  intervalMs = 2000,
+): Promise<PaymentSuccessResult> {
+  for (let i = 0; i < maxAttempts; i++) {
+    await new Promise((resolve) => setTimeout(resolve, intervalMs));
+    try {
+      const result = await paymentsService.getPaymentStatus(paymentId);
+      if (
+        result.paymentStatus === "paid" ||
+        result.paymentStatus === "failed"
+      ) {
+        return result;
+      }
+    } catch {
+      // Continue polling on error
+    }
+  }
+  return { paymentId, pending: true, paymentStatus: "pending" };
+}
+
 function CardCheckoutForm({
   compensationId,
   ensureCompensationId,
@@ -103,7 +125,7 @@ function CardCheckoutForm({
       }
 
       if (paymentIntent?.status === "succeeded") {
-        const result = await paymentsService.getPaymentStatus(intent.paymentId);
+        const result = await pollPaymentStatus(intent.paymentId);
         onSuccess(result);
       } else if (paymentIntent?.status === "requires_action") {
         onSuccess({
@@ -283,7 +305,6 @@ export function CompensationCheckoutPage() {
             totalTCO2e: store.totalTCO2e,
             totalAmount: summaryTotalAmount,
             currency: store.currency,
-            installments: 1,
           },
         },
       });
@@ -295,8 +316,18 @@ export function CompensationCheckoutPage() {
         state: {
           qrCode: result.qrCode,
           copyPasteCode: result.copyPasteCode,
+          areaName: store.areaName,
+          treesRequested: store.treesRequested,
+          totalAmount: summaryTotalAmount,
+          currency: store.currency,
+          totalTCO2e: store.totalTCO2e,
         },
       });
+      return;
+    }
+
+    if (result.paymentStatus !== "paid") {
+      setError("payment.not_confirmed");
       return;
     }
 
@@ -307,7 +338,6 @@ export function CompensationCheckoutPage() {
       totalTCO2e: store.totalTCO2e,
       totalAmount: summaryTotalAmount ?? result.amount ?? 0,
       currency: store.currency,
-      installments: 1,
     };
 
     navigate("/compensation/report", {
