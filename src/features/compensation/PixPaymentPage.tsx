@@ -63,7 +63,15 @@ export function PixPaymentPage() {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [paymentId, navigate]);
+  }, [
+    areaName,
+    currency,
+    navigate,
+    paymentId,
+    totalAmount,
+    totalTCO2e,
+    treesRequested,
+  ]);
 
   const handleCopy = async () => {
     if (copyPasteCode) {
