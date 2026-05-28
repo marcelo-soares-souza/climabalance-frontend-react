@@ -91,7 +91,7 @@ export function AboutPage() {
           </div>
         </section>
 
-        <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+        <section>
           <Card className="border-0 shadow-sm">
             <CardContent className="space-y-4 py-8">
               <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">
