@@ -179,7 +179,8 @@
     "collapse": "Contraer menú",
     "expand": "Expandir menú",
     "contact": "Contáctenos",
-    "legal": "Legal"
+    "legal": "Legal",
+    "social": "Redes Sociales"
   },
   "home": {
     "welcome": {
@@ -197,7 +198,8 @@
       "step3Title": "Recibe Certificados",
       "step3Description": "Recibe certificados y acompaña contribuciones con transparencia y trazabilidad.",
       "tryCalculator": "Calcular Huella",
-      "viewCommunity": "Comunidad"
+      "viewCommunity": "Comunidad",
+      "betaNotice": "Estamos en fase inicial de pruebas y buscamos alianzas para apoyar el desarrollo y mejora continua de esta solución. ¡Tus comentarios e interés son bienvenidos!"
     },
     "profiles": {
       "title": "¿Para quién es la plataforma?"
@@ -248,7 +250,8 @@
       "title": "Una plataforma para convertir la intención climática en acción rastreable",
       "paragraph1": "ClimaBalance fue creado para hacer que la compensación de carbono sea más clara, confiable y conectada al territorio. Ayuda a los usuarios a comprender sus emisiones y dirigir apoyo a proyectos auditados que combinan restauración ambiental con producción agrícola ecológica.",
       "paragraph2": "En lugar de tratar la compensación como algo abstracto, la plataforma organiza el proceso con un mapa interactivo, criterios socioambientales, trazabilidad de la contribución y certificados validados de impacto, priorizando iniciativas como Agroecología, Agroforestería, Permacultura y Agricultura Orgánica.",
-      "paragraph3": "Cuando se realiza una contribución, el valor se transfiere al reforestador responsable del área apoyada, mientras la plataforma cobra una tasa para sostener su mantenimiento continuo y su evolución."
+      "paragraph3": "Cuando se realiza una contribución, el valor se transfiere al reforestador responsable del área apoyada, mientras la plataforma cobra una tasa para sostener su mantenimiento continuo y su evolución.",
+      "paragraph4": "ClimaBalance se encuentra en fase inicial de desarrollo y pruebas. Estamos buscando activamente alianzas con organizaciones, empresas y personas interesadas en apoyar la evolución de la plataforma y ampliar su impacto socioambiental. Si desea contribuir o establecer una alianza, contáctenos."
     },
     "howItWorks": {
       "label": "Cómo funciona",

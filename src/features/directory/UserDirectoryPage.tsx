@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { useQuery } from "@tanstack/react-query";
 import { usersService } from "@/services/users";
@@ -37,66 +37,68 @@ function AvatarPlaceholder({ name, size }: { name: string; size: number }) {
 
 function UserCard({ user }: { user: DirectoryItem }) {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const displayName = user.displayName ?? user.slug;
 
   return (
-    <Card
-      className="h-full cursor-pointer overflow-hidden transition-shadow hover:shadow-lg"
-      onClick={() => navigate(getUserProfilePath(user))}
-    >
-      <CardContent className="flex h-full flex-col gap-4 p-5">
-        <div className="flex items-center gap-4">
-          {user.avatarUrl ? (
-            <img
-              src={user.avatarUrl}
-              alt={displayName}
-              className="h-14 w-14 rounded-full object-cover bg-gray-100 shrink-0"
-              onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = "none";
-                target
-                  .parentElement!.querySelector(".avatar-fallback")
-                  ?.classList.remove("hidden");
-              }}
-            />
-          ) : null}
-          <div className={`${user.avatarUrl ? "hidden" : ""} avatar-fallback`}>
-            <AvatarPlaceholder name={displayName} size={56} />
+    <Link to={getUserProfilePath(user)} className="block h-full">
+      <Card className="h-full cursor-pointer overflow-hidden transition-shadow hover:shadow-lg">
+        <CardContent className="flex h-full flex-col gap-4 p-5">
+          <div className="flex items-center gap-4">
+            {user.avatarUrl ? (
+              <img
+                src={user.avatarUrl}
+                alt={displayName}
+                className="h-14 w-14 rounded-full object-cover bg-gray-100 shrink-0"
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
+                  target
+                    .parentElement!.querySelector(".avatar-fallback")
+                    ?.classList.remove("hidden");
+                }}
+              />
+            ) : null}
+            <div
+              className={`${user.avatarUrl ? "hidden" : ""} avatar-fallback`}
+            >
+              <AvatarPlaceholder name={displayName} size={56} />
+            </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="font-bold leading-snug">{displayName}</h3>
+              {user.countryCode && (
+                <p className="text-sm text-text-secondary">
+                  {countries.find((c) => c.code === user.countryCode)?.name ??
+                    user.countryCode}
+                </p>
+              )}
+            </div>
           </div>
-          <div className="min-w-0 flex-1">
-            <h3 className="font-bold leading-snug">{displayName}</h3>
-            {user.countryCode && (
-              <p className="text-sm text-text-secondary">
-                {countries.find((c) => c.code === user.countryCode)?.name ??
-                  user.countryCode}
-              </p>
-            )}
-          </div>
-        </div>
 
-        {user.about && (
-          <p className="text-sm text-text-secondary line-clamp-3 leading-relaxed">
-            {user.about}
-          </p>
-        )}
-
-        <div className="mt-auto grid grid-cols-2 gap-3 pt-2 text-center">
-          <div className="rounded-lg bg-emerald-50 p-3">
-            <MapPin className="h-4 w-4 mx-auto mb-1 text-emerald-600" />
-            <p className="text-lg font-bold text-emerald-700">
-              {user.totalAreas}
+          {user.about && (
+            <p className="text-sm text-text-secondary line-clamp-3 leading-relaxed">
+              {user.about}
             </p>
-            <p className="text-xs text-emerald-600">{t("directory.areas")}</p>
+          )}
+
+          <div className="mt-auto grid grid-cols-2 gap-3 pt-2 text-center">
+            <div className="rounded-lg bg-emerald-50 p-3">
+              <MapPin className="h-4 w-4 mx-auto mb-1 text-emerald-600" />
+              <p className="text-lg font-bold text-emerald-700">
+                {user.totalAreas}
+              </p>
+              <p className="text-xs text-emerald-600">{t("directory.areas")}</p>
+            </div>
+            <div className="rounded-lg bg-primary-50 p-3">
+              <Trees className="h-4 w-4 mx-auto mb-1 text-primary" />
+              <p className="text-lg font-bold text-primary">
+                {user.totalTrees}
+              </p>
+              <p className="text-xs text-primary">{t("directory.trees")}</p>
+            </div>
           </div>
-          <div className="rounded-lg bg-primary-50 p-3">
-            <Trees className="h-4 w-4 mx-auto mb-1 text-primary" />
-            <p className="text-lg font-bold text-primary">{user.totalTrees}</p>
-            <p className="text-xs text-primary">{t("directory.trees")}</p>
-          </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }
 

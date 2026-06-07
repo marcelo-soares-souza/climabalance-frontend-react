@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { areasService } from "@/services/areas";
@@ -24,7 +24,6 @@ const PAGE_SIZE = 20;
 
 export function PublicAreasPage() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [statusFilter, setStatusFilter] = useState("");
   const [searchFilter, setSearchFilter] = useState("");
   const [countryFilter, setCountryFilter] = useState("");
@@ -151,72 +150,74 @@ export function PublicAreasPage() {
         ) : filteredAreas.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {filteredAreas.map((area: Area) => (
-              <Card
+              <Link
                 key={area.id}
-                className="cursor-pointer hover:shadow-lg transition-shadow overflow-hidden"
-                onClick={() => navigate(getAreaDetailPath(area))}
+                to={getAreaDetailPath(area)}
+                className="block h-full"
               >
-                <AreaThumbnail
-                  imageUrl={area.imageUrl}
-                  thumbnailUrl={area.thumbnailUrl}
-                  name={area.name}
-                />
-                <CardContent className="p-5 h-full flex flex-col gap-4">
-                  <div className="flex justify-between items-start gap-3">
-                    <h3 className="text-lg font-bold leading-snug">
-                      {area.name}
-                    </h3>
-                    <StatusBadge status={area.status} />
-                  </div>
-                  <div className="flex items-center gap-1.5 text-sm text-text-secondary">
-                    <MapPin className="h-4 w-4 shrink-0" />
-                    <span>
-                      {[
-                        area.city,
-                        area.state,
-                        getCountryName(area.countryCode ?? ""),
-                      ]
-                        .filter(Boolean)
-                        .join(", ") || "-"}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-h-0">
-                    {area.description && (
-                      <p className="text-sm text-text-secondary line-clamp-3 leading-relaxed">
-                        {area.description}
-                      </p>
-                    )}
-                  </div>
-                  <div className="grid grid-cols-3 gap-3 text-center">
-                    <div className="rounded-lg bg-primary-50 p-3">
-                      <p className="text-xs text-text-secondary mb-0.5">
-                        {t("area.form.pricePerTree")}
-                      </p>
-                      <p className="text-sm font-bold text-primary">
-                        {area.pricePerTree != null
-                          ? formatCurrency(area.pricePerTree, "USD")
-                          : "-"}
-                      </p>
+                <Card className="h-full cursor-pointer overflow-hidden transition-shadow hover:shadow-lg">
+                  <AreaThumbnail
+                    imageUrl={area.imageUrl}
+                    thumbnailUrl={area.thumbnailUrl}
+                    name={area.name}
+                  />
+                  <CardContent className="p-5 h-full flex flex-col gap-4">
+                    <div className="flex justify-between items-start gap-3">
+                      <h3 className="text-lg font-bold leading-snug">
+                        {area.name}
+                      </h3>
+                      <StatusBadge status={area.status} />
                     </div>
-                    <div className="rounded-lg bg-amber-50 p-3">
-                      <p className="text-xs text-text-secondary mb-0.5">
-                        {t("area.tCO2ePerTree")}
-                      </p>
-                      <p className="text-sm font-bold text-amber-700">
-                        {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
-                      </p>
+                    <div className="flex items-center gap-1.5 text-sm text-text-secondary">
+                      <MapPin className="h-4 w-4 shrink-0" />
+                      <span>
+                        {[
+                          area.city,
+                          area.state,
+                          getCountryName(area.countryCode ?? ""),
+                        ]
+                          .filter(Boolean)
+                          .join(", ") || "-"}
+                      </span>
                     </div>
-                    <div className="rounded-lg bg-gray-100 p-3">
-                      <p className="text-xs text-text-secondary mb-0.5">
-                        {t("area.form.defaultHorizonYears")}
-                      </p>
-                      <p className="text-sm font-bold text-text-primary">
-                        {area.defaultHorizonYears ?? 20} {t("common.years")}
-                      </p>
+                    <div className="flex-1 min-h-0">
+                      {area.description && (
+                        <p className="text-sm text-text-secondary line-clamp-3 leading-relaxed">
+                          {area.description}
+                        </p>
+                      )}
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
+                    <div className="grid grid-cols-3 gap-3 text-center">
+                      <div className="rounded-lg bg-primary-50 p-3">
+                        <p className="text-xs text-text-secondary mb-0.5">
+                          {t("area.form.pricePerTree")}
+                        </p>
+                        <p className="text-sm font-bold text-primary">
+                          {area.pricePerTree != null
+                            ? formatCurrency(area.pricePerTree, "USD")
+                            : "-"}
+                        </p>
+                      </div>
+                      <div className="rounded-lg bg-amber-50 p-3">
+                        <p className="text-xs text-text-secondary mb-0.5">
+                          {t("area.tCO2ePerTree")}
+                        </p>
+                        <p className="text-sm font-bold text-amber-700">
+                          {formatKgCO2e(area.estimatedKgCO2PerTreePerYear)}
+                        </p>
+                      </div>
+                      <div className="rounded-lg bg-gray-100 p-3">
+                        <p className="text-xs text-text-secondary mb-0.5">
+                          {t("area.form.defaultHorizonYears")}
+                        </p>
+                        <p className="text-sm font-bold text-text-primary">
+                          {area.defaultHorizonYears ?? 20} {t("common.years")}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
             <div ref={sentinelCallback} />
             {isFetchingNextPage && (

@@ -109,6 +109,9 @@ export function AboutPage() {
               <p className="text-base leading-7 text-text-secondary">
                 {t("about.whatIs.paragraph3")}
               </p>
+              <p className="text-base leading-7 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-amber-800">
+                {t("about.whatIs.paragraph4")}
+              </p>
             </CardContent>
           </Card>
         </section>

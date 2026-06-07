@@ -179,7 +179,8 @@
     "collapse": "Réduire le menu",
     "expand": "Agrandir le menu",
     "contact": "Contactez-nous",
-    "legal": "Légal"
+    "legal": "Légal",
+    "social": "Réseaux sociaux"
   },
   "home": {
     "welcome": {
@@ -197,7 +198,8 @@
       "step3Title": "Recevez des Certificats",
       "step3Description": "Recevez des certificats et suivez les contributions avec transparence et traçabilité.",
       "tryCalculator": "Calculer l'Empreinte",
-      "viewCommunity": "Communauté"
+      "viewCommunity": "Communauté",
+      "betaNotice": "Nous sommes en phase initiale de test et recherchons des partenariats pour soutenir le développement et l'amélioration continue de cette solution. Vos retours et votre intérêt sont les bienvenus !"
     },
     "profiles": {
       "title": "À qui s'adresse la plateforme?"
@@ -248,7 +250,8 @@
       "title": "Une plateforme qui transforme l'intention climatique en action traçable",
       "paragraph1": "ClimaBalance a été créé pour rendre la compensation carbone plus claire, plus fiable et plus connectée au territoire. La plateforme aide les utilisateurs à comprendre leurs émissions et à orienter leur soutien vers des projets audités qui combinent restauration environnementale et production agricole écologique.",
       "paragraph2": "Au lieu de traiter la compensation comme quelque chose d'abstrait, la plateforme structure le processus avec une carte interactive, des critères socio-environnementaux, une traçabilité des contributions et des certificats validés d'impact, en priorisant des initiatives comme l'Agroécologie, l'Agroforesterie, la Permaculture et l'Agriculture Biologique.",
-      "paragraph3": "Lorsqu'une contribution est réalisée, le montant est transféré au reboiseur responsable de la zone soutenue, tandis que la plateforme prélève des frais pour assurer sa maintenance continue et son évolution."
+      "paragraph3": "Lorsqu'une contribution est réalisée, le montant est transféré au reboiseur responsable de la zone soutenue, tandis que la plateforme prélève des frais pour assurer sa maintenance continue et son évolution.",
+      "paragraph4": "ClimaBalance est en phase initiale de développement et de test. Nous recherchons activement des partenariats avec des organisations, entreprises et personnes intéressées à soutenir l'évolution de la plateforme et à étendre son impact socio-environnemental. Si vous souhaitez contribuer ou établir un partenariat, contactez-nous."
     },
     "howItWorks": {
       "label": "Fonctionnement",

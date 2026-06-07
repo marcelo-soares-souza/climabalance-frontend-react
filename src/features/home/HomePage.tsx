@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SEO } from "@/components/SEO";
 import { useAuth } from "@/hooks/use-auth";
 import { useQuery } from "@tanstack/react-query";
@@ -32,6 +32,10 @@ import {
 } from "@/lib/public-refs";
 
 const LOGO_URL = "/logo.png";
+const heroLinkClass =
+  "inline-flex items-center justify-center rounded-[var(--radius-button)] px-6 py-3 text-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-primary/50";
+const heroOutlineLinkClass = `${heroLinkClass} border-2 border-white/40 text-white hover:bg-white/10`;
+const heroPrimaryLinkClass = `${heroLinkClass} bg-white text-primary shadow-lg hover:bg-white/90`;
 
 export function HomePage() {
   const { isAuthenticated, userId, userSlug, hasRestoredSession } = useAuth();
@@ -44,7 +48,6 @@ export function HomePage() {
 
 function UnauthenticatedHome() {
   const { t } = useTranslation();
-  const navigate = useNavigate();
 
   const { data: globalStats } = useQuery({
     queryKey: ["global-stats"],
@@ -76,47 +79,28 @@ function UnauthenticatedHome() {
           {t("home.welcome.transferNotice")}
         </p> */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => navigate("/about")}
-              className="border-white/40 text-white hover:bg-white/10"
-            >
+            <Link to="/about" className={heroOutlineLinkClass}>
               {t("home.welcome.learnMore")}
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => navigate("/how-to-use")}
-              className="border-white/40 text-white hover:bg-white/10"
-            >
+            </Link>
+            <Link to="/how-to-use" className={heroOutlineLinkClass}>
               {t("home.welcome.howToUse")}
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => navigate("/calculator")}
-              className="border-white/40 text-white hover:bg-white/10"
-            >
+            </Link>
+            <Link to="/calculator" className={heroOutlineLinkClass}>
               {t("home.welcome.tryCalculator")}
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              onClick={() => navigate("/map")}
-              className="border-white/40 text-white hover:bg-white/10"
-            >
+            </Link>
+            <Link to="/map" className={heroOutlineLinkClass}>
               {t("home.welcome.exploreMap")}
-            </Button>
-            <Button
-              size="lg"
-              onClick={() => navigate("/register")}
-              className="bg-white text-primary hover:bg-white/90 shadow-lg"
-            >
+            </Link>
+            <Link to="/register" className={heroPrimaryLinkClass}>
               {t("home.welcome.getStarted")}
-            </Button>
+            </Link>
           </div>
         </div>
+
+        <div className="mx-auto mb-6 max-w-3xl rounded-2xl border border-amber-200 bg-amber-50 px-5 py-4 text-sm text-amber-800">
+          {t("home.welcome.betaNotice")}
+        </div>
+
         {globalStats && (
           <div className="mb-4">
             <h2 className="text-xl font-bold text-text-primary mb-3 text-center">
@@ -162,22 +146,21 @@ function UnauthenticatedHome() {
             {t("home.profiles.title")}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card
-              className="cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => navigate("/how-to-use")}
-            >
-              <CardContent className="text-center py-8">
-                <div className="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
-                  <User className="h-7 w-7 text-primary" />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">
-                  {t("auth.register.roleIndividual")}
-                </h3>
-                <p className="text-base text-text-secondary">
-                  {t("auth.register.roleIndividualDescription")}
-                </p>
-              </CardContent>
-            </Card>
+            <Link to="/how-to-use" className="block">
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+                <CardContent className="text-center py-8">
+                  <div className="w-14 h-14 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
+                    <User className="h-7 w-7 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">
+                    {t("auth.register.roleIndividual")}
+                  </h3>
+                  <p className="text-base text-text-secondary">
+                    {t("auth.register.roleIndividualDescription")}
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
             {/* <Card
             className="cursor-pointer hover:shadow-lg transition-shadow"
             onClick={() => navigate("/how-to-use")}
@@ -194,22 +177,21 @@ function UnauthenticatedHome() {
               </p>
             </CardContent>
           </Card> */}
-            <Card
-              className="cursor-pointer hover:shadow-lg transition-shadow"
-              onClick={() => navigate("/how-to-use?tab=producer")}
-            >
-              <CardContent className="text-center py-8">
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">
-                  <Sprout className="h-7 w-7 text-emerald-700" />
-                </div>
-                <h3 className="font-semibold text-lg mb-2">
-                  {t("auth.register.roleProducer")}
-                </h3>
-                <p className="text-base text-text-secondary">
-                  {t("auth.register.roleProducerDescription")}
-                </p>
-              </CardContent>
-            </Card>
+            <Link to="/how-to-use?tab=producer" className="block">
+              <Card className="cursor-pointer hover:shadow-lg transition-shadow">
+                <CardContent className="text-center py-8">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-4">
+                    <Sprout className="h-7 w-7 text-emerald-700" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">
+                    {t("auth.register.roleProducer")}
+                  </h3>
+                  <p className="text-base text-text-secondary">
+                    {t("auth.register.roleProducerDescription")}
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </div>
 

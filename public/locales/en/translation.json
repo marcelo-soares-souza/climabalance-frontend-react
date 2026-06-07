@@ -180,7 +180,8 @@
     "collapse": "Collapse sidebar",
     "expand": "Expand sidebar",
     "contact": "Contact Us",
-    "legal": "Legal"
+    "legal": "Legal",
+    "social": "Social"
   },
   "home": {
     "welcome": {
@@ -198,7 +199,8 @@
       "step3Title": "Receive Certificates",
       "step3Description": "Receive certificates and track contributions with transparency and traceability.",
       "tryCalculator": "Calculate Footprint",
-      "viewCommunity": "Community"
+      "viewCommunity": "Community",
+      "betaNotice": "We are in early testing phase and seeking partnerships to support the ongoing development and improvement of this solution. Your feedback and interest are welcome!"
     },
     "profiles": {
       "title": "Who is the platform for?"
@@ -249,7 +251,8 @@
       "title": "A platform that turns climate intention into traceable action",
       "paragraph1": "ClimaBalance was created to make carbon compensation clearer, more trustworthy, and more connected to the territory. It helps users understand emissions and direct support to audited projects that combine environmental restoration with ecological agricultural production.",
       "paragraph2": "Instead of treating compensation as something abstract, the platform structures the process with an interactive map, socio-environmental criteria, contribution traceability, and validated impact certificates, prioritizing initiatives such as Agroecology, Agroforestry, Permaculture, and Organic Agriculture.",
-      "paragraph3": "When a contribution is made, the amount is transferred to the reforester responsible for the supported area, while the platform charges a fee to sustain ongoing maintenance and evolution."
+      "paragraph3": "When a contribution is made, the amount is transferred to the reforester responsible for the supported area, while the platform charges a fee to sustain ongoing maintenance and evolution.",
+      "paragraph4": "ClimaBalance is in early development and testing phase. We are actively seeking partnerships with organizations, companies, and individuals interested in supporting the platform's evolution and expanding its socio-environmental impact. If you would like to contribute or establish a partnership, please contact us."
     },
     "howItWorks": {
       "label": "How it works",

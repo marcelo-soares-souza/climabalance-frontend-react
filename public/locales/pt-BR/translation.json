@@ -180,7 +180,8 @@
     "collapse": "Recolher menu",
     "expand": "Expandir menu",
     "contact": "Fale Conosco",
-    "legal": "Legal"
+    "legal": "Legal",
+    "social": "Redes Sociais"
   },
   "home": {
     "welcome": {
@@ -198,7 +199,8 @@
       "step3Title": "Receba Certificados",
       "step3Description": "Obtenha certificados e acompanhe contribuições com rastreabilidade e transparência.",
       "tryCalculator": "Calcular Pegada",
-      "viewCommunity": "Comunidade"
+      "viewCommunity": "Comunidade",
+      "betaNotice": "Estamos em fase inicial de testes e buscamos parcerias para apoiar o desenvolvimento e aprimoramento contínuo desta solução. Seu feedback e interesse são bem-vindos!"
     },
     "profiles": {
       "title": "Para quem é a plataforma?"
@@ -249,7 +251,8 @@
       "title": "Uma plataforma para transformar intenção climática em ação rastreável",
       "paragraph1": "O ClimaBalance foi criado para tornar a compensação de carbono mais clara, confiável e conectada ao território. A proposta é ajudar usuários a entender suas emissões e direcionar apoio para projetos auditados que combinam restauração ambiental com produção agrícola ecológica.",
       "paragraph2": "Em vez de tratar a compensação como algo abstrato, a plataforma organiza o processo com mapa interativo, critérios socioambientais, rastreabilidade da contribuição e certificados de impacto com validação, priorizando iniciativas como Agroecologia, Agrofloresta, Permacultura e Agricultura Orgânica.",
-      "paragraph3": "Quando uma contribuição é realizada, o valor é transferido ao reflorestador responsável pela área apoiada, enquanto a plataforma cobra uma taxa para viabilizar sua manutenção contínua e sua evolução."
+      "paragraph3": "Quando uma contribuição é realizada, o valor é transferido ao reflorestador responsável pela área apoiada, enquanto a plataforma cobra uma taxa para viabilizar sua manutenção contínua e sua evolução.",
+      "paragraph4": "O ClimaBalance está em fase inicial de desenvolvimento e testes. Estamos ativamente buscando parcerias com organizações, empresas e pessoas interessadas em apoiar a evolução da plataforma e ampliar seu impacto socioambiental. Se você deseja contribuir ou estabelecer uma parceria, entre em contato conosco."
     },
     "howItWorks": {
       "label": "Como funciona",
